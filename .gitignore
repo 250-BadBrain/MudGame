@@ -8,7 +8,9 @@ data/
 *.log
 
 .idea/
-.vscode/
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
 *.iml
 .DS_Store
 Thumbs.db
