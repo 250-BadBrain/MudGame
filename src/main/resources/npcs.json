@@ -1,0 +1,76 @@
+{
+    "guard_luoyang": {
+        "name": "洛阳守卫",
+        "description": "一位身穿铠甲的守卫，警惕地注视着来往的行人。",
+        "attributes": {
+            "maxHp": 100,
+            "currentHp": 100,
+            "maxMp": 100,
+            "currentMp": 100,
+            "attack": 50,
+            "defense": 50,
+            "strength": 20,
+            "constitution": 20,
+            "agility": 20,
+            "intelligence": 20
+        }
+    },
+    "shopkeeper_jia": {
+        "name": "贾不易",
+        "title": "杂货铺掌柜",
+        "description": "一位精明的店小二，脸上总是挂着职业的笑容。",
+        "shopItems": ["common_clothes", "common_shoes"],
+        "attributes": {
+            "maxHp": 100,
+            "currentHp": 100,
+            "maxMp": 100,
+            "currentMp": 100,
+            "attack": 10,
+            "defense": 10,
+            "strength": 10,
+            "constitution": 10,
+            "agility": 10,
+            "intelligence": 10
+        }
+    },
+    "blacksmith_zhong": {
+        "name": "钟锤",
+        "title": "铁匠",
+        "description": "据说是郭靖黄蓉夫妇当年请来的铸剑高手的传人，锻得一手好兵器",
+        "shopItems": ["iron_sword", "steel_blade", "iron_staff", "darts", "iron_pickaxe"],
+        "attributes": {
+            "maxHp": 200,
+            "currentHp": 200,
+            "maxMp": 100,
+            "currentMp": 100,
+            "attack": 30,
+            "defense": 30,
+            "strength": 30,
+            "constitution": 30,
+            "agility": 20,
+            "intelligence": 20
+        }
+    },
+    "zhao_lao_jiaoxi": {
+        "name": "赵老教习",
+        "description": "一位武林高人，年事已高偏居于此，看起来精通各种武艺",
+        "attributes": {
+            "maxHp": 10000,
+            "currentHp": 10000,
+            "maxMp": 10000,
+            "currentMp": 10000,
+            "attack": 1000,
+            "defense": 1000,
+            "strength": 100,
+            "constitution": 100,
+            "agility": 100,
+            "intelligence": 100
+        },
+        "skills": {
+            "basic_fist": 300,
+            "basic_internal": 300,
+            "basic_parry": 300,
+            "basic_light": 300
+        }
+    }
+}

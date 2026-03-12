@@ -1,0 +1,141 @@
+﻿{
+    "pink_clothes": {
+        "name": "粉红绸衫",
+        "description": "",
+        "stackable": false,
+        "sellable": true,
+        "value": 10,
+        "rarity": 1,
+        "unit": "件",
+        "equipmentSlot": "BODY",
+        "limit": -1
+    },
+    "common_clothes": {
+        "name": "布衣",
+        "description": "一件简单的粗布衣。",
+        "stackable": false,
+        "sellable": true,
+        "value": 50,
+        "rarity": 1,
+        "unit": "件",
+        "equipmentSlot": "BODY",
+        "limit": -1
+    },
+    "common_shoes": {
+        "name": "布鞋",
+        "description": "一双普通的布鞋。",
+        "stackable": false,
+        "sellable": true,
+        "value": 50,
+        "rarity": 1,
+        "unit": "双",
+        "equipmentSlot": "FEET",
+        "limit": -1
+    },
+    "iron_sword": {
+        "name": "铁剑",
+        "description": "",
+        "stackable": false,
+        "sellable": true,
+        "value": 1000,
+        "rarity": 1,
+        "unit": "把",
+        "equipmentSlot": "WEAPON",
+        "limit": -1
+    },
+    "steel_blade": {
+        "name": "钢刀",
+        "description": "",
+        "stackable": false,
+        "sellable": true,
+        "value": 1000,
+        "rarity": 1,
+        "unit": "柄",
+        "equipmentSlot": "WEAPON",
+        "limit": -1
+    },
+    "iron_staff": {
+        "name": "铁棍",
+        "description": "",
+        "stackable": false,
+        "sellable": true,
+        "value": 1000,
+        "rarity": 1,
+        "unit": "根",
+        "equipmentSlot": "WEAPON",
+        "limit": -1
+    },
+    "darts": {
+        "name": "飞镖",
+        "description": "",
+        "stackable": false,
+        "sellable": true,
+        "value": 1000,
+        "rarity": 1,
+        "unit": "枚",
+        "equipmentSlot": "WEAPON",
+        "limit": -1
+    },
+    "iron_pickaxe": {
+        "name": "铁镐",
+        "description": "一把结实的铁镐，是挖矿的好帮手。",
+        "stackable": false,
+        "sellable": true,
+        "value": 1000,
+        "rarity": 1,
+        "unit": "把",
+        "equipmentSlot": "WEAPON",
+        "limit": -1
+    },
+    "cracked_yellow_gem": {
+        "name": "碎裂的黄宝石",
+        "description": "一块充满杂质的黄宝石。",
+        "stackable": true,
+        "sellable": true,
+        "value": 10000,
+        "rarity": 2,
+        "unit": "块",
+        "limit": -1
+    },
+    "cracked_blue_gem": {
+        "name": "碎裂的蓝宝石",
+        "description": "一块充满杂质的蓝宝石。",
+        "stackable": true,
+        "sellable": true,
+        "value": 10000,
+        "rarity": 2,
+        "unit": "块",
+        "limit": -1
+    },
+    "cracked_red_gem": {
+        "name": "碎裂的红宝石",
+        "description": "一块充满杂质的红宝石。",
+        "stackable": true,
+        "sellable": true,
+        "value": 10000,
+        "rarity": 2,
+        "unit": "块",
+        "limit": -1
+    },
+    "cracked_green_gem": {
+        "name": "碎裂的绿宝石",
+        "description": "一块充满杂质的绿宝石。",
+        "stackable": true,
+        "sellable": true,
+        "value": 10000,
+        "rarity": 2,
+        "unit": "块",
+        "limit": -1
+    },
+    "cracked_purple_gem": {
+        "name": "碎裂的紫宝石",
+        "description": "一块充满杂质的紫宝石。",
+        "stackable": true,
+        "sellable": true,
+        "value": 10000,
+        "rarity": 2,
+        "unit": "块",
+        "limit": -1
+    },
+    "": {}
+}

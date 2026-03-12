@@ -1,0 +1,42 @@
+{
+  "basic_fist": {
+    "id": "basic_fist",
+    "name": "基本拳脚",
+    "description": "世间所有拳脚功夫的根基。",
+    "rarity": 1,
+    "type": "BASIC",
+    "bonuses": {
+      "post_strength_per_10_levels": 1.0
+    }
+  },
+  "basic_parry": {
+    "id": "basic_parry",
+    "name": "基本招架",
+    "description": "抵挡攻击的基本技巧。",
+    "rarity": 1,
+    "type": "BASIC",
+    "bonuses": {
+      "post_parry_per_10_levels": 1.0
+    }
+  },
+  "basic_internal": {
+    "id": "basic_internal",
+    "name": "基本内功",
+    "description": "修习内力的入门法门。",
+    "rarity": 1,
+    "type": "BASIC",
+    "bonuses": {
+      "max_mp_per_level": 10.0
+    }
+  },
+  "basic_light": {
+    "id": "basic_light",
+    "name": "基本轻功",
+    "description": "强身健体，奔跑跳跃的基础。",
+    "rarity": 1,
+    "type": "BASIC",
+    "bonuses": {
+      "post_agility_per_10_levels": 1.0
+    }
+  }
+}
