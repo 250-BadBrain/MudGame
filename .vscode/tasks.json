@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "frontend: install",
+            "type": "shell",
+            "command": "npm",
+            "args": ["install"],
+            "problemMatcher": []
+        },
+        {
+            "label": "frontend: dev",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "dev"],
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "frontend: build",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "build"],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "frontend: lint",
+            "type": "shell",
+            "command": "npm",
+            "args": ["run", "lint"],
+            "problemMatcher": []
+        }
+    ]
+}
