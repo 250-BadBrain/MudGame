@@ -1,0 +1,74 @@
+/* client/src/assets/styles/global.css */
+
+/* -----------------------------------
+   全局样式和主题变量
+   ----------------------------------- */
+
+/* 定义主题颜色变量，便于后续维护 */
+:root {
+    --color-background-dark: #111; /* 极深背景 */
+    --color-text-light: #ecf0f1;   /* 浅白文字 */
+    --color-mud-primary: #2ecc71;  /* MUD 绿色（主要文本色） */
+    --color-accent-gold: #f39c12;  /* 金色（武侠重点色/边框） */
+    --color-accent-blue: #3498db;  /* 蓝色（次要按钮色） */
+    --color-border-subtle: #444;   /* 柔和的边框色 */
+}
+
+/* 全局重置和基础样式 */
+html, body, #app {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+}
+
+body {
+    /* 应用深色背景和全局字体 */
+    background-color: var(--color-background-dark);
+    color: var(--color-mud-primary);
+    /* 等宽字体增强 MUD 氛围 */
+    font-family: 'Courier New', Courier, monospace, 'STKaiti', KaiTi, serif;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* 标题基础样式 */
+h1, h2, h3 {
+    color: var(--color-accent-gold);
+    border-bottom: 1px solid var(--color-border-subtle);
+    padding-bottom: 5px;
+}
+
+/* 通用按钮基础样式 */
+button {
+    background-color: var(--color-border-subtle);
+    color: var(--color-text-light);
+    border: 1px solid var(--color-accent-gold);
+    padding: 8px 15px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    font-family: inherit; /* 继承等宽字体 */
+    border-radius: 4px;
+}
+
+button:hover:not(:disabled) {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 通用输入框基础样式 */
+input {
+    border: 1px solid var(--color-accent-gold);
+    background-color: #222;
+    color: var(--color-text-light);
+    padding: 6px;
+    box-sizing: border-box;
+    font-family: inherit;
+    border-radius: 2px;
+}

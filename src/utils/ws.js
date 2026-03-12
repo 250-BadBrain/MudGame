@@ -1,0 +1,242 @@
+let socket = null
+const messageHandlers = [] // 改为数组，支持多个处理器
+let openCallbacks = [] // 连接成功后要执行的队列
+let waitForReconnectRestore = false
+let shouldReconnectRestoreOnOpen = false
+
+const STORAGE_KEY_USER_ID = 'mud_userId'
+const STORAGE_KEY_RECONNECT_TOKEN = 'mud_reconnectToken'
+const SESSION_STORAGE_KEY_PLAYER_ID = 'mud_sessionPlayerId'
+
+//  改进：WebSocket 重新连接配置
+const RECONNECT_CONFIG = {
+  maxRetries: 5,
+  retryDelay: 3000, // 3秒
+  backoffMultiplier: 1.5
+}
+
+let reconnectAttempts = 0
+let reconnectTimeout = null
+
+const DEFAULT_BACKEND_PORT = '4009'
+
+// 初始化连接（仅在首次时创建连接）
+export function initWebSocket(onMessage) {
+  // 如果处理器已注册，直接返回
+  if (onMessage && messageHandlers.includes(onMessage)) {
+    return socket
+  }
+
+  // 如果处理器不为空，注册它
+  if (onMessage && !messageHandlers.includes(onMessage)) {
+    messageHandlers.push(onMessage)
+  }
+
+  // 如果连接已存在且打开，直接返回
+  if (socket && socket.readyState !== WebSocket.CLOSED) {
+    console.log('[WebSocket] 连接已存在，直接返回')
+    return socket
+  }
+
+  createWebSocket()
+  return socket
+}
+
+function createWebSocket() {
+  try {
+    const wsUrl = resolveWebSocketUrl()
+    
+    console.log(`[WebSocket] 尝试连接到: ${wsUrl}`)
+    socket = new WebSocket(wsUrl)
+
+    socket.onopen = () => {
+      console.log("[WebSocket] 已连接")
+      reconnectAttempts = 0 // 重置重连次数
+      if (reconnectTimeout) {
+        clearTimeout(reconnectTimeout)
+        reconnectTimeout = null
+      }
+
+      if (shouldReconnectRestoreOnOpen) {
+        const reconnectMessage = buildReconnectMessage()
+        if (reconnectMessage) {
+          waitForReconnectRestore = true
+          shouldReconnectRestoreOnOpen = false
+          socket.send(JSON.stringify(reconnectMessage))
+          return
+        }
+        shouldReconnectRestoreOnOpen = false
+      }
+      
+      flushOpenCallbacks()
+    }
+
+    socket.onmessage = (event) => {
+      const msg = JSON.parse(event.data)
+      console.log("[WebSocket] 收到消息:", msg) // 始终打印消息日志
+
+      const isReconnectResponse = msg?.type === 'system' && msg?.subtype === 'reconnect' && waitForReconnectRestore
+      
+      // 调用所有注册的处理器
+      messageHandlers.forEach(handler => {
+        try {
+          handler(msg)
+        } catch (e) {
+          console.error("[WebSocket] 消息处理器执行错误:", e)
+        }
+      })
+
+      if (isReconnectResponse) {
+        waitForReconnectRestore = false
+        if (msg.flag) {
+          flushOpenCallbacks()
+        } else {
+          openCallbacks = []
+        }
+      }
+    }
+
+    socket.onclose = (event) => {
+      console.log("[WebSocket] 已关闭，代码:", event.code, "原因:", event.reason)
+      waitForReconnectRestore = false
+      
+      // 🔧 改进：非正常关闭时尝试重新连接
+      if (event.code !== 1000) {
+        attemptReconnect()
+      }
+    }
+
+    socket.onerror = (error) => {
+      console.error("[WebSocket] 出错:", error)
+      attemptReconnect()
+    }
+  } catch (e) {
+    console.error("[WebSocket] 创建连接失败:", e)
+    attemptReconnect()
+  }
+}
+
+function resolveWebSocketUrl() {
+  const envUrl = import.meta.env.VITE_WS_URL?.trim()
+  if (envUrl) {
+    return envUrl
+  }
+
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+  const hostname = window.location.hostname || 'localhost'
+  return `${protocol}//${hostname}:${DEFAULT_BACKEND_PORT}/ws`
+}
+
+// 🔧 新增：重新连接逻辑
+function attemptReconnect() {
+  if (reconnectAttempts >= RECONNECT_CONFIG.maxRetries) {
+    console.error("[WebSocket] 达到最大重连次数，放弃重连")
+    return
+  }
+
+  reconnectAttempts++
+  shouldReconnectRestoreOnOpen = hasReconnectSession()
+  const delay = RECONNECT_CONFIG.retryDelay * Math.pow(RECONNECT_CONFIG.backoffMultiplier, reconnectAttempts - 1)
+  
+  console.log(`[WebSocket] 将在 ${delay / 1000}秒后进行第 ${reconnectAttempts} 次重连尝试...`)
+  
+  if (reconnectTimeout) {
+    clearTimeout(reconnectTimeout)
+  }
+  
+  reconnectTimeout = setTimeout(() => {
+    console.log(`[WebSocket] 执行第 ${reconnectAttempts} 次重连尝试...`)
+    createWebSocket()
+  }, delay)
+}
+
+function buildReconnectMessage() {
+  const userId = localStorage.getItem(STORAGE_KEY_USER_ID)
+  const reconnectToken = localStorage.getItem(STORAGE_KEY_RECONNECT_TOKEN)
+  const playerId = sessionStorage.getItem(SESSION_STORAGE_KEY_PLAYER_ID)
+
+  if (!userId || !reconnectToken) {
+    return null
+  }
+
+  const args = { userId, reconnectToken }
+  if (playerId) {
+    args.playerId = playerId
+  }
+
+  return {
+    type: 'system',
+    subtype: 'reconnect',
+    args,
+  }
+}
+
+function hasReconnectSession() {
+  return !!buildReconnectMessage()
+}
+
+function flushOpenCallbacks() {
+  const queuedCallbacks = openCallbacks
+  openCallbacks = []
+  queuedCallbacks.forEach(cb => cb())
+}
+
+// 移除指定的消息处理器
+export function removeMessageHandler(handler) {
+  const index = messageHandlers.indexOf(handler)
+  if (index > -1) {
+    messageHandlers.splice(index, 1)
+  }
+}
+
+// 安全发送消息：如果未连接，先放入队列等待连接成功再发送
+export function sendMessage(message) {
+  const send = () => {
+    if (socket && socket.readyState === WebSocket.OPEN && !waitForReconnectRestore) {
+      socket.send(JSON.stringify(message))
+    } else {
+      console.error("[WebSocket] WebSocket 状态异常，无法发送:", message)
+    }
+  }
+
+  if (socket && socket.readyState === WebSocket.OPEN && !waitForReconnectRestore) {
+    send()
+  } else if ((socket && socket.readyState === WebSocket.CONNECTING) || waitForReconnectRestore) {
+    // 等待连接成功后再发送
+    console.log("[WebSocket] 连接中，将消息加入队列...")
+    openCallbacks.push(send)
+  } else {
+    console.error("[WebSocket] WebSocket 未连接或已关闭，无法发送:", message)
+    // 尝试重新连接
+    if (!socket || socket.readyState === WebSocket.CLOSED) {
+      console.log("[WebSocket] 尝试重新初始化连接...")
+      initWebSocket(null)
+      // 重新加入发送队列
+      openCallbacks.push(send)
+    }
+  }
+}
+// 发送命令的封装
+export function sendCommandMessage(type, subtype, args = {}) {
+    const message = {
+        type: type,
+        subtype: subtype,
+        // playerId 在登录/创建角色阶段为 null，不发送
+        playerId: null, 
+        ts: Date.now(),
+        args: args
+    }
+    sendMessage(message)
+}
+
+// 供游戏内使用的指令发送，需要 playerId
+export function sendGameCommand(type, subtype, playerId, args = {}) {
+    const message = {
+        type: type,
+        subtype: subtype,
+        playerId: playerId, 
+        ts: Date.now(),
+        args: args
+    }
+    sendMessage(message)
+}
