@@ -122,6 +122,11 @@ function resolveWebSocketUrl() {
     return envUrl
   }
 
+  // 生产域名兜底：避免未注入环境变量时误连到前端自身的 :4009
+  if (window.location.hostname === 'mud.game.h2seo4.win') {
+    return 'wss://api-mud.h2seo4.win/ws'
+  }
+
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
   const hostname = window.location.hostname || 'localhost'
   return `${protocol}//${hostname}:${DEFAULT_BACKEND_PORT}/ws`
