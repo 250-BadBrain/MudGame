@@ -16,7 +16,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
 
     public WebSocketConfig(
         MudWebSocketHandler handler,
-        @Value("${mud.websocket.allowed-origin-patterns:http://localhost:*,http://127.0.0.1:*,http://[::1]:*,http://192.168.*:*,http://10.*:*,https://localhost:*,https://127.0.0.1:*,https://*.ngrok-free.app,https://*.ngrok.io}")
+        @Value("${mud.websocket.allowed-origin-patterns:http://localhost:*,http://127.0.0.1:*,http://[::1]:*,https://localhost:*,https://127.0.0.1:*,https://*.pages.dev,https://mud.game.h2seo4.win}")
         String allowedOriginPatterns) {
         this.handler = handler;
         this.allowedOriginPatterns = allowedOriginPatterns.split("\\s*,\\s*");
