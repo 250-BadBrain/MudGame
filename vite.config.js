@@ -23,7 +23,7 @@ export default defineConfig({
         changeOrigin: true
       }
     },
-    // 允许 ngrok 等内网穿透工具的 host
+    // 允许 Cloudflare Tunnel 等内网穿透工具的 host
     allowedHosts: true 
   }
 })

@@ -18,9 +18,20 @@ const inputMsg = ref('')
 const messages = ref([])
 let ws = null
 
+function resolveTestWebSocketUrl() {
+  const envUrl = import.meta.env.VITE_WS_URL?.trim()
+  if (envUrl) {
+    return envUrl
+  }
+
+  const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
+  const host = window.location.hostname || 'localhost'
+  return `${protocol}//${host}:4009/ws`
+}
+
 onMounted(() => {
-  // 连接后端 WebSocket
-  ws = new WebSocket('ws://localhost:8080/ws')
+  // 连接后端 WebSocket（优先使用 VITE_WS_URL）
+  ws = new WebSocket(resolveTestWebSocketUrl())
 
   ws.onopen = () => {
     messages.value.push('✅ 已连接服务器')
