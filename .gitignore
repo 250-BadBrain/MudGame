@@ -1,16 +1,26 @@
-target/
-logs/
-data/
+# Go build outputs
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
 
-*.class
-*.jar
-*.war
-*.log
+# Test binaries and coverage
+*.test
+*.out
+coverage.out
 
+# Module/workspace artifacts
+vendor/
+
+# Local runtime data and scratch folders
+tmp_*/
+server/
+
+# IDE settings
+.vscode/
 .idea/
-.vscode/*
-!.vscode/tasks.json
-!.vscode/launch.json
-*.iml
+
+# OS files
 .DS_Store
 Thumbs.db

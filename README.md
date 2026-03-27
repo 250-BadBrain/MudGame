@@ -1,34 +1,37 @@
-# MudGame-server
+# MudGame Go Server (Migration)
 
-MudGame 后端仓库，基于 Spring Boot 和 WebSocket。
+这是 MudGame 后端从 Java 迁移到 Go 的工程。
 
-## 运行要求
+## 当前分层（第一阶段重构后）
 
-- Java 21
-- Maven 3.9+
+- `cmd/mudserver`：启动入口
+- `internal/app`：网络层（WebSocket 接入、会话、事件广播）
+- `internal/engine`：业务编排层（面向上层的服务接口）
+- `internal/storage`：文件存储层（基于 data 目录实时读写）
+- `internal/model`：领域模型定义
+- `internal/protocol`：协议结构（CommandMessage/GameResult）
 
-## 启动
+## 当前已迁移内容
 
-```sh
-mvn spring-boot:run
-```
+- WebSocket 入口: /ws
+- 健康检查: /health
+- 协议结构: CommandMessage / GameResult
+- system 指令主流程（注册/登录/删号/创角/选角/重连/房间）
+- command 指令主流程（状态/背包/技能/装备/世界/移动/商店/学习/挖矿/战斗/复活）
+- chat 公开聊天
+- event 广播（player_left/player_entered/player_status_changed/room_update/room_message）
 
-默认监听 4009 端口，WebSocket 地址为 `/ws`。
+## 运行
 
-如果前端部署在 Cloudflare Pages 的 `mud.game.h2seo4.win`，而后端运行在本机，可通过 Cloudflare Tunnel 暴露后端端口到 `api-mud.game.h2seo4.win`。对应 WebSocket 地址应写为 `wss://api-mud.game.h2seo4.win/ws`。
+在 MudGame-server 目录执行:
 
-说明：本机 Spring Boot 仍然监听普通的 `ws` 连接，TLS 由 Cloudflare 终止并转换为公网侧的 `wss`。这就是 Cloudflare Pages 的 `https` 页面能够连接你本机后端的正确方式。
+go run ./cmd/mudserver
 
-默认允许的前端来源包含本地开发地址、`https://*.pages.dev` 和 `https://mud.game.h2seo4.win`。如需精确限制来源，可在运行时设置环境变量 `MUD_ALLOWED_ORIGIN_PATTERNS` 覆盖默认值。
+默认端口 4009，可通过 PORT 环境变量覆盖。
 
-## 打包
+默认动态数据目录为 `../data/servers/server1`，可通过 `MUD_DATA_DIR` 覆盖。
+静态资源默认从 `resources/` 加载，可通过 `MUD_RESOURCES_DIR` 覆盖。
 
-```sh
-mvn clean package
-```
+## 存储说明
 
-## 运行数据
-
-- 账号与角色存档位于 `data/`
-- 运行日志位于 `logs/`
-- 游戏静态资源与世界数据位于 `src/main/resources/`
+当前版本仅保留文件存储实现，不再包含内存存储后端。
