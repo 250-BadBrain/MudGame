@@ -78,7 +78,6 @@ const handleLoginMessage = (msg) => {
         
         playerStore.setUserId(userId) 
         playerStore.setReconnectToken(reconnectToken)
-        console.log("登录成功，尝试跳转到 CharacterSelect")
         router.push({ name: 'CharacterSelect' }) 
         
       } else {

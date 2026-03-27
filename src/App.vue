@@ -21,23 +21,8 @@ const error = ref('')
 
 onMounted(async () => {
   try {
-    // 🔧 修复：只初始化 store，不自动恢复 localStorage 中的登陆状态
-    // 原因：
-    // 1. 刚打开应用时，应该显示登录界面，而不是自动进入角色选择
-    // 2. localStorage 的恢复应该只在明确需要时进行（如浏览器刷新）
-    // 3. 路由守卫会根据 store 中的 userId 和 playerId 自动处理导航
-    
-    const playerStore = usePlayerStore()
-    
-    console.log('[App.vue] Mounted')
-    console.log('[App.vue] Initial store state - userId:', playerStore.userId, 'playerId:', playerStore.playerId)
-    
-    // 短暂延迟确保 store 初始化完成
-    await new Promise(resolve => setTimeout(resolve, 100))
-    
+    usePlayerStore()
     isReady.value = true
-    console.log('[App.vue] Ready to render')
-    
   } catch (e) {
     console.error('[App.vue] Error during initialization:', e)
     error.value = '应用初始化失败: ' + e.message

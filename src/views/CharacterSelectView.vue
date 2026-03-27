@@ -94,14 +94,11 @@ const fetchCharacters = () => {
   if (loading.value) return
   if (!playerStore.userId) {
     error.value = '错误：未获得用户信息'
-    console.error('[CharacterSelect] fetchCharacters 失败：playerStore.userId 为空')
     return
   }
   loading.value = true
   error.value = ''
-  
-  console.log('[CharacterSelect] 发送get_characters请求，userId:', playerStore.userId)
-  
+
   // 【命令】subtype: get_characters (获取列表)
   const msg = {
     type: "system",
@@ -178,13 +175,10 @@ const handleCharacterSelectMessage = (msg) => {
       }
     } else if (msg.subtype === 'reconnect') {
       if (msg.flag) {
-        console.log('[CharacterSelect] 重连成功，后端session已恢复')
         setTimeout(() => {
-          console.log('[CharacterSelect] 现在获取角色列表')
           fetchCharacters()
         }, 100)
       } else {
-        console.error('[CharacterSelect] 重连失败:', msg.results?.error)
         playerStore.clearAuth()
         router.push({ name: 'Login' })
       }
@@ -226,9 +220,7 @@ onMounted(() => {
       router.push({ name: 'Login' })
       return
     }
-    console.log('[CharacterSelect] userId存在:', playerStore.userId)
-    console.log('[CharacterSelect] 发送reconnect来恢复后端会话')
-    
+
     const reconnectMsg = {
       type: "system",
       subtype: "reconnect",
@@ -237,7 +229,6 @@ onMounted(() => {
     sendMessage(reconnectMsg)
   } else {
     error.value = '错误：无法获取用户信息，请重新登录'
-    console.error('[CharacterSelect] userId为空，无法获取角色列表')
   }
 })
 

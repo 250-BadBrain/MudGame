@@ -34,7 +34,6 @@ export function initWebSocket(onMessage) {
 
   // 如果连接已存在且打开，直接返回
   if (socket && socket.readyState !== WebSocket.CLOSED) {
-    console.log('[WebSocket] 连接已存在，直接返回')
     return socket
   }
 
@@ -45,12 +44,10 @@ export function initWebSocket(onMessage) {
 function createWebSocket() {
   try {
     const wsUrl = resolveWebSocketUrl()
-    
-    console.log(`[WebSocket] 尝试连接到: ${wsUrl}`)
+
     socket = new WebSocket(wsUrl)
 
     socket.onopen = () => {
-      console.log("[WebSocket] 已连接")
       reconnectAttempts = 0 // 重置重连次数
       if (reconnectTimeout) {
         clearTimeout(reconnectTimeout)
@@ -73,7 +70,6 @@ function createWebSocket() {
 
     socket.onmessage = (event) => {
       const msg = JSON.parse(event.data)
-      console.log("[WebSocket] 收到消息:", msg) // 始终打印消息日志
 
       const isReconnectResponse = msg?.type === 'system' && msg?.subtype === 'reconnect' && waitForReconnectRestore
       
@@ -97,7 +93,6 @@ function createWebSocket() {
     }
 
     socket.onclose = (event) => {
-      console.log("[WebSocket] 已关闭，代码:", event.code, "原因:", event.reason)
       waitForReconnectRestore = false
       
       // 🔧 改进：非正常关闭时尝试重新连接
@@ -142,15 +137,13 @@ function attemptReconnect() {
   reconnectAttempts++
   shouldReconnectRestoreOnOpen = hasReconnectSession()
   const delay = RECONNECT_CONFIG.retryDelay * Math.pow(RECONNECT_CONFIG.backoffMultiplier, reconnectAttempts - 1)
-  
-  console.log(`[WebSocket] 将在 ${delay / 1000}秒后进行第 ${reconnectAttempts} 次重连尝试...`)
+
   
   if (reconnectTimeout) {
     clearTimeout(reconnectTimeout)
   }
   
   reconnectTimeout = setTimeout(() => {
-    console.log(`[WebSocket] 执行第 ${reconnectAttempts} 次重连尝试...`)
     createWebSocket()
   }, delay)
 }
@@ -207,16 +200,11 @@ export function sendMessage(message) {
   if (socket && socket.readyState === WebSocket.OPEN && !waitForReconnectRestore) {
     send()
   } else if ((socket && socket.readyState === WebSocket.CONNECTING) || waitForReconnectRestore) {
-    // 等待连接成功后再发送
-    console.log("[WebSocket] 连接中，将消息加入队列...")
     openCallbacks.push(send)
   } else {
     console.error("[WebSocket] WebSocket 未连接或已关闭，无法发送:", message)
-    // 尝试重新连接
     if (!socket || socket.readyState === WebSocket.CLOSED) {
-      console.log("[WebSocket] 尝试重新初始化连接...")
       initWebSocket(null)
-      // 重新加入发送队列
       openCallbacks.push(send)
     }
   }

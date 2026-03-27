@@ -57,7 +57,7 @@
         </div>
 
         <!-- 学习面板 -->
-        <div v-if="showLearnPanel" class="shop-panel">
+        <div v-else-if="showLearnPanel" class="shop-panel">
             <div class="shop-header">
                 <h3>向{{ currentTeacher.name }}请教</h3>
                 <button @click="closeLearn" class="close-btn">×</button>
@@ -116,7 +116,7 @@
                 </ul>
             </div>
             <div v-if="room?.npcs && room.npcs.length > 0" class="entities-section">
-                <h4>NPC</h4>
+                <h4>江湖人物</h4>
                 <ul>
                     <li v-for="(npc, index) in room.npcs" :key="index" class="entity-item">
                         <div class="entity-row clickable" @click="toggleEntity(npc.id, 'npc', index)">
@@ -657,12 +657,7 @@ const changeAmount = (delta) => {
 }
 
 onMounted(() => {
-  // 路由守卫已经确保我们在这里时已经登录并选择了角色
-  console.log('[GameView] onMounted - playerStore - userId:', playerStore.userId, 'playerId:', playerStore.playerId)
-  
   if (!playerStore.isCharacterSelected) {
-    // 路由守卫应该处理这种情况，但这里做额外的安全检查
-    console.log('[GameView] Character not selected, redirecting to CharacterSelect')
     router.push({ name: 'CharacterSelect' })
     return
   }
@@ -786,12 +781,11 @@ const handleMessage = (msg) => {
       addLog(generatedMsg);
   }
 
-  if (msg.type === 'system' && msg.subtype === 'get_room') {
+    if (msg.type === 'system' && msg.subtype === 'get_room') {
     if (msg.flag) {
       room.value = msg.results.room
-      // Close shop if room changes (though usually 'go' handles this, get_room might be called on refresh)
-      // But if we just refresh, we might want to keep shop open? No, safer to close.
-      showShopPanel.value = false;
+            closeShop();
+            closeLearn();
       
       // 注意：后端 Player 对象现在包含 characterName/username
       // 根据您的 Player.java 结构，它有一个 getUsername()，我们假设在后端
@@ -815,7 +809,8 @@ const handleMessage = (msg) => {
       room.value = msg.results.room
       // 切换房间时清除选中状态
       selectedEntityKey.value = null;
-      showShopPanel.value = false; // Close shop on move
+            closeShop();
+            closeLearn();
       // 玩家移动成功，通常只更新日志和房间
       (msg.logs || []).forEach(l => addLog(l));
     } else {
@@ -936,7 +931,8 @@ const handleMessage = (msg) => {
           selectedEntityKey.value = null;
           (msg.logs || []).forEach(l => addLog(l));
           closeInfoPanel();
-          showShopPanel.value = false;
+          closeShop();
+          closeLearn();
       } else {
           addLog(`ERROR: 进入地图失败: ${msg.results.error}`);
       }
@@ -948,7 +944,8 @@ const handleMessage = (msg) => {
               name: msg.results.npcName,
               title: msg.results.npcTitle
           };
-          showShopPanel.value = true;
+          showLearnPanel.value = false;
+          showShopPanel.value = msg.results?.shopOpen !== false;
           selectedShopItem.value = null;
           buyAmount.value = 1;
       } else {
@@ -1130,9 +1127,7 @@ const handleMessage = (msg) => {
           }
       }
   } else {
-    // logs.value.push(`RECV: ${JSON.stringify(msg)}`)
-    console.log(`RECV: ${JSON.stringify(msg)}`)
-    scrollToBottom()
+        return
   }
 }
 

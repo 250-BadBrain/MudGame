@@ -47,16 +47,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const playerStore = usePlayerStore()
 
-  // 🔧 调试：打印当前的登陆状态（帮助排查问题）
-  console.log('[Router Guard] isLoggedIn:', playerStore.isLoggedIn, 'userId:', playerStore.userId)
-  console.log('[Router Guard] isCharacterSelected:', playerStore.isCharacterSelected, 'playerId:', playerStore.playerId)
-  console.log('[Router Guard] Navigating to:', to.name)
-
   // 1. 检查是否已登录 (认证级别)
   if (!playerStore.isLoggedIn) {
     // 未登录：只能访问 Login 或 Register 路由
     if (to.name !== 'Login' && to.name !== 'Register') {
-      console.log('[Router Guard] Not logged in, redirecting to Login')
       next({ name: 'Login' })
     } else {
       next()
@@ -69,11 +63,9 @@ router.beforeEach((to, from, next) => {
     if (!playerStore.isCharacterSelected) {
       // 未选角色：只能访问 CharacterSelect 路由
       if (to.name !== 'CharacterSelect' && to.name !== 'Login' && to.name !== 'CharacterCreate') {
-        console.log('[Router Guard] Character not selected, redirecting to CharacterSelect')
         next({ name: 'CharacterSelect' })
       } else if (to.name === 'Login') {
         // 已登录，但跳转到 Login，重定向到角色选择
-        console.log('[Router Guard] Already logged in, redirecting from Login to CharacterSelect')
         next({ name: 'CharacterSelect' })
       } else {
         next()
@@ -81,7 +73,6 @@ router.beforeEach((to, from, next) => {
     } else {
       // 已选角色：只能访问 Game 路由
       if (to.name !== 'Game') {
-        console.log('[Router Guard] Character selected, redirecting to Game with playerId:', playerStore.playerId)
         next({ name: 'Game', params: { playerId: playerStore.playerId } })
       } else {
         next()
