@@ -458,7 +458,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePlayerStore } from '@/stores/player'
 // 导入新的 ws 封装函数
-import { initWebSocket, removeMessageHandler, sendGameCommand, sendMessage } from '../utils/ws.js' 
+import { initWebSocket, removeMessageHandler, sendGameCommand as rawSendGameCommand, sendMessage } from '../utils/ws.js' 
 
 const router = useRouter()
 const playerStore = usePlayerStore()
@@ -479,6 +479,13 @@ const logs = ref([])
 const chatMessages = ref([])
 const MAX_CHAT_HISTORY = 200
 const command = ref('')
+
+const COMMAND_LIMIT_PER_WINDOW = 15
+const COMMAND_LIMIT_WINDOW_MS = 2000
+const commandQueue = []
+const commandSentTimestamps = []
+let commandQueueTimer = null
+let lastRateLimitNoticeAt = 0
 
 // 面板状态
 const showInfoPanel = ref(false)
@@ -601,6 +608,96 @@ const selectedWorld = computed(() => {
     return worldsList.value.find(w => w.id === selectedWorldId.value);
 });
 
+const keepCurrentPlayerOnlineInRoom = () => {
+    if (!room.value || !room.value.playersInRoom || !currentPlayer.value.id) return;
+    room.value.playersInRoom = room.value.playersInRoom.map(p => (
+        p.id === currentPlayer.value.id ? { ...p, online: true } : p
+    ));
+}
+
+const trimCommandWindow = (now) => {
+    while (commandSentTimestamps.length > 0 && (now - commandSentTimestamps[0]) >= COMMAND_LIMIT_WINDOW_MS) {
+        commandSentTimestamps.shift();
+    }
+}
+
+const scheduleCommandFlush = (delayMs) => {
+    if (commandQueueTimer) {
+        clearTimeout(commandQueueTimer)
+    }
+    commandQueueTimer = setTimeout(() => {
+        commandQueueTimer = null
+        flushCommandQueue()
+    }, delayMs)
+}
+
+const flushCommandQueue = () => {
+    if (commandQueue.length === 0) return
+
+    const now = Date.now()
+    trimCommandWindow(now)
+
+    if (commandSentTimestamps.length >= COMMAND_LIMIT_PER_WINDOW) {
+        if (now - lastRateLimitNoticeAt >= COMMAND_LIMIT_WINDOW_MS) {
+            addLog("不要急，慢慢来")
+            lastRateLimitNoticeAt = now
+        }
+        const waitMs = Math.max(1, COMMAND_LIMIT_WINDOW_MS - (now - commandSentTimestamps[0]))
+        scheduleCommandFlush(waitMs)
+        return
+    }
+
+    const next = commandQueue.shift()
+    rawSendGameCommand(next.type, next.subtype, next.playerId, next.args)
+    commandSentTimestamps.push(now)
+
+    if (commandQueue.length > 0) {
+        scheduleCommandFlush(0)
+    }
+}
+
+const sendGameCommand = (type, subtype, playerId, args = {}) => {
+    if (type !== 'command') {
+        rawSendGameCommand(type, subtype, playerId, args)
+        return
+    }
+
+    commandQueue.push({ type, subtype, playerId, args })
+    flushCommandQueue()
+}
+
+const keyDirectionMap = {
+    ArrowUp: 'north',
+    ArrowDown: 'south',
+    ArrowLeft: 'west',
+    ArrowRight: 'east',
+    Numpad8: 'north',
+    Numpad2: 'south',
+    Numpad4: 'west',
+    Numpad6: 'east',
+    Numpad3: 'southeast',
+    Numpad9: 'northeast',
+    Numpad1: 'southwest',
+    Numpad7: 'northwest'
+}
+
+const isTypingElement = (el) => {
+    if (!el || !(el instanceof HTMLElement)) return false
+    const tag = el.tagName
+    return el.isContentEditable || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT'
+}
+
+const handleGlobalKeydown = (event) => {
+    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) return
+    if (isTypingElement(event.target)) return
+
+    const direction = keyDirectionMap[event.code]
+    if (!direction) return
+
+    event.preventDefault()
+    go(direction)
+}
+
 const requestCoreGameState = () => {
     sendGameCommand("system", "get_room", characterId.value, {})
     sendGameCommand("command", "get_attributes", characterId.value, {})
@@ -664,6 +761,7 @@ onMounted(() => {
   
   // 初始化 WebSocket 监听器
   initWebSocket(handleMessage);
+    window.addEventListener('keydown', handleGlobalKeydown)
 
     if (playerStore.userId && playerStore.reconnectToken && characterId.value) {
         sendMessage({
@@ -682,7 +780,12 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+    if (commandQueueTimer) {
+        clearTimeout(commandQueueTimer)
+        commandQueueTimer = null
+    }
     removeMessageHandler(handleMessage)
+    window.removeEventListener('keydown', handleGlobalKeydown)
 })
 
 // ------------------- WebSocket 消息处理 -------------------
@@ -798,6 +901,7 @@ const handleMessage = (msg) => {
             userId: msg.results.player.userId, // 如果后端返回
             state: msg.results.player.state || 'IDLE'
           };
+                    keepCurrentPlayerOnlineInRoom();
       }
       
       (msg.logs || []).forEach(l => addLog(l));
@@ -809,8 +913,9 @@ const handleMessage = (msg) => {
       room.value = msg.results.room
       // 切换房间时清除选中状态
       selectedEntityKey.value = null;
-            closeShop();
-            closeLearn();
+    closeShop();
+    closeLearn();
+    keepCurrentPlayerOnlineInRoom();
       // 玩家移动成功，通常只更新日志和房间
       (msg.logs || []).forEach(l => addLog(l));
     } else {
@@ -933,6 +1038,7 @@ const handleMessage = (msg) => {
           closeInfoPanel();
           closeShop();
           closeLearn();
+          keepCurrentPlayerOnlineInRoom();
       } else {
           addLog(`ERROR: 进入地图失败: ${msg.results.error}`);
       }
@@ -1044,6 +1150,7 @@ const handleMessage = (msg) => {
     // 更新房间信息
     if (msg.results?.room) {
       room.value = msg.results.room;
+            keepCurrentPlayerOnlineInRoom();
     }
   } else if (msg.type === 'event' && msg.subtype === 'player_entered') {
     // 【新增】广播：其他玩家进入了房间
@@ -1053,6 +1160,7 @@ const handleMessage = (msg) => {
     // 更新房间信息
     if (msg.results?.room) {
       room.value = msg.results.room;
+            keepCurrentPlayerOnlineInRoom();
     }
   } else if (msg.type === 'event' && msg.subtype === 'player_status_changed') {
     const pid = msg.results?.playerId;
@@ -1079,8 +1187,13 @@ const handleMessage = (msg) => {
                     if (p.id === currentPlayer.value.id) {
                         currentPlayer.value.state = update.state;
                     }
-                    // 合并更新，保留原有的 online 状态（如果 update 中没有）
-                    return { ...p, ...update, online: p.online }; 
+                    const merged = { ...p, ...update };
+                    if (p.id === currentPlayer.value.id) {
+                        merged.online = true;
+                    } else if (update.online === undefined) {
+                        merged.online = p.online;
+                    }
+                    return merged;
                 }
                 return p;
             });
@@ -1135,10 +1248,17 @@ const handleMessage = (msg) => {
 const handlePlayerStatusChanged = (playerId, playerName, status, message) => {
   if (!room.value || !room.value.playersInRoom) return;
   const p = room.value.playersInRoom.find(x => x.id === playerId);
-  if (p) p.online = (status === 'online');
+    if (p) {
+            if (playerId === currentPlayer.value.id) {
+                    p.online = true;
+            } else {
+                    p.online = (status === 'online');
+            }
+    }
   if (status === 'online') {
     addLog(message || `${playerName}恢复连接`);
   } else {
+        if (playerId === currentPlayer.value.id) return;
     addLog(`${playerName}断开了连接`);
   }
 }

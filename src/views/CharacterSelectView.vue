@@ -187,7 +187,7 @@ const handleCharacterSelectMessage = (msg) => {
       if (msg.flag) {
         const selectedId = msg.results.characterId
         playerStore.setPlayerId(selectedId)
-        router.push({ name: 'Game', params: { playerId: selectedId } })
+        router.push({ name: 'Game' })
       } else {
         error.value = `选择角色失败: ${msg.results.error || '未知错误'}`
       }

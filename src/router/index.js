@@ -30,10 +30,9 @@ const routes = [
     meta: { requiresAuth: true, requiresNoCharacter: true }
   },
   {
-    path: '/game/:playerId',
+    path: '/game',
     name: 'Game',
     component: GameView,
-    props: true,
     meta: { requiresAuth: true, requiresCharacter: true } 
   }
 ]
@@ -73,7 +72,7 @@ router.beforeEach((to, from, next) => {
     } else {
       // 已选角色：只能访问 Game 路由
       if (to.name !== 'Game') {
-        next({ name: 'Game', params: { playerId: playerStore.playerId } })
+        next({ name: 'Game' })
       } else {
         next()
       }
