@@ -634,25 +634,23 @@ const scheduleCommandFlush = (delayMs) => {
 const flushCommandQueue = () => {
     if (commandQueue.length === 0) return
 
-    const now = Date.now()
-    trimCommandWindow(now)
+    while (commandQueue.length > 0) {
+        const now = Date.now()
+        trimCommandWindow(now)
 
-    if (commandSentTimestamps.length >= COMMAND_LIMIT_PER_WINDOW) {
-        if (now - lastRateLimitNoticeAt >= COMMAND_LIMIT_WINDOW_MS) {
-            addLog("不要急，慢慢来")
-            lastRateLimitNoticeAt = now
+        if (commandSentTimestamps.length >= COMMAND_LIMIT_PER_WINDOW) {
+            if (now - lastRateLimitNoticeAt >= COMMAND_LIMIT_WINDOW_MS) {
+                addLog("不要急，慢慢来")
+                lastRateLimitNoticeAt = now
+            }
+            const waitMs = Math.max(1, COMMAND_LIMIT_WINDOW_MS - (now - commandSentTimestamps[0]))
+            scheduleCommandFlush(waitMs)
+            return
         }
-        const waitMs = Math.max(1, COMMAND_LIMIT_WINDOW_MS - (now - commandSentTimestamps[0]))
-        scheduleCommandFlush(waitMs)
-        return
-    }
 
-    const next = commandQueue.shift()
-    rawSendGameCommand(next.type, next.subtype, next.playerId, next.args)
-    commandSentTimestamps.push(now)
-
-    if (commandQueue.length > 0) {
-        scheduleCommandFlush(0)
+        const next = commandQueue.shift()
+        rawSendGameCommand(next.type, next.subtype, next.playerId, next.args)
+        commandSentTimestamps.push(now)
     }
 }
 
@@ -776,7 +774,6 @@ onMounted(() => {
     }
   
         requestCoreGameState()
-  sendGameCommand("command", "get_attributes", characterId.value, {})
 })
 
 onUnmounted(() => {
@@ -1045,6 +1042,9 @@ const handleMessage = (msg) => {
   } else if (msg.type === 'command' && msg.subtype === 'get_shop') {
       if (msg.flag) {
           shopItems.value = msg.results.shopItems || [];
+          if (msg.results.money !== undefined) {
+              playerMoney.value = msg.results.money;
+          }
           currentShopNpc.value = {
               id: msg.results.npcId,
               name: msg.results.npcName,
@@ -1569,7 +1569,6 @@ const logout = () => {
 const openShop = (npc) => {
     if (!checkCanAct('open_shop')) return;
     sendGameCommand("command", "get_shop", characterId.value, { npcId: npc.id });
-    sendGameCommand("command", "get_backpack", characterId.value, {});
 }
 
 const closeShop = () => {
