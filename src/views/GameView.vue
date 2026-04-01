@@ -95,7 +95,7 @@
                                 <span v-if="player.state === 'HEALING'" class="status-tag healing">&lt;疗伤&gt;</span>
                                 <span v-if="player.state === 'MEDITATING'" class="status-tag meditating">&lt;打坐&gt;</span>
                                 <span v-if="player.state === 'MINING'" class="status-tag mining">&lt;挖矿中&gt;</span>
-                                <span v-if="player.state === 'LEARNING'" class="status-tag learning">&lt;学习中&gt;</span>
+                                <span v-if="player.state === 'LEARNING'" class="status-tag learning">&lt;学习&gt;</span>
                                 <span v-if="player.online === false" class="offline-tag"> &lt;断线&gt;</span>
                             </div>
                             <div class="entity-bars" v-if="player.state !== 'DEAD'">
@@ -134,6 +134,7 @@
                         </div>
                         <div v-if="selectedEntityKey === getEntityKey(npc.id, index, 'npc')" class="entity-actions">
                             <button @click.stop="viewEntity(npc)" class="action-btn">查看</button>
+                            <button @click.stop="killEntity(npc)" class="action-btn">击杀</button>
                             <button @click.stop="openShop(npc)" class="action-btn" v-if="npc.isShop">交易</button>
                             <button @click.stop="openLearn(npc)" class="action-btn" v-if="npc.skills && Object.keys(npc.skills).length > 0">学习</button>
                         </div>
@@ -423,6 +424,34 @@
                             <button @click="enterWorld" class="enter-world-btn" :disabled="!selectedWorld">进入世界</button>
                         </div>
                     </div>
+                    <div v-if="currentPanel === 'dungeons'" class="maps-panel-container">
+                        <div class="map-list-area">
+                            <ul v-if="sortedDungeonsList && sortedDungeonsList.length > 0" class="map-list">
+                                <li v-for="dungeon in sortedDungeonsList"
+                                    :key="dungeon.id"
+                                    class="map-item"
+                                    :class="{ 'selected': selectedDungeonId === dungeon.id }"
+                                    @click="selectDungeon(dungeon.id)">
+                                    <div class="map-item-line">
+                                        <span class="map-name">{{ dungeon.name }}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p v-else class="empty-msg">暂无可用副本。</p>
+                        </div>
+                        <div class="map-description-area">
+                            <div class="map-desc-text">
+                                {{ selectedDungeon ? selectedDungeon.description : '请选择一个副本查看详情。' }}
+                            </div>
+                            <div v-if="selectedDungeon" class="map-sub-line">
+                                满额奖励：{{ selectedDungeon.rewardBase || 0 }}经验 {{ selectedDungeon.rewardBase || 0 }}潜能
+                            </div>
+                            <div v-if="isInDungeon && room?.dungeon?.id === selectedDungeon?.id" class="map-sub-line">
+                                当前进度：{{ room?.dungeon?.progress ?? 0 }}%
+                            </div>
+                            <button @click="enterDungeon" class="enter-world-btn" :disabled="!selectedDungeon || isInDungeon">进入副本</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -433,6 +462,7 @@
                     <button @click="doAction('heal')" class="action-cmd-btn">疗伤</button>
                     <button @click="doAction('stop')" class="action-cmd-btn">停止</button>
                     <button v-if="room?.id === 'ly_mine'" @click="doAction('mine')" class="action-cmd-btn">挖矿</button>
+                    <button v-if="isInDungeon" @click="leaveCurrentDungeon" class="action-cmd-btn">完成副本</button>
                     <button v-if="currentPlayer.state === 'DEAD'" @click="doAction('relive')" class="action-cmd-btn relive-btn">复活</button>
                 </div>
             </div>
@@ -445,6 +475,7 @@
             <button @click="toggleSkills" class="tool-btn" title="技能">⚡</button>
             <button @click="toggleEquipment" class="tool-btn" title="装备">🛡️</button>
             <button @click="toggleMaps" class="tool-btn" title="地图">🗺️</button>
+                        <button @click="toggleDungeons" class="tool-btn" title="副本">🏯</button>
         </div>
       </div>
     </div>
@@ -496,8 +527,10 @@ const playerMoney = ref(0) // Add player money state
 const skillsList = ref([])
 const statusAttributes = ref(null)
 const worldsList = ref([])
+const dungeonsList = ref([])
 const selectedEntityKey = ref(null)
 const selectedWorldId = ref(null)
+const selectedDungeonId = ref(null)
 const suppressEquipmentPanelSwitchCount = ref(0)
 
 // Shop State
@@ -608,11 +641,57 @@ const selectedWorld = computed(() => {
     return worldsList.value.find(w => w.id === selectedWorldId.value);
 });
 
+const sortedDungeonsList = computed(() => {
+    if (!dungeonsList.value) return [];
+    return [...dungeonsList.value].sort((a, b) => {
+        const orderA = Number(a.order) || 999;
+        const orderB = Number(b.order) || 999;
+        if (orderA !== orderB) return orderA - orderB;
+        return String(a.id || '').localeCompare(String(b.id || ''));
+    });
+});
+
+const selectedDungeon = computed(() => {
+    if (!selectedDungeonId.value || !dungeonsList.value) return null;
+    return dungeonsList.value.find(d => d.id === selectedDungeonId.value) || null;
+});
+
+const isInDungeon = computed(() => {
+    const worldId = room.value?.worldId;
+    return typeof worldId === 'string' && worldId.startsWith('dungeon_');
+});
+
 const keepCurrentPlayerOnlineInRoom = () => {
     if (!room.value || !room.value.playersInRoom || !currentPlayer.value.id) return;
     room.value.playersInRoom = room.value.playersInRoom.map(p => (
         p.id === currentPlayer.value.id ? { ...p, online: true } : p
     ));
+}
+
+const applyDungeonProgressFromText = (message) => {
+    if (!room.value || !message) return;
+    const match = /当前完成度(\d+)%/.exec(message);
+    if (!match) return;
+    const progress = Math.max(0, Math.min(100, Number(match[1]) || 0));
+    const dungeon = room.value.dungeon ? { ...room.value.dungeon } : {};
+    dungeon.progress = progress;
+    room.value = { ...room.value, dungeon };
+}
+
+const formatDungeonSettlement = (settlement) => {
+    if (!settlement) return '';
+    const progress = Number(settlement.progress) || 0;
+    const rewardExp = Number(settlement.rewardExperience) || 0;
+    const rewardPotential = Number(settlement.rewardPotential) || 0;
+    const prefix = progress >= 100 ? '副本完成' : '副本结算';
+    return `${prefix}：完成度${progress}%，获得${rewardExp}点经验，${rewardPotential}点潜能。`;
+}
+
+const syncDungeonSelectionFromRoom = () => {
+    const currentDungeonId = room.value?.dungeon?.id;
+    if (currentDungeonId) {
+        selectedDungeonId.value = currentDungeonId;
+    }
 }
 
 const trimCommandWindow = (now) => {
@@ -714,6 +793,8 @@ const refreshOpenPanels = () => {
         sendGameCommand("command", "get_attributes", characterId.value, {})
     } else if (currentPanel.value === 'maps') {
         sendGameCommand("command", "get_worlds", characterId.value, {})
+    } else if (currentPanel.value === 'dungeons') {
+        sendGameCommand("command", "get_dungeons", characterId.value, {})
     }
 }
 
@@ -870,6 +951,22 @@ const getMessage = (msg) => {
             if (results?.error === 'escape_failed') return "你想抽身后退，却被对手缠得脱不开身。";
             return `停止失败: ${results?.error || 'unknown_error'}`;
         }
+        if (subtype === 'enter_dungeon') {
+            if (flag) return null;
+            const err = results?.error;
+            if (err === 'already_in_dungeon') return "你已经在副本中了。";
+            if (err === 'dungeon_not_found') return "没有找到这个副本。";
+            if (err === 'dungeon_unavailable') return "副本系统暂不可用。";
+            if (err === 'busy_state') return "你现在正忙着呢。";
+            if (err === 'dead_state') return "你已经重伤不起，先复活再说。";
+            return `进入副本失败: ${err || 'unknown_error'}`;
+        }
+        if (subtype === 'leave_dungeon') {
+            if (flag) return null;
+            const err = results?.error;
+            if (err === 'not_in_dungeon') return "你当前不在副本中。";
+            return `离开副本失败: ${err || 'unknown_error'}`;
+        }
     }
     return null;
 }
@@ -899,6 +996,7 @@ const handleMessage = (msg) => {
             state: msg.results.player.state || 'IDLE'
           };
                     keepCurrentPlayerOnlineInRoom();
+                    syncDungeonSelectionFromRoom();
       }
       
       (msg.logs || []).forEach(l => addLog(l));
@@ -912,7 +1010,8 @@ const handleMessage = (msg) => {
       selectedEntityKey.value = null;
     closeShop();
     closeLearn();
-    keepCurrentPlayerOnlineInRoom();
+            keepCurrentPlayerOnlineInRoom();
+            syncDungeonSelectionFromRoom();
       // 玩家移动成功，通常只更新日志和房间
       (msg.logs || []).forEach(l => addLog(l));
     } else {
@@ -1025,6 +1124,20 @@ const handleMessage = (msg) => {
       } else {
           addLog(`ERROR: 获取地图列表失败: ${msg.results.error}`);
       }
+  } else if (msg.type === 'command' && msg.subtype === 'get_dungeons') {
+      if (msg.flag) {
+          dungeonsList.value = msg.results.dungeons || [];
+          if (!selectedDungeonId.value && dungeonsList.value.length > 0) {
+              selectedDungeonId.value = dungeonsList.value[0].id;
+          }
+          if (!showInfoPanel.value || currentPanel.value !== 'dungeons') {
+              showInfoPanel.value = true;
+              currentPanel.value = 'dungeons';
+              panelTitle.value = '副本';
+          }
+      } else {
+          addLog(`ERROR: 获取副本列表失败: ${msg.results.error}`);
+      }
   } else if (msg.type === 'command' && msg.subtype === 'enter_world') {
       // 处理进入世界
       if (msg.flag) {
@@ -1036,8 +1149,36 @@ const handleMessage = (msg) => {
           closeShop();
           closeLearn();
           keepCurrentPlayerOnlineInRoom();
+          syncDungeonSelectionFromRoom();
       } else {
           addLog(`ERROR: 进入地图失败: ${msg.results.error}`);
+      }
+  } else if (msg.type === 'command' && msg.subtype === 'enter_dungeon') {
+      if (msg.flag) {
+          room.value = msg.results.room;
+          selectedEntityKey.value = null;
+          (msg.logs || []).forEach(l => addLog(l));
+          closeInfoPanel();
+          closeShop();
+          closeLearn();
+          keepCurrentPlayerOnlineInRoom();
+          syncDungeonSelectionFromRoom();
+      } else if (!generatedMsg) {
+          addLog(`ERROR: 进入副本失败: ${msg.results.error}`);
+      }
+  } else if (msg.type === 'command' && msg.subtype === 'leave_dungeon') {
+      if (msg.flag) {
+          room.value = msg.results.room;
+          selectedEntityKey.value = null;
+          (msg.logs || []).forEach(l => addLog(l));
+          closeInfoPanel();
+          closeShop();
+          closeLearn();
+          keepCurrentPlayerOnlineInRoom();
+          syncDungeonSelectionFromRoom();
+          sendGameCommand("command", "get_attributes", characterId.value, {});
+      } else if (!generatedMsg) {
+          addLog(`ERROR: 离开副本失败: ${msg.results.error}`);
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_shop') {
       if (msg.flag) {
@@ -1151,6 +1292,7 @@ const handleMessage = (msg) => {
     if (msg.results?.room) {
       room.value = msg.results.room;
             keepCurrentPlayerOnlineInRoom();
+            syncDungeonSelectionFromRoom();
     }
   } else if (msg.type === 'event' && msg.subtype === 'player_entered') {
     // 【新增】广播：其他玩家进入了房间
@@ -1161,6 +1303,7 @@ const handleMessage = (msg) => {
     if (msg.results?.room) {
       room.value = msg.results.room;
             keepCurrentPlayerOnlineInRoom();
+            syncDungeonSelectionFromRoom();
     }
   } else if (msg.type === 'event' && msg.subtype === 'player_status_changed') {
     const pid = msg.results?.playerId;
@@ -1326,14 +1469,37 @@ const toggleMaps = () => {
     }
 }
 
+const toggleDungeons = () => {
+    if (showInfoPanel.value && currentPanel.value === 'dungeons') {
+        closeInfoPanel();
+    } else {
+        sendGameCommand("command", "get_dungeons", characterId.value, {});
+    }
+}
+
 const selectWorld = (worldId) => {
     selectedWorldId.value = worldId;
+}
+
+const selectDungeon = (dungeonId) => {
+    selectedDungeonId.value = dungeonId;
 }
 
 const enterWorld = () => {
     if (!checkCanAct('enter_world')) return;
     if (!selectedWorldId.value) return;
     sendGameCommand("command", "enter_world", characterId.value, { worldId: selectedWorldId.value });
+}
+
+const enterDungeon = () => {
+    if (!checkCanAct('enter_dungeon')) return;
+    if (!selectedDungeonId.value) return;
+    sendGameCommand("command", "enter_dungeon", characterId.value, { dungeonId: selectedDungeonId.value });
+}
+
+const leaveCurrentDungeon = () => {
+    if (!checkCanAct('leave_dungeon')) return;
+    sendGameCommand("command", "leave_dungeon", characterId.value, {});
 }
 
 const closeInfoPanel = () => {
@@ -1381,7 +1547,7 @@ const stateNames = {
 // 检查当前状态是否允许执行动作
 const checkCanAct = (actionType) => {
     // 停止动作总是允许的
-    if (actionType === 'stop') return true;
+    if (actionType === 'stop' || actionType === 'leave_dungeon') return true;
     
     const state = currentPlayer.value.state;
     
@@ -1445,8 +1611,8 @@ const viewEntity = (entity) => {
 
 const killEntity = (entity) => {
     if (!checkCanAct('kill')) return;
-    if (!entity || entity.state === undefined) {
-        addLog('当前版本暂不支持与 NPC 战斗。');
+    if (!entity) {
+        addLog('找不到目标。');
         return;
     }
     sendGameCommand("command", "kill", characterId.value, { targetId: entity.id });
@@ -1524,6 +1690,7 @@ const addLog = (message) => {
     if (!message) return;
     // 移除 INFO/WARN/ERROR 前缀
     const cleanMessage = message.replace(/^(INFO|WARN|ERROR):\s*/, '');
+    applyDungeonProgressFromText(cleanMessage);
     logs.value.push(cleanMessage);
     scrollToBottom();
 }
