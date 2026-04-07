@@ -216,13 +216,14 @@
             </div>
 
             <div class="game-log">
-            <div v-if="pendingDungeonLeave" class="dungeon-leave-confirm">
-                <div class="confirm-line">确认离开{{ pendingDungeonLeave.name }}副本？</div>
-                <div class="confirm-line">当前副本完成度{{ pendingDungeonLeave.progress }}%</div>
-                <button class="confirm-leave-btn" @click="confirmLeaveCurrentDungeon">离开副本</button>
-            </div>
             <div v-for="(log, index) in logs" :key="index" :class="getLogClass(log)">
-                {{ log }}
+                <template v-if="isDungeonLeaveButtonLog(log)">
+                    <button v-if="isActiveDungeonLeaveButtonLog(log)" @click="confirmLeaveCurrentDungeon">{{ getLogText(log) }}</button>
+                    <template v-else>{{ getLogText(log) }}</template>
+                </template>
+                <template v-else>
+                    {{ getLogText(log) }}
+                </template>
             </div>
             </div>
             
@@ -516,6 +517,7 @@ const chatMessages = ref([])
 const MAX_CHAT_HISTORY = 200
 const command = ref('')
 const pendingDungeonLeave = ref(null)
+const DUNGEON_LEAVE_BUTTON_LOG_TYPE = 'dungeon_leave_button'
 
 const COMMAND_LIMIT_PER_WINDOW = 15
 const COMMAND_LIMIT_WINDOW_MS = 2000
@@ -698,7 +700,7 @@ const buildDungeonLeavePrompt = () => {
     if (!isInDungeon.value || !room.value) return null;
     const dungeonName = room.value?.dungeon?.name || room.value?.worldName || selectedDungeon.value?.name || '未知';
     const progress = Math.max(0, Math.min(100, Number(room.value?.dungeon?.progress ?? 0) || 0));
-    return { name: dungeonName, progress };
+    return { name: dungeonName, progress, token: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}` };
 }
 
 const syncPendingDungeonLeavePrompt = () => {
@@ -1528,12 +1530,16 @@ const enterDungeon = () => {
 
 const leaveCurrentDungeon = () => {
     if (!checkCanAct('leave_dungeon')) return;
+    if (pendingDungeonLeave.value) return;
     const prompt = buildDungeonLeavePrompt();
     if (!prompt) {
         pendingDungeonLeave.value = null;
         return;
     }
     pendingDungeonLeave.value = prompt;
+    addLog(`确认离开${prompt.name}副本？`);
+    addLog(`当前副本完成度${prompt.progress}%`);
+    addDungeonLeaveButtonLog(prompt.token);
 }
 
 const confirmLeaveCurrentDungeon = () => {
@@ -1729,6 +1735,9 @@ const go = (direction) => {
 
 const addLog = (message) => {
     if (!message) return;
+    if (typeof message !== 'string') {
+        message = String(message);
+    }
     // 移除 INFO/WARN/ERROR 前缀
     const cleanMessage = message.replace(/^(INFO|WARN|ERROR):\s*/, '');
     applyDungeonProgressFromText(cleanMessage);
@@ -1736,10 +1745,35 @@ const addLog = (message) => {
     scrollToBottom();
 }
 
+const addDungeonLeaveButtonLog = (token) => {
+    logs.value.push({
+        type: DUNGEON_LEAVE_BUTTON_LOG_TYPE,
+        text: '离开副本',
+        token
+    });
+    scrollToBottom();
+}
+
+const getLogText = (log) => {
+    if (typeof log === 'string') return log;
+    if (log && typeof log === 'object' && typeof log.text === 'string') return log.text;
+    return '';
+}
+
+const isDungeonLeaveButtonLog = (log) => {
+    return !!(log && typeof log === 'object' && log.type === DUNGEON_LEAVE_BUTTON_LOG_TYPE);
+}
+
+const isActiveDungeonLeaveButtonLog = (log) => {
+    if (!isDungeonLeaveButtonLog(log)) return false;
+    return !!pendingDungeonLeave.value && pendingDungeonLeave.value.token === log.token;
+}
+
 const getLogClass = (log) => {
-  if (log.startsWith('ERROR:')) return 'log-error'
-  if (log.startsWith('WARN:')) return 'log-warn'
-  if (log.startsWith('CHAT:')) return 'log-chat'
+  const text = getLogText(log)
+  if (text.startsWith('ERROR:')) return 'log-error'
+  if (text.startsWith('WARN:')) return 'log-warn'
+  if (text.startsWith('CHAT:')) return 'log-chat'
   return 'log-info'
 }
 
@@ -2292,32 +2326,6 @@ const formatMoney = (money) => {
 .log-warn { color: #f39c12; }
 .log-error { color: #e74c3c; }
 .log-chat { color: var(--color-accent-blue); }
-
-.dungeon-leave-confirm {
-    border: 1px solid var(--color-accent-gold);
-    border-radius: 6px;
-    background: rgba(243, 156, 18, 0.12);
-    padding: 8px 10px;
-    margin-bottom: 8px;
-}
-
-.dungeon-leave-confirm .confirm-line {
-    color: var(--color-text-light);
-    margin-bottom: 4px;
-}
-
-.confirm-leave-btn {
-    margin-top: 2px;
-    background-color: #b8482f;
-    border: 1px solid #d26145;
-    color: #fff;
-    padding: 4px 10px;
-}
-
-.confirm-leave-btn:hover {
-    background-color: #d26145;
-    color: #fff;
-}
 
 
 .chat-input {
