@@ -216,6 +216,11 @@
             </div>
 
             <div class="game-log">
+            <div v-if="pendingDungeonLeave" class="dungeon-leave-confirm">
+                <div class="confirm-line">确认离开{{ pendingDungeonLeave.name }}副本？</div>
+                <div class="confirm-line">当前副本完成度{{ pendingDungeonLeave.progress }}%</div>
+                <button class="confirm-leave-btn" @click="confirmLeaveCurrentDungeon">离开副本</button>
+            </div>
             <div v-for="(log, index) in logs" :key="index" :class="getLogClass(log)">
                 {{ log }}
             </div>
@@ -462,7 +467,7 @@
                     <button @click="doAction('heal')" class="action-cmd-btn">疗伤</button>
                     <button @click="doAction('stop')" class="action-cmd-btn">停止</button>
                     <button v-if="room?.id === 'ly_mine'" @click="doAction('mine')" class="action-cmd-btn">挖矿</button>
-                    <button v-if="isInDungeon" @click="leaveCurrentDungeon" class="action-cmd-btn">完成副本</button>
+                    <button v-if="isInDungeon" @click="leaveCurrentDungeon" class="action-cmd-btn">离开副本</button>
                     <button v-if="currentPlayer.state === 'DEAD'" @click="doAction('relive')" class="action-cmd-btn relive-btn">复活</button>
                 </div>
             </div>
@@ -510,6 +515,7 @@ const logs = ref([])
 const chatMessages = ref([])
 const MAX_CHAT_HISTORY = 200
 const command = ref('')
+const pendingDungeonLeave = ref(null)
 
 const COMMAND_LIMIT_PER_WINDOW = 15
 const COMMAND_LIMIT_WINDOW_MS = 2000
@@ -676,6 +682,7 @@ const applyDungeonProgressFromText = (message) => {
     const dungeon = room.value.dungeon ? { ...room.value.dungeon } : {};
     dungeon.progress = progress;
     room.value = { ...room.value, dungeon };
+    syncPendingDungeonLeavePrompt();
 }
 
 const formatDungeonSettlement = (settlement) => {
@@ -685,6 +692,23 @@ const formatDungeonSettlement = (settlement) => {
     const rewardPotential = Number(settlement.rewardPotential) || 0;
     const prefix = progress >= 100 ? '副本完成' : '副本结算';
     return `${prefix}：完成度${progress}%，获得${rewardExp}点经验，${rewardPotential}点潜能。`;
+}
+
+const buildDungeonLeavePrompt = () => {
+    if (!isInDungeon.value || !room.value) return null;
+    const dungeonName = room.value?.dungeon?.name || room.value?.worldName || selectedDungeon.value?.name || '未知';
+    const progress = Math.max(0, Math.min(100, Number(room.value?.dungeon?.progress ?? 0) || 0));
+    return { name: dungeonName, progress };
+}
+
+const syncPendingDungeonLeavePrompt = () => {
+    if (!pendingDungeonLeave.value) return;
+    const next = buildDungeonLeavePrompt();
+    if (!next) {
+        pendingDungeonLeave.value = null;
+        return;
+    }
+    pendingDungeonLeave.value = next;
 }
 
 const syncDungeonSelectionFromRoom = () => {
@@ -997,7 +1021,9 @@ const handleMessage = (msg) => {
           };
                     keepCurrentPlayerOnlineInRoom();
                     syncDungeonSelectionFromRoom();
+                    syncPendingDungeonLeavePrompt();
       }
+            syncPendingDungeonLeavePrompt();
       
       (msg.logs || []).forEach(l => addLog(l));
     } else {
@@ -1012,6 +1038,7 @@ const handleMessage = (msg) => {
     closeLearn();
             keepCurrentPlayerOnlineInRoom();
             syncDungeonSelectionFromRoom();
+            syncPendingDungeonLeavePrompt();
       // 玩家移动成功，通常只更新日志和房间
       (msg.logs || []).forEach(l => addLog(l));
     } else {
@@ -1150,6 +1177,7 @@ const handleMessage = (msg) => {
           closeLearn();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
+          pendingDungeonLeave.value = null;
       } else {
           addLog(`ERROR: 进入地图失败: ${msg.results.error}`);
       }
@@ -1163,6 +1191,7 @@ const handleMessage = (msg) => {
           closeLearn();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
+          pendingDungeonLeave.value = null;
       } else if (!generatedMsg) {
           addLog(`ERROR: 进入副本失败: ${msg.results.error}`);
       }
@@ -1176,8 +1205,10 @@ const handleMessage = (msg) => {
           closeLearn();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
+          pendingDungeonLeave.value = null;
           sendGameCommand("command", "get_attributes", characterId.value, {});
       } else if (!generatedMsg) {
+          pendingDungeonLeave.value = null;
           addLog(`ERROR: 离开副本失败: ${msg.results.error}`);
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_shop') {
@@ -1293,6 +1324,7 @@ const handleMessage = (msg) => {
       room.value = msg.results.room;
             keepCurrentPlayerOnlineInRoom();
             syncDungeonSelectionFromRoom();
+        syncPendingDungeonLeavePrompt();
     }
   } else if (msg.type === 'event' && msg.subtype === 'player_entered') {
     // 【新增】广播：其他玩家进入了房间
@@ -1304,6 +1336,7 @@ const handleMessage = (msg) => {
       room.value = msg.results.room;
             keepCurrentPlayerOnlineInRoom();
             syncDungeonSelectionFromRoom();
+        syncPendingDungeonLeavePrompt();
     }
   } else if (msg.type === 'event' && msg.subtype === 'player_status_changed') {
     const pid = msg.results?.playerId;
@@ -1344,15 +1377,11 @@ const handleMessage = (msg) => {
         
         // 更新房间内的 NPC 列表数据
         const updatedNpcs = msg.results.npcs;
-        if (updatedNpcs && room.value.npcs) {
-            room.value.npcs = room.value.npcs.map(n => {
-                const update = updatedNpcs.find(u => u.id === n.id);
-                if (update) {
-                    return { ...n, ...update };
-                }
-                return n;
-            });
+        if (updatedNpcs && Array.isArray(updatedNpcs)) {
+            const oldNpcMap = new Map((room.value.npcs || []).map(n => [n.id, n]));
+            room.value.npcs = updatedNpcs.map(n => ({ ...(oldNpcMap.get(n.id) || {}), ...n }));
         }
+        syncPendingDungeonLeavePrompt();
     }
   } else if (msg.type === 'command' && msg.subtype === 'relive') {
       if (msg.flag) {
@@ -1499,6 +1528,18 @@ const enterDungeon = () => {
 
 const leaveCurrentDungeon = () => {
     if (!checkCanAct('leave_dungeon')) return;
+    const prompt = buildDungeonLeavePrompt();
+    if (!prompt) {
+        pendingDungeonLeave.value = null;
+        return;
+    }
+    pendingDungeonLeave.value = prompt;
+}
+
+const confirmLeaveCurrentDungeon = () => {
+    if (!pendingDungeonLeave.value) return;
+    if (!checkCanAct('leave_dungeon')) return;
+    pendingDungeonLeave.value = null;
     sendGameCommand("command", "leave_dungeon", characterId.value, {});
 }
 
@@ -2251,6 +2292,32 @@ const formatMoney = (money) => {
 .log-warn { color: #f39c12; }
 .log-error { color: #e74c3c; }
 .log-chat { color: var(--color-accent-blue); }
+
+.dungeon-leave-confirm {
+    border: 1px solid var(--color-accent-gold);
+    border-radius: 6px;
+    background: rgba(243, 156, 18, 0.12);
+    padding: 8px 10px;
+    margin-bottom: 8px;
+}
+
+.dungeon-leave-confirm .confirm-line {
+    color: var(--color-text-light);
+    margin-bottom: 4px;
+}
+
+.confirm-leave-btn {
+    margin-top: 2px;
+    background-color: #b8482f;
+    border: 1px solid #d26145;
+    color: #fff;
+    padding: 4px 10px;
+}
+
+.confirm-leave-btn:hover {
+    background-color: #d26145;
+    color: #fff;
+}
 
 
 .chat-input {
