@@ -72,5 +72,49 @@
             "basic_parry": 300,
             "basic_light": 300
         }
+    },
+    "wild_wolf": {
+        "name": "野狼",
+        "description": "这是一头饥饿的野狼，双眼泛着凶光，似乎随时会扑上来。",
+        "aggressive": true,
+        "attributes": {
+            "maxHp": 80,
+            "currentHp": 80,
+            "maxMp": 30,
+            "currentMp": 30,
+            "trainedMaxMp": 30,
+            "attack": 10,
+            "defense": 6,
+            "strength": 12,
+            "constitution": 10,
+            "agility": 14,
+            "intelligence": 6,
+            "hitRate": 85,
+            "dodge": 80,
+            "parry": 60,
+            "critRate": 2
+        }
+    },
+    "wild_wolf_king": {
+        "name": "野狼王",
+        "description": "这头体型巨大的狼王盘踞在泥沼深处，獠牙上还沾着血迹。",
+        "aggressive": true,
+        "attributes": {
+            "maxHp": 140,
+            "currentHp": 140,
+            "maxMp": 50,
+            "currentMp": 50,
+            "trainedMaxMp": 50,
+            "attack": 14,
+            "defense": 10,
+            "strength": 16,
+            "constitution": 14,
+            "agility": 14,
+            "intelligence": 8,
+            "hitRate": 95,
+            "dodge": 85,
+            "parry": 70,
+            "critRate": 3
+        }
     }
 }

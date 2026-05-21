@@ -47,6 +47,7 @@ type rawNPC struct {
 	Name        string           `json:"name"`
 	Title       string           `json:"title"`
 	Description string           `json:"description"`
+	Aggressive  bool             `json:"aggressive"`
 	Attributes  model.Attributes `json:"attributes"`
 	ShopItems   []string         `json:"shopItems"`
 	Skills      map[string]int   `json:"skills"`
@@ -125,6 +126,10 @@ func loadFromDisk() (StaticData, error) {
 		Skills:     skills,
 		NPCs:       npcs,
 	}, nil
+}
+
+func ResolveResourceDir() (string, error) {
+	return resolveResourceDir()
 }
 
 func resolveResourceDir() (string, error) {
@@ -285,6 +290,7 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 			Name:          raw.Name,
 			Title:         raw.Title,
 			Description:   raw.Description,
+			Aggressive:    raw.Aggressive,
 			IsShop:        len(shopInventory) > 0,
 			ShopInventory: shopInventory,
 			Skills:        skills,

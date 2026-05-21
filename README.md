@@ -2,14 +2,21 @@
 
 这是 MudGame 后端从 Java 迁移到 Go 的工程。
 
-## 当前分层（第一阶段重构后）
+## 当前分层（运行时内存化后）
 
 - `cmd/mudserver`：启动入口
 - `internal/app`：网络层（WebSocket 接入、会话、事件广播）
-- `internal/engine`：业务编排层（面向上层的服务接口）
-- `internal/storage`：文件存储层（基于 data 目录实时读写）
+- `internal/engine`：业务编排层（对外服务接口与流程编排）
+- `internal/manager`：运行时管理层（玩家/房间/副本等动态状态的内存维护与指令处理）
+- `internal/storage`：持久化层（仅负责动态数据与磁盘之间的读写）
 - `internal/model`：领域模型定义
 - `internal/protocol`：协议结构（CommandMessage/GameResult）
+
+## 运行时 I/O 策略
+
+- 启动阶段：一次性加载静态资源与动态数据到内存。
+- 运行阶段：前端所有指令仅在内存态处理，不执行磁盘读写。
+- 持久化阶段：仅通过定时落盘（autosave）与进程退出时 flush 将动态数据写回磁盘。
 
 ## 当前已迁移内容
 

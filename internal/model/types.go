@@ -1,11 +1,10 @@
 package model
 
 type User struct {
-	Username       string
-	Password       string
-	PasswordHash   string
-	CharacterIDs   []string
-	ReconnectToken string
+	Username           string
+	PasswordHash       string
+	CharacterIDs       []string
+	ReconnectTokenHash string
 }
 
 type Attributes struct {
@@ -36,19 +35,21 @@ type Attributes struct {
 }
 
 type Player struct {
-	ID            string
-	UserID        string
-	CharacterName string
-	RoomID        string
-	State         string
-	TargetID      string
-	CombatType    string
-	Money         int
-	Attributes    Attributes
-	Skills        map[string]int
-	Backpack      map[string]int
-	Equipment     map[string]string
-	Online        bool
+	ID                 string
+	UserID             string
+	CharacterName      string
+	RoomID             string
+	State              string
+	StateTickCountdown int
+	LearningSkillID    string
+	TargetID           string
+	CombatType         string
+	Money              int
+	Attributes         Attributes
+	Skills             map[string]int
+	Backpack           map[string]int
+	Equipment          map[string]string
+	Online             bool
 }
 
 type ItemDef struct {
@@ -75,6 +76,7 @@ type NPC struct {
 	Name          string
 	Title         string
 	Description   string
+	Aggressive    bool
 	IsShop        bool
 	ShopInventory map[string]int
 	Skills        map[string]int

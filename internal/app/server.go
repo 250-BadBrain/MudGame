@@ -29,7 +29,7 @@ type commandHandler func(conn *websocket.Conn, cmd protocol.CommandMessage)
 
 type Server struct {
 	upgrader websocket.Upgrader
-	store    *engine.Service
+	repo     engine.RuntimeRepository
 
 	mu       sync.RWMutex
 	writeMu  sync.Mutex
@@ -40,14 +40,14 @@ type Server struct {
 	handlersChat map[string]commandHandler
 }
 
-func NewServer(svc *engine.Service) *Server {
+func NewServer(repo engine.RuntimeRepository) *Server {
 	s := &Server{
 		upgrader: websocket.Upgrader{
 			ReadBufferSize:  1024,
 			WriteBufferSize: 1024,
 			CheckOrigin:     func(r *http.Request) bool { return true },
 		},
-		store:        svc,
+		repo:         repo,
 		sessions:     map[*websocket.Conn]*sessionState{},
 		handlersSys:  map[string]commandHandler{},
 		handlersGame: map[string]commandHandler{},
@@ -174,7 +174,7 @@ func (s *Server) broadcast(result protocol.GameResult) {
 func (s *Server) handleSessionClosed(conn *websocket.Conn) {
 	ss := s.session(conn)
 	if ss.playerID != "" {
-		s.store.SetPlayerOnline(ss.playerID, false)
+		s.repo.SetPlayerOnline(ss.playerID, false)
 		s.emitPlayerStatusChanged(ss.playerID, "断开了连接", ss.playerID)
 	}
 }
@@ -196,11 +196,11 @@ func (s *Server) emitPlayerLeft(playerID, roomID, roomName string) {
 	if roomID == "" {
 		return
 	}
-	status, err := s.store.GetPlayerStatusView(playerID)
+	status, err := engine.GetPlayerStatusView(s.repo, playerID)
 	if err != nil {
 		return
 	}
-	room, err := s.store.GetRoomPayloadView(roomID)
+	room, err := engine.GetRoomPayloadView(s.repo, roomID)
 	if err != nil {
 		return
 	}
@@ -218,11 +218,11 @@ func (s *Server) emitPlayerEntered(playerID, roomID, roomName string) {
 	if roomID == "" {
 		return
 	}
-	status, err := s.store.GetPlayerStatusView(playerID)
+	status, err := engine.GetPlayerStatusView(s.repo, playerID)
 	if err != nil {
 		return
 	}
-	room, err := s.store.GetRoomPayloadView(roomID)
+	room, err := engine.GetRoomPayloadView(s.repo, roomID)
 	if err != nil {
 		return
 	}
@@ -237,7 +237,7 @@ func (s *Server) emitPlayerEntered(playerID, roomID, roomName string) {
 }
 
 func (s *Server) emitPlayerStatusChanged(playerID, message, excludePlayerID string) {
-	status, err := s.store.GetPlayerStatusView(playerID)
+	status, err := engine.GetPlayerStatusView(s.repo, playerID)
 	if err != nil {
 		return
 	}
@@ -255,7 +255,7 @@ func (s *Server) emitRoomUpdate(roomID string) {
 	if roomID == "" {
 		return
 	}
-	res, err := s.store.GetRoomUpdateView(roomID)
+	res, err := engine.GetRoomUpdateView(s.repo, roomID)
 	if err != nil {
 		return
 	}
@@ -267,7 +267,7 @@ func (s *Server) emitRoomUpdate(roomID string) {
 }
 
 func (s *Server) emitRoomUpdateByPlayer(playerID string) {
-	roomID, _, err := s.store.GetPlayerRoomView(playerID)
+	roomID, _, err := engine.GetPlayerRoomView(s.repo, playerID)
 	if err != nil {
 		return
 	}
@@ -275,7 +275,7 @@ func (s *Server) emitRoomUpdateByPlayer(playerID string) {
 }
 
 func (s *Server) emitRoomMessageByPlayer(playerID, message string) {
-	roomID, _, err := s.store.GetPlayerRoomView(playerID)
+	roomID, _, err := engine.GetPlayerRoomView(s.repo, playerID)
 	if err != nil {
 		return
 	}
@@ -286,7 +286,7 @@ func (s *Server) emitRoomMessageToOthersByPlayer(playerID, message string) {
 	if message == "" {
 		return
 	}
-	roomID, _, err := s.store.GetPlayerRoomView(playerID)
+	roomID, _, err := engine.GetPlayerRoomView(s.repo, playerID)
 	if err != nil {
 		return
 	}
@@ -300,7 +300,7 @@ func (s *Server) emitScopedActionMessage(playerID, selfMessage, othersMessage st
 	if selfMessage == "" && othersMessage == "" {
 		return
 	}
-	roomID, _, err := s.store.GetPlayerRoomView(playerID)
+	roomID, _, err := engine.GetPlayerRoomView(s.repo, playerID)
 	if err != nil {
 		return
 	}
@@ -326,7 +326,7 @@ func (s *Server) connectionsWithScopedMessage(roomID, actorPlayerID, selfMessage
 		if ss.playerID == "" {
 			continue
 		}
-		if !s.store.IsPlayerInRoomView(ss.playerID, roomID) {
+		if !engine.IsPlayerInRoomView(s.repo, ss.playerID, roomID) {
 			continue
 		}
 		msg := othersMessage
@@ -369,7 +369,7 @@ func (s *Server) connectionsByRoom(roomID, excludePlayerID string) []*websocket.
 		if excludePlayerID != "" && ss.playerID == excludePlayerID {
 			continue
 		}
-		if s.store.IsPlayerInRoomView(ss.playerID, roomID) {
+		if engine.IsPlayerInRoomView(s.repo, ss.playerID, roomID) {
 			out = append(out, c)
 		}
 	}
@@ -390,7 +390,7 @@ func toString(v interface{}) string {
 }
 
 func (s *Server) runBackgroundTicker() {
-	statusTicker := time.NewTicker(10 * time.Second)
+	statusTicker := time.NewTicker(1 * time.Second)
 	combatTicker := time.NewTicker(2 * time.Second)
 	defer statusTicker.Stop()
 	defer combatTicker.Stop()
@@ -398,11 +398,11 @@ func (s *Server) runBackgroundTicker() {
 	for {
 		select {
 		case <-statusTicker.C:
-			if statusRes, err := s.store.ProcessStatusTickWithEffects(); err == nil {
+			if statusRes, err := engine.ProcessStatusTickWithEffects(s.repo); err == nil {
 				s.emitTickResult(statusRes)
 			}
 		case <-combatTicker.C:
-			if combatRes, err := s.store.ProcessCombatTickWithEffects(); err == nil {
+			if combatRes, err := engine.ProcessCombatTickWithEffects(s.repo); err == nil {
 				s.emitTickResult(combatRes)
 			}
 		}

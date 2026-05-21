@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 
+	"mudgame/server/internal/engine"
 	"mudgame/server/internal/exception"
 	"mudgame/server/internal/protocol"
 
@@ -22,7 +23,7 @@ func (s *Server) handleSystemDeleteAccount(conn *websocket.Conn, cmd protocol.Co
 	ss := s.session(conn)
 	username := toString(cmd.Args["username"])
 	password := toString(cmd.Args["password"])
-	if err := s.store.DeleteAccount(username, password); err != nil {
+	if err := s.repo.DeleteAccount(username, password); err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "delete_account", false, map[string]interface{}{"error": err.Error()}, nil))
 		return
 	}
@@ -36,7 +37,7 @@ func (s *Server) handleSystemDeleteAccount(conn *websocket.Conn, cmd protocol.Co
 func (s *Server) handleSystemDeleteCharacter(conn *websocket.Conn, cmd protocol.CommandMessage) {
 	ss := s.session(conn)
 	characterID := toString(cmd.Args["characterId"])
-	if err := s.store.DeleteCharacter(ss.userID, characterID); err != nil {
+	if err := s.repo.DeleteCharacter(ss.userID, characterID); err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "delete_character", false, map[string]interface{}{"error": err.Error()}, nil))
 		return
 	}
@@ -48,7 +49,7 @@ func (s *Server) handleSystemDeleteCharacter(conn *websocket.Conn, cmd protocol.
 
 func (s *Server) handleSystemReconnect(conn *websocket.Conn, cmd protocol.CommandMessage) {
 	ss := s.session(conn)
-	res, err := s.store.Reconnect(
+	res, err := engine.Reconnect(s.repo,
 		toString(cmd.Args["userId"]),
 		ss.userID,
 		toString(cmd.Args["reconnectToken"]),
@@ -62,7 +63,7 @@ func (s *Server) handleSystemReconnect(conn *websocket.Conn, cmd protocol.Comman
 	if res.PlayerID != "" {
 		s.handleCharacterRebind(res.PlayerID, conn)
 		ss.playerID = res.PlayerID
-		s.store.SetPlayerOnline(res.PlayerID, true)
+		s.repo.SetPlayerOnline(res.PlayerID, true)
 		s.emitPlayerStatusChanged(res.PlayerID, "恢复连接", res.PlayerID)
 	}
 	results := map[string]interface{}{"message": "重新连接成功"}
@@ -76,7 +77,7 @@ func (s *Server) handleSystemDeselectCharacter(conn *websocket.Conn, _ protocol.
 	ss := s.session(conn)
 	if ss.playerID != "" {
 		oldPlayerID := ss.playerID
-		s.store.SetPlayerOnline(ss.playerID, false)
+		s.repo.SetPlayerOnline(ss.playerID, false)
 		ss.playerID = ""
 		s.emitPlayerStatusChanged(oldPlayerID, "断开了连接", oldPlayerID)
 	}
@@ -89,12 +90,63 @@ func (s *Server) handleGameEnterWorld(conn *websocket.Conn, cmd protocol.Command
 		return
 	}
 	worldID := toString(cmd.Args["worldId"])
-	res, err := s.store.EnterWorldWithTransition(playerID, worldID)
+	res, err := engine.EnterWorldWithTransition(s.repo, playerID, worldID)
 	worldName := toString(res.Room["worldName"])
 	if worldName == "" {
 		worldName = worldID
 	}
 	s.replyCommand(conn, "enter_world", err, map[string]interface{}{"room": res.Room, "closeShop": true}, []string{fmt.Sprintf("你进入了%s。", worldName)})
+	if err != nil {
+		return
+	}
+	s.emitPlayerLeft(playerID, res.FromRoomID, res.FromRoomName)
+	s.emitPlayerEntered(playerID, res.ToRoomID, res.ToRoomName)
+	s.emitRoomUpdate(res.FromRoomID)
+	s.emitRoomUpdate(res.ToRoomID)
+}
+
+func (s *Server) handleGameEnterDungeon(conn *websocket.Conn, cmd protocol.CommandMessage) {
+	playerID, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	dungeonID := toString(cmd.Args["dungeonId"])
+	if dungeonID == "" {
+		dungeonID = "swamp"
+	}
+	res, err := engine.EnterDungeonWithTransition(s.repo, playerID, dungeonID)
+	dungeonName := toString(res.Room["worldName"])
+	if dungeonName == "" {
+		dungeonName = dungeonID
+	}
+	s.replyCommand(conn, "enter_dungeon", err, map[string]interface{}{"room": res.Room, "closeShop": true}, []string{fmt.Sprintf("你进入了%s副本。", dungeonName)})
+	if err != nil {
+		return
+	}
+	s.emitPlayerLeft(playerID, res.FromRoomID, res.FromRoomName)
+	s.emitPlayerEntered(playerID, res.ToRoomID, res.ToRoomName)
+	s.emitRoomUpdate(res.FromRoomID)
+	s.emitRoomUpdate(res.ToRoomID)
+}
+
+func (s *Server) handleGameLeaveDungeon(conn *websocket.Conn, _ protocol.CommandMessage) {
+	playerID, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	res, err := engine.LeaveDungeonWithTransition(s.repo, playerID)
+	logs := []string{"你离开了副本。"}
+	if settlement, ok := res.Room["dungeonSettlement"].(map[string]interface{}); ok {
+		progress := toInt(settlement["progress"], 0)
+		rewardExp := toInt(settlement["rewardExperience"], 0)
+		rewardPotential := toInt(settlement["rewardPotential"], 0)
+		prefix := "副本结算"
+		if progress >= 100 {
+			prefix = "副本完成"
+		}
+		logs = []string{fmt.Sprintf("%s：完成度%d%%，获得%d点经验，%d点潜能。", prefix, progress, rewardExp, rewardPotential)}
+	}
+	s.replyCommand(conn, "leave_dungeon", err, map[string]interface{}{"room": res.Room, "closeShop": true}, logs)
 	if err != nil {
 		return
 	}
@@ -110,7 +162,7 @@ func (s *Server) handleGameGo(conn *websocket.Conn, cmd protocol.CommandMessage)
 		return
 	}
 	direction := toString(cmd.Args["direction"])
-	res, err := s.store.MoveWithTransition(playerID, direction)
+	res, err := engine.MoveWithTransition(s.repo, playerID, direction)
 	s.replyCommand(conn, "go", err, map[string]interface{}{"room": res.Room, "closeShop": true}, nil)
 	if err != nil {
 		return
@@ -126,7 +178,7 @@ func (s *Server) handleGameHeal(conn *websocket.Conn, _ protocol.CommandMessage)
 	if !ok {
 		return
 	}
-	res, err := s.store.HealWithEffects(playerID)
+	res, err := engine.HealWithEffects(s.repo, playerID)
 	s.replyCommand(conn, "heal", err, map[string]interface{}{}, nil)
 	if err == nil && res.RoomMessage != "" {
 		s.emitRoomMessageToOthersByPlayer(playerID, res.RoomMessage)
@@ -141,7 +193,7 @@ func (s *Server) handleGameMeditate(conn *websocket.Conn, _ protocol.CommandMess
 	if !ok {
 		return
 	}
-	res, err := s.store.MeditateWithEffects(playerID)
+	res, err := engine.MeditateWithEffects(s.repo, playerID)
 	s.replyCommand(conn, "meditate", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.RoomMessage != "" {
 		s.emitRoomMessageToOthersByPlayer(playerID, res.RoomMessage)
@@ -156,7 +208,7 @@ func (s *Server) handleGameStop(conn *websocket.Conn, _ protocol.CommandMessage)
 	if !ok {
 		return
 	}
-	res := s.store.StopWithEffects(playerID)
+	res := engine.StopWithEffects(s.repo, playerID)
 	s.write(conn, protocol.NewResult(protocol.TypeCommand, "stop", true, map[string]interface{}{}, nil))
 	if res.Message != "" || res.RoomMessage != "" {
 		s.emitScopedActionMessage(playerID, res.Message, res.RoomMessage)
@@ -172,8 +224,12 @@ func (s *Server) handleGameGetShop(conn *websocket.Conn, cmd protocol.CommandMes
 		return
 	}
 	npcID := toString(cmd.Args["npcId"])
-	res, err := s.store.GetShopView(playerID, npcID)
-	s.replyCommand(conn, "get_shop", err, map[string]interface{}{"shopItems": res.Items, "npcId": res.NPCID, "npcName": res.NPCName, "npcTitle": res.NPCTitle, "shopOpen": true, "hideRoomEntities": true}, nil)
+	res, err := engine.GetShopView(s.repo, playerID, npcID)
+	money := 0
+	if bag, bagErr := engine.GetBackpackView(s.repo, playerID); bagErr == nil {
+		money = bag.Money
+	}
+	s.replyCommand(conn, "get_shop", err, map[string]interface{}{"shopItems": res.Items, "npcId": res.NPCID, "npcName": res.NPCName, "npcTitle": res.NPCTitle, "money": money, "shopOpen": true, "hideRoomEntities": true}, nil)
 }
 
 func (s *Server) handleGameBuy(conn *websocket.Conn, cmd protocol.CommandMessage) {
@@ -184,7 +240,7 @@ func (s *Server) handleGameBuy(conn *websocket.Conn, cmd protocol.CommandMessage
 	npcID := toString(cmd.Args["npcId"])
 	itemID := toString(cmd.Args["itemId"])
 	amount := toInt(cmd.Args["amount"], 1)
-	res, err := s.store.BuyWithReceipt(playerID, npcID, itemID, amount)
+	res, err := engine.BuyWithReceipt(s.repo, playerID, npcID, itemID, amount)
 	s.replyCommand(conn, "buy", err, map[string]interface{}{"money": res.Money, "boughtItemId": res.BoughtItemID, "boughtAmount": res.BoughtAmount}, res.Logs)
 }
 
@@ -195,7 +251,7 @@ func (s *Server) handleGameDiscardItem(conn *websocket.Conn, cmd protocol.Comman
 	}
 	itemID := toString(cmd.Args["itemId"])
 	amount := toInt(cmd.Args["amount"], 1)
-	msg, err := s.store.DiscardWithMessage(playerID, itemID, amount)
+	msg, err := engine.DiscardWithMessage(s.repo, playerID, itemID, amount)
 	s.replyCommand(conn, "discard_item", err, map[string]interface{}{"message": msg}, nil)
 }
 
@@ -206,7 +262,7 @@ func (s *Server) handleGameSell(conn *websocket.Conn, cmd protocol.CommandMessag
 	}
 	itemID := toString(cmd.Args["itemId"])
 	amount := toInt(cmd.Args["amount"], 1)
-	res, err := s.store.SellWithReceipt(playerID, itemID, amount)
+	res, err := engine.SellWithReceipt(s.repo, playerID, itemID, amount)
 	s.replyCommand(conn, "sell", err, map[string]interface{}{"money": res.Money, "gain": res.Gain, "message": res.Message}, nil)
 }
 
@@ -216,7 +272,7 @@ func (s *Server) handleGameEquip(conn *websocket.Conn, cmd protocol.CommandMessa
 		return
 	}
 	itemID := toString(cmd.Args["itemId"])
-	res, err := s.store.EquipWithEffects(playerID, itemID)
+	res, err := engine.EquipWithEffects(s.repo, playerID, itemID)
 	s.replyCommand(conn, "equip", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
@@ -229,7 +285,7 @@ func (s *Server) handleGameUnequip(conn *websocket.Conn, cmd protocol.CommandMes
 		return
 	}
 	slot := toString(cmd.Args["slot"])
-	res, err := s.store.UnequipWithEffects(playerID, slot)
+	res, err := engine.UnequipWithEffects(s.repo, playerID, slot)
 	s.replyCommand(conn, "unequip", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
@@ -243,7 +299,7 @@ func (s *Server) handleGameLearn(conn *websocket.Conn, cmd protocol.CommandMessa
 	}
 	npcID := toString(cmd.Args["npcId"])
 	skillID := toString(cmd.Args["skillId"])
-	res, err := s.store.LearnWithEffects(playerID, npcID, skillID)
+	res, err := engine.LearnWithEffects(s.repo, playerID, npcID, skillID)
 	s.replyCommand(conn, "learn", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
@@ -255,7 +311,7 @@ func (s *Server) handleGameMine(conn *websocket.Conn, _ protocol.CommandMessage)
 	if !ok {
 		return
 	}
-	res, err := s.store.MineWithEffects(playerID)
+	res, err := engine.MineWithEffects(s.repo, playerID)
 	s.replyCommand(conn, "mine", err, map[string]interface{}{"experience": res.Experience, "potential": res.Potential}, res.Logs)
 	if err == nil && res.RoomMessage != "" {
 		s.emitRoomMessageToOthersByPlayer(playerID, res.RoomMessage)
@@ -271,7 +327,7 @@ func (s *Server) handleGameKill(conn *websocket.Conn, cmd protocol.CommandMessag
 		return
 	}
 	targetID := toString(cmd.Args["targetId"])
-	res, err := s.store.KillWithEffects(playerID, targetID)
+	res, err := engine.KillWithEffects(s.repo, playerID, targetID)
 	s.replyCommand(conn, "kill", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.NeedRoomMessage {
 		s.emitRoomMessageByPlayer(playerID, res.Message)
@@ -287,7 +343,7 @@ func (s *Server) handleGameSpar(conn *websocket.Conn, cmd protocol.CommandMessag
 		return
 	}
 	targetID := toString(cmd.Args["targetId"])
-	res, err := s.store.SparWithEffects(playerID, targetID)
+	res, err := engine.SparWithEffects(s.repo, playerID, targetID)
 	s.replyCommand(conn, "spar", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.NeedRoomMessage {
 		s.emitRoomMessageByPlayer(playerID, res.Message)
@@ -302,7 +358,7 @@ func (s *Server) handleGameRelive(conn *websocket.Conn, _ protocol.CommandMessag
 	if !ok {
 		return
 	}
-	res, err := s.store.ReliveWithEffects(playerID)
+	res, err := engine.ReliveWithEffects(s.repo, playerID)
 	s.replyCommand(conn, "relive", err, map[string]interface{}{"message": res.Message, "action": res.Action}, nil)
 	if err == nil && res.NeedRoomUpdate {
 		if res.FromRoomID != "" && res.FromRoomID != res.ToRoomID {
@@ -327,7 +383,7 @@ func (s *Server) handleChatPublic(conn *websocket.Conn, cmd protocol.CommandMess
 	if message == "" {
 		return
 	}
-	res, err := s.store.GetRoomSnapshotView(playerID)
+	res, err := engine.GetRoomSnapshotView(s.repo, playerID)
 	if err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeChat, "public", false, map[string]interface{}{"error": err.Error()}, nil))
 		return

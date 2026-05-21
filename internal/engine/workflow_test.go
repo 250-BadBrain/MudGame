@@ -1,10 +1,33 @@
 package engine
 
 import (
+	"strings"
 	"testing"
 
-	"mudgame/server/internal/storage"
+	"mudgame/server/internal/manager"
 )
+
+func extractRoomNPCs(room map[string]interface{}) []map[string]interface{} {
+	raw, ok := room["npcs"]
+	if !ok || raw == nil {
+		return nil
+	}
+	if typed, ok := raw.([]map[string]interface{}); ok {
+		return typed
+	}
+	arr, ok := raw.([]interface{})
+	if !ok {
+		return nil
+	}
+	out := make([]map[string]interface{}, 0, len(arr))
+	for _, item := range arr {
+		m, ok := item.(map[string]interface{})
+		if ok {
+			out = append(out, m)
+		}
+	}
+	return out
+}
 
 const (
 	workflowShopNPCID    = "shopkeeper_jia"
@@ -12,97 +35,111 @@ const (
 	workflowShopItemID   = "common_clothes"
 )
 
-func moveToMineFromSpawn(t *testing.T, svc *Service, playerID string) {
+type testHelper struct {
+	repo     RuntimeRepository
+	username string
+	playerID string
+}
+
+func moveToMineFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
 	path := []string{"east", "east", "east", "east", "east", "south"}
 	for _, dir := range path {
-		if _, err := svc.MoveWithTransition(playerID, dir); err != nil {
+		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
 		}
 	}
 }
 
-func moveBackFromMineToSpawn(t *testing.T, svc *Service, playerID string) {
+func moveBackFromMineToSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
 	path := []string{"north", "west", "west", "west", "west", "west"}
 	for _, dir := range path {
-		if _, err := svc.MoveWithTransition(playerID, dir); err != nil {
+		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
 		}
 	}
 }
 
-func moveToShopFromSpawn(t *testing.T, svc *Service, playerID string) {
+func moveToShopFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
 	path := []string{"west", "south"}
 	for _, dir := range path {
-		if _, err := svc.MoveWithTransition(playerID, dir); err != nil {
+		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
 		}
 	}
 }
 
-func moveToTeacherFromSpawn(t *testing.T, svc *Service, playerID string) {
+func moveToTeacherFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
 	path := []string{"south", "west"}
 	for _, dir := range path {
-		if _, err := svc.MoveWithTransition(playerID, dir); err != nil {
+		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
 		}
 	}
 }
 
-func setupService(t *testing.T) (*Service, string, string) {
+func runStatusTicks(t *testing.T, repo RuntimeRepository, times int) {
 	t.Helper()
-	repo := storage.NewFileRepository(t.TempDir())
-	svc := NewService(repo)
+	for i := 0; i < times; i++ {
+		if _, err := ProcessStatusTickWithEffects(repo); err != nil {
+			t.Fatalf("process status tick failed at %d: %v", i, err)
+		}
+	}
+}
+
+func setupRepo(t *testing.T) *testHelper {
+	t.Helper()
+	repo := manager.NewRuntimeManager(t.TempDir())
 
 	username := "tester"
 	password := "pass123"
-	if err := svc.Register(username, password); err != nil {
+	if err := repo.Register(username, password); err != nil {
 		t.Fatalf("register failed: %v", err)
 	}
-	if _, err := svc.Login(username, password); err != nil {
+	if _, err := repo.Login(username, password); err != nil {
 		t.Fatalf("login failed: %v", err)
 	}
-	playerID, err := svc.CreateCharacter(username, "hero", 20, 20, 20, 20)
+	playerID, err := repo.CreateCharacter(username, "hero", 20, 20, 20, 20)
 	if err != nil {
 		t.Fatalf("create character failed: %v", err)
 	}
-	return svc, username, playerID
+	return &testHelper{repo: repo, username: username, playerID: playerID}
 }
 
 func TestReconnectSuccess(t *testing.T) {
-	svc, username, playerID := setupService(t)
-	token, err := svc.Login(username, "pass123")
+	h := setupRepo(t)
+	token, err := h.repo.Login(h.username, "pass123")
 	if err != nil {
 		t.Fatalf("login for token failed: %v", err)
 	}
 
-	res, err := svc.Reconnect(username, "", token, playerID)
+	res, err := Reconnect(h.repo, h.username, "", token, h.playerID)
 	if err != nil {
 		t.Fatalf("reconnect failed: %v", err)
 	}
-	if res.UserID != username {
+	if res.UserID != h.username {
 		t.Fatalf("unexpected user id: %s", res.UserID)
 	}
-	if res.PlayerID != playerID {
+	if res.PlayerID != h.playerID {
 		t.Fatalf("unexpected player id: %s", res.PlayerID)
 	}
 }
 
 func TestReconnectInvalidToken(t *testing.T) {
-	svc, username, playerID := setupService(t)
-	_, err := svc.Reconnect(username, "", "bad-token", playerID)
+	h := setupRepo(t)
+	_, err := Reconnect(h.repo, h.username, "", "bad-token", h.playerID)
 	if err == nil {
 		t.Fatalf("expected reconnect error")
 	}
 }
 
 func TestMoveAndEnterWorldTransitions(t *testing.T) {
-	svc, _, playerID := setupService(t)
+	h := setupRepo(t)
 
-	moveRes, err := svc.MoveWithTransition(playerID, "north")
+	moveRes, err := MoveWithTransition(h.repo, h.playerID, "north")
 	if err != nil {
 		t.Fatalf("move failed: %v", err)
 	}
@@ -110,7 +147,7 @@ func TestMoveAndEnterWorldTransitions(t *testing.T) {
 		t.Fatalf("expected different room after move")
 	}
 
-	enterRes, err := svc.EnterWorldWithTransition(playerID, "wudang")
+	enterRes, err := EnterWorldWithTransition(h.repo, h.playerID, "wudang")
 	if err != nil {
 		t.Fatalf("enter world failed: %v", err)
 	}
@@ -119,49 +156,36 @@ func TestMoveAndEnterWorldTransitions(t *testing.T) {
 	}
 }
 
+func setupSecondPlayer(t *testing.T, username, charName string, repo RuntimeRepository) string {
+	t.Helper()
+	if err := repo.Register(username, "pass123"); err != nil {
+		t.Fatalf("register %s failed: %v", username, err)
+	}
+	if _, err := repo.Login(username, "pass123"); err != nil {
+		t.Fatalf("login %s failed: %v", username, err)
+	}
+	playerID, err := repo.CreateCharacter(username, charName, 20, 20, 20, 20)
+	if err != nil {
+		t.Fatalf("create %s character failed: %v", username, err)
+	}
+	return playerID
+}
+
 func TestStateAndCombatWorkflows(t *testing.T) {
-	svc, username, p1 := setupService(t)
+	h := setupRepo(t)
+	p2 := setupSecondPlayer(t, "tester2", "hero2", h.repo)
+	p3 := setupSecondPlayer(t, "tester3", "hero3", h.repo)
+	p4 := setupSecondPlayer(t, "tester4", "hero4", h.repo)
 
-	if err := svc.Register("tester2", "pass123"); err != nil {
-		t.Fatalf("register tester2 failed: %v", err)
-	}
-	if _, err := svc.Login("tester2", "pass123"); err != nil {
-		t.Fatalf("login tester2 failed: %v", err)
-	}
-	p2, err := svc.CreateCharacter("tester2", "hero2", 20, 20, 20, 20)
-	if err != nil {
-		t.Fatalf("create tester2 character failed: %v", err)
-	}
-	if err := svc.Register("tester3", "pass123"); err != nil {
-		t.Fatalf("register tester3 failed: %v", err)
-	}
-	if _, err := svc.Login("tester3", "pass123"); err != nil {
-		t.Fatalf("login tester3 failed: %v", err)
-	}
-	p3, err := svc.CreateCharacter("tester3", "hero3", 20, 20, 20, 20)
-	if err != nil {
-		t.Fatalf("create tester3 character failed: %v", err)
-	}
-	if err := svc.Register("tester4", "pass123"); err != nil {
-		t.Fatalf("register tester4 failed: %v", err)
-	}
-	if _, err := svc.Login("tester4", "pass123"); err != nil {
-		t.Fatalf("login tester4 failed: %v", err)
-	}
-	p4, err := svc.CreateCharacter("tester4", "hero4", 20, 20, 20, 20)
-	if err != nil {
-		t.Fatalf("create tester4 character failed: %v", err)
-	}
-
-	if _, err := svc.Login(username, "pass123"); err != nil {
+	if _, err := h.repo.Login(h.username, "pass123"); err != nil {
 		t.Fatalf("refresh login failed: %v", err)
 	}
-	if _, err := svc.EquipWithEffects(p1, "iron_pickaxe"); err != nil {
+	if _, err := EquipWithEffects(h.repo, h.playerID, "iron_pickaxe"); err != nil {
 		t.Fatalf("equip pickaxe failed: %v", err)
 	}
 
-	moveToMineFromSpawn(t, svc, p1)
-	mineRes, err := svc.MineWithEffects(p1)
+	moveToMineFromSpawn(t, h.repo, h.playerID)
+	mineRes, err := MineWithEffects(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("mine workflow failed: %v", err)
 	}
@@ -169,23 +193,23 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 		t.Fatalf("unexpected mine result: %+v", mineRes)
 	}
 
-	_, err = svc.HealWithEffects(p1)
+	_, err = HealWithEffects(h.repo, h.playerID)
 	if err == nil || err.Error() != "mining_state" {
 		t.Fatalf("heal should return mining_state while mining, got: %v", err)
 	}
-	if stop := svc.StopWithEffects(p1); stop.Message != "你收起铁镐，停止了挖矿。" {
+	if stop := StopWithEffects(h.repo, h.playerID); stop.Message != "你收起铁镐，停止了挖矿。" {
 		t.Fatalf("unexpected stop mining message: %+v", stop)
 	}
 
-	moveBackFromMineToSpawn(t, svc, p1)
-	combatRes, err := svc.SparWithEffects(p1, p2)
+	moveBackFromMineToSpawn(t, h.repo, h.playerID)
+	combatRes, err := SparWithEffects(h.repo, h.playerID, p2)
 	if err != nil {
 		t.Fatalf("spar workflow failed: %v", err)
 	}
 	if !combatRes.NeedRoomMessage || !combatRes.NeedRoomUpdate {
 		t.Fatalf("unexpected combat result: %+v", combatRes)
 	}
-	stopRes := svc.StopWithEffects(p1)
+	stopRes := StopWithEffects(h.repo, h.playerID)
 	if stopRes.Message != "你正在战斗，待会再说" {
 		t.Fatalf("unexpected stop message in combat: %+v", stopRes)
 	}
@@ -193,7 +217,7 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 		t.Fatalf("stop in combat should not trigger room update")
 	}
 
-	killRes, err := svc.KillWithEffects(p3, p4)
+	killRes, err := KillWithEffects(h.repo, p3, p4)
 	if err != nil {
 		t.Fatalf("kill workflow failed: %v", err)
 	}
@@ -202,10 +226,10 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 	}
 	deadID := ""
 	for i := 0; i < 800; i++ {
-		if _, err := svc.ProcessCombatTickWithEffects(); err != nil {
+		if _, err := ProcessCombatTickWithEffects(h.repo); err != nil {
 			t.Fatalf("process combat tick failed: %v", err)
 		}
-		status4, err := svc.GetPlayerStatusView(p4)
+		status4, err := GetPlayerStatusView(h.repo, p4)
 		if err != nil {
 			t.Fatalf("get player4 status failed: %v", err)
 		}
@@ -213,7 +237,7 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 			deadID = p4
 			break
 		}
-		status3, err := svc.GetPlayerStatusView(p3)
+		status3, err := GetPlayerStatusView(h.repo, p3)
 		if err != nil {
 			t.Fatalf("get player3 status failed: %v", err)
 		}
@@ -226,7 +250,7 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 		t.Fatalf("expected one combatant dead after kill combat ticks")
 	}
 
-	reliveRes, err := svc.ReliveWithEffects(deadID)
+	reliveRes, err := ReliveWithEffects(h.repo, deadID)
 	if err != nil {
 		t.Fatalf("relive workflow failed: %v", err)
 	}
@@ -236,10 +260,10 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 }
 
 func TestShopAndInventoryWorkflows(t *testing.T) {
-	svc, _, playerID := setupService(t)
+	h := setupRepo(t)
 
-	moveToShopFromSpawn(t, svc, playerID)
-	shop, err := svc.GetShopView(playerID, workflowShopNPCID)
+	moveToShopFromSpawn(t, h.repo, h.playerID)
+	shop, err := GetShopView(h.repo, h.playerID, workflowShopNPCID)
 	if err != nil {
 		t.Fatalf("get shop view failed: %v", err)
 	}
@@ -247,7 +271,7 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 		t.Fatalf("unexpected shop payload: %+v", shop)
 	}
 
-	buyRes, err := svc.BuyWithReceipt(playerID, workflowShopNPCID, workflowShopItemID, 1)
+	buyRes, err := BuyWithReceipt(h.repo, h.playerID, workflowShopNPCID, workflowShopItemID, 1)
 	if err != nil {
 		t.Fatalf("buy workflow failed: %v", err)
 	}
@@ -255,7 +279,7 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 		t.Fatalf("unexpected buy result: %+v", buyRes)
 	}
 
-	equipRes, err := svc.EquipWithEffects(playerID, workflowShopItemID)
+	equipRes, err := EquipWithEffects(h.repo, h.playerID, workflowShopItemID)
 	if err != nil {
 		t.Fatalf("equip workflow failed: %v", err)
 	}
@@ -263,7 +287,7 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 		t.Fatalf("unexpected equip result: %+v", equipRes)
 	}
 
-	unequipRes, err := svc.UnequipWithEffects(playerID, "BODY")
+	unequipRes, err := UnequipWithEffects(h.repo, h.playerID, "BODY")
 	if err != nil {
 		t.Fatalf("unequip workflow failed: %v", err)
 	}
@@ -271,20 +295,20 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 		t.Fatalf("unexpected unequip result: %+v", unequipRes)
 	}
 
-	if _, err := svc.EnterWorldWithTransition(playerID, "luoyang"); err != nil {
+	if _, err := EnterWorldWithTransition(h.repo, h.playerID, "luoyang"); err != nil {
 		t.Fatalf("reset to luoyang spawn failed: %v", err)
 	}
-	moveToTeacherFromSpawn(t, svc, playerID)
-	learnRes, err := svc.LearnWithEffects(playerID, workflowTeacherNPCID, "basic_fist")
+	moveToTeacherFromSpawn(t, h.repo, h.playerID)
+	learnRes, err := LearnWithEffects(h.repo, h.playerID, workflowTeacherNPCID, "basic_fist")
 	if err != nil {
 		t.Fatalf("learn workflow failed: %v", err)
 	}
 	if learnRes.Message == "" {
 		t.Fatalf("unexpected learn result: %+v", learnRes)
 	}
-	_ = svc.StopWithEffects(playerID)
+	_ = StopWithEffects(h.repo, h.playerID)
 
-	discardMsg, err := svc.DiscardWithMessage(playerID, "iron_pickaxe", 1)
+	discardMsg, err := DiscardWithMessage(h.repo, h.playerID, "iron_pickaxe", 1)
 	if err != nil {
 		t.Fatalf("discard workflow failed: %v", err)
 	}
@@ -292,7 +316,7 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 		t.Fatalf("discard message should not be empty")
 	}
 
-	sellRes, err := svc.SellWithReceipt(playerID, workflowShopItemID, 1)
+	sellRes, err := SellWithReceipt(h.repo, h.playerID, workflowShopItemID, 1)
 	if err != nil {
 		t.Fatalf("sell workflow failed: %v", err)
 	}
@@ -302,9 +326,9 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 }
 
 func TestQueryViewWorkflows(t *testing.T) {
-	svc, _, playerID := setupService(t)
+	h := setupRepo(t)
 
-	roomRes, err := svc.GetRoomSnapshotView(playerID)
+	roomRes, err := GetRoomSnapshotView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get room snapshot view failed: %v", err)
 	}
@@ -312,7 +336,7 @@ func TestQueryViewWorkflows(t *testing.T) {
 		t.Fatalf("unexpected room snapshot payload: %+v", roomRes)
 	}
 
-	attrs, err := svc.GetAttributesView(playerID)
+	attrs, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get attributes view failed: %v", err)
 	}
@@ -320,7 +344,7 @@ func TestQueryViewWorkflows(t *testing.T) {
 		t.Fatalf("attributes missing currentHp")
 	}
 
-	bag, err := svc.GetBackpackView(playerID)
+	bag, err := GetBackpackView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get backpack view failed: %v", err)
 	}
@@ -328,7 +352,7 @@ func TestQueryViewWorkflows(t *testing.T) {
 		t.Fatalf("unexpected backpack payload: %+v", bag)
 	}
 
-	skills, err := svc.GetSkillsView(playerID)
+	skills, err := GetSkillsView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get skills view failed: %v", err)
 	}
@@ -336,7 +360,7 @@ func TestQueryViewWorkflows(t *testing.T) {
 		t.Fatalf("skills should not be empty")
 	}
 
-	eq, err := svc.GetEquipmentView(playerID)
+	eq, err := GetEquipmentView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get equipment view failed: %v", err)
 	}
@@ -344,16 +368,16 @@ func TestQueryViewWorkflows(t *testing.T) {
 		t.Fatalf("new character should have empty equipment")
 	}
 
-	worlds := svc.GetWorldsView()
+	worlds := GetWorldsView(h.repo)
 	if len(worlds) == 0 {
 		t.Fatalf("world list should not be empty")
 	}
 }
 
 func TestEventViewWorkflows(t *testing.T) {
-	svc, _, playerID := setupService(t)
+	h := setupRepo(t)
 
-	status, err := svc.GetPlayerStatusView(playerID)
+	status, err := GetPlayerStatusView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get player status view failed: %v", err)
 	}
@@ -362,7 +386,7 @@ func TestEventViewWorkflows(t *testing.T) {
 		t.Fatalf("status roomId should not be empty")
 	}
 
-	room, err := svc.GetRoomPayloadView(roomID)
+	room, err := GetRoomPayloadView(h.repo, roomID)
 	if err != nil {
 		t.Fatalf("get room payload view failed: %v", err)
 	}
@@ -370,7 +394,7 @@ func TestEventViewWorkflows(t *testing.T) {
 		t.Fatalf("room payload id should not be empty")
 	}
 
-	update, err := svc.GetRoomUpdateView(roomID)
+	update, err := GetRoomUpdateView(h.repo, roomID)
 	if err != nil {
 		t.Fatalf("get room update view failed: %v", err)
 	}
@@ -378,7 +402,7 @@ func TestEventViewWorkflows(t *testing.T) {
 		t.Fatalf("room update players should not be empty")
 	}
 
-	rid2, rname2, err := svc.GetPlayerRoomView(playerID)
+	rid2, rname2, err := GetPlayerRoomView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get player room view failed: %v", err)
 	}
@@ -386,75 +410,61 @@ func TestEventViewWorkflows(t *testing.T) {
 		t.Fatalf("unexpected player room view: %s %s", rid2, rname2)
 	}
 
-	if !svc.IsPlayerInRoomView(playerID, rid2) {
+	if !IsPlayerInRoomView(h.repo, h.playerID, rid2) {
 		t.Fatalf("player should be in returned room")
 	}
 }
 
 func TestStatusTickWorkflow(t *testing.T) {
-	svc, _, p1 := setupService(t)
+	h := setupRepo(t)
+	p2 := setupSecondPlayer(t, "ticker2", "ticker2hero", h.repo)
 
-	if err := svc.Register("ticker2", "pass123"); err != nil {
-		t.Fatalf("register ticker2 failed: %v", err)
-	}
-	if _, err := svc.Login("ticker2", "pass123"); err != nil {
-		t.Fatalf("login ticker2 failed: %v", err)
-	}
-	p2, err := svc.CreateCharacter("ticker2", "ticker2hero", 20, 20, 20, 20)
-	if err != nil {
-		t.Fatalf("create ticker2 character failed: %v", err)
-	}
-
-	if _, err := svc.EquipWithEffects(p1, "iron_pickaxe"); err != nil {
+	if _, err := EquipWithEffects(h.repo, h.playerID, "iron_pickaxe"); err != nil {
 		t.Fatalf("equip pickaxe failed: %v", err)
 	}
-	moveToMineFromSpawn(t, svc, p1)
-	if _, err := svc.MineWithEffects(p1); err != nil {
+	moveToMineFromSpawn(t, h.repo, h.playerID)
+	if _, err := MineWithEffects(h.repo, h.playerID); err != nil {
 		t.Fatalf("mine failed: %v", err)
 	}
-	attrsBeforeMine, err := svc.GetAttributesView(p1)
+	attrsBeforeMine, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get attrs before mine tick failed: %v", err)
 	}
-	if _, err := svc.ProcessStatusTickWithEffects(); err != nil {
-		t.Fatalf("process status tick for mine failed: %v", err)
-	}
-	attrsAfterMine, err := svc.GetAttributesView(p1)
+	runStatusTicks(t, h.repo, 10)
+	attrsAfterMine, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get attrs after mine tick failed: %v", err)
 	}
 	if attrsAfterMine["experience"].(int) <= attrsBeforeMine["experience"].(int) {
 		t.Fatalf("expected mine tick to increase experience")
 	}
-	if stop := svc.StopWithEffects(p1); stop.Message != "你收起铁镐，停止了挖矿。" {
+	if stop := StopWithEffects(h.repo, h.playerID); stop.Message != "你收起铁镐，停止了挖矿。" {
 		t.Fatalf("unexpected stop mining message: %+v", stop)
 	}
 
-	moveBackFromMineToSpawn(t, svc, p1)
-	if _, err := svc.MeditateWithEffects(p1); err != nil {
+	moveBackFromMineToSpawn(t, h.repo, h.playerID)
+	if _, err := MeditateWithEffects(h.repo, h.playerID); err != nil {
 		t.Fatalf("meditate failed: %v", err)
 	}
-	if _, err := svc.ProcessStatusTickWithEffects(); err != nil {
-		t.Fatalf("process status tick for meditate failed: %v", err)
-	}
-	if stop := svc.StopWithEffects(p1); stop.Message != "你停止了打坐。" {
+	runStatusTicks(t, h.repo, 10)
+	if stop := StopWithEffects(h.repo, h.playerID); stop.Message != "你停止了打坐。" {
 		t.Fatalf("unexpected stop meditate message: %+v", stop)
 	}
 
 	hpDropped := false
 	for attempt := 0; attempt < 3 && !hpDropped; attempt++ {
-		if _, err := svc.SparWithEffects(p1, p2); err != nil {
+		if _, err := SparWithEffects(h.repo, h.playerID, p2); err != nil {
 			t.Fatalf("spar failed: %v", err)
 		}
 		for i := 0; i < 80; i++ {
-			if _, err := svc.ProcessCombatTickWithEffects(); err != nil {
+			if _, err := ProcessCombatTickWithEffects(h.repo); err != nil {
 				t.Fatalf("process combat tick failed: %v", err)
 			}
-			st1, err := svc.GetPlayerStatusView(p1)
+			st1, err := GetPlayerStatusView(h.repo, h.playerID)
 			if err != nil {
 				t.Fatalf("get player1 status failed: %v", err)
 			}
-			attrsNow, err := svc.GetAttributesView(p1)
+			attrsNow, err := GetAttributesView(h.repo, h.playerID)
 			if err != nil {
 				t.Fatalf("get attrs during combat tick failed: %v", err)
 			}
@@ -469,17 +479,15 @@ func TestStatusTickWorkflow(t *testing.T) {
 	if !hpDropped {
 		t.Fatalf("expected hp drop before heal test")
 	}
-	if _, err := svc.HealWithEffects(p1); err != nil {
+	if _, err := HealWithEffects(h.repo, h.playerID); err != nil {
 		t.Fatalf("heal failed: %v", err)
 	}
-	attrsBeforeHealTick, err := svc.GetAttributesView(p1)
+	attrsBeforeHealTick, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get attrs before heal tick failed: %v", err)
 	}
-	if _, err := svc.ProcessStatusTickWithEffects(); err != nil {
-		t.Fatalf("process status tick for heal failed: %v", err)
-	}
-	attrsAfterHealTick, err := svc.GetAttributesView(p1)
+	runStatusTicks(t, h.repo, 10)
+	attrsAfterHealTick, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get attrs after heal tick failed: %v", err)
 	}
@@ -489,33 +497,23 @@ func TestStatusTickWorkflow(t *testing.T) {
 }
 
 func TestSparAutoStopWorkflow(t *testing.T) {
-	svc, _, p1 := setupService(t)
+	h := setupRepo(t)
+	p2 := setupSecondPlayer(t, "spar2", "spar2hero", h.repo)
 
-	if err := svc.Register("spar2", "pass123"); err != nil {
-		t.Fatalf("register spar2 failed: %v", err)
-	}
-	if _, err := svc.Login("spar2", "pass123"); err != nil {
-		t.Fatalf("login spar2 failed: %v", err)
-	}
-	p2, err := svc.CreateCharacter("spar2", "spar2hero", 20, 20, 20, 20)
-	if err != nil {
-		t.Fatalf("create spar2 character failed: %v", err)
-	}
-
-	if _, err := svc.SparWithEffects(p1, p2); err != nil {
+	if _, err := SparWithEffects(h.repo, h.playerID, p2); err != nil {
 		t.Fatalf("spar failed: %v", err)
 	}
 
 	idle1, idle2 := false, false
 	for i := 0; i < 40; i++ {
-		if _, err := svc.ProcessCombatTickWithEffects(); err != nil {
+		if _, err := ProcessCombatTickWithEffects(h.repo); err != nil {
 			t.Fatalf("process combat tick failed: %v", err)
 		}
-		st1, err := svc.GetPlayerStatusView(p1)
+		st1, err := GetPlayerStatusView(h.repo, h.playerID)
 		if err != nil {
 			t.Fatalf("get player1 status failed: %v", err)
 		}
-		st2, err := svc.GetPlayerStatusView(p2)
+		st2, err := GetPlayerStatusView(h.repo, p2)
 		if err != nil {
 			t.Fatalf("get player2 status failed: %v", err)
 		}
@@ -531,27 +529,17 @@ func TestSparAutoStopWorkflow(t *testing.T) {
 }
 
 func TestCombatTargetLossWorkflow(t *testing.T) {
-	svc, _, p1 := setupService(t)
+	h := setupRepo(t)
+	p2 := setupSecondPlayer(t, "loss2", "loss2hero", h.repo)
 
-	if err := svc.Register("loss2", "pass123"); err != nil {
-		t.Fatalf("register loss2 failed: %v", err)
-	}
-	if _, err := svc.Login("loss2", "pass123"); err != nil {
-		t.Fatalf("login loss2 failed: %v", err)
-	}
-	p2, err := svc.CreateCharacter("loss2", "loss2hero", 20, 20, 20, 20)
-	if err != nil {
-		t.Fatalf("create loss2 character failed: %v", err)
-	}
-
-	if _, err := svc.SparWithEffects(p1, p2); err != nil {
+	if _, err := SparWithEffects(h.repo, h.playerID, p2); err != nil {
 		t.Fatalf("spar failed: %v", err)
 	}
-	if err := svc.DeleteCharacter("loss2", p2); err != nil {
+	if err := h.repo.DeleteCharacter("loss2", p2); err != nil {
 		t.Fatalf("delete opponent failed: %v", err)
 	}
 
-	tickRes, err := svc.ProcessCombatTickWithEffects()
+	tickRes, err := ProcessCombatTickWithEffects(h.repo)
 	if err != nil {
 		t.Fatalf("process combat tick failed: %v", err)
 	}
@@ -559,11 +547,73 @@ func TestCombatTargetLossWorkflow(t *testing.T) {
 		t.Fatalf("expected target-loss combat message")
 	}
 
-	status, err := svc.GetPlayerStatusView(p1)
+	status, err := GetPlayerStatusView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get player status failed: %v", err)
 	}
 	if status["state"] != "IDLE" {
 		t.Fatalf("expected attacker leave combat after target loss, got %v", status["state"])
+	}
+}
+
+func TestDungeonInstanceLoadsNPCsAndSupportsKill(t *testing.T) {
+	h := setupRepo(t)
+
+	enterRes, err := EnterDungeonWithTransition(h.repo, h.playerID, "swamp")
+	if err != nil {
+		t.Fatalf("enter dungeon failed: %v", err)
+	}
+	roomID, _ := enterRes.Room["id"].(string)
+	if !strings.HasPrefix(roomID, "dg_swamp_") {
+		t.Fatalf("unexpected dungeon room id: %s", roomID)
+	}
+	if worldName, _ := enterRes.Room["worldName"].(string); worldName != "沼泽" {
+		t.Fatalf("unexpected dungeon worldName: %q", worldName)
+	}
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to wolf room failed: %v", err)
+	}
+	snapshot, err := GetRoomSnapshotView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get room snapshot failed: %v", err)
+	}
+	npcs := extractRoomNPCs(snapshot.Room)
+	if len(npcs) == 0 {
+		t.Fatalf("expected dungeon NPCs in room payload, got %+v", snapshot.Room)
+	}
+	npcID, _ := npcs[0]["id"].(string)
+	if npcID == "" {
+		t.Fatalf("expected dungeon npc id in payload: %+v", npcs[0])
+	}
+
+	if _, err := KillWithEffects(h.repo, h.playerID, npcID); err != nil {
+		t.Fatalf("kill dungeon npc should be supported, got: %v", err)
+	}
+}
+
+func TestDungeonAggressiveNPCStartsCombat(t *testing.T) {
+	h := setupRepo(t)
+
+	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "swamp"); err != nil {
+		t.Fatalf("enter dungeon failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to aggressive npc room failed: %v", err)
+	}
+
+	tickRes, err := ProcessCombatTickWithEffects(h.repo)
+	if err != nil {
+		t.Fatalf("process combat tick failed: %v", err)
+	}
+	foundAggro := false
+	for _, msg := range tickRes.Messages {
+		if strings.Contains(msg.Message, "扑向") {
+			foundAggro = true
+			break
+		}
+	}
+	if !foundAggro {
+		t.Fatalf("expected aggressive dungeon npc message, got: %+v", tickRes.Messages)
 	}
 }
