@@ -38,7 +38,11 @@
           <GameRoomPanel
             :entities="combinedEntities"
             :selectedEntity="selectedEntityObj"
-            @selectEntity="handleEntitySelect" />
+            @selectEntity="handleEntitySelect"
+            @viewEntity="viewEntity"
+            @sparEntity="sparEntity"
+            @killEntity="killEntity"
+            @tradeEntity="openShop" />
         </div>
         
         <div class="room-exits-grid">
@@ -280,7 +284,12 @@ const combinedEntities = computed(() => {
         level: p.level,
         hp: p.attributes?.currentHp,
         maxHp: p.attributes?.maxHp,
-        hostile: false
+        hostile: false,
+        state: p.state,
+        isShop: false,
+        capabilities: [],
+        description: '',
+        attributes: p.attributes
       })
     }
   }
@@ -295,7 +304,12 @@ const combinedEntities = computed(() => {
         level: n.level,
         hp: n.attributes?.currentHp,
         maxHp: n.attributes?.maxHp,
-        hostile: n.hostile || false
+        hostile: n.hostile || false,
+        state: n.state,
+        isShop: n.isShop || false,
+        capabilities: n.capabilities || [],
+        description: n.description || '',
+        attributes: n.attributes
       })
     }
   }

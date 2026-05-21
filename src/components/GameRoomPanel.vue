@@ -18,6 +18,13 @@
     <div class="room-entities-section" v-else>
       <div class="entity-row hint-row">这里空无一人</div>
     </div>
+
+    <div v-if="selectedEntity" class="entity-actions">
+      <button @click="$emit('viewEntity', selectedEntity)" class="action-btn view-btn">查看</button>
+      <button @click="$emit('sparEntity', selectedEntity)" class="action-btn spar-btn">比试</button>
+      <button @click="$emit('killEntity', selectedEntity)" class="action-btn kill-btn">击杀</button>
+      <button v-if="selectedEntity.isShop" @click="$emit('tradeEntity', selectedEntity)" class="action-btn trade-btn">交易</button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +36,7 @@ const props = defineProps({
   selectedEntity: Object
 })
 
-defineEmits(['selectEntity'])
+defineEmits(['selectEntity', 'viewEntity', 'sparEntity', 'killEntity', 'tradeEntity'])
 
 const visibleEntities = computed(() => {
   if (!props.entities) return []
@@ -50,4 +57,41 @@ const visibleEntities = computed(() => {
 .entity-hp { color: #2ecc71; font-size: 12px; }
 .entity-hostile { color: #e74c3c; font-size: 11px; font-weight: bold; }
 .hint-row { color: #666; cursor: default; font-style: italic; }
+
+.entity-actions {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  flex-wrap: wrap;
+  border-top: 1px solid #2a2a2a;
+  margin-top: 4px;
+}
+
+.action-btn {
+  padding: 5px 12px;
+  border: 1px solid #444;
+  background: #1e1e1e;
+  color: #ccc;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 12px;
+  transition: all 0.15s;
+}
+
+.action-btn:hover {
+  background: #333;
+  color: #fff;
+}
+
+.view-btn { border-color: #3498db; color: #3498db; }
+.view-btn:hover { background: #3498db; color: #fff; }
+
+.spar-btn { border-color: #f1c40f; color: #f1c40f; }
+.spar-btn:hover { background: #f1c40f; color: #000; }
+
+.kill-btn { border-color: #e74c3c; color: #e74c3c; }
+.kill-btn:hover { background: #e74c3c; color: #fff; }
+
+.trade-btn { border-color: #2ecc71; color: #2ecc71; }
+.trade-btn:hover { background: #2ecc71; color: #000; }
 </style>
