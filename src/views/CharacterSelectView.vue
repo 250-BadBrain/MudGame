@@ -57,6 +57,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePlayerStore } from '@/stores/player'
 import { initWebSocket, removeMessageHandler, sendMessage } from '../utils/ws.js'
+import { createSystemMessage } from '../protocal/message.js'
 
 const router = useRouter()
 const playerStore = usePlayerStore()
@@ -99,13 +100,7 @@ const fetchCharacters = () => {
   loading.value = true
   error.value = ''
 
-  // 【命令】subtype: get_characters (获取列表)
-  const msg = {
-    type: "system",
-    subtype: "get_characters",
-    args: { userId: playerStore.userId }
-  }
-  sendMessage(msg)
+  sendMessage(createSystemMessage('get_characters', { userId: playerStore.userId }))
 }
 
 // 3. 发送选择角色请求并跳转
@@ -114,16 +109,10 @@ const enterGame = () => {
   loading.value = true
   error.value = ''
   
-  // 【命令】subtype: select_character (对应 SelectCharacterHandler)
-  const msg = {
-    type: "system",
-    subtype: "select_character",
-    args: { 
-      userId: playerStore.userId,
-      characterId: selectedCharId.value 
-    }
-  }
-  sendMessage(msg)
+  sendMessage(createSystemMessage('select_character', {
+    userId: playerStore.userId,
+    characterId: selectedCharId.value
+  }))
 }
 
 // 4. 退出登录
@@ -149,15 +138,10 @@ const confirmDeleteChar = () => {
   loading.value = true
   error.value = ''
   
-  const msg = {
-    type: "system",
-    subtype: "delete_character",
-    args: { 
-      userId: playerStore.userId,
-      characterId: selectedCharId.value
-    }
-  }
-  sendMessage(msg)
+  sendMessage(createSystemMessage('delete_character', {
+    userId: playerStore.userId,
+    characterId: selectedCharId.value
+  }))
 }
 
 // --- WebSocket 消息处理 ---
@@ -221,12 +205,10 @@ onMounted(() => {
       return
     }
 
-    const reconnectMsg = {
-      type: "system",
-      subtype: "reconnect",
-      args: { userId: playerStore.userId, reconnectToken: playerStore.reconnectToken }
-    }
-    sendMessage(reconnectMsg)
+    sendMessage(createSystemMessage('reconnect', {
+      userId: playerStore.userId,
+      reconnectToken: playerStore.reconnectToken
+    }))
   } else {
     error.value = '错误：无法获取用户信息，请重新登录'
   }

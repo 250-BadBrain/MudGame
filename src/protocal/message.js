@@ -1,28 +1,35 @@
-// 玩家指令
-export function createCommandMessage(playerId, content) {
+export function createSystemMessage(subtype, args = {}) {
   return {
-    type: "command",
-    playerId,
-    content,
-    timestamp: Date.now()
+    type: "system",
+    subtype,
+    args
   }
 }
 
-// 聊天
+export function createCommandMessage(subtype, args = {}) {
+  return {
+    type: "command",
+    subtype,
+    args
+  }
+}
+
+export function createGameCommandMessage(subtype, playerId, args = {}) {
+  return {
+    type: "command",
+    subtype,
+    playerId,
+    ts: Date.now(),
+    args
+  }
+}
+
 export function createChatMessage(playerId, content) {
   return {
     type: "chat",
+    subtype: "public",
     playerId,
-    content,
-    timestamp: Date.now()
-  }
-}
-
-// 系统消息
-export function createSystemMessage(content) {
-  return {
-    type: "system",
-    content,
-    timestamp: Date.now()
+    ts: Date.now(),
+    args: { content }
   }
 }

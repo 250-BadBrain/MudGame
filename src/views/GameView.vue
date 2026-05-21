@@ -12,138 +12,33 @@
     <div class="middle-layout">
       
       <div class="left-content-area">
-        <!-- 商店面板 (替代 room-entities 显示) -->
-        <div v-if="showShopPanel" class="shop-panel">
-            <div class="shop-header">
-                <h3>{{ currentShopNpc.name }}正在售卖</h3>
-                <button @click="closeShop" class="close-btn">×</button>
-            </div>
-            <div class="shop-content">
-                <div class="money-display">
-                    {{ formatMoney(playerMoney) }}
-                </div>
-                <div class="shop-items-list">
-                    <div v-for="item in shopItems" :key="item.id" class="shop-item" :class="{ 'selected': selectedShopItem?.id === item.id }" @click="selectShopItem(item)">
-                        <div class="shop-item-info-row">
-                            <span class="item-name" :style="{ color: getItemColor(item.rarity) }">{{ item.name }}</span>
-                        </div>
-                        <div class="shop-item-price-row">
-                            <span class="item-price">{{ formatPrice(item.value) }}</span>
-                            <span v-if="item.limit !== undefined && item.limit === 0" class="item-sold-out-tag"> 已售罄</span>
-                            <span v-else-if="item.limit" class="item-limit-tag"> 库存:{{ item.limit }}</span>
-                            <span v-else class="item-stock-tag"> 库存充足</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="buy-controls" v-if="selectedShopItem">
-                    <div class="selected-item-info">
-                        <span class="selected-item-name" :style="{ color: getItemColor(selectedShopItem.rarity) }">{{ selectedShopItem.name }}</span>
-                        <span class="selected-item-price">{{ formatPrice(selectedShopItem.value) }}</span>
-                    </div>
-                    <div class="amount-selector" v-if="selectedShopItem.stackable">
-                        <button @click="changeAmount('min')" :disabled="buyAmount <= 1" class="small-btn">最少</button>
-                        <button @click="changeAmount(-10)" :disabled="buyAmount <= 10" class="small-btn">-10</button>
-                        <input type="number" v-model="buyAmount" min="1" readonly />
-                        <button @click="changeAmount(10)" :disabled="isMaxAmountReached" class="small-btn">+10</button>
-                        <button @click="changeAmount('max')" :disabled="isMaxAmountReached" class="small-btn">最多</button>
-                    </div>
-                    <div class="stock-info">
-                        <span v-if="selectedShopItem.limit">库存: {{ selectedShopItem.limit }}{{ selectedShopItem.unit }}</span>
-                        <span v-else>库存充足</span>
-                    </div>
-                    <button @click="buyItem" class="buy-btn">购买</button>
-                </div>
-            </div>
-        </div>
+        <GameShop v-if="showShopPanel"
+          :title="currentShopNpc.name + '正在售卖'"
+          :items="shopItems"
+          :selectedItem="selectedShopItem"
+          :buyAmount="buyAmount"
+          :isMaxReached="isMaxAmountReached"
+          :playerMoney="playerMoney"
+          @close="closeShop"
+          @selectItem="selectShopItem"
+          @changeAmount="changeAmount"
+          @buy="buyItem" />
 
-        <!-- 学习面板 -->
-        <div v-else-if="showLearnPanel" class="shop-panel">
-            <div class="shop-header">
-                <h3>向{{ currentTeacher.name }}请教</h3>
-                <button @click="closeLearn" class="close-btn">×</button>
-            </div>
-            <div class="shop-content">
-                <div class="shop-items-list">
-                    <div v-for="skill in learnSkills" :key="skill.id" class="shop-item" :class="{ 'selected': selectedLearnSkill?.id === skill.id }" @click="selectLearnSkill(skill)">
-                        <div class="shop-item-info-row">
-                            <span class="item-name">{{ skill.name }}</span>
-                            <span class="item-stock-tag">Lv.{{ skill.level }}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="buy-controls" v-if="selectedLearnSkill">
-                    <div class="selected-item-info">
-                        <span class="selected-item-name">{{ selectedLearnSkill.name }}</span>
-                    </div>
-                    <div class="stock-info">
-                        <p>消耗潜能提升技能等级</p>
-                    </div>
-                    <button @click="startLearning" class="buy-btn">开始学习</button>
-                </div>
-            </div>
-        </div>
+        <GameShop v-else-if="showLearnPanel"
+          title="请教技能"
+          :items="learnSkills"
+          :selectedItem="selectedLearnSkill"
+          :showMoney="false"
+          buyButtonText="开始学习"
+          @close="closeLearn"
+          @selectItem="selectLearnSkill"
+          @buy="startLearning" />
 
-        <div v-else class="room-entities">
-            <div v-if="room?.playersInRoom && room.playersInRoom.length > 0" class="entities-section">
-                <ul>
-                    <li v-for="player in room.playersInRoom" :key="player.id" class="entity-item">
-                        <div class="entity-row" @click="toggleEntity(player.id, 'player')" :class="{ 'clickable': player.id !== currentPlayer.id }">
-                            <div class="entity-info">
-                                <span :class="{ 'current-player': player.id === currentPlayer.id, 'player-offline': player.online === false }">
-                                    {{ player.title ? player.title + ' ' : '' }}{{ player.name }}{{ player.state === 'DEAD' ? '的尸体' : '' }}
-                                </span>
-                                <span v-if="player.state === 'HEALING'" class="status-tag healing">&lt;疗伤&gt;</span>
-                                <span v-if="player.state === 'MEDITATING'" class="status-tag meditating">&lt;打坐&gt;</span>
-                                <span v-if="player.state === 'MINING'" class="status-tag mining">&lt;挖矿中&gt;</span>
-                                <span v-if="player.state === 'LEARNING'" class="status-tag learning">&lt;学习&gt;</span>
-                                <span v-if="player.online === false" class="offline-tag"> &lt;断线&gt;</span>
-                            </div>
-                            <div class="entity-bars" v-if="player.state !== 'DEAD'">
-                                <div class="bar-container hp-bar">
-                                    <div class="bar-fill" :style="{ width: getHpPercent(player) + '%' }"></div>
-                                </div>
-                                <div class="bar-container mp-bar">
-                                    <div class="bar-fill" :style="{ width: getMpPercent(player) + '%' }"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-if="selectedEntityKey === getEntityKey(player.id, null, 'player') && player.id !== currentPlayer.id" class="entity-actions">
-                            <button @click.stop="viewEntity(player)" class="action-btn">查看</button>
-                            <button v-if="player.state !== 'DEAD'" @click.stop="killEntity(player)" class="action-btn">击杀</button>
-                            <button v-if="player.state !== 'DEAD'" @click.stop="sparEntity(player)" class="action-btn">比试</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div v-if="room?.npcs && room.npcs.length > 0" class="entities-section">
-                <h4>江湖人物</h4>
-                <ul>
-                    <li v-for="(npc, index) in room.npcs" :key="index" class="entity-item">
-                        <div class="entity-row clickable" @click="toggleEntity(npc.id, 'npc', index)">
-                            <div class="entity-info">
-                                {{ npc.title ? npc.title + ' ' : '' }}{{ npc.name }}
-                            </div>
-                            <div class="entity-bars">
-                                <div class="bar-container hp-bar">
-                                    <div class="bar-fill" :style="{ width: getHpPercent(npc) + '%' }"></div>
-                                </div>
-                                <div class="bar-container mp-bar">
-                                    <div class="bar-fill" :style="{ width: getMpPercent(npc) + '%' }"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div v-if="selectedEntityKey === getEntityKey(npc.id, index, 'npc')" class="entity-actions">
-                            <button @click.stop="viewEntity(npc)" class="action-btn">查看</button>
-                            <button @click.stop="killEntity(npc)" class="action-btn">击杀</button>
-                            <button @click.stop="openShop(npc)" class="action-btn" v-if="npc.isShop">交易</button>
-                            <button @click.stop="openLearn(npc)" class="action-btn" v-if="npc.skills && Object.keys(npc.skills).length > 0">学习</button>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div v-if="(!room?.playersInRoom || room.playersInRoom.length === 0) && (!room?.npcs || room.npcs.length === 0)" class="empty-entities">
-                <p>房间内空无一人。</p>
-            </div>
+        <div v-else class="room-entities-area">
+          <GameRoomPanel
+            :entities="combinedEntities"
+            :selectedEntity="selectedEntityObj"
+            @selectEntity="handleEntitySelect" />
         </div>
         
         <div class="room-exits-grid">
@@ -235,231 +130,60 @@
 
         <!-- 右侧面板区域（包含信息面板） -->
         <div class="right-panels-wrapper">
-            <!-- 信息显示框 (背包等) -->
-            <div v-if="showInfoPanel" class="info-panel">
-                <div class="panel-header">
-                    <h3>{{ panelTitle }}</h3>
-                    <button @click="closeInfoPanel" class="close-btn">×</button>
-                </div>
-                <div class="panel-content">
-                    <div v-if="currentPanel === 'backpack'" class="backpack-panel-container">
-                        <div class="money-header">
-                            {{ formatMoney(playerMoney) }}
-                        </div>
-                        <div class="backpack-list">
-                            <ul v-if="backpackItems && backpackItems.length > 0">
-                                <li v-for="item in backpackItems" :key="item.uniqueId || item.id" class="item-entry" :class="{ 'selected': (selectedBackpackItem?.uniqueId || selectedBackpackItem?.id) === (item.uniqueId || item.id) }" @click="selectBackpackItem(item)">
-                                    <div class="item-row">
-                                        <div class="item-row-content">
-                                            <span class="item-name" :style="{ color: getItemColor(item.rarity) }">{{ item.name }}</span>
-                                            <span v-if="item.stackable && item.count > 1" class="item-count">{{ item.count }}{{ item.unit }}</span>
-                                        </div>
-                                    </div>
-                                    <div v-if="(selectedBackpackItem?.uniqueId || selectedBackpackItem?.id) === (item.uniqueId || item.id)" class="item-actions">
-                                        <button @click.stop="viewBackpackItem(item)" class="action-btn">查看</button>
-                                        <button @click.stop="initiateDiscard(item)" class="action-btn discard-btn">丢弃</button>
-                                        <button v-if="item.equipmentSlot" @click.stop="equipItem(item)" class="action-btn">装备</button>
-                                        <button v-if="item.sellable && room?.npcs?.some(n => n.isShop)" @click.stop="initiateSell(item)" class="action-btn">出售</button>
-                                    </div>
-                                </li>
-                            </ul>
-                            <p v-else class="empty-msg">背包里空空如也。</p>
-                        </div>
-                        
-                        <div class="backpack-bottom-area">
-                            <div v-if="viewingItem" class="item-details-view">
-                                <div class="detail-header">
-                                    <span class="detail-name" :style="{ color: getItemColor(viewingItem.rarity) }">{{ viewingItem.name }}</span>
-                                    <span class="detail-sell-price" v-if="viewingItem.sellable">{{ formatPrice(Math.floor(viewingItem.value / 2)) }}/{{ viewingItem.unit || '个' }}</span>
-                                </div>
-                                <div class="detail-desc">{{ viewingItem.description }}</div>
-                                <div v-if="viewingItem.equipmentSlot" class="detail-slot">部位: {{ equipmentSlots[viewingItem.equipmentSlot] || viewingItem.equipmentSlot }}</div>
-                            </div>
-                            <div v-else-if="discardingItem" class="discard-prompt">
-                                <div class="discard-info">丢弃 {{ discardingItem.name }} ?</div>
-                                <div class="amount-selector" v-if="backpackItems.filter(i => i.id === discardingItem.id).length > 1 || (discardingItem.stackable && discardingItem.count > 1)">
-                                    <button @click="changeDiscardAmount(-1)" :disabled="discardAmount <= 1" class="small-btn">-</button>
-                                    <input type="number" v-model="discardAmount" readonly />
-                                    <button @click="changeDiscardAmount(1)" :disabled="isMaxDiscardReached" class="small-btn">+</button>
-                                </div>
-                                <div class="discard-actions">
-                                    <button @click="confirmDiscard" class="confirm-btn">确认</button>
-                                    <button @click="cancelDiscard" class="cancel-btn">取消</button>
-                                </div>
-                            </div>
-                            <div v-else-if="sellingItem" class="discard-prompt">
-                                <div class="discard-info">出售 {{ sellingItem.name }}</div>
-                                <div class="sell-price-info">单价: {{ formatPrice(Math.floor(sellingItem.value / 2)) }}</div>
-                                <div class="amount-selector" v-if="sellingItem.stackable && sellingItem.count > 1">
-                                    <button @click="changeSellAmount('min')" :disabled="sellAmount <= 1" class="small-btn">最少</button>
-                                    <button @click="changeSellAmount(-10)" :disabled="sellAmount <= 10" class="small-btn">-10</button>
-                                    <input type="number" v-model="sellAmount" readonly />
-                                    <button @click="changeSellAmount(10)" :disabled="isMaxSellReached" class="small-btn">+10</button>
-                                    <button @click="changeSellAmount('max')" :disabled="isMaxSellReached" class="small-btn">最多</button>
-                                </div>
-                                <div class="total-price-info">总价: {{ formatPrice(Math.floor(sellingItem.value / 2) * sellAmount) }}</div>
-                                <div class="discard-actions">
-                                    <button @click="confirmSell" class="confirm-btn">确认出售</button>
-                                    <button @click="cancelSell" class="cancel-btn">取消</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-if="currentPanel === 'skills'" class="backpack-panel-container">
-                        <div class="skill-tabs">
-                            <span :class="{ active: skillTab === 'basic' }" @click="skillTab = 'basic'">基础武功</span>
-                            <span class="tab-separator">|</span>
-                            <span :class="{ active: skillTab === 'special' }" @click="skillTab = 'special'">特殊武功</span>
-                        </div>
-                        
-                        <div class="backpack-list">
-                            <ul v-if="filteredSkills && filteredSkills.length > 0">
-                                <li v-for="skill in filteredSkills" 
-                                    :key="skill.id" 
-                                    class="item-entry"
-                                    :class="{ selected: selectedSkill && selectedSkill.id === skill.id }"
-                                    @click="selectSkill(skill)">
-                                    <div class="item-row">
-                                        <div class="item-row-content">
-                                            <span class="item-name" :style="{ color: getItemColor(skill.rarity) }">{{ skill.name }}</span>
-                                            <span class="item-count">Lv.{{ skill.level }}</span>
-                                        </div>
-                                    </div>
-                                    <div v-if="selectedSkill && selectedSkill.id === skill.id" class="item-actions">
-                                        <button @click.stop="viewSkill(skill)" class="action-btn">查看</button>
-                                    </div>
-                                </li>
-                            </ul>
-                            <p v-else class="empty-msg">没有相关技能。</p>
-                        </div>
-                        
-                        <div class="backpack-bottom-area" v-if="viewingSkill">
-                            <div class="item-details-view">
-                                <div class="detail-header">
-                                    <span class="detail-name" :style="{ color: getItemColor(viewingSkill.rarity) }">{{ viewingSkill.name }}</span>
-                                    <span class="detail-sell-price">Lv.{{ viewingSkill.level }}</span>
-                                </div>
-                                <div class="detail-desc">{{ viewingSkill.description }}</div>
-                                <div class="detail-bonuses" v-if="getSkillBonusText(viewingSkill).length > 0">
-                                    <div class="bonus-title">加成效果:</div>
-                                    <div v-for="(bonus, index) in getSkillBonusText(viewingSkill)" :key="index" class="bonus-item">
-                                        {{ bonus }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-if="currentPanel === 'equipment'" class="equipment-panel-container">
-                        <div class="equipment-slots">
-                            <div v-for="(slotName, slotKey) in equipmentSlots" :key="slotKey" class="equipment-slot-wrapper">
-                                <div class="equipment-slot" 
-                                     :class="{ 'selected': selectedEquipmentSlot === slotKey }"
-                                     @click="selectEquipmentSlot(slotKey)">
-                                    <span class="slot-label">{{ slotName }}</span>
-                                    <div class="slot-content">
-                                        <span v-if="equipment[slotKey]" class="equipped-item" :style="{ color: getItemColor(equipment[slotKey].rarity) }">{{ equipment[slotKey].name }}</span>
-                                        <span v-else class="empty-slot">空</span>
-                                    </div>
-                                </div>
-                                <div v-if="selectedEquipmentSlot === slotKey && equipment[slotKey]" class="slot-actions">
-                                     <button @click="unequipItem(slotKey)" class="action-btn unequip-btn">脱下</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="backpack-bottom-area" v-if="selectedEquipmentSlot && equipment[selectedEquipmentSlot]">
-                             <div class="item-details-view">
-                                <div class="detail-header">
-                                    <span class="detail-name" :style="{ color: getItemColor(equipment[selectedEquipmentSlot].rarity) }">{{ equipment[selectedEquipmentSlot].name }}</span>
-                                </div>
-                                <div class="detail-desc">{{ equipment[selectedEquipmentSlot].description }}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-if="currentPanel === 'status'">
-                        <div v-if="statusAttributes" class="status-list">
-                            <div class="status-item"><span class="label">经验:</span> <span class="value">{{ statusAttributes.experience || 0 }}</span></div>
-                            <div class="status-item"><span class="label">潜能:</span> <span class="value">{{ statusAttributes.potential || 0 }}</span></div>
-                            
-                            <hr class="status-divider">
-
-                            <div class="status-item"><span class="label">气血:</span> <span class="value">{{ statusAttributes.currentHp }} / {{ statusAttributes.maxHp }}</span></div>
-                            <div class="status-item"><span class="label">内力:</span> <span class="value">{{ statusAttributes.currentMp }} / {{ statusAttributes.trainedMaxMp }}</span></div>
-                            <div class="status-item"><span class="label">内力上限:</span> <span class="value">{{ statusAttributes.maxMp }}</span></div>
-                            
-                            <hr class="status-divider">
-                            
-                            <div class="status-grid">
-                                <div class="status-item"><span class="label">臂力:</span> <span class="value">{{ statusAttributes.strength }} ({{ statusAttributes.totalPostStrength || statusAttributes.postStrength || 0 }})</span></div>
-                                <div class="status-item"><span class="label">根骨:</span> <span class="value">{{ statusAttributes.constitution }} ({{ statusAttributes.totalPostConstitution || statusAttributes.postConstitution || 0 }})</span></div>
-                                <div class="status-item"><span class="label">身法:</span> <span class="value">{{ statusAttributes.agility }} ({{ statusAttributes.totalPostAgility || statusAttributes.postAgility || 0 }})</span></div>
-                                <div class="status-item"><span class="label">悟性:</span> <span class="value">{{ statusAttributes.intelligence }} ({{ statusAttributes.totalPostIntelligence || statusAttributes.postIntelligence || 0 }})</span></div>
-                                <div class="status-item"><span class="label">容貌:</span> <span class="value">{{ statusAttributes.appearance || '?' }}</span></div>
-                                <div class="status-item"><span class="label">福禄:</span> <span class="value">{{ statusAttributes.luck || '?' }}</span></div>
-                            </div>
-                            
-                            <hr class="status-divider">
-                            
-                            <div class="status-grid">
-                                <div class="status-item"><span class="label">攻击:</span> <span class="value">{{ statusAttributes.attack }}</span></div>
-                                <div class="status-item"><span class="label">防御:</span> <span class="value">{{ statusAttributes.defense }}</span></div>
-                                <div class="status-item"><span class="label">命中:</span> <span class="value">{{ statusAttributes.hitRate || 100 }}</span></div>
-                                <div class="status-item"><span class="label">躲闪:</span> <span class="value">{{ statusAttributes.dodge || 100 }}</span></div>
-                                <div class="status-item"><span class="label">招架:</span> <span class="value">{{ statusAttributes.parry || 100 }}</span></div>
-                                <div class="status-item"><span class="label">暴击:</span> <span class="value">{{ statusAttributes.critRate || 1 }}%</span></div>
-                                <div class="status-item full-width"><span class="label">攻速:</span> <span class="value">{{ statusAttributes.attackSpeed || 4 }}</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div v-if="currentPanel === 'maps'" class="maps-panel-container">
-                        <div class="map-list-area">
-                            <ul v-if="sortedWorldsList && sortedWorldsList.length > 0" class="map-list">
-                                <li v-for="world in sortedWorldsList" 
-                                    :key="world.id" 
-                                    class="map-item"
-                                    :class="{ 'selected': selectedWorldId === world.id }"
-                                    @click="selectWorld(world.id)">
-                                    <span class="map-name">{{ world.name }}</span>
-                                </li>
-                            </ul>
-                            <p v-else class="empty-msg">暂无可用地图。</p>
-                        </div>
-                        <div class="map-description-area">
-                            <div class="map-desc-text">
-                                {{ selectedWorld ? selectedWorld.description : '请选择一个世界查看详情。' }}
-                            </div>
-                            <button @click="enterWorld" class="enter-world-btn" :disabled="!selectedWorld">进入世界</button>
-                        </div>
-                    </div>
-                    <div v-if="currentPanel === 'dungeons'" class="maps-panel-container">
-                        <div class="map-list-area">
-                            <ul v-if="sortedDungeonsList && sortedDungeonsList.length > 0" class="map-list">
-                                <li v-for="dungeon in sortedDungeonsList"
-                                    :key="dungeon.id"
-                                    class="map-item"
-                                    :class="{ 'selected': selectedDungeonId === dungeon.id }"
-                                    @click="selectDungeon(dungeon.id)">
-                                    <div class="map-item-line">
-                                        <span class="map-name">{{ dungeon.name }}</span>
-                                    </div>
-                                </li>
-                            </ul>
-                            <p v-else class="empty-msg">暂无可用副本。</p>
-                        </div>
-                        <div class="map-description-area">
-                            <div class="map-desc-text">
-                                {{ selectedDungeon ? selectedDungeon.description : '请选择一个副本查看详情。' }}
-                            </div>
-                            <div v-if="selectedDungeon" class="map-sub-line">
-                                满额奖励：{{ selectedDungeon.rewardBase || 0 }}经验 {{ selectedDungeon.rewardBase || 0 }}潜能
-                            </div>
-                            <div v-if="isInDungeon && room?.dungeon?.id === selectedDungeon?.id" class="map-sub-line">
-                                当前进度：{{ room?.dungeon?.progress ?? 0 }}%
-                            </div>
-                            <button @click="enterDungeon" class="enter-world-btn" :disabled="!selectedDungeon || isInDungeon">进入副本</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <GameInfoPanel
+              :visible="showInfoPanel"
+              :title="panelTitle"
+              :currentPanel="currentPanel"
+              :backpackItems="backpackItems"
+              :selectedBackpackItem="selectedBackpackItem"
+              :viewingItem="viewingItem"
+              :discardingItem="discardingItem"
+              :discardAmount="discardAmount"
+              :discardMax="maxDiscardCount"
+              :discardShowAmount="discardShowAmount"
+              :sellingItem="sellingItem"
+              :sellAmount="sellAmount"
+              :sellMax="maxSellCount"
+              :playerMoney="playerMoney"
+              :hasShopNpc="room?.npcs?.some(n => n.isShop)"
+              :skillTab="skillTab"
+              :filteredSkills="filteredSkills"
+              :selectedSkill="selectedSkill"
+              :viewingSkill="viewingSkill"
+              :equipmentSlotLabels="equipmentSlots"
+              :equipment="equipment"
+              :selectedEquipmentSlot="selectedEquipmentSlot"
+              :statusAttributes="statusAttributes"
+              :worldsList="sortedWorldsList"
+              :selectedWorldId="selectedWorldId"
+              :selectedWorld="selectedWorld"
+              :dungeonsList="sortedDungeonsList"
+              :selectedDungeonId="selectedDungeonId"
+              :selectedDungeon="selectedDungeon"
+              :isInDungeon="isInDungeon"
+              :dungeonRoomId="room?.dungeon?.id"
+              :dungeonProgress="room?.dungeon?.progress"
+              @close="closeInfoPanel"
+              @selectBackpackItem="selectBackpackItem"
+              @viewItem="viewBackpackItem"
+              @discardItem="initiateDiscard"
+              @equipItem="equipItem"
+              @sellItem="initiateSell"
+              @changeDiscardAmount="changeDiscardAmount"
+              @confirmDiscard="confirmDiscard"
+              @cancelDiscard="cancelDiscard"
+              @changeSellAmount="changeSellAmount"
+              @confirmSell="confirmSell"
+              @cancelSell="cancelSell"
+              @changeSkillTab="(tab) => skillTab = tab"
+              @selectSkill="selectSkill"
+              @viewSkill="viewSkill"
+              @selectEquipSlot="selectEquipmentSlot"
+              @unequipSlot="unequipItem"
+              @selectWorld="selectWorld"
+              @enterWorld="enterWorld"
+              @selectDungeon="selectDungeon"
+              @enterDungeon="enterDungeon" />
             
             <!-- 动作按钮区域 -->
             <div class="action-panel">
@@ -494,8 +218,10 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePlayerStore } from '@/stores/player'
-// 导入新的 ws 封装函数
-import { initWebSocket, removeMessageHandler, sendGameCommand as rawSendGameCommand, sendMessage } from '../utils/ws.js' 
+import { initWebSocket, removeMessageHandler, sendGameCommand as rawSendGameCommand, sendMessage } from '../utils/ws.js'
+import GameShop from '../components/GameShop.vue'
+import GameRoomPanel from '../components/GameRoomPanel.vue'
+import GameInfoPanel from '../components/GameInfoPanel.vue'
 
 const router = useRouter()
 const playerStore = usePlayerStore()
@@ -540,6 +266,56 @@ const selectedEntityKey = ref(null)
 const selectedWorldId = ref(null)
 const selectedDungeonId = ref(null)
 const suppressEquipmentPanelSwitchCount = ref(0)
+
+const combinedEntities = computed(() => {
+  const result = []
+  if (room.value?.playersInRoom) {
+    for (const p of room.value.playersInRoom) {
+      result.push({
+        id: p.id,
+        name: p.name,
+        isPlayer: true,
+        isNpc: false,
+        isItem: false,
+        level: p.level,
+        hp: p.attributes?.currentHp,
+        maxHp: p.attributes?.maxHp,
+        hostile: false
+      })
+    }
+  }
+  if (room.value?.npcs) {
+    for (const n of room.value.npcs) {
+      result.push({
+        id: n.id,
+        name: n.name,
+        isPlayer: false,
+        isNpc: true,
+        isItem: false,
+        level: n.level,
+        hp: n.attributes?.currentHp,
+        maxHp: n.attributes?.maxHp,
+        hostile: n.hostile || false
+      })
+    }
+  }
+  return result
+})
+
+const selectedEntityObj = computed(() => {
+  if (!selectedEntityKey.value) return null
+  return combinedEntities.value.find(e => `entity_${e.id}` === selectedEntityKey.value) || null
+})
+
+const handleEntitySelect = (entity) => {
+  if (!entity) return
+  const key = `entity_${entity.id}`
+  if (selectedEntityKey.value === key) {
+    selectedEntityKey.value = null
+  } else {
+    selectedEntityKey.value = key
+  }
+}
 
 // Shop State
 const showShopPanel = ref(false)
@@ -1996,6 +1772,21 @@ const isMaxSellReached = computed(() => {
     if (!sellingItem.value) return true;
     const max = sellingItem.value.count || 1;
     return sellAmount.value >= max;
+});
+
+const maxSellCount = computed(() => {
+    if (!sellingItem.value) return 1;
+    return sellingItem.value.count || 1;
+});
+
+const maxDiscardCount = computed(() => {
+    if (!discardingItem.value) return 1;
+    return discardingItem.value.count || backpackItems.value.filter(i => i.id === discardingItem.value.id).length || 1;
+});
+
+const discardShowAmount = computed(() => {
+    if (!discardingItem.value) return false;
+    return backpackItems.value.filter(i => i.id === discardingItem.value.id).length > 1 || (discardingItem.value.stackable && discardingItem.value.count > 1);
 });
 
 const confirmSell = () => {

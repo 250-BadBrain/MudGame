@@ -33,6 +33,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { initWebSocket, removeMessageHandler, sendMessage } from '../utils/ws.js'
+import { createSystemMessage } from '../protocal/message.js'
 
 const router = useRouter()
 
@@ -95,17 +96,10 @@ const register = () => {
 
   loading.value = true
 
-  const registerMsg = {
-    type: 'system',
-    subtype: 'register',
-    ts: Date.now(),
-    args: {
-      username: username.value.trim(),
-      password: password.value
-    }
-  }
-
-  sendMessage(registerMsg)
+  sendMessage(createSystemMessage('register', {
+    username: username.value.trim(),
+    password: password.value
+  }))
 }
 
 const backToLogin = () => {

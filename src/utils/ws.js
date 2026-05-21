@@ -1,3 +1,5 @@
+import { createSystemMessage, createGameCommandMessage, createChatMessage } from '../protocal/message.js'
+
 let socket = null
 const messageHandlers = [] // 改为数组，支持多个处理器
 let openCallbacks = [] // 连接成功后要执行的队列
@@ -209,27 +211,24 @@ export function sendMessage(message) {
     }
   }
 }
-// 发送命令的封装
+// 发送命令的封装（用于登录/注册等不需要 playerId 的阶段）
 export function sendCommandMessage(type, subtype, args = {}) {
-    const message = {
-        type: type,
-        subtype: subtype,
-        // playerId 在登录/创建角色阶段为 null，不发送
-        playerId: null, 
-        ts: Date.now(),
-        args: args
-    }
+    const message = createSystemMessage(subtype, args)
+    message.type = type
+    message.ts = Date.now()
     sendMessage(message)
 }
 
 // 供游戏内使用的指令发送，需要 playerId
 export function sendGameCommand(type, subtype, playerId, args = {}) {
-    const message = {
-        type: type,
-        subtype: subtype,
-        playerId: playerId, 
-        ts: Date.now(),
-        args: args
+    let message
+    if (type === 'command') {
+        message = createGameCommandMessage(subtype, playerId, args)
+    } else if (type === 'chat') {
+        message = createChatMessage(playerId, args?.content || '')
+    } else {
+        message = createSystemMessage(subtype, args)
+        message.ts = Date.now()
     }
     sendMessage(message)
 }

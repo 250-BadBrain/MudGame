@@ -47,6 +47,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePlayerStore } from '@/stores/player'
 import { initWebSocket, removeMessageHandler, sendMessage } from '../utils/ws.js'
+import { createSystemMessage } from '../protocal/message.js'
 
 const router = useRouter()
 const playerStore = usePlayerStore()
@@ -93,19 +94,14 @@ const createCharacter = () => {
   loading.value = true;
   error.value = '';
 
-  const msg = {
-    type: "system",
-    subtype: "create_character",
-    args: { 
-      userId: playerStore.userId,
-      characterName: characterName.value.trim(),
-      strength: strength.value,
-      constitution: constitution.value,
-      agility: agility.value,
-      intelligence: intelligence.value
-    }
-  }
-  sendMessage(msg);
+  sendMessage(createSystemMessage('create_character', {
+    userId: playerStore.userId,
+    characterName: characterName.value.trim(),
+    strength: strength.value,
+    constitution: constitution.value,
+    agility: agility.value,
+    intelligence: intelligence.value
+  }));
 }
 
 const goBack = () => {

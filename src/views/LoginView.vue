@@ -54,6 +54,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { initWebSocket, removeMessageHandler, sendMessage } from '../utils/ws.js'
+import { createSystemMessage } from '../protocal/message.js'
 import { usePlayerStore } from '@/stores/player' 
 
 const router = useRouter()
@@ -120,18 +121,10 @@ const login = () => {
   }
   loading.value = true
 
-  const loginMsg = {
-    type: "system",
-    subtype: "login",
-    playerId: null,
-    ts: Date.now(),
-    args: {
-      username: username.value,
-      password: password.value
-    }
-  }
-
-  sendMessage(loginMsg)
+  sendMessage(createSystemMessage('login', {
+    username: username.value,
+    password: password.value
+  }))
 }
 
 const goToRegister = () => {
@@ -161,17 +154,10 @@ const confirmDelete = () => {
   loading.value = true
   error.value = ''
 
-  const deleteMsg = {
-    type: 'system',
-    subtype: 'delete_account',
-    ts: Date.now(),
-    args: {
-      username: username.value,
-      password: password.value
-    }
-  }
-
-  sendMessage(deleteMsg)
+  sendMessage(createSystemMessage('delete_account', {
+    username: username.value,
+    password: password.value
+  }))
 }
 </script>
 
