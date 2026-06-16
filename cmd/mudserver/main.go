@@ -27,6 +27,18 @@ func main() {
 		dataDir = filepath.Join("..", "data", "servers", "server1")
 	}
 
+	if err := os.MkdirAll(dataDir, 0755); err != nil {
+		log.Fatalf("failed to create data directory: %v", err)
+	}
+
+	logPath := filepath.Join(dataDir, "server.log")
+	logFile, err := os.OpenFile(logPath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	if err != nil {
+		log.Fatalf("failed to open log file: %v", err)
+	}
+	defer logFile.Close()
+	log.SetOutput(logFile)
+
 	repo := manager.NewRuntimeManager(dataDir)
 	log.Printf("storage backend: file (%s)", dataDir)
 
