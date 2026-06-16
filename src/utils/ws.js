@@ -225,7 +225,7 @@ export function sendGameCommand(type, subtype, playerId, args = {}) {
     if (type === 'command') {
         message = createGameCommandMessage(subtype, playerId, args)
     } else if (type === 'chat') {
-        message = createChatMessage(playerId, args?.content || '')
+        message = createChatMessage(playerId, args?.message || args?.content || '')
     } else {
         message = createSystemMessage(subtype, args)
         message.ts = Date.now()

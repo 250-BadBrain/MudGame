@@ -2171,6 +2171,12 @@ const formatMoney = (money) => {
     color: var(--color-text-light);
 }
 
+.chat-input input:focus {
+    outline: none;
+    border-color: var(--color-border-subtle);
+    box-shadow: none;
+}
+
 .chat-input button {
     flex: 0 0 auto;
     background-color: var(--color-accent-gold);

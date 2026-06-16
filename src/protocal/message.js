@@ -30,6 +30,6 @@ export function createChatMessage(playerId, content) {
     subtype: "public",
     playerId,
     ts: Date.now(),
-    args: { content }
+    args: { message: content }
   }
 }
