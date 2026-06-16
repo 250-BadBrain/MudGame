@@ -81,34 +81,34 @@ const formatPrice = (value) => {
 </script>
 
 <style scoped>
-.shop-panel { height: 100%; display: flex; flex-direction: column; }
-.shop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.shop-header h3 { margin: 0; border: none; padding: 0; font-size: 14px; }
+.shop-panel { height: 100%; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
+.shop-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; min-width: 0; }
+.shop-header h3 { margin: 0; border: none; padding: 0; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 20px; cursor: pointer; padding: 0 5px; }
-.shop-content { flex: 1; overflow-y: auto; display: flex; flex-direction: column; }
-.money-display { text-align: right; color: #f1c40f; margin-bottom: 8px; font-weight: bold; }
-.shop-items-list { flex: 1; overflow-y: auto; }
-.shop-item { padding: 8px; cursor: pointer; border-bottom: 1px solid #333; transition: background 0.2s; }
+.shop-content { flex: 1; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; min-height: 0; min-width: 0; }
+.money-display { text-align: right; color: #f1c40f; margin-bottom: 8px; font-weight: bold; overflow-wrap: anywhere; }
+.shop-items-list { flex: 1; overflow-y: auto; overflow-x: hidden; min-height: 0; }
+.shop-item { padding: 8px; cursor: pointer; border-bottom: 1px solid #333; transition: background 0.2s; min-width: 0; }
 .shop-item:hover { background: rgba(255,255,255,0.05); }
 .shop-item.selected { background: rgba(241,196,15,0.15); border-left: 3px solid #f1c40f; }
-.shop-item-info-row { display: flex; align-items: center; gap: 8px; }
-.item-name { font-weight: bold; }
-.shop-item-price-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12px; }
+.shop-item-info-row { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.item-name { font-weight: bold; overflow-wrap: anywhere; }
+.shop-item-price-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; font-size: 12px; flex-wrap: wrap; min-width: 0; }
 .item-price { color: #f1c40f; }
 .item-sold-out-tag { color: #e74c3c; font-weight: bold; }
 .item-limit-tag { color: #e67e22; }
 .item-stock-tag { color: #2ecc71; }
-.buy-controls { margin-top: 12px; padding-top: 12px; border-top: 1px solid #444; }
-.selected-item-info { display: flex; justify-content: space-between; margin-bottom: 8px; }
-.selected-item-name { font-weight: bold; }
+.buy-controls { margin-top: 12px; padding-top: 12px; border-top: 1px solid #444; overflow: hidden; min-width: 0; }
+.selected-item-info { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; min-width: 0; }
+.selected-item-name { font-weight: bold; overflow-wrap: anywhere; }
 .selected-item-price { color: #f1c40f; }
-.amount-selector { display: flex; align-items: center; gap: 4px; margin-bottom: 8px; }
-.amount-selector input { width: 50px; text-align: center; background: #222; color: #ecf0f1; border: 1px solid #555; padding: 4px; }
-.amount-selector button { padding: 4px 8px; font-size: 12px; }
-.small-btn { background: #444; color: #ecf0f1; border: 1px solid #666; cursor: pointer; border-radius: 2px; padding: 4px 8px; font-size: 12px; font-family: inherit; }
+.amount-selector { display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; min-width: 0; }
+.amount-selector input { width: 42px; text-align: center; background: #222; color: #ecf0f1; border: 1px solid #555; padding: 4px 2px; }
+.amount-selector button { padding: 4px 6px; font-size: 11px; }
+.small-btn { background: #444; color: #ecf0f1; border: 1px solid #666; cursor: pointer; border-radius: 2px; padding: 4px 6px; font-size: 11px; font-family: inherit; flex: 0 1 auto; }
 .small-btn:hover:not(:disabled) { background: #555; }
 .small-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.stock-info { margin-bottom: 8px; font-size: 12px; color: #888; }
+.stock-info { margin-bottom: 8px; font-size: 12px; color: #888; overflow-wrap: anywhere; }
 .buy-btn { width: 100%; padding: 8px; background: #f1c40f; color: #111; border: none; cursor: pointer; font-weight: bold; font-family: inherit; border-radius: 4px; }
 .buy-btn:hover { filter: brightness(1.2); }
 </style>

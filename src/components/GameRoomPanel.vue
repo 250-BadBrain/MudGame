@@ -1,14 +1,22 @@
 <template>
   <div class="room-entities-comp">
     <div class="room-entities-section" v-if="entities?.length">
-      <div v-for="entity in visibleEntities" :key="entity.id" class="entity-row"
-        :class="{ 'entity-highlight': entity.isNpc && entity.hostile, 'entity-interactable': entity === selectedEntity }"
-        @click="$emit('selectEntity', entity)">
-        <span class="entity-icon">{{ entity.isNpc ? '👤' : entity.isPlayer ? '🧑' : '📦' }}</span>
-        <span class="entity-name">{{ entity.name }}</span>
-        <span v-if="entity.level" class="entity-level">Lv.{{ entity.level }}</span>
-        <span v-if="entity.hp" class="entity-hp">HP:{{ entity.hp }}/{{ entity.maxHp }}</span>
-        <span v-if="entity.isNpc && entity.hostile" class="entity-hostile">⚔敌对</span>
+      <div v-for="entity in visibleEntities" :key="entity.id" class="entity-block">
+        <div class="entity-row"
+          :class="{ 'entity-highlight': entity.isNpc && entity.hostile, 'entity-interactable': entity === selectedEntity }"
+          @click="$emit('selectEntity', entity)">
+          <span class="entity-icon">{{ entity.isNpc ? '👤' : entity.isPlayer ? '🧑' : '📦' }}</span>
+          <span class="entity-name">{{ entity.name }}</span>
+          <span v-if="entity.level" class="entity-level">Lv.{{ entity.level }}</span>
+          <span v-if="entity.hp" class="entity-hp">HP:{{ entity.hp }}/{{ entity.maxHp }}</span>
+          <span v-if="entity.isNpc && entity.hostile" class="entity-hostile">⚔敌对</span>
+        </div>
+        <div v-if="entity === selectedEntity" class="entity-actions">
+          <button @click.stop="$emit('viewEntity', entity)" class="action-btn view-btn">查看</button>
+          <button @click.stop="$emit('sparEntity', entity)" class="action-btn spar-btn">比试</button>
+          <button @click.stop="$emit('killEntity', entity)" class="action-btn kill-btn">击杀</button>
+          <button v-if="entity.isShop" @click.stop="$emit('tradeEntity', entity)" class="action-btn trade-btn">交易</button>
+        </div>
       </div>
     </div>
 
@@ -17,13 +25,6 @@
     </div>
     <div class="room-entities-section" v-else>
       <div class="entity-row hint-row">这里空无一人</div>
-    </div>
-
-    <div v-if="selectedEntity" class="entity-actions">
-      <button @click="$emit('viewEntity', selectedEntity)" class="action-btn view-btn">查看</button>
-      <button @click="$emit('sparEntity', selectedEntity)" class="action-btn spar-btn">比试</button>
-      <button @click="$emit('killEntity', selectedEntity)" class="action-btn kill-btn">击杀</button>
-      <button v-if="selectedEntity.isShop" @click="$emit('tradeEntity', selectedEntity)" class="action-btn trade-btn">交易</button>
     </div>
   </div>
 </template>
@@ -45,36 +46,38 @@ const visibleEntities = computed(() => {
 </script>
 
 <style scoped>
-.room-entities-comp { height: 100%; }
-.room-entities-section { }
-.entity-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; cursor: pointer; border-bottom: 1px solid #2a2a2a; transition: background 0.15s; border-radius: 3px; }
+.room-entities-comp { height: 100%; overflow: hidden; min-width: 0; }
+.room-entities-section { overflow-y: auto; overflow-x: hidden; max-height: 100%; min-width: 0; }
+.entity-row { display: flex; align-items: center; gap: 8px; padding: 6px 8px; cursor: pointer; border-bottom: 1px solid #2a2a2a; transition: background 0.15s; border-radius: 3px; min-width: 0; }
 .entity-row:hover { background: rgba(255,255,255,0.04); }
 .entity-highlight { border-left: 3px solid #e74c3c; }
 .entity-interactable { background: rgba(52,152,219,0.1); border-left: 3px solid #3498db; }
 .entity-icon { font-size: 14px; }
-.entity-name { font-weight: bold; flex: 1; }
+.entity-name { font-weight: bold; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .entity-level { color: #f1c40f; font-size: 12px; }
 .entity-hp { color: #2ecc71; font-size: 12px; }
 .entity-hostile { color: #e74c3c; font-size: 11px; font-weight: bold; }
 .hint-row { color: #666; cursor: default; font-style: italic; }
 
+.entity-block { }
+
 .entity-actions {
   display: flex;
-  gap: 6px;
-  padding: 8px;
+  gap: 4px;
+  padding: 2px 8px 6px;
   flex-wrap: wrap;
-  border-top: 1px solid #2a2a2a;
-  margin-top: 4px;
+  overflow: hidden;
 }
 
 .action-btn {
-  padding: 5px 12px;
+  padding: 1px 6px;
   border: 1px solid #444;
   background: #1e1e1e;
   color: #ccc;
   cursor: pointer;
-  border-radius: 3px;
-  font-size: 12px;
+  border-radius: 2px;
+  font-size: 11px;
+  line-height: 1.4;
   transition: all 0.15s;
 }
 

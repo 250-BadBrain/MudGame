@@ -274,27 +274,27 @@ const getSkillBonusText = (skill) => {
 </script>
 
 <style scoped>
-.info-panel { background: rgba(20,20,20,0.95); border: 1px solid #333; border-radius: 6px; padding: 10px; margin-bottom: 8px; }
-.panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.panel-header h3 { margin: 0; font-size: 14px; color: #f1c40f; }
+.info-panel { background: rgba(20,20,20,0.95); border: 1px solid #333; border-radius: 6px; padding: 10px; margin-bottom: 8px; overflow: hidden; min-width: 0; }
+.panel-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; min-width: 0; }
+.panel-header h3 { margin: 0; font-size: 14px; color: #f1c40f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 18px; cursor: pointer; padding: 0 4px; }
-.panel-content { max-height: 50vh; overflow-y: auto; }
+.panel-content { max-height: 50vh; overflow-y: auto; overflow-x: hidden; min-width: 0; }
 .money-header { text-align: right; color: #f1c40f; margin-bottom: 6px; font-weight: bold; font-size: 13px; }
 .backpack-list ul { list-style: none; padding: 0; margin: 0; }
 .item-entry { padding: 6px 6px; cursor: pointer; border-bottom: 1px solid #2a2a2a; }
 .item-entry.selected { background: rgba(241,196,15,0.1); border-left: 3px solid #f1c40f; }
-.item-row-content { display: flex; align-items: center; gap: 8px; }
-.item-name { font-weight: bold; font-size: 12px; }
+.item-row-content { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.item-name { font-weight: bold; font-size: 12px; overflow-wrap: anywhere; }
 .item-count { color: #888; font-size: 11px; background: #333; padding: 1px 6px; border-radius: 8px; }
-.item-actions { display: flex; gap: 4px; margin-top: 4px; }
+.item-actions { display: flex; gap: 4px; margin-top: 4px; flex-wrap: wrap; }
 .action-btn { padding: 4px 8px; background: #444; color: #ecf0f1; border: 1px solid #666; cursor: pointer; font-size: 11px; border-radius: 3px; font-family: inherit; }
 .action-btn:hover { background: #555; }
 .discard-btn { color: #e74c3c; }
 .empty-msg { color: #666; text-align: center; padding: 15px; font-style: italic; font-size: 12px; }
 .backpack-bottom-area { margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; }
 .item-details-view { }
-.detail-header { display: flex; justify-content: space-between; margin-bottom: 4px; }
-.detail-name { font-weight: bold; font-size: 13px; }
+.detail-header { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+.detail-name { font-weight: bold; font-size: 13px; overflow-wrap: anywhere; }
 .detail-sell-price { color: #f1c40f; font-size: 12px; }
 .detail-desc { font-size: 11px; color: #b0b0b0; margin-bottom: 4px; }
 .detail-slot { font-size: 11px; color: #888; }
@@ -305,12 +305,12 @@ const getSkillBonusText = (skill) => {
 .discard-info { font-size: 12px; margin-bottom: 6px; }
 .sell-price-info { font-size: 11px; color: #f1c40f; margin-bottom: 4px; }
 .total-price-info { font-size: 11px; color: #f1c40f; margin: 4px 0; }
-.amount-selector { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }
+.amount-selector { display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 6px; flex-wrap: wrap; }
 .amount-selector input { width: 40px; text-align: center; background: #222; color: #ecf0f1; border: 1px solid #555; padding: 3px; }
 .small-btn { padding: 3px 6px; background: #444; color: #ecf0f1; border: 1px solid #666; cursor: pointer; font-size: 11px; border-radius: 2px; font-family: inherit; }
 .small-btn:hover:not(:disabled) { background: #555; }
 .small-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.discard-actions { display: flex; gap: 6px; }
+.discard-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
 .confirm-btn { padding: 5px 12px; background: #e74c3c; color: #fff; border: none; cursor: pointer; font-size: 12px; border-radius: 3px; font-family: inherit; }
 .cancel-btn { padding: 5px 12px; background: #555; color: #ecf0f1; border: none; cursor: pointer; font-size: 12px; border-radius: 3px; font-family: inherit; }
 .skill-tabs { display: flex; gap: 4px; margin-bottom: 8px; font-size: 12px; }
@@ -318,11 +318,11 @@ const getSkillBonusText = (skill) => {
 .skill-tabs span.active { color: #f1c40f; font-weight: bold; }
 .tab-separator { color: #444; cursor: default !important; }
 .equipment-slots { display: flex; flex-direction: column; gap: 4px; }
-.equipment-slot-wrapper { display: flex; align-items: center; gap: 8px; }
+.equipment-slot-wrapper { display: flex; align-items: center; gap: 8px; min-width: 0; }
 .equipment-slot { flex: 1; display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-bottom: 1px solid #2a2a2a; cursor: pointer; }
 .equipment-slot.selected { background: rgba(241,196,15,0.1); }
 .slot-label { min-width: 50px; color: #888; font-size: 12px; }
-.slot-content { flex: 1; }
+.slot-content { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .equipped-item { font-weight: bold; font-size: 12px; }
 .empty-slot { color: #555; font-style: italic; font-size: 12px; }
 .slot-actions { }
@@ -336,7 +336,7 @@ const getSkillBonusText = (skill) => {
 .status-divider { border: none; border-top: 1px solid #333; margin: 6px 0; }
 .maps-panel-container { display: flex; flex-direction: column; gap: 8px; }
 .map-list { list-style: none; padding: 0; margin: 0; }
-.map-list-area { max-height: 200px; overflow-y: auto; }
+.map-list-area { max-height: 200px; overflow-y: auto; overflow-x: hidden; }
 .map-item { padding: 6px 8px; cursor: pointer; border-bottom: 1px solid #2a2a2a; font-size: 12px; }
 .map-item.selected { background: rgba(241,196,15,0.1); border-left: 3px solid #f1c40f; color: #f1c40f; }
 .map-name { font-weight: bold; }

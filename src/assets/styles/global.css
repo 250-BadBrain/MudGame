@@ -22,6 +22,23 @@ html, body, #app {
     min-height: 100vh;
 }
 
+#app,
+#app * {
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+#app * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#app *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+}
+
 body {
     /* 应用深色背景和全局字体 */
     background-color: var(--color-background-dark);

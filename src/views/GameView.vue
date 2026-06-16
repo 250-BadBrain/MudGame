@@ -1920,21 +1920,43 @@ const formatMoney = (money) => {
     flex-grow: 1;
     gap: 15px;
     overflow: hidden;
+    min-height: 0;
 }
 
 .left-content-area {
     flex: 0 0 260px; /* Increased width to accommodate shop controls */
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.room-entities-area {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 8px;
+    padding: 10px;
 }
 
 .room-exits-grid {
     background-color: var(--color-background-secondary);
     border: 1px solid var(--color-border-subtle);
-    padding: 15px;
+    padding: 8px;
     border-radius: 8px;
     flex: 0 0 auto;
+    margin-top: auto;
+    overflow: hidden;
+}
+
+.room-exits-grid h3 {
+    margin: 0 0 6px;
+    padding-bottom: 4px;
+    font-size: 0.95em;
 }
 
 .room-entities {
@@ -2105,12 +2127,14 @@ const formatMoney = (money) => {
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     min-width: 0; /* 防止 flex 子项溢出 */
 }
 
 .game-log {
     flex-grow: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     margin-bottom: 5px;
     padding-right: 0;
     line-height: 1.2;
@@ -2148,6 +2172,7 @@ const formatMoney = (money) => {
 }
 
 .chat-input button {
+    flex: 0 0 auto;
     background-color: var(--color-accent-gold);
     color: var(--color-background-dark);
     border: none;
@@ -2162,16 +2187,16 @@ const formatMoney = (money) => {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
 
-    gap: 4px;
+    gap: 3px;
     border: none;
 
     width: 100%;
     max-width: none;
-    margin: 5px auto;
+    margin: 0 auto;
 }
 
 .grid-cell {
-    min-height: 35px;
+    min-height: 28px;
 
     display: flex;
     justify-content: center;
@@ -2187,7 +2212,7 @@ const formatMoney = (money) => {
     height: 100%;
 
     padding: 2px 2px;
-    min-height: 35px;
+    min-height: 28px;
 
     cursor: pointer;
     white-space: normal;
@@ -2195,22 +2220,22 @@ const formatMoney = (money) => {
     border: none;
     background-color: var(--color-background-dark, #111);
     color: var(--color-text-light, #fff);
-    font-size: 0.85em;
-    line-height: 1.2;
+    font-size: 0.78em;
+    line-height: 1.1;
 
-    border-radius: 8px;
+    border-radius: 5px;
     border: 1px solid var(--color-border-subtle);
 }
 
 .current-room-center {
     width: 95%;
     height: 95%;
-    min-height: 35px;
+    min-height: 28px;
 
     background-color: var(--color-background-dark);
     color: var(--color-accent-gold);
     border: 2px solid var(--color-accent-gold);
-    border-radius: 8px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2218,7 +2243,7 @@ const formatMoney = (money) => {
 }
 
 .room-abbr {
-    font-size: 0.9em;
+    font-size: 0.78em;
     word-break: break-word;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -2276,6 +2301,7 @@ const formatMoney = (money) => {
 .panel-content {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 10px;
 }
 
@@ -2492,6 +2518,7 @@ const formatMoney = (money) => {
     /* remove fixed max-height so it can stretch; use flex to fill */ 
     flex: 1 1 auto;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -2544,6 +2571,7 @@ const formatMoney = (money) => {
 .map-list-area {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding-right: 5px;
     /* Hide scrollbar */
     -ms-overflow-style: none;
@@ -2598,6 +2626,7 @@ const formatMoney = (money) => {
     min-height: 60px; /* Ensure some space for text */
     max-height: 100px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .enter-world-btn {
@@ -2659,6 +2688,7 @@ const formatMoney = (money) => {
     flex-direction: column;
     padding: 10px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .money-display {
@@ -2673,6 +2703,7 @@ const formatMoney = (money) => {
 .shop-items-list {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     /* Hide scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -2689,8 +2720,10 @@ const formatMoney = (money) => {
     cursor: pointer;
     border-radius: 4px;
     display: flex;
+    flex-direction: column;
+    gap: 2px;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     font-size: 0.9em;
 }
 
@@ -2801,6 +2834,8 @@ const formatMoney = (money) => {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
     font-size: 0.9em;
 }
 
@@ -2808,6 +2843,8 @@ const formatMoney = (money) => {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 4px;
     margin-bottom: 10px;
 }
 
@@ -2906,13 +2943,13 @@ const formatMoney = (money) => {
 }
 
 .amount-selector input {
-    width: 50px;
+    width: 42px;
     text-align: center;
     background-color: var(--color-background-dark);
     border: 1px solid var(--color-border-subtle);
     color: var(--color-text-light);
     height: 28px;
-    margin: 0 5px;
+    margin: 0;
 }
 
 .buy-btn {
@@ -2980,6 +3017,7 @@ const formatMoney = (money) => {
 .backpack-list {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding-right: 2px;
     /* Hide scrollbar */
     -ms-overflow-style: none;
@@ -3016,6 +3054,7 @@ const formatMoney = (money) => {
 .item-actions {
     display: flex;
     justify-content: flex-end;
+    flex-wrap: wrap;
     margin-top: 5px;
     gap: 5px;
     padding-top: 5px;
@@ -3132,6 +3171,7 @@ const formatMoney = (money) => {
 .equipment-slots {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     padding-bottom: 10px;
     /* Hide scrollbar */
     -ms-overflow-style: none;
@@ -3221,6 +3261,7 @@ const formatMoney = (money) => {
 .skills-list-container {
     flex: 1;
     overflow-y: auto;
+    overflow-x: hidden;
     /* Hide scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -3295,5 +3336,3 @@ const formatMoney = (money) => {
     font-size: 0.85em;
     margin-bottom: 2px;
 }
-
-
