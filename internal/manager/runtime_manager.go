@@ -29,6 +29,7 @@ type RuntimeManager struct {
 
 	dungeonLoadErr error
 	dungeonMgr     *engruntime.Manager
+	staticNPCs     map[string]*engruntime.NPCState
 }
 
 var (
@@ -50,6 +51,7 @@ func NewRuntimeManager(baseDir string) *RuntimeManager {
 		usersCache:    map[string]*model.User{},
 		playersCache:  map[string]*model.Player{},
 		dynamicRooms:  map[string]diskRoomDynamic{},
+		staticNPCs:    map[string]*engruntime.NPCState{},
 		autosaveEvery: 30 * time.Second,
 		autosaveStop:  make(chan struct{}),
 		autosaveDone:  make(chan struct{}),

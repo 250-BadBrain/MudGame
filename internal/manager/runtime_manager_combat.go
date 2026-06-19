@@ -26,6 +26,18 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 		if attacker.State != "COMBAT" || attacker.TargetID == "" || processed[attacker.ID] {
 			continue
 		}
+		if staticTarget, ok := r.staticNPCs[attacker.TargetID]; ok {
+			processed[attacker.ID] = true
+			if staticTarget == nil || !staticTarget.Alive || staticTarget.RoomID != attacker.RoomID {
+				roomID := attacker.RoomID
+				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: attacker.CharacterName + "茫然地四处张望，找不到对手了。"})
+				r.clearCombatNoLock(attacker)
+				updatedRoom[roomID] = true
+				continue
+			}
+			r.resolveStaticNPCCombatRoundNoLock(attacker, staticTarget, &result, updatedRoom)
+			continue
+		}
 		if dungeonTarget, _, ok := r.dungeonNPCInRoomNoLock(attacker.RoomID, attacker.TargetID); ok {
 			processed[attacker.ID] = true
 			r.resolveDungeonCombatRoundNoLock(players, attacker, dungeonTarget, &result, updatedRoom)
@@ -112,6 +124,74 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 		return model.CombatTickResult{}, err
 	}
 	return result, nil
+}
+
+func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Player, target *engruntime.NPCState, result *model.CombatTickResult, updatedRoom map[string]bool) {
+	if attacker == nil || target == nil {
+		return
+	}
+	roomID := attacker.RoomID
+	combatType := attacker.CombatType
+	if combatType == "" {
+		combatType = "SPAR"
+	}
+
+	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), target.Name, model.BuildEffectiveAttributes(target.Attributes), combatType)
+	counterType := combatType
+	if combatType == "KILL" || target.Aggressive {
+		counterType = "KILL"
+	}
+	strikeBToA := r.resolveCombatStrikeEntity(target.Name, model.BuildEffectiveAttributes(target.Attributes), attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), counterType)
+
+	target.Attributes.Resources.HP -= strikeAToB.Damage
+	if target.Attributes.Resources.HP < 0 {
+		target.Attributes.Resources.HP = 0
+	}
+	attacker.Attributes.Resources.HP -= strikeBToA.Damage
+	if attacker.Attributes.Resources.HP < 0 {
+		attacker.Attributes.Resources.HP = 0
+	}
+
+	if strikeAToB.Message != "" {
+		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeAToB.Message})
+	}
+	if strikeBToA.Message != "" {
+		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeBToA.Message})
+	}
+	updatedRoom[roomID] = true
+
+	if combatType == "KILL" {
+		if target.Attributes.Resources.HP == 0 {
+			target.Alive = false
+			r.clearCombatNoLock(attacker)
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: target.Name + "大叫一声，倒在地上，死了！"})
+		}
+		if attacker.Attributes.Resources.HP == 0 {
+			attacker.State = "DEAD"
+			attacker.TargetID = ""
+			attacker.CombatType = ""
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: attacker.CharacterName + "大叫一声，倒在地上，死了！"})
+		}
+		return
+	}
+
+	attackerLimit := attacker.Attributes.Resources.MaxHP / 5
+	targetLimit := target.Attributes.Resources.MaxHP / 5
+	attackerLow := attacker.Attributes.Resources.HP <= attackerLimit
+	targetLow := target.Attributes.Resources.HP <= targetLimit
+	if attackerLow || targetLow {
+		r.clearCombatNoLock(attacker)
+		if targetLow {
+			target.Attributes.Resources.HP = target.Attributes.Resources.MaxHP
+		}
+		if attackerLow && targetLow {
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: "双方点到为止，抱拳收招。"})
+		} else if attackerLow {
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: target.Name + "抱拳道：承让。"})
+		} else {
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: target.Name + "后退三尺，抱拳道：佩服、佩服！"})
+		}
+	}
 }
 
 func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*model.Player, attacker *model.Player, dungeonTarget *engruntime.NPCState, result *model.CombatTickResult, updatedRoom map[string]bool) {

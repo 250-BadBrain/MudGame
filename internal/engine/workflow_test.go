@@ -665,6 +665,80 @@ func TestDungeonInstanceLoadsNPCsAndSupportsKill(t *testing.T) {
 	}
 }
 
+func TestStaticNPCSparAndKillWorkflows(t *testing.T) {
+	h := setupRepo(t)
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to east market failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "south"); err != nil {
+		t.Fatalf("move to weapon school failed: %v", err)
+	}
+	if _, err := SparWithEffects(h.repo, h.playerID, "weapon_school_master"); err != nil {
+		t.Fatalf("spar static npc failed: %v", err)
+	}
+	stopped := false
+	for i := 0; i < 80; i++ {
+		if _, err := ProcessCombatTickWithEffects(h.repo); err != nil {
+			t.Fatalf("combat tick failed: %v", err)
+		}
+		status, err := GetPlayerStatusView(h.repo, h.playerID)
+		if err != nil {
+			t.Fatalf("get status failed: %v", err)
+		}
+		if status["state"] == "IDLE" {
+			stopped = true
+			break
+		}
+	}
+	if !stopped {
+		t.Fatalf("expected static npc spar to stop")
+	}
+
+	h = setupRepo(t)
+	if _, err := MoveWithTransition(h.repo, h.playerID, "south"); err != nil {
+		t.Fatalf("move to south gate failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "south"); err != nil {
+		t.Fatalf("move to outskirts failed: %v", err)
+	}
+	if _, err := KillWithEffects(h.repo, h.playerID, "road_bandit"); err != nil {
+		t.Fatalf("kill static npc failed: %v", err)
+	}
+	defeated := false
+	for i := 0; i < 80; i++ {
+		if _, err := ProcessCombatTickWithEffects(h.repo); err != nil {
+			t.Fatalf("combat tick failed: %v", err)
+		}
+		snapshot, err := GetRoomSnapshotView(h.repo, h.playerID)
+		if err != nil {
+			t.Fatalf("get room snapshot failed: %v", err)
+		}
+		npcs := extractRoomNPCs(snapshot.Room)
+		stillPresent := false
+		for _, npc := range npcs {
+			if npc["id"] == "road_bandit" {
+				stillPresent = true
+				break
+			}
+		}
+		if !stillPresent {
+			defeated = true
+			break
+		}
+		status, err := GetPlayerStatusView(h.repo, h.playerID)
+		if err != nil {
+			t.Fatalf("get status after kill failed: %v", err)
+		}
+		if status["state"] == "DEAD" {
+			t.Fatalf("player died before defeating road bandit")
+		}
+	}
+	if !defeated {
+		t.Fatalf("expected road bandit to be removed after kill")
+	}
+}
+
 func TestDungeonAggressiveNPCStartsCombat(t *testing.T) {
 	h := setupRepo(t)
 

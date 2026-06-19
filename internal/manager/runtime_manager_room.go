@@ -203,7 +203,14 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		skills := map[string]int{}
 		npcAttributes := map[string]interface{}{}
 		if npc, ok := fileNpcs[npcID]; ok {
+			staticState, _ := r.staticNPCStateNoLock(npcID, room.ID)
+			if staticState != nil && !staticState.Alive {
+				continue
+			}
 			attrs := model.NormalizeAttributes(npc.Attributes)
+			if staticState != nil {
+				attrs = model.NormalizeAttributes(staticState.Attributes)
+			}
 			eff := model.BuildEffectiveAttributes(attrs)
 			npcIDValue = npc.ID
 			npcName = npc.Name

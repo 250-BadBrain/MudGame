@@ -900,7 +900,24 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 		return "", errors.New("npc_combat_unsupported")
 	}
 	if _, isNPC := fileNpcs[targetID]; isNPC {
-		return "", errors.New("npc_combat_unsupported")
+		room, ok := r.roomByIDNoLock(p.RoomID, fileRooms)
+		if !ok {
+			return "", errors.New("room_not_found")
+		}
+		npc, ok := r.staticNPCInRoomNoLock(room, targetID)
+		if !ok {
+			return "", errors.New("target_not_in_room")
+		}
+		if npc.Attributes.Resources.HP < npc.Attributes.Resources.MaxHP {
+			return "", errors.New("target_not_full")
+		}
+		p.State = "COMBAT"
+		p.TargetID = npc.ID
+		p.CombatType = "SPAR"
+		if err := r.savePlayers(players); err != nil {
+			return "", err
+		}
+		return p.CharacterName + "对" + npc.Name + "抱拳道：请赐教！", nil
 	}
 	t, ok2 := players[targetID]
 	if !ok2 {
@@ -970,7 +987,21 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		return p.CharacterName + "对" + dnpc.Name + "喝道：纳命来！", nil
 	}
 	if _, isNPC := fileNpcs[targetID]; isNPC {
-		return "", errors.New("npc_combat_unsupported")
+		room, ok := r.roomByIDNoLock(p.RoomID, fileRooms)
+		if !ok {
+			return "", errors.New("room_not_found")
+		}
+		npc, ok := r.staticNPCInRoomNoLock(room, targetID)
+		if !ok {
+			return "", errors.New("target_not_in_room")
+		}
+		p.State = "COMBAT"
+		p.TargetID = npc.ID
+		p.CombatType = "KILL"
+		if err := r.savePlayers(players); err != nil {
+			return "", err
+		}
+		return p.CharacterName + "对" + npc.Name + "喝道：纳命来！", nil
 	}
 	t, ok2 := players[targetID]
 	if !ok2 {
