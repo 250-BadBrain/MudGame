@@ -6,7 +6,11 @@
           :class="{ 'entity-highlight': entity.isNpc && entity.hostile, 'entity-interactable': entity === selectedEntity }"
           @click="$emit('selectEntity', entity)">
           <span class="entity-icon">{{ entity.isNpc ? '客' : entity.isPlayer ? '人' : '物' }}</span>
-          <span class="entity-name">{{ entity.name }}</span>
+          <span class="entity-main">
+            <span class="entity-name">{{ entity.name }}</span>
+            <span v-if="isOffline(entity)" class="entity-status entity-status-offline">&lt;断线&gt;</span>
+            <span v-if="stateLabel(entity)" class="entity-status entity-status-active">&lt;{{ stateLabel(entity) }}&gt;</span>
+          </span>
           <span v-if="entity.level" class="entity-level">Lv.{{ entity.level }}</span>
           <span v-if="entity.hp" class="entity-hp">HP:{{ entity.hp }}/{{ entity.maxHp }}</span>
           <span v-if="entity.isNpc && entity.hostile" class="entity-hostile">敌对</span>
@@ -53,6 +57,25 @@ const canTeach = (entity) => {
 const canTalk = (entity) => {
   return !!entity?.capabilities?.includes('talk')
 }
+
+const stateNames = {
+  HEALING: '疗伤',
+  MEDITATING: '打坐',
+  MINING: '挖矿',
+  COMBAT: '战斗',
+  LEARNING: '学习',
+  DEAD: '死亡'
+}
+
+const stateLabel = (entity) => {
+  const state = entity?.state
+  if (!state || state === 'IDLE') return ''
+  return stateNames[state] || state
+}
+
+const isOffline = (entity) => {
+  return !!(entity?.isPlayer && entity.online === false)
+}
 </script>
 
 <style scoped>
@@ -63,7 +86,11 @@ const canTalk = (entity) => {
 .entity-highlight { border-left: 3px solid #e74c3c; }
 .entity-interactable { background: rgba(52,152,219,0.1); border-left: 3px solid #3498db; }
 .entity-icon { font-size: 14px; }
-.entity-name { font-weight: bold; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.entity-main { flex: 1; min-width: 0; display: flex; align-items: center; gap: 4px; overflow: hidden; }
+.entity-name { color: #fff; font-weight: bold; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.entity-status { flex: 0 0 auto; font-size: 11px; font-weight: bold; white-space: nowrap; }
+.entity-status-active { color: #2ecc71; }
+.entity-status-offline { color: #e74c3c; }
 .entity-level { color: #f1c40f; font-size: 12px; }
 .entity-hp { color: #2ecc71; font-size: 12px; }
 .entity-hostile { color: #e74c3c; font-size: 11px; font-weight: bold; }

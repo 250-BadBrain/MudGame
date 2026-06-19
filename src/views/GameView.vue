@@ -304,6 +304,7 @@ const combinedEntities = computed(() => {
         maxHp: p.attributes?.maxHp,
         hostile: false,
         state: p.state,
+        online: p.online,
         isShop: false,
         capabilities: [],
         description: '',
