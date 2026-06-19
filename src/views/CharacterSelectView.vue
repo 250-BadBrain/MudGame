@@ -34,7 +34,7 @@
     <!-- 删除角色确认对话框 -->
     <div v-if="showDeleteDialog" class="modal-overlay" @click="closeDeleteCharDialog">
       <div class="modal-content" @click.stop>
-        <h3>⚠️ 删除角色</h3>
+        <h3>删除角色</h3>
         <p>确定要删除角色 <strong>{{ getSelectedCharName() }}</strong> 吗？</p>
         <p class="warning-text">此操作无法撤销，角色的所有数据将被永久删除。</p>
         <div class="modal-buttons">
@@ -178,7 +178,7 @@ const handleCharacterSelectMessage = (msg) => {
     } else if (msg.subtype === 'delete_character') {
       loading.value = false
       if (msg.flag) {
-        error.value = '✅ 角色已成功删除'
+        error.value = '角色已成功删除'
         selectedCharId.value = null
         closeDeleteCharDialog()
         setTimeout(() => {
@@ -195,7 +195,7 @@ onMounted(() => {
   // 注册 WebSocket 监听器，处理所有角色选择相关的系统消息
   initWebSocket(handleCharacterSelectMessage)
   
-  // 💡 改进：如果页面刷新后userId存在，自动发送reconnect来恢复后端session
+  // 如果页面刷新后 userId 存在，自动发送 reconnect 来恢复后端 session
   // reconnect成功后，reconnect处理器会自动调用fetchCharacters()
   // 不要在这里直接调用fetchCharacters()，否则会导致userId未被绑定到session
   if (playerStore.userId) {

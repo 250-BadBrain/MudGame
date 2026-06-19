@@ -4,7 +4,7 @@
       <div class="spinner"></div>
       <p>{{ loadingMessage }}</p>
       <div v-if="error" class="error-message">
-        ⚠️ {{ error }}
+        {{ error }}
       </div>
     </div>
   </div>

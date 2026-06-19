@@ -31,7 +31,7 @@
     <!-- 删除确认对话框 -->
     <div v-if="showDeleteDialog" class="modal-overlay" @click="closeDeleteDialog">
       <div class="modal-content" @click.stop>
-        <h3>⚠️ 注销账号</h3>
+        <h3>注销账号</h3>
         <p>此操作将永久删除您的账号和所有相关角色数据，无法恢复！</p>
         <p class="confirm-text">请输入用户名 <strong>{{ username }}</strong> 来确认注销:</p>
         <input v-model="deleteConfirmInput" placeholder="输入用户名以确认" class="confirm-input" />
@@ -82,7 +82,7 @@ const handleLoginMessage = (msg) => {
         router.push({ name: 'CharacterSelect' }) 
         
       } else {
-        error.value = `❌ 登录失败: ${msg.results.error || '用户名或密码错误'}`
+        error.value = `登录失败: ${msg.results.error || '用户名或密码错误'}`
       }
     }
     // --- 账号删除处理 ---
@@ -94,12 +94,12 @@ const handleLoginMessage = (msg) => {
         deleteConfirmInput.value = ''
         username.value = ''
         password.value = ''
-        alert('✅ 账号已成功注销，所有相关数据已删除。')
+        alert('账号已成功注销，所有相关数据已删除。')
         // 清空本地数据并返回登录
         playerStore.clearAuth()
         router.push({ name: 'Login' })
       } else {
-        error.value = `❌ 注销失败: ${msg.results.error || '未知错误'}`
+        error.value = `注销失败: ${msg.results.error || '未知错误'}`
       }
     }
   }

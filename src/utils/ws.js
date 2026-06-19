@@ -97,7 +97,7 @@ function createWebSocket() {
     socket.onclose = (event) => {
       waitForReconnectRestore = false
       
-      // 🔧 改进：非正常关闭时尝试重新连接
+      // 非正常关闭时尝试重新连接
       if (event.code !== 1000) {
         attemptReconnect()
       }
@@ -129,7 +129,7 @@ function resolveWebSocketUrl() {
   return `${protocol}//${hostname}:${DEFAULT_BACKEND_PORT}/ws`
 }
 
-// 🔧 新增：重新连接逻辑
+// 重新连接逻辑
 function attemptReconnect() {
   if (reconnectAttempts >= RECONNECT_CONFIG.maxRetries) {
     console.error("[WebSocket] 达到最大重连次数，放弃重连")

@@ -49,13 +49,13 @@ const handleRegisterMessage = (msg) => {
     loading.value = false
     if (msg.flag) {
       const registeredUsername = msg.results.userId || username.value
-      success.value = `✅ 注册成功，用户：${registeredUsername}。请返回登录。`
+      success.value = `注册成功，用户：${registeredUsername}。请返回登录。`
       // 3秒后自动返回登录页
       setTimeout(() => {
         router.push({ name: 'Login' })
       }, 2000)
     } else {
-      error.value = `❌ 注册失败: ${msg.results.error || '未知错误'}`
+      error.value = `注册失败: ${msg.results.error || '未知错误'}`
     }
   }
 }

@@ -5,11 +5,11 @@
         <div class="entity-row"
           :class="{ 'entity-highlight': entity.isNpc && entity.hostile, 'entity-interactable': entity === selectedEntity }"
           @click="$emit('selectEntity', entity)">
-          <span class="entity-icon">{{ entity.isNpc ? '👤' : entity.isPlayer ? '🧑' : '📦' }}</span>
+          <span class="entity-icon">{{ entity.isNpc ? '客' : entity.isPlayer ? '人' : '物' }}</span>
           <span class="entity-name">{{ entity.name }}</span>
           <span v-if="entity.level" class="entity-level">Lv.{{ entity.level }}</span>
           <span v-if="entity.hp" class="entity-hp">HP:{{ entity.hp }}/{{ entity.maxHp }}</span>
-          <span v-if="entity.isNpc && entity.hostile" class="entity-hostile">⚔敌对</span>
+          <span v-if="entity.isNpc && entity.hostile" class="entity-hostile">敌对</span>
         </div>
         <div v-if="entity === selectedEntity" class="entity-actions">
           <button @click.stop="$emit('viewEntity', entity)" class="action-btn view-btn">查看</button>

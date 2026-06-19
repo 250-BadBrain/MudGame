@@ -236,12 +236,12 @@
 
         <!-- 右侧工具栏 -->
         <div class="side-toolbar">
-            <button @click="toggleStatus" class="tool-btn" title="属性">📊</button>
-            <button @click="toggleBackpack" class="tool-btn" title="背包">🎒</button>
-            <button @click="toggleSkills" class="tool-btn" title="技能">⚡</button>
-            <button @click="toggleEquipment" class="tool-btn" title="装备">🛡️</button>
-            <button @click="toggleMaps" class="tool-btn" title="地图">🗺️</button>
-            <button @click="toggleDungeons" class="tool-btn" title="副本">🏯</button>
+            <button @click="toggleStatus" class="tool-btn" title="属性">属</button>
+            <button @click="toggleBackpack" class="tool-btn" title="背包">囊</button>
+            <button @click="toggleSkills" class="tool-btn" title="技能">技</button>
+            <button @click="toggleEquipment" class="tool-btn" title="装备">装</button>
+            <button @click="toggleMaps" class="tool-btn" title="地图">图</button>
+            <button @click="toggleDungeons" class="tool-btn" title="副本">境</button>
             <button @click="toggleQuests" class="tool-btn" title="任务">令</button>
             <button @click="toggleFactions" class="tool-btn" title="势力">势</button>
         </div>
