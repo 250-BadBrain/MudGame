@@ -34,27 +34,11 @@
           @selectItem="selectLearnSkill"
           @buy="startLearning" />
 
-        <div v-else-if="showDialoguePanel" class="dialogue-panel">
-          <div class="dialogue-header">
-            <div>
-              <h3>{{ activeDialogue?.npcName || '交谈' }}</h3>
-              <span>{{ activeDialogue?.title || '' }}</span>
-            </div>
-            <button @click="closeDialogue" class="dialogue-close-btn">×</button>
-          </div>
-          <div class="dialogue-body">
-            <p class="dialogue-opening">{{ activeDialogue?.opening }}</p>
-            <div class="dialogue-options">
-              <button
-                v-for="option in activeDialogueOptions"
-                :key="option.id"
-                @click="chooseDialogue(option.id)"
-                class="dialogue-option-btn">
-                {{ option.text }}
-              </button>
-            </div>
-          </div>
-        </div>
+        <GameDialoguePanel
+          v-else-if="showDialoguePanel"
+          :dialogue="activeDialogue"
+          @close="closeDialogue"
+          @choose="chooseDialogue" />
 
         <div v-else class="room-entities-area">
           <GameRoomPanel
@@ -260,6 +244,8 @@ import { initWebSocket, removeMessageHandler, sendGameCommand as rawSendGameComm
 import GameShop from '../components/GameShop.vue'
 import GameRoomPanel from '../components/GameRoomPanel.vue'
 import GameInfoPanel from '../components/GameInfoPanel.vue'
+import GameDialoguePanel from '../components/GameDialoguePanel.vue'
+import { useChatState } from '../composables/useChatState.js'
 
 const router = useRouter()
 const playerStore = usePlayerStore()
@@ -276,10 +262,6 @@ const currentPlayer = ref({
   state: 'IDLE' // Add state
 })
 const logs = ref([])
-// 聊天历史（独立保存，限长）
-const chatMessages = ref([])
-const MAX_CHAT_HISTORY = 200
-const command = ref('')
 const pendingDungeonLeave = ref(null)
 const DUNGEON_LEAVE_BUTTON_LOG_TYPE = 'dungeon_leave_button'
 
@@ -386,10 +368,6 @@ const selectedLearnSkill = ref(null)
 const showDialoguePanel = ref(false)
 const activeDialogue = ref(null)
 const activeDialogueNpcId = ref('')
-
-const activeDialogueOptions = computed(() => {
-    return Array.isArray(activeDialogue.value?.options) ? activeDialogue.value.options : []
-})
 
 // Backpack State
 const selectedBackpackItem = ref(null)
@@ -606,6 +584,18 @@ const sendGameCommand = (type, subtype, playerId, args = {}) => {
     commandQueue.push({ type, subtype, playerId, args })
     flushCommandQueue()
 }
+
+const {
+    chatMessages,
+    command,
+    chatHistoryEl,
+    addChatMessage,
+    sendChatCommand
+} = useChatState({
+    sendGameCommand,
+    getPlayerId: () => characterId.value,
+    addLog: (message) => addLog(message)
+})
 
 const keyDirectionMap = {
     ArrowUp: 'north',
@@ -1181,15 +1171,11 @@ const handleMessage = (msg) => {
       }
   } else if (msg.type === 'chat') {
       // 聊天消息处理（公开聊天）
-      const sender = msg.results?.senderName || '???';
-      const text = msg.results?.message || '';
-      const ts = msg.ts || Date.now();
-      chatMessages.value.push({ sender, message: text, ts });
-      // 限制长度，保留最新的 MAX_CHAT_HISTORY 条
-      if (chatMessages.value.length > MAX_CHAT_HISTORY) {
-          chatMessages.value.splice(0, chatMessages.value.length - MAX_CHAT_HISTORY);
-      }
-      scrollChatToBottom();
+      addChatMessage({
+          sender: msg.results?.senderName || '???',
+          message: msg.results?.message || '',
+          ts: msg.ts || Date.now()
+      });
   } else if (msg.type === 'system' && msg.subtype === 'session_replaced') {
     // 【新增】其他会话选择了该角色，当前连接被替换
     addLog(`ERROR: ${msg.results.error}`);
@@ -1644,21 +1630,7 @@ const getMpPercent = (entity) => {
 
 // ------------------- 命令发送 -------------------
 
-const sendCommand = () => {
-  if (!command.value.trim()) return
-
-  const input = command.value.trim()
-  
-  if (input.length > 200) {
-      addLog("你要发送的内容太多了");
-      return;
-  }
-  
-  // 仅作为公开聊天发送，不解析任何指令
-  sendGameCommand("chat", "public", characterId.value, { message: input });
-  
-  command.value = ''
-}
+const sendCommand = sendChatCommand
 
 const go = (direction) => {
   if (!checkCanAct('go')) return;
@@ -1721,16 +1693,6 @@ const scrollToBottom = () => {
         logContainer.scrollTop = logContainer.scrollHeight;
     }, 0);
   }
-}
-
-const scrollChatToBottom = () => {
-    // 滚动聊天历史到底部
-    const chatContainer = document.querySelector('.chat-history');
-    if (chatContainer) {
-        setTimeout(() => {
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-        }, 0);
-    }
 }
 
 const logout = () => {
@@ -2582,94 +2544,6 @@ const formatMoney = (money) => {
     flex: 0 0 auto;
     margin-top: auto; /* 确保始终位于底部 */
     box-sizing: border-box;
-}
-
-.dialogue-panel {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    overflow: hidden;
-    background-color: var(--color-background-secondary);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 6px;
-}
-
-.dialogue-header {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 10px;
-    border-bottom: 1px solid var(--color-accent-gold);
-}
-
-.dialogue-header h3 {
-    margin: 0;
-    color: var(--color-accent-gold);
-    font-size: 1em;
-}
-
-.dialogue-header span {
-    color: var(--color-text-light);
-    font-size: 0.85em;
-    opacity: 0.8;
-}
-
-.dialogue-close-btn {
-    flex: 0 0 auto;
-    width: 24px;
-    height: 24px;
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 3px;
-    background: var(--color-background-dark);
-    color: var(--color-text-light);
-    cursor: pointer;
-}
-
-.dialogue-body {
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 12px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.dialogue-body::-webkit-scrollbar {
-    display: none;
-}
-
-.dialogue-opening {
-    margin: 0 0 12px;
-    color: var(--color-text-light);
-    line-height: 1.6;
-    overflow-wrap: anywhere;
-}
-
-.dialogue-options {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.dialogue-option-btn {
-    width: 100%;
-    text-align: left;
-    padding: 8px 10px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: 4px;
-    color: var(--color-text-light);
-    cursor: pointer;
-    font-family: inherit;
-    line-height: 1.4;
-    overflow-wrap: anywhere;
-}
-
-.dialogue-option-btn:hover {
-    border-color: var(--color-accent-gold);
-    color: var(--color-accent-gold);
 }
 
 .action-buttons-grid {
