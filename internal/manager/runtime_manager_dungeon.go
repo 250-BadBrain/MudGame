@@ -9,12 +9,17 @@ import (
 	"mudgame/server/internal/model"
 )
 
-func (r *RuntimeManager) GetDungeons() []map[string]interface{} {
+func (r *RuntimeManager) GetDungeons(playerID string) []map[string]interface{} {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 	if r.dungeonMgr == nil {
 		return []map[string]interface{}{}
 	}
+	players, err := r.loadPlayers()
+	if err != nil {
+		return []map[string]interface{}{}
+	}
+	player := players[playerID]
 	ids := r.dungeonMgr.DungeonTemplateIDsNoLock()
 	sort.Strings(ids)
 	out := make([]map[string]interface{}, 0, len(ids))
@@ -23,19 +28,72 @@ func (r *RuntimeManager) GetDungeons() []map[string]interface{} {
 		if !ok {
 			continue
 		}
+		if !dungeonUnlockedForPlayer(player, tpl.UnlockConditions) {
+			continue
+		}
 		order := tpl.Order
 		if order <= 0 {
 			order = 1
+		}
+		objectives := make([]map[string]interface{}, 0, len(tpl.Objectives))
+		for _, obj := range tpl.Objectives {
+			objectives = append(objectives, map[string]interface{}{
+				"id":          obj.ID,
+				"type":        obj.Type,
+				"targetId":    obj.TargetID,
+				"required":    obj.Required,
+				"description": obj.Description,
+			})
 		}
 		out = append(out, map[string]interface{}{
 			"id":          tpl.ID,
 			"name":        tpl.Name,
 			"description": tpl.Description,
 			"order":       order,
+			"chainId":     tpl.ChainID,
+			"chapter":     tpl.Chapter,
+			"objectives":  objectives,
+			"rewards":     tpl.Rewards,
 			"rewardBase":  order * 100,
 		})
 	}
 	return out
+}
+
+func dungeonUnlockedForPlayer(p *model.Player, conditions []engruntime.UnlockCondition) bool {
+	if len(conditions) == 0 {
+		return true
+	}
+	if p == nil {
+		return false
+	}
+	for _, cond := range conditions {
+		switch cond.Type {
+		case "flag":
+			want := true
+			if cond.Value == "false" {
+				want = false
+			}
+			if p.Flags[cond.TargetID] != want {
+				return false
+			}
+		case "reputation":
+			if p.Reputations[cond.TargetID] < cond.Min {
+				return false
+			}
+		case "item":
+			required := cond.Min
+			if required <= 0 {
+				required = 1
+			}
+			if p.Backpack[cond.TargetID] < required {
+				return false
+			}
+		default:
+			return false
+		}
+	}
+	return true
 }
 
 func (r *RuntimeManager) loadDungeonTemplatesNoLock() error {
@@ -164,8 +222,50 @@ func (r *RuntimeManager) buildDungeonSettlementNoLock(inst *engruntime.Instance)
 	return r.dungeonMgr.BuildDungeonSettlementNoLock(inst)
 }
 
+func (r *RuntimeManager) applyEnterRoomDungeonObjectiveNoLock(roomID string) int {
+	if r.dungeonMgr == nil {
+		return 0
+	}
+	return r.dungeonMgr.ApplyEnterRoomObjectiveNoLock(roomID)
+}
+
 func formatDungeonSettlementMessage(settlement engruntime.Settlement) string {
 	return engruntime.FormatDungeonSettlementMessage(settlement)
+}
+
+func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlement) {
+	if p == nil {
+		return
+	}
+	p.Attributes.Experience += settlement.RewardExperience
+	p.Attributes.Potential += settlement.RewardPotential
+	p.Money += settlement.RewardMoney
+	if len(settlement.RewardItems) > 0 {
+		if p.Backpack == nil {
+			p.Backpack = map[string]int{}
+		}
+		for itemID, amount := range settlement.RewardItems {
+			if amount > 0 {
+				p.Backpack[itemID] += amount
+			}
+		}
+	}
+	if len(settlement.RewardFlags) > 0 {
+		if p.Flags == nil {
+			p.Flags = map[string]bool{}
+		}
+		for flag, value := range settlement.RewardFlags {
+			p.Flags[flag] = value
+		}
+	}
+	if len(settlement.RewardReputations) > 0 {
+		if p.Reputations == nil {
+			p.Reputations = map[string]int{}
+		}
+		for factionID, value := range settlement.RewardReputations {
+			p.Reputations[factionID] += value
+		}
+	}
 }
 
 func (r *RuntimeManager) forceLeaveDungeonOnDeathNoLock(players map[string]*model.Player, playerID string) *engruntime.Settlement {
@@ -189,8 +289,7 @@ func (r *RuntimeManager) forceLeaveDungeonOnDeathNoLock(players map[string]*mode
 			fallback = "ly_00"
 		}
 		p.RoomID = fallback
-		p.Attributes.Experience += settlement.RewardExperience
-		p.Attributes.Potential += settlement.RewardPotential
+		applyDungeonSettlementReward(p, settlement)
 	}
 	r.destroyDungeonInstanceNoLock(instanceID)
 	return &settlement
@@ -249,6 +348,11 @@ func (r *RuntimeManager) EnterDungeon(playerID, dungeonID string) (map[string]in
 		}
 		return nil, errors.New("busy_state")
 	}
+	if tpl, ok := r.dungeonMgr.DungeonTemplateNoLock(dungeonID); ok {
+		if !dungeonUnlockedForPlayer(p, tpl.UnlockConditions) {
+			return nil, errors.New("dungeon_locked")
+		}
+	}
 
 	inst, err := r.createDungeonInstanceNoLock(playerID, dungeonID, p.RoomID)
 	if err != nil {
@@ -264,6 +368,7 @@ func (r *RuntimeManager) EnterDungeon(playerID, dungeonID string) (map[string]in
 	p.LearningSkillID = ""
 	p.TargetID = ""
 	p.CombatType = ""
+	r.applyEnterRoomDungeonObjectiveNoLock(p.RoomID)
 
 	if err := r.savePlayers(players); err != nil {
 		return nil, err
@@ -296,8 +401,7 @@ func (r *RuntimeManager) LeaveDungeon(playerID string) (map[string]interface{}, 
 	if inst != nil {
 		s := r.buildDungeonSettlementNoLock(inst)
 		settlement = &s
-		p.Attributes.Experience += s.RewardExperience
-		p.Attributes.Potential += s.RewardPotential
+		applyDungeonSettlementReward(p, s)
 	}
 	fallback := "ly_00"
 	if inst != nil && inst.EntryRoomID != "" {
@@ -323,9 +427,13 @@ func (r *RuntimeManager) LeaveDungeon(playerID string) (map[string]interface{}, 
 			"dungeonId":        settlement.DungeonID,
 			"dungeonName":      settlement.DungeonName,
 			"sequence":         settlement.Sequence,
+			"chainId":          settlement.ChainID,
+			"chapter":          settlement.Chapter,
 			"progress":         settlement.Progress,
 			"rewardExperience": settlement.RewardExperience,
 			"rewardPotential":  settlement.RewardPotential,
+			"rewardMoney":      settlement.RewardMoney,
+			"rewardItems":      settlement.RewardItems,
 		}
 	}
 	return roomPayload, nil

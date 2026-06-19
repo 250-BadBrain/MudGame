@@ -288,8 +288,8 @@ func GetWorldsView(repo RuntimeRepository) []map[string]interface{} {
 	return repo.GetWorlds()
 }
 
-func GetDungeonsView(repo RuntimeRepository) []map[string]interface{} {
-	return repo.GetDungeons()
+func GetDungeonsView(repo RuntimeRepository, playerID string) []map[string]interface{} {
+	return repo.GetDungeons(playerID)
 }
 
 func GetPlayerStatusView(repo RuntimeRepository, playerID string) (map[string]interface{}, error) {

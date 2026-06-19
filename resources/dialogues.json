@@ -16,9 +16,10 @@
       {
         "id": "ask_bronze_box",
         "text": "听说城中有战国铜匣的怪谈？",
-        "response": "他目光一闪：“铜匣旧痕不像中原手艺，倒像是从很远的年月里挖出来的。此事现在还不是说破的时候。”",
+        "response": "他目光一闪：“铜匣旧痕不像中原手艺，倒像是从很远的年月里挖出来的。若你真想知道，夜深后去西市旧货巷寻那阵铜响。”",
         "setFlags": {
-          "heard_bronze_box_rumor": true
+          "heard_bronze_box_rumor": true,
+          "xunqin_ch01_unlocked": true
         }
       }
     ]

@@ -139,5 +139,5 @@ func (s *Server) handleGameGetDungeons(conn *websocket.Conn, _ protocol.CommandM
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "error", false, map[string]interface{}{"error": "未选择角色，请先登录并选择角色"}, nil))
 		return
 	}
-	s.write(conn, protocol.NewResult(protocol.TypeCommand, "get_dungeons", true, map[string]interface{}{"dungeons": engine.GetDungeonsView(s.repo)}, nil))
+	s.write(conn, protocol.NewResult(protocol.TypeCommand, "get_dungeons", true, map[string]interface{}{"dungeons": engine.GetDungeonsView(s.repo, ss.playerID)}, nil))
 }

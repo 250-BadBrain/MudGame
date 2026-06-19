@@ -17,6 +17,7 @@ var commandErrorMessages = map[string]string{
 	"in_dungeon_state":          "你正在副本中，待会再说。",
 	"not_in_dungeon":            "你当前不在副本中。",
 	"dungeon_unavailable":       "副本系统暂不可用。",
+	"dungeon_locked":            "你还没有找到进入这个秘境的线索。",
 	"no_exit_in_that_direction": "这个方向走不通。",
 	"shop_npc_not_in_room":      "这个商人不在当前房间。",
 	"npc_not_shop":              "这个 NPC 不是商人。",

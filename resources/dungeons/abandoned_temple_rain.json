@@ -3,7 +3,40 @@
   "name": "荒庙夜雨",
   "description": "洛阳城外夜雨如注，一名负伤信使逃入荒庙，追兵也随之而至。",
   "order": 1,
+  "chainId": "luoyang_rain_temple",
+  "chapter": 1,
   "spawnRoomId": "temple_00",
+  "objectives": [
+    {
+      "id": "clear_front_court",
+      "type": "kill",
+      "targetId": "temple_bandit",
+      "required": 3,
+      "description": "击退荒庙内搜捕信使的流寇。"
+    },
+    {
+      "id": "reach_back_hall",
+      "type": "enter_room",
+      "targetId": "temple_02",
+      "required": 1,
+      "description": "追至后殿雨廊，查明真正的灭口者。"
+    },
+    {
+      "id": "defeat_assassin",
+      "type": "kill",
+      "targetId": "temple_assassin",
+      "required": 1,
+      "description": "击败蒙面刺客，夺回染血密信。"
+    }
+  ],
+  "rewards": {
+    "experience": 180,
+    "potential": 120,
+    "money": 60,
+    "items": {
+      "sealed_letter": 1
+    }
+  },
   "progressOnKill": {
     "temple_bandit": 25,
     "temple_assassin": 50

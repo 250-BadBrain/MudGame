@@ -140,11 +140,22 @@ func (s *Server) handleGameLeaveDungeon(conn *websocket.Conn, _ protocol.Command
 		progress := toInt(settlement["progress"], 0)
 		rewardExp := toInt(settlement["rewardExperience"], 0)
 		rewardPotential := toInt(settlement["rewardPotential"], 0)
+		rewardMoney := toInt(settlement["rewardMoney"], 0)
 		prefix := "副本结算"
 		if progress >= 100 {
 			prefix = "副本完成"
 		}
-		logs = []string{fmt.Sprintf("%s：完成度%d%%，获得%d点经验，%d点潜能。", prefix, progress, rewardExp, rewardPotential)}
+		rewardText := fmt.Sprintf("%s：完成度%d%%，获得%d点经验，%d点潜能", prefix, progress, rewardExp, rewardPotential)
+		if rewardMoney > 0 {
+			rewardText += fmt.Sprintf("，%d文钱", rewardMoney)
+		}
+		if rewardItems, ok := settlement["rewardItems"].(map[string]int); ok && len(rewardItems) > 0 {
+			rewardText += "，物品若干"
+		} else if rewardItems, ok := settlement["rewardItems"].(map[string]interface{}); ok && len(rewardItems) > 0 {
+			rewardText += "，物品若干"
+		}
+		rewardText += "。"
+		logs = []string{rewardText}
 	}
 	s.replyCommand(conn, "leave_dungeon", err, map[string]interface{}{"room": res.Room, "closeShop": true}, logs)
 	if err != nil {

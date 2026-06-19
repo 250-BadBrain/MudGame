@@ -224,6 +224,7 @@ func (r *RuntimeManager) Move(playerID, direction string) (map[string]interface{
 		return nil, errors.New("no_exit_in_that_direction")
 	}
 	p.RoomID = ex.TargetRoomID
+	r.applyEnterRoomDungeonObjectiveNoLock(p.RoomID)
 	if err := r.savePlayers(players); err != nil {
 		return nil, err
 	}

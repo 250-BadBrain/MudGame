@@ -110,7 +110,7 @@ type RuntimeRepository interface {
 	GetSkills(playerID string) ([]map[string]interface{}, error)
 	GetEquipment(playerID string) (map[string]interface{}, error)
 	GetWorlds() []map[string]interface{}
-	GetDungeons() []map[string]interface{}
+	GetDungeons(playerID string) []map[string]interface{}
 	EnterWorld(playerID, worldID string) (map[string]interface{}, error)
 	EnterDungeon(playerID, dungeonID string) (map[string]interface{}, error)
 	LeaveDungeon(playerID string) (map[string]interface{}, error)

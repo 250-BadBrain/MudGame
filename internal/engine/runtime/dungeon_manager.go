@@ -25,23 +25,48 @@ type TemplateRoom struct {
 }
 
 type Template struct {
-	ID             string
-	Name           string
-	Description    string
-	Order          int
-	SpawnRoomID    string
-	Rooms          map[string]TemplateRoom
-	ProgressOnKill map[string]int
+	ID               string
+	Name             string
+	Description      string
+	Order            int
+	ChainID          string
+	Chapter          int
+	SpawnRoomID      string
+	Rooms            map[string]TemplateRoom
+	ProgressOnKill   map[string]int
+	Objectives       []Objective
+	Rewards          model.Rewards
+	UnlockConditions []UnlockCondition
+}
+
+type Objective struct {
+	ID          string
+	Type        string
+	TargetID    string
+	Required    int
+	Description string
+}
+
+type UnlockCondition struct {
+	Type     string
+	TargetID string
+	Value    string
+	Min      int
 }
 
 type templateFile struct {
-	ID             string                      `json:"id"`
-	Name           string                      `json:"name"`
-	Description    string                      `json:"description"`
-	Order          int                         `json:"order"`
-	SpawnRoomID    string                      `json:"spawnRoomId"`
-	Rooms          map[string]templateRoomFile `json:"rooms"`
-	ProgressOnKill map[string]int              `json:"progressOnKill"`
+	ID               string                      `json:"id"`
+	Name             string                      `json:"name"`
+	Description      string                      `json:"description"`
+	Order            int                         `json:"order"`
+	ChainID          string                      `json:"chainId"`
+	Chapter          int                         `json:"chapter"`
+	SpawnRoomID      string                      `json:"spawnRoomId"`
+	Rooms            map[string]templateRoomFile `json:"rooms"`
+	ProgressOnKill   map[string]int              `json:"progressOnKill"`
+	Objectives       []objectiveFile             `json:"objectives"`
+	Rewards          model.Rewards               `json:"rewards"`
+	UnlockConditions []unlockConditionFile       `json:"unlockConditions"`
 }
 
 type templateRoomFile struct {
@@ -49,6 +74,21 @@ type templateRoomFile struct {
 	Description string            `json:"description"`
 	Exits       map[string]string `json:"exits"`
 	NPCs        []string          `json:"npcs"`
+}
+
+type objectiveFile struct {
+	ID          string `json:"id"`
+	Type        string `json:"type"`
+	TargetID    string `json:"targetId"`
+	Required    int    `json:"required"`
+	Description string `json:"description"`
+}
+
+type unlockConditionFile struct {
+	Type     string `json:"type"`
+	TargetID string `json:"targetId"`
+	Value    string `json:"value"`
+	Min      int    `json:"min"`
 }
 
 type NPCState struct {
@@ -67,26 +107,37 @@ type NPCState struct {
 }
 
 type Instance struct {
-	ID             string
-	DungeonID      string
-	Name           string
-	Sequence       int
-	Progress       int
-	OwnerPlayer    string
-	EntryRoomID    string
-	SpawnRoomID    string
-	Rooms          map[string]model.Room
-	NPCs           map[string]*NPCState
-	ProgressOnKill map[string]int
+	ID                string
+	DungeonID         string
+	Name              string
+	Sequence          int
+	ChainID           string
+	Chapter           int
+	Progress          int
+	OwnerPlayer       string
+	EntryRoomID       string
+	SpawnRoomID       string
+	Rooms             map[string]model.Room
+	NPCs              map[string]*NPCState
+	ProgressOnKill    map[string]int
+	Objectives        []Objective
+	ObjectiveProgress map[string]int
+	Rewards           model.Rewards
 }
 
 type Settlement struct {
-	DungeonID        string
-	DungeonName      string
-	Sequence         int
-	Progress         int
-	RewardExperience int
-	RewardPotential  int
+	DungeonID         string
+	DungeonName       string
+	Sequence          int
+	ChainID           string
+	Chapter           int
+	Progress          int
+	RewardExperience  int
+	RewardPotential   int
+	RewardMoney       int
+	RewardItems       map[string]int
+	RewardFlags       map[string]bool
+	RewardReputations map[string]int
 }
 
 type Manager struct {
@@ -165,13 +216,18 @@ func (m *Manager) LoadTemplatesNoLock() error {
 		}
 
 		tpl := Template{
-			ID:             tplID,
-			Name:           strings.TrimSpace(df.Name),
-			Description:    strings.TrimSpace(df.Description),
-			Order:          df.Order,
-			SpawnRoomID:    strings.TrimSpace(df.SpawnRoomID),
-			Rooms:          map[string]TemplateRoom{},
-			ProgressOnKill: progressOnKill,
+			ID:               tplID,
+			Name:             strings.TrimSpace(df.Name),
+			Description:      strings.TrimSpace(df.Description),
+			Order:            df.Order,
+			ChainID:          strings.TrimSpace(df.ChainID),
+			Chapter:          df.Chapter,
+			SpawnRoomID:      strings.TrimSpace(df.SpawnRoomID),
+			Rooms:            map[string]TemplateRoom{},
+			ProgressOnKill:   progressOnKill,
+			Objectives:       loadObjectives(df.Objectives),
+			Rewards:          normalizeDungeonRewards(df.Rewards),
+			UnlockConditions: loadUnlockConditions(df.UnlockConditions),
 		}
 		if tpl.Name == "" {
 			tpl.Name = tplID
@@ -256,6 +312,102 @@ func (m *Manager) assignTemplateOrderNoLock() {
 	}
 }
 
+func loadObjectives(files []objectiveFile) []Objective {
+	out := make([]Objective, 0, len(files))
+	for _, obj := range files {
+		id := strings.TrimSpace(obj.ID)
+		typ := strings.TrimSpace(obj.Type)
+		targetID := strings.TrimSpace(obj.TargetID)
+		if id == "" || typ == "" {
+			continue
+		}
+		required := obj.Required
+		if required <= 0 {
+			required = 1
+		}
+		out = append(out, Objective{
+			ID:          id,
+			Type:        typ,
+			TargetID:    targetID,
+			Required:    required,
+			Description: strings.TrimSpace(obj.Description),
+		})
+	}
+	return out
+}
+
+func loadUnlockConditions(files []unlockConditionFile) []UnlockCondition {
+	out := make([]UnlockCondition, 0, len(files))
+	for _, cond := range files {
+		typ := strings.TrimSpace(cond.Type)
+		targetID := strings.TrimSpace(cond.TargetID)
+		if typ == "" || targetID == "" {
+			continue
+		}
+		out = append(out, UnlockCondition{
+			Type:     typ,
+			TargetID: targetID,
+			Value:    strings.TrimSpace(cond.Value),
+			Min:      cond.Min,
+		})
+	}
+	return out
+}
+
+func normalizeDungeonRewards(rewards model.Rewards) model.Rewards {
+	if rewards.Items == nil {
+		rewards.Items = map[string]int{}
+	}
+	if rewards.Flags == nil {
+		rewards.Flags = map[string]bool{}
+	}
+	if rewards.Reputations == nil {
+		rewards.Reputations = map[string]int{}
+	}
+	return rewards
+}
+
+func cloneObjectives(in []Objective) []Objective {
+	if len(in) == 0 {
+		return nil
+	}
+	out := make([]Objective, len(in))
+	copy(out, in)
+	return out
+}
+
+func cloneObjectivesForInstance(in []Objective, oldToNew map[string]string) []Objective {
+	out := cloneObjectives(in)
+	for i := range out {
+		if out[i].Type == "enter_room" {
+			if newID := oldToNew[out[i].TargetID]; newID != "" {
+				out[i].TargetID = newID
+			}
+		}
+	}
+	return out
+}
+
+func cloneUnlockConditions(in []UnlockCondition) []UnlockCondition {
+	if len(in) == 0 {
+		return nil
+	}
+	out := make([]UnlockCondition, len(in))
+	copy(out, in)
+	return out
+}
+
+func cloneRewards(in model.Rewards) model.Rewards {
+	return model.Rewards{
+		Experience:  in.Experience,
+		Potential:   in.Potential,
+		Money:       in.Money,
+		Items:       copyIntMap(in.Items),
+		Flags:       copyBoolMap(in.Flags),
+		Reputations: copyIntMap(in.Reputations),
+	}
+}
+
 func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) (*Instance, error) {
 	if _, ok := m.playerInstance[playerID]; ok {
 		return nil, errors.New("already_in_dungeon")
@@ -280,16 +432,21 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 	}
 
 	inst := &Instance{
-		ID:             prefix,
-		DungeonID:      dungeonID,
-		Name:           tpl.Name,
-		Sequence:       tpl.Order,
-		Progress:       0,
-		OwnerPlayer:    playerID,
-		EntryRoomID:    entryRoomID,
-		Rooms:          map[string]model.Room{},
-		NPCs:           map[string]*NPCState{},
-		ProgressOnKill: copyIntMap(tpl.ProgressOnKill),
+		ID:                prefix,
+		DungeonID:         dungeonID,
+		Name:              tpl.Name,
+		Sequence:          tpl.Order,
+		ChainID:           tpl.ChainID,
+		Chapter:           tpl.Chapter,
+		Progress:          0,
+		OwnerPlayer:       playerID,
+		EntryRoomID:       entryRoomID,
+		Rooms:             map[string]model.Room{},
+		NPCs:              map[string]*NPCState{},
+		ProgressOnKill:    copyIntMap(tpl.ProgressOnKill),
+		Objectives:        cloneObjectivesForInstance(tpl.Objectives, oldToNew),
+		ObjectiveProgress: map[string]int{},
+		Rewards:           cloneRewards(tpl.Rewards),
 	}
 
 	for _, oldID := range roomIDs {
@@ -361,6 +518,7 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 	for roomID := range inst.Rooms {
 		m.roomInstance[roomID] = inst.ID
 	}
+	m.ApplyEnterRoomObjectiveNoLock(inst.SpawnRoomID)
 	return inst, nil
 }
 
@@ -456,20 +614,70 @@ func (m *Manager) DefeatNPCNoLock(npcID string) (*Instance, *NPCState, int, bool
 	m.RemoveDungeonNPCFromRoomNoLock(inst, npcID)
 	npc.Alive = false
 
+	oldProgress := inst.Progress
 	progressGain := 0
-	if inst.ProgressOnKill != nil {
+	if len(inst.Objectives) > 0 {
+		for _, obj := range inst.Objectives {
+			if obj.Type != "kill" || obj.TargetID != npc.TemplateID {
+				continue
+			}
+			inst.ObjectiveProgress[obj.ID]++
+		}
+		m.updateObjectiveProgressNoLock(inst)
+		progressGain = inst.Progress - oldProgress
+	} else if inst.ProgressOnKill != nil {
 		progressGain = inst.ProgressOnKill[npc.TemplateID]
-	}
-	if progressGain > 0 {
-		inst.Progress += progressGain
-		if inst.Progress > 100 {
-			inst.Progress = 100
+		if progressGain > 0 {
+			inst.Progress += progressGain
+			if inst.Progress > 100 {
+				inst.Progress = 100
+			}
 		}
 	}
 
 	delete(inst.NPCs, npcID)
 	delete(m.npcs, npcID)
 	return inst, npc, progressGain, true
+}
+
+func (m *Manager) ApplyEnterRoomObjectiveNoLock(roomID string) int {
+	instanceID, ok := m.roomInstance[roomID]
+	if !ok {
+		return 0
+	}
+	inst, ok := m.instances[instanceID]
+	if !ok || inst == nil || len(inst.Objectives) == 0 {
+		return 0
+	}
+	oldProgress := inst.Progress
+	for _, obj := range inst.Objectives {
+		if obj.Type != "enter_room" || obj.TargetID != roomID {
+			continue
+		}
+		inst.ObjectiveProgress[obj.ID] = obj.Required
+	}
+	m.updateObjectiveProgressNoLock(inst)
+	return inst.Progress - oldProgress
+}
+
+func (m *Manager) updateObjectiveProgressNoLock(inst *Instance) {
+	if inst == nil || len(inst.Objectives) == 0 {
+		return
+	}
+	completed := 0
+	for _, obj := range inst.Objectives {
+		required := obj.Required
+		if required <= 0 {
+			required = 1
+		}
+		if inst.ObjectiveProgress[obj.ID] >= required {
+			completed++
+		}
+	}
+	inst.Progress = completed * 100 / len(inst.Objectives)
+	if completed == len(inst.Objectives) {
+		inst.Progress = 100
+	}
 }
 
 func (m *Manager) FirstAggressiveDungeonNPCInRoomNoLock(roomID string) (*NPCState, bool) {
@@ -520,18 +728,40 @@ func (m *Manager) BuildDungeonSettlementNoLock(inst *Instance) Settlement {
 		progress = 100
 	}
 	base := m.DungeonBaseRewardNoLock(inst)
-	reward := base * progress / 100
+	rewardExp := inst.Rewards.Experience
+	if rewardExp <= 0 {
+		rewardExp = base
+	}
+	rewardPotential := inst.Rewards.Potential
+	if rewardPotential <= 0 {
+		rewardPotential = base
+	}
+	rewardMoney := inst.Rewards.Money
+	rewardItems := map[string]int{}
+	rewardFlags := map[string]bool{}
+	rewardReputations := map[string]int{}
+	if progress >= 100 {
+		rewardItems = copyIntMap(inst.Rewards.Items)
+		rewardFlags = copyBoolMap(inst.Rewards.Flags)
+		rewardReputations = copyIntMap(inst.Rewards.Reputations)
+	}
 	sequence := inst.Sequence
 	if sequence <= 0 {
 		sequence = 1
 	}
 	return Settlement{
-		DungeonID:        inst.DungeonID,
-		DungeonName:      inst.Name,
-		Sequence:         sequence,
-		Progress:         progress,
-		RewardExperience: reward,
-		RewardPotential:  reward,
+		DungeonID:         inst.DungeonID,
+		DungeonName:       inst.Name,
+		Sequence:          sequence,
+		ChainID:           inst.ChainID,
+		Chapter:           inst.Chapter,
+		Progress:          progress,
+		RewardExperience:  rewardExp * progress / 100,
+		RewardPotential:   rewardPotential * progress / 100,
+		RewardMoney:       rewardMoney * progress / 100,
+		RewardItems:       rewardItems,
+		RewardFlags:       rewardFlags,
+		RewardReputations: rewardReputations,
 	}
 }
 
@@ -602,6 +832,14 @@ func (m *Manager) DungeonInstanceNoLock(instanceID string) (*Instance, bool) {
 
 func copyIntMap(in map[string]int) map[string]int {
 	out := map[string]int{}
+	for k, v := range in {
+		out[k] = v
+	}
+	return out
+}
+
+func copyBoolMap(in map[string]bool) map[string]bool {
+	out := map[string]bool{}
 	for k, v := range in {
 		out[k] = v
 	}

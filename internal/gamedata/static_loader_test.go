@@ -182,6 +182,15 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 				NPCs  []string          `json:"npcs"`
 			} `json:"rooms"`
 			ProgressOnKill map[string]int `json:"progressOnKill"`
+			Objectives     []struct {
+				ID       string `json:"id"`
+				Type     string `json:"type"`
+				TargetID string `json:"targetId"`
+				Required int    `json:"required"`
+			} `json:"objectives"`
+			Rewards struct {
+				Items map[string]int `json:"items"`
+			} `json:"rewards"`
 		}
 		if err := json.Unmarshal(raw, &dungeon); err != nil {
 			t.Fatalf("parse dungeon %s failed: %v", entry.Name(), err)
@@ -228,6 +237,38 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			}
 			if !dungeonNPCs[npcID] {
 				t.Fatalf("dungeon %s progressOnKill references npc %s not present in dungeon rooms", dungeon.ID, npcID)
+			}
+		}
+		for _, obj := range dungeon.Objectives {
+			if strings.TrimSpace(obj.ID) == "" || strings.TrimSpace(obj.Type) == "" {
+				t.Fatalf("dungeon %s has objective with empty id or type", dungeon.ID)
+			}
+			if obj.Required <= 0 {
+				t.Fatalf("dungeon %s objective %s should have positive required", dungeon.ID, obj.ID)
+			}
+			switch obj.Type {
+			case "kill", "talk":
+				if !dungeonNPCs[obj.TargetID] {
+					t.Fatalf("dungeon %s objective %s references missing npc %s", dungeon.ID, obj.ID, obj.TargetID)
+				}
+			case "enter_room":
+				if _, ok := dungeon.Rooms[obj.TargetID]; !ok {
+					t.Fatalf("dungeon %s objective %s references missing room %s", dungeon.ID, obj.ID, obj.TargetID)
+				}
+			case "collect":
+				if _, ok := data.Items[obj.TargetID]; !ok {
+					t.Fatalf("dungeon %s objective %s references missing item %s", dungeon.ID, obj.ID, obj.TargetID)
+				}
+			default:
+				t.Fatalf("dungeon %s objective %s has unsupported type %s", dungeon.ID, obj.ID, obj.Type)
+			}
+		}
+		for itemID, amount := range dungeon.Rewards.Items {
+			if amount <= 0 {
+				t.Fatalf("dungeon %s reward item %s should be positive", dungeon.ID, itemID)
+			}
+			if _, ok := data.Items[itemID]; !ok {
+				t.Fatalf("dungeon %s reward references missing item %s", dungeon.ID, itemID)
 			}
 		}
 	}

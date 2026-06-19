@@ -690,3 +690,72 @@ func TestDungeonAggressiveNPCStartsCombat(t *testing.T) {
 		t.Fatalf("expected aggressive dungeon npc message, got: %+v", tickRes.Messages)
 	}
 }
+
+func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
+	h := setupRepo(t)
+
+	dungeons := GetDungeonsView(h.repo, h.playerID)
+	for _, dungeon := range dungeons {
+		if dungeon["id"] == "xunqin_ch01_bronze_box" {
+			t.Fatalf("xunqin dungeon should start locked, got %+v", dungeons)
+		}
+	}
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err != nil {
+		t.Fatalf("move to west market failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "south"); err != nil {
+		t.Fatalf("move to inn failed: %v", err)
+	}
+	if _, err := ChooseDialogueWithEffects(h.repo, h.playerID, "storyteller", "ask_bronze_box"); err != nil {
+		t.Fatalf("unlock xunqin dialogue failed: %v", err)
+	}
+
+	dungeons = GetDungeonsView(h.repo, h.playerID)
+	found := false
+	for _, dungeon := range dungeons {
+		if dungeon["id"] == "xunqin_ch01_bronze_box" {
+			found = true
+			if dungeon["chainId"] != "xunqin_legend" || dungeon["chapter"] != 1 {
+				t.Fatalf("expected xunqin chain metadata, got %+v", dungeon)
+			}
+		}
+	}
+	if !found {
+		t.Fatalf("expected xunqin dungeon after dialogue unlock, got %+v", dungeons)
+	}
+
+	enterRes, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch01_bronze_box")
+	if err != nil {
+		t.Fatalf("enter xunqin dungeon failed: %v", err)
+	}
+	if progress, _ := enterRes.Room["dungeon"].(map[string]interface{})["progress"].(int); progress != 0 {
+		t.Fatalf("expected initial xunqin progress 0, got %+v", enterRes.Room["dungeon"])
+	}
+	moveRes, err := MoveWithTransition(h.repo, h.playerID, "east")
+	if err != nil {
+		t.Fatalf("move to bronze chamber failed: %v", err)
+	}
+	dungeonPayload, _ := moveRes.Room["dungeon"].(map[string]interface{})
+	if dungeonPayload["progress"] != 100 {
+		t.Fatalf("expected xunqin progress 100 after entering chamber, got %+v", dungeonPayload)
+	}
+
+	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
+		t.Fatalf("leave xunqin dungeon failed: %v", err)
+	}
+	backpack, err := GetBackpackView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get backpack failed: %v", err)
+	}
+	foundFragment := false
+	for _, item := range backpack.Items {
+		if item["id"] == "bronze_fragment" && item["count"] == 1 {
+			foundFragment = true
+			break
+		}
+	}
+	if !foundFragment {
+		t.Fatalf("expected bronze_fragment reward, got %+v", backpack.Items)
+	}
+}
