@@ -81,6 +81,16 @@ func moveToTeacherFromSpawn(t *testing.T, repo RuntimeRepository, playerID strin
 	}
 }
 
+func moveToAcademyFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
+	t.Helper()
+	path := []string{"north", "east"}
+	for _, dir := range path {
+		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
+			t.Fatalf("move %s failed: %v", dir, err)
+		}
+	}
+}
+
 func runStatusTicks(t *testing.T, repo RuntimeRepository, times int) {
 	t.Helper()
 	for i := 0; i < times; i++ {
@@ -452,6 +462,69 @@ func TestQueryViewWorkflows(t *testing.T) {
 	worlds := GetWorldsView(h.repo)
 	if len(worlds) == 0 {
 		t.Fatalf("world list should not be empty")
+	}
+}
+
+func TestEffectiveAttributesUseSkillAndEquipmentBonuses(t *testing.T) {
+	h := setupRepo(t)
+
+	attrsBefore, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get initial attributes failed: %v", err)
+	}
+	initialMaxMP := attrsBefore["maxMp"].(int)
+
+	moveToAcademyFromSpawn(t, h.repo, h.playerID)
+	if _, err := LearnWithEffects(h.repo, h.playerID, "academy_teacher", "basic_neigong"); err != nil {
+		t.Fatalf("learn basic neigong failed: %v", err)
+	}
+	_ = StopWithEffects(h.repo, h.playerID)
+
+	attrsAfterSkill, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes after skill failed: %v", err)
+	}
+	if attrsAfterSkill["maxMp"].(int) <= initialMaxMP {
+		t.Fatalf("expected basic_neigong to increase maxMp, before=%d after=%d", initialMaxMP, attrsAfterSkill["maxMp"].(int))
+	}
+
+	skills, err := GetSkillsView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get skills failed: %v", err)
+	}
+	hasBonusText := false
+	for _, skill := range skills {
+		if skill["id"] == "basic_neigong" {
+			if text, ok := skill["bonusText"].([]string); ok && len(text) > 0 {
+				hasBonusText = true
+			}
+		}
+	}
+	if !hasBonusText {
+		t.Fatalf("expected basic_neigong bonusText, got %+v", skills)
+	}
+
+	if _, err := EnterWorldWithTransition(h.repo, h.playerID, "luoyang"); err != nil {
+		t.Fatalf("reset to luoyang failed: %v", err)
+	}
+	moveToShopFromSpawn(t, h.repo, h.playerID)
+	attrsBeforeEquip, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes before equip failed: %v", err)
+	}
+	baseAttack := attrsBeforeEquip["attack"].(int)
+	if _, err := BuyWithReceipt(h.repo, h.playerID, "heluo_blacksmith", "iron_sword", 1); err != nil {
+		t.Fatalf("buy iron sword failed: %v", err)
+	}
+	if _, err := EquipWithEffects(h.repo, h.playerID, "iron_sword"); err != nil {
+		t.Fatalf("equip iron sword failed: %v", err)
+	}
+	attrsAfterEquip, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes after equip failed: %v", err)
+	}
+	if attrsAfterEquip["attack"].(int) != baseAttack+6 {
+		t.Fatalf("expected iron sword attack +6, before=%d after=%d", baseAttack, attrsAfterEquip["attack"].(int))
 	}
 }
 

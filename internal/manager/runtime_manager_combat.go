@@ -136,12 +136,12 @@ func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Playe
 		combatType = "SPAR"
 	}
 
-	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), target.Name, model.BuildEffectiveAttributes(target.Attributes), combatType)
+	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), target.Name, model.BuildEffectiveAttributes(target.Attributes), combatType)
 	counterType := combatType
 	if combatType == "KILL" || target.Aggressive {
 		counterType = "KILL"
 	}
-	strikeBToA := r.resolveCombatStrikeEntity(target.Name, model.BuildEffectiveAttributes(target.Attributes), attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), counterType)
+	strikeBToA := r.resolveCombatStrikeEntity(target.Name, model.BuildEffectiveAttributes(target.Attributes), attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), counterType)
 
 	target.Attributes.Resources.HP -= strikeAToB.Damage
 	if target.Attributes.Resources.HP < 0 {
@@ -204,8 +204,8 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 		combatType = "KILL"
 	}
 
-	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), combatType)
-	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), "KILL")
+	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), combatType)
+	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), "KILL")
 
 	dungeonTarget.Attributes.Resources.HP -= strikeAToB.Damage
 	if dungeonTarget.Attributes.Resources.HP < 0 {
@@ -365,7 +365,7 @@ type combatStrikeResult struct {
 }
 
 func (r *RuntimeManager) resolveCombatStrike(attacker, defender *model.Player, combatType string) combatStrikeResult {
-	return r.resolveCombatStrikeEntity(attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), defender.CharacterName, model.BuildEffectiveAttributes(defender.Attributes), combatType)
+	return r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), defender.CharacterName, effectiveAttributesForPlayerNoLock(defender), combatType)
 }
 
 func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attackerAttrs model.EffectiveAttributes, defenderName string, defenderAttrs model.EffectiveAttributes, combatType string) combatStrikeResult {

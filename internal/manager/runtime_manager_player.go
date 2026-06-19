@@ -23,7 +23,7 @@ func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{},
 		return nil, exception.ErrPlayerNotFound
 	}
 	a := model.NormalizeAttributes(p.Attributes)
-	eff := model.BuildEffectiveAttributes(a)
+	eff := effectiveAttributesForPlayerNoLock(p)
 	return map[string]interface{}{
 		"level": a.Level, "realm": a.Realm,
 		"experience": a.Experience, "potential": a.Potential,
@@ -38,8 +38,11 @@ func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{},
 		"guardBreak": eff.GuardBreak, "damageReduction": eff.DamageReduction,
 		"postStrength": a.Growth.PostStrength, "postConstitution": a.Growth.PostConstitution,
 		"postAgility": a.Growth.PostAgility, "postPerception": a.Growth.PostPerception,
-		"postWillpower": a.Growth.PostWillpower,
-		"fame":          eff.Fame, "notoriety": eff.Notoriety, "authority": eff.Authority, "credit": eff.Credit,
+		"postWillpower":     a.Growth.PostWillpower,
+		"totalPostStrength": eff.Strength - a.Base.Strength, "totalPostConstitution": eff.Constitution - a.Base.Constitution,
+		"totalPostAgility": eff.Agility - a.Base.Agility, "totalPostPerception": eff.Perception - a.Base.Perception,
+		"totalPostWillpower": eff.Willpower - a.Base.Willpower,
+		"fame":               eff.Fame, "notoriety": eff.Notoriety, "authority": eff.Authority, "credit": eff.Credit,
 		"base": a.Base, "growth": a.Growth, "resources": a.Resources,
 		"derived": a.Derived, "social": a.Social, "resistances": a.Resistances,
 	}, nil
@@ -96,7 +99,7 @@ func (r *RuntimeManager) GetSkills(playerID string) ([]map[string]interface{}, e
 		out = append(out, map[string]interface{}{
 			"id": id, "name": def.Name, "description": def.Description, "rarity": def.Rarity, "level": level,
 			"type": def.Type, "category": def.Category, "school": def.School,
-			"bonuses": def.Bonuses, "requirements": def.Requirements,
+			"bonuses": def.Bonuses, "bonusText": skillBonusText(def.Bonuses, level), "requirements": def.Requirements,
 		})
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i]["id"].(string) < out[j]["id"].(string) })
@@ -124,7 +127,7 @@ func (r *RuntimeManager) GetEquipment(playerID string) (map[string]interface{}, 
 		if !ok {
 			continue
 		}
-		out[slot] = map[string]interface{}{"id": def.ID, "name": def.Name, "description": def.Description, "rarity": def.Rarity}
+		out[slot] = map[string]interface{}{"id": def.ID, "name": def.Name, "description": def.Description, "rarity": def.Rarity, "effects": def.Effects}
 	}
 	return out, nil
 }

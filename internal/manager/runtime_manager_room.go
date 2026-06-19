@@ -172,7 +172,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 	playersInRoom := make([]map[string]interface{}, 0)
 	for _, p := range players {
 		if p.RoomID == room.ID {
-			eff := model.BuildEffectiveAttributes(model.NormalizeAttributes(p.Attributes))
+			eff := effectiveAttributesForPlayerNoLock(p)
 			playersInRoom = append(playersInRoom, map[string]interface{}{
 				"id":     p.ID,
 				"name":   p.CharacterName,
