@@ -25,13 +25,7 @@
   "rewards": {
     "experience": 120,
     "potential": 80,
-    "money": 20,
-    "items": {
-      "bronze_fragment": 1
-    },
-    "flags": {
-      "xunqin_ch01_completed": true
-    }
+    "money": 20
   },
   "rooms": {
     "bronze_00": {
@@ -48,6 +42,7 @@
       "exits": {
         "west": "bronze_00"
       },
+      "actions": ["search"],
       "npcs": []
     }
   }

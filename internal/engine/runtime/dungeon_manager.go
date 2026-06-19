@@ -22,6 +22,7 @@ type TemplateRoom struct {
 	Description string
 	Exits       map[string]string
 	NPCs        []string
+	Actions     []string
 }
 
 type Template struct {
@@ -74,6 +75,7 @@ type templateRoomFile struct {
 	Description string            `json:"description"`
 	Exits       map[string]string `json:"exits"`
 	NPCs        []string          `json:"npcs"`
+	Actions     []string          `json:"actions"`
 }
 
 type objectiveFile struct {
@@ -265,6 +267,7 @@ func (m *Manager) LoadTemplatesNoLock() error {
 				Description: rf.Description,
 				Exits:       exits,
 				NPCs:        npcs,
+				Actions:     append([]string{}, rf.Actions...),
 			}
 		}
 
@@ -471,6 +474,7 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 			WorldName:   tpl.Name,
 			Name:        tr.Name,
 			Description: tr.Description,
+			Actions:     append([]string{}, tr.Actions...),
 			Exits:       exits,
 			NPCIDs:      []string{},
 		}

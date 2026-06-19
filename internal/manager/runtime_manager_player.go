@@ -4,6 +4,7 @@ import (
 	"errors"
 	"sort"
 	"strconv"
+	"strings"
 
 	"mudgame/server/internal/exception"
 	"mudgame/server/internal/model"
@@ -719,6 +720,12 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 		result["potential"] = p.Attributes.Potential
 	case "listen_rumor":
 		result["message"] = roomRumor(room.ID)
+	case "search":
+		message, err := r.searchRoomNoLock(p, room)
+		if err != nil {
+			return nil, err
+		}
+		result["message"] = message
 	default:
 		return nil, errors.New("action_not_supported")
 	}
@@ -726,6 +733,27 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 		return nil, err
 	}
 	return result, nil
+}
+
+func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (string, error) {
+	if p == nil {
+		return "", exception.ErrPlayerNotFound
+	}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
+	}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	if room.WorldID == "dungeon_xunqin_ch01_bronze_box" && strings.HasSuffix(room.ID, "_bronze_01") {
+		if p.Flags["xunqin_ch01_completed"] {
+			return "你又仔细搜了一遍铜匣暗室，只找到些无用铜锈。", nil
+		}
+		p.Backpack["bronze_fragment"] += 1
+		p.Flags["xunqin_ch01_completed"] = true
+		return "你在铜匣暗格中摸到一枚古铜残片，残片入手微凉，纹路似在烛光下缓缓流动。", nil
+	}
+	return "你仔细搜索四周，没有发现值得带走的东西。", nil
 }
 
 func roomRumor(roomID string) string {

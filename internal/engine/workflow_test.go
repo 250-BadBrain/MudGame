@@ -814,10 +814,26 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	if dungeonPayload["progress"] != 100 {
 		t.Fatalf("expected xunqin progress 100 after entering chamber, got %+v", dungeonPayload)
 	}
-
-	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
-		t.Fatalf("leave xunqin dungeon failed: %v", err)
+	actions, _ := moveRes.Room["actions"].([]string)
+	hasSearch := false
+	for _, action := range actions {
+		if action == "search" {
+			hasSearch = true
+			break
+		}
 	}
+	if !hasSearch {
+		t.Fatalf("expected search action in bronze chamber, got %+v", moveRes.Room["actions"])
+	}
+
+	searchRes, err := DoRoomActionWithEffects(h.repo, h.playerID, "search")
+	if err != nil {
+		t.Fatalf("search bronze chamber failed: %v", err)
+	}
+	if searchRes.Message == "" {
+		t.Fatalf("search should return message")
+	}
+
 	backpack, err := GetBackpackView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get backpack failed: %v", err)
@@ -831,5 +847,9 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	}
 	if !foundFragment {
 		t.Fatalf("expected bronze_fragment reward, got %+v", backpack.Items)
+	}
+
+	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
+		t.Fatalf("leave xunqin dungeon failed: %v", err)
 	}
 }
