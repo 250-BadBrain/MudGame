@@ -276,6 +276,7 @@ const formatPrice = (value) => {
 }
 
 const getSkillBonusText = (skill) => {
+  if (Array.isArray(skill?.bonusText)) return skill.bonusText
   if (!skill || !skill.bonuses) return []
   const bonusMap = { 'strength': '臂力', 'constitution': '根骨', 'agility': '身法', 'perception': '悟性', 'willpower': '心志', 'charm': '魅力', 'luck': '福缘', 'attack': '攻击', 'defense': '防御', 'maxHp': '气血上限', 'maxMp': '内力上限', 'spirit': '心神', 'maxSpirit': '心神上限', 'hitRate': '命中', 'dodge': '躲闪', 'parry': '招架', 'critRate': '暴击率' }
   return Object.entries(skill.bonuses).map(([key, val]) => (bonusMap[key] || key) + ' +' + val)
