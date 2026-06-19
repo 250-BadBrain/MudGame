@@ -42,6 +42,7 @@
             @viewEntity="viewEntity"
             @sparEntity="sparEntity"
             @killEntity="killEntity"
+            @learnEntity="openLearn"
             @tradeEntity="openShop" />
         </div>
         
@@ -1133,7 +1134,7 @@ const handleMessage = (msg) => {
   } else if (msg.type === 'event' && msg.subtype === 'player_status_changed') {
     const pid = msg.results?.playerId;
     const pname = msg.results?.playerName || '未知玩家';
-    const status = msg.results?.status; // 'online' | 'offline'
+    const status = msg.results?.online ?? msg.results?.status;
     const message = msg.results?.message;
     handlePlayerStatusChanged(pid, pname, status, message);
   } else if (msg.type === 'event' && msg.subtype === 'room_message') {
@@ -1212,14 +1213,15 @@ const handleMessage = (msg) => {
 const handlePlayerStatusChanged = (playerId, playerName, status, message) => {
   if (!room.value || !room.value.playersInRoom) return;
   const p = room.value.playersInRoom.find(x => x.id === playerId);
+  const online = status === true || status === 'online' || status === '在线';
     if (p) {
             if (playerId === currentPlayer.value.id) {
                     p.online = true;
             } else {
-                    p.online = (status === 'online');
+                    p.online = online;
             }
     }
-  if (status === 'online') {
+  if (online) {
     addLog(message || `${playerName}恢复连接`);
   } else {
         if (playerId === currentPlayer.value.id) return;

@@ -15,6 +15,7 @@
           <button @click.stop="$emit('viewEntity', entity)" class="action-btn view-btn">查看</button>
           <button @click.stop="$emit('sparEntity', entity)" class="action-btn spar-btn">比试</button>
           <button @click.stop="$emit('killEntity', entity)" class="action-btn kill-btn">击杀</button>
+          <button v-if="canTeach(entity)" @click.stop="$emit('learnEntity', entity)" class="action-btn learn-btn">请教</button>
           <button v-if="entity.isShop" @click.stop="$emit('tradeEntity', entity)" class="action-btn trade-btn">交易</button>
         </div>
       </div>
@@ -37,12 +38,16 @@ const props = defineProps({
   selectedEntity: Object
 })
 
-defineEmits(['selectEntity', 'viewEntity', 'sparEntity', 'killEntity', 'tradeEntity'])
+defineEmits(['selectEntity', 'viewEntity', 'sparEntity', 'killEntity', 'learnEntity', 'tradeEntity'])
 
 const visibleEntities = computed(() => {
   if (!props.entities) return []
   return props.entities.filter(e => e.isNpc || e.isItem || e.isPlayer)
 })
+
+const canTeach = (entity) => {
+  return !!(entity?.capabilities?.includes('teach') || Object.keys(entity?.skills || {}).length > 0)
+}
 </script>
 
 <style scoped>
@@ -94,6 +99,9 @@ const visibleEntities = computed(() => {
 
 .kill-btn { border-color: #e74c3c; color: #e74c3c; }
 .kill-btn:hover { background: #e74c3c; color: #fff; }
+
+.learn-btn { border-color: #9b59b6; color: #c39bd3; }
+.learn-btn:hover { background: #9b59b6; color: #fff; }
 
 .trade-btn { border-color: #2ecc71; color: #2ecc71; }
 .trade-btn:hover { background: #2ecc71; color: #000; }
