@@ -189,6 +189,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		npcTitle := ""
 		npcDescription := ""
 		npcIsShop := false
+		npcAggressive := false
 		skills := map[string]int{}
 		npcAttributes := map[string]interface{}{}
 		if npc, ok := fileNpcs[npcID]; ok {
@@ -197,6 +198,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			npcTitle = npc.Title
 			npcDescription = npc.Description
 			npcIsShop = npc.IsShop
+			npcAggressive = npc.Aggressive
 			for skillID, level := range npc.Skills {
 				skills[skillID] = level
 			}
@@ -212,6 +214,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			npcTitle = dnpc.Title
 			npcDescription = dnpc.Description
 			npcIsShop = dnpc.IsShop
+			npcAggressive = dnpc.Aggressive
 			for skillID, level := range dnpc.Skills {
 				skills[skillID] = level
 			}
@@ -245,6 +248,8 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			"title":        npcTitle,
 			"description":  npcDescription,
 			"attributes":   npcAttributes,
+			"aggressive":   npcAggressive,
+			"hostile":      npcAggressive,
 			"isShop":       npcIsShop,
 			"shopable":     shopable,
 			"teachable":    teachable,

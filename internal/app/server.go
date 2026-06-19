@@ -246,6 +246,7 @@ func (s *Server) emitPlayerStatusChanged(playerID, message, excludePlayerID stri
 		"playerId":   status["playerId"],
 		"playerName": status["playerName"],
 		"status":     status["status"],
+		"online":     status["online"],
 		"message":    message,
 	}, nil)
 	s.broadcastToRoom(roomID, payload, excludePlayerID)
