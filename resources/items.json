@@ -209,5 +209,19 @@
     "rarity": 3,
     "unit": "枚",
     "source": "秘境异闻"
+  },
+  "zongheng_fragment": {
+    "name": "纵横残简",
+    "description": "半页残破竹简，字迹像从战国旧梦中拓下，隐约提到一名不属于此世的旅人。",
+    "type": "quest",
+    "subtype": "xunqin_clue",
+    "stackable": true,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 3,
+    "unit": "页",
+    "limit": 1,
+    "source": "寻秦异闻"
   }
 }

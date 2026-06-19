@@ -756,6 +756,14 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 		p.Flags["xunqin_ch01_completed"] = true
 		return "你在铜匣暗格中摸到一枚古铜残片，残片入手微凉，纹路似在烛光下缓缓流动。", nil
 	}
+	if room.WorldID == "dungeon_xunqin_ch02_zongheng_shadow" && strings.HasSuffix(room.ID, "_shadow_02") {
+		if p.Flags["xunqin_ch02_searched"] {
+			return "你又翻看旧营残帐，案上只余几片被风吹散的竹屑。", nil
+		}
+		p.Backpack["zongheng_fragment"] += 1
+		p.Flags["xunqin_ch02_searched"] = true
+		return "你从案上断简中拣起半页纵横残简，残简末尾只剩两个模糊字迹：少龙。", nil
+	}
 	return "你仔细搜索四周，没有发现值得带走的东西。", nil
 }
 
