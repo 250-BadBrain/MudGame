@@ -213,6 +213,18 @@
         </div>
         <p v-else class="empty-msg">暂无任务。</p>
       </div>
+      <div v-if="currentPanel === 'factions'" class="quest-panel-container">
+        <div v-if="factionsList && factionsList.length > 0" class="quest-list">
+          <div v-for="faction in factionsList" :key="faction.id" class="quest-entry">
+            <div class="quest-title-row">
+              <span class="quest-name">{{ faction.name }}</span>
+              <span class="quest-status">声望 {{ faction.reputation || 0 }}</span>
+            </div>
+            <div class="quest-desc">{{ faction.description }}</div>
+          </div>
+        </div>
+        <p v-else class="empty-msg">暂无势力记录。</p>
+      </div>
     </div>
   </div>
 </template>
@@ -251,7 +263,8 @@ const props = defineProps({
   isInDungeon: Boolean,
   dungeonRoomId: String,
   dungeonProgress: { type: Number, default: 0 },
-  questsList: { type: Array, default: () => [] }
+  questsList: { type: Array, default: () => [] },
+  factionsList: { type: Array, default: () => [] }
 })
 
 defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'sellItem',

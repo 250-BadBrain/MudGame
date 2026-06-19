@@ -192,6 +192,7 @@
               :dungeonRoomId="room?.dungeon?.id"
               :dungeonProgress="room?.dungeon?.progress"
               :questsList="questsList"
+              :factionsList="factionsList"
               @close="closeInfoPanel"
               @selectBackpackItem="selectBackpackItem"
               @viewItem="viewBackpackItem"
@@ -242,6 +243,7 @@
             <button @click="toggleMaps" class="tool-btn" title="地图">🗺️</button>
             <button @click="toggleDungeons" class="tool-btn" title="副本">🏯</button>
             <button @click="toggleQuests" class="tool-btn" title="任务">令</button>
+            <button @click="toggleFactions" class="tool-btn" title="势力">势</button>
         </div>
       </div>
     </div>
@@ -299,6 +301,7 @@ const statusAttributes = ref(null)
 const worldsList = ref([])
 const dungeonsList = ref([])
 const questsList = ref([])
+const factionsList = ref([])
 const selectedEntityKey = ref(null)
 const selectedWorldId = ref(null)
 const selectedDungeonId = ref(null)
@@ -658,6 +661,8 @@ const refreshOpenPanels = () => {
         sendGameCommand("command", "get_dungeons", characterId.value, {})
     } else if (currentPanel.value === 'quests') {
         sendGameCommand("command", "get_quests", characterId.value, {})
+    } else if (currentPanel.value === 'factions') {
+        sendGameCommand("command", "get_factions", characterId.value, {})
     }
 }
 
@@ -1143,6 +1148,9 @@ const handleMessage = (msg) => {
           (msg.logs || []).forEach(l => addLog(l));
           sendGameCommand("command", "get_quests", characterId.value, {});
           sendGameCommand("command", "get_attributes", characterId.value, {});
+          if (showInfoPanel.value && currentPanel.value === 'factions') {
+              sendGameCommand("command", "get_factions", characterId.value, {});
+          }
           if (showInfoPanel.value && currentPanel.value === 'backpack') {
               sendGameCommand("command", "get_backpack", characterId.value, {});
           }
@@ -1159,6 +1167,17 @@ const handleMessage = (msg) => {
           }
       } else {
           addLog(`ERROR: 获取任务失败: ${msg.results.error}`);
+      }
+  } else if (msg.type === 'command' && msg.subtype === 'get_factions') {
+      if (msg.flag) {
+          factionsList.value = msg.results.factions || [];
+          if (!showInfoPanel.value || currentPanel.value !== 'factions') {
+              showInfoPanel.value = true;
+              currentPanel.value = 'factions';
+              panelTitle.value = '势力';
+          }
+      } else {
+          addLog(`ERROR: 获取势力失败: ${msg.results.error}`);
       }
   } else if (msg.type === 'chat') {
       // 聊天消息处理（公开聊天）
@@ -1384,6 +1403,14 @@ const toggleQuests = () => {
         closeInfoPanel();
     } else {
         sendGameCommand("command", "get_quests", characterId.value, {});
+    }
+}
+
+const toggleFactions = () => {
+    if (showInfoPanel.value && currentPanel.value === 'factions') {
+        closeInfoPanel();
+    } else {
+        sendGameCommand("command", "get_factions", characterId.value, {});
     }
 }
 
@@ -2745,17 +2772,31 @@ const formatMoney = (money) => {
 .chat-history { -ms-overflow-style: none; scrollbar-width: none; }    
 
 .chat-message {
+    display: flex;
+    align-items: flex-start;
+    min-width: 0;
     font-size: 0.9em;
+    line-height: 1.4;
 }
 
 .chat-sender {
+    flex: 0 0 auto;
+    max-width: 42%;
     color: var(--color-accent-blue);
     font-weight: bold;
     margin-right: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .chat-text {
+    flex: 1 1 auto;
+    min-width: 0;
     color: var(--color-text-light);
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .player-offline {
