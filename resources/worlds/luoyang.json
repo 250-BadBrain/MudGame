@@ -1,382 +1,185 @@
 {
-    "id": "luoyang",
-    "name": "洛阳城",
-    "description": "洛阳城，古都繁华，商贾云集。这里是中原的交通枢纽，也是江湖消息最灵通的地方。城内店铺林立，车水马龙，是初入江湖者的必经之地。",
-    "rooms": {
-        "ly_00": {
-            "name": "城中心",
-            "description": "这里是洛阳城的中心，繁华热闹，商贾云集。",
-            "exits": {
-                "north": "ly_01",
-                "east": "ly_02",
-                "south": "ly_03",
-                "west": "ly_04"
-            }
-        },
-        "ly_01": {
-            "name":"北街",
-            "description":"这里是洛阳城的北街，通向皇宫。",
-            "exits": {
-                "north": "ly_05",
-                "east": "ly_21",
-                "south": "ly_00",
-                "west": "ly_22"
-            }
-        },
-        "ly_02": {
-            "name":"东街",
-            "description":"这里是洛阳城的东街，商铺林立。",
-            "exits": {
-                "north": "ly_27",
-                "east": "ly_06",
-                "south": "ly_28",
-                "west": "ly_00"
-            }
-        },
-        "ly_03": {
-            "name":"南街",
-            "description":"这里是洛阳城的南街，通向居民区。",
-            "exits": {
-                "north": "ly_00",
-                "east": "ly_33",
-                "south": "ly_07",
-                "west": "ly_34"
-            }
-        },
-        "ly_04": {
-            "name":"西街",
-            "description":"这里是洛阳城的西街，通向城门。",
-            "exits": {
-                "north": "ly_39",
-                "east": "ly_00",
-                "south": "ly_40",
-                "west": "ly_08"
-            }
-        },
-        "ly_05": {
-            "name":"北街",
-            "description":"这里是洛阳城的北街北段，通往皇城。",
-            "exits": {
-                "north": "ly_09",
-                "east": "ly_23",
-                "south": "ly_01",
-                "west": "ly_24"
-            }
-        },
-        "ly_06": {
-            "name":"东街",
-            "description":"这里是洛阳城的东街东段，商业更加发达。",
-            "exits": {
-                "north": "ly_29",
-                "east": "ly_10",
-                "south": "ly_30",
-                "west": "ly_02"
-            }
-        },
-        "ly_07": {
-            "name":"南街",
-            "description":"这里是洛阳城的南街南段，手工业集中。",
-            "exits": {
-                "north": "ly_03",
-                "east": "ly_35",
-                "south": "ly_11",
-                "west": "ly_36"
-            }
-        },
-        "ly_08": {
-            "name":"西街",
-            "description":"这里是洛阳城的西街西段，驿站众多。",
-            "exits": {
-                "north": "ly_41",
-                "east": "ly_04",
-                "south": "ly_42",
-                "west": "ly_12"
-            }
-        },
-        "ly_09": {
-            "name":"北街",
-            "description":"这里是洛阳城的北街最北段，贵族府邸。",
-            "exits": {
-                "north": "ly_13",
-                "east": "ly_25",
-                "south": "ly_05",
-                "west": "ly_26"
-            }
-        },
-        "ly_10": {
-            "name":"东街",
-            "description":"这里是洛阳城的东街最东段，通向城门。",
-            "exits": {
-                "north": "ly_31",
-                "east": "ly_14",
-                "south": "ly_32",
-                "west": "ly_06"
-            }
-        },
-        "ly_11": {
-            "name":"南街",
-            "description":"这里是洛阳城的南街最南段，手工坊集中。",
-            "exits": {
-                "north": "ly_07",
-                "east": "ly_37",
-                "south": "ly_15",
-                "west": "ly_38"
-            }
-        },
-        "ly_12": {
-            "name":"西街",
-            "description":"这里是洛阳城的西街最西段，商队驻地。",
-            "exits": {
-                "north": "ly_43",
-                "east": "ly_08",
-                "south": "ly_44",
-                "west": "ly_16"
-            }
-        },
-        "ly_13": {
-            "name": "北城门",
-            "description": "这是洛阳城的北城门，通往北方。",
-            "npcs": ["guard_luoyang"],
-            "exits": {
-                "north": "ly_17",
-                "south": "ly_09"
-            }
-        },
-        "ly_14": {
-            "name": "东城门",
-            "description": "这是洛阳城的东城门，通往东方。",
-            "npcs": ["guard_luoyang"],
-            "exits": {
-                "east": "ly_18",
-                "west": "ly_10"
-            }
-        },
-        "ly_15": {
-            "name": "南城门",
-            "description": "这是洛阳城的南城门，通往南方。",
-            "npcs": ["guard_luoyang"],
-            "exits": {
-                "north": "ly_11",
-                "south": "ly_19"
-            }
-        },
-        "ly_16": {
-            "name": "西城门",
-            "description": "这是洛阳城的西城门，通往西方。",
-            "npcs": ["guard_luoyang"],
-            "exits": {
-                "east": "ly_12",
-                "west": "ly_20"
-            }
-        },
-        "ly_17": {
-            "name":"北门外",
-            "description":"这是北城门外的旷野，通向远方。",
-            "exits": {
-                "south": "ly_13"
-            }
-        },
-        "ly_18": {
-            "name":"东门外",
-            "description":"这是东城门外的驿道，通向远方。",
-            "exits": {
-                "west": "ly_14",
-                "south": "ly_mine"
-            }
-        },
-        "ly_mine": {
-            "name": "矿山",
-            "description": "一座废弃的矿山，据说有不少人在这里发了财",
-            "exits": {
-                "north": "ly_18"
-            }
-        },
-        "ly_19": {
-            "name":"南门外",
-            "description":"这是南城门外的驿道，通向远方。",
-            "exits": {
-                "north": "ly_15"
-            }
-        },
-        "ly_20": {
-            "name":"西门外",
-            "description":"这是西城门外的驿道，通向远方。",
-            "exits": {
-                "east": "ly_16"
-            }
-        },
-        "ly_21": {
-            "name":"酒楼",
-            "description":"这是一间雕梁画栋的酒楼。二楼的窗户敞开，酒香和笑声飘落下来。楼下大厅中食客众多，伙计们在忙碌地穿梭。偶尔能听到楼上传来的弦乐声。",
-            "exits": {
-                "west": "ly_01"
-            }
-        },
-        "ly_22": {
-            "name":"医馆",
-            "description":"这是一间中医馆。门口挂着一块古朴的木牌，上面写着'悬壶济世'。馆内弥漫着中药的气味。柜台后有一位须发皆白的老医生在配药，墙上贴满了各类药方。",
-            "exits": {
-                "east": "ly_01"
-            }
-        },
-        "ly_23": {
-            "name":"武馆",
-            "description":"这是一间武馆。高大的木制建筑内传来刀剑相击的声音和武师的叱喝。院中可以看到学徒们在认真训练。墙上挂着各类兵器，散发着寒光。",
-            "exits": {
-                "west": "ly_05"
-            }
-        },
-        "ly_24": {
-            "name":"道观",
-            "description":"这是一座小型道观。红漆的木门紧闭，门上贴着符咒。院内香烟缭绕，可隐约看到一座小亭。不时有身穿道袍的人从中走出。",
-            "exits": {
-                "east": "ly_05"
-            }
-        },
-        "ly_25": {
-            "name":"兵营",
-            "description":"这是皇城的禁卫兵营。高大的围墙内可以听到整齐的步操声。守卫们全副武装地站在门口。普通人根本靠不近这里。",
-            "exits": {
-                "west": "ly_09"
-            }
-        },
-        "ly_26": {
-            "name":"官府",
-            "description":"这是一座官府建筑。威严的大堂里传来公差的喝声。堂前的旗杆上飘扬着官府的旗帜。只有公务才能进入此地。",
-            "exits": {
-                "east": "ly_09"
-            }
-        },
-        "ly_27": {
-            "name":"布庄",
-            "description":"这是一间大布庄。店铺里堆满了各种颜色和质地的布匹。商人们正在热情地向客人介绍最新的丝绸和棉布。柜台上摆着精致的布料样品。",
-            "exits": {
-                "south": "ly_02"
-            }
-        },
-        "ly_28": {
-            "name":"酒肆",
-            "description":"这是一间简陋但热闹的酒肆。里面烟雾弥漫，食客们围坐在小桌前。角落里有一位说书人正在绘声绘色地讲述江湖故事。伙计们端着酒碗和菜肴来回奔忙。",
-            "exits": {
-                "north": "ly_02"
-            }
-        },
-        "ly_29": {
-            "name":"古董铺",
-            "description":"这是一间幽静的古董铺。店内昏暗而沉静，琳琅满目的古董和字画摆满了各个角落。掌柜是一位年长的文人，坐在柜台后悠闲地品茶。",
-            "exits": {
-                "south": "ly_06"
-            }
-        },
-        "ly_30": {
-            "name":"书画院",
-            "description":"这是一间高雅的书画院。墙上挂满了名家字画。几位文人正在院中讨论笔法和构图。笔墨纸砚的香气充满了整个房间。",
-            "exits": {
-                "north": "ly_06"
-            }
-        },
-        "ly_31": {
-            "name":"旅舍",
-            "description":"这是一间规模不小的旅舍。大厅里能看到来自四方的客旅。掌柜正在记录客人的房间号。楼上传来各种陌生的口音和脚步声。",
-            "exits": {
-                "south": "ly_10"
-            }
-        },
-        "ly_32": {
-            "name":"马市",
-            "description":"这是一处露天的马匹交易场所。栏杆里关着各种马匹。牲口贩子们正在评估马的品质。时常能听到马儿的嘶鸣和讨价还价的声音。",
-            "exits": {
-                "north": "ly_10"
-            }
-        },
-        "ly_33": {
-            "name":"面馆",
-            "description":"这是一间热气腾腾的面馆。柜台上摆满了各种面食。老板娘正在麻利地制作面条。食客们坐在小桌前享受着简朴而美味的饭菜。",
-            "exits": {
-                "west": "ly_03"
-            }
-        },
-        "ly_34": {
-            "name": "武馆",
-
-            "description": "这是一间武馆。高大的木制建筑内传来刀剑相击的声音和武师的叱喝。院中可以看到学徒们在认真训练。墙上挂着各类兵器，散发着寒光。",
-            "npcs": ["zhao_lao_jiaoxi"],
-
-            "exits": {
-                "east": "ly_03"
-            }
-        },
-        "ly_35": {
-            "name":"陶瓷坊",
-            "description":"这是一间陶瓷作坊。窑火熊熊燃烧，热浪扑面而来。工人们正在制作和烧制陶器。各种颜色和形状的陶瓷制品堆满了工坊。",
-            "exits": {
-                "west": "ly_07"
-            }
-        },
-        "ly_36": {
-            "name":"染坊",
-            "description":"这是一间布料染坊。各种颜色的布料在架子上晾晒。空气中弥漫着染料的刺激气味。工人们正在大缸里浸染布料。",
-            "exits": {
-                "east": "ly_07"
-            }
-        },
-        "ly_37": {
-            "name":"客栈",
-            "description":"这是一间中等规模的客栈。大厅里有火炉和桌椅。掌柜坐在柜台后打盹。楼上的房间门牌写着各种房号。",
-            "exits": {
-                "west": "ly_11"
-            }
-        },
-        "ly_38": {
-            "name":"驿站",
-            "description":"这是一处官方的驿站。马槽里拴着几匹驿马。驿丞正在整理文件和路牒。这里是往来信使和官方驾驶的中转站。",
-            "exits": {
-                "east": "ly_11"
-            }
-        },
-        "ly_39": {
-            "name":"镖局",
-            "description":"这是一间镖局。大门前矗立着一尊威武的石狮。里面能听到镖师们在训练的声音。墙上挂着各种兵器。这是江湖人士经常出入的地方。",
-            "exits": {
-                "south": "ly_04"
-            }
-        },
-        "ly_40": {
-            "name": "杂货铺",
-            "description": "这是一间繁杂的杂货铺。从米、盐、油、酱到锅、碗、瓢、盆，什么都能买到。店里堆满了各式商品。掌柜娘正在整理货架。",
-            "npcs": ["shopkeeper_jia"],
-            "exits": {
-                "north": "ly_04"
-            }
-        },
-        "ly_41": {
-            "name":"货栈",
-            "description":"这是一间大型货栈。高大的木制结构内堆满了待运的货物。搬运工们正在忙碌地装卸货物。叮叮当当的声音和搬运工的吆喝声充满了整个货栈。",
-            "exits": {
-                "south": "ly_08"
-            }
-        },
-        "ly_42": {
-            "name": "铁匠铺",
-            "description": "这是一间铁匠铺，炉火熊熊，叮当之声不绝于耳。墙上挂满了各式兵器。",
-            "npcs": ["blacksmith_zhong"],
-            "exits": {
-                "north": "ly_08"
-            }
-        },
-        "ly_43": {
-            "name":"驿馆",
-            "description":"这是一间大型驿馆。招待来自异域的商人和使者。墙上贴着各种语言的指示牌。能听到多种陌生的口音。",
-            "exits": {
-                "south": "ly_12"
-            }
-        },
-        "ly_44": {
-            "name":"骆驼行",
-            "description":"这是一处骆驼队的集散地。院落里拴着十几只骆驼。驼队首领正在安排骆驼的装卸。骆驼的叫声和铃声混合在一起。这是西域商队进出的必经之地。",
-            "exits": {
-                "north": "ly_12"
-            }
-        }
+  "id": "luoyang",
+  "name": "洛阳",
+  "description": "洛阳雄踞中原，洛水穿城而过，东市商贾云集，西市暗流潜伏。隋唐乱世将起，朝堂、门阀、江湖与异闻都在此交汇。",
+  "order": 1,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "ly_00",
+  "rooms": {
+    "ly_00": {
+      "name": "天津桥",
+      "description": "天津桥横跨洛水，桥上行人如织。北望皇城，南接坊市，酒楼的喧声与马蹄声混在一起，像一张缓缓收紧的江湖网。",
+      "area": "洛水",
+      "tags": ["center", "safe", "rumor"],
+      "safeZone": true,
+      "function": "city_center",
+      "actions": ["listen_rumor"],
+      "npcs": ["luoyang_guard"],
+      "exits": {
+        "north": "ly_north_office",
+        "east": "ly_east_market",
+        "south": "ly_south_gate",
+        "west": "ly_west_market"
+      }
+    },
+    "ly_north_office": {
+      "name": "北城官署",
+      "description": "官署门前兵甲森严，告示墙上贴满通缉、征发和军报。来往小吏脚步匆匆，没人敢在这里高声喧哗。",
+      "area": "北城",
+      "tags": ["government", "safe", "quest"],
+      "safeZone": true,
+      "function": "government",
+      "npcs": ["luoyang_guard", "office_clerk"],
+      "exits": {
+        "north": "ly_military_office",
+        "south": "ly_00",
+        "east": "ly_academy",
+        "west": "ly_old_alley"
+      }
+    },
+    "ly_military_office": {
+      "name": "洛阳军府",
+      "description": "军府校场上枪戟如林，军士操练声震得瓦檐微颤。这里收录军功，也发布剿匪、护粮和城防差遣。",
+      "area": "北城",
+      "tags": ["military", "training", "quest"],
+      "safeZone": true,
+      "function": "military",
+      "npcs": ["military_instructor"],
+      "exits": {
+        "south": "ly_north_office"
+      }
+    },
+    "ly_academy": {
+      "name": "河洛书院",
+      "description": "书院深处传来朗朗读书声，墙上挂着河洛形势图和残旧兵书。几名士子正围着一卷古简低声争论。",
+      "area": "北城",
+      "tags": ["academy", "training", "safe"],
+      "safeZone": true,
+      "function": "academy",
+      "npcs": ["academy_teacher"],
+      "exits": {
+        "west": "ly_north_office"
+      }
+    },
+    "ly_old_alley": {
+      "name": "旧坊暗巷",
+      "description": "旧坊墙影斑驳，窄巷里常有陌生人擦肩而过。这里离官署不远，却像被阳光遗忘的另一座洛阳。",
+      "area": "旧坊",
+      "tags": ["spy", "black", "unsafe"],
+      "safeZone": false,
+      "function": "spy_hub",
+      "npcs": ["qingyi_spy"],
+      "exits": {
+        "east": "ly_north_office",
+        "south": "ly_west_market"
+      }
+    },
+    "ly_east_market": {
+      "name": "东市",
+      "description": "东市铺面鳞次栉比，绸缎、茶酒、铁器和药材沿街铺开。商会伙计高声招呼客人，铜钱声此起彼伏。",
+      "area": "东市",
+      "tags": ["shop", "trade", "safe"],
+      "safeZone": true,
+      "function": "shop_hub",
+      "npcs": ["east_market_keeper", "heluo_blacksmith"],
+      "exits": {
+        "west": "ly_00",
+        "east": "ly_merchant_guild",
+        "south": "ly_weapon_school"
+      }
+    },
+    "ly_merchant_guild": {
+      "name": "河洛商会",
+      "description": "商会厅内堆着账册、货样和各地路引。墙上一幅商路图标着潼关、江淮、巴蜀与塞外。",
+      "area": "东市",
+      "tags": ["merchant", "quest", "safe"],
+      "safeZone": true,
+      "function": "merchant_guild",
+      "npcs": ["guild_steward"],
+      "exits": {
+        "west": "ly_east_market"
+      }
+    },
+    "ly_weapon_school": {
+      "name": "河洛武馆",
+      "description": "武馆院中立着木人和兵器架，刀剑棍棒俱全。教头坐在檐下，目光扫过每个进门的人。",
+      "area": "东市",
+      "tags": ["training", "safe"],
+      "safeZone": true,
+      "function": "training",
+      "npcs": ["weapon_school_master"],
+      "exits": {
+        "north": "ly_east_market"
+      }
+    },
+    "ly_west_market": {
+      "name": "西市",
+      "description": "西市比东市更杂乱，胡商、游侠、掮客和赌徒混在一处。明面上卖的是旧货，暗地里流通的却是消息。",
+      "area": "西市",
+      "tags": ["black_market", "rumor", "unsafe"],
+      "safeZone": false,
+      "function": "black_market",
+      "actions": ["listen_rumor"],
+      "npcs": ["black_market_broker"],
+      "exits": {
+        "east": "ly_00",
+        "north": "ly_old_alley",
+        "south": "ly_inn"
+      }
+    },
+    "ly_inn": {
+      "name": "洛水酒楼",
+      "description": "酒楼临水而建，说书人一拍醒木，满堂立刻安静了几分。有人谈扬州双龙，有人谈战国铜匣，也有人只低头喝酒。",
+      "area": "洛水",
+      "tags": ["inn", "rumor", "dungeon_entry", "safe"],
+      "safeZone": true,
+      "function": "rumor_hub",
+      "actions": ["listen_rumor"],
+      "npcs": ["storyteller"],
+      "exits": {
+        "north": "ly_west_market",
+        "east": "ly_south_gate"
+      }
+    },
+    "ly_south_gate": {
+      "name": "南门",
+      "description": "南门外车马不断，镖旗、商队和流民挤在城门前。再往南便是城郊，太平与乱世只隔这一道门。",
+      "area": "南门",
+      "tags": ["gate", "escort", "safe"],
+      "safeZone": true,
+      "function": "travel",
+      "npcs": ["escort_bureau_chief", "luoyang_guard"],
+      "exits": {
+        "north": "ly_00",
+        "south": "ly_outskirts",
+        "west": "ly_inn"
+      }
+    },
+    "ly_outskirts": {
+      "name": "洛阳城郊",
+      "description": "城郊荒草没膝，远处有破庙露出半截屋脊。商旅经过这里时，总会下意识按住腰间钱袋。",
+      "area": "城郊",
+      "tags": ["wild", "dungeon_entry", "unsafe"],
+      "safeZone": false,
+      "function": "dungeon_entry",
+      "actions": ["gather"],
+      "npcs": ["road_bandit"],
+      "exits": {
+        "north": "ly_south_gate",
+        "south": "ly_abandoned_temple"
+      }
+    },
+    "ly_abandoned_temple": {
+      "name": "荒庙外",
+      "description": "荒庙门楣坍塌，檐角挂着一串破铃。风从殿内穿出，带着潮湿香灰和铁锈般的血腥味。",
+      "area": "城郊",
+      "tags": ["dungeon_entry", "unsafe"],
+      "safeZone": false,
+      "function": "dungeon_entry",
+      "exits": {
+        "north": "ly_outskirts"
+      }
     }
+  }
 }

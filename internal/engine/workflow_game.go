@@ -128,6 +128,15 @@ func MineWithEffects(repo RuntimeRepository, playerID string) (MineActionResult,
 	return MineActionResult{Experience: exp, Potential: potential, Logs: logs, RoomMessage: roomMsg, NeedRoomUpdate: true}, nil
 }
 
+func DoRoomActionWithEffects(repo RuntimeRepository, playerID, action string) (StateActionResult, error) {
+	res, err := repo.DoRoomAction(playerID, action)
+	if err != nil {
+		return StateActionResult{}, err
+	}
+	msg := asString(res["message"])
+	return StateActionResult{Message: msg, NeedRoomUpdate: true}, nil
+}
+
 func KillWithEffects(repo RuntimeRepository, playerID, targetID string) (CombatActionResult, error) {
 	msg, err := repo.Kill(playerID, targetID)
 	if err != nil {

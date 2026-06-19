@@ -112,7 +112,7 @@ func (s *Server) handleGameEnterDungeon(conn *websocket.Conn, cmd protocol.Comma
 	}
 	dungeonID := toString(cmd.Args["dungeonId"])
 	if dungeonID == "" {
-		dungeonID = "swamp"
+		dungeonID = "abandoned_temple_rain"
 	}
 	res, err := engine.EnterDungeonWithTransition(s.repo, playerID, dungeonID)
 	dungeonName := toString(res.Room["worldName"])
@@ -316,6 +316,19 @@ func (s *Server) handleGameMine(conn *websocket.Conn, _ protocol.CommandMessage)
 	if err == nil && res.RoomMessage != "" {
 		s.emitRoomMessageToOthersByPlayer(playerID, res.RoomMessage)
 	}
+	if err == nil && res.NeedRoomUpdate {
+		s.emitRoomUpdateByPlayer(playerID)
+	}
+}
+
+func (s *Server) handleGameDoAction(conn *websocket.Conn, cmd protocol.CommandMessage) {
+	playerID, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	action := toString(cmd.Args["action"])
+	res, err := engine.DoRoomActionWithEffects(s.repo, playerID, action)
+	s.replyCommand(conn, "do_action", err, map[string]interface{}{"message": res.Message}, []string{res.Message})
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
 	}

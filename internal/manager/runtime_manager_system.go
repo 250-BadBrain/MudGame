@@ -145,7 +145,7 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, i
 			Appearance: 20, Luck: 20,
 			Attack: 15, Defense: 15, HitRate: 100, Dodge: 100, Parry: 100, CritRate: 1, AttackSpeed: 4,
 		},
-		Skills:    map[string]int{"basic_fist": 1, "basic_parry": 1, "basic_internal": 1, "basic_light": 1},
+		Skills:    map[string]int{"basic_unarmed": 1, "basic_parry": 1, "basic_neigong": 1, "basic_qinggong": 1},
 		Backpack:  map[string]int{"iron_pickaxe": 1},
 		Equipment: map[string]string{},
 		Online:    false,

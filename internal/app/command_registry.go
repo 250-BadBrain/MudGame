@@ -39,6 +39,7 @@ func (s *Server) registerCommandHandlers() {
 	s.handlersGame["unequip"] = s.handleGameUnequip
 	s.handlersGame["learn"] = s.handleGameLearn
 	s.handlersGame["mine"] = s.handleGameMine
+	s.handlersGame["do_action"] = s.handleGameDoAction
 	s.handlersGame["heal"] = s.handleGameHeal
 	s.handlersGame["meditate"] = s.handleGameMeditate
 	s.handlersGame["stop"] = s.handleGameStop

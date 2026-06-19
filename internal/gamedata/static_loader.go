@@ -25,44 +25,72 @@ type StaticData struct {
 }
 
 type rawItem struct {
-	Name          string `json:"name"`
-	Description   string `json:"description"`
-	Stackable     bool   `json:"stackable"`
-	Sellable      bool   `json:"sellable"`
-	Value         int    `json:"value"`
-	Rarity        int    `json:"rarity"`
-	Unit          string `json:"unit"`
-	EquipmentSlot string `json:"equipmentSlot"`
-	Limit         *int   `json:"limit"`
+	Name          string                 `json:"name"`
+	Description   string                 `json:"description"`
+	Type          string                 `json:"type"`
+	Subtype       string                 `json:"subtype"`
+	Stackable     bool                   `json:"stackable"`
+	Sellable      bool                   `json:"sellable"`
+	Value         int                    `json:"value"`
+	Rarity        int                    `json:"rarity"`
+	Unit          string                 `json:"unit"`
+	EquipmentSlot string                 `json:"equipmentSlot"`
+	Limit         *int                   `json:"limit"`
+	Bind          string                 `json:"bind"`
+	QuestItem     bool                   `json:"questItem"`
+	Usable        bool                   `json:"usable"`
+	Effects       map[string]interface{} `json:"effects"`
+	Source        string                 `json:"source"`
 }
 
 type rawSkill struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Rarity      int    `json:"rarity"`
+	ID           string                 `json:"id"`
+	Name         string                 `json:"name"`
+	Description  string                 `json:"description"`
+	Rarity       int                    `json:"rarity"`
+	Type         string                 `json:"type"`
+	Category     string                 `json:"category"`
+	School       string                 `json:"school"`
+	Bonuses      map[string]float64     `json:"bonuses"`
+	Requirements map[string]interface{} `json:"requirements"`
 }
 
 type rawNPC struct {
-	Name        string           `json:"name"`
-	Title       string           `json:"title"`
-	Description string           `json:"description"`
-	Aggressive  bool             `json:"aggressive"`
-	Attributes  model.Attributes `json:"attributes"`
-	ShopItems   []string         `json:"shopItems"`
-	Skills      map[string]int   `json:"skills"`
+	Name         string           `json:"name"`
+	Title        string           `json:"title"`
+	Description  string           `json:"description"`
+	Faction      string           `json:"faction"`
+	Role         string           `json:"role"`
+	Importance   string           `json:"importance"`
+	DialogueID   string           `json:"dialogueId"`
+	QuestIDs     []string         `json:"questIds"`
+	InstanceOnly bool             `json:"instanceOnly"`
+	SpawnRule    string           `json:"spawnRule"`
+	Aggressive   bool             `json:"aggressive"`
+	Attributes   model.Attributes `json:"attributes"`
+	ShopItems    []string         `json:"shopItems"`
+	Skills       map[string]int   `json:"skills"`
 }
 
 type rawWorldFile struct {
 	ID          string             `json:"id"`
 	Name        string             `json:"name"`
 	Description string             `json:"description"`
+	Order       int                `json:"order"`
+	Category    string             `json:"category"`
+	Visible     *bool              `json:"visible"`
+	SpawnRoomID string             `json:"spawnRoomId"`
 	Rooms       map[string]rawRoom `json:"rooms"`
 }
 
 type rawRoom struct {
 	Name        string            `json:"name"`
 	Description string            `json:"description"`
+	Area        string            `json:"area"`
+	Tags        []string          `json:"tags"`
+	SafeZone    bool              `json:"safeZone"`
+	Function    string            `json:"function"`
+	Actions     []string          `json:"actions"`
 	Exits       map[string]string `json:"exits"`
 	NPCs        []string          `json:"npcs"`
 }
@@ -220,12 +248,19 @@ func loadItems(path string) (map[string]model.ItemDef, map[string]int, error) {
 			ID:            id,
 			Name:          raw.Name,
 			Description:   raw.Description,
+			Type:          raw.Type,
+			Subtype:       raw.Subtype,
 			Rarity:        raw.Rarity,
 			Value:         raw.Value,
 			Stackable:     raw.Stackable,
 			Unit:          raw.Unit,
 			EquipmentSlot: raw.EquipmentSlot,
 			Sellable:      raw.Sellable,
+			Bind:          raw.Bind,
+			QuestItem:     raw.QuestItem,
+			Usable:        raw.Usable,
+			Effects:       cloneInterfaceMap(raw.Effects),
+			Source:        raw.Source,
 		}
 	}
 	return items, itemLimits, nil
@@ -247,10 +282,15 @@ func loadSkills(path string) (map[string]model.SkillDef, error) {
 			continue
 		}
 		skills[id] = model.SkillDef{
-			ID:          id,
-			Name:        raw.Name,
-			Description: raw.Description,
-			Rarity:      raw.Rarity,
+			ID:           id,
+			Name:         raw.Name,
+			Description:  raw.Description,
+			Rarity:       raw.Rarity,
+			Type:         raw.Type,
+			Category:     raw.Category,
+			School:       raw.School,
+			Bonuses:      copyFloatMap(raw.Bonuses),
+			Requirements: cloneInterfaceMap(raw.Requirements),
 		}
 	}
 	return skills, nil
@@ -290,6 +330,13 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 			Name:          raw.Name,
 			Title:         raw.Title,
 			Description:   raw.Description,
+			Faction:       raw.Faction,
+			Role:          raw.Role,
+			Importance:    raw.Importance,
+			DialogueID:    raw.DialogueID,
+			QuestIDs:      append([]string{}, raw.QuestIDs...),
+			InstanceOnly:  raw.InstanceOnly,
+			SpawnRule:     raw.SpawnRule,
 			Aggressive:    raw.Aggressive,
 			IsShop:        len(shopInventory) > 0,
 			ShopInventory: shopInventory,
@@ -361,22 +408,37 @@ func loadWorlds(worldDir string) ([]string, map[string]model.World, map[string]m
 				WorldName:   rawWorld.Name,
 				Name:        roomNames[roomID],
 				Description: rawRoom.Description,
+				Area:        rawRoom.Area,
+				Tags:        append([]string{}, rawRoom.Tags...),
+				SafeZone:    rawRoom.SafeZone,
+				Function:    rawRoom.Function,
+				Actions:     append([]string{}, rawRoom.Actions...),
 				Exits:       exits,
 				NPCIDs:      npcs,
 			}
 		}
 
-		spawnRoomID := detectSpawnRoomID(roomIDs)
+		spawnRoomID := strings.TrimSpace(rawWorld.SpawnRoomID)
+		if spawnRoomID == "" {
+			spawnRoomID = detectSpawnRoomID(roomIDs)
+		}
+		visible := true
+		if rawWorld.Visible != nil {
+			visible = *rawWorld.Visible
+		}
 		worlds[worldID] = model.World{
 			ID:          worldID,
 			Name:        rawWorld.Name,
 			Description: rawWorld.Description,
+			Order:       rawWorld.Order,
+			Category:    rawWorld.Category,
+			Visible:     visible,
 			SpawnRoomID: spawnRoomID,
 		}
 		worldIDs = append(worldIDs, worldID)
 	}
 
-	worldOrder := buildWorldOrder(worldIDs)
+	worldOrder := buildWorldOrder(worldIDs, worlds)
 	return worldOrder, worlds, rooms, nil
 }
 
@@ -392,28 +454,22 @@ func detectSpawnRoomID(roomIDs []string) string {
 	return roomIDs[0]
 }
 
-func buildWorldOrder(foundWorldIDs []string) []string {
-	preferred := []string{"luoyang", "wudang", "shaolin", "emei", "huashan", "kunlun", "kongtong"}
-	seen := map[string]bool{}
-	out := make([]string, 0, len(foundWorldIDs))
-	foundSet := map[string]bool{}
-	for _, id := range foundWorldIDs {
-		foundSet[id] = true
-	}
-	for _, id := range preferred {
-		if foundSet[id] {
-			out = append(out, id)
-			seen[id] = true
+func buildWorldOrder(foundWorldIDs []string, worlds map[string]model.World) []string {
+	out := append([]string{}, foundWorldIDs...)
+	sort.Slice(out, func(i, j int) bool {
+		a := worlds[out[i]]
+		b := worlds[out[j]]
+		if a.Order > 0 && b.Order > 0 && a.Order != b.Order {
+			return a.Order < b.Order
 		}
-	}
-	left := make([]string, 0)
-	for _, id := range foundWorldIDs {
-		if !seen[id] {
-			left = append(left, id)
+		if a.Order > 0 && b.Order <= 0 {
+			return true
 		}
-	}
-	sort.Strings(left)
-	out = append(out, left...)
+		if a.Order <= 0 && b.Order > 0 {
+			return false
+		}
+		return out[i] < out[j]
+	})
 	return out
 }
 
@@ -430,14 +486,19 @@ func cloneStaticData(in StaticData) StaticData {
 		out.Worlds[id] = w
 	}
 	for id, item := range in.Items {
+		item.Effects = cloneInterfaceMap(item.Effects)
 		out.Items[id] = item
 	}
 	for id, skill := range in.Skills {
+		skill.Bonuses = copyFloatMap(skill.Bonuses)
+		skill.Requirements = cloneInterfaceMap(skill.Requirements)
 		out.Skills[id] = skill
 	}
 	for id, room := range in.Rooms {
 		roomCopy := room
 		roomCopy.NPCIDs = append([]string{}, room.NPCIDs...)
+		roomCopy.Tags = append([]string{}, room.Tags...)
+		roomCopy.Actions = append([]string{}, room.Actions...)
 		roomCopy.Exits = map[string]model.Exit{}
 		for dir, ex := range room.Exits {
 			roomCopy.Exits[dir] = ex
@@ -454,7 +515,30 @@ func cloneStaticData(in StaticData) StaticData {
 		for skillID, level := range npc.Skills {
 			npcCopy.Skills[skillID] = level
 		}
+		npcCopy.QuestIDs = append([]string{}, npc.QuestIDs...)
 		out.NPCs[id] = npcCopy
+	}
+	return out
+}
+
+func copyFloatMap(in map[string]float64) map[string]float64 {
+	if in == nil {
+		return nil
+	}
+	out := map[string]float64{}
+	for k, v := range in {
+		out[k] = v
+	}
+	return out
+}
+
+func cloneInterfaceMap(in map[string]interface{}) map[string]interface{} {
+	if in == nil {
+		return nil
+	}
+	out := map[string]interface{}{}
+	for k, v := range in {
+		out[k] = v
 	}
 	return out
 }

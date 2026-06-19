@@ -56,19 +56,31 @@ type ItemDef struct {
 	ID            string
 	Name          string
 	Description   string
+	Type          string
+	Subtype       string
 	Rarity        int
 	Value         int
 	Stackable     bool
 	Unit          string
 	EquipmentSlot string
 	Sellable      bool
+	Bind          string
+	QuestItem     bool
+	Usable        bool
+	Effects       map[string]interface{}
+	Source        string
 }
 
 type SkillDef struct {
-	ID          string
-	Name        string
-	Description string
-	Rarity      int
+	ID           string
+	Name         string
+	Description  string
+	Rarity       int
+	Type         string
+	Category     string
+	School       string
+	Bonuses      map[string]float64
+	Requirements map[string]interface{}
 }
 
 type NPC struct {
@@ -76,6 +88,13 @@ type NPC struct {
 	Name          string
 	Title         string
 	Description   string
+	Faction       string
+	Role          string
+	Importance    string
+	DialogueID    string
+	QuestIDs      []string
+	InstanceOnly  bool
+	SpawnRule     string
 	Aggressive    bool
 	IsShop        bool
 	ShopInventory map[string]int
@@ -95,6 +114,11 @@ type Room struct {
 	WorldName   string
 	Name        string
 	Description string
+	Area        string
+	Tags        []string
+	SafeZone    bool
+	Function    string
+	Actions     []string
 	Exits       map[string]Exit
 	NPCIDs      []string
 }
@@ -103,5 +127,8 @@ type World struct {
 	ID          string `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
+	Order       int    `json:"order"`
+	Category    string `json:"category"`
+	Visible     bool   `json:"visible"`
 	SpawnRoomID string
 }

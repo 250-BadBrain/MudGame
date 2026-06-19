@@ -1,42 +1,86 @@
 {
-  "basic_fist": {
-    "id": "basic_fist",
+  "basic_unarmed": {
+    "id": "basic_unarmed",
     "name": "基本拳脚",
-    "description": "世间所有拳脚功夫的根基。",
+    "description": "拳掌腿肘的入门功夫，是近身搏杀的根基。",
     "rarity": 1,
     "type": "BASIC",
+    "category": "unarmed",
+    "school": "common",
     "bonuses": {
-      "post_strength_per_10_levels": 1.0
+      "post_strength_per_10_levels": 1
     }
   },
   "basic_parry": {
     "id": "basic_parry",
     "name": "基本招架",
-    "description": "抵挡攻击的基本技巧。",
+    "description": "以身法、兵器或拳掌卸开来势，保住性命的基本功。",
     "rarity": 1,
     "type": "BASIC",
+    "category": "defense",
+    "school": "common",
     "bonuses": {
-      "post_parry_per_10_levels": 1.0
+      "parry_per_10_levels": 1
     }
   },
-  "basic_internal": {
-    "id": "basic_internal",
+  "basic_neigong": {
+    "id": "basic_neigong",
     "name": "基本内功",
-    "description": "修习内力的入门法门。",
+    "description": "吐纳导引的入门法门，可稳固气血，积蓄内力。",
     "rarity": 1,
     "type": "BASIC",
+    "category": "internal",
+    "school": "common",
     "bonuses": {
-      "max_mp_per_level": 10.0
+      "max_mp_per_level": 10
     }
   },
-  "basic_light": {
-    "id": "basic_light",
+  "basic_qinggong": {
+    "id": "basic_qinggong",
     "name": "基本轻功",
-    "description": "强身健体，奔跑跳跃的基础。",
+    "description": "奔行、腾挪、闪避的基础训练。",
     "rarity": 1,
     "type": "BASIC",
+    "category": "movement",
+    "school": "common",
     "bonuses": {
-      "post_agility_per_10_levels": 1.0
+      "post_agility_per_10_levels": 1
+    }
+  },
+  "basic_blade": {
+    "id": "basic_blade",
+    "name": "基本刀法",
+    "description": "劈、斩、撩、格的基本刀路，军府和江湖都常见。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "attack_per_10_levels": 1
+    }
+  },
+  "basic_sword": {
+    "id": "basic_sword",
+    "name": "基本剑法",
+    "description": "刺、削、点、挑的基本剑式，是日后悟入剑意的起点。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "hit_rate_per_10_levels": 1
+    }
+  },
+  "basic_literacy": {
+    "id": "basic_literacy",
+    "name": "读书识文",
+    "description": "识字、读图、辨认文书与古卷的基础能力。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "knowledge",
+    "school": "academy",
+    "bonuses": {
+      "intelligence_check_per_10_levels": 1
     }
   }
 }

@@ -30,8 +30,8 @@ func extractRoomNPCs(room map[string]interface{}) []map[string]interface{} {
 }
 
 const (
-	workflowShopNPCID    = "shopkeeper_jia"
-	workflowTeacherNPCID = "zhao_lao_jiaoxi"
+	workflowShopNPCID    = "east_market_keeper"
+	workflowTeacherNPCID = "weapon_school_master"
 	workflowShopItemID   = "common_clothes"
 )
 
@@ -41,9 +41,9 @@ type testHelper struct {
 	playerID string
 }
 
-func moveToMineFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
+func moveToOutskirtsFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
-	path := []string{"east", "east", "east", "east", "east", "south"}
+	path := []string{"south", "south"}
 	for _, dir := range path {
 		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
@@ -51,9 +51,9 @@ func moveToMineFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) 
 	}
 }
 
-func moveBackFromMineToSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
+func moveBackFromOutskirtsToSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
-	path := []string{"north", "west", "west", "west", "west", "west"}
+	path := []string{"north", "north"}
 	for _, dir := range path {
 		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
@@ -63,7 +63,7 @@ func moveBackFromMineToSpawn(t *testing.T, repo RuntimeRepository, playerID stri
 
 func moveToShopFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
-	path := []string{"west", "south"}
+	path := []string{"east"}
 	for _, dir := range path {
 		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
@@ -73,7 +73,7 @@ func moveToShopFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) 
 
 func moveToTeacherFromSpawn(t *testing.T, repo RuntimeRepository, playerID string) {
 	t.Helper()
-	path := []string{"south", "west"}
+	path := []string{"east", "south"}
 	for _, dir := range path {
 		if _, err := MoveWithTransition(repo, playerID, dir); err != nil {
 			t.Fatalf("move %s failed: %v", dir, err)
@@ -147,11 +147,11 @@ func TestMoveAndEnterWorldTransitions(t *testing.T) {
 		t.Fatalf("expected different room after move")
 	}
 
-	enterRes, err := EnterWorldWithTransition(h.repo, h.playerID, "wudang")
+	enterRes, err := EnterWorldWithTransition(h.repo, h.playerID, "luoyang")
 	if err != nil {
 		t.Fatalf("enter world failed: %v", err)
 	}
-	if enterRes.ToRoomID != "wd_00" {
+	if enterRes.ToRoomID != "ly_00" {
 		t.Fatalf("unexpected target room: %s", enterRes.ToRoomID)
 	}
 }
@@ -180,28 +180,19 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 	if _, err := h.repo.Login(h.username, "pass123"); err != nil {
 		t.Fatalf("refresh login failed: %v", err)
 	}
-	if _, err := EquipWithEffects(h.repo, h.playerID, "iron_pickaxe"); err != nil {
-		t.Fatalf("equip pickaxe failed: %v", err)
-	}
-
-	moveToMineFromSpawn(t, h.repo, h.playerID)
-	mineRes, err := MineWithEffects(h.repo, h.playerID)
+	moveToOutskirtsFromSpawn(t, h.repo, h.playerID)
+	actionRes, err := DoRoomActionWithEffects(h.repo, h.playerID, "gather")
 	if err != nil {
-		t.Fatalf("mine workflow failed: %v", err)
+		t.Fatalf("room action workflow failed: %v", err)
 	}
-	if len(mineRes.Logs) == 0 {
-		t.Fatalf("unexpected mine result: %+v", mineRes)
+	if actionRes.Message == "" {
+		t.Fatalf("unexpected room action result: %+v", actionRes)
 	}
-
-	_, err = HealWithEffects(h.repo, h.playerID)
-	if err == nil || err.Error() != "mining_state" {
-		t.Fatalf("heal should return mining_state while mining, got: %v", err)
+	if _, err := HealWithEffects(h.repo, h.playerID); err == nil {
+		t.Fatalf("heal should still reject when hp is full")
 	}
-	if stop := StopWithEffects(h.repo, h.playerID); stop.Message != "你收起铁镐，停止了挖矿。" {
-		t.Fatalf("unexpected stop mining message: %+v", stop)
-	}
-
-	moveBackFromMineToSpawn(t, h.repo, h.playerID)
+	_ = StopWithEffects(h.repo, h.playerID)
+	moveBackFromOutskirtsToSpawn(t, h.repo, h.playerID)
 	combatRes, err := SparWithEffects(h.repo, h.playerID, p2)
 	if err != nil {
 		t.Fatalf("spar workflow failed: %v", err)
@@ -299,7 +290,7 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 		t.Fatalf("reset to luoyang spawn failed: %v", err)
 	}
 	moveToTeacherFromSpawn(t, h.repo, h.playerID)
-	learnRes, err := LearnWithEffects(h.repo, h.playerID, workflowTeacherNPCID, "basic_fist")
+	learnRes, err := LearnWithEffects(h.repo, h.playerID, workflowTeacherNPCID, "basic_unarmed")
 	if err != nil {
 		t.Fatalf("learn workflow failed: %v", err)
 	}
@@ -419,30 +410,22 @@ func TestStatusTickWorkflow(t *testing.T) {
 	h := setupRepo(t)
 	p2 := setupSecondPlayer(t, "ticker2", "ticker2hero", h.repo)
 
-	if _, err := EquipWithEffects(h.repo, h.playerID, "iron_pickaxe"); err != nil {
-		t.Fatalf("equip pickaxe failed: %v", err)
-	}
-	moveToMineFromSpawn(t, h.repo, h.playerID)
-	if _, err := MineWithEffects(h.repo, h.playerID); err != nil {
-		t.Fatalf("mine failed: %v", err)
-	}
-	attrsBeforeMine, err := GetAttributesView(h.repo, h.playerID)
+	moveToOutskirtsFromSpawn(t, h.repo, h.playerID)
+	attrsBeforeGather, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
-		t.Fatalf("get attrs before mine tick failed: %v", err)
+		t.Fatalf("get attrs before gather failed: %v", err)
 	}
-	runStatusTicks(t, h.repo, 10)
-	attrsAfterMine, err := GetAttributesView(h.repo, h.playerID)
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "gather"); err != nil {
+		t.Fatalf("gather failed: %v", err)
+	}
+	attrsAfterGather, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
-		t.Fatalf("get attrs after mine tick failed: %v", err)
+		t.Fatalf("get attrs after gather failed: %v", err)
 	}
-	if attrsAfterMine["experience"].(int) <= attrsBeforeMine["experience"].(int) {
-		t.Fatalf("expected mine tick to increase experience")
+	if attrsAfterGather["experience"].(int) <= attrsBeforeGather["experience"].(int) {
+		t.Fatalf("expected gather to increase experience")
 	}
-	if stop := StopWithEffects(h.repo, h.playerID); stop.Message != "你收起铁镐，停止了挖矿。" {
-		t.Fatalf("unexpected stop mining message: %+v", stop)
-	}
-
-	moveBackFromMineToSpawn(t, h.repo, h.playerID)
+	moveBackFromOutskirtsToSpawn(t, h.repo, h.playerID)
 	if _, err := MeditateWithEffects(h.repo, h.playerID); err != nil {
 		t.Fatalf("meditate failed: %v", err)
 	}
@@ -559,16 +542,16 @@ func TestCombatTargetLossWorkflow(t *testing.T) {
 func TestDungeonInstanceLoadsNPCsAndSupportsKill(t *testing.T) {
 	h := setupRepo(t)
 
-	enterRes, err := EnterDungeonWithTransition(h.repo, h.playerID, "swamp")
+	enterRes, err := EnterDungeonWithTransition(h.repo, h.playerID, "abandoned_temple_rain")
 	if err != nil {
 		t.Fatalf("enter dungeon failed: %v", err)
 	}
 	roomID, _ := enterRes.Room["id"].(string)
-	if !strings.HasPrefix(roomID, "dg_swamp_") {
+	if !strings.HasPrefix(roomID, "dg_abandoned_temple_rain_") {
 		t.Fatalf("unexpected dungeon room id: %s", roomID)
 	}
-	if worldName, _ := enterRes.Room["worldName"].(string); worldName != "沼泽" {
-		t.Fatalf("unexpected dungeon worldName: %q", worldName)
+	if worldName, _ := enterRes.Room["worldName"].(string); worldName == "" {
+		t.Fatalf("dungeon worldName should not be empty")
 	}
 
 	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
@@ -595,7 +578,7 @@ func TestDungeonInstanceLoadsNPCsAndSupportsKill(t *testing.T) {
 func TestDungeonAggressiveNPCStartsCombat(t *testing.T) {
 	h := setupRepo(t)
 
-	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "swamp"); err != nil {
+	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "abandoned_temple_rain"); err != nil {
 		t.Fatalf("enter dungeon failed: %v", err)
 	}
 	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {

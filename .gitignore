@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+mud
 
 # Test binaries and coverage
 *.test

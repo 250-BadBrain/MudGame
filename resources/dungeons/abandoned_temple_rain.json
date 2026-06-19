@@ -1,0 +1,38 @@
+{
+  "id": "abandoned_temple_rain",
+  "name": "荒庙夜雨",
+  "description": "洛阳城外夜雨如注，一名负伤信使逃入荒庙，追兵也随之而至。",
+  "order": 1,
+  "spawnRoomId": "temple_00",
+  "progressOnKill": {
+    "temple_bandit": 25,
+    "temple_assassin": 50
+  },
+  "rooms": {
+    "temple_00": {
+      "name": "荒庙前庭",
+      "description": "雨水从破瓦间滴落，庭中积着浑浊泥水。地上有几道凌乱脚印，一直通向大殿。",
+      "exits": {
+        "north": "temple_01"
+      },
+      "npcs": ["temple_bandit"]
+    },
+    "temple_01": {
+      "name": "荒庙大殿",
+      "description": "残破佛像半边脸隐在黑暗里，香案后似乎有人急促喘息。两名流寇正翻找什么。",
+      "exits": {
+        "south": "temple_00",
+        "north": "temple_02"
+      },
+      "npcs": ["temple_bandit", "temple_bandit"]
+    },
+    "temple_02": {
+      "name": "后殿雨廊",
+      "description": "雨廊尽头立着一名蒙面刺客，袖中短刃映出冷光。那人显然不打算留下活口。",
+      "exits": {
+        "south": "temple_01"
+      },
+      "npcs": ["temple_assassin"]
+    }
+  }
+}

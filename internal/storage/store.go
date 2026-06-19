@@ -156,7 +156,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			dp.Equipment = map[string]string{}
 		}
 		if dp.Skills == nil {
-			dp.Skills = map[string]int{"basic_fist": 1, "basic_parry": 1, "basic_internal": 1, "basic_light": 1}
+			dp.Skills = map[string]int{"basic_unarmed": 1, "basic_parry": 1, "basic_neigong": 1, "basic_qinggong": 1}
 		}
 		state := dp.State
 		if state == "" {

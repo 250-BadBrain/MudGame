@@ -49,7 +49,7 @@ func TestFileStorePlayersAndRoomsRoundTrip(t *testing.T) {
 			State:         "IDLE",
 			Money:         123,
 			Attributes:    model.Attributes{CurrentHP: 88, MaxHP: 100},
-			Skills:        map[string]int{"basic_fist": 2},
+			Skills:        map[string]int{"basic_unarmed": 2},
 			Backpack:      map[string]int{"iron_pickaxe": 1},
 			Equipment:     map[string]string{},
 		},
@@ -83,20 +83,20 @@ func TestFileStorePlayersAndRoomsRoundTrip(t *testing.T) {
 		t.Fatalf("unexpected rooms payload: %+v", loadedRooms)
 	}
 
-	if err := os.WriteFile(filepath.Join(dir, "rooms", "dg_swamp_deadbeef_swamp_00.json"), []byte(`{"npcs":["wolf"],"players":["p2"]}`), 0o644); err != nil {
+	if err := os.WriteFile(filepath.Join(dir, "rooms", "dg_abandoned_temple_rain_deadbeef_temple_00.json"), []byte(`{"npcs":["wolf"],"players":["p2"]}`), 0o644); err != nil {
 		t.Fatalf("seed dungeon room file failed: %v", err)
 	}
 	loadedRooms, err = store.LoadDynamicRooms()
 	if err != nil {
 		t.Fatalf("reload rooms failed: %v", err)
 	}
-	if _, ok := loadedRooms["dg_swamp_deadbeef_swamp_00"]; ok {
+	if _, ok := loadedRooms["dg_abandoned_temple_rain_deadbeef_temple_00"]; ok {
 		t.Fatalf("dungeon room file should be ignored: %+v", loadedRooms)
 	}
 	if err := store.SaveDynamicRooms(loadedRooms); err != nil {
 		t.Fatalf("save cleaned rooms failed: %v", err)
 	}
-	if _, err := os.Stat(filepath.Join(dir, "rooms", "dg_swamp_deadbeef_swamp_00.json")); !os.IsNotExist(err) {
+	if _, err := os.Stat(filepath.Join(dir, "rooms", "dg_abandoned_temple_rain_deadbeef_temple_00.json")); !os.IsNotExist(err) {
 		t.Fatalf("expected dungeon room file to be removed, got err=%v", err)
 	}
 }
@@ -108,7 +108,7 @@ func TestFileStoreLoadPlayersSanitizesDungeonRoomIDs(t *testing.T) {
 	if err := os.MkdirAll(filepath.Join(dir, "players"), 0o755); err != nil {
 		t.Fatalf("mkdir players failed: %v", err)
 	}
-	raw := `{"id":"p1","characterName":"hero","userId":"u1","roomId":"dg_swamp_1234abcd_swamp_00","state":"IDLE"}`
+	raw := `{"id":"p1","characterName":"hero","userId":"u1","roomId":"dg_abandoned_temple_rain_1234abcd_temple_00","state":"IDLE"}`
 	if err := os.WriteFile(filepath.Join(dir, "players", "p1.json"), []byte(raw), 0o644); err != nil {
 		t.Fatalf("write player failed: %v", err)
 	}

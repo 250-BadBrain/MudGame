@@ -56,6 +56,8 @@ func (r *RuntimeManager) GetBackpack(playerID string) ([]map[string]interface{},
 			"id": def.ID, "uniqueId": def.ID, "name": def.Name, "description": def.Description,
 			"rarity": def.Rarity, "value": def.Value, "stackable": def.Stackable,
 			"unit": def.Unit, "count": count, "equipmentSlot": def.EquipmentSlot, "sellable": def.Sellable,
+			"type": def.Type, "subtype": def.Subtype, "bind": def.Bind, "questItem": def.QuestItem,
+			"usable": def.Usable, "effects": def.Effects, "source": def.Source,
 		})
 	}
 	sort.Slice(items, func(i, j int) bool { return items[i]["name"].(string) < items[j]["name"].(string) })
@@ -80,7 +82,11 @@ func (r *RuntimeManager) GetSkills(playerID string) ([]map[string]interface{}, e
 		if !ok {
 			continue
 		}
-		out = append(out, map[string]interface{}{"id": id, "name": def.Name, "description": def.Description, "rarity": def.Rarity, "level": level})
+		out = append(out, map[string]interface{}{
+			"id": id, "name": def.Name, "description": def.Description, "rarity": def.Rarity, "level": level,
+			"type": def.Type, "category": def.Category, "school": def.School,
+			"bonuses": def.Bonuses, "requirements": def.Requirements,
+		})
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i]["id"].(string) < out[j]["id"].(string) })
 	return out, nil
@@ -116,7 +122,13 @@ func (r *RuntimeManager) GetWorlds() []map[string]interface{} {
 	out := make([]map[string]interface{}, 0, len(fileWorldOrder))
 	for _, id := range fileWorldOrder {
 		w := fileWorlds[id]
-		out = append(out, map[string]interface{}{"id": w.ID, "name": w.Name, "description": w.Description})
+		if !w.Visible {
+			continue
+		}
+		out = append(out, map[string]interface{}{
+			"id": w.ID, "name": w.Name, "description": w.Description,
+			"order": w.Order, "category": w.Category,
+		})
 	}
 	return out
 }
@@ -272,10 +284,17 @@ func (r *RuntimeManager) GetShop(playerID, npcID string) ([]map[string]interface
 			"id":          def.ID,
 			"name":        def.Name,
 			"description": def.Description,
+			"type":        def.Type,
+			"subtype":     def.Subtype,
 			"rarity":      def.Rarity,
 			"value":       def.Value,
 			"stackable":   def.Stackable,
 			"unit":        def.Unit,
+			"bind":        def.Bind,
+			"questItem":   def.QuestItem,
+			"usable":      def.Usable,
+			"effects":     def.Effects,
+			"source":      def.Source,
 		}
 		if limit != -1 {
 			entry["limit"] = limit
@@ -630,6 +649,85 @@ func (r *RuntimeManager) Mine(playerID string) (int, int, string, error) {
 		return 0, 0, "", err
 	}
 	return p.Attributes.Experience, p.Attributes.Potential, "", nil
+}
+
+func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]interface{}, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	players, err := r.loadPlayers()
+	if err != nil {
+		return nil, err
+	}
+	staticRooms, err := r.loadRooms()
+	if err != nil {
+		return nil, err
+	}
+	p, ok := players[playerID]
+	if !ok {
+		return nil, exception.ErrPlayerNotFound
+	}
+	if p.State == "DEAD" {
+		return nil, errors.New("dead_state")
+	}
+	if p.State != "IDLE" {
+		return nil, errors.New("busy_state")
+	}
+	room, ok := r.roomByIDNoLock(p.RoomID, staticRooms)
+	if !ok {
+		return nil, exception.ErrRoomNotFound
+	}
+	allowed := false
+	for _, a := range room.Actions {
+		if a == action {
+			allowed = true
+			break
+		}
+	}
+	if !allowed {
+		return nil, errors.New("action_not_available")
+	}
+
+	result := map[string]interface{}{"action": action}
+	switch action {
+	case "gather":
+		expGain := 8
+		potGain := 12
+		p.Attributes.Experience += expGain
+		p.Attributes.Potential += potGain
+		result["message"] = "你在附近搜寻一番，找到些可用杂物，也增长了几分江湖经验。"
+		result["experience"] = p.Attributes.Experience
+		result["potential"] = p.Attributes.Potential
+	case "work":
+		moneyGain := 30
+		potGain := 5
+		p.Money += moneyGain
+		p.Attributes.Potential += potGain
+		result["message"] = "你接了些零散差事，换得几枚铜钱，也磨练了耐性。"
+		result["money"] = p.Money
+		result["potential"] = p.Attributes.Potential
+	case "listen_rumor":
+		result["message"] = roomRumor(room.ID)
+	default:
+		return nil, errors.New("action_not_supported")
+	}
+	if err := r.savePlayers(players); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func roomRumor(roomID string) string {
+	switch roomID {
+	case "ly_00":
+		return "你听见桥边有人低声谈起扬州来的两个少年，说他们身上似乎牵着一场大风波。"
+	case "ly_west_market":
+		return "西市掮客说，最近有人在暗中收购战国铜器拓片，出价高得反常。"
+	case "ly_inn":
+		return "说书人醒木一拍，正讲到一只来历不明的战国铜匣，满堂酒客都屏住了呼吸。"
+	default:
+		return "你驻足听了一阵，只听见市井喧嚣里夹着几句真假难辨的江湖传闻。"
+	}
 }
 
 func (r *RuntimeManager) Heal(playerID string) (string, error) {
