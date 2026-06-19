@@ -11,19 +11,23 @@
       <h3>先天属性 (总和必须为80)</h3>
       <div class="attribute-row">
         <label>臂力 (Strength): {{ strength }}</label>
-        <input type="range" v-model.number="strength" min="15" max="30" @input="validateSum" />
+        <input type="range" v-model.number="strength" min="10" max="25" @input="validateSum" />
       </div>
       <div class="attribute-row">
         <label>根骨 (Constitution): {{ constitution }}</label>
-        <input type="range" v-model.number="constitution" min="15" max="30" @input="validateSum" />
+        <input type="range" v-model.number="constitution" min="10" max="25" @input="validateSum" />
       </div>
       <div class="attribute-row">
         <label>身法 (Agility): {{ agility }}</label>
-        <input type="range" v-model.number="agility" min="15" max="30" @input="validateSum" />
+        <input type="range" v-model.number="agility" min="10" max="25" @input="validateSum" />
       </div>
       <div class="attribute-row">
-        <label>悟性 (Intelligence): {{ intelligence }}</label>
-        <input type="range" v-model.number="intelligence" min="15" max="30" @input="validateSum" />
+        <label>悟性 (Perception): {{ perception }}</label>
+        <input type="range" v-model.number="perception" min="10" max="25" @input="validateSum" />
+      </div>
+      <div class="attribute-row">
+        <label>心志 (Willpower): {{ willpower }}</label>
+        <input type="range" v-model.number="willpower" min="10" max="25" @input="validateSum" />
       </div>
       
       <div class="sum-display" :class="{ 'valid-sum': currentSum === 80, 'invalid-sum': currentSum !== 80 }">
@@ -53,14 +57,15 @@ const router = useRouter()
 const playerStore = usePlayerStore()
 
 const characterName = ref('')
-const strength = ref(20)
-const constitution = ref(20)
-const agility = ref(20)
-const intelligence = ref(20)
+const strength = ref(16)
+const constitution = ref(16)
+const agility = ref(16)
+const perception = ref(16)
+const willpower = ref(16)
 const error = ref('')
 const loading = ref(false)
 
-const currentSum = computed(() => strength.value + constitution.value + agility.value + intelligence.value)
+const currentSum = computed(() => strength.value + constitution.value + agility.value + perception.value + willpower.value)
 
 const isValid = computed(() => {
   return characterName.value.length >= 2 && 
@@ -74,19 +79,21 @@ const validateSum = () => {
 }
 
 const randomizeAttributes = () => {
-  // Simple randomizer that ensures sum is 80 and each is 15-30
-  let s, c, a, i;
+  // Simple randomizer that ensures sum is 80 and each is 10-25
+  let s, c, a, p, w;
   do {
-    s = Math.floor(Math.random() * 16) + 15;
-    c = Math.floor(Math.random() * 16) + 15;
-    a = Math.floor(Math.random() * 16) + 15;
-    i = 80 - s - c - a;
-  } while (i < 15 || i > 30);
+    s = Math.floor(Math.random() * 16) + 10;
+    c = Math.floor(Math.random() * 16) + 10;
+    a = Math.floor(Math.random() * 16) + 10;
+    p = Math.floor(Math.random() * 16) + 10;
+    w = 80 - s - c - a - p;
+  } while (w < 10 || w > 25);
   
   strength.value = s;
   constitution.value = c;
   agility.value = a;
-  intelligence.value = i;
+  perception.value = p;
+  willpower.value = w;
 }
 
 const createCharacter = () => {
@@ -100,7 +107,8 @@ const createCharacter = () => {
     strength: strength.value,
     constitution: constitution.value,
     agility: agility.value,
-    intelligence: intelligence.value
+    perception: perception.value,
+    willpower: willpower.value
   }));
 }
 

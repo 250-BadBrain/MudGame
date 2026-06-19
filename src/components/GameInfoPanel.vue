@@ -139,13 +139,15 @@
           <div class="status-item"><span class="label">气血:</span> <span class="value">{{ statusAttributes.currentHp }} / {{ statusAttributes.maxHp }}</span></div>
           <div class="status-item"><span class="label">内力:</span> <span class="value">{{ statusAttributes.currentMp }} / {{ statusAttributes.trainedMaxMp }}</span></div>
           <div class="status-item"><span class="label">内力上限:</span> <span class="value">{{ statusAttributes.maxMp }}</span></div>
+          <div class="status-item"><span class="label">心神:</span> <span class="value">{{ statusAttributes.spirit }} / {{ statusAttributes.maxSpirit }}</span></div>
           <hr class="status-divider">
           <div class="status-grid">
             <div class="status-item"><span class="label">臂力:</span> <span class="value">{{ statusAttributes.strength }} ({{ statusAttributes.totalPostStrength || statusAttributes.postStrength || 0 }})</span></div>
             <div class="status-item"><span class="label">根骨:</span> <span class="value">{{ statusAttributes.constitution }} ({{ statusAttributes.totalPostConstitution || statusAttributes.postConstitution || 0 }})</span></div>
             <div class="status-item"><span class="label">身法:</span> <span class="value">{{ statusAttributes.agility }} ({{ statusAttributes.totalPostAgility || statusAttributes.postAgility || 0 }})</span></div>
-            <div class="status-item"><span class="label">悟性:</span> <span class="value">{{ statusAttributes.intelligence }} ({{ statusAttributes.totalPostIntelligence || statusAttributes.postIntelligence || 0 }})</span></div>
-            <div class="status-item"><span class="label">容貌:</span> <span class="value">{{ statusAttributes.appearance || '?' }}</span></div>
+            <div class="status-item"><span class="label">悟性:</span> <span class="value">{{ statusAttributes.perception }} ({{ statusAttributes.totalPostPerception || statusAttributes.postPerception || 0 }})</span></div>
+            <div class="status-item"><span class="label">心志:</span> <span class="value">{{ statusAttributes.willpower }} ({{ statusAttributes.totalPostWillpower || statusAttributes.postWillpower || 0 }})</span></div>
+            <div class="status-item"><span class="label">魅力:</span> <span class="value">{{ statusAttributes.charm || '?' }}</span></div>
             <div class="status-item"><span class="label">福禄:</span> <span class="value">{{ statusAttributes.luck || '?' }}</span></div>
           </div>
           <hr class="status-divider">
@@ -196,6 +198,21 @@
           <button @click="$emit('enterDungeon')" class="enter-world-btn" :disabled="!selectedDungeon || isInDungeon">进入副本</button>
         </div>
       </div>
+      <div v-if="currentPanel === 'quests'" class="quest-panel-container">
+        <div v-if="questsList && questsList.length > 0" class="quest-list">
+          <div v-for="quest in questsList" :key="quest.id" class="quest-entry">
+            <div class="quest-title-row">
+              <span class="quest-name">{{ quest.name }}</span>
+              <span class="quest-status">{{ quest.status === 'completed' ? '已完成' : '进行中' }}</span>
+            </div>
+            <div class="quest-desc">{{ quest.description }}</div>
+            <div v-for="objective in quest.objectives || []" :key="objective.targetId || objective.description" class="quest-objective">
+              {{ objective.description }}
+            </div>
+          </div>
+        </div>
+        <p v-else class="empty-msg">暂无任务。</p>
+      </div>
     </div>
   </div>
 </template>
@@ -233,7 +250,8 @@ const props = defineProps({
   selectedDungeon: Object,
   isInDungeon: Boolean,
   dungeonRoomId: String,
-  dungeonProgress: { type: Number, default: 0 }
+  dungeonProgress: { type: Number, default: 0 },
+  questsList: { type: Array, default: () => [] }
 })
 
 defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'sellItem',
@@ -268,7 +286,7 @@ const formatPrice = (value) => {
 
 const getSkillBonusText = (skill) => {
   if (!skill || !skill.bonuses) return []
-  const bonusMap = { 'strength': '臂力', 'constitution': '根骨', 'agility': '身法', 'intelligence': '悟性', 'attack': '攻击', 'defense': '防御', 'maxHp': '气血上限', 'maxMp': '内力上限', 'hitRate': '命中', 'dodge': '躲闪', 'parry': '招架', 'critRate': '暴击率' }
+  const bonusMap = { 'strength': '臂力', 'constitution': '根骨', 'agility': '身法', 'perception': '悟性', 'willpower': '心志', 'charm': '魅力', 'luck': '福缘', 'attack': '攻击', 'defense': '防御', 'maxHp': '气血上限', 'maxMp': '内力上限', 'spirit': '心神', 'maxSpirit': '心神上限', 'hitRate': '命中', 'dodge': '躲闪', 'parry': '招架', 'critRate': '暴击率' }
   return Object.entries(skill.bonuses).map(([key, val]) => (bonusMap[key] || key) + ' +' + val)
 }
 </script>
@@ -345,4 +363,12 @@ const getSkillBonusText = (skill) => {
 .map-sub-line { color: #888; font-size: 11px; margin-bottom: 4px; }
 .enter-world-btn { width: 100%; padding: 6px; background: #3498db; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-family: inherit; }
 .enter-world-btn:disabled { background: #444; color: #888; cursor: not-allowed; }
+.quest-panel-container { display: flex; flex-direction: column; gap: 8px; }
+.quest-list { display: flex; flex-direction: column; gap: 8px; }
+.quest-entry { padding: 8px; border-bottom: 1px solid #2a2a2a; background: rgba(0,0,0,0.18); border-radius: 4px; }
+.quest-title-row { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.quest-name { color: #f1c40f; font-weight: bold; font-size: 12px; overflow-wrap: anywhere; }
+.quest-status { color: #2ecc71; font-size: 11px; white-space: nowrap; }
+.quest-desc { color: #b0b0b0; font-size: 11px; margin-top: 4px; line-height: 1.4; }
+.quest-objective { color: #ecf0f1; font-size: 11px; margin-top: 5px; padding-left: 8px; border-left: 2px solid #444; }
 </style>

@@ -13,6 +13,7 @@
         </div>
         <div v-if="entity === selectedEntity" class="entity-actions">
           <button @click.stop="$emit('viewEntity', entity)" class="action-btn view-btn">查看</button>
+          <button v-if="canTalk(entity)" @click.stop="$emit('talkEntity', entity)" class="action-btn talk-btn">交谈</button>
           <button @click.stop="$emit('sparEntity', entity)" class="action-btn spar-btn">比试</button>
           <button @click.stop="$emit('killEntity', entity)" class="action-btn kill-btn">击杀</button>
           <button v-if="canTeach(entity)" @click.stop="$emit('learnEntity', entity)" class="action-btn learn-btn">请教</button>
@@ -38,7 +39,7 @@ const props = defineProps({
   selectedEntity: Object
 })
 
-defineEmits(['selectEntity', 'viewEntity', 'sparEntity', 'killEntity', 'learnEntity', 'tradeEntity'])
+defineEmits(['selectEntity', 'viewEntity', 'talkEntity', 'sparEntity', 'killEntity', 'learnEntity', 'tradeEntity'])
 
 const visibleEntities = computed(() => {
   if (!props.entities) return []
@@ -47,6 +48,10 @@ const visibleEntities = computed(() => {
 
 const canTeach = (entity) => {
   return !!(entity?.capabilities?.includes('teach') || Object.keys(entity?.skills || {}).length > 0)
+}
+
+const canTalk = (entity) => {
+  return !!entity?.capabilities?.includes('talk')
 }
 </script>
 
@@ -93,6 +98,9 @@ const canTeach = (entity) => {
 
 .view-btn { border-color: #3498db; color: #3498db; }
 .view-btn:hover { background: #3498db; color: #fff; }
+
+.talk-btn { border-color: #1abc9c; color: #1abc9c; }
+.talk-btn:hover { background: #1abc9c; color: #000; }
 
 .spar-btn { border-color: #f1c40f; color: #f1c40f; }
 .spar-btn:hover { background: #f1c40f; color: #000; }

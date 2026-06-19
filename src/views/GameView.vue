@@ -34,12 +34,35 @@
           @selectItem="selectLearnSkill"
           @buy="startLearning" />
 
+        <div v-else-if="showDialoguePanel" class="dialogue-panel">
+          <div class="dialogue-header">
+            <div>
+              <h3>{{ activeDialogue?.npcName || '交谈' }}</h3>
+              <span>{{ activeDialogue?.title || '' }}</span>
+            </div>
+            <button @click="closeDialogue" class="dialogue-close-btn">×</button>
+          </div>
+          <div class="dialogue-body">
+            <p class="dialogue-opening">{{ activeDialogue?.opening }}</p>
+            <div class="dialogue-options">
+              <button
+                v-for="option in activeDialogueOptions"
+                :key="option.id"
+                @click="chooseDialogue(option.id)"
+                class="dialogue-option-btn">
+                {{ option.text }}
+              </button>
+            </div>
+          </div>
+        </div>
+
         <div v-else class="room-entities-area">
           <GameRoomPanel
             :entities="combinedEntities"
             :selectedEntity="selectedEntityObj"
             @selectEntity="handleEntitySelect"
             @viewEntity="viewEntity"
+            @talkEntity="talkEntity"
             @sparEntity="sparEntity"
             @killEntity="killEntity"
             @learnEntity="openLearn"
@@ -168,6 +191,7 @@
               :isInDungeon="isInDungeon"
               :dungeonRoomId="room?.dungeon?.id"
               :dungeonProgress="room?.dungeon?.progress"
+              :questsList="questsList"
               @close="closeInfoPanel"
               @selectBackpackItem="selectBackpackItem"
               @viewItem="viewBackpackItem"
@@ -216,7 +240,8 @@
             <button @click="toggleSkills" class="tool-btn" title="技能">⚡</button>
             <button @click="toggleEquipment" class="tool-btn" title="装备">🛡️</button>
             <button @click="toggleMaps" class="tool-btn" title="地图">🗺️</button>
-                        <button @click="toggleDungeons" class="tool-btn" title="副本">🏯</button>
+            <button @click="toggleDungeons" class="tool-btn" title="副本">🏯</button>
+            <button @click="toggleQuests" class="tool-btn" title="任务">令</button>
         </div>
       </div>
     </div>
@@ -273,6 +298,7 @@ const skillsList = ref([])
 const statusAttributes = ref(null)
 const worldsList = ref([])
 const dungeonsList = ref([])
+const questsList = ref([])
 const selectedEntityKey = ref(null)
 const selectedWorldId = ref(null)
 const selectedDungeonId = ref(null)
@@ -315,6 +341,8 @@ const combinedEntities = computed(() => {
         state: n.state,
         isShop: n.isShop || false,
         capabilities: n.capabilities || [],
+        dialogueId: n.dialogueId || '',
+        questIds: n.questIds || [],
         description: n.description || '',
         attributes: n.attributes
       })
@@ -350,6 +378,15 @@ const showLearnPanel = ref(false)
 const learnSkills = ref([])
 const currentTeacher = ref(null)
 const selectedLearnSkill = ref(null)
+
+// Dialogue State
+const showDialoguePanel = ref(false)
+const activeDialogue = ref(null)
+const activeDialogueNpcId = ref('')
+
+const activeDialogueOptions = computed(() => {
+    return Array.isArray(activeDialogue.value?.options) ? activeDialogue.value.options : []
+})
 
 // Backpack State
 const selectedBackpackItem = ref(null)
@@ -452,9 +489,9 @@ const selectedDungeon = computed(() => {
 });
 
 const roomActionLabels = {
-    gather: '??',
-    work: '??',
-    listen_rumor: '???'
+    gather: '采集',
+    work: '劳作',
+    listen_rumor: '听传闻'
 };
 
 const roomActions = computed(() => {
@@ -619,6 +656,8 @@ const refreshOpenPanels = () => {
         sendGameCommand("command", "get_worlds", characterId.value, {})
     } else if (currentPanel.value === 'dungeons') {
         sendGameCommand("command", "get_dungeons", characterId.value, {})
+    } else if (currentPanel.value === 'quests') {
+        sendGameCommand("command", "get_quests", characterId.value, {})
     }
 }
 
@@ -807,6 +846,7 @@ const handleMessage = (msg) => {
       room.value = msg.results.room
             closeShop();
             closeLearn();
+            closeDialogue();
       
       // 注意：后端 Player 对象现在包含 characterName/username
       // 根据您的 Player.java 结构，它有一个 getUsername()，我们假设在后端
@@ -836,6 +876,7 @@ const handleMessage = (msg) => {
       selectedEntityKey.value = null;
     closeShop();
     closeLearn();
+            closeDialogue();
             keepCurrentPlayerOnlineInRoom();
             syncDungeonSelectionFromRoom();
             syncPendingDungeonLeavePrompt();
@@ -975,6 +1016,7 @@ const handleMessage = (msg) => {
           closeInfoPanel();
           closeShop();
           closeLearn();
+            closeDialogue();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
@@ -989,6 +1031,7 @@ const handleMessage = (msg) => {
           closeInfoPanel();
           closeShop();
           closeLearn();
+            closeDialogue();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
@@ -1003,6 +1046,7 @@ const handleMessage = (msg) => {
           closeInfoPanel();
           closeShop();
           closeLearn();
+            closeDialogue();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
@@ -1081,6 +1125,40 @@ const handleMessage = (msg) => {
           sendGameCommand("command", "get_backpack", characterId.value, {});
       } else {
           addLog(`ERROR: 出售失败: ${msg.results.error}`);
+      }
+  } else if (msg.type === 'command' && msg.subtype === 'talk') {
+      if (msg.flag) {
+          activeDialogue.value = msg.results.dialogue || null;
+          activeDialogueNpcId.value = activeDialogue.value?.npcId || activeDialogueNpcId.value;
+          showShopPanel.value = false;
+          showLearnPanel.value = false;
+          showDialoguePanel.value = !!activeDialogue.value;
+      } else {
+          addLog(`ERROR: 交谈失败: ${msg.results.error}`);
+      }
+  } else if (msg.type === 'command' && msg.subtype === 'choose_dialogue') {
+      if (msg.flag) {
+          activeDialogue.value = msg.results.dialogue || activeDialogue.value;
+          showDialoguePanel.value = !!activeDialogue.value;
+          (msg.logs || []).forEach(l => addLog(l));
+          sendGameCommand("command", "get_quests", characterId.value, {});
+          sendGameCommand("command", "get_attributes", characterId.value, {});
+          if (showInfoPanel.value && currentPanel.value === 'backpack') {
+              sendGameCommand("command", "get_backpack", characterId.value, {});
+          }
+      } else {
+          addLog(`ERROR: 对话选择失败: ${msg.results.error}`);
+      }
+  } else if (msg.type === 'command' && msg.subtype === 'get_quests') {
+      if (msg.flag) {
+          questsList.value = msg.results.quests || [];
+          if (!showInfoPanel.value || currentPanel.value !== 'quests') {
+              showInfoPanel.value = true;
+              currentPanel.value = 'quests';
+              panelTitle.value = '任务';
+          }
+      } else {
+          addLog(`ERROR: 获取任务失败: ${msg.results.error}`);
       }
   } else if (msg.type === 'chat') {
       // 聊天消息处理（公开聊天）
@@ -1301,6 +1379,14 @@ const toggleDungeons = () => {
     }
 }
 
+const toggleQuests = () => {
+    if (showInfoPanel.value && currentPanel.value === 'quests') {
+        closeInfoPanel();
+    } else {
+        sendGameCommand("command", "get_quests", characterId.value, {});
+    }
+}
+
 const selectWorld = (worldId) => {
     selectedWorldId.value = worldId;
 }
@@ -1350,6 +1436,12 @@ const closeInfoPanel = () => {
     discardingItem.value = null;
     sellingItem.value = null;
     selectedBackpackItem.value = null;
+}
+
+const closeDialogue = () => {
+    showDialoguePanel.value = false;
+    activeDialogue.value = null;
+    activeDialogueNpcId.value = '';
 }
 
 // ------------------- 实体交互 -------------------
@@ -1452,6 +1544,24 @@ const viewEntity = (entity) => {
     }
     
     addLog(info);
+}
+
+const talkEntity = (entity) => {
+    if (!checkCanAct('talk')) return;
+    if (!entity?.isNpc) {
+        addLog('只能和 NPC 交谈。');
+        return;
+    }
+    activeDialogueNpcId.value = entity.id;
+    sendGameCommand("command", "talk", characterId.value, { npcId: entity.id });
+}
+
+const chooseDialogue = (optionId) => {
+    if (!activeDialogueNpcId.value || !optionId) return;
+    sendGameCommand("command", "choose_dialogue", characterId.value, {
+        npcId: activeDialogueNpcId.value,
+        optionId
+    });
 }
 
 const killEntity = (entity) => {
@@ -1608,6 +1718,7 @@ const logout = () => {
 
 const openShop = (npc) => {
     if (!checkCanAct('open_shop')) return;
+    closeDialogue();
     sendGameCommand("command", "get_shop", characterId.value, { npcId: npc.id });
 }
 
@@ -1619,6 +1730,7 @@ const closeShop = () => {
 
 const openLearn = (npc) => {
     if (!checkCanAct('learn')) return;
+    closeDialogue();
     currentTeacher.value = npc;
     // Convert skills map to array for display
     // npc.skills is { "skillId": level }
@@ -2443,6 +2555,94 @@ const formatMoney = (money) => {
     flex: 0 0 auto;
     margin-top: auto; /* 确保始终位于底部 */
     box-sizing: border-box;
+}
+
+.dialogue-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    background-color: var(--color-background-secondary);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 6px;
+}
+
+.dialogue-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid var(--color-accent-gold);
+}
+
+.dialogue-header h3 {
+    margin: 0;
+    color: var(--color-accent-gold);
+    font-size: 1em;
+}
+
+.dialogue-header span {
+    color: var(--color-text-light);
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+
+.dialogue-close-btn {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 3px;
+    background: var(--color-background-dark);
+    color: var(--color-text-light);
+    cursor: pointer;
+}
+
+.dialogue-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 12px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.dialogue-body::-webkit-scrollbar {
+    display: none;
+}
+
+.dialogue-opening {
+    margin: 0 0 12px;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.dialogue-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dialogue-option-btn {
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 4px;
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-family: inherit;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.dialogue-option-btn:hover {
+    border-color: var(--color-accent-gold);
+    color: var(--color-accent-gold);
 }
 
 .action-buttons-grid {
