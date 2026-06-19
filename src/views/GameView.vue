@@ -196,7 +196,13 @@
                     <button @click="doAction('meditate')" class="action-cmd-btn">打坐</button>
                     <button @click="doAction('heal')" class="action-cmd-btn">疗伤</button>
                     <button @click="doAction('stop')" class="action-cmd-btn">停止</button>
-                    <button v-if="room?.id === 'ly_mine'" @click="doAction('mine')" class="action-cmd-btn">挖矿</button>
+                    <button
+                      v-for="action in roomActions"
+                      :key="action.id"
+                      @click="doRoomAction(action.id)"
+                      class="action-cmd-btn">
+                      {{ action.label }}
+                    </button>
                     <button v-if="isInDungeon" @click="leaveCurrentDungeon" class="action-cmd-btn">离开副本</button>
                     <button v-if="currentPlayer.state === 'DEAD'" @click="doAction('relive')" class="action-cmd-btn relive-btn">复活</button>
                 </div>
@@ -404,35 +410,25 @@ const getSkillBonusText = (skill) => {
     const level = skill.level;
     let bonuses = [];
     
-    if (skill.id === 'basic_fist') {
+    if (skill.id === 'basic_unarmed') {
         bonuses.push(`后天臂力: +${Math.floor(level / 10)}`);
     } else if (skill.id === 'basic_parry') {
         bonuses.push(`后天招架: +${Math.floor(level / 10)}`);
-    } else if (skill.id === 'basic_internal') {
+    } else if (skill.id === 'basic_neigong') {
         bonuses.push(`最大内力: +${level * 10}`);
         if (level > 0) {
             bonuses.push(`内力转气血: 30%`);
         }
-    } else if (skill.id === 'basic_light') {
+    } else if (skill.id === 'basic_qinggong') {
         bonuses.push(`后天身法: +${Math.floor(level / 10)}`);
     }
     
     return bonuses;
 }
 
-// 世界排序顺序
-const worldOrder = ['luoyang', 'wudang', 'shaolin', 'emei', 'huashan', 'kunlun', 'kongtong'];
-
 const sortedWorldsList = computed(() => {
     if (!worldsList.value) return [];
-    return [...worldsList.value].sort((a, b) => {
-        const indexA = worldOrder.indexOf(a.id);
-        const indexB = worldOrder.indexOf(b.id);
-        // 如果不在列表中，放到最后
-        const valA = indexA === -1 ? 999 : indexA;
-        const valB = indexB === -1 ? 999 : indexB;
-        return valA - valB;
-    });
+    return [...worldsList.value];
 });
 
 const selectedWorld = computed(() => {
@@ -453,6 +449,17 @@ const sortedDungeonsList = computed(() => {
 const selectedDungeon = computed(() => {
     if (!selectedDungeonId.value || !dungeonsList.value) return null;
     return dungeonsList.value.find(d => d.id === selectedDungeonId.value) || null;
+});
+
+const roomActionLabels = {
+    gather: '??',
+    work: '??',
+    listen_rumor: '???'
+};
+
+const roomActions = computed(() => {
+    const actions = Array.isArray(room.value?.actions) ? room.value.actions : [];
+    return actions.map(id => ({ id, label: roomActionLabels[id] || id }));
 });
 
 const isInDungeon = computed(() => {
@@ -1277,13 +1284,7 @@ const toggleMaps = () => {
         if (room.value && room.value.id) {
             const prefix = room.value.id.split('_')[0];
             const prefixMap = {
-                'ly': 'luoyang',
-                'wd': 'wudang',
-                'sl': 'shaolin',
-                'em': 'emei',
-                'hs': 'huashan',
-                'kl': 'kunlun',
-                'kt': 'kongtong'
+                'ly': 'luoyang'
             };
             selectedWorldId.value = prefixMap[prefix] || 'luoyang';
         } else {
@@ -1413,6 +1414,11 @@ const doAction = (actionType) => {
     } else {
         sendGameCommand("command", actionType, characterId.value, {});
     }
+}
+
+const doRoomAction = (actionType) => {
+    if (!checkCanAct(actionType)) return;
+    sendGameCommand("command", "do_action", characterId.value, { action: actionType });
 }
 
 const getHealthStatusDescription = (currentHp, maxHp) => {
@@ -1626,14 +1632,14 @@ const openLearn = (npc) => {
     // For now, let's just list them.
     
     const skillNames = {
-        "basic_fist": "基本拳脚",
+        "basic_unarmed": "基本拳脚",
         "basic_sword": "基本剑法",
         "basic_blade": "基本刀法",
         "basic_staff": "基本棍法",
         "basic_parry": "基本招架",
         "basic_dodge": "基本躲闪",
-        "basic_internal": "基本内功",
-        "basic_light": "基本轻功"
+        "basic_neigong": "基本内功",
+        "basic_qinggong": "基本轻功"
     };
 
     learnSkills.value = Object.entries(npc.skills || {}).map(([id, level]) => ({
