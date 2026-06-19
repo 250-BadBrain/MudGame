@@ -664,6 +664,26 @@ func (m *Manager) ApplyEnterRoomObjectiveNoLock(roomID string) int {
 	return inst.Progress - oldProgress
 }
 
+func (m *Manager) ApplyCollectObjectiveNoLock(playerID, itemID string) int {
+	instanceID, ok := m.playerInstance[playerID]
+	if !ok {
+		return 0
+	}
+	inst, ok := m.instances[instanceID]
+	if !ok || inst == nil || len(inst.Objectives) == 0 {
+		return 0
+	}
+	oldProgress := inst.Progress
+	for _, obj := range inst.Objectives {
+		if obj.Type != "collect" || obj.TargetID != itemID {
+			continue
+		}
+		inst.ObjectiveProgress[obj.ID]++
+	}
+	m.updateObjectiveProgressNoLock(inst)
+	return inst.Progress - oldProgress
+}
+
 func (m *Manager) updateObjectiveProgressNoLock(inst *Instance) {
 	if inst == nil || len(inst.Objectives) == 0 {
 		return

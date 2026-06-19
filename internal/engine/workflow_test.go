@@ -100,6 +100,43 @@ func runStatusTicks(t *testing.T, repo RuntimeRepository, times int) {
 	}
 }
 
+func killRoomNPCByName(t *testing.T, repo RuntimeRepository, playerID, npcName string) {
+	t.Helper()
+	snapshot, err := GetRoomSnapshotView(repo, playerID)
+	if err != nil {
+		t.Fatalf("get room snapshot failed: %v", err)
+	}
+	npcs := extractRoomNPCs(snapshot.Room)
+	targetID := ""
+	for _, npc := range npcs {
+		if npc["name"] == npcName {
+			targetID, _ = npc["id"].(string)
+			break
+		}
+	}
+	if targetID == "" {
+		t.Fatalf("expected npc %s in room, got %+v", npcName, npcs)
+	}
+	if _, err := KillWithEffects(repo, playerID, targetID); err != nil {
+		t.Fatalf("kill %s failed: %v", npcName, err)
+	}
+	for i := 0; i < 80; i++ {
+		if _, err := ProcessCombatTickWithEffects(repo); err != nil {
+			t.Fatalf("process combat tick for %s failed at %d: %v", npcName, i, err)
+		}
+		status, err := GetPlayerStatusView(repo, playerID)
+		if err != nil {
+			t.Fatalf("get status after combat failed: %v", err)
+		}
+		if status["state"] == "IDLE" {
+			return
+		}
+	}
+	status, _ := GetPlayerStatusView(repo, playerID)
+	snapshot, _ = GetRoomSnapshotView(repo, playerID)
+	t.Fatalf("combat with %s did not finish, status=%+v roomNPCs=%+v", npcName, status, extractRoomNPCs(snapshot.Room))
+}
+
 func setupRepo(t *testing.T) *testHelper {
 	t.Helper()
 	repo := manager.NewRuntimeManager(t.TempDir())
@@ -843,7 +880,7 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 
 	dungeons := GetDungeonsView(h.repo, h.playerID)
 	for _, dungeon := range dungeons {
-		if dungeon["id"] == "xunqin_ch01_bronze_box" {
+		if dungeon["id"] == "xunqin_ch01_bronze_gate" {
 			t.Fatalf("xunqin dungeon should start locked, got %+v", dungeons)
 		}
 	}
@@ -861,7 +898,7 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	dungeons = GetDungeonsView(h.repo, h.playerID)
 	found := false
 	for _, dungeon := range dungeons {
-		if dungeon["id"] == "xunqin_ch01_bronze_box" {
+		if dungeon["id"] == "xunqin_ch01_bronze_gate" {
 			found = true
 			if dungeon["chainId"] != "xunqin_legend" || dungeon["chapter"] != 1 {
 				t.Fatalf("expected xunqin chain metadata, got %+v", dungeon)
@@ -872,20 +909,19 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 		t.Fatalf("expected xunqin dungeon after dialogue unlock, got %+v", dungeons)
 	}
 
-	enterRes, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch01_bronze_box")
+	enterRes, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch01_bronze_gate")
 	if err != nil {
 		t.Fatalf("enter xunqin dungeon failed: %v", err)
 	}
 	if progress, _ := enterRes.Room["dungeon"].(map[string]interface{})["progress"].(int); progress != 0 {
 		t.Fatalf("expected initial xunqin progress 0, got %+v", enterRes.Room["dungeon"])
 	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to bronze hall failed: %v", err)
+	}
 	moveRes, err := MoveWithTransition(h.repo, h.playerID, "east")
 	if err != nil {
-		t.Fatalf("move to bronze chamber failed: %v", err)
-	}
-	dungeonPayload, _ := moveRes.Room["dungeon"].(map[string]interface{})
-	if dungeonPayload["progress"] != 100 {
-		t.Fatalf("expected xunqin progress 100 after entering chamber, got %+v", dungeonPayload)
+		t.Fatalf("move to bronze mechanism failed: %v", err)
 	}
 	actions, _ := moveRes.Room["actions"].([]string)
 	hasSearch := false
@@ -896,33 +932,109 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 		}
 	}
 	if !hasSearch {
-		t.Fatalf("expected search action in bronze chamber, got %+v", moveRes.Room["actions"])
+		t.Fatalf("expected search action in bronze mechanism room, got %+v", moveRes.Room["actions"])
 	}
-
 	searchRes, err := DoRoomActionWithEffects(h.repo, h.playerID, "search")
 	if err != nil {
-		t.Fatalf("search bronze chamber failed: %v", err)
+		t.Fatalf("search bronze mechanism failed: %v", err)
 	}
 	if searchRes.Message == "" {
 		t.Fatalf("search should return message")
+	}
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to warring states rift failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to village failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "荒村恶霸")
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to ambush road failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "赵国游骑")
+	killRoomNPCByName(t, h.repo, h.playerID, "赵国游骑")
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to bamboo road failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to abandoned camp failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "赵国游骑")
+	killRoomNPCByName(t, h.repo, h.playerID, "赵府门客")
+
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "east")
+	if err != nil {
+		t.Fatalf("move to fragment desk failed: %v", err)
+	}
+	actions, _ = moveRes.Room["actions"].([]string)
+	hasInspect := false
+	for _, action := range actions {
+		if action == "inspect_fragment" {
+			hasInspect = true
+			break
+		}
+	}
+	if !hasInspect {
+		t.Fatalf("expected inspect_fragment action, got %+v", moveRes.Room["actions"])
+	}
+	inspectRes, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_fragment")
+	if err != nil {
+		t.Fatalf("inspect fragment failed: %v", err)
+	}
+	if inspectRes.Message == "" {
+		t.Fatalf("inspect fragment should return message")
+	}
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to broken bridge failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "门客剑士")
+
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "east")
+	if err != nil {
+		t.Fatalf("move to bronze gate echo failed: %v", err)
+	}
+	dungeonPayload, _ := moveRes.Room["dungeon"].(map[string]interface{})
+	if dungeonPayload["progress"] != 100 {
+		t.Fatalf("expected xunqin progress 100 at bronze gate echo, got %+v", dungeonPayload)
 	}
 
 	backpack, err := GetBackpackView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get backpack failed: %v", err)
 	}
-	foundFragment := false
+	foundBronze := false
+	foundZongheng := false
 	for _, item := range backpack.Items {
 		if item["id"] == "bronze_fragment" && item["count"] == 1 {
-			foundFragment = true
-			break
+			foundBronze = true
+		}
+		if item["id"] == "zongheng_fragment" && item["count"] == 1 {
+			foundZongheng = true
 		}
 	}
-	if !foundFragment {
-		t.Fatalf("expected bronze_fragment reward, got %+v", backpack.Items)
+	if !foundBronze || !foundZongheng {
+		t.Fatalf("expected xunqin clue items, bronze=%v zongheng=%v backpack=%+v", foundBronze, foundZongheng, backpack.Items)
 	}
 
 	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
 		t.Fatalf("leave xunqin dungeon failed: %v", err)
+	}
+	status, err := GetPlayerStatusView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get status after leaving dungeon failed: %v", err)
+	}
+	if status["roomId"] != "ly_inn" {
+		t.Fatalf("expected player to return to entry room after dungeon, got %+v", status)
+	}
+	attrs, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes after dungeon failed: %v", err)
+	}
+	if attrs["experience"].(int) < 380 || attrs["potential"].(int) < 240 {
+		t.Fatalf("expected xunqin settlement rewards, got %+v", attrs)
 	}
 }

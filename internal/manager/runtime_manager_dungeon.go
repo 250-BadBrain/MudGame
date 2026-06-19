@@ -229,6 +229,13 @@ func (r *RuntimeManager) applyEnterRoomDungeonObjectiveNoLock(roomID string) int
 	return r.dungeonMgr.ApplyEnterRoomObjectiveNoLock(roomID)
 }
 
+func (r *RuntimeManager) applyCollectDungeonObjectiveNoLock(playerID, itemID string) int {
+	if r.dungeonMgr == nil {
+		return 0
+	}
+	return r.dungeonMgr.ApplyCollectObjectiveNoLock(playerID, itemID)
+}
+
 func formatDungeonSettlementMessage(settlement engruntime.Settlement) string {
 	return engruntime.FormatDungeonSettlementMessage(settlement)
 }

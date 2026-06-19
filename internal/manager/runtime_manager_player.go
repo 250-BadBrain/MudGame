@@ -729,6 +729,12 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 			return nil, err
 		}
 		result["message"] = message
+	case "inspect_fragment":
+		message, err := r.inspectFragmentRoomNoLock(p, room)
+		if err != nil {
+			return nil, err
+		}
+		result["message"] = message
 	default:
 		return nil, errors.New("action_not_supported")
 	}
@@ -748,23 +754,38 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
 	}
-	if room.WorldID == "dungeon_xunqin_ch01_bronze_box" && strings.HasSuffix(room.ID, "_bronze_01") {
-		if p.Flags["xunqin_ch01_completed"] {
-			return "你又仔细搜了一遍铜匣暗室，只找到些无用铜锈。", nil
+	if room.WorldID == "dungeon_xunqin_ch01_bronze_gate" && strings.HasSuffix(room.ID, "_bronze_02") {
+		if p.Flags["xunqin_ch01_found_bronze_fragment"] {
+			return "你又仔细搜了一遍机关暗格，只见铜匣纹路暗淡下来，再无新的发现。", nil
 		}
 		p.Backpack["bronze_fragment"] += 1
-		p.Flags["xunqin_ch01_completed"] = true
-		return "你在铜匣暗格中摸到一枚古铜残片，残片入手微凉，纹路似在烛光下缓缓流动。", nil
-	}
-	if room.WorldID == "dungeon_xunqin_ch02_zongheng_shadow" && strings.HasSuffix(room.ID, "_shadow_02") {
-		if p.Flags["xunqin_ch02_searched"] {
-			return "你又翻看旧营残帐，案上只余几片被风吹散的竹屑。", nil
-		}
-		p.Backpack["zongheng_fragment"] += 1
-		p.Flags["xunqin_ch02_searched"] = true
-		return "你从案上断简中拣起半页纵横残简，残简末尾只剩两个模糊字迹：少龙。", nil
+		p.Flags["xunqin_ch01_found_bronze_fragment"] = true
+		r.applyCollectDungeonObjectiveNoLock(p.ID, "bronze_fragment")
+		return "你在机关暗格中摸到一枚古铜残片。残片入手微凉，铜匣随即开启，洛阳夜色被一线铜光割开。", nil
 	}
 	return "你仔细搜索四周，没有发现值得带走的东西。", nil
+}
+
+func (r *RuntimeManager) inspectFragmentRoomNoLock(p *model.Player, room model.Room) (string, error) {
+	if p == nil {
+		return "", exception.ErrPlayerNotFound
+	}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
+	}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	if room.WorldID == "dungeon_xunqin_ch01_bronze_gate" && strings.HasSuffix(room.ID, "_camp_08") {
+		if p.Flags["xunqin_ch01_read_fragment"] {
+			return "你再次辨认残简，只觉那些断字已深深印在心里：邯郸，质子，少龙。", nil
+		}
+		p.Backpack["zongheng_fragment"] += 1
+		p.Flags["xunqin_ch01_read_fragment"] = true
+		r.applyCollectDungeonObjectiveNoLock(p.ID, "zongheng_fragment")
+		return "你辨出残简上断续的字迹：邯郸、质子、少龙。竹简忽然发热，像是在催你赶往下一段命运。", nil
+	}
+	return "你细细查看眼前物事，没有辨出新的线索。", nil
 }
 
 func roomRumor(roomID string) string {

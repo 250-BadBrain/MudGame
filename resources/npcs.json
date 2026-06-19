@@ -854,8 +854,8 @@
         "postWillpower": 0
       },
       "resources": {
-        "hp": 90,
-        "maxHp": 90,
+        "hp": 18,
+        "maxHp": 18,
         "mp": 30,
         "trainedMaxMp": 30,
         "maxMp": 30,
@@ -863,11 +863,11 @@
         "maxSpirit": 100
       },
       "derived": {
-        "attack": 16,
-        "defense": 8,
-        "hitRate": 80,
-        "dodge": 70,
-        "parry": 55,
+        "attack": 12,
+        "defense": 6,
+        "hitRate": 72,
+        "dodge": 58,
+        "parry": 45,
         "critRate": 3,
         "attackSpeed": 4,
         "initiative": 80,
@@ -1021,6 +1021,170 @@
         "fear": 0,
         "charm": 0,
         "seal": 0
+      }
+    }
+  },
+  "tingfang_shadow": {
+    "name": "婷芳氏",
+    "title": "赵境少女",
+    "description": "她衣衫虽旧，神色却倔强清亮。她似乎知道这个时代的险恶，也隐约觉得你并不完全属于此处。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 1,
+      "realm": "ordinary",
+      "resources": {
+        "hp": 70,
+        "maxHp": 70,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 8,
+        "defense": 8,
+        "hitRate": 70,
+        "dodge": 70,
+        "parry": 40,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 80
+      }
+    }
+  },
+  "zhao_bully": {
+    "name": "荒村恶霸",
+    "title": "横行村里",
+    "description": "这恶霸仗着几分蛮力在荒村欺人，见你插手，脸色顿时凶狠起来。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 5,
+      "realm": "trainee",
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 3,
+        "defense": 3,
+        "hitRate": 62,
+        "dodge": 40,
+        "parry": 30,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 80
+      }
+    }
+  },
+  "zhao_rider": {
+    "name": "赵国游骑",
+    "title": "追兵",
+    "description": "游骑披着轻甲，刀锋上带着风沙。他们认定你就是要追的人，出手毫不迟疑。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 7,
+      "realm": "trainee",
+      "resources": {
+        "hp": 16,
+        "maxHp": 16,
+        "mp": 50,
+        "trainedMaxMp": 50,
+        "maxMp": 50,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 3,
+        "defense": 4,
+        "hitRate": 64,
+        "dodge": 44,
+        "parry": 34,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 80
+      }
+    }
+  },
+  "zhao_retainer": {
+    "name": "赵府门客",
+    "title": "追踪者",
+    "description": "这名门客眼神阴沉，盯着你手中的铜光痕迹，显然并非只为追杀而来。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "elite",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 9,
+      "realm": "fighter",
+      "resources": {
+        "hp": 22,
+        "maxHp": 22,
+        "mp": 70,
+        "trainedMaxMp": 70,
+        "maxMp": 70,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 3,
+        "defense": 4,
+        "hitRate": 64,
+        "dodge": 42,
+        "parry": 34,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 80
+      }
+    }
+  },
+  "retainer_swordsman": {
+    "name": "门客剑士",
+    "title": "断桥拦路",
+    "description": "剑士衣袖无风自动，目光冷得像铁。他守在断桥前，不许任何异数带着残简离开。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "boss",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 12,
+      "realm": "fighter",
+      "resources": {
+        "hp": 32,
+        "maxHp": 32,
+        "mp": 100,
+        "trainedMaxMp": 100,
+        "maxMp": 100,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 5,
+        "defense": 6,
+        "hitRate": 70,
+        "dodge": 48,
+        "parry": 42,
+        "critRate": 7,
+        "attackSpeed": 4,
+        "initiative": 80
       }
     }
   }
