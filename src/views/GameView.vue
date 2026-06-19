@@ -475,7 +475,8 @@ const roomActionLabels = {
     gather: '采集',
     work: '劳作',
     listen_rumor: '听传闻',
-    search: '搜索'
+    search: '搜索',
+    inspect_fragment: '辨认残简'
 };
 
 const roomActions = computed(() => {
