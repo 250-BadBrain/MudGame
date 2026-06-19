@@ -472,7 +472,8 @@ const selectedDungeon = computed(() => {
 const roomActionLabels = {
     gather: '采集',
     work: '劳作',
-    listen_rumor: '听传闻'
+    listen_rumor: '听传闻',
+    search: '搜索'
 };
 
 const roomActions = computed(() => {
@@ -1266,6 +1267,18 @@ const handleMessage = (msg) => {
         }
         syncPendingDungeonLeavePrompt();
     }
+  } else if (msg.type === 'command' && msg.subtype === 'do_action') {
+      if (msg.flag) {
+          (msg.logs || []).forEach(l => addLog(l));
+          if (showInfoPanel.value && currentPanel.value === 'backpack') {
+              sendGameCommand("command", "get_backpack", characterId.value, {});
+          }
+          if (showInfoPanel.value && currentPanel.value === 'status') {
+              sendGameCommand("command", "get_attributes", characterId.value, {});
+          }
+      } else {
+          addLog(`ERROR: 动作失败: ${msg.results.error}`);
+      }
   } else if (msg.type === 'command' && msg.subtype === 'relive') {
       if (msg.flag) {
           addLog(msg.results.message);
