@@ -22,6 +22,8 @@ type StaticData struct {
 	Items      map[string]model.ItemDef
 	Skills     map[string]model.SkillDef
 	NPCs       map[string]model.NPC
+	Dialogues  map[string]model.DialogueDef
+	Quests     map[string]model.QuestDef
 }
 
 type rawItem struct {
@@ -137,6 +139,14 @@ func loadFromDisk() (StaticData, error) {
 	if err != nil {
 		return StaticData{}, err
 	}
+	dialogues, err := loadDialogues(filepath.Join(resourceDir, "dialogues.json"))
+	if err != nil {
+		return StaticData{}, err
+	}
+	quests, err := loadQuests(filepath.Join(resourceDir, "quests.json"))
+	if err != nil {
+		return StaticData{}, err
+	}
 	worldOrder, worlds, rooms, err := loadWorlds(filepath.Join(resourceDir, "worlds"))
 	if err != nil {
 		return StaticData{}, err
@@ -153,6 +163,8 @@ func loadFromDisk() (StaticData, error) {
 		Items:      items,
 		Skills:     skills,
 		NPCs:       npcs,
+		Dialogues:  dialogues,
+		Quests:     quests,
 	}, nil
 }
 
@@ -341,10 +353,62 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 			IsShop:        len(shopInventory) > 0,
 			ShopInventory: shopInventory,
 			Skills:        skills,
-			Attributes:    raw.Attributes,
+			Attributes:    model.NormalizeAttributes(raw.Attributes),
 		}
 	}
 	return npcs, nil
+}
+
+func loadDialogues(path string) (map[string]model.DialogueDef, error) {
+	dialogues := map[string]model.DialogueDef{}
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return dialogues, nil
+	}
+	raw := map[string]model.DialogueDef{}
+	if err := readJSON(path, &raw); err != nil {
+		return nil, err
+	}
+	for key, def := range raw {
+		id := strings.TrimSpace(def.ID)
+		if id == "" {
+			id = strings.TrimSpace(key)
+		}
+		if id == "" {
+			continue
+		}
+		def.ID = id
+		dialogues[id] = def
+	}
+	return dialogues, nil
+}
+
+func loadQuests(path string) (map[string]model.QuestDef, error) {
+	quests := map[string]model.QuestDef{}
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return quests, nil
+	}
+	raw := map[string]model.QuestDef{}
+	if err := readJSON(path, &raw); err != nil {
+		return nil, err
+	}
+	for key, def := range raw {
+		id := strings.TrimSpace(def.ID)
+		if id == "" {
+			id = strings.TrimSpace(key)
+		}
+		if id == "" || strings.TrimSpace(def.Name) == "" {
+			continue
+		}
+		def.ID = id
+		if def.Rewards.Items == nil {
+			def.Rewards.Items = map[string]int{}
+		}
+		if def.Rewards.Flags == nil {
+			def.Rewards.Flags = map[string]bool{}
+		}
+		quests[id] = def
+	}
+	return quests, nil
 }
 
 func loadWorlds(worldDir string) ([]string, map[string]model.World, map[string]model.Room, error) {
@@ -481,6 +545,8 @@ func cloneStaticData(in StaticData) StaticData {
 		Items:      map[string]model.ItemDef{},
 		Skills:     map[string]model.SkillDef{},
 		NPCs:       map[string]model.NPC{},
+		Dialogues:  map[string]model.DialogueDef{},
+		Quests:     map[string]model.QuestDef{},
 	}
 	for id, w := range in.Worlds {
 		out.Worlds[id] = w
@@ -517,6 +583,24 @@ func cloneStaticData(in StaticData) StaticData {
 		}
 		npcCopy.QuestIDs = append([]string{}, npc.QuestIDs...)
 		out.NPCs[id] = npcCopy
+	}
+	for id, dialogue := range in.Dialogues {
+		dialogueCopy := dialogue
+		dialogueCopy.Options = append([]model.DialogueOption{}, dialogue.Options...)
+		out.Dialogues[id] = dialogueCopy
+	}
+	for id, quest := range in.Quests {
+		questCopy := quest
+		questCopy.Objectives = append([]model.Objective{}, quest.Objectives...)
+		questCopy.Rewards.Items = map[string]int{}
+		for itemID, amount := range quest.Rewards.Items {
+			questCopy.Rewards.Items[itemID] = amount
+		}
+		questCopy.Rewards.Flags = map[string]bool{}
+		for flag, value := range quest.Rewards.Flags {
+			questCopy.Rewards.Flags[flag] = value
+		}
+		out.Quests[id] = questCopy
 	}
 	return out
 }

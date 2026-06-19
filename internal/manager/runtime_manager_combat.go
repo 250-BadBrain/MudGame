@@ -69,13 +69,13 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 		strikeAToB := r.resolveCombatStrike(attacker, target, combatType)
 		strikeBToA := r.resolveCombatStrike(target, attacker, combatType)
 
-		target.Attributes.CurrentHP -= strikeAToB.Damage
-		if target.Attributes.CurrentHP < 0 {
-			target.Attributes.CurrentHP = 0
+		target.Attributes.Resources.HP -= strikeAToB.Damage
+		if target.Attributes.Resources.HP < 0 {
+			target.Attributes.Resources.HP = 0
 		}
-		attacker.Attributes.CurrentHP -= strikeBToA.Damage
-		if attacker.Attributes.CurrentHP < 0 {
-			attacker.Attributes.CurrentHP = 0
+		attacker.Attributes.Resources.HP -= strikeBToA.Damage
+		if attacker.Attributes.Resources.HP < 0 {
+			attacker.Attributes.Resources.HP = 0
 		}
 
 		if strikeAToB.Message != "" {
@@ -87,16 +87,16 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 		updatedRoom[roomID] = true
 
 		if combatType == "KILL" {
-			if attacker.Attributes.CurrentHP == 0 || target.Attributes.CurrentHP == 0 {
+			if attacker.Attributes.Resources.HP == 0 || target.Attributes.Resources.HP == 0 {
 				r.resolveKillEndNoLock(attacker, target, roomID, &result)
 			}
 			continue
 		}
 
-		attackerLimit := attacker.Attributes.MaxHP / 5
-		targetLimit := target.Attributes.MaxHP / 5
-		attackerLow := attacker.Attributes.CurrentHP <= attackerLimit
-		targetLow := target.Attributes.CurrentHP <= targetLimit
+		attackerLimit := attacker.Attributes.Resources.MaxHP / 5
+		targetLimit := target.Attributes.Resources.MaxHP / 5
+		attackerLow := attacker.Attributes.Resources.HP <= attackerLimit
+		targetLow := target.Attributes.Resources.HP <= targetLimit
 		if attackerLow || targetLow {
 			r.clearCombatNoLock(attacker)
 			r.clearCombatNoLock(target)
@@ -124,16 +124,16 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 		combatType = "KILL"
 	}
 
-	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, attacker.Attributes, dungeonTarget.Name, dungeonTarget.Attributes, combatType)
-	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, dungeonTarget.Attributes, attacker.CharacterName, attacker.Attributes, "KILL")
+	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), combatType)
+	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), "KILL")
 
-	dungeonTarget.Attributes.CurrentHP -= strikeAToB.Damage
-	if dungeonTarget.Attributes.CurrentHP < 0 {
-		dungeonTarget.Attributes.CurrentHP = 0
+	dungeonTarget.Attributes.Resources.HP -= strikeAToB.Damage
+	if dungeonTarget.Attributes.Resources.HP < 0 {
+		dungeonTarget.Attributes.Resources.HP = 0
 	}
-	attacker.Attributes.CurrentHP -= strikeBToA.Damage
-	if attacker.Attributes.CurrentHP < 0 {
-		attacker.Attributes.CurrentHP = 0
+	attacker.Attributes.Resources.HP -= strikeBToA.Damage
+	if attacker.Attributes.Resources.HP < 0 {
+		attacker.Attributes.Resources.HP = 0
 	}
 
 	if strikeAToB.Message != "" {
@@ -144,7 +144,7 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 	}
 	updatedRoom[roomID] = true
 
-	if dungeonTarget.Attributes.CurrentHP == 0 {
+	if dungeonTarget.Attributes.Resources.HP == 0 {
 		defeatedName := dungeonTarget.Name
 		progress := 0
 		if inst, defeated, progressGain, ok := r.defeatDungeonNPCNoLock(dungeonTarget.ID); ok {
@@ -160,7 +160,7 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 		r.clearCombatNoLock(attacker)
 	}
 
-	if attacker.Attributes.CurrentHP == 0 {
+	if attacker.Attributes.Resources.HP == 0 {
 		attacker.State = "DEAD"
 		attacker.TargetID = ""
 		attacker.CombatType = ""
@@ -178,7 +178,7 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 }
 
 func (r *RuntimeManager) resolveKillEndNoLock(a, b *model.Player, roomID string, result *model.CombatTickResult) {
-	if a.Attributes.CurrentHP == 0 && b.Attributes.CurrentHP == 0 {
+	if a.Attributes.Resources.HP == 0 && b.Attributes.Resources.HP == 0 {
 		a.State = "DEAD"
 		a.TargetID = ""
 		a.CombatType = ""
@@ -188,7 +188,7 @@ func (r *RuntimeManager) resolveKillEndNoLock(a, b *model.Player, roomID string,
 		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: a.CharacterName + "和" + b.CharacterName + "同归于尽。"})
 		return
 	}
-	if b.Attributes.CurrentHP == 0 {
+	if b.Attributes.Resources.HP == 0 {
 		b.State = "DEAD"
 		b.TargetID = ""
 		b.CombatType = ""
@@ -196,7 +196,7 @@ func (r *RuntimeManager) resolveKillEndNoLock(a, b *model.Player, roomID string,
 		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: b.CharacterName + "大叫一声，倒在地上，死了！"})
 		return
 	}
-	if a.Attributes.CurrentHP == 0 {
+	if a.Attributes.Resources.HP == 0 {
 		a.State = "DEAD"
 		a.TargetID = ""
 		a.CombatType = ""
@@ -285,10 +285,10 @@ type combatStrikeResult struct {
 }
 
 func (r *RuntimeManager) resolveCombatStrike(attacker, defender *model.Player, combatType string) combatStrikeResult {
-	return r.resolveCombatStrikeEntity(attacker.CharacterName, attacker.Attributes, defender.CharacterName, defender.Attributes, combatType)
+	return r.resolveCombatStrikeEntity(attacker.CharacterName, model.BuildEffectiveAttributes(attacker.Attributes), defender.CharacterName, model.BuildEffectiveAttributes(defender.Attributes), combatType)
 }
 
-func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attackerAttrs model.Attributes, defenderName string, defenderAttrs model.Attributes, combatType string) combatStrikeResult {
+func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attackerAttrs model.EffectiveAttributes, defenderName string, defenderAttrs model.EffectiveAttributes, combatType string) combatStrikeResult {
 	hitChance := boundedChance(attackerAttrs.HitRate, defenderAttrs.Dodge)
 	if rand.Float64() > hitChance {
 		return combatStrikeResult{Damage: 0, Message: attackerName + "发起攻击，但被" + defenderName + "躲开了！"}

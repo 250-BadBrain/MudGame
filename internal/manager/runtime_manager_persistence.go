@@ -227,7 +227,15 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for sk, sv := range v.Skills {
 			skills[sk] = sv
 		}
-		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, Backpack: backpack, Equipment: equipment, Online: v.Online}
+		questStates := map[string]model.QuestState{}
+		for qk, qv := range v.QuestStates {
+			questStates[qk] = qv
+		}
+		flags := map[string]bool{}
+		for fk, fv := range v.Flags {
+			flags[fk] = fv
+		}
+		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, Online: v.Online}
 	}
 	return out
 }

@@ -40,22 +40,24 @@ type diskUser struct {
 }
 
 type diskPlayer struct {
-	ID                 string            `json:"id"`
-	CharacterName      string            `json:"characterName"`
-	UserID             string            `json:"userId"`
-	RoomID             string            `json:"roomId"`
-	Title              interface{}       `json:"title"`
-	UnlockedTitles     interface{}       `json:"unlockedTitles"`
-	Money              int               `json:"money"`
-	Attributes         model.Attributes  `json:"attributes"`
-	Items              map[string]int    `json:"items"`
-	Equipment          map[string]string `json:"equipment"`
-	Skills             map[string]int    `json:"skills"`
-	State              string            `json:"state"`
-	StateTickCountdown int               `json:"stateTickCountdown"`
-	TargetID           string            `json:"targetId"`
-	LearningSkillID    interface{}       `json:"learningSkillId"`
-	CombatType         string            `json:"combatType"`
+	ID                 string                      `json:"id"`
+	CharacterName      string                      `json:"characterName"`
+	UserID             string                      `json:"userId"`
+	RoomID             string                      `json:"roomId"`
+	Title              interface{}                 `json:"title"`
+	UnlockedTitles     interface{}                 `json:"unlockedTitles"`
+	Money              int                         `json:"money"`
+	Attributes         model.Attributes            `json:"attributes"`
+	Items              map[string]int              `json:"items"`
+	Equipment          map[string]string           `json:"equipment"`
+	Skills             map[string]int              `json:"skills"`
+	QuestStates        map[string]model.QuestState `json:"questStates"`
+	Flags              map[string]bool             `json:"flags"`
+	State              string                      `json:"state"`
+	StateTickCountdown int                         `json:"stateTickCountdown"`
+	TargetID           string                      `json:"targetId"`
+	LearningSkillID    interface{}                 `json:"learningSkillId"`
+	CombatType         string                      `json:"combatType"`
 }
 
 func NewFileStore(baseDir string) *FileStore {
@@ -158,6 +160,12 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 		if dp.Skills == nil {
 			dp.Skills = map[string]int{"basic_unarmed": 1, "basic_parry": 1, "basic_neigong": 1, "basic_qinggong": 1}
 		}
+		if dp.QuestStates == nil {
+			dp.QuestStates = map[string]model.QuestState{}
+		}
+		if dp.Flags == nil {
+			dp.Flags = map[string]bool{}
+		}
 		state := dp.State
 		if state == "" {
 			state = "IDLE"
@@ -167,6 +175,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 		case string:
 			learningSkillID = v
 		}
+		attrs := model.NormalizeAttributes(dp.Attributes)
 		players[dp.ID] = &model.Player{
 			ID:                 dp.ID,
 			UserID:             dp.UserID,
@@ -178,10 +187,12 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			TargetID:           dp.TargetID,
 			CombatType:         dp.CombatType,
 			Money:              dp.Money,
-			Attributes:         dp.Attributes,
+			Attributes:         attrs,
 			Skills:             dp.Skills,
 			Backpack:           dp.Items,
 			Equipment:          dp.Equipment,
+			QuestStates:        dp.QuestStates,
+			Flags:              dp.Flags,
 			Online:             false,
 		}
 	}
@@ -219,10 +230,12 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 			Title:              nil,
 			UnlockedTitles:     nil,
 			Money:              p.Money,
-			Attributes:         p.Attributes,
+			Attributes:         model.NormalizeAttributes(p.Attributes),
 			Items:              p.Backpack,
 			Equipment:          p.Equipment,
 			Skills:             p.Skills,
+			QuestStates:        p.QuestStates,
+			Flags:              p.Flags,
 			State:              state,
 			StateTickCountdown: p.StateTickCountdown,
 			TargetID:           targetID,

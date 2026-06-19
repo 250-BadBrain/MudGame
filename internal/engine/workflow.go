@@ -80,12 +80,22 @@ type RoomUpdateResult struct {
 	NPCs    []map[string]interface{}
 }
 
+type DialogueResult struct {
+	Dialogue map[string]interface{}
+	Message  string
+	Logs     []string
+}
+
+type QuestListResult struct {
+	Quests []map[string]interface{}
+}
+
 type RuntimeRepository interface {
 	Register(username, password string) error
 	Login(username, password string) (string, error)
 	IsReconnectTokenValid(username, token string) bool
 	DeleteAccount(username, password string) error
-	CreateCharacter(username, name string, str, con, agi, intel int) (string, error)
+	CreateCharacter(username, name string, str, con, agi, perception, willpower int) (string, error)
 	ListCharacters(username string) []map[string]string
 	CharacterBelongsToUser(username, playerID string) bool
 	DeleteCharacter(username, playerID string) error
@@ -110,6 +120,9 @@ type RuntimeRepository interface {
 	LearnSkill(playerID, npcID, skillID string) error
 	Mine(playerID string) (int, int, string, error)
 	DoRoomAction(playerID, action string) (map[string]interface{}, error)
+	Talk(playerID, npcID string) (map[string]interface{}, error)
+	ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, error)
+	GetQuests(playerID string) ([]map[string]interface{}, error)
 	Heal(playerID string) (string, error)
 	Meditate(playerID string) (string, error)
 	Stop(playerID string) string

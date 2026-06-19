@@ -39,8 +39,9 @@ func (s *Server) handleSystemCreateCharacter(conn *websocket.Conn, cmd protocol.
 	str := toInt(cmd.Args["strength"], 20)
 	con := toInt(cmd.Args["constitution"], 20)
 	agi := toInt(cmd.Args["agility"], 20)
-	intel := toInt(cmd.Args["intelligence"], 20)
-	id, err := s.repo.CreateCharacter(username, charName, str, con, agi, intel)
+	perception := toInt(cmd.Args["perception"], 16)
+	willpower := toInt(cmd.Args["willpower"], 16)
+	id, err := s.repo.CreateCharacter(username, charName, str, con, agi, perception, willpower)
 	if err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "create_character", false, map[string]interface{}{"error": err.Error()}, nil))
 		return

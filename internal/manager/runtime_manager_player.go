@@ -21,16 +21,26 @@ func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{},
 	if !ok {
 		return nil, exception.ErrPlayerNotFound
 	}
-	a := p.Attributes
+	a := model.NormalizeAttributes(p.Attributes)
+	eff := model.BuildEffectiveAttributes(a)
 	return map[string]interface{}{
+		"level": a.Level, "realm": a.Realm,
 		"experience": a.Experience, "potential": a.Potential,
-		"currentHp": a.CurrentHP, "maxHp": a.MaxHP,
-		"currentMp": a.CurrentMP, "trainedMaxMp": a.TrainedMaxMP, "maxMp": a.MaxMP,
-		"strength": a.Strength, "constitution": a.Constitution, "agility": a.Agility, "intelligence": a.Intelligence,
-		"appearance": a.Appearance, "luck": a.Luck,
-		"attack": a.Attack, "defense": a.Defense,
-		"hitRate": a.HitRate, "dodge": a.Dodge, "parry": a.Parry, "critRate": a.CritRate, "attackSpeed": a.AttackSpeed,
-		"postStrength": a.PostStrength, "postConstitution": a.PostConstitution, "postAgility": a.PostAgility, "postIntelligence": a.PostIntelligence,
+		"currentHp": eff.HP, "maxHp": eff.MaxHP,
+		"currentMp": eff.MP, "trainedMaxMp": eff.TrainedMaxMP, "maxMp": eff.MaxMP,
+		"spirit": eff.Spirit, "maxSpirit": eff.MaxSpirit,
+		"strength": eff.Strength, "constitution": eff.Constitution, "agility": eff.Agility,
+		"perception": eff.Perception, "willpower": eff.Willpower, "charm": eff.Charm, "luck": eff.Luck,
+		"attack": eff.Attack, "defense": eff.Defense,
+		"hitRate": eff.HitRate, "dodge": eff.Dodge, "parry": eff.Parry, "critRate": eff.CritRate,
+		"attackSpeed": eff.AttackSpeed, "initiative": eff.Initiative,
+		"guardBreak": eff.GuardBreak, "damageReduction": eff.DamageReduction,
+		"postStrength": a.Growth.PostStrength, "postConstitution": a.Growth.PostConstitution,
+		"postAgility": a.Growth.PostAgility, "postPerception": a.Growth.PostPerception,
+		"postWillpower": a.Growth.PostWillpower,
+		"fame":          eff.Fame, "notoriety": eff.Notoriety, "authority": eff.Authority, "credit": eff.Credit,
+		"base": a.Base, "growth": a.Growth, "resources": a.Resources,
+		"derived": a.Derived, "social": a.Social, "resistances": a.Resistances,
 	}, nil
 }
 
@@ -760,16 +770,16 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
 	}
-	if p.Attributes.CurrentHP >= p.Attributes.MaxHP {
+	if p.Attributes.Resources.HP >= p.Attributes.Resources.MaxHP {
 		return "", errors.New("hp_full")
 	}
-	if p.Attributes.CurrentMP < 10 {
+	if p.Attributes.Resources.MP < 10 {
 		return "", errors.New("mp_insufficient")
 	}
-	p.Attributes.CurrentMP -= 10
-	p.Attributes.CurrentHP += 20
-	if p.Attributes.CurrentHP > p.Attributes.MaxHP {
-		p.Attributes.CurrentHP = p.Attributes.MaxHP
+	p.Attributes.Resources.MP -= 10
+	p.Attributes.Resources.HP += 20
+	if p.Attributes.Resources.HP > p.Attributes.Resources.MaxHP {
+		p.Attributes.Resources.HP = p.Attributes.Resources.MaxHP
 	}
 	p.State = "HEALING"
 	if err := r.savePlayers(players); err != nil {
@@ -808,12 +818,12 @@ func (r *RuntimeManager) Meditate(playerID string) (string, error) {
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
 	}
-	if p.Attributes.TrainedMaxMP >= p.Attributes.MaxMP && p.Attributes.CurrentMP >= p.Attributes.TrainedMaxMP {
+	if p.Attributes.Resources.TrainedMaxMP >= p.Attributes.Resources.MaxMP && p.Attributes.Resources.MP >= p.Attributes.Resources.TrainedMaxMP {
 		return "", errors.New("full_state")
 	}
-	p.Attributes.CurrentMP += 15
-	if p.Attributes.CurrentMP > p.Attributes.TrainedMaxMP {
-		p.Attributes.CurrentMP = p.Attributes.TrainedMaxMP
+	p.Attributes.Resources.MP += 15
+	if p.Attributes.Resources.MP > p.Attributes.Resources.TrainedMaxMP {
+		p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
 	}
 	p.State = "MEDITATING"
 	if err := r.savePlayers(players); err != nil {
@@ -870,7 +880,7 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 	if p.State != "IDLE" {
 		return "", errors.New("busy")
 	}
-	if p.Attributes.CurrentHP < p.Attributes.MaxHP {
+	if p.Attributes.Resources.HP < p.Attributes.Resources.MaxHP {
 		return "", errors.New("self_not_full")
 	}
 	if targetID == "" {
@@ -904,7 +914,7 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 	if t.State != "IDLE" {
 		return "", errors.New("target_busy")
 	}
-	if t.Attributes.CurrentHP < t.Attributes.MaxHP {
+	if t.Attributes.Resources.HP < t.Attributes.Resources.MaxHP {
 		return "", errors.New("target_not_full")
 	}
 	p.State = "COMBAT"
@@ -1004,8 +1014,8 @@ func (r *RuntimeManager) Relive(playerID string) (string, error) {
 	p.State = "IDLE"
 	p.TargetID = ""
 	p.CombatType = ""
-	p.Attributes.CurrentHP = p.Attributes.MaxHP
-	p.Attributes.CurrentMP = p.Attributes.TrainedMaxMP
+	p.Attributes.Resources.HP = p.Attributes.Resources.MaxHP
+	p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
 	p.RoomID = "ly_00"
 	if err := r.savePlayers(players); err != nil {
 		return "", err
@@ -1029,50 +1039,50 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 		roomID := p.RoomID
 		switch p.State {
 		case "HEALING":
-			if p.Attributes.CurrentHP >= p.Attributes.MaxHP || p.Attributes.CurrentMP < 8 {
+			if p.Attributes.Resources.HP >= p.Attributes.Resources.MaxHP || p.Attributes.Resources.MP < 8 {
 				p.State = "IDLE"
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "停止了运功疗伤。"})
 				updatedRoom[roomID] = true
 				continue
 			}
-			beforeHP := p.Attributes.CurrentHP
-			p.Attributes.CurrentMP -= 8
-			p.Attributes.CurrentHP += 20
-			if p.Attributes.CurrentHP > p.Attributes.MaxHP {
-				p.Attributes.CurrentHP = p.Attributes.MaxHP
+			beforeHP := p.Attributes.Resources.HP
+			p.Attributes.Resources.MP -= 8
+			p.Attributes.Resources.HP += 20
+			if p.Attributes.Resources.HP > p.Attributes.Resources.MaxHP {
+				p.Attributes.Resources.HP = p.Attributes.Resources.MaxHP
 			}
-			recovered := p.Attributes.CurrentHP - beforeHP
+			recovered := p.Attributes.Resources.HP - beforeHP
 			if recovered > 0 {
 				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你恢复了" + strconv.Itoa(recovered) + "点气血。"})
 			}
 			updatedRoom[roomID] = true
 		case "MEDITATING":
-			if p.Attributes.CurrentMP < p.Attributes.TrainedMaxMP {
-				beforeMP := p.Attributes.CurrentMP
-				p.Attributes.CurrentMP += 20
-				if p.Attributes.CurrentMP > p.Attributes.TrainedMaxMP {
-					p.Attributes.CurrentMP = p.Attributes.TrainedMaxMP
+			if p.Attributes.Resources.MP < p.Attributes.Resources.TrainedMaxMP {
+				beforeMP := p.Attributes.Resources.MP
+				p.Attributes.Resources.MP += 20
+				if p.Attributes.Resources.MP > p.Attributes.Resources.TrainedMaxMP {
+					p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
 				}
-				recovered := p.Attributes.CurrentMP - beforeMP
+				recovered := p.Attributes.Resources.MP - beforeMP
 				if recovered > 0 {
 					result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你恢复了" + strconv.Itoa(recovered) + "点内力。"})
 				}
 				updatedRoom[roomID] = true
 				continue
 			}
-			if p.Attributes.TrainedMaxMP >= p.Attributes.MaxMP {
+			if p.Attributes.Resources.TrainedMaxMP >= p.Attributes.Resources.MaxMP {
 				p.State = "IDLE"
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "结束了打坐调息。"})
 				updatedRoom[roomID] = true
 				continue
 			}
-			beforeMaxMP := p.Attributes.TrainedMaxMP
-			p.Attributes.TrainedMaxMP += 1
-			if p.Attributes.TrainedMaxMP > p.Attributes.MaxMP {
-				p.Attributes.TrainedMaxMP = p.Attributes.MaxMP
+			beforeMaxMP := p.Attributes.Resources.TrainedMaxMP
+			p.Attributes.Resources.TrainedMaxMP += 1
+			if p.Attributes.Resources.TrainedMaxMP > p.Attributes.Resources.MaxMP {
+				p.Attributes.Resources.TrainedMaxMP = p.Attributes.Resources.MaxMP
 			}
-			increased := p.Attributes.TrainedMaxMP - beforeMaxMP
-			p.Attributes.CurrentMP = p.Attributes.TrainedMaxMP
+			increased := p.Attributes.Resources.TrainedMaxMP - beforeMaxMP
+			p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
 			if increased > 0 {
 				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你增加了" + strconv.Itoa(increased) + "点最大内力。"})
 			}

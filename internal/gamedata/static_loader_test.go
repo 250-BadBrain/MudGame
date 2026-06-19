@@ -54,6 +54,16 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 		}
 	}
 	for npcID, npc := range data.NPCs {
+		if npc.DialogueID != "" {
+			if _, ok := data.Dialogues[npc.DialogueID]; !ok {
+				t.Fatalf("npc %s references missing dialogue %s", npcID, npc.DialogueID)
+			}
+		}
+		for _, questID := range npc.QuestIDs {
+			if _, ok := data.Quests[questID]; !ok {
+				t.Fatalf("npc %s references missing quest %s", npcID, questID)
+			}
+		}
 		for itemID := range npc.ShopInventory {
 			if _, ok := data.Items[itemID]; !ok {
 				t.Fatalf("npc %s shop references missing item %s", npcID, itemID)
@@ -83,6 +93,42 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 		}
 		if strings.TrimSpace(skill.Name) == "" {
 			t.Fatalf("skill %s missing name", key)
+		}
+	}
+	for dialogueID, dialogue := range data.Dialogues {
+		if dialogue.NPCID != "" {
+			if _, ok := data.NPCs[dialogue.NPCID]; !ok {
+				t.Fatalf("dialogue %s references missing npc %s", dialogueID, dialogue.NPCID)
+			}
+		}
+		for _, option := range dialogue.Options {
+			if option.StartQuestID != "" {
+				if _, ok := data.Quests[option.StartQuestID]; !ok {
+					t.Fatalf("dialogue %s option %s starts missing quest %s", dialogueID, option.ID, option.StartQuestID)
+				}
+			}
+			if option.CompleteQuestID != "" {
+				if _, ok := data.Quests[option.CompleteQuestID]; !ok {
+					t.Fatalf("dialogue %s option %s completes missing quest %s", dialogueID, option.ID, option.CompleteQuestID)
+				}
+			}
+		}
+	}
+	for questID, quest := range data.Quests {
+		if quest.GiverNPCID != "" {
+			if _, ok := data.NPCs[quest.GiverNPCID]; !ok {
+				t.Fatalf("quest %s references missing giver npc %s", questID, quest.GiverNPCID)
+			}
+		}
+		if quest.TurnInNPCID != "" {
+			if _, ok := data.NPCs[quest.TurnInNPCID]; !ok {
+				t.Fatalf("quest %s references missing turn-in npc %s", questID, quest.TurnInNPCID)
+			}
+		}
+		for itemID := range quest.Rewards.Items {
+			if _, ok := data.Items[itemID]; !ok {
+				t.Fatalf("quest %s rewards missing item %s", questID, itemID)
+			}
 		}
 	}
 	validateDungeonResources(t, data)

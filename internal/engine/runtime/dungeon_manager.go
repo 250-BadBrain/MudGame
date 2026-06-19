@@ -329,22 +329,7 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 				continue
 			}
 			npcID := roomID + "_n" + strconv.Itoa(i+1)
-			attrs := npcTemplate.Attributes
-			if attrs.MaxHP <= 0 {
-				attrs.MaxHP = 100
-			}
-			if attrs.CurrentHP <= 0 || attrs.CurrentHP > attrs.MaxHP {
-				attrs.CurrentHP = attrs.MaxHP
-			}
-			if attrs.MaxMP <= 0 {
-				attrs.MaxMP = 20
-			}
-			if attrs.CurrentMP <= 0 || attrs.CurrentMP > attrs.MaxMP {
-				attrs.CurrentMP = attrs.MaxMP
-			}
-			if attrs.TrainedMaxMP <= 0 {
-				attrs.TrainedMaxMP = attrs.MaxMP
-			}
+			attrs := model.NormalizeAttributes(npcTemplate.Attributes)
 			npcState := &NPCState{
 				ID:            npcID,
 				TemplateID:    npcTemplateID,

@@ -99,7 +99,7 @@ func (r *RuntimeManager) DeleteAccount(username, password string) error {
 	return r.saveUsers(users)
 }
 
-func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, intel int) (string, error) {
+func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, perception, willpower int) (string, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -114,7 +114,7 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, i
 	if len(name) < 2 || len(name) > 16 {
 		return "", errors.New("invalid_character_name")
 	}
-	if str+con+agi+intel != 80 {
+	if str+con+agi+perception+willpower != 80 {
 		return "", errors.New("invalid_attribute_sum")
 	}
 
@@ -137,18 +137,13 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, i
 		RoomID:        "ly_00",
 		State:         "IDLE",
 		Money:         5000,
-		Attributes: model.Attributes{
-			Experience: 0, Potential: 500,
-			CurrentHP: 100, MaxHP: 100,
-			CurrentMP: 80, TrainedMaxMP: 80, MaxMP: 200,
-			Strength: str, Constitution: con, Agility: agi, Intelligence: intel,
-			Appearance: 20, Luck: 20,
-			Attack: 15, Defense: 15, HitRate: 100, Dodge: 100, Parry: 100, CritRate: 1, AttackSpeed: 4,
-		},
-		Skills:    map[string]int{"basic_unarmed": 1, "basic_parry": 1, "basic_neigong": 1, "basic_qinggong": 1},
-		Backpack:  map[string]int{"iron_pickaxe": 1},
-		Equipment: map[string]string{},
-		Online:    false,
+		Attributes:    model.NewPlayerAttributes(str, con, agi, perception, willpower),
+		Skills:        map[string]int{"basic_unarmed": 1, "basic_parry": 1, "basic_neigong": 1, "basic_qinggong": 1},
+		Backpack:      map[string]int{"iron_pickaxe": 1},
+		Equipment:     map[string]string{},
+		QuestStates:   map[string]model.QuestState{},
+		Flags:         map[string]bool{},
+		Online:        false,
 	}
 	u.CharacterIDs = append(u.CharacterIDs, id)
 

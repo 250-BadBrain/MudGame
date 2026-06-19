@@ -137,6 +137,33 @@ func DoRoomActionWithEffects(repo RuntimeRepository, playerID, action string) (S
 	return StateActionResult{Message: msg, NeedRoomUpdate: true}, nil
 }
 
+func TalkWithView(repo RuntimeRepository, playerID, npcID string) (DialogueResult, error) {
+	dialogue, err := repo.Talk(playerID, npcID)
+	if err != nil {
+		return DialogueResult{}, err
+	}
+	return DialogueResult{Dialogue: dialogue}, nil
+}
+
+func ChooseDialogueWithEffects(repo RuntimeRepository, playerID, npcID, optionID string) (DialogueResult, error) {
+	dialogue, message, logs, err := repo.ChooseDialogue(playerID, npcID, optionID)
+	if err != nil {
+		return DialogueResult{}, err
+	}
+	if message != "" {
+		logs = append([]string{message}, logs...)
+	}
+	return DialogueResult{Dialogue: dialogue, Message: message, Logs: logs}, nil
+}
+
+func GetQuestsView(repo RuntimeRepository, playerID string) (QuestListResult, error) {
+	quests, err := repo.GetQuests(playerID)
+	if err != nil {
+		return QuestListResult{}, err
+	}
+	return QuestListResult{Quests: quests}, nil
+}
+
 func KillWithEffects(repo RuntimeRepository, playerID, targetID string) (CombatActionResult, error) {
 	msg, err := repo.Kill(playerID, targetID)
 	if err != nil {

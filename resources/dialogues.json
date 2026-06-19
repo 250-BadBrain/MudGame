@@ -1,0 +1,112 @@
+{
+  "storyteller_intro": {
+    "id": "storyteller_intro",
+    "npcId": "storyteller",
+    "title": "洛水酒楼说书人",
+    "opening": "许说书人把醒木轻轻一敲，压低声音道：“洛阳城的风，今日是从扬州吹来的。”",
+    "options": [
+      {
+        "id": "ask_rumor",
+        "text": "请先生讲讲近日传闻。",
+        "response": "许说书人笑道：“双龙尚未入洛，已有各路人马先闻风而动。若有人问起，你只说洛水边的醒木响过三声。”",
+        "setFlags": {
+          "heard_storyteller_rumor": true
+        }
+      },
+      {
+        "id": "ask_bronze_box",
+        "text": "听说城中有战国铜匣的怪谈？",
+        "response": "他目光一闪：“铜匣旧痕不像中原手艺，倒像是从很远的年月里挖出来的。此事现在还不是说破的时候。”",
+        "setFlags": {
+          "heard_bronze_box_rumor": true
+        }
+      }
+    ]
+  },
+  "escort_intro": {
+    "id": "escort_intro",
+    "npcId": "escort_bureau_chief",
+    "title": "南门镖局管事",
+    "opening": "段老镖头捻着胡须打量你：“眼下洛阳鱼龙混杂，肯替人跑腿听消息的年轻人，倒也难得。”",
+    "options": [
+      {
+        "id": "ask_work",
+        "text": "镖局可有我能做的事？",
+        "response": "段老镖头道：“去洛水酒楼听许说书人的一段传闻，再回来告诉我。路不远，考的是耳朵和记性。”",
+        "startQuestId": "escort_rumor_run",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "remind_work",
+        "text": "我该去哪里打听消息？",
+        "response": "“西市南边的洛水酒楼，找那个醒木拍得最响的许说书人。”",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "turn_in_rumor",
+        "text": "我听到了洛水酒楼的传闻。",
+        "response": "段老镖头点头道：“好，能听出这句话的分量，说明你不是只会看热闹的人。拿着，往后镖局还有事会找你。”",
+        "completeQuestId": "escort_rumor_run",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "active",
+          "flag": "heard_storyteller_rumor"
+        }
+      },
+      {
+        "id": "after_done",
+        "text": "镖局还有别的差事吗？",
+        "response": "“先把城中路数摸熟。等商路一开，我再给你派更远的活。”",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "completed"
+        }
+      }
+    ]
+  },
+  "office_clerk_intro": {
+    "id": "office_clerk_intro",
+    "npcId": "office_clerk",
+    "title": "官署录事",
+    "opening": "韩录事抬眼看了看你：“官署案牍繁多，若要查告示，先看墙上新贴的榜文。”",
+    "options": [
+      {
+        "id": "ask_notice",
+        "text": "近日官署有什么告示？",
+        "response": "“南北商旅渐多，盗匪也随之生事。若有本事，可去军府或镖局问问差事。”"
+      }
+    ]
+  },
+  "merchant_guild_intro": {
+    "id": "merchant_guild_intro",
+    "npcId": "guild_steward",
+    "title": "河洛商会管事",
+    "opening": "沈七合上账册，笑道：“商路讲究信用，也讲究消息。你若肯跑腿，日后总有用得着你的地方。”",
+    "options": [
+      {
+        "id": "ask_trade",
+        "text": "商会近来缺什么？",
+        "response": "“缺太平，缺准信，也缺能在乱世里把货送到的人。”"
+      }
+    ]
+  },
+  "qingyi_intro": {
+    "id": "qingyi_intro",
+    "npcId": "qingyi_spy",
+    "title": "青衣密探",
+    "opening": "秦三娘倚在暗巷墙边，似笑非笑：“你走得太直，在洛阳城里容易被人看穿。”",
+    "options": [
+      {
+        "id": "ask_shadow",
+        "text": "你在等什么人？",
+        "response": "“等一个知道自己为什么来洛阳的人。现在看来，还不是你。”"
+      }
+    ]
+  }
+}

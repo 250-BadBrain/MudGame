@@ -7,21 +7,61 @@
     "role": "guard",
     "importance": "common",
     "attributes": {
-      "maxHp": 180,
-      "currentHp": 180,
-      "maxMp": 80,
-      "currentMp": 80,
-      "trainedMaxMp": 80,
-      "attack": 28,
-      "defense": 22,
-      "strength": 18,
-      "constitution": 18,
-      "agility": 14,
-      "intelligence": 10,
-      "hitRate": 85,
-      "dodge": 70,
-      "parry": 75,
-      "critRate": 2
+      "level": 8,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 18,
+        "agility": 14,
+        "perception": 10,
+        "willpower": 14,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 80,
+        "trainedMaxMp": 80,
+        "maxMp": 80,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 28,
+        "defense": 22,
+        "hitRate": 85,
+        "dodge": 70,
+        "parry": 75,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "office_clerk": {
@@ -33,21 +73,61 @@
     "importance": "local",
     "dialogueId": "office_clerk_intro",
     "attributes": {
-      "maxHp": 120,
-      "currentHp": 120,
-      "maxMp": 80,
-      "currentMp": 80,
-      "trainedMaxMp": 80,
-      "attack": 10,
-      "defense": 10,
-      "strength": 8,
-      "constitution": 12,
-      "agility": 10,
-      "intelligence": 18,
-      "hitRate": 70,
-      "dodge": 60,
-      "parry": 50,
-      "critRate": 1
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 8,
+        "constitution": 12,
+        "agility": 10,
+        "perception": 18,
+        "willpower": 15,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 80,
+        "trainedMaxMp": 80,
+        "maxMp": 80,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 70,
+        "dodge": 60,
+        "parry": 50,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "east_market_keeper": {
@@ -57,23 +137,68 @@
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "common",
-    "shopItems": ["common_clothes", "common_shoes", "dry_ration", "simple_medicine"],
+    "shopItems": [
+      "common_clothes",
+      "common_shoes",
+      "dry_ration",
+      "simple_medicine"
+    ],
     "attributes": {
-      "maxHp": 120,
-      "currentHp": 120,
-      "maxMp": 60,
-      "currentMp": 60,
-      "trainedMaxMp": 60,
-      "attack": 8,
-      "defense": 8,
-      "strength": 8,
-      "constitution": 10,
-      "agility": 10,
-      "intelligence": 16,
-      "hitRate": 65,
-      "dodge": 60,
-      "parry": 45,
-      "critRate": 1
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 8,
+        "constitution": 10,
+        "agility": 10,
+        "perception": 16,
+        "willpower": 13,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 8,
+        "defense": 8,
+        "hitRate": 65,
+        "dodge": 60,
+        "parry": 45,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "heluo_blacksmith": {
@@ -83,23 +208,69 @@
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "local",
-    "shopItems": ["iron_sword", "steel_blade", "iron_staff", "darts", "iron_pickaxe"],
+    "shopItems": [
+      "iron_sword",
+      "steel_blade",
+      "iron_staff",
+      "darts",
+      "iron_pickaxe"
+    ],
     "attributes": {
-      "maxHp": 180,
-      "currentHp": 180,
-      "maxMp": 80,
-      "currentMp": 80,
-      "trainedMaxMp": 80,
-      "attack": 22,
-      "defense": 18,
-      "strength": 22,
-      "constitution": 18,
-      "agility": 10,
-      "intelligence": 12,
-      "hitRate": 75,
-      "dodge": 55,
-      "parry": 65,
-      "critRate": 2
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 18,
+        "agility": 10,
+        "perception": 12,
+        "willpower": 15,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 80,
+        "trainedMaxMp": 80,
+        "maxMp": 80,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 22,
+        "defense": 18,
+        "hitRate": 75,
+        "dodge": 55,
+        "parry": 65,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "weapon_school_master": {
@@ -117,21 +288,61 @@
       "basic_qinggong": 180
     },
     "attributes": {
-      "maxHp": 1200,
-      "currentHp": 1200,
-      "maxMp": 500,
-      "currentMp": 500,
-      "trainedMaxMp": 500,
-      "attack": 120,
-      "defense": 100,
-      "strength": 40,
-      "constitution": 35,
-      "agility": 30,
-      "intelligence": 20,
-      "hitRate": 140,
-      "dodge": 120,
-      "parry": 150,
-      "critRate": 8
+      "level": 20,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 40,
+        "constitution": 35,
+        "agility": 30,
+        "perception": 20,
+        "willpower": 28,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1200,
+        "maxHp": 1200,
+        "mp": 500,
+        "trainedMaxMp": 500,
+        "maxMp": 500,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 120,
+        "defense": 100,
+        "hitRate": 140,
+        "dodge": 120,
+        "parry": 150,
+        "critRate": 8,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "academy_teacher": {
@@ -146,21 +357,61 @@
       "basic_literacy": 200
     },
     "attributes": {
-      "maxHp": 500,
-      "currentHp": 500,
-      "maxMp": 800,
-      "currentMp": 800,
-      "trainedMaxMp": 800,
-      "attack": 35,
-      "defense": 35,
-      "strength": 12,
-      "constitution": 20,
-      "agility": 16,
-      "intelligence": 36,
-      "hitRate": 90,
-      "dodge": 80,
-      "parry": 80,
-      "critRate": 3
+      "level": 20,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 20,
+        "agility": 16,
+        "perception": 36,
+        "willpower": 28,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 500,
+        "maxHp": 500,
+        "mp": 800,
+        "trainedMaxMp": 800,
+        "maxMp": 800,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 35,
+        "defense": 35,
+        "hitRate": 90,
+        "dodge": 80,
+        "parry": 80,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "military_instructor": {
@@ -176,21 +427,61 @@
       "basic_qinggong": 160
     },
     "attributes": {
-      "maxHp": 900,
-      "currentHp": 900,
-      "maxMp": 300,
-      "currentMp": 300,
-      "trainedMaxMp": 300,
-      "attack": 95,
-      "defense": 85,
-      "strength": 32,
-      "constitution": 30,
-      "agility": 22,
-      "intelligence": 18,
-      "hitRate": 120,
-      "dodge": 95,
-      "parry": 120,
-      "critRate": 6
+      "level": 20,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 32,
+        "constitution": 30,
+        "agility": 22,
+        "perception": 18,
+        "willpower": 24,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 900,
+        "maxHp": 900,
+        "mp": 300,
+        "trainedMaxMp": 300,
+        "maxMp": 300,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 95,
+        "defense": 85,
+        "hitRate": 120,
+        "dodge": 95,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "guild_steward": {
@@ -202,21 +493,61 @@
     "importance": "local",
     "dialogueId": "merchant_guild_intro",
     "attributes": {
-      "maxHp": 160,
-      "currentHp": 160,
-      "maxMp": 80,
-      "currentMp": 80,
-      "trainedMaxMp": 80,
-      "attack": 12,
-      "defense": 12,
-      "strength": 10,
-      "constitution": 12,
-      "agility": 14,
-      "intelligence": 22,
-      "hitRate": 70,
-      "dodge": 70,
-      "parry": 50,
-      "critRate": 1
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 10,
+        "constitution": 12,
+        "agility": 14,
+        "perception": 22,
+        "willpower": 17,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 80,
+        "trainedMaxMp": 80,
+        "maxMp": 80,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 70,
+        "dodge": 70,
+        "parry": 50,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "escort_bureau_chief": {
@@ -228,22 +559,65 @@
     "importance": "local",
     "dialogueId": "escort_intro",
     "attributes": {
-      "maxHp": 700,
-      "currentHp": 700,
-      "maxMp": 260,
-      "currentMp": 260,
-      "trainedMaxMp": 260,
-      "attack": 70,
-      "defense": 65,
-      "strength": 28,
-      "constitution": 26,
-      "agility": 20,
-      "intelligence": 18,
-      "hitRate": 105,
-      "dodge": 90,
-      "parry": 100,
-      "critRate": 5
-    }
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 28,
+        "constitution": 26,
+        "agility": 20,
+        "perception": 18,
+        "willpower": 22,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 700,
+        "maxHp": 700,
+        "mp": 260,
+        "trainedMaxMp": 260,
+        "maxMp": 260,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 70,
+        "defense": 65,
+        "hitRate": 105,
+        "dodge": 90,
+        "parry": 100,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "questIds": [
+      "escort_rumor_run"
+    ]
   },
   "storyteller": {
     "name": "许说书",
@@ -254,22 +628,65 @@
     "importance": "special",
     "dialogueId": "storyteller_intro",
     "attributes": {
-      "maxHp": 160,
-      "currentHp": 160,
-      "maxMp": 120,
-      "currentMp": 120,
-      "trainedMaxMp": 120,
-      "attack": 10,
-      "defense": 10,
-      "strength": 8,
-      "constitution": 12,
-      "agility": 12,
-      "intelligence": 26,
-      "hitRate": 65,
-      "dodge": 65,
-      "parry": 45,
-      "critRate": 1
-    }
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 8,
+        "constitution": 12,
+        "agility": 12,
+        "perception": 26,
+        "willpower": 19,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 120,
+        "trainedMaxMp": 120,
+        "maxMp": 120,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 65,
+        "dodge": 65,
+        "parry": 45,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "questIds": [
+      "escort_rumor_run"
+    ]
   },
   "qingyi_spy": {
     "name": "秦三娘",
@@ -280,21 +697,61 @@
     "importance": "local",
     "dialogueId": "qingyi_intro",
     "attributes": {
-      "maxHp": 420,
-      "currentHp": 420,
-      "maxMp": 240,
-      "currentMp": 240,
-      "trainedMaxMp": 240,
-      "attack": 55,
-      "defense": 35,
-      "strength": 18,
-      "constitution": 18,
-      "agility": 34,
-      "intelligence": 24,
-      "hitRate": 110,
-      "dodge": 125,
-      "parry": 80,
-      "critRate": 7
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 18,
+        "agility": 34,
+        "perception": 24,
+        "willpower": 21,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 420,
+        "maxHp": 420,
+        "mp": 240,
+        "trainedMaxMp": 240,
+        "maxMp": 240,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 55,
+        "defense": 35,
+        "hitRate": 110,
+        "dodge": 125,
+        "parry": 80,
+        "critRate": 7,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "black_market_broker": {
@@ -304,23 +761,67 @@
     "faction": "west_market",
     "role": "shopkeeper",
     "importance": "local",
-    "shopItems": ["smoke_powder", "old_map_fragment", "bronze_box_rubbing"],
+    "shopItems": [
+      "smoke_powder",
+      "old_map_fragment",
+      "bronze_box_rubbing"
+    ],
     "attributes": {
-      "maxHp": 220,
-      "currentHp": 220,
-      "maxMp": 140,
-      "currentMp": 140,
-      "trainedMaxMp": 140,
-      "attack": 28,
-      "defense": 20,
-      "strength": 14,
-      "constitution": 16,
-      "agility": 24,
-      "intelligence": 24,
-      "hitRate": 85,
-      "dodge": 95,
-      "parry": 65,
-      "critRate": 4
+      "level": 1,
+      "realm": "ordinary",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 16,
+        "agility": 24,
+        "perception": 24,
+        "willpower": 20,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 220,
+        "maxHp": 220,
+        "mp": 140,
+        "trainedMaxMp": 140,
+        "maxMp": 140,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 28,
+        "defense": 20,
+        "hitRate": 85,
+        "dodge": 95,
+        "parry": 65,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "road_bandit": {
@@ -332,21 +833,61 @@
     "importance": "common",
     "aggressive": true,
     "attributes": {
-      "maxHp": 90,
-      "currentHp": 90,
-      "maxMp": 30,
-      "currentMp": 30,
-      "trainedMaxMp": 30,
-      "attack": 16,
-      "defense": 8,
-      "strength": 13,
-      "constitution": 10,
-      "agility": 13,
-      "intelligence": 7,
-      "hitRate": 80,
-      "dodge": 70,
-      "parry": 55,
-      "critRate": 3
+      "level": 4,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 10,
+        "agility": 13,
+        "perception": 7,
+        "willpower": 9,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 90,
+        "maxHp": 90,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 16,
+        "defense": 8,
+        "hitRate": 80,
+        "dodge": 70,
+        "parry": 55,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "temple_bandit": {
@@ -359,21 +900,61 @@
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {
-      "maxHp": 95,
-      "currentHp": 95,
-      "maxMp": 30,
-      "currentMp": 30,
-      "trainedMaxMp": 30,
-      "attack": 17,
-      "defense": 9,
-      "strength": 14,
-      "constitution": 11,
-      "agility": 13,
-      "intelligence": 8,
-      "hitRate": 82,
-      "dodge": 72,
-      "parry": 58,
-      "critRate": 3
+      "level": 4,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 11,
+        "agility": 13,
+        "perception": 8,
+        "willpower": 10,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 95,
+        "maxHp": 95,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 17,
+        "defense": 9,
+        "hitRate": 82,
+        "dodge": 72,
+        "parry": 58,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
   "temple_assassin": {
@@ -386,21 +967,61 @@
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {
-      "maxHp": 160,
-      "currentHp": 160,
-      "maxMp": 60,
-      "currentMp": 60,
-      "trainedMaxMp": 60,
-      "attack": 26,
-      "defense": 14,
-      "strength": 16,
-      "constitution": 14,
-      "agility": 24,
-      "intelligence": 14,
-      "hitRate": 100,
-      "dodge": 95,
-      "parry": 70,
-      "critRate": 6
+      "level": 12,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 16,
+        "constitution": 14,
+        "agility": 24,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 12,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 26,
+        "defense": 14,
+        "hitRate": 100,
+        "dodge": 95,
+        "parry": 70,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   }
 }

@@ -102,7 +102,7 @@ func setupRepo(t *testing.T) *testHelper {
 	if _, err := repo.Login(username, password); err != nil {
 		t.Fatalf("login failed: %v", err)
 	}
-	playerID, err := repo.CreateCharacter(username, "hero", 20, 20, 20, 20)
+	playerID, err := repo.CreateCharacter(username, "hero", 16, 16, 16, 16, 16)
 	if err != nil {
 		t.Fatalf("create character failed: %v", err)
 	}
@@ -164,7 +164,7 @@ func setupSecondPlayer(t *testing.T, username, charName string, repo RuntimeRepo
 	if _, err := repo.Login(username, "pass123"); err != nil {
 		t.Fatalf("login %s failed: %v", username, err)
 	}
-	playerID, err := repo.CreateCharacter(username, charName, 20, 20, 20, 20)
+	playerID, err := repo.CreateCharacter(username, charName, 16, 16, 16, 16, 16)
 	if err != nil {
 		t.Fatalf("create %s character failed: %v", username, err)
 	}
@@ -313,6 +313,58 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 	}
 	if sellRes.Gain <= 0 || sellRes.Money <= 0 {
 		t.Fatalf("unexpected sell result: %+v", sellRes)
+	}
+}
+
+func TestDialogueAndQuestWorkflow(t *testing.T) {
+	h := setupRepo(t)
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "south"); err != nil {
+		t.Fatalf("move to south gate failed: %v", err)
+	}
+	dialogue, err := TalkWithView(h.repo, h.playerID, "escort_bureau_chief")
+	if err != nil {
+		t.Fatalf("talk escort failed: %v", err)
+	}
+	if dialogue.Dialogue["id"] != "escort_intro" {
+		t.Fatalf("unexpected dialogue: %+v", dialogue.Dialogue)
+	}
+	if _, err := ChooseDialogueWithEffects(h.repo, h.playerID, "escort_bureau_chief", "ask_work"); err != nil {
+		t.Fatalf("start quest dialogue failed: %v", err)
+	}
+	quests, err := GetQuestsView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get quests failed: %v", err)
+	}
+	if len(quests.Quests) != 1 || quests.Quests[0]["status"] != "active" {
+		t.Fatalf("expected active quest, got %+v", quests.Quests)
+	}
+
+	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err != nil {
+		t.Fatalf("move to inn failed: %v", err)
+	}
+	if _, err := ChooseDialogueWithEffects(h.repo, h.playerID, "storyteller", "ask_rumor"); err != nil {
+		t.Fatalf("hear rumor dialogue failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move back to south gate failed: %v", err)
+	}
+	if _, err := ChooseDialogueWithEffects(h.repo, h.playerID, "escort_bureau_chief", "turn_in_rumor"); err != nil {
+		t.Fatalf("complete quest dialogue failed: %v", err)
+	}
+	quests, err = GetQuestsView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get quests after completion failed: %v", err)
+	}
+	if len(quests.Quests) != 1 || quests.Quests[0]["status"] != "completed" {
+		t.Fatalf("expected completed quest, got %+v", quests.Quests)
+	}
+	attrs, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attrs after quest failed: %v", err)
+	}
+	if attrs["experience"].(int) < 30 || attrs["potential"].(int) < 525 {
+		t.Fatalf("expected quest rewards in attrs, got %+v", attrs)
 	}
 }
 

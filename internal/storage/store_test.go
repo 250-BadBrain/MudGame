@@ -48,10 +48,12 @@ func TestFileStorePlayersAndRoomsRoundTrip(t *testing.T) {
 			RoomID:        "ly_00",
 			State:         "IDLE",
 			Money:         123,
-			Attributes:    model.Attributes{CurrentHP: 88, MaxHP: 100},
-			Skills:        map[string]int{"basic_unarmed": 2},
-			Backpack:      map[string]int{"iron_pickaxe": 1},
-			Equipment:     map[string]string{},
+			Attributes: model.Attributes{
+				Resources: model.ResourceAttributes{HP: 88, MaxHP: 100},
+			},
+			Skills:    map[string]int{"basic_unarmed": 2},
+			Backpack:  map[string]int{"iron_pickaxe": 1},
+			Equipment: map[string]string{},
 		},
 	}
 	if err := store.SavePlayers(players); err != nil {

@@ -172,6 +172,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 	playersInRoom := make([]map[string]interface{}, 0)
 	for _, p := range players {
 		if p.RoomID == room.ID {
+			eff := model.BuildEffectiveAttributes(model.NormalizeAttributes(p.Attributes))
 			playersInRoom = append(playersInRoom, map[string]interface{}{
 				"id":     p.ID,
 				"name":   p.CharacterName,
@@ -179,10 +180,12 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 				"state":  p.State,
 				"online": p.Online,
 				"attributes": map[string]interface{}{
-					"currentHp":    p.Attributes.CurrentHP,
-					"maxHp":        p.Attributes.MaxHP,
-					"currentMp":    p.Attributes.CurrentMP,
-					"trainedMaxMp": p.Attributes.TrainedMaxMP,
+					"currentHp":    eff.HP,
+					"maxHp":        eff.MaxHP,
+					"currentMp":    eff.MP,
+					"trainedMaxMp": eff.TrainedMaxMP,
+					"spirit":       eff.Spirit,
+					"maxSpirit":    eff.MaxSpirit,
 				},
 			})
 		}
@@ -195,25 +198,35 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		npcDescription := ""
 		npcIsShop := false
 		npcAggressive := false
+		dialogueID := ""
+		questIDs := []string{}
 		skills := map[string]int{}
 		npcAttributes := map[string]interface{}{}
 		if npc, ok := fileNpcs[npcID]; ok {
+			attrs := model.NormalizeAttributes(npc.Attributes)
+			eff := model.BuildEffectiveAttributes(attrs)
 			npcIDValue = npc.ID
 			npcName = npc.Name
 			npcTitle = npc.Title
 			npcDescription = npc.Description
 			npcIsShop = npc.IsShop
 			npcAggressive = npc.Aggressive
+			dialogueID = npc.DialogueID
+			questIDs = append([]string{}, npc.QuestIDs...)
 			for skillID, level := range npc.Skills {
 				skills[skillID] = level
 			}
 			npcAttributes = map[string]interface{}{
-				"currentHp":    npc.Attributes.CurrentHP,
-				"maxHp":        npc.Attributes.MaxHP,
-				"currentMp":    npc.Attributes.CurrentMP,
-				"trainedMaxMp": npc.Attributes.TrainedMaxMP,
+				"currentHp":    eff.HP,
+				"maxHp":        eff.MaxHP,
+				"currentMp":    eff.MP,
+				"trainedMaxMp": eff.TrainedMaxMP,
+				"spirit":       eff.Spirit,
+				"maxSpirit":    eff.MaxSpirit,
 			}
 		} else if dnpc, ok := r.dungeonNPCByIDNoLock(npcID); ok {
+			attrs := model.NormalizeAttributes(dnpc.Attributes)
+			eff := model.BuildEffectiveAttributes(attrs)
 			npcIDValue = dnpc.ID
 			npcName = dnpc.Name
 			npcTitle = dnpc.Title
@@ -224,10 +237,12 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 				skills[skillID] = level
 			}
 			npcAttributes = map[string]interface{}{
-				"currentHp":    dnpc.Attributes.CurrentHP,
-				"maxHp":        dnpc.Attributes.MaxHP,
-				"currentMp":    dnpc.Attributes.CurrentMP,
-				"trainedMaxMp": dnpc.Attributes.TrainedMaxMP,
+				"currentHp":    eff.HP,
+				"maxHp":        eff.MaxHP,
+				"currentMp":    eff.MP,
+				"trainedMaxMp": eff.TrainedMaxMP,
+				"spirit":       eff.Spirit,
+				"maxSpirit":    eff.MaxSpirit,
 			}
 		} else {
 			continue
@@ -238,6 +253,9 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		}
 		if len(skills) > 0 {
 			capabilities = append(capabilities, "teach")
+		}
+		if dialogueID != "" {
+			capabilities = append(capabilities, "talk")
 		}
 		shopable := 0
 		if npcIsShop {
@@ -258,6 +276,8 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			"isShop":       npcIsShop,
 			"shopable":     shopable,
 			"teachable":    teachable,
+			"dialogueId":   dialogueID,
+			"questIds":     questIDs,
 			"capabilities": capabilities,
 			"skills":       skills,
 		})

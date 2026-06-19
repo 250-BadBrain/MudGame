@@ -1,4 +1,4 @@
-﻿package manager
+package manager
 
 import (
 	"sync"
@@ -39,6 +39,8 @@ var (
 	fileItems        = loadedStaticData.Items
 	fileSkills       = loadedStaticData.Skills
 	fileNpcs         = loadedStaticData.NPCs
+	fileDialogues    = loadedStaticData.Dialogues
+	fileQuests       = loadedStaticData.Quests
 )
 
 func NewRuntimeManager(baseDir string) *RuntimeManager {
