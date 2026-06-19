@@ -328,6 +328,7 @@ const combinedEntities = computed(() => {
         capabilities: n.capabilities || [],
         dialogueId: n.dialogueId || '',
         questIds: n.questIds || [],
+        skills: n.skills || {},
         description: n.description || '',
         attributes: n.attributes
       })
@@ -1753,7 +1754,8 @@ const openLearn = (npc) => {
         "basic_parry": "基本招架",
         "basic_dodge": "基本躲闪",
         "basic_neigong": "基本内功",
-        "basic_qinggong": "基本轻功"
+        "basic_qinggong": "基本轻功",
+        "basic_literacy": "读书识文"
     };
 
     learnSkills.value = Object.entries(npc.skills || {}).map(([id, level]) => ({
