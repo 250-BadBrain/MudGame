@@ -41,6 +41,7 @@ var (
 	fileNpcs         = loadedStaticData.NPCs
 	fileDialogues    = loadedStaticData.Dialogues
 	fileQuests       = loadedStaticData.Quests
+	fileFactions     = loadedStaticData.Factions
 )
 
 func NewRuntimeManager(baseDir string) *RuntimeManager {

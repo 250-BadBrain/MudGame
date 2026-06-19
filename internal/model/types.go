@@ -94,6 +94,7 @@ type Player struct {
 	Equipment          map[string]string
 	QuestStates        map[string]QuestState
 	Flags              map[string]bool
+	Reputations        map[string]int
 	Online             bool
 }
 
@@ -173,10 +174,12 @@ type DialogueOption struct {
 }
 
 type DialogueRequire struct {
-	QuestID     string `json:"questId,omitempty"`
-	QuestStatus string `json:"questStatus,omitempty"`
-	Flag        string `json:"flag,omitempty"`
-	FlagValue   *bool  `json:"flagValue,omitempty"`
+	QuestID       string `json:"questId,omitempty"`
+	QuestStatus   string `json:"questStatus,omitempty"`
+	Flag          string `json:"flag,omitempty"`
+	FlagValue     *bool  `json:"flagValue,omitempty"`
+	ReputationID  string `json:"reputationId,omitempty"`
+	ReputationMin int    `json:"reputationMin,omitempty"`
 }
 
 type QuestDef struct {
@@ -198,11 +201,21 @@ type Objective struct {
 }
 
 type Rewards struct {
-	Experience int             `json:"experience"`
-	Potential  int             `json:"potential"`
-	Money      int             `json:"money"`
-	Items      map[string]int  `json:"items"`
-	Flags      map[string]bool `json:"flags"`
+	Experience  int             `json:"experience"`
+	Potential   int             `json:"potential"`
+	Money       int             `json:"money"`
+	Items       map[string]int  `json:"items"`
+	Flags       map[string]bool `json:"flags"`
+	Reputations map[string]int  `json:"reputations"`
+}
+
+type FactionDef struct {
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Category    string `json:"category"`
+	Visible     bool   `json:"visible"`
+	Order       int    `json:"order"`
 }
 
 type Exit struct {

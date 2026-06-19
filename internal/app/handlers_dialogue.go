@@ -36,3 +36,12 @@ func (s *Server) handleGameGetQuests(conn *websocket.Conn, _ protocol.CommandMes
 	res, err := engine.GetQuestsView(s.repo, playerID)
 	s.replyCommand(conn, "get_quests", err, map[string]interface{}{"quests": res.Quests}, nil)
 }
+
+func (s *Server) handleGameGetFactions(conn *websocket.Conn, _ protocol.CommandMessage) {
+	playerID, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	res, err := engine.GetFactionsView(s.repo, playerID)
+	s.replyCommand(conn, "get_factions", err, map[string]interface{}{"factions": res.Factions}, nil)
+}

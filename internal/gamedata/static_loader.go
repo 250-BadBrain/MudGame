@@ -24,6 +24,7 @@ type StaticData struct {
 	NPCs       map[string]model.NPC
 	Dialogues  map[string]model.DialogueDef
 	Quests     map[string]model.QuestDef
+	Factions   map[string]model.FactionDef
 }
 
 type rawItem struct {
@@ -147,6 +148,10 @@ func loadFromDisk() (StaticData, error) {
 	if err != nil {
 		return StaticData{}, err
 	}
+	factions, err := loadFactions(filepath.Join(resourceDir, "factions.json"))
+	if err != nil {
+		return StaticData{}, err
+	}
 	worldOrder, worlds, rooms, err := loadWorlds(filepath.Join(resourceDir, "worlds"))
 	if err != nil {
 		return StaticData{}, err
@@ -165,6 +170,7 @@ func loadFromDisk() (StaticData, error) {
 		NPCs:       npcs,
 		Dialogues:  dialogues,
 		Quests:     quests,
+		Factions:   factions,
 	}, nil
 }
 
@@ -406,9 +412,35 @@ func loadQuests(path string) (map[string]model.QuestDef, error) {
 		if def.Rewards.Flags == nil {
 			def.Rewards.Flags = map[string]bool{}
 		}
+		if def.Rewards.Reputations == nil {
+			def.Rewards.Reputations = map[string]int{}
+		}
 		quests[id] = def
 	}
 	return quests, nil
+}
+
+func loadFactions(path string) (map[string]model.FactionDef, error) {
+	factions := map[string]model.FactionDef{}
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return factions, nil
+	}
+	raw := map[string]model.FactionDef{}
+	if err := readJSON(path, &raw); err != nil {
+		return nil, err
+	}
+	for key, def := range raw {
+		id := strings.TrimSpace(def.ID)
+		if id == "" {
+			id = strings.TrimSpace(key)
+		}
+		if id == "" || strings.TrimSpace(def.Name) == "" {
+			continue
+		}
+		def.ID = id
+		factions[id] = def
+	}
+	return factions, nil
 }
 
 func loadWorlds(worldDir string) ([]string, map[string]model.World, map[string]model.Room, error) {
@@ -547,6 +579,7 @@ func cloneStaticData(in StaticData) StaticData {
 		NPCs:       map[string]model.NPC{},
 		Dialogues:  map[string]model.DialogueDef{},
 		Quests:     map[string]model.QuestDef{},
+		Factions:   map[string]model.FactionDef{},
 	}
 	for id, w := range in.Worlds {
 		out.Worlds[id] = w
@@ -600,7 +633,14 @@ func cloneStaticData(in StaticData) StaticData {
 		for flag, value := range quest.Rewards.Flags {
 			questCopy.Rewards.Flags[flag] = value
 		}
+		questCopy.Rewards.Reputations = map[string]int{}
+		for factionID, value := range quest.Rewards.Reputations {
+			questCopy.Rewards.Reputations[factionID] = value
+		}
 		out.Quests[id] = questCopy
+	}
+	for id, faction := range in.Factions {
+		out.Factions[id] = faction
 	}
 	return out
 }

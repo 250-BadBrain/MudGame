@@ -22,6 +22,9 @@
       },
       "flags": {
         "escort_rumor_run_completed": true
+      },
+      "reputations": {
+        "luoyang_escort": 10
       }
     },
     "repeatable": false

@@ -366,6 +366,44 @@ func TestDialogueAndQuestWorkflow(t *testing.T) {
 	if attrs["experience"].(int) < 30 || attrs["potential"].(int) < 525 {
 		t.Fatalf("expected quest rewards in attrs, got %+v", attrs)
 	}
+	factions, err := GetFactionsView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get factions after quest failed: %v", err)
+	}
+	foundEscortRep := false
+	for _, faction := range factions.Factions {
+		if faction["id"] == "luoyang_escort" && faction["reputation"] == 10 {
+			foundEscortRep = true
+		}
+	}
+	if !foundEscortRep {
+		t.Fatalf("expected luoyang_escort reputation 10, got %+v", factions.Factions)
+	}
+	dialogue, err = TalkWithView(h.repo, h.playerID, "escort_bureau_chief")
+	if err != nil {
+		t.Fatalf("talk escort after reputation failed: %v", err)
+	}
+	hasTrustedOption := false
+	switch options := dialogue.Dialogue["options"].(type) {
+	case []map[string]interface{}:
+		for _, option := range options {
+			if option["id"] == "trusted_runner" {
+				hasTrustedOption = true
+				break
+			}
+		}
+	case []interface{}:
+		for _, raw := range options {
+			option, _ := raw.(map[string]interface{})
+			if option["id"] == "trusted_runner" {
+				hasTrustedOption = true
+				break
+			}
+		}
+	}
+	if !hasTrustedOption {
+		t.Fatalf("expected reputation-gated dialogue option, got %+v", dialogue.Dialogue["options"])
+	}
 }
 
 func TestQueryViewWorkflows(t *testing.T) {

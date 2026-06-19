@@ -2,6 +2,7 @@ package manager
 
 import (
 	"errors"
+	"sort"
 	"time"
 
 	"mudgame/server/internal/exception"
@@ -51,6 +52,9 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	}
 	if p.Flags == nil {
 		p.Flags = map[string]bool{}
+	}
+	if p.Reputations == nil {
+		p.Reputations = map[string]int{}
 	}
 	npc, err := r.npcInPlayerRoomNoLock(p, npcID)
 	if err != nil {
@@ -194,6 +198,11 @@ func (r *RuntimeManager) dialogueRequirementMetNoLock(p *model.Player, req model
 			return false
 		}
 	}
+	if req.ReputationID != "" {
+		if p.Reputations[req.ReputationID] < req.ReputationMin {
+			return false
+		}
+	}
 	return true
 }
 
@@ -243,11 +252,54 @@ func (r *RuntimeManager) completeQuestNoLock(p *model.Player, questID string) ([
 	for flag, value := range quest.Rewards.Flags {
 		p.Flags[flag] = value
 	}
+	if p.Reputations == nil {
+		p.Reputations = map[string]int{}
+	}
+	for factionID, value := range quest.Rewards.Reputations {
+		p.Reputations[factionID] += value
+	}
 	logs := []string{"你完成了任务：" + quest.Name}
 	if quest.Rewards.Experience > 0 || quest.Rewards.Potential > 0 || quest.Rewards.Money > 0 {
 		logs = append(logs, "你获得了任务奖励。")
 	}
 	return logs, nil
+}
+
+func (r *RuntimeManager) GetFactions(playerID string) ([]map[string]interface{}, error) {
+	r.mu.RLock()
+	defer r.mu.RUnlock()
+
+	players, err := r.loadPlayers()
+	if err != nil {
+		return nil, err
+	}
+	p, ok := players[playerID]
+	if !ok {
+		return nil, exception.ErrPlayerNotFound
+	}
+	out := make([]map[string]interface{}, 0, len(fileFactions))
+	for id, faction := range fileFactions {
+		if !faction.Visible {
+			continue
+		}
+		out = append(out, map[string]interface{}{
+			"id":          id,
+			"name":        faction.Name,
+			"description": faction.Description,
+			"category":    faction.Category,
+			"order":       faction.Order,
+			"reputation":  p.Reputations[id],
+		})
+	}
+	sort.Slice(out, func(i, j int) bool {
+		oi, _ := out[i]["order"].(int)
+		oj, _ := out[j]["order"].(int)
+		if oi != oj {
+			return oi < oj
+		}
+		return out[i]["id"].(string) < out[j]["id"].(string)
+	})
+	return out, nil
 }
 
 func (r *RuntimeManager) questObjectivesMetNoLock(p *model.Player, quest model.QuestDef) bool {

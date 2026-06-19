@@ -54,6 +54,11 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 		}
 	}
 	for npcID, npc := range data.NPCs {
+		if npc.Faction != "" {
+			if _, ok := data.Factions[npc.Faction]; !ok {
+				t.Fatalf("npc %s references missing faction %s", npcID, npc.Faction)
+			}
+		}
 		if npc.DialogueID != "" {
 			if _, ok := data.Dialogues[npc.DialogueID]; !ok {
 				t.Fatalf("npc %s references missing dialogue %s", npcID, npc.DialogueID)
@@ -102,6 +107,11 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 			}
 		}
 		for _, option := range dialogue.Options {
+			if option.Requires.ReputationID != "" {
+				if _, ok := data.Factions[option.Requires.ReputationID]; !ok {
+					t.Fatalf("dialogue %s option %s requires missing reputation %s", dialogueID, option.ID, option.Requires.ReputationID)
+				}
+			}
 			if option.StartQuestID != "" {
 				if _, ok := data.Quests[option.StartQuestID]; !ok {
 					t.Fatalf("dialogue %s option %s starts missing quest %s", dialogueID, option.ID, option.StartQuestID)
@@ -128,6 +138,11 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 		for itemID := range quest.Rewards.Items {
 			if _, ok := data.Items[itemID]; !ok {
 				t.Fatalf("quest %s rewards missing item %s", questID, itemID)
+			}
+		}
+		for factionID := range quest.Rewards.Reputations {
+			if _, ok := data.Factions[factionID]; !ok {
+				t.Fatalf("quest %s rewards missing faction reputation %s", questID, factionID)
 			}
 		}
 	}

@@ -164,6 +164,14 @@ func GetQuestsView(repo RuntimeRepository, playerID string) (QuestListResult, er
 	return QuestListResult{Quests: quests}, nil
 }
 
+func GetFactionsView(repo RuntimeRepository, playerID string) (FactionListResult, error) {
+	factions, err := repo.GetFactions(playerID)
+	if err != nil {
+		return FactionListResult{}, err
+	}
+	return FactionListResult{Factions: factions}, nil
+}
+
 func KillWithEffects(repo RuntimeRepository, playerID, targetID string) (CombatActionResult, error) {
 	msg, err := repo.Kill(playerID, targetID)
 	if err != nil {

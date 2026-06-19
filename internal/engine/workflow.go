@@ -90,6 +90,10 @@ type QuestListResult struct {
 	Quests []map[string]interface{}
 }
 
+type FactionListResult struct {
+	Factions []map[string]interface{}
+}
+
 type RuntimeRepository interface {
 	Register(username, password string) error
 	Login(username, password string) (string, error)
@@ -123,6 +127,7 @@ type RuntimeRepository interface {
 	Talk(playerID, npcID string) (map[string]interface{}, error)
 	ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, error)
 	GetQuests(playerID string) ([]map[string]interface{}, error)
+	GetFactions(playerID string) ([]map[string]interface{}, error)
 	Heal(playerID string) (string, error)
 	Meditate(playerID string) (string, error)
 	Stop(playerID string) string

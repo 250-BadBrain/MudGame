@@ -53,6 +53,7 @@ type diskPlayer struct {
 	Skills             map[string]int              `json:"skills"`
 	QuestStates        map[string]model.QuestState `json:"questStates"`
 	Flags              map[string]bool             `json:"flags"`
+	Reputations        map[string]int              `json:"reputations"`
 	State              string                      `json:"state"`
 	StateTickCountdown int                         `json:"stateTickCountdown"`
 	TargetID           string                      `json:"targetId"`
@@ -166,6 +167,9 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 		if dp.Flags == nil {
 			dp.Flags = map[string]bool{}
 		}
+		if dp.Reputations == nil {
+			dp.Reputations = map[string]int{}
+		}
 		state := dp.State
 		if state == "" {
 			state = "IDLE"
@@ -193,6 +197,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			Equipment:          dp.Equipment,
 			QuestStates:        dp.QuestStates,
 			Flags:              dp.Flags,
+			Reputations:        dp.Reputations,
 			Online:             false,
 		}
 	}
@@ -236,6 +241,7 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 			Skills:             p.Skills,
 			QuestStates:        p.QuestStates,
 			Flags:              p.Flags,
+			Reputations:        p.Reputations,
 			State:              state,
 			StateTickCountdown: p.StateTickCountdown,
 			TargetID:           targetID,

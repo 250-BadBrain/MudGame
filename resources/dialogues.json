@@ -67,6 +67,15 @@
           "questId": "escort_rumor_run",
           "questStatus": "completed"
         }
+      },
+      {
+        "id": "trusted_runner",
+        "text": "段老觉得我办事还稳妥吗？",
+        "response": "段老镖头笑了笑：“肯听、肯记、肯回来交代清楚，这就是走镖最要紧的底子。往后镖局认得你这个人。”",
+        "requires": {
+          "reputationId": "luoyang_escort",
+          "reputationMin": 10
+        }
       }
     ]
   },

@@ -143,6 +143,7 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, p
 		Equipment:     map[string]string{},
 		QuestStates:   map[string]model.QuestState{},
 		Flags:         map[string]bool{},
+		Reputations:   map[string]int{},
 		Online:        false,
 	}
 	u.CharacterIDs = append(u.CharacterIDs, id)
