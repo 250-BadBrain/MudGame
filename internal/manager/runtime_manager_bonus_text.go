@@ -4,6 +4,9 @@ import "strconv"
 
 func skillBonusText(bonuses map[string]float64, level int) []string {
 	out := []string{}
+	if value := bonuses["trained_mp_to_max_hp_percent"]; level > 0 && value > 0 {
+		out = append(out, "转血 +"+strconv.FormatFloat(value*100, 'f', -1, 64)+"%")
+	}
 	for key, value := range bonuses {
 		amount := 0
 		switch key {
@@ -47,9 +50,7 @@ func skillBonusText(bonuses map[string]float64, level int) []string {
 			amount = int(value) * level
 			out = appendPositiveBonus(out, "气血上限", amount)
 		case "trained_mp_to_max_hp_percent":
-			if level > 0 && value > 0 {
-				out = append(out, "转血 +"+strconv.FormatFloat(value*100, 'f', -1, 64)+"%")
-			}
+			continue
 		default:
 			out = appendPositiveBonus(out, key, int(value))
 		}

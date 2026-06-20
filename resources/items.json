@@ -210,6 +210,20 @@
     "unit": "枚",
     "source": "秘境异闻"
   },
+  "black_stallion_rein": {
+    "name": "黑鬃马缰",
+    "description": "一截重新结好的旧缰绳，黑鬃马已经认可握住它的人。乌家用它记下这场无须鞭索的驯服。",
+    "type": "quest",
+    "subtype": "xunqin_clue",
+    "stackable": true,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 3,
+    "unit": "条",
+    "limit": 1,
+    "source": "寻秦异闻"
+  },
   "wu_house_token": {
     "name": "乌氏令牌",
     "description": "一枚刻着乌氏马纹的青铜令牌，背面细字指向邯郸城外的一处隐秘马道。",

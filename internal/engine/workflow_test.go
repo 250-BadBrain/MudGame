@@ -759,10 +759,40 @@ func TestStatusTickWorkflow(t *testing.T) {
 		t.Fatalf("expected gather to increase experience")
 	}
 	moveBackFromOutskirtsToSpawn(t, h.repo, h.playerID)
+	attrsBeforeMeditate, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attrs before meditation failed: %v", err)
+	}
 	if _, err := MeditateWithEffects(h.repo, h.playerID); err != nil {
 		t.Fatalf("meditate failed: %v", err)
 	}
 	runStatusTicks(t, h.repo, 10)
+	attrsAfterMeditate, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attrs after meditation failed: %v", err)
+	}
+	if attrsAfterMeditate["trainedMaxMp"].(int) <= attrsBeforeMeditate["trainedMaxMp"].(int) {
+		t.Fatalf("meditation should raise trained max mp, before=%+v after=%+v", attrsBeforeMeditate, attrsAfterMeditate)
+	}
+	if attrsAfterMeditate["maxHp"].(int) <= attrsBeforeMeditate["maxHp"].(int) {
+		t.Fatalf("internal skill conversion should immediately raise max hp after meditation, before=%+v after=%+v", attrsBeforeMeditate, attrsAfterMeditate)
+	}
+	roomAfterMeditate, err := GetRoomSnapshotView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get room after meditation failed: %v", err)
+	}
+	roomPlayers, _ := roomAfterMeditate.Room["playersInRoom"].([]map[string]interface{})
+	foundConvertedRoomHP := false
+	for _, player := range roomPlayers {
+		if player["id"] != h.playerID {
+			continue
+		}
+		roomAttrs, _ := player["attributes"].(map[string]interface{})
+		foundConvertedRoomHP = roomAttrs["maxHp"] == attrsAfterMeditate["maxHp"]
+	}
+	if !foundConvertedRoomHP {
+		t.Fatalf("room player hp should use converted max hp, room=%+v attrs=%+v", roomAfterMeditate.Room, attrsAfterMeditate)
+	}
 	if stop := StopWithEffects(h.repo, h.playerID); stop.Message != "你停止了打坐。" {
 		t.Fatalf("unexpected stop meditate message: %+v", stop)
 	}
@@ -1264,5 +1294,97 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	}
 	if attrs["experience"].(int) < 900 || attrs["potential"].(int) < 570 {
 		t.Fatalf("expected cumulative chapter rewards, got %+v", attrs)
+	}
+	chapterTwoExperience := attrs["experience"].(int)
+	chapterTwoPotential := attrs["potential"].(int)
+
+	dungeons = GetDungeonsView(h.repo, h.playerID)
+	foundChapterThree := false
+	for _, dungeon := range dungeons {
+		if dungeon["id"] == "xunqin_ch03_wu_ranch" {
+			foundChapterThree = true
+			if dungeon["chapter"] != 3 || dungeon["chainId"] != "xunqin_legend" {
+				t.Fatalf("expected chapter three chain metadata, got %+v", dungeon)
+			}
+		}
+	}
+	if !foundChapterThree {
+		t.Fatalf("expected xunqin chapter three after chapter two settlement, got %+v", dungeons)
+	}
+	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch03_wu_ranch"); err != nil {
+		t.Fatalf("enter xunqin chapter three failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to horse slope failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to wu hall failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err != nil {
+		t.Fatalf("return to horse slope failed: %v", err)
+	}
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "north")
+	if err != nil {
+		t.Fatalf("move to taming corral failed: %v", err)
+	}
+	actions, _ = moveRes.Room["actions"].([]string)
+	hasTameHorse := false
+	for _, action := range actions {
+		if action == "tame_horse" {
+			hasTameHorse = true
+		}
+	}
+	if !hasTameHorse {
+		t.Fatalf("expected tame_horse action, got %+v", moveRes.Room["actions"])
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "tame_horse"); err != nil {
+		t.Fatalf("tame black stallion failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "tame_horse"); err != nil {
+		t.Fatalf("repeat tame black stallion failed: %v", err)
+	}
+	backpack, err = GetBackpackView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get backpack after taming failed: %v", err)
+	}
+	reinCount := 0
+	for _, item := range backpack.Items {
+		if item["id"] == "black_stallion_rein" {
+			reinCount = item["count"].(int)
+		}
+	}
+	if reinCount != 1 {
+		t.Fatalf("expected exactly one black stallion rein, got %d in %+v", reinCount, backpack.Items)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to north watch failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "牧场蒙面客")
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to river pasture failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "牧场蒙面客")
+	killRoomNPCByName(t, h.repo, h.playerID, "牧场蒙面客")
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to stone pass failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "赵府门客首领")
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "north")
+	if err != nil {
+		t.Fatalf("move to ranch tunnel failed: %v", err)
+	}
+	dungeonPayload, _ = moveRes.Room["dungeon"].(map[string]interface{})
+	if dungeonPayload["progress"] != 100 {
+		t.Fatalf("expected chapter three progress 100, got %+v", dungeonPayload)
+	}
+	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
+		t.Fatalf("leave xunqin chapter three failed: %v", err)
+	}
+	attrs, err = GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes after chapter three failed: %v", err)
+	}
+	if attrs["experience"].(int) < chapterTwoExperience+680 || attrs["potential"].(int) < chapterTwoPotential+420 {
+		t.Fatalf("expected chapter three settlement rewards, before exp=%d pot=%d after=%+v", chapterTwoExperience, chapterTwoPotential, attrs)
 	}
 }

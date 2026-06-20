@@ -1,0 +1,113 @@
+{
+  "id": "xunqin_ch03_wu_ranch",
+  "name": "寻秦异闻：乌家牧场",
+  "description": "邯郸城外的乌家牧场看似平静，夜色中的马群却正为一场来历不明的袭击而躁动。",
+  "order": 12,
+  "chainId": "xunqin_legend",
+  "chapter": 3,
+  "spawnRoomId": "ranch_gate_00",
+  "unlockConditions": [
+    {
+      "type": "flag",
+      "targetId": "xunqin_ch03_unlocked",
+      "value": "true"
+    }
+  ],
+  "objectives": [
+    {
+      "id": "meet_wu_yingyuan",
+      "type": "enter_room",
+      "targetId": "wu_hall_02",
+      "required": 1,
+      "description": "进入乌氏正堂，见到乌应元。"
+    },
+    {
+      "id": "tame_black_stallion",
+      "type": "collect",
+      "targetId": "black_stallion_rein",
+      "required": 1,
+      "description": "在驯马围栏收服躁动的黑鬃马。"
+    },
+    {
+      "id": "defend_wu_ranch",
+      "type": "kill",
+      "targetId": "ranch_raider",
+      "required": 3,
+      "description": "击退潜入牧场的蒙面袭击者。"
+    },
+    {
+      "id": "defeat_zhao_retainer_captain",
+      "type": "kill",
+      "targetId": "zhao_retainer_captain",
+      "required": 1,
+      "description": "击败石岭隘口的赵府门客首领。"
+    },
+    {
+      "id": "reach_ranch_tunnel",
+      "type": "enter_room",
+      "targetId": "ranch_tunnel_07",
+      "required": 1,
+      "description": "沿袭击者留下的痕迹进入密库马道。"
+    }
+  ],
+  "rewards": {
+    "experience": 680,
+    "potential": 420,
+    "money": 160,
+    "flags": {
+      "xunqin_ch03_completed": true,
+      "xunqin_ch04_unlocked": true
+    }
+  },
+  "rooms": {
+    "ranch_gate_00": {
+      "name": "牧场南门",
+      "description": "木栅沿草坡伸向远处，门楼上悬着乌氏马纹。陶方早已候在门内，神色比邯郸城中更加凝重。",
+      "exits": { "north": "horse_slope_01" },
+      "npcs": ["tao_fang_shadow"]
+    },
+    "horse_slope_01": {
+      "name": "牧马坡",
+      "description": "成群骏马在坡上奔行，一匹黑鬃马不断冲撞围栏。乌廷芳勒马立在坡顶，像是在等人证明自己并非只会逞强。",
+      "exits": { "south": "ranch_gate_00", "east": "wu_hall_02", "north": "taming_corral_03" },
+      "npcs": ["wu_tingfang_shadow"]
+    },
+    "wu_hall_02": {
+      "name": "乌氏正堂",
+      "description": "正堂陈设朴实，墙上却挂满各国马道图。乌应元审视着从邯郸带回的令牌，要先看清来人是否值得乌家托付。",
+      "exits": { "west": "horse_slope_01" },
+      "npcs": ["wu_yingyuan_shadow"]
+    },
+    "taming_corral_03": {
+      "name": "驯马围栏",
+      "description": "黑鬃马踏得尘土四起，缰绳已经断了半截。它并非畏人，只是不肯向粗暴的鞭索低头。",
+      "exits": { "south": "horse_slope_01", "north": "north_watch_04" },
+      "actions": ["tame_horse"],
+      "npcs": []
+    },
+    "north_watch_04": {
+      "name": "北坡哨道",
+      "description": "哨道上的铜铃被人割断，草间留着几枚不属于牧场的黑布碎片。夜风送来急促马蹄，来者显然熟知乌家巡防。",
+      "exits": { "south": "taming_corral_03", "north": "river_pasture_05" },
+      "npcs": ["ranch_raider"]
+    },
+    "river_pasture_05": {
+      "name": "河谷草场",
+      "description": "受惊马群被赶向狭窄河谷，两名蒙面人挥动火把，企图让混乱掩住他们真正寻找的东西。",
+      "exits": { "south": "north_watch_04", "east": "stone_pass_06" },
+      "npcs": ["ranch_raider", "ranch_raider"]
+    },
+    "stone_pass_06": {
+      "name": "石岭隘口",
+      "description": "乱石间横着一辆空马车，赵府门客首领守在车后。他承认袭击并非为了夺马，而是为了逼乌家交出一条秘密路线。",
+      "exits": { "west": "river_pasture_05", "north": "ranch_tunnel_07" },
+      "npcs": ["zhao_retainer_captain"]
+    },
+    "ranch_tunnel_07": {
+      "name": "密库马道",
+      "description": "石门后是一条可供车马通行的旧道，墙上留着通往雅湖的暗记。乌应元一直守护的并非金银，而是一张足以牵动赵国权贵的商路网。",
+      "exits": { "south": "stone_pass_06" },
+      "npcs": ["wu_yingyuan_shadow", "wu_tingfang_shadow"]
+    }
+  }
+}

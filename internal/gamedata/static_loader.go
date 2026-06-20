@@ -299,6 +299,9 @@ func loadSkills(path string) (map[string]model.SkillDef, error) {
 		if id == "" || strings.TrimSpace(raw.Name) == "" {
 			continue
 		}
+		if strings.EqualFold(strings.TrimSpace(raw.Category), "internal") && raw.Bonuses["trained_mp_to_max_hp_percent"] <= 0 {
+			return nil, fmt.Errorf("internal skill %s must define a positive trained_mp_to_max_hp_percent bonus", id)
+		}
 		skills[id] = model.SkillDef{
 			ID:           id,
 			Name:         raw.Name,

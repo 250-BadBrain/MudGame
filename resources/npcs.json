@@ -1155,6 +1155,53 @@
       }
     }
   },
+  "wu_yingyuan_shadow": {
+    "name": "乌应元",
+    "title": "乌家之主",
+    "description": "他衣着并不奢华，目光却像在衡量一匹千里马的筋骨。乌家的每条商路与退路，都藏在这份沉稳之后。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 20,
+      "realm": "expert",
+      "resources": { "hp": 150, "maxHp": 150, "mp": 160, "trainedMaxMp": 160, "maxMp": 160, "spirit": 120, "maxSpirit": 120 },
+      "derived": { "attack": 16, "defense": 20, "hitRate": 82, "dodge": 68, "parry": 74, "critRate": 5, "attackSpeed": 4, "initiative": 90 }
+    }
+  },
+  "ranch_raider": {
+    "name": "牧场蒙面客",
+    "title": "夜袭者",
+    "description": "蒙面客靴底沾着邯郸城泥，出手只求逼退阻拦者。他们熟悉牧场哨位，显然有人提前画过路线。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 15,
+      "realm": "fighter",
+      "resources": { "hp": 32, "maxHp": 32, "mp": 90, "trainedMaxMp": 90, "maxMp": 90, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 6, "defense": 7, "hitRate": 72, "dodge": 54, "parry": 50, "critRate": 5, "attackSpeed": 4, "initiative": 88 }
+    }
+  },
+  "zhao_retainer_captain": {
+    "name": "赵府门客首领",
+    "title": "石岭截路",
+    "description": "这名门客披着暗甲，刀法没有军中痕迹，眼神却习惯发号施令。他奉命寻找的东西远比一群战马重要。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "boss",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 22,
+      "realm": "expert",
+      "resources": { "hp": 55, "maxHp": 55, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 110, "maxSpirit": 110 },
+      "derived": { "attack": 9, "defense": 10, "hitRate": 82, "dodge": 62, "parry": 68, "critRate": 9, "attackSpeed": 3, "initiative": 105 }
+    }
+  },
   "wu_tingfang_shadow": {
     "name": "乌廷芳",
     "title": "乌家小姐",

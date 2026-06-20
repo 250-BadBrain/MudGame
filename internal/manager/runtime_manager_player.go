@@ -772,6 +772,12 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 			return nil, err
 		}
 		result["message"] = message
+	case "tame_horse":
+		message, err := r.tameHorseRoomNoLock(p, room)
+		if err != nil {
+			return nil, err
+		}
+		result["message"] = message
 	default:
 		return nil, errors.New("action_not_supported")
 	}
@@ -845,6 +851,28 @@ func (r *RuntimeManager) inspectTokenRoomNoLock(p *model.Player, room model.Room
 	p.Flags["xunqin_ch02_found_wu_token"] = true
 	r.applyCollectDungeonObjectiveNoLock(p.ID, "wu_house_token")
 	return "你从名帖下取出一枚乌氏令牌。牌背细字指向城西马厩，质子府与乌家的暗线终于连在了一起。", nil
+}
+
+func (r *RuntimeManager) tameHorseRoomNoLock(p *model.Player, room model.Room) (string, error) {
+	if p == nil {
+		return "", exception.ErrPlayerNotFound
+	}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
+	}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	if room.WorldID != "dungeon_xunqin_ch03_wu_ranch" || !strings.HasSuffix(room.ID, "_taming_corral_03") {
+		return "附近没有需要安抚的马匹。", nil
+	}
+	if p.Flags["xunqin_ch03_tamed_black_stallion"] {
+		return "黑鬃马认出你的脚步，安静地低下头，已经不再抗拒这截缰绳。", nil
+	}
+	p.Backpack["black_stallion_rein"] += 1
+	p.Flags["xunqin_ch03_tamed_black_stallion"] = true
+	r.applyCollectDungeonObjectiveNoLock(p.ID, "black_stallion_rein")
+	return "你没有扬鞭，只顺着黑鬃马的呼吸缓缓靠近。它终于停止冲撞，让你重新系好断裂的缰绳。", nil
 }
 
 func roomRumor(roomID string) string {

@@ -1,6 +1,10 @@
 package manager
 
-import "mudgame/server/internal/model"
+import (
+	"math"
+
+	"mudgame/server/internal/model"
+)
 
 func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttributes {
 	if p == nil {
@@ -52,7 +56,7 @@ func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]i
 		}
 	}
 	if trainedMPToHPPercent > 0 {
-		eff.MaxHP += int(float64(eff.TrainedMaxMP) * trainedMPToHPPercent)
+		eff.MaxHP += int(math.Ceil(float64(eff.TrainedMaxMP) * trainedMPToHPPercent))
 	}
 	clampEffectiveResources(eff)
 }

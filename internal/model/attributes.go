@@ -77,11 +77,14 @@ func NormalizeAttributes(a Attributes) Attributes {
 	if a.Realm == "" {
 		a.Realm = DefaultRealm
 	}
-	if a.Resources.MaxHP <= 0 {
+	maxHPMissing := a.Resources.MaxHP <= 0
+	if maxHPMissing {
 		a.Resources.MaxHP = max(80, a.Base.Constitution*5)
 	}
-	if a.Resources.HP <= 0 {
+	if maxHPMissing && a.Resources.HP == 0 {
 		a.Resources.HP = a.Resources.MaxHP
+	} else if a.Resources.HP < 0 {
+		a.Resources.HP = 0
 	}
 	if a.Resources.MaxMP <= 0 {
 		a.Resources.MaxMP = max(50, (a.Base.Perception+a.Base.Willpower)*5)

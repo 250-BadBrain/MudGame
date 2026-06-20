@@ -22,3 +22,13 @@ func TestCalculateCombatDerivedUsesPostAttributeTotals(t *testing.T) {
 		t.Fatalf("post attributes should dynamically raise all derived values: base=%+v boosted=%+v", base, boosted)
 	}
 }
+
+func TestNormalizeAttributesPreservesZeroHPForDeadCharacter(t *testing.T) {
+	attrs := NewPlayerAttributes(16, 16, 16, 16, 16)
+	attrs.Resources.HP = 0
+
+	normalized := NormalizeAttributes(attrs)
+	if normalized.Resources.HP != 0 {
+		t.Fatalf("dead character hp should remain zero, got %d", normalized.Resources.HP)
+	}
+}
