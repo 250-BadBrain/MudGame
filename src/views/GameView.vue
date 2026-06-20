@@ -1991,7 +1991,7 @@ const formatMoney = (money) => {
     padding: 20px;
     box-sizing: border-box;
     gap: 15px;
-    background-color: var(--color-background-dark);
+    background-color: transparent;
 }
 
 .top-info-area {
@@ -2392,7 +2392,7 @@ const formatMoney = (money) => {
     flex-direction: column;
     overflow: hidden;
     animation: slideIn 0.3s ease;
-    flex: 0 1 auto;
+    flex: 1;
     min-height: 0;
     box-sizing: border-box;
 }
