@@ -290,11 +290,11 @@ const getSkillBonusText = (skill) => {
 </script>
 
 <style scoped>
-.game-info-panel { background: transparent; border: 0; border-radius: 0; padding: 10px; margin: 0; overflow: hidden; min-width: 0; box-sizing: border-box; }
+.game-info-panel { background: transparent; padding: 10px; margin: 0; overflow: hidden; min-width: 0; box-sizing: border-box; }
 .panel-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; min-width: 0; background: rgba(20,20,20,0.95); }
 .panel-header h3 { margin: 0; font-size: 14px; color: #f1c40f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 18px; cursor: pointer; padding: 0 4px; }
-.panel-content { max-height: min(50vh, 420px); overflow-y: auto; overflow-x: hidden; min-width: 0; background: rgba(20,20,20,0.95); scrollbar-width: none; -ms-overflow-style: none; }
+.panel-content { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; min-width: 0; background: transparent; scrollbar-width: none; -ms-overflow-style: none; }
 .panel-content::-webkit-scrollbar { display: none; }
 .backpack-panel-container, .equipment-panel-container, .maps-panel-container { display: flex; flex-direction: column; max-height: min(50vh, 420px); min-height: 0; overflow: hidden; }
 .backpack-list, .equipment-slots, .map-list-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; }
