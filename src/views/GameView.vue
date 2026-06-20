@@ -454,7 +454,8 @@ const roomActionLabels = {
     listen_rumor: '听传闻',
     search: '搜索',
     inspect_fragment: '辨认残简',
-    inspect_token: '查验令牌'
+    inspect_token: '查验令牌',
+    tame_horse: '驯马'
 };
 
 const roomActions = computed(() => {

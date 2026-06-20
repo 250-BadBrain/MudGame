@@ -294,8 +294,9 @@ const getSkillBonusText = (skill) => {
 .panel-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; min-width: 0; }
 .panel-header h3 { margin: 0; font-size: 14px; color: #f1c40f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 18px; cursor: pointer; padding: 0 4px; }
-.panel-content { height: min(50vh, 420px); overflow: hidden; min-width: 0; }
-.backpack-panel-container, .equipment-panel-container, .maps-panel-container { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; }
+.panel-content { max-height: min(50vh, 420px); overflow-y: auto; overflow-x: hidden; min-width: 0; scrollbar-width: none; -ms-overflow-style: none; }
+.panel-content::-webkit-scrollbar { display: none; }
+.backpack-panel-container, .equipment-panel-container, .maps-panel-container { display: flex; flex-direction: column; max-height: min(50vh, 420px); min-height: 0; overflow: hidden; }
 .backpack-list, .equipment-slots, .map-list-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; }
 .backpack-list::-webkit-scrollbar, .equipment-slots::-webkit-scrollbar, .map-list-area::-webkit-scrollbar, .backpack-bottom-area::-webkit-scrollbar, .map-description-area::-webkit-scrollbar { display: none; }
 .money-header { text-align: right; color: #f1c40f; margin-bottom: 6px; font-weight: bold; font-size: 13px; }
@@ -349,7 +350,8 @@ const getSkillBonusText = (skill) => {
 .empty-slot { color: #555; font-style: italic; font-size: 12px; }
 .slot-actions { }
 .unequip-btn { background: #e67e22; color: #fff; border: none; padding: 4px 8px; cursor: pointer; font-size: 11px; border-radius: 3px; font-family: inherit; }
-.status-list { font-size: 12px; }
+.status-list { max-height: min(50vh, 420px); overflow-y: auto; overflow-x: hidden; font-size: 12px; scrollbar-width: none; -ms-overflow-style: none; }
+.status-list::-webkit-scrollbar { display: none; }
 .status-item { display: flex; justify-content: space-between; padding: 3px 6px; }
 .status-item .label { color: #888; }
 .status-item .value { color: #ecf0f1; }
