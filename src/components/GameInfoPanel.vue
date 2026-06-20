@@ -135,7 +135,7 @@
           </div>
         </div>
       </div>
-      <div v-if="currentPanel === 'status'">
+      <div v-if="currentPanel === 'status'" class="status-panel-container">
         <div v-if="statusAttributes" class="status-list">
           <div class="status-item"><span class="label">经验:</span> <span class="value">{{ statusAttributes.experience || 0 }}</span></div>
           <div class="status-item"><span class="label">潜能:</span> <span class="value">{{ statusAttributes.potential || 0 }}</span></div>
@@ -296,7 +296,7 @@ const getSkillBonusText = (skill) => {
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 18px; cursor: pointer; padding: 0 4px; }
 .panel-content { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; min-width: 0; background: transparent; scrollbar-width: none; -ms-overflow-style: none; }
 .panel-content::-webkit-scrollbar { display: none; }
-.backpack-panel-container, .equipment-panel-container, .maps-panel-container { display: flex; flex-direction: column; max-height: min(50vh, 420px); min-height: 0; overflow: hidden; }
+.backpack-panel-container, .equipment-panel-container, .maps-panel-container, .status-panel-container { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; }
 .backpack-list, .equipment-slots, .map-list-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; }
 .backpack-list::-webkit-scrollbar, .equipment-slots::-webkit-scrollbar, .map-list-area::-webkit-scrollbar, .backpack-bottom-area::-webkit-scrollbar, .map-description-area::-webkit-scrollbar { display: none; }
 .money-header { text-align: right; color: #f1c40f; margin-bottom: 6px; font-weight: bold; font-size: 13px; }
@@ -350,7 +350,7 @@ const getSkillBonusText = (skill) => {
 .empty-slot { color: #555; font-style: italic; font-size: 12px; }
 .slot-actions { }
 .unequip-btn { background: #e67e22; color: #fff; border: none; padding: 4px 8px; cursor: pointer; font-size: 11px; border-radius: 3px; font-family: inherit; }
-.status-list { max-height: min(50vh, 420px); overflow-y: auto; overflow-x: hidden; font-size: 12px; scrollbar-width: none; -ms-overflow-style: none; }
+.status-list { height: 100%; min-height: 0; overflow-y: auto; overflow-x: hidden; font-size: 12px; scrollbar-width: none; -ms-overflow-style: none; }
 .status-list::-webkit-scrollbar { display: none; }
 .status-item { display: flex; justify-content: space-between; padding: 3px 6px; }
 .status-item .label { color: #888; }
