@@ -147,6 +147,7 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, p
 		Reputations:           map[string]int{},
 		Online:                false,
 	}
+	players[id].Attributes.Resources.HP = effectiveAttributesForPlayerNoLock(players[id]).MaxHP
 	u.CharacterIDs = append(u.CharacterIDs, id)
 
 	if err := r.savePlayers(players); err != nil {

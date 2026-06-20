@@ -8,8 +8,25 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	}
 	attrs := model.NormalizeAttributes(p.Attributes)
 	eff := model.BuildEffectiveAttributes(attrs)
+	eff.MaxHP = 80
+	eff.Attack = 0
+	eff.Defense = 0
+	eff.HitRate = 0
+	eff.Dodge = 0
+	eff.Parry = 0
 	applySkillBonusesNoLock(&eff, p.Skills)
 	applyEquipmentEffectsNoLock(&eff, p.Equipment)
+	directAttack := eff.Attack
+	directDefense := eff.Defense
+	directHitRate := eff.HitRate
+	directDodge := eff.Dodge
+	directParry := eff.Parry
+	derived := model.CalculateCombatDerived(eff)
+	eff.Attack = derived.Attack + directAttack
+	eff.Defense = derived.Defense + directDefense
+	eff.HitRate = derived.HitRate + directHitRate
+	eff.Dodge = derived.Dodge + directDodge
+	eff.Parry = derived.Parry + directParry
 	return eff
 }
 
@@ -17,6 +34,7 @@ func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]i
 	if eff == nil {
 		return
 	}
+	trainedMPToHPPercent := 0.0
 	for skillID, level := range skills {
 		if level <= 0 {
 			continue
@@ -26,8 +44,15 @@ func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]i
 			continue
 		}
 		for key, value := range def.Bonuses {
+			if key == "trained_mp_to_max_hp_percent" {
+				trainedMPToHPPercent += value
+				continue
+			}
 			applyLeveledBonus(eff, key, value, level)
 		}
+	}
+	if trainedMPToHPPercent > 0 {
+		eff.MaxHP += int(float64(eff.TrainedMaxMP) * trainedMPToHPPercent)
 	}
 	clampEffectiveResources(eff)
 }
@@ -74,8 +99,6 @@ func applyLeveledBonus(eff *model.EffectiveAttributes, key string, value float64
 		eff.CritRate += int(value) * (level / 10)
 	case "max_mp_per_level":
 		eff.MaxMP += int(value) * level
-		eff.TrainedMaxMP += int(value) * level
-		eff.MP += int(value) * level
 	case "max_hp_per_level":
 		eff.MaxHP += int(value) * level
 		eff.HP += int(value) * level
@@ -115,8 +138,6 @@ func applyFlatBonus(eff *model.EffectiveAttributes, key string, value int) {
 		eff.HP += value
 	case "maxMp":
 		eff.MaxMP += value
-		eff.TrainedMaxMP += value
-		eff.MP += value
 	case "spirit", "maxSpirit":
 		eff.MaxSpirit += value
 		eff.Spirit += value

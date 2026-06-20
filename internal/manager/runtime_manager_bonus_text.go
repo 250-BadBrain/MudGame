@@ -46,6 +46,10 @@ func skillBonusText(bonuses map[string]float64, level int) []string {
 		case "max_hp_per_level":
 			amount = int(value) * level
 			out = appendPositiveBonus(out, "气血上限", amount)
+		case "trained_mp_to_max_hp_percent":
+			if level > 0 && value > 0 {
+				out = append(out, "转血 +"+strconv.FormatFloat(value*100, 'f', -1, 64)+"%")
+			}
 		default:
 			out = appendPositiveBonus(out, key, int(value))
 		}

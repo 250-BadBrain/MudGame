@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"mudgame/server/internal/manager"
+	"mudgame/server/internal/model"
 )
 
 func extractRoomNPCs(room map[string]interface{}) []map[string]interface{} {
@@ -129,12 +130,60 @@ func killRoomNPCByName(t *testing.T, repo RuntimeRepository, playerID, npcName s
 			t.Fatalf("get status after combat failed: %v", err)
 		}
 		if status["state"] == "IDLE" {
+			recoverPlayerBetweenFights(t, repo, playerID)
 			return
 		}
 	}
 	status, _ := GetPlayerStatusView(repo, playerID)
 	snapshot, _ = GetRoomSnapshotView(repo, playerID)
 	t.Fatalf("combat with %s did not finish, status=%+v roomNPCs=%+v", npcName, status, extractRoomNPCs(snapshot.Room))
+}
+
+func recoverPlayerBetweenFights(t *testing.T, repo RuntimeRepository, playerID string) {
+	t.Helper()
+	for round := 0; round < 4; round++ {
+		attrs, err := GetAttributesView(repo, playerID)
+		if err != nil {
+			t.Fatalf("get recovery attributes failed: %v", err)
+		}
+		if attrs["currentHp"].(int) >= attrs["maxHp"].(int) && attrs["currentMp"].(int) >= attrs["trainedMaxMp"].(int) {
+			return
+		}
+		if attrs["currentHp"].(int) < attrs["maxHp"].(int) && attrs["currentMp"].(int) >= 10 {
+			if _, err := HealWithEffects(repo, playerID); err != nil {
+				t.Fatalf("start recovery healing failed: %v", err)
+			}
+			for i := 0; i < 100; i++ {
+				if _, err := ProcessStatusTickWithEffects(repo); err != nil {
+					t.Fatalf("process healing recovery tick failed: %v", err)
+				}
+				current, _ := GetAttributesView(repo, playerID)
+				if current["currentHp"].(int) >= current["maxHp"].(int) {
+					_ = StopWithEffects(repo, playerID)
+					break
+				}
+			}
+		}
+		attrs, err = GetAttributesView(repo, playerID)
+		if err != nil {
+			t.Fatalf("get post-healing attributes failed: %v", err)
+		}
+		if attrs["currentMp"].(int) < attrs["trainedMaxMp"].(int) {
+			if _, err := MeditateWithEffects(repo, playerID); err != nil {
+				t.Fatalf("start recovery meditation failed: %v", err)
+			}
+			for i := 0; i < 100; i++ {
+				if _, err := ProcessStatusTickWithEffects(repo); err != nil {
+					t.Fatalf("process meditation recovery tick failed: %v", err)
+				}
+				current, _ := GetAttributesView(repo, playerID)
+				if current["currentMp"].(int) >= current["trainedMaxMp"].(int) {
+					_ = StopWithEffects(repo, playerID)
+					break
+				}
+			}
+		}
+	}
 }
 
 func setupRepo(t *testing.T) *testHelper {
@@ -471,6 +520,10 @@ func TestQueryViewWorkflows(t *testing.T) {
 	if attrs["currentHp"] == nil {
 		t.Fatalf("attributes missing currentHp")
 	}
+	resources := attrs["resources"].(model.ResourceAttributes)
+	if resources.MaxHP != 80 || attrs["currentHp"] != 104 || attrs["maxHp"] != 104 {
+		t.Fatalf("expected base hp 80 and full effective hp 104, resources=%+v current=%v max=%v", resources, attrs["currentHp"], attrs["maxHp"])
+	}
 
 	bag, err := GetBackpackView(h.repo, h.playerID)
 	if err != nil {
@@ -525,20 +578,33 @@ func TestEffectiveAttributesUseSkillAndEquipmentBonuses(t *testing.T) {
 	if attrsAfterSkill["maxMp"].(int) <= initialMaxMP {
 		t.Fatalf("expected basic_neigong to increase maxMp, before=%d after=%d", initialMaxMP, attrsAfterSkill["maxMp"].(int))
 	}
+	if attrsAfterSkill["trainedMaxMp"] != attrsBefore["trainedMaxMp"] {
+		t.Fatalf("skill maxMp bonus must not raise trained maxMp, before=%v after=%v", attrsBefore["trainedMaxMp"], attrsAfterSkill["trainedMaxMp"])
+	}
+	if attrsAfterSkill["currentMp"] != attrsBefore["currentMp"] {
+		t.Fatalf("skill maxMp bonus must not raise current mp, before=%v after=%v", attrsBefore["currentMp"], attrsAfterSkill["currentMp"])
+	}
+	if attrsAfterSkill["maxHp"] != attrsBefore["maxHp"] {
+		t.Fatalf("hp conversion must use trained maxMp, not maxMp cap, before=%v after=%v", attrsBefore["maxHp"], attrsAfterSkill["maxHp"])
+	}
 
 	skills, err := GetSkillsView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get skills failed: %v", err)
 	}
-	hasBonusText := false
+	hasMaxMPBonus := false
+	hasHPConversion := false
 	for _, skill := range skills {
 		if skill["id"] == "basic_neigong" {
-			if text, ok := skill["bonusText"].([]string); ok && len(text) > 0 {
-				hasBonusText = true
+			if bonusText, ok := skill["bonusText"].([]string); ok {
+				for _, text := range bonusText {
+					hasMaxMPBonus = hasMaxMPBonus || strings.Contains(text, "内力上限 +40")
+					hasHPConversion = hasHPConversion || text == "转血 +30%"
+				}
 			}
 		}
 	}
-	if !hasBonusText {
+	if !hasMaxMPBonus || !hasHPConversion {
 		t.Fatalf("expected basic_neigong bonusText, got %+v", skills)
 	}
 
@@ -1103,5 +1169,100 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	}
 	if attrs["experience"].(int) < 380 || attrs["potential"].(int) < 240 {
 		t.Fatalf("expected xunqin settlement rewards, got %+v", attrs)
+	}
+
+	dungeons = GetDungeonsView(h.repo, h.playerID)
+	foundChapterTwo := false
+	for _, dungeon := range dungeons {
+		if dungeon["id"] == "xunqin_ch02_handan_maze" {
+			foundChapterTwo = true
+			if dungeon["chapter"] != 2 || dungeon["chainId"] != "xunqin_legend" {
+				t.Fatalf("expected chapter two chain metadata, got %+v", dungeon)
+			}
+		}
+	}
+	if !foundChapterTwo {
+		t.Fatalf("expected xunqin chapter two after chapter one settlement, got %+v", dungeons)
+	}
+
+	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch02_handan_maze"); err != nil {
+		t.Fatalf("enter xunqin chapter two failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to old horse market failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "赵府卫士")
+	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err != nil {
+		t.Fatalf("move to wu courtyard failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to hostage alley failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "赵府卫士")
+	killRoomNPCByName(t, h.repo, h.playerID, "赵府卫士")
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to hostage side gate failed: %v", err)
+	}
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "east")
+	if err != nil {
+		t.Fatalf("move to corridor guard room failed: %v", err)
+	}
+	actions, _ = moveRes.Room["actions"].([]string)
+	hasInspectToken := false
+	for _, action := range actions {
+		if action == "inspect_token" {
+			hasInspectToken = true
+		}
+	}
+	if !hasInspectToken {
+		t.Fatalf("expected inspect_token action, got %+v", moveRes.Room["actions"])
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_token"); err != nil {
+		t.Fatalf("inspect wu token failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_token"); err != nil {
+		t.Fatalf("inspect wu token twice failed: %v", err)
+	}
+	backpack, err = GetBackpackView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get backpack after token failed: %v", err)
+	}
+	tokenCount := 0
+	for _, item := range backpack.Items {
+		if item["id"] == "wu_house_token" {
+			tokenCount = item["count"].(int)
+		}
+	}
+	if tokenCount != 1 {
+		t.Fatalf("expected exactly one wu token, got %d in %+v", tokenCount, backpack.Items)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to bamboo archive failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "赵府卫士")
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to west stable failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err != nil {
+		t.Fatalf("move to zhang river crossing failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "连晋")
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "north")
+	if err != nil {
+		t.Fatalf("move to wu refuge failed: %v", err)
+	}
+	dungeonPayload, _ = moveRes.Room["dungeon"].(map[string]interface{})
+	if dungeonPayload["progress"] != 100 {
+		t.Fatalf("expected chapter two progress 100, got %+v", dungeonPayload)
+	}
+	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
+		t.Fatalf("leave xunqin chapter two failed: %v", err)
+	}
+	attrs, err = GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes after chapter two failed: %v", err)
+	}
+	if attrs["experience"].(int) < 900 || attrs["potential"].(int) < 570 {
+		t.Fatalf("expected cumulative chapter rewards, got %+v", attrs)
 	}
 }

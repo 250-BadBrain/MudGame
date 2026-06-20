@@ -210,6 +210,20 @@
     "unit": "枚",
     "source": "秘境异闻"
   },
+  "wu_house_token": {
+    "name": "乌氏令牌",
+    "description": "一枚刻着乌氏马纹的青铜令牌，背面细字指向邯郸城外的一处隐秘马道。",
+    "type": "quest",
+    "subtype": "xunqin_clue",
+    "stackable": true,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 3,
+    "unit": "枚",
+    "limit": 1,
+    "source": "寻秦异闻"
+  },
   "zongheng_fragment": {
     "name": "纵横残简",
     "description": "半页残破竹简，字迹像从战国旧梦中拓下，隐约提到一名不属于此世的旅人。",

@@ -59,23 +59,13 @@ func NewPlayerAttributes(strength, constitution, agility, perception, willpower 
 			Luck:         20,
 		},
 		Resources: ResourceAttributes{
-			HP:           100,
-			MaxHP:        100,
+			HP:           80,
+			MaxHP:        80,
 			MP:           80,
 			TrainedMaxMP: 80,
 			MaxMP:        200,
 			Spirit:       100,
 			MaxSpirit:    100,
-		},
-		Derived: DerivedAttributes{
-			Attack:      15,
-			Defense:     15,
-			HitRate:     100,
-			Dodge:       100,
-			Parry:       100,
-			CritRate:    1,
-			AttackSpeed: 4,
-			Initiative:  100,
 		},
 	})
 }
@@ -90,13 +80,13 @@ func NormalizeAttributes(a Attributes) Attributes {
 	if a.Resources.MaxHP <= 0 {
 		a.Resources.MaxHP = max(80, a.Base.Constitution*5)
 	}
-	if a.Resources.HP <= 0 || a.Resources.HP > a.Resources.MaxHP {
+	if a.Resources.HP <= 0 {
 		a.Resources.HP = a.Resources.MaxHP
 	}
 	if a.Resources.MaxMP <= 0 {
 		a.Resources.MaxMP = max(50, (a.Base.Perception+a.Base.Willpower)*5)
 	}
-	if a.Resources.TrainedMaxMP <= 0 || a.Resources.TrainedMaxMP > a.Resources.MaxMP {
+	if a.Resources.TrainedMaxMP <= 0 {
 		a.Resources.TrainedMaxMP = min(a.Resources.MaxMP, max(30, a.Resources.MaxMP/2))
 	}
 	if a.Resources.MP <= 0 || a.Resources.MP > a.Resources.TrainedMaxMP {
@@ -109,20 +99,21 @@ func NormalizeAttributes(a Attributes) Attributes {
 		a.Resources.Spirit = a.Resources.MaxSpirit
 	}
 	eff := BuildEffectiveAttributes(a)
+	combatDerived := CalculateCombatDerived(eff)
 	if a.Derived.Attack <= 0 {
-		a.Derived.Attack = max(1, eff.Strength/2+eff.Agility/4)
+		a.Derived.Attack = combatDerived.Attack
 	}
 	if a.Derived.Defense <= 0 {
-		a.Derived.Defense = max(1, eff.Constitution/2+eff.Willpower/4)
+		a.Derived.Defense = combatDerived.Defense
 	}
 	if a.Derived.HitRate <= 0 {
-		a.Derived.HitRate = 60 + eff.Perception + eff.Agility/2
+		a.Derived.HitRate = combatDerived.HitRate
 	}
 	if a.Derived.Dodge <= 0 {
-		a.Derived.Dodge = 60 + eff.Agility
+		a.Derived.Dodge = combatDerived.Dodge
 	}
 	if a.Derived.Parry <= 0 {
-		a.Derived.Parry = 50 + eff.Strength/2 + eff.Perception/2
+		a.Derived.Parry = combatDerived.Parry
 	}
 	if a.Derived.CritRate <= 0 {
 		a.Derived.CritRate = 1
@@ -134,6 +125,16 @@ func NormalizeAttributes(a Attributes) Attributes {
 		a.Derived.Initiative = 60 + eff.Agility + eff.Perception/2
 	}
 	return a
+}
+
+func CalculateCombatDerived(eff EffectiveAttributes) DerivedAttributes {
+	return DerivedAttributes{
+		Attack:  max(1, 10+eff.Strength*2+eff.Agility/2),
+		HitRate: max(1, 50+eff.Perception*2+eff.Agility),
+		Defense: max(1, 5+eff.Constitution*2+eff.Strength/2+eff.Willpower/2),
+		Parry:   max(1, 30+eff.Strength+eff.Perception+eff.Agility/2),
+		Dodge:   max(1, 30+eff.Agility*2+eff.Perception/2),
+	}
 }
 
 func BuildEffectiveAttributes(a Attributes) EffectiveAttributes {

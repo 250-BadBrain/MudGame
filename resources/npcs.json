@@ -1155,6 +1155,68 @@
       }
     }
   },
+  "wu_tingfang_shadow": {
+    "name": "乌廷芳",
+    "title": "乌家小姐",
+    "description": "她一身利落骑装，眉目间英气逼人。面对邯郸暗流，她更愿相信自己的眼睛，而不是旁人的传闻。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 12,
+      "realm": "fighter",
+      "resources": { "hp": 100, "maxHp": 100, "mp": 90, "trainedMaxMp": 90, "maxMp": 90, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 12, "defense": 12, "hitRate": 76, "dodge": 82, "parry": 60, "critRate": 5, "attackSpeed": 4, "initiative": 90 }
+    }
+  },
+  "tao_fang_shadow": {
+    "name": "陶方",
+    "title": "乌家管事",
+    "description": "他风尘仆仆，言语谨慎，腰间的马鞭却从未离手。邯郸城里每一条退路，他似乎都预先看过。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 14,
+      "realm": "fighter",
+      "resources": { "hp": 120, "maxHp": 120, "mp": 100, "trainedMaxMp": 100, "maxMp": 100, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 14, "defense": 15, "hitRate": 78, "dodge": 72, "parry": 68, "critRate": 4, "attackSpeed": 4, "initiative": 85 }
+    }
+  },
+  "zhao_mansion_guard": {
+    "name": "赵府卫士",
+    "title": "封巷甲士",
+    "description": "卫士甲叶压得很低，只露出一双审视来人的眼睛。刀鞘上的赵府印记在灯下泛着冷光。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 11,
+      "realm": "fighter",
+      "resources": { "hp": 26, "maxHp": 26, "mp": 70, "trainedMaxMp": 70, "maxMp": 70, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 4, "defense": 6, "hitRate": 68, "dodge": 46, "parry": 45, "critRate": 4, "attackSpeed": 4, "initiative": 80 }
+    }
+  },
+  "lian_jin_shadow": {
+    "name": "连晋",
+    "title": "赵境剑客",
+    "description": "他持剑站在渡口，神情从容得近乎倨傲。剑锋尚未抬起，四周退路已像被无形剑势封住。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "boss",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 18,
+      "realm": "expert",
+      "resources": { "hp": 45, "maxHp": 45, "mp": 140, "trainedMaxMp": 140, "maxMp": 140, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 7, "defense": 8, "hitRate": 78, "dodge": 58, "parry": 62, "critRate": 8, "attackSpeed": 3, "initiative": 100 }
+    }
+  },
   "retainer_swordsman": {
     "name": "门客剑士",
     "title": "断桥拦路",

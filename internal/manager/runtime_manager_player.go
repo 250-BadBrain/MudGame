@@ -766,6 +766,12 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 			return nil, err
 		}
 		result["message"] = message
+	case "inspect_token":
+		message, err := r.inspectTokenRoomNoLock(p, room)
+		if err != nil {
+			return nil, err
+		}
+		result["message"] = message
 	default:
 		return nil, errors.New("action_not_supported")
 	}
@@ -819,6 +825,28 @@ func (r *RuntimeManager) inspectFragmentRoomNoLock(p *model.Player, room model.R
 	return "你细细查看眼前物事，没有辨出新的线索。", nil
 }
 
+func (r *RuntimeManager) inspectTokenRoomNoLock(p *model.Player, room model.Room) (string, error) {
+	if p == nil {
+		return "", exception.ErrPlayerNotFound
+	}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
+	}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	if room.WorldID != "dungeon_xunqin_ch02_handan_maze" || !strings.HasSuffix(room.ID, "_guard_room_05") {
+		return "你查验了附近的物件，没有发现可用的线索。", nil
+	}
+	if p.Flags["xunqin_ch02_found_wu_token"] {
+		return "你再次翻看值房名帖，乌氏令牌背面的马道已经牢牢记在心中。", nil
+	}
+	p.Backpack["wu_house_token"] += 1
+	p.Flags["xunqin_ch02_found_wu_token"] = true
+	r.applyCollectDungeonObjectiveNoLock(p.ID, "wu_house_token")
+	return "你从名帖下取出一枚乌氏令牌。牌背细字指向城西马厩，质子府与乌家的暗线终于连在了一起。", nil
+}
+
 func roomRumor(roomID string) string {
 	switch roomID {
 	case "ly_00":
@@ -862,7 +890,8 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
 	}
-	if p.Attributes.Resources.HP >= p.Attributes.Resources.MaxHP {
+	effectiveMaxHP := effectiveAttributesForPlayerNoLock(p).MaxHP
+	if p.Attributes.Resources.HP >= effectiveMaxHP {
 		return "", errors.New("hp_full")
 	}
 	if p.Attributes.Resources.MP < 10 {
@@ -870,8 +899,8 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 	}
 	p.Attributes.Resources.MP -= 10
 	p.Attributes.Resources.HP += 20
-	if p.Attributes.Resources.HP > p.Attributes.Resources.MaxHP {
-		p.Attributes.Resources.HP = p.Attributes.Resources.MaxHP
+	if p.Attributes.Resources.HP > effectiveMaxHP {
+		p.Attributes.Resources.HP = effectiveMaxHP
 	}
 	p.State = "HEALING"
 	p.StateTickCountdown = stateSettlementSeconds
@@ -911,7 +940,8 @@ func (r *RuntimeManager) Meditate(playerID string) (string, error) {
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
 	}
-	if p.Attributes.Resources.TrainedMaxMP >= p.Attributes.Resources.MaxMP && p.Attributes.Resources.MP >= p.Attributes.Resources.TrainedMaxMP {
+	eff := effectiveAttributesForPlayerNoLock(p)
+	if p.Attributes.Resources.TrainedMaxMP >= eff.MaxMP && p.Attributes.Resources.MP >= p.Attributes.Resources.TrainedMaxMP {
 		return "", errors.New("full_state")
 	}
 	p.Attributes.Resources.MP += 15
@@ -1143,7 +1173,7 @@ func (r *RuntimeManager) Relive(playerID string) (string, error) {
 	p.State = "IDLE"
 	p.TargetID = ""
 	p.CombatType = ""
-	p.Attributes.Resources.HP = p.Attributes.Resources.MaxHP
+	p.Attributes.Resources.HP = effectiveAttributesForPlayerNoLock(p).MaxHP
 	p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
 	p.RoomID = "ly_00"
 	if err := r.savePlayers(players); err != nil {
@@ -1178,7 +1208,8 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 		}
 		switch p.State {
 		case "HEALING":
-			if p.Attributes.Resources.HP >= p.Attributes.Resources.MaxHP || p.Attributes.Resources.MP < 8 {
+			effectiveMaxHP := effectiveAttributesForPlayerNoLock(p).MaxHP
+			if p.Attributes.Resources.HP >= effectiveMaxHP || p.Attributes.Resources.MP < 8 {
 				p.State = "IDLE"
 				p.StateTickCountdown = 0
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "停止了运功疗伤。"})
@@ -1188,8 +1219,8 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			beforeHP := p.Attributes.Resources.HP
 			p.Attributes.Resources.MP -= 8
 			p.Attributes.Resources.HP += 20
-			if p.Attributes.Resources.HP > p.Attributes.Resources.MaxHP {
-				p.Attributes.Resources.HP = p.Attributes.Resources.MaxHP
+			if p.Attributes.Resources.HP > effectiveMaxHP {
+				p.Attributes.Resources.HP = effectiveMaxHP
 			}
 			recovered := p.Attributes.Resources.HP - beforeHP
 			if recovered > 0 {
@@ -1197,6 +1228,7 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			}
 			updatedRoom[roomID] = true
 		case "MEDITATING":
+			effectiveMaxMP := effectiveAttributesForPlayerNoLock(p).MaxMP
 			if p.Attributes.Resources.MP < p.Attributes.Resources.TrainedMaxMP {
 				beforeMP := p.Attributes.Resources.MP
 				p.Attributes.Resources.MP += 20
@@ -1210,7 +1242,7 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 				updatedRoom[roomID] = true
 				continue
 			}
-			if p.Attributes.Resources.TrainedMaxMP >= p.Attributes.Resources.MaxMP {
+			if p.Attributes.Resources.TrainedMaxMP >= effectiveMaxMP {
 				p.State = "IDLE"
 				p.StateTickCountdown = 0
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "结束了打坐调息。"})
@@ -1219,8 +1251,8 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			}
 			beforeMaxMP := p.Attributes.Resources.TrainedMaxMP
 			p.Attributes.Resources.TrainedMaxMP += 1
-			if p.Attributes.Resources.TrainedMaxMP > p.Attributes.Resources.MaxMP {
-				p.Attributes.Resources.TrainedMaxMP = p.Attributes.Resources.MaxMP
+			if p.Attributes.Resources.TrainedMaxMP > effectiveMaxMP {
+				p.Attributes.Resources.TrainedMaxMP = effectiveMaxMP
 			}
 			increased := p.Attributes.Resources.TrainedMaxMP - beforeMaxMP
 			p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP

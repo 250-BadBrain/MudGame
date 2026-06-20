@@ -1,7 +1,7 @@
 {
   "id": "xunqin_ch01_bronze_gate",
   "name": "寻秦异闻：铜匣入赵",
-  "description": "洛阳西市的战国铜匣忽然开启，玩家误入赵地幻境，被卷入一个名为“少龙”的身份。荒村恶霸、赵地追兵与门客剑士接踵而至，只有守住残简，才能在铜门合拢前回到洛阳。",
+  "description": "洛阳西市的战国铜匣忽现异响，匣后似有一条通往古老岁月的神秘通道。",
   "order": 10,
   "chainId": "xunqin_legend",
   "chapter": 1,
@@ -26,7 +26,7 @@
       "type": "enter_room",
       "targetId": "zhao_road_03",
       "required": 1,
-      "description": "穿过铜光裂隙，进入战国赵地。"
+      "description": "穿过铜光甬道，进入战国赵地。"
     },
     {
       "id": "defeat_village_bully",
@@ -47,7 +47,7 @@
       "type": "collect",
       "targetId": "zongheng_fragment",
       "required": 1,
-      "description": "在残帐书案中辨认纵横残简。"
+      "description": "在驿营残帐中辨认纵横残简。"
     },
     {
       "id": "defeat_retainer_swordsman",
@@ -61,7 +61,7 @@
       "type": "enter_room",
       "targetId": "gate_09",
       "required": 1,
-      "description": "在幻境崩解前返回铜门残响。"
+      "description": "在幻境崩解前抵达古铜石门。"
     }
   ],
   "rewards": {
@@ -103,7 +103,7 @@
       "npcs": []
     },
     "zhao_road_03": {
-      "name": "铜光裂隙",
+      "name": "铜光甬道",
       "description": "一步踏出，脚下青石变成黄土。风里有陌生的马汗与草灰味，身上衣物、佩饰、兵刃全都变了模样，远处有人惊呼：少龙在那里！",
       "exits": {
         "west": "bronze_02",
@@ -121,7 +121,7 @@
       "npcs": ["tingfang_shadow", "zhao_bully"]
     },
     "zhao_road_05": {
-      "name": "赵道伏击",
+      "name": "黄土驿道",
       "description": "土路两旁野草齐腰，马蹄声从坡后骤然逼近。赵国游骑勒马横刀，口中一声声喊着少龙，仿佛这个名字已经替你招来杀机。",
       "exits": {
         "west": "village_04",
@@ -148,7 +148,7 @@
       "npcs": ["zhao_rider", "zhao_retainer"]
     },
     "camp_08": {
-      "name": "残帐书案",
+      "name": "驿营残帐",
       "description": "书案半塌，竹简散落一地，其中一页残简压在铜扣下。简上残字断续，隐约牵出邯郸、质子和少龙几个名字。",
       "exits": {
         "west": "camp_07",
@@ -158,7 +158,7 @@
       "npcs": []
     },
     "pass_09": {
-      "name": "归途断桥",
+      "name": "枯河断桥",
       "description": "断桥横在枯水沟上，桥头立着一名门客剑士。他并不急着出剑，只冷冷道：能乱时局的异数，不能带着残简活着离开。",
       "exits": {
         "west": "camp_08",
@@ -167,7 +167,7 @@
       "npcs": ["retainer_swordsman"]
     },
     "gate_09": {
-      "name": "铜门残响",
+      "name": "古铜石门",
       "description": "铜光在断桥尽头重新聚合成门。风沙中有人喊着少龙往邯郸去，那声音像来自身后，又像从你自己的记忆里响起。",
       "exits": {
         "west": "pass_09"

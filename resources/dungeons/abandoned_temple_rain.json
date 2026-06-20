@@ -1,7 +1,7 @@
 {
   "id": "abandoned_temple_rain",
   "name": "荒庙夜雨",
-  "description": "洛阳城外夜雨如注，一名负伤信使逃入荒庙，追兵也随之而至。",
+  "description": "洛阳城外夜雨如注，荒庙深处血迹未干，一封密信似乎藏着不为人知的秘密。",
   "order": 1,
   "chainId": "luoyang_rain_temple",
   "chapter": 1,
