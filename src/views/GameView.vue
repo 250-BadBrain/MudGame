@@ -2383,7 +2383,7 @@ const formatMoney = (money) => {
 }
 
 /* 新增布局样式 */
-.info-panel {
+.game-info-panel {
     width: 100%; /* 适应父容器 */
     background-color: var(--color-background-dark);
     border: 1px solid var(--color-accent-gold);
@@ -2392,7 +2392,7 @@ const formatMoney = (money) => {
     flex-direction: column;
     overflow: hidden;
     animation: slideIn 0.3s ease;
-    flex: 1; /* Take available space */
+    flex: 0 1 auto;
     min-height: 0;
     box-sizing: border-box;
 }

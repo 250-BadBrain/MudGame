@@ -1,5 +1,5 @@
 <template>
-  <div v-if="visible" class="info-panel">
+  <div v-if="visible" class="game-info-panel">
     <div class="panel-header">
       <h3>{{ title }}</h3>
       <button @click="$emit('close')" class="close-btn">×</button>
@@ -290,7 +290,7 @@ const getSkillBonusText = (skill) => {
 </script>
 
 <style scoped>
-.info-panel { background: rgba(20,20,20,0.95); border: 1px solid #333; border-radius: 6px; padding: 10px; margin-bottom: 8px; overflow: hidden; min-width: 0; }
+.game-info-panel { background: rgba(20,20,20,0.95); border: 1px solid #333; border-radius: 6px; padding: 10px; margin-bottom: 8px; overflow: hidden; min-width: 0; }
 .panel-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; min-width: 0; }
 .panel-header h3 { margin: 0; font-size: 14px; color: #f1c40f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 18px; cursor: pointer; padding: 0 4px; }
