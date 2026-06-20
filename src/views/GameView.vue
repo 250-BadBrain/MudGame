@@ -143,8 +143,9 @@
 
         <!-- 右侧面板区域（包含信息面板） -->
         <div class="right-panels-wrapper">
+          <div v-if="showInfoPanel" class="game-info-panel-frame">
             <GameInfoPanel
-              :visible="showInfoPanel"
+              :visible="true"
               :title="panelTitle"
               :currentPanel="currentPanel"
               :backpackItems="backpackItems"
@@ -199,6 +200,7 @@
               @enterWorld="enterWorld"
               @selectDungeon="selectDungeon"
               @enterDungeon="enterDungeon" />
+          </div>
             
             <!-- 动作按钮区域 -->
             <div class="action-panel">
@@ -2383,9 +2385,8 @@ const formatMoney = (money) => {
 }
 
 /* 新增布局样式 */
-.game-info-panel {
-    width: 100%; /* 适应父容器 */
-    background-color: var(--color-background-dark);
+.game-info-panel-frame {
+    width: 100%;
     border: 1px solid var(--color-accent-gold);
     border-radius: 4px;
     display: flex;
@@ -2394,6 +2395,12 @@ const formatMoney = (money) => {
     animation: slideIn 0.3s ease;
     flex: 1;
     min-height: 0;
+    box-sizing: border-box;
+}
+
+.game-info-panel {
+    width: 100%;
+    flex: 0 0 auto;
     box-sizing: border-box;
 }
 
