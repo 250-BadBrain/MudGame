@@ -81,7 +81,7 @@
               <div class="item-row">
                 <div class="item-row-content">
                   <span class="item-name" :style="{ color: getItemColor(skill.rarity) }">{{ skill.name }}</span>
-                  <span class="item-count">Lv.{{ skill.level }}</span>
+                  <span class="item-count">Lv.{{ skill.level }}/{{ skill.levelCap }}</span>
                 </div>
               </div>
               <div v-if="selectedSkill && selectedSkill.id === skill.id" class="item-actions">
@@ -95,9 +95,13 @@
           <div class="item-details-view">
             <div class="detail-header">
               <span class="detail-name" :style="{ color: getItemColor(viewingSkill.rarity) }">{{ viewingSkill.name }}</span>
-              <span class="detail-sell-price">Lv.{{ viewingSkill.level }}</span>
+              <span class="detail-sell-price">Lv.{{ viewingSkill.level }}/{{ viewingSkill.levelCap }}</span>
             </div>
             <div class="detail-desc">{{ viewingSkill.description }}</div>
+            <div class="skill-progress-info">
+              下一级潜能：{{ viewingSkill.learningProgress || 0 }}/{{ viewingSkill.nextLevelPotential }}
+              <span v-if="viewingSkill.isLearning" class="learning-indicator">学习中</span>
+            </div>
             <div class="detail-bonuses" v-if="getSkillBonusText(viewingSkill).length > 0">
               <div class="bonus-title">加成效果:</div>
               <div v-for="(bonus, index) in getSkillBonusText(viewingSkill)" :key="index" class="bonus-item">{{ bonus }}</div>
@@ -303,6 +307,8 @@ const getSkillBonusText = (skill) => {
 .empty-msg { color: #666; text-align: center; padding: 15px; font-style: italic; font-size: 12px; }
 .backpack-bottom-area { margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; }
 .item-details-view { }
+.skill-progress-info { color: #b8c5b8; font-size: 11px; margin-top: 6px; }
+.learning-indicator { color: #2ecc71; margin-left: 8px; font-weight: bold; }
 .detail-header { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
 .detail-name { font-weight: bold; font-size: 13px; overflow-wrap: anywhere; }
 .detail-sell-price { color: #f1c40f; font-size: 12px; }

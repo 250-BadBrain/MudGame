@@ -1269,6 +1269,11 @@ const handleMessage = (msg) => {
             room.value.npcs = updatedNpcs.map(n => ({ ...(oldNpcMap.get(n.id) || {}), ...n }));
         }
         syncPendingDungeonLeavePrompt();
+        if (showInfoPanel.value && currentPanel.value === 'skills') {
+            sendGameCommand("command", "get_skills", characterId.value, {});
+        } else if (showInfoPanel.value && currentPanel.value === 'status') {
+            sendGameCommand("command", "get_attributes", characterId.value, {});
+        }
     }
   } else if (msg.type === 'command' && msg.subtype === 'do_action') {
       if (msg.flag) {
