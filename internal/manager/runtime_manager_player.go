@@ -620,8 +620,11 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	if !npcInRoom {
 		return errors.New("npc_not_found")
 	}
+	teacherSkillLevel := 0
 	if dnpc, _, ok := r.dungeonNPCInRoomNoLock(room.ID, npcID); ok {
-		if _, taught := dnpc.Skills[skillID]; !taught {
+		var taught bool
+		teacherSkillLevel, taught = dnpc.Skills[skillID]
+		if !taught || teacherSkillLevel <= 0 {
 			return errors.New("skill_not_taught")
 		}
 	} else {
@@ -629,9 +632,18 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 		if !ok {
 			return errors.New("npc_not_found")
 		}
-		if _, taught := npc.Skills[skillID]; !taught {
+		var taught bool
+		teacherSkillLevel, taught = npc.Skills[skillID]
+		if !taught || teacherSkillLevel <= 0 {
 			return errors.New("skill_not_taught")
 		}
+	}
+	skillDef, ok := fileSkills[skillID]
+	if !ok {
+		return errors.New("skill_not_taught")
+	}
+	if p.Skills[skillID] >= teacherSkillLevel {
+		return errors.New("你的" + skillDef.Name + "已经不输你师傅了")
 	}
 	if p.Skills[skillID] >= model.SkillLevelCapForExperience(p.Attributes.Experience) {
 		return errors.New("skill_level_capped")
@@ -646,6 +658,7 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	p.StateTickCountdown = stateSettlementSeconds
 	p.LearningSkillID = skillID
 	p.LearningTeacherID = npcID
+	p.LearningTeacherLevel = teacherSkillLevel
 	return r.savePlayers(players)
 }
 
@@ -928,6 +941,7 @@ func (r *RuntimeManager) Stop(playerID string) string {
 			p.StateTickCountdown = 0
 			p.LearningSkillID = ""
 			p.LearningTeacherID = ""
+			p.LearningTeacherLevel = 0
 			p.TargetID = ""
 			p.CombatType = ""
 			_ = r.savePlayers(players)
@@ -1247,7 +1261,26 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 				updatedRoom[roomID] = true
 				continue
 			}
+			if p.LearningTeacherLevel <= 0 {
+				if teacher, exists := fileNpcs[p.LearningTeacherID]; exists {
+					p.LearningTeacherLevel = teacher.Skills[skillID]
+				} else if teacher, exists := r.dungeonNPCByIDNoLock(p.LearningTeacherID); exists {
+					p.LearningTeacherLevel = teacher.Skills[skillID]
+				}
+			}
+			if p.LearningTeacherLevel <= 0 {
+				stopLearningNoLock(p)
+				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你已无法继续向这位老师学习" + skillDef.Name + "。"})
+				updatedRoom[roomID] = true
+				continue
+			}
 			levelCap := model.SkillLevelCapForExperience(p.Attributes.Experience)
+			if p.Skills[skillID] >= p.LearningTeacherLevel {
+				stopLearningNoLock(p)
+				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你的" + skillDef.Name + "已经不输你师傅了"})
+				updatedRoom[roomID] = true
+				continue
+			}
 			if p.Skills[skillID] >= levelCap {
 				stopLearningNoLock(p)
 				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你的经验尚不足以继续领悟" + skillDef.Name + "，停止了学习。"})
@@ -1277,7 +1310,10 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 				p.SkillLearningProgress[skillID] = 0
 				p.Skills[skillID]++
 				message := "你的" + skillDef.Name + "等级提升了，现在是" + strconv.Itoa(p.Skills[skillID]) + "级。"
-				if p.Skills[skillID] >= levelCap {
+				if p.Skills[skillID] >= p.LearningTeacherLevel {
+					stopLearningNoLock(p)
+					message += "你的" + skillDef.Name + "已经不输你师傅了"
+				} else if p.Skills[skillID] >= levelCap {
 					stopLearningNoLock(p)
 					message += "你已达到当前经验所能领悟的上限。"
 				} else if p.Attributes.Potential <= 0 {
@@ -1314,4 +1350,5 @@ func stopLearningNoLock(p *model.Player) {
 	p.StateTickCountdown = 0
 	p.LearningSkillID = ""
 	p.LearningTeacherID = ""
+	p.LearningTeacherLevel = 0
 }

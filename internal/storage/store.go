@@ -59,6 +59,7 @@ type diskPlayer struct {
 	TargetID              string                      `json:"targetId"`
 	LearningSkillID       interface{}                 `json:"learningSkillId"`
 	LearningTeacherID     string                      `json:"learningTeacherId"`
+	LearningTeacherLevel  int                         `json:"learningTeacherLevel"`
 	SkillLearningProgress map[string]int              `json:"skillLearningProgress"`
 	CombatType            string                      `json:"combatType"`
 }
@@ -194,6 +195,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			StateTickCountdown:    dp.StateTickCountdown,
 			LearningSkillID:       learningSkillID,
 			LearningTeacherID:     dp.LearningTeacherID,
+			LearningTeacherLevel:  dp.LearningTeacherLevel,
 			SkillLearningProgress: dp.SkillLearningProgress,
 			TargetID:              dp.TargetID,
 			CombatType:            dp.CombatType,
@@ -228,6 +230,7 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 		combatType := p.CombatType
 		learningSkillID := interface{}(p.LearningSkillID)
 		learningTeacherID := p.LearningTeacherID
+		learningTeacherLevel := p.LearningTeacherLevel
 		if strings.HasPrefix(roomID, "dg_") {
 			roomID = "ly_00"
 			state = "IDLE"
@@ -235,6 +238,7 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 			combatType = ""
 			learningSkillID = ""
 			learningTeacherID = ""
+			learningTeacherLevel = 0
 		}
 		d := diskPlayer{
 			ID:                    p.ID,
@@ -256,6 +260,7 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 			TargetID:              targetID,
 			LearningSkillID:       learningSkillID,
 			LearningTeacherID:     learningTeacherID,
+			LearningTeacherLevel:  learningTeacherLevel,
 			SkillLearningProgress: p.SkillLearningProgress,
 			CombatType:            combatType,
 		}

@@ -86,6 +86,7 @@ type Player struct {
 	StateTickCountdown    int
 	LearningSkillID       string
 	LearningTeacherID     string
+	LearningTeacherLevel  int
 	SkillLearningProgress map[string]int
 	TargetID              string
 	CombatType            string
