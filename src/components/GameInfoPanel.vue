@@ -28,8 +28,8 @@
           </ul>
           <p v-else class="empty-msg">背包里空空如也。</p>
         </div>
-        <div class="backpack-bottom-area">
-          <div v-if="viewingItem" class="item-details-view">
+        <div v-if="viewingItem || discardingItem || sellingItem" class="backpack-bottom-area">
+          <div v-if="viewingItem" class="item-details-view collapsible-detail" @click="$emit('viewItem', viewingItem)">
             <div class="detail-header">
               <span class="detail-name" :style="{ color: getItemColor(viewingItem.rarity) }">{{ viewingItem.name }}</span>
               <span class="detail-sell-price" v-if="viewingItem.sellable">{{ formatPrice(Math.floor(viewingItem.value / 2)) }}/{{ viewingItem.unit || '个' }}</span>
@@ -92,7 +92,7 @@
           <p v-else class="empty-msg">没有相关技能。</p>
         </div>
         <div class="backpack-bottom-area" v-if="viewingSkill">
-          <div class="item-details-view">
+          <div class="item-details-view collapsible-detail" @click="$emit('viewSkill', viewingSkill)">
             <div class="detail-header">
               <span class="detail-name" :style="{ color: getItemColor(viewingSkill.rarity) }">{{ viewingSkill.name }}</span>
               <span class="detail-sell-price">Lv.{{ viewingSkill.level }}/{{ viewingSkill.levelCap }}</span>
@@ -127,7 +127,7 @@
           </div>
         </div>
         <div class="backpack-bottom-area" v-if="selectedEquipmentSlot && equipment[selectedEquipmentSlot]">
-          <div class="item-details-view">
+          <div class="item-details-view collapsible-detail" @click="$emit('selectEquipSlot', selectedEquipmentSlot)">
             <div class="detail-header">
               <span class="detail-name" :style="{ color: getItemColor(equipment[selectedEquipmentSlot].rarity) }">{{ equipment[selectedEquipmentSlot].name }}</span>
             </div>
@@ -171,15 +171,16 @@
           <ul v-if="worldsList && worldsList.length > 0" class="map-list">
             <li v-for="world in worldsList" :key="world.id" class="map-item"
               :class="{ 'selected': selectedWorldId === world.id }"
+              @mousedown.prevent
               @click="$emit('selectWorld', world.id)">
               <span class="map-name">{{ world.name }}</span>
             </li>
           </ul>
           <p v-else class="empty-msg">暂无可用地图。</p>
         </div>
-        <div class="map-description-area">
-          <div class="map-desc-text">{{ selectedWorld ? selectedWorld.description : '请选择一个世界查看详情。' }}</div>
-          <button @click="$emit('enterWorld')" class="enter-world-btn" :disabled="!selectedWorld">进入世界</button>
+        <div v-if="selectedWorld" class="map-description-area collapsible-detail" @click="$emit('selectWorld', selectedWorld.id)">
+          <div class="map-desc-text">{{ selectedWorld.description }}</div>
+          <button @click.stop="$emit('enterWorld')" class="enter-world-btn">进入世界</button>
         </div>
       </div>
       <div v-if="currentPanel === 'dungeons'" class="maps-panel-container">
@@ -187,6 +188,7 @@
           <ul v-if="dungeonsList && dungeonsList.length > 0" class="map-list">
             <li v-for="dungeon in dungeonsList" :key="dungeon.id" class="map-item"
               :class="{ 'selected': selectedDungeonId === dungeon.id }"
+              @mousedown.prevent
               @click="$emit('selectDungeon', dungeon.id)">
               <div class="map-item-line">
                 <span class="map-name">{{ dungeon.name }}</span>
@@ -195,11 +197,11 @@
           </ul>
           <p v-else class="empty-msg">暂无可用副本。</p>
         </div>
-        <div class="map-description-area">
-          <div class="map-desc-text">{{ selectedDungeon ? selectedDungeon.description : '请选择一个副本查看详情。' }}</div>
-          <div v-if="selectedDungeon" class="map-sub-line">满额奖励：{{ selectedDungeon.rewardBase || 0 }}经验 {{ selectedDungeon.rewardBase || 0 }}潜能</div>
+        <div v-if="selectedDungeon" class="map-description-area collapsible-detail" @click="$emit('selectDungeon', selectedDungeon.id)">
+          <div class="map-desc-text">{{ selectedDungeon.description }}</div>
+          <div class="map-sub-line">满额奖励：{{ selectedDungeon.rewardBase || 0 }}经验 {{ selectedDungeon.rewardBase || 0 }}潜能</div>
           <div v-if="isInDungeon && dungeonRoomId === selectedDungeon?.id" class="map-sub-line">当前进度：{{ dungeonProgress ?? 0 }}%</div>
-          <button @click="$emit('enterDungeon')" class="enter-world-btn" :disabled="!selectedDungeon || isInDungeon">进入副本</button>
+          <button @click.stop="$emit('enterDungeon')" class="enter-world-btn" :disabled="isInDungeon">进入副本</button>
         </div>
       </div>
       <GameQuestPanel v-if="currentPanel === 'quests'" :quests="questsList" />
@@ -282,7 +284,7 @@ const formatPrice = (value) => {
 const getSkillBonusText = (skill) => {
   if (Array.isArray(skill?.bonusText)) return skill.bonusText
   if (!skill || !skill.bonuses) return []
-  const bonusMap = { 'strength': '臂力', 'constitution': '根骨', 'agility': '身法', 'perception': '悟性', 'willpower': '心志', 'charm': '魅力', 'luck': '福缘', 'attack': '攻击', 'defense': '防御', 'maxHp': '气血上限', 'maxMp': '内力上限', 'spirit': '心神', 'maxSpirit': '心神上限', 'hitRate': '命中', 'dodge': '躲闪', 'parry': '招架', 'critRate': '暴击率' }
+  const bonusMap = { 'strength': '臂力', 'constitution': '根骨', 'agility': '身法', 'perception': '悟性', 'willpower': '心志', 'charm': '魅力', 'luck': '福缘', 'attack': '攻击', 'defense': '防御', 'maxHp': '气血上限', 'maxMp': '内力上限', 'spirit': '心神', 'maxSpirit': '心神上限', 'hitRate': '命中', 'dodge': '躲闪', 'parry': '招架', 'critRate': '暴击率', 'trained_mp_to_max_hp_percent': '转血' }
   return Object.entries(skill.bonuses).map(([key, val]) => (bonusMap[key] || key) + ' +' + val)
 }
 </script>
@@ -292,7 +294,10 @@ const getSkillBonusText = (skill) => {
 .panel-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; min-width: 0; }
 .panel-header h3 { margin: 0; font-size: 14px; color: #f1c40f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 18px; cursor: pointer; padding: 0 4px; }
-.panel-content { max-height: 50vh; overflow-y: auto; overflow-x: hidden; min-width: 0; }
+.panel-content { height: min(50vh, 420px); overflow: hidden; min-width: 0; }
+.backpack-panel-container, .equipment-panel-container, .maps-panel-container { display: flex; flex-direction: column; height: 100%; min-height: 0; overflow: hidden; }
+.backpack-list, .equipment-slots, .map-list-area { flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; -ms-overflow-style: none; }
+.backpack-list::-webkit-scrollbar, .equipment-slots::-webkit-scrollbar, .map-list-area::-webkit-scrollbar, .backpack-bottom-area::-webkit-scrollbar, .map-description-area::-webkit-scrollbar { display: none; }
 .money-header { text-align: right; color: #f1c40f; margin-bottom: 6px; font-weight: bold; font-size: 13px; }
 .backpack-list ul { list-style: none; padding: 0; margin: 0; }
 .item-entry { padding: 6px 6px; cursor: pointer; border-bottom: 1px solid #2a2a2a; }
@@ -305,8 +310,9 @@ const getSkillBonusText = (skill) => {
 .action-btn:hover { background: #555; }
 .discard-btn { color: #e74c3c; }
 .empty-msg { color: #666; text-align: center; padding: 15px; font-style: italic; font-size: 12px; }
-.backpack-bottom-area { margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; }
+.backpack-bottom-area { flex: 0 0 auto; max-height: 45%; overflow-y: auto; overflow-x: hidden; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; scrollbar-width: none; -ms-overflow-style: none; }
 .item-details-view { }
+.collapsible-detail { cursor: pointer; user-select: none; }
 .skill-progress-info { color: #b8c5b8; font-size: 11px; margin-top: 6px; }
 .learning-indicator { color: #2ecc71; margin-left: 8px; font-weight: bold; }
 .detail-header { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
@@ -350,13 +356,14 @@ const getSkillBonusText = (skill) => {
 .status-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
 .status-item.full-width { grid-column: 1 / -1; }
 .status-divider { border: none; border-top: 1px solid #333; margin: 6px 0; }
-.maps-panel-container { display: flex; flex-direction: column; gap: 8px; }
+.maps-panel-container { gap: 8px; }
 .map-list { list-style: none; padding: 0; margin: 0; }
-.map-list-area { max-height: 200px; overflow-y: auto; overflow-x: hidden; }
-.map-item { padding: 6px 8px; cursor: pointer; border-bottom: 1px solid #2a2a2a; font-size: 12px; }
+.map-list-area { overflow-y: auto; overflow-x: hidden; }
+.map-item { padding: 6px 8px; cursor: pointer; border-bottom: 1px solid #2a2a2a; font-size: 12px; user-select: none; outline: none; }
+.map-item:focus, .map-item:focus-visible { outline: none; }
 .map-item.selected { background: rgba(241,196,15,0.1); border-left: 3px solid #f1c40f; color: #f1c40f; }
 .map-name { font-weight: bold; }
-.map-description-area { padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 12px; }
+.map-description-area { flex: 0 0 auto; max-height: 45%; overflow-y: auto; overflow-x: hidden; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 12px; scrollbar-width: none; -ms-overflow-style: none; }
 .map-desc-text { color: #b0b0b0; margin-bottom: 8px; }
 .map-sub-line { color: #888; font-size: 11px; margin-bottom: 4px; }
 .enter-world-btn { width: 100%; padding: 6px; background: #3498db; color: #fff; border: none; cursor: pointer; border-radius: 4px; font-family: inherit; }

@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <h2>泥巴游戏</h2>
+    <h2>破碎江湖</h2>
 
     <div class="form-group">
       <label>用户名:</label>

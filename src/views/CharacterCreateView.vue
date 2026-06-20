@@ -10,23 +10,23 @@
     <div class="attributes-section">
       <h3>先天属性 (总和必须为80)</h3>
       <div class="attribute-row">
-        <label>臂力 (Strength): {{ strength }}</label>
+        <label>臂力：{{ strength }}</label>
         <input type="range" v-model.number="strength" min="10" max="25" @input="validateSum" />
       </div>
       <div class="attribute-row">
-        <label>根骨 (Constitution): {{ constitution }}</label>
+        <label>根骨：{{ constitution }}</label>
         <input type="range" v-model.number="constitution" min="10" max="25" @input="validateSum" />
       </div>
       <div class="attribute-row">
-        <label>身法 (Agility): {{ agility }}</label>
+        <label>身法：{{ agility }}</label>
         <input type="range" v-model.number="agility" min="10" max="25" @input="validateSum" />
       </div>
       <div class="attribute-row">
-        <label>悟性 (Perception): {{ perception }}</label>
+        <label>悟性：{{ perception }}</label>
         <input type="range" v-model.number="perception" min="10" max="25" @input="validateSum" />
       </div>
       <div class="attribute-row">
-        <label>心志 (Willpower): {{ willpower }}</label>
+        <label>心志：{{ willpower }}</label>
         <input type="range" v-model.number="willpower" min="10" max="25" @input="validateSum" />
       </div>
       

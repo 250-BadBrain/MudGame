@@ -6,14 +6,17 @@
     </div>
     <div class="shop-content">
       <div class="money-display" v-if="showMoney">
-        {{ formatMoney(playerMoney) }}
+        你身上有{{ formatMoney(playerMoney) }}
       </div>
       <div class="shop-items-list">
         <div v-for="item in items" :key="item.id" class="shop-item" :class="{ 'selected': selectedItem?.id === item.id }" @click="$emit('selectItem', item)">
           <div class="shop-item-info-row">
             <span class="item-name" :style="{ color: getItemColor(item.rarity) }">{{ item.name }}</span>
           </div>
-          <div class="shop-item-price-row">
+          <div v-if="teachingMode" class="shop-item-price-row">
+            <span class="teacher-skill-level">等级：{{ item.level }}</span>
+          </div>
+          <div v-else class="shop-item-price-row">
             <span class="item-price">{{ formatPrice(item.value) }}</span>
             <span v-if="item.limit !== undefined && item.limit === 0" class="item-sold-out-tag"> 已售罄</span>
             <span v-else-if="item.limit" class="item-limit-tag"> 库存:{{ item.limit }}</span>
@@ -24,7 +27,8 @@
       <div class="buy-controls" v-if="selectedItem">
         <div class="selected-item-info">
           <span class="selected-item-name" :style="{ color: getItemColor(selectedItem.rarity) }">{{ selectedItem.name }}</span>
-          <span class="selected-item-price">{{ formatPrice(selectedItem.value) }}</span>
+          <span v-if="teachingMode" class="teacher-skill-level">等级：{{ selectedItem.level }}</span>
+          <span v-else class="selected-item-price">{{ formatPrice(selectedItem.value) }}</span>
         </div>
         <div class="amount-selector" v-if="selectedItem.stackable">
           <button @click="$emit('changeAmount', 'min')" :disabled="buyAmount <= 1" class="small-btn">最少</button>
@@ -33,7 +37,7 @@
           <button @click="$emit('changeAmount', 10)" :disabled="isMaxReached" class="small-btn">+10</button>
           <button @click="$emit('changeAmount', 'max')" :disabled="isMaxReached" class="small-btn">最多</button>
         </div>
-        <div class="stock-info">
+        <div v-if="!teachingMode" class="stock-info">
           <span v-if="selectedItem.limit">库存: {{ selectedItem.limit }}{{ selectedItem.unit }}</span>
           <span v-else>库存充足</span>
         </div>
@@ -52,6 +56,7 @@ defineProps({
   isMaxReached: Boolean,
   playerMoney: { type: Number, default: 0 },
   showMoney: { type: Boolean, default: true },
+  teachingMode: { type: Boolean, default: false },
   buyButtonText: { type: String, default: '购买' }
 })
 
@@ -83,10 +88,10 @@ const formatPrice = (value) => {
 <style scoped>
 .shop-panel { height: 100%; display: flex; flex-direction: column; overflow: hidden; min-width: 0; }
 .shop-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; min-width: 0; }
-.shop-header h3 { margin: 0; border: none; padding: 0; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shop-header h3 { margin: 0; border: none; padding: 0 0 0 2ch; font-size: 14px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .close-btn { background: none; border: none; color: #e74c3c; font-size: 20px; cursor: pointer; padding: 0 5px; }
 .shop-content { flex: 1; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; min-height: 0; min-width: 0; }
-.money-display { text-align: right; color: #f1c40f; margin-bottom: 8px; font-weight: bold; overflow-wrap: anywhere; }
+.money-display { text-align: right; color: #f1c40f; margin-bottom: 8px; padding-right: 2ch; font-weight: bold; overflow-wrap: anywhere; }
 .shop-items-list { flex: 1; overflow-y: auto; overflow-x: hidden; min-height: 0; }
 .shop-item { padding: 8px; cursor: pointer; border-bottom: 1px solid #333; transition: background 0.2s; min-width: 0; }
 .shop-item:hover { background: rgba(255,255,255,0.05); }
@@ -98,7 +103,8 @@ const formatPrice = (value) => {
 .item-sold-out-tag { color: #e74c3c; font-weight: bold; }
 .item-limit-tag { color: #e67e22; }
 .item-stock-tag { color: #2ecc71; }
-.buy-controls { margin-top: 12px; padding-top: 12px; border-top: 1px solid #444; overflow: hidden; min-width: 0; }
+.teacher-skill-level { color: #b8c5b8; }
+.buy-controls { margin-top: 12px; padding: 12px 2ch 0; border-top: 1px solid #444; overflow: hidden; min-width: 0; box-sizing: border-box; }
 .selected-item-info { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; min-width: 0; }
 .selected-item-name { font-weight: bold; overflow-wrap: anywhere; }
 .selected-item-price { color: #f1c40f; }

@@ -29,6 +29,7 @@
           :items="learnSkills"
           :selectedItem="selectedLearnSkill"
           :showMoney="false"
+          teachingMode
           buyButtonText="开始学习"
           @close="closeLearn"
           @selectItem="selectLearnSkill"
@@ -419,31 +420,7 @@ const selectSkill = (skill) => {
 }
 
 const viewSkill = (skill) => {
-    viewingSkill.value = skill;
-}
-
-const getSkillBonusText = (skill) => {
-    // Calculate bonus based on level
-    // This logic should ideally match server logic or be sent from server
-    // For now, we implement the known formulas here for display
-    
-    const level = skill.level;
-    let bonuses = [];
-    
-    if (skill.id === 'basic_unarmed') {
-        bonuses.push(`后天臂力: +${Math.floor(level / 10)}`);
-    } else if (skill.id === 'basic_parry') {
-        bonuses.push(`后天招架: +${Math.floor(level / 10)}`);
-    } else if (skill.id === 'basic_neigong') {
-        bonuses.push(`最大内力: +${level * 10}`);
-        if (level > 0) {
-            bonuses.push(`内力转气血: 30%`);
-        }
-    } else if (skill.id === 'basic_qinggong') {
-        bonuses.push(`后天身法: +${Math.floor(level / 10)}`);
-    }
-    
-    return bonuses;
+    viewingSkill.value = viewingSkill.value?.id === skill.id ? null : skill;
 }
 
 const sortedWorldsList = computed(() => {
@@ -476,7 +453,8 @@ const roomActionLabels = {
     work: '劳作',
     listen_rumor: '听传闻',
     search: '搜索',
-    inspect_fragment: '辨认残简'
+    inspect_fragment: '辨认残简',
+    inspect_token: '查验令牌'
 };
 
 const roomActions = computed(() => {
@@ -630,6 +608,10 @@ const handleGlobalKeydown = (event) => {
     if (!direction) return
 
     event.preventDefault()
+    if (document.activeElement instanceof HTMLElement && !isTypingElement(document.activeElement)) {
+        document.activeElement.blur()
+    }
+    window.getSelection()?.removeAllRanges()
     go(direction)
 }
 
@@ -730,6 +712,11 @@ onUnmounted(() => {
 
 // ------------------- WebSocket 消息处理 -------------------
 
+const describeCommandError = (error, fallback) => {
+    if (typeof error === 'string' && /[\u3400-\u9fff]/.test(error)) return error;
+    return fallback;
+}
+
 const getMessage = (msg) => {
     const { type, subtype, flag, results } = msg;
     
@@ -742,7 +729,7 @@ const getMessage = (msg) => {
             if (err === 'learning_state') return "你正在学习，无法分心疗伤。";
             if (err === 'hp_full') return "你气血充沛，不需要疗伤";
             if (err === 'mp_insufficient') return "你的内力不足，无法疗伤。";
-            return `疗伤失败: ${err}`;
+            return describeCommandError(err, "你现在无法运功疗伤。");
         }
         if (subtype === 'meditate') {
             if (flag) {
@@ -754,7 +741,7 @@ const getMessage = (msg) => {
             if (err === 'dead_state') return "死人是无法打坐的。";
             if (err === 'learning_state') return "你正在学习，无法同时打坐。";
             if (err === 'full_state') return "你现在精力充沛，无需打坐。";
-            return `打坐失败: ${err}`;
+            return describeCommandError(err, "你现在无法静心打坐。");
         }
         if (subtype === 'go') {
             if (flag) {
@@ -766,7 +753,7 @@ const getMessage = (msg) => {
             if (err === 'dead_state') return "你已经死了，动弹不得。";
             if (err === 'learning_state') return "你正在学习，无法随意走动。";
             if (err === 'no_exit_in_that_direction') return "这个方向没有路。";
-            return `移动失败: ${err}`;
+            return describeCommandError(err, "你现在无法向这个方向移动。");
         }
         if (subtype === 'spar') {
             if (flag) return results?.message || null;
@@ -783,7 +770,7 @@ const getMessage = (msg) => {
             if (err === 'target_not_in_room') return "目标不在当前房间";
             if (err === 'target_is_dead') return "你要比试谁？";
             if (err === 'target_busy') return `${results.targetName || '对方'}现在正忙着。`;
-            return `切磋失败: ${err}`;
+            return describeCommandError(err, "眼下并不适合切磋。");
         }
         if (subtype === 'kill') {
             if (flag && results?.message) return results.message;
@@ -797,7 +784,7 @@ const getMessage = (msg) => {
             if (err === 'target_not_in_room') return "目标不在当前房间";
             if (err === 'npc_combat_unsupported') return "当前版本暂不支持与 NPC 战斗。";
             if (err === 'target_is_dead') return "你要击杀谁？";
-            return `攻击失败: ${err}`;
+            return describeCommandError(err, "你现在无法向对方出手。");
         }
         if (subtype === 'learn') {
             if (flag) return null;
@@ -807,12 +794,12 @@ const getMessage = (msg) => {
             if (err === 'skill_not_taught') return "这位老师似乎不会这招。";
             if (err === 'npc_not_found') return "找不到这位老师。";
             if (typeof err === 'string' && err.includes('已经不输你师傅了')) return err;
-            return `学习失败: ${err}`;
+            return describeCommandError(err, "你现在无法继续学习这门武功。");
         }
         if (subtype === 'stop') {
             if (flag) return results?.message || null;
             if (results?.error === 'escape_failed') return "你想抽身后退，却被对手缠得脱不开身。";
-            return `停止失败: ${results?.error || 'unknown_error'}`;
+            return describeCommandError(results?.error, "你一时无法停下当前动作。");
         }
         if (subtype === 'enter_dungeon') {
             if (flag) return null;
@@ -822,13 +809,13 @@ const getMessage = (msg) => {
             if (err === 'dungeon_unavailable') return "副本系统暂不可用。";
             if (err === 'busy_state') return "你现在正忙着呢。";
             if (err === 'dead_state') return "你已经重伤不起，先复活再说。";
-            return `进入副本失败: ${err || 'unknown_error'}`;
+            return describeCommandError(err, "你现在无法进入这处秘境。");
         }
         if (subtype === 'leave_dungeon') {
             if (flag) return null;
             const err = results?.error;
             if (err === 'not_in_dungeon') return "你当前不在副本中。";
-            return `离开副本失败: ${err || 'unknown_error'}`;
+            return describeCommandError(err, "你现在无法离开这处秘境。");
         }
     }
     return null;
@@ -867,7 +854,7 @@ const handleMessage = (msg) => {
       
       (msg.logs || []).forEach(l => addLog(l));
     } else {
-      addLog(`ERROR: 获取房间信息失败: ${msg.results.error}`)
+      addLog(describeCommandError(msg.results.error, '眼前景象一时难以辨清。'))
     }
   } else if (msg.type === 'command' && msg.subtype === 'go') {
     if (msg.flag) {
@@ -883,7 +870,7 @@ const handleMessage = (msg) => {
       // 玩家移动成功，通常只更新日志和房间
       (msg.logs || []).forEach(l => addLog(l));
     } else {
-      if (!generatedMsg) addLog(`ERROR: 移动失败: ${msg.results.error}`)
+      if (!generatedMsg) addLog(describeCommandError(msg.results.error, '你现在无法向这个方向移动。'))
     }
   } else if (msg.type === 'command' && msg.subtype === 'get_backpack') {
       // 处理背包信息
@@ -897,7 +884,7 @@ const handleMessage = (msg) => {
               panelTitle.value = '背包';
           }
       } else {
-          addLog(`ERROR: 获取背包失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法查看背包。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_skills') {
       // 处理技能信息
@@ -909,7 +896,7 @@ const handleMessage = (msg) => {
               panelTitle.value = '技能';
           }
       } else {
-          addLog(`ERROR: 获取技能失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法查看所学武功。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_attributes') {
       // 处理属性信息
@@ -921,7 +908,7 @@ const handleMessage = (msg) => {
               panelTitle.value = '属性';
           }
       } else {
-          addLog(`ERROR: 获取属性失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法察看自身状态。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_equipment') {
       if (msg.flag) {
@@ -937,7 +924,7 @@ const handleMessage = (msg) => {
           if (suppressEquipmentPanelSwitchCount.value > 0) {
               suppressEquipmentPanelSwitchCount.value--;
           }
-          addLog(`ERROR: 获取装备失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法查看随身装备。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'equip') {
       if (msg.flag) {
@@ -946,7 +933,7 @@ const handleMessage = (msg) => {
           sendGameCommand("command", "get_backpack", characterId.value, {});
           sendGameCommand("command", "get_equipment", characterId.value, {});
       } else {
-          addLog(`ERROR: 装备失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '这件物品现在无法装备。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'unequip') {
       if (msg.flag) {
@@ -955,7 +942,7 @@ const handleMessage = (msg) => {
           sendGameCommand("command", "get_backpack", characterId.value, {});
           sendGameCommand("command", "get_equipment", characterId.value, {});
       } else {
-          addLog(`ERROR: 脱下装备失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '这件装备现在无法脱下。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'mine') {
       if (msg.flag) {
@@ -977,7 +964,7 @@ const handleMessage = (msg) => {
           } else if (msg.results.error === 'dead_state') {
               addLog("你已经死了，没法挖矿。");
           } else {
-              addLog(`ERROR: 挖矿失败: ${msg.results.error}`);
+              addLog(describeCommandError(msg.results.error, '你现在无法在此采矿。'));
           }
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_worlds') {
@@ -990,21 +977,18 @@ const handleMessage = (msg) => {
               panelTitle.value = '世界';
           }
       } else {
-          addLog(`ERROR: 获取地图列表失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法查阅地图。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_dungeons') {
       if (msg.flag) {
           dungeonsList.value = msg.results.dungeons || [];
-          if (!selectedDungeonId.value && dungeonsList.value.length > 0) {
-              selectedDungeonId.value = dungeonsList.value[0].id;
-          }
           if (!showInfoPanel.value || currentPanel.value !== 'dungeons') {
               showInfoPanel.value = true;
               currentPanel.value = 'dungeons';
               panelTitle.value = '副本';
           }
       } else {
-          addLog(`ERROR: 获取副本列表失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法探查附近秘境。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'enter_world') {
       // 处理进入世界
@@ -1021,7 +1005,7 @@ const handleMessage = (msg) => {
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
       } else {
-          addLog(`ERROR: 进入地图失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你现在无法前往那处地方。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'enter_dungeon') {
       if (msg.flag) {
@@ -1036,7 +1020,7 @@ const handleMessage = (msg) => {
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
       } else if (!generatedMsg) {
-          addLog(`ERROR: 进入副本失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你现在无法进入这处秘境。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'leave_dungeon') {
       if (msg.flag) {
@@ -1053,7 +1037,7 @@ const handleMessage = (msg) => {
           sendGameCommand("command", "get_attributes", characterId.value, {});
       } else if (!generatedMsg) {
           pendingDungeonLeave.value = null;
-          addLog(`ERROR: 离开副本失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你现在无法离开这处秘境。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_shop') {
       if (msg.flag) {
@@ -1071,7 +1055,7 @@ const handleMessage = (msg) => {
           selectedShopItem.value = null;
           buyAmount.value = 1;
       } else {
-          addLog(`ERROR: 无法打开商店: ${msg.results.error || '未知错误'}`);
+          addLog(describeCommandError(msg.results.error, '对方此刻无意做买卖。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'buy') {
       if (msg.flag) {
@@ -1108,7 +1092,7 @@ const handleMessage = (msg) => {
               sendGameCommand("command", "get_backpack", characterId.value, {});
           }
       } else {
-          addLog(`ERROR: 购买失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '这桩买卖没有谈成。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'discard_item') {
       if (msg.flag) {
@@ -1116,7 +1100,7 @@ const handleMessage = (msg) => {
           // Refresh backpack immediately
           sendGameCommand("command", "get_backpack", characterId.value, {});
       } else {
-          addLog(`ERROR: 丢弃失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '这件物品现在无法丢弃。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'sell') {
       if (msg.flag) {
@@ -1124,7 +1108,7 @@ const handleMessage = (msg) => {
           // Refresh backpack immediately
           sendGameCommand("command", "get_backpack", characterId.value, {});
       } else {
-          addLog(`ERROR: 出售失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '对方没有收下这件物品。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'talk') {
       if (msg.flag) {
@@ -1134,7 +1118,7 @@ const handleMessage = (msg) => {
           showLearnPanel.value = false;
           showDialoguePanel.value = !!activeDialogue.value;
       } else {
-          addLog(`ERROR: 交谈失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '对方此刻无意交谈。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'choose_dialogue') {
       if (msg.flag) {
@@ -1150,7 +1134,7 @@ const handleMessage = (msg) => {
               sendGameCommand("command", "get_backpack", characterId.value, {});
           }
       } else {
-          addLog(`ERROR: 对话选择失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '对方没有回应这句话。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_quests') {
       if (msg.flag) {
@@ -1161,7 +1145,7 @@ const handleMessage = (msg) => {
               panelTitle.value = '任务';
           }
       } else {
-          addLog(`ERROR: 获取任务失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法理清身上的事务。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_factions') {
       if (msg.flag) {
@@ -1172,7 +1156,7 @@ const handleMessage = (msg) => {
               panelTitle.value = '势力';
           }
       } else {
-          addLog(`ERROR: 获取势力失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你一时无法查明江湖势力。'));
       }
   } else if (msg.type === 'chat') {
       // 聊天消息处理（公开聊天）
@@ -1286,7 +1270,7 @@ const handleMessage = (msg) => {
               sendGameCommand("command", "get_attributes", characterId.value, {});
           }
       } else {
-          addLog(`ERROR: 动作失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你现在无法做出这个动作。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'relive') {
       if (msg.flag) {
@@ -1295,7 +1279,7 @@ const handleMessage = (msg) => {
               sendGameCommand("system", "get_room", characterId.value, {});
           }
       } else {
-          addLog(`ERROR: 复活失败: ${msg.results.error}`);
+          addLog(describeCommandError(msg.results.error, '你的神志尚未恢复。'));
       }
   } else if (msg.type === 'command') {
       // 通用命令处理（处理 kill, spar, heal, meditate 等没有特殊 UI 逻辑的命令）
@@ -1303,7 +1287,7 @@ const handleMessage = (msg) => {
           // 已由 getMessage 处理
           if (msg.flag && msg.logs) (msg.logs || []).forEach(l => addLog(l));
           if (msg.flag && msg.results && msg.results.message) addLog(msg.results.message); // spar returns message on success
-          if (!msg.flag && !generatedMsg) addLog(`ERROR: ${msg.results.error || '操作失败'}`);
+          if (!msg.flag && !generatedMsg) addLog(describeCommandError(msg.results.error, '你现在无法做出这个动作。'));
       } else {
           if (msg.flag) {
               if (msg.results && msg.results.message) {
@@ -1313,7 +1297,7 @@ const handleMessage = (msg) => {
                  (msg.logs || []).forEach(l => addLog(l));
               }
           } else {
-              addLog(`ERROR: ${msg.results.error || '操作失败'}`);
+              addLog(describeCommandError(msg.results.error, '你现在无法做出这个动作。'));
           }
       }
   } else {
@@ -1423,11 +1407,11 @@ const toggleFactions = () => {
 }
 
 const selectWorld = (worldId) => {
-    selectedWorldId.value = worldId;
+    selectedWorldId.value = selectedWorldId.value === worldId ? null : worldId;
 }
 
 const selectDungeon = (dungeonId) => {
-    selectedDungeonId.value = dungeonId;
+    selectedDungeonId.value = selectedDungeonId.value === dungeonId ? null : dungeonId;
 }
 
 const enterWorld = () => {
@@ -1802,7 +1786,7 @@ const startLearning = () => {
 
 const selectShopItem = (item) => {
     if (item.limit === 0) return;
-    selectedShopItem.value = item;
+    selectedShopItem.value = selectedShopItem.value?.id === item.id ? null : item;
     buyAmount.value = 1;
 }
 
@@ -1844,6 +1828,9 @@ const selectBackpackItem = (item) => {
 
     if (currentId === targetId) {
         selectedBackpackItem.value = null;
+        viewingItem.value = null;
+        discardingItem.value = null;
+        sellingItem.value = null;
     } else {
         selectedBackpackItem.value = item;
         viewingItem.value = null;
@@ -1853,7 +1840,9 @@ const selectBackpackItem = (item) => {
 }
 
 const viewBackpackItem = (item) => {
-    viewingItem.value = item;
+    const currentId = viewingItem.value?.uniqueId || viewingItem.value?.id;
+    const targetId = item.uniqueId || item.id;
+    viewingItem.value = currentId === targetId ? null : item;
     discardingItem.value = null;
     sellingItem.value = null;
 }
