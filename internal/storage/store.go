@@ -40,25 +40,27 @@ type diskUser struct {
 }
 
 type diskPlayer struct {
-	ID                 string                      `json:"id"`
-	CharacterName      string                      `json:"characterName"`
-	UserID             string                      `json:"userId"`
-	RoomID             string                      `json:"roomId"`
-	Title              interface{}                 `json:"title"`
-	UnlockedTitles     interface{}                 `json:"unlockedTitles"`
-	Money              int                         `json:"money"`
-	Attributes         model.Attributes            `json:"attributes"`
-	Items              map[string]int              `json:"items"`
-	Equipment          map[string]string           `json:"equipment"`
-	Skills             map[string]int              `json:"skills"`
-	QuestStates        map[string]model.QuestState `json:"questStates"`
-	Flags              map[string]bool             `json:"flags"`
-	Reputations        map[string]int              `json:"reputations"`
-	State              string                      `json:"state"`
-	StateTickCountdown int                         `json:"stateTickCountdown"`
-	TargetID           string                      `json:"targetId"`
-	LearningSkillID    interface{}                 `json:"learningSkillId"`
-	CombatType         string                      `json:"combatType"`
+	ID                    string                      `json:"id"`
+	CharacterName         string                      `json:"characterName"`
+	UserID                string                      `json:"userId"`
+	RoomID                string                      `json:"roomId"`
+	Title                 interface{}                 `json:"title"`
+	UnlockedTitles        interface{}                 `json:"unlockedTitles"`
+	Money                 int                         `json:"money"`
+	Attributes            model.Attributes            `json:"attributes"`
+	Items                 map[string]int              `json:"items"`
+	Equipment             map[string]string           `json:"equipment"`
+	Skills                map[string]int              `json:"skills"`
+	QuestStates           map[string]model.QuestState `json:"questStates"`
+	Flags                 map[string]bool             `json:"flags"`
+	Reputations           map[string]int              `json:"reputations"`
+	State                 string                      `json:"state"`
+	StateTickCountdown    int                         `json:"stateTickCountdown"`
+	TargetID              string                      `json:"targetId"`
+	LearningSkillID       interface{}                 `json:"learningSkillId"`
+	LearningTeacherID     string                      `json:"learningTeacherId"`
+	SkillLearningProgress map[string]int              `json:"skillLearningProgress"`
+	CombatType            string                      `json:"combatType"`
 }
 
 func NewFileStore(baseDir string) *FileStore {
@@ -170,6 +172,9 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 		if dp.Reputations == nil {
 			dp.Reputations = map[string]int{}
 		}
+		if dp.SkillLearningProgress == nil {
+			dp.SkillLearningProgress = map[string]int{}
+		}
 		state := dp.State
 		if state == "" {
 			state = "IDLE"
@@ -181,24 +186,26 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 		}
 		attrs := model.NormalizeAttributes(dp.Attributes)
 		players[dp.ID] = &model.Player{
-			ID:                 dp.ID,
-			UserID:             dp.UserID,
-			CharacterName:      dp.CharacterName,
-			RoomID:             roomID,
-			State:              state,
-			StateTickCountdown: dp.StateTickCountdown,
-			LearningSkillID:    learningSkillID,
-			TargetID:           dp.TargetID,
-			CombatType:         dp.CombatType,
-			Money:              dp.Money,
-			Attributes:         attrs,
-			Skills:             dp.Skills,
-			Backpack:           dp.Items,
-			Equipment:          dp.Equipment,
-			QuestStates:        dp.QuestStates,
-			Flags:              dp.Flags,
-			Reputations:        dp.Reputations,
-			Online:             false,
+			ID:                    dp.ID,
+			UserID:                dp.UserID,
+			CharacterName:         dp.CharacterName,
+			RoomID:                roomID,
+			State:                 state,
+			StateTickCountdown:    dp.StateTickCountdown,
+			LearningSkillID:       learningSkillID,
+			LearningTeacherID:     dp.LearningTeacherID,
+			SkillLearningProgress: dp.SkillLearningProgress,
+			TargetID:              dp.TargetID,
+			CombatType:            dp.CombatType,
+			Money:                 dp.Money,
+			Attributes:            attrs,
+			Skills:                dp.Skills,
+			Backpack:              dp.Items,
+			Equipment:             dp.Equipment,
+			QuestStates:           dp.QuestStates,
+			Flags:                 dp.Flags,
+			Reputations:           dp.Reputations,
+			Online:                false,
 		}
 	}
 	return players, nil
@@ -220,33 +227,37 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 		targetID := p.TargetID
 		combatType := p.CombatType
 		learningSkillID := interface{}(p.LearningSkillID)
+		learningTeacherID := p.LearningTeacherID
 		if strings.HasPrefix(roomID, "dg_") {
 			roomID = "ly_00"
 			state = "IDLE"
 			targetID = ""
 			combatType = ""
 			learningSkillID = ""
+			learningTeacherID = ""
 		}
 		d := diskPlayer{
-			ID:                 p.ID,
-			CharacterName:      p.CharacterName,
-			UserID:             p.UserID,
-			RoomID:             roomID,
-			Title:              nil,
-			UnlockedTitles:     nil,
-			Money:              p.Money,
-			Attributes:         model.NormalizeAttributes(p.Attributes),
-			Items:              p.Backpack,
-			Equipment:          p.Equipment,
-			Skills:             p.Skills,
-			QuestStates:        p.QuestStates,
-			Flags:              p.Flags,
-			Reputations:        p.Reputations,
-			State:              state,
-			StateTickCountdown: p.StateTickCountdown,
-			TargetID:           targetID,
-			LearningSkillID:    learningSkillID,
-			CombatType:         combatType,
+			ID:                    p.ID,
+			CharacterName:         p.CharacterName,
+			UserID:                p.UserID,
+			RoomID:                roomID,
+			Title:                 nil,
+			UnlockedTitles:        nil,
+			Money:                 p.Money,
+			Attributes:            model.NormalizeAttributes(p.Attributes),
+			Items:                 p.Backpack,
+			Equipment:             p.Equipment,
+			Skills:                p.Skills,
+			QuestStates:           p.QuestStates,
+			Flags:                 p.Flags,
+			Reputations:           p.Reputations,
+			State:                 state,
+			StateTickCountdown:    p.StateTickCountdown,
+			TargetID:              targetID,
+			LearningSkillID:       learningSkillID,
+			LearningTeacherID:     learningTeacherID,
+			SkillLearningProgress: p.SkillLearningProgress,
+			CombatType:            combatType,
 		}
 		if err := writeJSONFile(filepath.Join(s.playersDir(), p.ID+".json"), d); err != nil {
 			return err

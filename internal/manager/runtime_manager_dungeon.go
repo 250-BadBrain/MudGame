@@ -373,6 +373,7 @@ func (r *RuntimeManager) EnterDungeon(playerID, dungeonID string) (map[string]in
 	p.State = "IDLE"
 	p.StateTickCountdown = 0
 	p.LearningSkillID = ""
+	p.LearningTeacherID = ""
 	p.TargetID = ""
 	p.CombatType = ""
 	r.applyEnterRoomDungeonObjectiveNoLock(p.RoomID)
@@ -418,6 +419,7 @@ func (r *RuntimeManager) LeaveDungeon(playerID string) (map[string]interface{}, 
 	p.State = "IDLE"
 	p.StateTickCountdown = 0
 	p.LearningSkillID = ""
+	p.LearningTeacherID = ""
 	p.TargetID = ""
 	p.CombatType = ""
 	r.destroyDungeonInstanceNoLock(instanceID)

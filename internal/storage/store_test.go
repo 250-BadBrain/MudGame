@@ -42,12 +42,16 @@ func TestFileStorePlayersAndRoomsRoundTrip(t *testing.T) {
 
 	players := map[string]*model.Player{
 		"p1": {
-			ID:            "p1",
-			UserID:        "u1",
-			CharacterName: "hero",
-			RoomID:        "ly_00",
-			State:         "IDLE",
-			Money:         123,
+			ID:                    "p1",
+			UserID:                "u1",
+			CharacterName:         "hero",
+			RoomID:                "ly_00",
+			State:                 "LEARNING",
+			StateTickCountdown:    7,
+			LearningSkillID:       "basic_unarmed",
+			LearningTeacherID:     "weapon_school_master",
+			SkillLearningProgress: map[string]int{"basic_unarmed": 2},
+			Money:                 123,
 			Attributes: model.Attributes{
 				Resources: model.ResourceAttributes{HP: 88, MaxHP: 100},
 			},
@@ -69,6 +73,10 @@ func TestFileStorePlayersAndRoomsRoundTrip(t *testing.T) {
 	}
 	if loadedPlayers["p1"].Backpack["iron_pickaxe"] != 1 {
 		t.Fatalf("unexpected backpack payload: %+v", loadedPlayers["p1"].Backpack)
+	}
+	loadedPlayer := loadedPlayers["p1"]
+	if loadedPlayer.State != "LEARNING" || loadedPlayer.StateTickCountdown != 7 || loadedPlayer.LearningSkillID != "basic_unarmed" || loadedPlayer.LearningTeacherID != "weapon_school_master" || loadedPlayer.SkillLearningProgress["basic_unarmed"] != 2 {
+		t.Fatalf("unexpected learning state payload: %+v", loadedPlayer)
 	}
 
 	rooms := map[string]RoomDynamic{

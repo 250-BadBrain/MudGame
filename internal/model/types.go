@@ -78,24 +78,26 @@ type ResistanceAttributes struct {
 }
 
 type Player struct {
-	ID                 string
-	UserID             string
-	CharacterName      string
-	RoomID             string
-	State              string
-	StateTickCountdown int
-	LearningSkillID    string
-	TargetID           string
-	CombatType         string
-	Money              int
-	Attributes         Attributes
-	Skills             map[string]int
-	Backpack           map[string]int
-	Equipment          map[string]string
-	QuestStates        map[string]QuestState
-	Flags              map[string]bool
-	Reputations        map[string]int
-	Online             bool
+	ID                    string
+	UserID                string
+	CharacterName         string
+	RoomID                string
+	State                 string
+	StateTickCountdown    int
+	LearningSkillID       string
+	LearningTeacherID     string
+	SkillLearningProgress map[string]int
+	TargetID              string
+	CombatType            string
+	Money                 int
+	Attributes            Attributes
+	Skills                map[string]int
+	Backpack              map[string]int
+	Equipment             map[string]string
+	QuestStates           map[string]QuestState
+	Flags                 map[string]bool
+	Reputations           map[string]int
+	Online                bool
 }
 
 type QuestState struct {

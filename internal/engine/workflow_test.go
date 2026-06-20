@@ -515,6 +515,7 @@ func TestEffectiveAttributesUseSkillAndEquipmentBonuses(t *testing.T) {
 	if _, err := LearnWithEffects(h.repo, h.playerID, "academy_teacher", "basic_neigong"); err != nil {
 		t.Fatalf("learn basic neigong failed: %v", err)
 	}
+	runStatusTicks(t, h.repo, 30)
 	_ = StopWithEffects(h.repo, h.playerID)
 
 	attrsAfterSkill, err := GetAttributesView(h.repo, h.playerID)
@@ -562,6 +563,72 @@ func TestEffectiveAttributesUseSkillAndEquipmentBonuses(t *testing.T) {
 	}
 	if attrsAfterEquip["attack"].(int) != baseAttack+6 {
 		t.Fatalf("expected iron sword attack +6, before=%d after=%d", baseAttack, attrsAfterEquip["attack"].(int))
+	}
+}
+
+func TestLearningContinuouslyConsumesPotentialAndRaisesSkill(t *testing.T) {
+	h := setupRepo(t)
+	moveToTeacherFromSpawn(t, h.repo, h.playerID)
+
+	attrsBefore, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes before learning failed: %v", err)
+	}
+	skillsBefore, err := GetSkillsView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get skills before learning failed: %v", err)
+	}
+	levelBefore := 0
+	for _, skill := range skillsBefore {
+		if skill["id"] == "basic_unarmed" {
+			levelBefore = skill["level"].(int)
+		}
+	}
+
+	if _, err := LearnWithEffects(h.repo, h.playerID, workflowTeacherNPCID, "basic_unarmed"); err != nil {
+		t.Fatalf("start continuous learning failed: %v", err)
+	}
+	runStatusTicks(t, h.repo, 9)
+	attrsBeforeSettlement, err := GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes before first settlement failed: %v", err)
+	}
+	if attrsBeforeSettlement["potential"] != attrsBefore["potential"] {
+		t.Fatalf("learning should not consume potential before 10 seconds")
+	}
+
+	firstTick, err := ProcessStatusTickWithEffects(h.repo)
+	if err != nil {
+		t.Fatalf("process first learning settlement failed: %v", err)
+	}
+	if len(firstTick.PlayerMessages) != 1 || !strings.Contains(firstTick.PlayerMessages[0].Message, "等级提升了") {
+		t.Fatalf("expected deterministic level-up feedback, got %+v", firstTick.PlayerMessages)
+	}
+	attrsAfterFirst, _ := GetAttributesView(h.repo, h.playerID)
+	if attrsAfterFirst["potential"].(int) != attrsBefore["potential"].(int)-1 {
+		t.Fatalf("expected one potential consumed, before=%v after=%v", attrsBefore["potential"], attrsAfterFirst["potential"])
+	}
+
+	runStatusTicks(t, h.repo, 20)
+	skillsAfter, err := GetSkillsView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get skills after learning failed: %v", err)
+	}
+	levelAfter := 0
+	for _, skill := range skillsAfter {
+		if skill["id"] == "basic_unarmed" {
+			levelAfter = skill["level"].(int)
+		}
+	}
+	if levelAfter != levelBefore+3 {
+		t.Fatalf("expected low-level skill to rise at every settlement, before=%d after=%d", levelBefore, levelAfter)
+	}
+	status, err := GetPlayerStatusView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get learning status failed: %v", err)
+	}
+	if status["state"] != "LEARNING" {
+		t.Fatalf("expected learning to continue after level up, got %+v", status)
 	}
 }
 

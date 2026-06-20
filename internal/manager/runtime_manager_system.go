@@ -131,20 +131,21 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, p
 
 	id := uuid.NewString()
 	players[id] = &model.Player{
-		ID:            id,
-		UserID:        username,
-		CharacterName: name,
-		RoomID:        "ly_00",
-		State:         "IDLE",
-		Money:         5000,
-		Attributes:    model.NewPlayerAttributes(str, con, agi, perception, willpower),
-		Skills:        map[string]int{"basic_unarmed": 1, "basic_parry": 1, "basic_neigong": 1, "basic_qinggong": 1},
-		Backpack:      map[string]int{"iron_pickaxe": 1},
-		Equipment:     map[string]string{},
-		QuestStates:   map[string]model.QuestState{},
-		Flags:         map[string]bool{},
-		Reputations:   map[string]int{},
-		Online:        false,
+		ID:                    id,
+		UserID:                username,
+		CharacterName:         name,
+		RoomID:                "ly_00",
+		State:                 "IDLE",
+		Money:                 5000,
+		Attributes:            model.NewPlayerAttributes(str, con, agi, perception, willpower),
+		Skills:                map[string]int{"basic_unarmed": 1, "basic_parry": 1, "basic_neigong": 1, "basic_qinggong": 1},
+		SkillLearningProgress: map[string]int{},
+		Backpack:              map[string]int{"iron_pickaxe": 1},
+		Equipment:             map[string]string{},
+		QuestStates:           map[string]model.QuestState{},
+		Flags:                 map[string]bool{},
+		Reputations:           map[string]int{},
+		Online:                false,
 	}
 	u.CharacterIDs = append(u.CharacterIDs, id)
 

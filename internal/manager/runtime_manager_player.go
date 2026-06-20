@@ -10,6 +10,10 @@ import (
 	"mudgame/server/internal/model"
 )
 
+const (
+	stateSettlementSeconds = 10
+)
+
 func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{}, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -91,15 +95,24 @@ func (r *RuntimeManager) GetSkills(playerID string) ([]map[string]interface{}, e
 		return nil, exception.ErrPlayerNotFound
 	}
 	out := make([]map[string]interface{}, 0, len(p.Skills))
+	levelCap := model.SkillLevelCapForExperience(p.Attributes.Experience)
 	for id, level := range p.Skills {
 		def, ok := fileSkills[id]
 		if !ok {
 			continue
 		}
+		targetLevel := level + 1
+		nextLevelPotential := model.SkillPotentialForTargetLevel(targetLevel)
+		learningProgress := p.SkillLearningProgress[id]
+		if learningProgress > nextLevelPotential {
+			learningProgress = nextLevelPotential
+		}
 		out = append(out, map[string]interface{}{
 			"id": id, "name": def.Name, "description": def.Description, "rarity": def.Rarity, "level": level,
 			"type": def.Type, "category": def.Category, "school": def.School,
 			"bonuses": def.Bonuses, "bonusText": skillBonusText(def.Bonuses, level), "requirements": def.Requirements,
+			"levelCap": levelCap, "nextLevelPotential": nextLevelPotential, "learningProgress": learningProgress,
+			"isLearning": p.State == "LEARNING" && p.LearningSkillID == id,
 		})
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i]["id"].(string) < out[j]["id"].(string) })
@@ -608,7 +621,7 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 		return errors.New("npc_not_found")
 	}
 	if dnpc, _, ok := r.dungeonNPCInRoomNoLock(room.ID, npcID); ok {
-		if _, ok := dnpc.Skills[skillID]; !ok {
+		if _, taught := dnpc.Skills[skillID]; !taught {
 			return errors.New("skill_not_taught")
 		}
 	} else {
@@ -616,19 +629,23 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 		if !ok {
 			return errors.New("npc_not_found")
 		}
-		if _, ok := npc.Skills[skillID]; !ok {
+		if _, taught := npc.Skills[skillID]; !taught {
 			return errors.New("skill_not_taught")
 		}
 	}
-	if p.Skills[skillID] >= 300 {
+	if p.Skills[skillID] >= model.SkillLevelCapForExperience(p.Attributes.Experience) {
 		return errors.New("skill_level_capped")
 	}
 	if p.Skills == nil {
 		p.Skills = map[string]int{}
 	}
-	p.Attributes.Potential -= 1
-	p.Skills[skillID] += 1
+	if p.SkillLearningProgress == nil {
+		p.SkillLearningProgress = map[string]int{}
+	}
 	p.State = "LEARNING"
+	p.StateTickCountdown = stateSettlementSeconds
+	p.LearningSkillID = skillID
+	p.LearningTeacherID = npcID
 	return r.savePlayers(players)
 }
 
@@ -660,6 +677,7 @@ func (r *RuntimeManager) Mine(playerID string) (int, int, string, error) {
 		return 0, 0, "", errors.New("no_pickaxe")
 	}
 	p.State = "MINING"
+	p.StateTickCountdown = stateSettlementSeconds
 	if err := r.savePlayers(players); err != nil {
 		return 0, 0, "", err
 	}
@@ -843,6 +861,7 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 		p.Attributes.Resources.HP = p.Attributes.Resources.MaxHP
 	}
 	p.State = "HEALING"
+	p.StateTickCountdown = stateSettlementSeconds
 	if err := r.savePlayers(players); err != nil {
 		return "", err
 	}
@@ -887,6 +906,7 @@ func (r *RuntimeManager) Meditate(playerID string) (string, error) {
 		p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
 	}
 	p.State = "MEDITATING"
+	p.StateTickCountdown = stateSettlementSeconds
 	if err := r.savePlayers(players); err != nil {
 		return "", err
 	}
@@ -905,6 +925,9 @@ func (r *RuntimeManager) Stop(playerID string) string {
 			}
 			oldState := p.State
 			p.State = "IDLE"
+			p.StateTickCountdown = 0
+			p.LearningSkillID = ""
+			p.LearningTeacherID = ""
 			p.TargetID = ""
 			p.CombatType = ""
 			_ = r.savePlayers(players)
@@ -1129,10 +1152,21 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 
 	for _, p := range players {
 		roomID := p.RoomID
+		if p.State == "HEALING" || p.State == "MEDITATING" || p.State == "MINING" || p.State == "LEARNING" {
+			if p.StateTickCountdown <= 0 {
+				p.StateTickCountdown = stateSettlementSeconds
+			}
+			p.StateTickCountdown--
+			if p.StateTickCountdown > 0 {
+				continue
+			}
+			p.StateTickCountdown = stateSettlementSeconds
+		}
 		switch p.State {
 		case "HEALING":
 			if p.Attributes.Resources.HP >= p.Attributes.Resources.MaxHP || p.Attributes.Resources.MP < 8 {
 				p.State = "IDLE"
+				p.StateTickCountdown = 0
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "停止了运功疗伤。"})
 				updatedRoom[roomID] = true
 				continue
@@ -1164,6 +1198,7 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			}
 			if p.Attributes.Resources.TrainedMaxMP >= p.Attributes.Resources.MaxMP {
 				p.State = "IDLE"
+				p.StateTickCountdown = 0
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "结束了打坐调息。"})
 				updatedRoom[roomID] = true
 				continue
@@ -1182,6 +1217,7 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 		case "MINING":
 			if p.Equipment["WEAPON"] != "iron_pickaxe" {
 				p.State = "IDLE"
+				p.StateTickCountdown = 0
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "收起铁镐，停止了挖矿。"})
 				updatedRoom[roomID] = true
 				continue
@@ -1202,6 +1238,62 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			}
 			result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你获得了" + strconv.Itoa(expGain) + "点经验，" + strconv.Itoa(potGain) + "点潜能。"})
 			updatedRoom[roomID] = true
+		case "LEARNING":
+			skillID := p.LearningSkillID
+			skillDef, ok := fileSkills[skillID]
+			if !ok || skillID == "" {
+				stopLearningNoLock(p)
+				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你失去了学习的头绪，只得停了下来。"})
+				updatedRoom[roomID] = true
+				continue
+			}
+			levelCap := model.SkillLevelCapForExperience(p.Attributes.Experience)
+			if p.Skills[skillID] >= levelCap {
+				stopLearningNoLock(p)
+				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你的经验尚不足以继续领悟" + skillDef.Name + "，停止了学习。"})
+				updatedRoom[roomID] = true
+				continue
+			}
+			if p.Attributes.Potential <= 0 {
+				stopLearningNoLock(p)
+				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你的潜能已经耗尽，无法继续学习" + skillDef.Name + "。"})
+				updatedRoom[roomID] = true
+				continue
+			}
+			if p.SkillLearningProgress == nil {
+				p.SkillLearningProgress = map[string]int{}
+			}
+			targetLevel := p.Skills[skillID] + 1
+			requiredPotential := model.SkillPotentialForTargetLevel(targetLevel)
+			remainingPotential := requiredPotential - p.SkillLearningProgress[skillID]
+			if remainingPotential <= 0 {
+				remainingPotential = requiredPotential
+				p.SkillLearningProgress[skillID] = 0
+			}
+			spentPotential := min(model.LearningPotentialPerTick, p.Attributes.Potential, remainingPotential)
+			p.Attributes.Potential -= spentPotential
+			p.SkillLearningProgress[skillID] += spentPotential
+			if p.SkillLearningProgress[skillID] >= requiredPotential {
+				p.SkillLearningProgress[skillID] = 0
+				p.Skills[skillID]++
+				message := "你的" + skillDef.Name + "等级提升了，现在是" + strconv.Itoa(p.Skills[skillID]) + "级。"
+				if p.Skills[skillID] >= levelCap {
+					stopLearningNoLock(p)
+					message += "你已达到当前经验所能领悟的上限。"
+				} else if p.Attributes.Potential <= 0 {
+					stopLearningNoLock(p)
+					message += "你的潜能已经耗尽。"
+				}
+				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: message})
+			} else {
+				message := "你对" + skillDef.Name + "略有所悟。"
+				if p.Attributes.Potential <= 0 {
+					stopLearningNoLock(p)
+					message += "你的潜能已经耗尽，停止了学习。"
+				}
+				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: message})
+			}
+			updatedRoom[roomID] = true
 		}
 	}
 
@@ -1212,4 +1304,14 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 		return model.CombatTickResult{}, err
 	}
 	return result, nil
+}
+
+func stopLearningNoLock(p *model.Player) {
+	if p == nil {
+		return
+	}
+	p.State = "IDLE"
+	p.StateTickCountdown = 0
+	p.LearningSkillID = ""
+	p.LearningTeacherID = ""
 }
