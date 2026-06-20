@@ -806,6 +806,7 @@ const getMessage = (msg) => {
             if (err === 'no_potential') return "你的潜能不足，无法继续学习。";
             if (err === 'skill_not_taught') return "这位老师似乎不会这招。";
             if (err === 'npc_not_found') return "找不到这位老师。";
+            if (typeof err === 'string' && err.includes('已经不输你师傅了')) return err;
             return `学习失败: ${err}`;
         }
         if (subtype === 'stop') {
