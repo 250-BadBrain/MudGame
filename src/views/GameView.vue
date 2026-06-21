@@ -202,6 +202,7 @@
             
             <!-- 动作按钮区域 -->
             <div class="action-panel">
+                <div v-if="room?.dungeon?.alertLevel > 0" class="dungeon-alert">戒备 {{ room.dungeon.alertLevel }}</div>
                 <div class="action-buttons-grid">
                     <button @click="doAction('meditate')" class="action-cmd-btn">打坐</button>
                     <button @click="doAction('heal')" class="action-cmd-btn">疗伤</button>
@@ -465,7 +466,8 @@ const roomActionLabels = {
 
 const roomActions = computed(() => {
     const actions = Array.isArray(room.value?.actions) ? room.value.actions : [];
-    return actions.map(id => ({ id, label: roomActionLabels[id] || id }));
+    const labels = room.value?.actionLabels || {};
+    return actions.map(id => ({ id, label: labels[id] || roomActionLabels[id] || id }));
 });
 
 const isInDungeon = computed(() => {
@@ -780,7 +782,7 @@ const getMessage = (msg) => {
             return describeCommandError(err, "眼下并不适合切磋。");
         }
         if (subtype === 'kill') {
-            if (flag && results?.message) return results.message;
+            if (flag) return null;
             const err = results.error;
             if (err === 'busy_state') return "你现在正忙着呢。";
             if (err === 'dead_state') return "你已经死了，无法攻击。";
@@ -1269,6 +1271,10 @@ const handleMessage = (msg) => {
     }
   } else if (msg.type === 'command' && msg.subtype === 'do_action') {
       if (msg.flag) {
+          if (msg.results?.room) {
+              room.value = msg.results.room;
+              keepCurrentPlayerOnlineInRoom();
+          }
           (msg.logs || []).forEach(l => addLog(l));
           if (showInfoPanel.value && currentPanel.value === 'backpack') {
               sendGameCommand("command", "get_backpack", characterId.value, {});
@@ -1293,7 +1299,7 @@ const handleMessage = (msg) => {
       if (['heal', 'meditate', 'spar', 'kill'].includes(msg.subtype)) {
           // 已由 getMessage 处理
           if (msg.flag && msg.logs) (msg.logs || []).forEach(l => addLog(l));
-          if (msg.flag && msg.results && msg.results.message) addLog(msg.results.message); // spar returns message on success
+          if (msg.subtype !== 'kill' && msg.flag && msg.results && msg.results.message) addLog(msg.results.message); // spar returns message on success
           if (!msg.flag && !generatedMsg) addLog(describeCommandError(msg.results.error, '你现在无法做出这个动作。'));
       } else {
           if (msg.flag) {
@@ -2568,6 +2574,12 @@ const formatMoney = (money) => {
     flex-wrap: wrap;
     gap: 8px;
     justify-content: flex-start;
+}
+
+.dungeon-alert {
+    margin-bottom: 7px;
+    color: #d8a44b;
+    font-size: 12px;
 }
 
 .action-cmd-btn {
