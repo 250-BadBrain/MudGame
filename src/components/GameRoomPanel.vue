@@ -12,16 +12,16 @@
             <span v-if="stateLabel(entity)" class="entity-status entity-status-active">&lt;{{ stateLabel(entity) }}&gt;</span>
           </span>
           <span v-if="entity.level" class="entity-level">Lv.{{ entity.level }}</span>
-          <span v-if="entity.hp" class="entity-hp">HP:{{ entity.hp }}/{{ entity.maxHp }}</span>
-          <span v-if="entity.isNpc && entity.hostile" class="entity-hostile">敌对</span>
+          <span v-if="!isCorpse(entity) && entity.hp !== undefined && entity.hp !== null" class="entity-hp">HP:{{ entity.hp }}/{{ entity.maxHp }}</span>
+          <span v-if="!isCorpse(entity) && entity.isNpc && entity.hostile" class="entity-hostile">敌对</span>
         </div>
         <div v-if="entity === selectedEntity" class="entity-actions">
           <button @click.stop="$emit('viewEntity', entity)" class="action-btn view-btn">查看</button>
-          <button v-if="canTalk(entity)" @click.stop="$emit('talkEntity', entity)" class="action-btn talk-btn">交谈</button>
-          <button @click.stop="$emit('sparEntity', entity)" class="action-btn spar-btn">比试</button>
-          <button @click.stop="$emit('killEntity', entity)" class="action-btn kill-btn">击杀</button>
-          <button v-if="canTeach(entity)" @click.stop="$emit('learnEntity', entity)" class="action-btn learn-btn">请教</button>
-          <button v-if="entity.isShop" @click.stop="$emit('tradeEntity', entity)" class="action-btn trade-btn">交易</button>
+          <button v-if="!isCorpse(entity) && canTalk(entity)" @click.stop="$emit('talkEntity', entity)" class="action-btn talk-btn">交谈</button>
+          <button v-if="!isCorpse(entity)" @click.stop="$emit('sparEntity', entity)" class="action-btn spar-btn">比试</button>
+          <button v-if="!isCorpse(entity)" @click.stop="$emit('killEntity', entity)" class="action-btn kill-btn">击杀</button>
+          <button v-if="!isCorpse(entity) && canTeach(entity)" @click.stop="$emit('learnEntity', entity)" class="action-btn learn-btn">请教</button>
+          <button v-if="!isCorpse(entity) && entity.isShop" @click.stop="$emit('tradeEntity', entity)" class="action-btn trade-btn">交易</button>
         </div>
       </div>
     </div>
@@ -58,6 +58,8 @@ const canTalk = (entity) => {
   return !!entity?.capabilities?.includes('talk')
 }
 
+const isCorpse = (entity) => entity?.isCorpse || entity?.state === 'DEAD'
+
 const stateNames = {
   HEALING: '疗伤',
   MEDITATING: '打坐',
@@ -69,7 +71,7 @@ const stateNames = {
 
 const stateLabel = (entity) => {
   const state = entity?.state
-  if (!state || state === 'IDLE') return ''
+  if (!state || state === 'IDLE' || state === 'DEAD') return ''
   return stateNames[state] || state
 }
 

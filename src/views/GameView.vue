@@ -294,18 +294,20 @@ const combinedEntities = computed(() => {
   const result = []
   if (room.value?.playersInRoom) {
     for (const p of room.value.playersInRoom) {
+      const isCorpse = p.state === 'DEAD'
       result.push({
         id: p.id,
-        name: p.name,
+        name: isCorpse ? `${p.name}的尸体` : p.name,
         isPlayer: true,
         isNpc: false,
         isItem: false,
         level: p.level,
-        hp: p.attributes?.currentHp,
-        maxHp: p.attributes?.maxHp,
+        hp: isCorpse ? null : p.attributes?.currentHp,
+        maxHp: isCorpse ? null : p.attributes?.maxHp,
         hostile: false,
         state: p.state,
         online: p.online,
+        isCorpse,
         isShop: false,
         capabilities: [],
         description: '',
@@ -315,17 +317,19 @@ const combinedEntities = computed(() => {
   }
   if (room.value?.npcs) {
     for (const n of room.value.npcs) {
+      const isCorpse = n.state === 'DEAD'
       result.push({
         id: n.id,
-        name: n.name,
+        name: isCorpse ? `${n.name}的尸体` : n.name,
         isPlayer: false,
         isNpc: true,
         isItem: false,
         level: n.level,
-        hp: n.attributes?.currentHp,
-        maxHp: n.attributes?.maxHp,
-        hostile: n.hostile || false,
+        hp: isCorpse ? null : n.attributes?.currentHp,
+        maxHp: isCorpse ? null : n.attributes?.maxHp,
+        hostile: isCorpse ? false : n.hostile || false,
         state: n.state,
+        isCorpse,
         isShop: n.isShop || false,
         capabilities: n.capabilities || [],
         dialogueId: n.dialogueId || '',
@@ -1547,7 +1551,7 @@ const getHealthStatusDescription = (currentHp, maxHp) => {
 
 const viewEntity = (entity) => {
     if (entity.state === 'DEAD') {
-        const name = entity.name + '的尸体';
+        const name = entity.isCorpse ? entity.name : entity.name + '的尸体';
         addLog(`${name}\n${name}，静静地躺在这里`);
         return;
     }
