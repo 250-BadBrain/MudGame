@@ -129,6 +129,12 @@
                     <button v-if="isActiveDungeonLeaveButtonLog(log)" @click="confirmLeaveCurrentDungeon">{{ getLogText(log) }}</button>
                     <template v-else>{{ getLogText(log) }}</template>
                 </template>
+                <template v-else-if="isDungeonChoiceLog(log)">
+                    <span>{{ getLogText(log) }}</span>
+                    <span class="dungeon-choice-buttons">
+                        <button v-for="choice in log.choices" :key="choice.id" :disabled="log.used" @click="chooseDungeonAction(log, choice.id)">{{ choice.label }}</button>
+                    </span>
+                </template>
                 <template v-else>
                     {{ getLogText(log) }}
                 </template>
@@ -329,6 +335,7 @@ const combinedEntities = computed(() => {
         hp: isCorpse ? null : n.attributes?.currentHp,
         maxHp: isCorpse ? null : n.attributes?.maxHp,
         hostile: isCorpse ? false : n.hostile || false,
+        combatMode: n.combatMode || 'kill',
         state: n.state,
         isCorpse,
         isShop: n.isShop || false,
@@ -458,10 +465,6 @@ const roomActionLabels = {
     work: '劳作',
     listen_rumor: '听传闻',
     search: '搜索',
-    inspect_fragment: '辨认残简',
-    inspect_token: '查验令牌',
-    tame_horse: '驯马',
-    inspect_guest_register: '查验名册'
 };
 
 const roomActions = computed(() => {
@@ -1276,6 +1279,10 @@ const handleMessage = (msg) => {
               keepCurrentPlayerOnlineInRoom();
           }
           (msg.logs || []).forEach(l => addLog(l));
+          if (Array.isArray(msg.results?.choices) && msg.results.choices.length) {
+              logs.value.push({ type: 'dungeon_choice', text: '请选择：', choices: msg.results.choices, used: false });
+              scrollToBottom();
+          }
           if (showInfoPanel.value && currentPanel.value === 'backpack') {
               sendGameCommand("command", "get_backpack", characterId.value, {});
           }
@@ -1687,6 +1694,14 @@ const getLogText = (log) => {
 
 const isDungeonLeaveButtonLog = (log) => {
     return !!(log && typeof log === 'object' && log.type === DUNGEON_LEAVE_BUTTON_LOG_TYPE);
+}
+
+const isDungeonChoiceLog = (log) => !!(log && typeof log === 'object' && log.type === 'dungeon_choice');
+
+const chooseDungeonAction = (log, actionId) => {
+    if (!log || log.used) return;
+    log.used = true;
+    doRoomAction(actionId);
 }
 
 const isActiveDungeonLeaveButtonLog = (log) => {
@@ -2580,6 +2595,26 @@ const formatMoney = (money) => {
     margin-bottom: 7px;
     color: #d8a44b;
     font-size: 12px;
+}
+
+.dungeon-choice-buttons {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-left: 8px;
+}
+
+.dungeon-choice-buttons button {
+    border: 1px solid #8d6a23;
+    background: #17140d;
+    color: #e5c568;
+    cursor: pointer;
+}
+
+.dungeon-choice-buttons button:disabled {
+    color: #777;
+    border-color: #444;
+    cursor: default;
 }
 
 .action-cmd-btn {

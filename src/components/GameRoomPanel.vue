@@ -19,7 +19,7 @@
           <button @click.stop="$emit('viewEntity', entity)" class="action-btn view-btn">查看</button>
           <button v-if="!isCorpse(entity) && canTalk(entity)" @click.stop="$emit('talkEntity', entity)" class="action-btn talk-btn">交谈</button>
           <button v-if="!isCorpse(entity)" @click.stop="$emit('sparEntity', entity)" class="action-btn spar-btn">比试</button>
-          <button v-if="!isCorpse(entity)" @click.stop="$emit('killEntity', entity)" class="action-btn kill-btn">击杀</button>
+          <button v-if="!isCorpse(entity) && entity.combatMode !== 'protected'" @click.stop="$emit('killEntity', entity)" class="action-btn kill-btn">击杀</button>
           <button v-if="!isCorpse(entity) && canTeach(entity)" @click.stop="$emit('learnEntity', entity)" class="action-btn learn-btn">请教</button>
           <button v-if="!isCorpse(entity) && entity.isShop" @click.stop="$emit('tradeEntity', entity)" class="action-btn trade-btn">交易</button>
         </div>
