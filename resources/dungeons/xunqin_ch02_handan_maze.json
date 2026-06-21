@@ -1,7 +1,7 @@
 {
   "id": "xunqin_ch02_handan_maze",
   "name": "寻秦异闻：邯郸迷局",
-  "description": "古铜石门再度开启，邯郸城中的一枚乌氏令牌，似乎牵着质子府与剑客之间的暗线。",
+  "description": "铜门再度开启，邯郸城中的一枚乌氏令牌，似乎牵着质子府与剑客之间的暗线。",
   "order": 11,
   "chainId": "xunqin_legend",
   "chapter": 2,
@@ -19,7 +19,7 @@
       "type": "enter_room",
       "targetId": "wu_house_02",
       "required": 1,
-      "description": "沿旧马市找到乌氏别院。"
+      "description": "沿旧马市找到乌家别院。"
     },
     {
       "id": "break_outer_blockade",
@@ -33,21 +33,21 @@
       "type": "collect",
       "targetId": "wu_house_token",
       "required": 1,
-      "description": "在暗廊值房中查验乌氏令牌。"
+      "description": "在暗廊中查验乌氏令牌。"
     },
     {
       "id": "defeat_lian_jin",
       "type": "kill",
       "targetId": "lian_jin_shadow",
       "required": 1,
-      "description": "击退守在漳水渡口的连晋。"
+      "description": "击退守在漳水边的连晋。"
     },
     {
       "id": "reach_wu_refuge",
       "type": "enter_room",
       "targetId": "wu_refuge_09",
       "required": 1,
-      "description": "携令牌抵达乌家密院。"
+      "description": "携令牌抵达乌家河畔密院。"
     }
   ],
   "rewards": {
@@ -61,7 +61,7 @@
   },
   "rooms": {
     "handan_00": {
-      "name": "邯郸南郭",
+      "name": "邯郸南门",
       "description": "城郭压在暮色里，车马与流民挤过半掩的城门。腰间那枚古铜残片微微发热，陌生记忆却认得城内的路。",
       "exits": { "north": "horse_market_01" },
       "npcs": []
@@ -73,7 +73,7 @@
       "npcs": ["zhao_mansion_guard"]
     },
     "wu_house_02": {
-      "name": "乌氏别院",
+      "name": "乌家别院",
       "description": "院墙不起眼，檐下却悬着精巧马铃。乌廷芳与陶方在廊前低声争执，一枚能够出入质子府的令牌已经失落。",
       "exits": { "east": "horse_market_01", "north": "hostage_alley_03" },
       "npcs": ["wu_tingfang_shadow", "tao_fang_shadow"]
@@ -85,13 +85,13 @@
       "npcs": ["zhao_mansion_guard", "zhao_mansion_guard"]
     },
     "hostage_side_gate_04": {
-      "name": "质子府偏门",
+      "name": "质子府西门",
       "description": "偏门铜钉蒙尘，门缝里透出值夜灯火。墙上一道浅刻指向东侧暗廊，手法与古铜残片上的纹路相似。",
       "exits": { "south": "hostage_alley_03", "east": "guard_room_05" },
       "npcs": []
     },
     "guard_room_05": {
-      "name": "暗廊值房",
+      "name": "暗廊",
       "description": "值房只剩一盏青灯，案上堆着来往名帖与马籍。半开的木匣下压着一角刻有乌字的青铜牌。",
       "exits": { "west": "hostage_side_gate_04", "east": "bamboo_archive_06" },
       "actions": ["inspect_token"],
@@ -104,19 +104,19 @@
       "npcs": ["zhao_mansion_guard"]
     },
     "west_stable_07": {
-      "name": "城西马厩",
+      "name": "西城马厩",
       "description": "乌家骏马在栏中不安踏蹄，陶方留下的绳结指向城外。远处剑鸣一闪，渡口方向已有高手等候。",
       "exits": { "south": "bamboo_archive_06", "west": "zhang_river_08" },
       "npcs": ["tao_fang_shadow"]
     },
     "zhang_river_08": {
-      "name": "漳水渡口",
+      "name": "漳水边",
       "description": "暮潮拍着空舟，连晋独立跳板之上，长剑横在渡口。他只看了一眼令牌，便断定今夜不能让任何人过河。",
       "exits": { "east": "west_stable_07", "north": "wu_refuge_09" },
       "npcs": ["lian_jin_shadow"]
     },
     "wu_refuge_09": {
-      "name": "乌家密院",
+      "name": "乌家河畔密院",
       "description": "密院藏在河湾竹林后，乌氏灯号逐盏亮起。令牌背面的细字拼出一条通往乌家牧场的旧道，下一重迷局已经露出端倪。",
       "exits": { "south": "zhang_river_08" },
       "npcs": ["wu_tingfang_shadow"]

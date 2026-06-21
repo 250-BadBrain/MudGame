@@ -1,7 +1,7 @@
 {
   "id": "xunqin_ch04_ya_lake",
   "name": "寻秦异闻：雅湖风波",
-  "description": "雅湖水榭设下夜宴，宾客名册上的一处改痕，似乎正等着把某个异乡人送入局中。",
+  "description": "雅湖临水榭设下夜宴，宾客名册上的一处改痕，似乎正等着把某个异乡人送入局中。",
   "order": 13,
   "chainId": "xunqin_legend",
   "chapter": 4,
@@ -19,35 +19,35 @@
       "type": "enter_room",
       "targetId": "waterside_hall_05",
       "required": 1,
-      "description": "穿过别院赴雅湖水榭夜宴。"
+      "description": "穿过别院赴临水榭夜宴。"
     },
     {
       "id": "find_altered_register",
       "type": "collect",
       "targetId": "ya_lake_guest_register",
       "required": 1,
-      "description": "在藏卷偏阁查明被人改动的宾客名册。"
+      "description": "在藏卷阁查明被人改动的宾客名册。"
     },
     {
       "id": "break_bridge_ambush",
       "type": "kill",
       "targetId": "ya_lake_assassin",
       "required": 3,
-      "description": "击退荷风曲桥与画舫间的伏击者。"
+      "description": "击退九曲桥与画舫间的伏击者。"
     },
     {
       "id": "defeat_hidden_guard",
       "type": "kill",
       "targetId": "zhao_hidden_guard_captain",
       "required": 1,
-      "description": "击败芦岸后坞的赵府暗卫首领。"
+      "description": "击败芦苇后坞的赵府暗卫首领。"
     },
     {
       "id": "reach_rear_wharf",
       "type": "enter_room",
       "targetId": "rear_wharf_08",
       "required": 1,
-      "description": "循画舫暗梯抵达芦岸后坞。"
+      "description": "循画舫暗梯抵达芦苇后坞。"
     }
   ],
   "rewards": {
@@ -61,44 +61,44 @@
   },
   "rooms": {
     "lake_causeway_00": {
-      "name": "雅湖长堤",
+      "name": "雅湖堤",
       "description": "长堤尽头灯影浮在湖面，赴宴车马沿岸停成一线。乌家的请帖能带人进门，却挡不住暗处审视的目光。",
       "exits": { "east": "villa_court_01" },
       "npcs": []
     },
     "villa_court_01": {
-      "name": "临湖别院",
+      "name": "湖畔别院",
       "description": "别院花木修整得一丝不乱，侍从却反复核对每张名帖。赵雅的人在前方引路，赵穆的家将则守住了回廊出口。",
       "exits": { "west": "lake_causeway_00", "north": "banquet_corridor_02" },
       "npcs": []
     },
     "banquet_corridor_02": {
-      "name": "宴前回廊",
+      "name": "迎宾廊",
       "description": "回廊两侧垂着轻纱，湖风送来琴声与谈笑。几名权贵门客谈到少龙二字时忽然压低声音，显然早已听过这个身份。",
       "exits": { "south": "villa_court_01", "east": "guest_hall_03" },
       "npcs": ["lian_jin_guest_shadow"]
     },
     "guest_hall_03": {
-      "name": "宾客花厅",
+      "name": "花厅",
       "description": "花厅中陈列各家贺礼，赵穆坐在上首与宾客寒暄。他看似从未留意乌家来客，身后暗卫却始终没有移开视线。",
       "exits": { "west": "banquet_corridor_02", "north": "archive_room_04", "east": "waterside_hall_05" },
       "npcs": ["zhao_mu_banquet_shadow"]
     },
     "archive_room_04": {
-      "name": "藏卷偏阁",
+      "name": "藏卷阁",
       "description": "偏阁案上收着宾客名帖与座次简册，其中一页墨色未干，少龙之名被移到了最靠近曲桥的席位。",
       "exits": { "south": "guest_hall_03" },
       "actions": ["inspect_guest_register"],
       "npcs": []
     },
     "waterside_hall_05": {
-      "name": "雅湖水榭",
+      "name": "临水榭",
       "description": "赵雅倚栏听琴，言语温和，却句句都在试探来历。连晋隔席举杯相邀，笑意里已经藏着下一场剑争。",
       "exits": { "west": "guest_hall_03", "east": "lotus_bridge_06" },
       "npcs": ["zhao_ya_shadow", "lian_jin_guest_shadow"]
     },
     "lotus_bridge_06": {
-      "name": "荷风曲桥",
+      "name": "九曲桥",
       "description": "宴灯突然熄灭，桥下跃出蒙面人，口中却故意喊着乌家暗号。若让他们留下尸首与伪证，这场刺杀便会被算在乌家头上。",
       "exits": { "west": "waterside_hall_05", "east": "lake_barge_07" },
       "npcs": ["ya_lake_assassin", "ya_lake_assassin"]
@@ -110,7 +110,7 @@
       "npcs": ["ya_lake_assassin"]
     },
     "rear_wharf_08": {
-      "name": "芦岸后坞",
+      "name": "芦苇后坞",
       "description": "后坞停着赵府快舟，暗卫首领正焚毁余下名帖。只要他带着口供离开，少龙与乌家便会同时成为这场风波的罪人。",
       "exits": { "south": "lake_barge_07" },
       "npcs": ["zhao_hidden_guard_captain", "zhao_ya_shadow"]
