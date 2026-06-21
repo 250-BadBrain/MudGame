@@ -48,6 +48,12 @@
       "exits": {
         "north": "temple_01"
       },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["temple_bandit"],
+          "message": "流寇堵住大殿入口，挥刀将你逼回雨中。"
+        }
+      },
       "npcs": ["temple_bandit"]
     },
     "temple_01": {
@@ -56,6 +62,12 @@
       "exits": {
         "south": "temple_00",
         "north": "temple_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["temple_bandit"],
+          "message": "两名流寇死守通往后院的窄门。"
+        }
       },
       "npcs": ["temple_bandit", "temple_bandit"]
     },

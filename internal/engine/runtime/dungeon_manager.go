@@ -17,12 +17,13 @@ import (
 )
 
 type TemplateRoom struct {
-	ID          string
-	Name        string
-	Description string
-	Exits       map[string]string
-	NPCs        []string
-	Actions     []string
+	ID               string
+	Name             string
+	Description      string
+	Exits            map[string]string
+	NPCs             []string
+	Actions          []string
+	ExitRequirements map[string]model.ExitRequirement
 }
 
 type Template struct {
@@ -71,11 +72,20 @@ type templateFile struct {
 }
 
 type templateRoomFile struct {
-	Name        string            `json:"name"`
-	Description string            `json:"description"`
-	Exits       map[string]string `json:"exits"`
-	NPCs        []string          `json:"npcs"`
-	Actions     []string          `json:"actions"`
+	Name             string                         `json:"name"`
+	Description      string                         `json:"description"`
+	Exits            map[string]string              `json:"exits"`
+	NPCs             []string                       `json:"npcs"`
+	Actions          []string                       `json:"actions"`
+	ExitRequirements map[string]exitRequirementFile `json:"exitRequirements"`
+}
+
+type exitRequirementFile struct {
+	DefeatNPCs     []string `json:"defeatNpcs"`
+	RequiredItemID string   `json:"requiredItemId"`
+	RequiredAmount int      `json:"requiredAmount"`
+	ConsumeItem    bool     `json:"consumeItem"`
+	Message        string   `json:"message"`
 }
 
 type objectiveFile struct {
@@ -100,6 +110,7 @@ type NPCState struct {
 	Name          string
 	Title         string
 	Description   string
+	DialogueID    string
 	Aggressive    bool
 	Attributes    model.Attributes
 	ShopInventory map[string]int
@@ -261,13 +272,28 @@ func (m *Manager) LoadTemplatesNoLock() error {
 			if name == "" {
 				name = roomID
 			}
+			exitRequirements := map[string]model.ExitRequirement{}
+			for direction, requirement := range rf.ExitRequirements {
+				direction = strings.TrimSpace(direction)
+				if direction == "" {
+					continue
+				}
+				exitRequirements[direction] = model.ExitRequirement{
+					DefeatNPCs:     append([]string{}, requirement.DefeatNPCs...),
+					RequiredItemID: strings.TrimSpace(requirement.RequiredItemID),
+					RequiredAmount: requirement.RequiredAmount,
+					ConsumeItem:    requirement.ConsumeItem,
+					Message:        strings.TrimSpace(requirement.Message),
+				}
+			}
 			tpl.Rooms[roomID] = TemplateRoom{
-				ID:          roomID,
-				Name:        name,
-				Description: rf.Description,
-				Exits:       exits,
-				NPCs:        npcs,
-				Actions:     append([]string{}, rf.Actions...),
+				ID:               roomID,
+				Name:             name,
+				Description:      rf.Description,
+				Exits:            exits,
+				NPCs:             npcs,
+				Actions:          append([]string{}, rf.Actions...),
+				ExitRequirements: exitRequirements,
 			}
 		}
 
@@ -469,14 +495,15 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 			exits[dir] = model.Exit{Direction: dir, TargetRoomID: newTargetID, TargetRoomName: targetName}
 		}
 		inst.Rooms[newID] = model.Room{
-			ID:          newID,
-			WorldID:     "dungeon_" + dungeonID,
-			WorldName:   tpl.Name,
-			Name:        tr.Name,
-			Description: tr.Description,
-			Actions:     append([]string{}, tr.Actions...),
-			Exits:       exits,
-			NPCIDs:      []string{},
+			ID:               newID,
+			WorldID:          "dungeon_" + dungeonID,
+			WorldName:        tpl.Name,
+			Name:             tr.Name,
+			Description:      tr.Description,
+			Actions:          append([]string{}, tr.Actions...),
+			Exits:            exits,
+			ExitRequirements: cloneExitRequirements(tr.ExitRequirements),
+			NPCIDs:           []string{},
 		}
 	}
 
@@ -498,6 +525,7 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 				Name:          npcTemplate.Name,
 				Title:         npcTemplate.Title,
 				Description:   npcTemplate.Description,
+				DialogueID:    npcTemplate.DialogueID,
 				Aggressive:    npcTemplate.Aggressive,
 				Attributes:    attrs,
 				ShopInventory: copyIntMap(npcTemplate.ShopInventory),
@@ -615,7 +643,6 @@ func (m *Manager) DefeatNPCNoLock(npcID string) (*Instance, *NPCState, int, bool
 		return nil, nil, 0, false
 	}
 
-	m.RemoveDungeonNPCFromRoomNoLock(inst, npcID)
 	npc.Alive = false
 
 	oldProgress := inst.Progress
@@ -639,8 +666,6 @@ func (m *Manager) DefeatNPCNoLock(npcID string) (*Instance, *NPCState, int, bool
 		}
 	}
 
-	delete(inst.NPCs, npcID)
-	delete(m.npcs, npcID)
 	return inst, npc, progressGain, true
 }
 
@@ -797,21 +822,7 @@ func FormatDungeonSettlementMessage(s Settlement) string {
 	return fmt.Sprintf("%s：完成度%d%%，获得%d点经验，%d点潜能。", prefix, s.Progress, s.RewardExperience, s.RewardPotential)
 }
 
-func (m *Manager) ProcessDungeonAggroNoLock(players map[string]*model.Player, result *model.CombatTickResult, updatedRoom map[string]bool) {
-	for _, p := range players {
-		if p == nil || p.State != "IDLE" || p.RoomID == "" {
-			continue
-		}
-		npc, ok := m.FirstAggressiveDungeonNPCInRoomNoLock(p.RoomID)
-		if !ok || npc == nil || !npc.Alive {
-			continue
-		}
-		p.State = "COMBAT"
-		p.TargetID = npc.ID
-		p.CombatType = "KILL"
-		result.Messages = append(result.Messages, model.RoomMessage{RoomID: p.RoomID, Message: npc.Name + "猛地扑向" + p.CharacterName + "！"})
-		updatedRoom[p.RoomID] = true
-	}
+func (m *Manager) ProcessDungeonAggroNoLock(_ map[string]*model.Player, _ *model.CombatTickResult, _ map[string]bool) {
 }
 
 func (m *Manager) DungeonTemplateIDsNoLock() []string {
@@ -866,6 +877,15 @@ func copyBoolMap(in map[string]bool) map[string]bool {
 	out := map[string]bool{}
 	for k, v := range in {
 		out[k] = v
+	}
+	return out
+}
+
+func cloneExitRequirements(in map[string]model.ExitRequirement) map[string]model.ExitRequirement {
+	out := map[string]model.ExitRequirement{}
+	for direction, requirement := range in {
+		requirement.DefeatNPCs = append([]string{}, requirement.DefeatNPCs...)
+		out[direction] = requirement
 	}
 	return out
 }

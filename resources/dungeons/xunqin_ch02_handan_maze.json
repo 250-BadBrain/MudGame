@@ -70,18 +70,36 @@
       "name": "旧马市",
       "description": "空马槽间残留着乌家烙印，几名陌生汉子正逐摊盘问一个名叫少龙的人。西侧窄门后传来短促的马嘶。",
       "exits": { "south": "handan_00", "west": "wu_house_02" },
+      "exitRequirements": {
+        "west": {
+          "defeatNpcs": ["zhao_mansion_guard"],
+          "message": "赵府卫士按刀守住窄门，不肯让你接近乌家别院。"
+        }
+      },
       "npcs": ["zhao_mansion_guard"]
     },
     "wu_house_02": {
       "name": "乌家别院",
       "description": "院墙不起眼，檐下却悬着精巧马铃。乌廷芳与陶方在廊前低声争执，一枚能够出入质子府的令牌已经失落。",
       "exits": { "east": "horse_market_01", "north": "hostage_alley_03" },
+      "exitRequirements": {
+        "north": {
+          "requiredItemId": "wu_house_token",
+          "message": "陶方拦下你，低声道：没有乌家令牌，此去质子府无异于送死。"
+        }
+      },
       "npcs": ["wu_tingfang_shadow", "tao_fang_shadow"]
     },
     "hostage_alley_03": {
       "name": "质子府外巷",
       "description": "高墙遮住天光，墙根留着新鲜车辙。赵府卫士封住巷口，见到乌家来人便按住刀柄。",
       "exits": { "south": "wu_house_02", "north": "hostage_side_gate_04" },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["zhao_mansion_guard"],
+          "message": "守巷的赵府卫士结阵拦路，偏门近在眼前却无法通过。"
+        }
+      },
       "npcs": ["zhao_mansion_guard", "zhao_mansion_guard"]
     },
     "hostage_side_gate_04": {
@@ -94,13 +112,18 @@
       "name": "暗廊",
       "description": "值房只剩一盏青灯，案上堆着来往名帖与马籍。半开的木匣下压着一角刻有乌字的青铜牌。",
       "exits": { "west": "hostage_side_gate_04", "east": "bamboo_archive_06" },
-      "actions": ["inspect_token"],
       "npcs": []
     },
     "bamboo_archive_06": {
       "name": "竹简库",
       "description": "成排木架间塞满赵国名册，数页简牍记着乌家车队和质子府的往来。守卫听见脚步，已从架后包抄过来。",
       "exits": { "west": "guard_room_05", "north": "west_stable_07" },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["zhao_mansion_guard"],
+          "message": "竹架后的赵府卫士封死了通往马厩的门。"
+        }
+      },
       "npcs": ["zhao_mansion_guard"]
     },
     "west_stable_07": {
@@ -113,6 +136,12 @@
       "name": "漳水边",
       "description": "暮潮拍着空舟，连晋独立跳板之上，长剑横在渡口。他只看了一眼令牌，便断定今夜不能让任何人过河。",
       "exits": { "east": "west_stable_07", "north": "wu_refuge_09" },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["lian_jin_shadow"],
+          "message": "连晋横剑立在渡口，淡淡道：今夜谁也别想过河。"
+        }
+      },
       "npcs": ["lian_jin_shadow"]
     },
     "wu_refuge_09": {

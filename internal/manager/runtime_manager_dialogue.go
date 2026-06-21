@@ -77,6 +77,25 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	}
 
 	logs := []string{}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	for itemID, amount := range selected.TakeItems {
+		if amount <= 0 {
+			continue
+		}
+		p.Backpack[itemID] -= amount
+		if p.Backpack[itemID] <= 0 {
+			delete(p.Backpack, itemID)
+		}
+	}
+	for itemID, amount := range selected.GiveItems {
+		if amount <= 0 {
+			continue
+		}
+		p.Backpack[itemID] += amount
+		r.applyCollectDungeonObjectiveNoLock(p.ID, itemID)
+	}
 	for flag, value := range selected.SetFlags {
 		p.Flags[flag] = value
 	}
@@ -140,14 +159,22 @@ func (r *RuntimeManager) npcInPlayerRoomNoLock(p *model.Player, npcID string) (m
 			continue
 		}
 		if npc, ok := fileNpcs[id]; ok {
+			state, _ := r.staticNPCStateNoLock(id, room.ID)
+			if state != nil && !state.Alive {
+				return model.NPC{}, errors.New("target_is_dead")
+			}
 			return npc, nil
 		}
 		if dnpc, ok := r.dungeonNPCByIDNoLock(id); ok {
+			if !dnpc.Alive {
+				return model.NPC{}, errors.New("target_is_dead")
+			}
 			return model.NPC{
 				ID:          dnpc.ID,
 				Name:        dnpc.Name,
 				Title:       dnpc.Title,
 				Description: dnpc.Description,
+				DialogueID:  dnpc.DialogueID,
 				IsShop:      dnpc.IsShop,
 				Skills:      dnpc.Skills,
 				Attributes:  dnpc.Attributes,
@@ -200,6 +227,14 @@ func (r *RuntimeManager) dialogueRequirementMetNoLock(p *model.Player, req model
 	}
 	if req.ReputationID != "" {
 		if p.Reputations[req.ReputationID] < req.ReputationMin {
+			return false
+		}
+	}
+	for itemID, amount := range req.Items {
+		if amount <= 0 {
+			continue
+		}
+		if p.Backpack[itemID] < amount {
 			return false
 		}
 	}

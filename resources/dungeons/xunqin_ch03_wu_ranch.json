@@ -89,18 +89,36 @@
       "name": "北坡哨台",
       "description": "哨道上的铜铃被人割断，草间留着几枚不属于牧场的黑布碎片。夜风送来急促马蹄，来者显然熟知乌家巡防。",
       "exits": { "south": "taming_corral_03", "north": "river_pasture_05" },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["ranch_raider"],
+          "message": "蒙面袭击者占住哨道，挥刀逼得你无法前行。"
+        }
+      },
       "npcs": ["ranch_raider"]
     },
     "river_pasture_05": {
       "name": "河谷",
       "description": "受惊马群被赶向狭窄河谷，两名蒙面人挥动火把，企图让混乱掩住他们真正寻找的东西。",
       "exits": { "south": "north_watch_04", "east": "stone_pass_06" },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": ["ranch_raider"],
+          "message": "两名蒙面人借惊马之势封住河谷出口。"
+        }
+      },
       "npcs": ["ranch_raider", "ranch_raider"]
     },
     "stone_pass_06": {
       "name": "石岭关",
       "description": "乱石间横着一辆空马车，赵府门客首领守在车后。他承认袭击并非为了夺马，而是为了逼乌家交出一条秘密路线。",
       "exits": { "west": "river_pasture_05", "north": "ranch_tunnel_07" },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["zhao_retainer_captain"],
+          "message": "赵府门客首领守住石门，身后的地下马道无路可绕。"
+        }
+      },
       "npcs": ["zhao_retainer_captain"]
     },
     "ranch_tunnel_07": {

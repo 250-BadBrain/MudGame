@@ -1031,6 +1031,7 @@
     "faction": "neutral",
     "role": "story",
     "importance": "special",
+    "dialogueId": "xunqin_tingfang_intro",
     "instanceOnly": true,
     "attributes": {
       "level": 1,
@@ -1063,6 +1064,7 @@
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
+    "dialogueId": "xunqin_bully_confrontation",
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {
@@ -1096,6 +1098,7 @@
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
+    "dialogueId": "xunqin_rider_warning",
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {
@@ -1129,6 +1132,7 @@
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "elite",
+    "dialogueId": "xunqin_retainer_warning",
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {
@@ -1301,6 +1305,7 @@
     "faction": "neutral",
     "role": "story",
     "importance": "special",
+    "dialogueId": "xunqin_tao_fang_handan",
     "instanceOnly": true,
     "attributes": {
       "level": 14,
@@ -1316,6 +1321,7 @@
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
+    "dialogueId": "xunqin_zhao_guard",
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {
@@ -1332,6 +1338,7 @@
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "boss",
+    "dialogueId": "xunqin_lian_jin_crossing",
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {
@@ -1348,6 +1355,7 @@
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "boss",
+    "dialogueId": "xunqin_swordsman_warning",
     "aggressive": true,
     "instanceOnly": true,
     "attributes": {

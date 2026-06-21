@@ -122,6 +122,30 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 					t.Fatalf("dialogue %s option %s completes missing quest %s", dialogueID, option.ID, option.CompleteQuestID)
 				}
 			}
+			for itemID, amount := range option.GiveItems {
+				if amount <= 0 {
+					t.Fatalf("dialogue %s option %s gives non-positive amount of %s", dialogueID, option.ID, itemID)
+				}
+				if _, ok := data.Items[itemID]; !ok {
+					t.Fatalf("dialogue %s option %s gives missing item %s", dialogueID, option.ID, itemID)
+				}
+			}
+			for itemID, amount := range option.TakeItems {
+				if amount <= 0 {
+					t.Fatalf("dialogue %s option %s takes non-positive amount of %s", dialogueID, option.ID, itemID)
+				}
+				if _, ok := data.Items[itemID]; !ok {
+					t.Fatalf("dialogue %s option %s takes missing item %s", dialogueID, option.ID, itemID)
+				}
+			}
+			for itemID, amount := range option.Requires.Items {
+				if amount <= 0 {
+					t.Fatalf("dialogue %s option %s requires non-positive amount of %s", dialogueID, option.ID, itemID)
+				}
+				if _, ok := data.Items[itemID]; !ok {
+					t.Fatalf("dialogue %s option %s requires missing item %s", dialogueID, option.ID, itemID)
+				}
+			}
 		}
 	}
 	for questID, quest := range data.Quests {
@@ -177,9 +201,14 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			ID          string `json:"id"`
 			SpawnRoomID string `json:"spawnRoomId"`
 			Rooms       map[string]struct {
-				Name  string            `json:"name"`
-				Exits map[string]string `json:"exits"`
-				NPCs  []string          `json:"npcs"`
+				Name             string            `json:"name"`
+				Exits            map[string]string `json:"exits"`
+				NPCs             []string          `json:"npcs"`
+				ExitRequirements map[string]struct {
+					DefeatNPCs     []string `json:"defeatNpcs"`
+					RequiredItemID string   `json:"requiredItemId"`
+					RequiredAmount int      `json:"requiredAmount"`
+				} `json:"exitRequirements"`
 			} `json:"rooms"`
 			ProgressOnKill map[string]int `json:"progressOnKill"`
 			Objectives     []struct {
@@ -229,6 +258,28 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 					t.Fatalf("dungeon %s room %s references missing npc %s", dungeon.ID, roomID, npcID)
 				}
 				dungeonNPCs[npcID] = true
+			}
+			roomNPCs := map[string]bool{}
+			for _, npcID := range room.NPCs {
+				roomNPCs[npcID] = true
+			}
+			for direction, requirement := range room.ExitRequirements {
+				if _, ok := room.Exits[direction]; !ok {
+					t.Fatalf("dungeon %s room %s requirement references missing exit %s", dungeon.ID, roomID, direction)
+				}
+				for _, npcID := range requirement.DefeatNPCs {
+					if !roomNPCs[npcID] {
+						t.Fatalf("dungeon %s room %s exit %s requires npc %s not present in room", dungeon.ID, roomID, direction, npcID)
+					}
+				}
+				if requirement.RequiredAmount < 0 {
+					t.Fatalf("dungeon %s room %s exit %s has negative required item amount", dungeon.ID, roomID, direction)
+				}
+				if requirement.RequiredItemID != "" {
+					if _, ok := data.Items[requirement.RequiredItemID]; !ok {
+						t.Fatalf("dungeon %s room %s exit %s requires missing item %s", dungeon.ID, roomID, direction, requirement.RequiredItemID)
+					}
+				}
 			}
 		}
 		for npcID, progress := range dungeon.ProgressOnKill {

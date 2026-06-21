@@ -173,16 +173,19 @@ type DialogueOption struct {
 	StartQuestID    string          `json:"startQuestId,omitempty"`
 	CompleteQuestID string          `json:"completeQuestId,omitempty"`
 	SetFlags        map[string]bool `json:"setFlags,omitempty"`
+	GiveItems       map[string]int  `json:"giveItems,omitempty"`
+	TakeItems       map[string]int  `json:"takeItems,omitempty"`
 	Requires        DialogueRequire `json:"requires,omitempty"`
 }
 
 type DialogueRequire struct {
-	QuestID       string `json:"questId,omitempty"`
-	QuestStatus   string `json:"questStatus,omitempty"`
-	Flag          string `json:"flag,omitempty"`
-	FlagValue     *bool  `json:"flagValue,omitempty"`
-	ReputationID  string `json:"reputationId,omitempty"`
-	ReputationMin int    `json:"reputationMin,omitempty"`
+	QuestID       string         `json:"questId,omitempty"`
+	QuestStatus   string         `json:"questStatus,omitempty"`
+	Flag          string         `json:"flag,omitempty"`
+	FlagValue     *bool          `json:"flagValue,omitempty"`
+	ReputationID  string         `json:"reputationId,omitempty"`
+	ReputationMin int            `json:"reputationMin,omitempty"`
+	Items         map[string]int `json:"items,omitempty"`
 }
 
 type QuestDef struct {
@@ -227,19 +230,28 @@ type Exit struct {
 	TargetRoomName string
 }
 
+type ExitRequirement struct {
+	DefeatNPCs     []string
+	RequiredItemID string
+	RequiredAmount int
+	ConsumeItem    bool
+	Message        string
+}
+
 type Room struct {
-	ID          string
-	WorldID     string
-	WorldName   string
-	Name        string
-	Description string
-	Area        string
-	Tags        []string
-	SafeZone    bool
-	Function    string
-	Actions     []string
-	Exits       map[string]Exit
-	NPCIDs      []string
+	ID               string
+	WorldID          string
+	WorldName        string
+	Name             string
+	Description      string
+	Area             string
+	Tags             []string
+	SafeZone         bool
+	Function         string
+	Actions          []string
+	Exits            map[string]Exit
+	ExitRequirements map[string]ExitRequirement
+	NPCIDs           []string
 }
 
 type World struct {

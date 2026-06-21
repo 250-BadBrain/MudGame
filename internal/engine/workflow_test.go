@@ -30,6 +30,23 @@ func extractRoomNPCs(room map[string]interface{}) []map[string]interface{} {
 	return out
 }
 
+func roomNPCIDByName(t *testing.T, repo RuntimeRepository, playerID, npcName string) string {
+	t.Helper()
+	snapshot, err := GetRoomSnapshotView(repo, playerID)
+	if err != nil {
+		t.Fatalf("get room snapshot failed: %v", err)
+	}
+	for _, npc := range extractRoomNPCs(snapshot.Room) {
+		if npc["name"] == npcName && npc["state"] != "DEAD" {
+			if id, _ := npc["id"].(string); id != "" {
+				return id
+			}
+		}
+	}
+	t.Fatalf("expected living npc %s in room, got %+v", npcName, extractRoomNPCs(snapshot.Room))
+	return ""
+}
+
 const (
 	workflowShopNPCID    = "east_market_keeper"
 	workflowTeacherNPCID = "weapon_school_master"
@@ -107,17 +124,7 @@ func killRoomNPCByName(t *testing.T, repo RuntimeRepository, playerID, npcName s
 	if err != nil {
 		t.Fatalf("get room snapshot failed: %v", err)
 	}
-	npcs := extractRoomNPCs(snapshot.Room)
-	targetID := ""
-	for _, npc := range npcs {
-		if npc["name"] == npcName {
-			targetID, _ = npc["id"].(string)
-			break
-		}
-	}
-	if targetID == "" {
-		t.Fatalf("expected npc %s in room, got %+v", npcName, npcs)
-	}
+	targetID := roomNPCIDByName(t, repo, playerID, npcName)
 	if _, err := KillWithEffects(repo, playerID, targetID); err != nil {
 		t.Fatalf("kill %s failed: %v", npcName, err)
 	}
@@ -917,6 +924,7 @@ func TestDungeonInstanceLoadsNPCsAndSupportsKill(t *testing.T) {
 		t.Fatalf("dungeon worldName should not be empty")
 	}
 
+	killRoomNPCByName(t, h.repo, h.playerID, "荒庙流寇")
 	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
 		t.Fatalf("move to wolf room failed: %v", err)
 	}
@@ -988,15 +996,16 @@ func TestStaticNPCSparAndKillWorkflows(t *testing.T) {
 			t.Fatalf("get room snapshot failed: %v", err)
 		}
 		npcs := extractRoomNPCs(snapshot.Room)
-		stillPresent := false
 		for _, npc := range npcs {
 			if npc["id"] == "road_bandit" {
-				stillPresent = true
+				attributes, _ := npc["attributes"].(map[string]interface{})
+				if npc["state"] == "DEAD" && attributes["currentHp"] == 0 {
+					defeated = true
+				}
 				break
 			}
 		}
-		if !stillPresent {
-			defeated = true
+		if defeated {
 			break
 		}
 		status, err := GetPlayerStatusView(h.repo, h.playerID)
@@ -1008,20 +1017,16 @@ func TestStaticNPCSparAndKillWorkflows(t *testing.T) {
 		}
 	}
 	if !defeated {
-		t.Fatalf("expected road bandit to be removed after kill")
+		t.Fatalf("expected road bandit corpse to remain with zero HP")
 	}
 }
 
-func TestDungeonAggressiveNPCStartsCombat(t *testing.T) {
+func TestDungeonAggressiveNPCWaitsForPlayerAction(t *testing.T) {
 	h := setupRepo(t)
 
 	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "abandoned_temple_rain"); err != nil {
 		t.Fatalf("enter dungeon failed: %v", err)
 	}
-	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
-		t.Fatalf("move to aggressive npc room failed: %v", err)
-	}
-
 	tickRes, err := ProcessCombatTickWithEffects(h.repo)
 	if err != nil {
 		t.Fatalf("process combat tick failed: %v", err)
@@ -1033,8 +1038,15 @@ func TestDungeonAggressiveNPCStartsCombat(t *testing.T) {
 			break
 		}
 	}
-	if !foundAggro {
-		t.Fatalf("expected aggressive dungeon npc message, got: %+v", tickRes.Messages)
+	if foundAggro {
+		t.Fatalf("dungeon npc should wait for player action, got: %+v", tickRes.Messages)
+	}
+	status, err := GetPlayerStatusView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get player status failed: %v", err)
+	}
+	if status["state"] != "IDLE" {
+		t.Fatalf("expected player to remain idle near hostile npc, got %+v", status)
 	}
 }
 
@@ -1221,9 +1233,50 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
 		t.Fatalf("move to old horse market failed: %v", err)
 	}
+	guardID := roomNPCIDByName(t, h.repo, h.playerID, "赵府卫士")
+	guardDialogue, err := TalkWithView(h.repo, h.playerID, guardID)
+	if err != nil {
+		t.Fatalf("talk with hostile guard failed: %v", err)
+	}
+	if guardDialogue.Dialogue["id"] != "xunqin_zhao_guard" {
+		t.Fatalf("unexpected hostile guard dialogue: %+v", guardDialogue.Dialogue)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err == nil || !strings.Contains(err.Error(), "赵府卫士") {
+		t.Fatalf("expected living guard to block wu courtyard, got %v", err)
+	}
 	killRoomNPCByName(t, h.repo, h.playerID, "赵府卫士")
 	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err != nil {
 		t.Fatalf("move to wu courtyard failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err == nil || !strings.Contains(err.Error(), "陶方") {
+		t.Fatalf("expected missing wu token to block hostage alley, got %v", err)
+	}
+	taoFangID := roomNPCIDByName(t, h.repo, h.playerID, "陶方")
+	dialogue, err := TalkWithView(h.repo, h.playerID, taoFangID)
+	if err != nil {
+		t.Fatalf("talk with tao fang failed: %v", err)
+	}
+	if dialogue.Dialogue["id"] != "xunqin_tao_fang_handan" {
+		t.Fatalf("unexpected tao fang dialogue: %+v", dialogue.Dialogue)
+	}
+	if _, err := ChooseDialogueWithEffects(h.repo, h.playerID, taoFangID, "ask_handan_situation"); err != nil {
+		t.Fatalf("ask tao fang about handan failed: %v", err)
+	}
+	if _, err := ChooseDialogueWithEffects(h.repo, h.playerID, taoFangID, "request_wu_token"); err != nil {
+		t.Fatalf("receive wu token from tao fang failed: %v", err)
+	}
+	backpack, err = GetBackpackView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get backpack after tao fang dialogue failed: %v", err)
+	}
+	tokenCount := 0
+	for _, item := range backpack.Items {
+		if item["id"] == "wu_house_token" {
+			tokenCount = item["count"].(int)
+		}
+	}
+	if tokenCount != 1 {
+		t.Fatalf("expected tao fang to give exactly one wu token, got %d in %+v", tokenCount, backpack.Items)
 	}
 	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
 		t.Fatalf("move to hostage alley failed: %v", err)
@@ -1236,35 +1289,6 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	moveRes, err = MoveWithTransition(h.repo, h.playerID, "east")
 	if err != nil {
 		t.Fatalf("move to corridor guard room failed: %v", err)
-	}
-	actions, _ = moveRes.Room["actions"].([]string)
-	hasInspectToken := false
-	for _, action := range actions {
-		if action == "inspect_token" {
-			hasInspectToken = true
-		}
-	}
-	if !hasInspectToken {
-		t.Fatalf("expected inspect_token action, got %+v", moveRes.Room["actions"])
-	}
-	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_token"); err != nil {
-		t.Fatalf("inspect wu token failed: %v", err)
-	}
-	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_token"); err != nil {
-		t.Fatalf("inspect wu token twice failed: %v", err)
-	}
-	backpack, err = GetBackpackView(h.repo, h.playerID)
-	if err != nil {
-		t.Fatalf("get backpack after token failed: %v", err)
-	}
-	tokenCount := 0
-	for _, item := range backpack.Items {
-		if item["id"] == "wu_house_token" {
-			tokenCount = item["count"].(int)
-		}
-	}
-	if tokenCount != 1 {
-		t.Fatalf("expected exactly one wu token, got %d in %+v", tokenCount, backpack.Items)
 	}
 	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
 		t.Fatalf("move to bamboo archive failed: %v", err)

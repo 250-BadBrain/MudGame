@@ -198,6 +198,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		npcDescription := ""
 		npcIsShop := false
 		npcAggressive := false
+		npcState := "IDLE"
 		dialogueID := ""
 		questIDs := []string{}
 		skills := map[string]int{}
@@ -205,7 +206,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		if npc, ok := fileNpcs[npcID]; ok {
 			staticState, _ := r.staticNPCStateNoLock(npcID, room.ID)
 			if staticState != nil && !staticState.Alive {
-				continue
+				npcState = "DEAD"
 			}
 			attrs := model.NormalizeAttributes(npc.Attributes)
 			if staticState != nil {
@@ -232,6 +233,9 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 				"maxSpirit":    eff.MaxSpirit,
 			}
 		} else if dnpc, ok := r.dungeonNPCByIDNoLock(npcID); ok {
+			if !dnpc.Alive {
+				npcState = "DEAD"
+			}
 			attrs := model.NormalizeAttributes(dnpc.Attributes)
 			eff := model.BuildEffectiveAttributes(attrs)
 			npcIDValue = dnpc.ID
@@ -240,6 +244,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			npcDescription = dnpc.Description
 			npcIsShop = dnpc.IsShop
 			npcAggressive = dnpc.Aggressive
+			dialogueID = dnpc.DialogueID
 			for skillID, level := range dnpc.Skills {
 				skills[skillID] = level
 			}
@@ -255,14 +260,18 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			continue
 		}
 		capabilities := make([]string, 0, 2)
-		if npcIsShop {
-			capabilities = append(capabilities, "shop")
-		}
-		if len(skills) > 0 {
-			capabilities = append(capabilities, "teach")
-		}
-		if dialogueID != "" {
-			capabilities = append(capabilities, "talk")
+		if npcState != "DEAD" {
+			if npcIsShop {
+				capabilities = append(capabilities, "shop")
+			}
+			if len(skills) > 0 {
+				capabilities = append(capabilities, "teach")
+			}
+			if dialogueID != "" {
+				capabilities = append(capabilities, "talk")
+			}
+		} else {
+			npcAggressive = false
 		}
 		shopable := 0
 		if npcIsShop {
@@ -287,6 +296,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			"questIds":     questIDs,
 			"capabilities": capabilities,
 			"skills":       skills,
+			"state":        npcState,
 		})
 	}
 	return playersInRoom, npcs, nil

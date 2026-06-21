@@ -240,6 +240,9 @@ func (r *RuntimeManager) Move(playerID, direction string) (map[string]interface{
 	if !ok {
 		return nil, errors.New("no_exit_in_that_direction")
 	}
+	if err := r.checkExitRequirementNoLock(p, room, direction); err != nil {
+		return nil, err
+	}
 	p.RoomID = ex.TargetRoomID
 	r.applyEnterRoomDungeonObjectiveNoLock(p.RoomID)
 	if err := r.savePlayers(players); err != nil {
@@ -247,6 +250,54 @@ func (r *RuntimeManager) Move(playerID, direction string) (map[string]interface{
 	}
 	roomPayload, _, err := r.buildRoomPayload(p.RoomID, players)
 	return roomPayload, err
+}
+
+func (r *RuntimeManager) checkExitRequirementNoLock(p *model.Player, room model.Room, direction string) error {
+	requirement, ok := room.ExitRequirements[direction]
+	if !ok {
+		return nil
+	}
+	blockedTemplates := map[string]bool{}
+	for _, templateID := range requirement.DefeatNPCs {
+		blockedTemplates[templateID] = true
+	}
+	for _, npcID := range room.NPCIDs {
+		if dungeonNPC, exists := r.dungeonNPCByIDNoLock(npcID); exists && dungeonNPC.Alive && blockedTemplates[dungeonNPC.TemplateID] {
+			if requirement.Message != "" {
+				return errors.New(requirement.Message)
+			}
+			return errors.New(dungeonNPC.Name + "拦住了你。")
+		}
+		if staticNPC, exists := fileNpcs[npcID]; exists && blockedTemplates[npcID] {
+			state, _ := r.staticNPCStateNoLock(npcID, room.ID)
+			if state == nil || state.Alive {
+				if requirement.Message != "" {
+					return errors.New(requirement.Message)
+				}
+				return errors.New(staticNPC.Name + "拦住了你。")
+			}
+		}
+	}
+	if requirement.RequiredItemID == "" {
+		return nil
+	}
+	requiredAmount := requirement.RequiredAmount
+	if requiredAmount <= 0 {
+		requiredAmount = 1
+	}
+	if p.Backpack[requirement.RequiredItemID] < requiredAmount {
+		if requirement.Message != "" {
+			return errors.New(requirement.Message)
+		}
+		return errors.New("你还没有找到通行所需的物品。")
+	}
+	if requirement.ConsumeItem {
+		p.Backpack[requirement.RequiredItemID] -= requiredAmount
+		if p.Backpack[requirement.RequiredItemID] <= 0 {
+			delete(p.Backpack, requirement.RequiredItemID)
+		}
+	}
+	return nil
 }
 
 func (r *RuntimeManager) GetShop(playerID, npcID string) ([]map[string]interface{}, string, string, string, error) {

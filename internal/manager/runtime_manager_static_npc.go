@@ -24,6 +24,7 @@ func (r *RuntimeManager) staticNPCStateNoLock(npcID, roomID string) (*engruntime
 		Name:          npc.Name,
 		Title:         npc.Title,
 		Description:   npc.Description,
+		DialogueID:    npc.DialogueID,
 		Aggressive:    npc.Aggressive,
 		Attributes:    attrs,
 		ShopInventory: copyIntMap(npc.ShopInventory),

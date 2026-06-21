@@ -106,6 +106,153 @@
       }
     ]
   },
+  "xunqin_tingfang_intro": {
+    "id": "xunqin_tingfang_intro",
+    "npcId": "tingfang_shadow",
+    "title": "枯井村少女",
+    "opening": "婷芳氏警惕地望着村口，又看了看你身上的陌生装束：‘这里是赵境。那些人喊你少龙，你却像是第一次听见这个名字。’",
+    "options": [
+      {
+        "id": "ask_where",
+        "text": "这里究竟是什么地方？",
+        "response": "‘向东是通往邯郸的官道。赵府的人近来四处搜捕异乡人，村里的恶霸便借他们的名头欺人。若你真要往邯郸去，先别让他继续堵着村口。’",
+        "setFlags": { "xunqin_ch01_heard_tingfang": true }
+      },
+      {
+        "id": "ask_shaolong",
+        "text": "他们为何叫我少龙？",
+        "response": "她摇头道：‘我只听追兵这样喊。这个名字似乎牵着邯郸的一桩大事，你若想活着弄明白，便不能在此久留。’"
+      }
+    ]
+  },
+  "xunqin_bully_confrontation": {
+    "id": "xunqin_bully_confrontation",
+    "npcId": "zhao_bully",
+    "title": "村口恶霸",
+    "opening": "恶霸横在路中，指着婷芳氏冷笑：‘外乡人，少管赵境的闲事。’",
+    "options": [
+      {
+        "id": "demand_release",
+        "text": "让开道路，放她离开。",
+        "response": "他啐了一口，抄起木棍：‘想从这里过去，就先问过爷爷手里的家伙。’"
+      },
+      {
+        "id": "ask_backer",
+        "text": "是谁准你在村中横行？",
+        "response": "‘赵府正在拿人，谁敢管我？你既被叫作少龙，正好拿你去领赏。’"
+      }
+    ]
+  },
+  "xunqin_rider_warning": {
+    "id": "xunqin_rider_warning",
+    "npcId": "zhao_rider",
+    "title": "赵国追骑",
+    "opening": "游骑勒住坐骑，刀锋斜指地面：‘少龙，跟我们回邯郸，尚可少受些苦。’",
+    "options": [
+      {
+        "id": "ask_charge",
+        "text": "赵府为何追我？",
+        "response": "‘你知道了不该知道的事，又带走了不该带走的东西。其余的话，等你跪在主人面前再问。’"
+      },
+      {
+        "id": "refuse_capture",
+        "text": "这条路，我一定要走。",
+        "response": "游骑收紧缰绳：‘那便只好把你绑在马后带走。’"
+      }
+    ]
+  },
+  "xunqin_retainer_warning": {
+    "id": "xunqin_retainer_warning",
+    "npcId": "zhao_retainer",
+    "title": "赵府门客",
+    "opening": "门客盯着你身上的铜光痕迹：‘追的不是一条命，是你从旧岁月里带来的东西。’",
+    "options": [
+      {
+        "id": "ask_fragment",
+        "text": "你们在找什么？",
+        "response": "‘一页能牵动邯郸局势的残简。交出来，我可以让你死得痛快些。’"
+      }
+    ]
+  },
+  "xunqin_swordsman_warning": {
+    "id": "xunqin_swordsman_warning",
+    "npcId": "retainer_swordsman",
+    "title": "断桥剑士",
+    "opening": "剑士守在断桥中央：‘能乱时局的异数，不能带着残简离开。’",
+    "options": [
+      {
+        "id": "ask_master",
+        "text": "是谁命你守在这里？",
+        "response": "‘活人没有资格知道主人的名号。你若能胜过这柄剑，自会在邯郸找到答案。’"
+      }
+    ]
+  },
+  "xunqin_tao_fang_handan": {
+    "id": "xunqin_tao_fang_handan",
+    "npcId": "tao_fang_shadow",
+    "title": "乌家管事陶方",
+    "opening": "陶方将院门掩上：‘你在赵境惹出的动静不小。想在邯郸活下去，先要明白乌家、质子府和赵穆的人为何都盯上了你。’",
+    "options": [
+      {
+        "id": "ask_handan_situation",
+        "text": "请讲讲邯郸眼下的局势。",
+        "response": "‘乌家以马匹和商路立足，赵穆却想把这些都握在手中。质子府里还藏着另一条暗线。你被人称作少龙，又带着纵横残简，已经成了几方都想抢先找到的人。’",
+        "setFlags": { "xunqin_ch02_heard_tao_background": true },
+        "requires": { "flag": "xunqin_ch02_received_wu_token", "flagValue": false }
+      },
+      {
+        "id": "request_wu_token",
+        "text": "我要如何进入质子府查明此事？",
+        "response": "陶方取出一枚乌氏令牌：‘偏门守卫认得这块牌子，但赵府卫士未必肯让路。收好它，暗廊里有人改过乌家的出入记录。’",
+        "giveItems": { "wu_house_token": 1 },
+        "setFlags": { "xunqin_ch02_received_wu_token": true },
+        "requires": { "flag": "xunqin_ch02_heard_tao_background" }
+      },
+      {
+        "id": "after_token",
+        "text": "令牌背面的马道通向哪里？",
+        "response": "‘通向乌家在城西的马厩和河畔密院。先查质子府的名册，再从西城退走，我会在马厩留下绳结指路。’",
+        "requires": { "flag": "xunqin_ch02_received_wu_token" }
+      }
+    ]
+  },
+  "xunqin_zhao_guard": {
+    "id": "xunqin_zhao_guard",
+    "npcId": "zhao_mansion_guard",
+    "title": "赵府封巷卫士",
+    "opening": "卫士按住刀柄：‘赵府办事，闲人退开。乌家的牌子也护不住来历不明的人。’",
+    "options": [
+      {
+        "id": "show_token",
+        "text": "这是乌氏令牌，让开。",
+        "response": "他只瞥了一眼便冷笑：‘令牌可以过偏门，却过不了我的刀。’",
+        "requires": { "items": { "wu_house_token": 1 } }
+      },
+      {
+        "id": "ask_orders",
+        "text": "你们奉谁的命令封路？",
+        "response": "‘不该问的别问。少龙若在这里，今日便休想走脱。’"
+      }
+    ]
+  },
+  "xunqin_lian_jin_crossing": {
+    "id": "xunqin_lian_jin_crossing",
+    "npcId": "lian_jin_shadow",
+    "title": "漳水边的连晋",
+    "opening": "连晋横剑望来：‘乌家把希望押在你身上，实在叫人失望。把令牌和残简留下，我让你自行回头。’",
+    "options": [
+      {
+        "id": "ask_rivalry",
+        "text": "你为何处处与乌家为敌？",
+        "response": "‘我只与配做对手的人争。乌家、赵府、邯郸名士，最后都只会记住胜者的名字。’"
+      },
+      {
+        "id": "refuse_lian_jin",
+        "text": "我不会交出令牌。",
+        "response": "连晋缓缓拔剑：‘很好。死人最能守住秘密。’"
+      }
+    ]
+  },
   "qingyi_intro": {
     "id": "qingyi_intro",
     "npcId": "qingyi_spy",

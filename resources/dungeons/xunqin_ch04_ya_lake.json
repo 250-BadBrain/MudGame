@@ -101,12 +101,24 @@
       "name": "九曲桥",
       "description": "宴灯突然熄灭，桥下跃出蒙面人，口中却故意喊着乌家暗号。若让他们留下尸首与伪证，这场刺杀便会被算在乌家头上。",
       "exits": { "west": "waterside_hall_05", "east": "lake_barge_07" },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": ["ya_lake_assassin"],
+          "message": "伏击者截住九曲桥，刀光将通往画舫的路完全封死。"
+        }
+      },
       "npcs": ["ya_lake_assassin", "ya_lake_assassin"]
     },
     "lake_barge_07": {
       "name": "湖心画舫",
       "description": "画舫缆绳已被割断，一名伏击者守在舱门，船尾暗梯通向芦苇深处。名册上的改痕与船中伪造的乌家信物出自同一手笔。",
       "exits": { "west": "lotus_bridge_06", "north": "rear_wharf_08" },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["ya_lake_assassin"],
+          "message": "守在舱门前的伏击者挡住暗梯，不容你靠近后坞。"
+        }
+      },
       "npcs": ["ya_lake_assassin"]
     },
     "rear_wharf_08": {

@@ -245,15 +245,7 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 		attacker.TargetID = ""
 		attacker.CombatType = ""
 		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: attacker.CharacterName + "大叫一声，倒在地上，死了！"})
-		oldRoomID := roomID
-		settlement := r.forceLeaveDungeonOnDeathNoLock(players, attacker.ID)
-		updatedRoom[oldRoomID] = true
-		if attacker.RoomID != "" {
-			updatedRoom[attacker.RoomID] = true
-		}
-		if settlement != nil {
-			result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: attacker.ID, Message: formatDungeonSettlementMessage(*settlement)})
-		}
+		updatedRoom[roomID] = true
 	}
 }
 

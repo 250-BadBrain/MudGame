@@ -99,6 +99,12 @@
         "west": "bronze_01",
         "east": "zhao_road_03"
       },
+      "exitRequirements": {
+        "east": {
+          "requiredItemId": "bronze_fragment",
+          "message": "铜匣机关尚未解开，那道幽暗铜光仍将去路封住。"
+        }
+      },
       "actions": ["search"],
       "npcs": []
     },
@@ -118,6 +124,12 @@
         "west": "zhao_road_03",
         "east": "zhao_road_05"
       },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": ["zhao_bully"],
+          "message": "恶霸横身堵住村口，不肯让你继续前行。"
+        }
+      },
       "npcs": ["tingfang_shadow", "zhao_bully"]
     },
     "zhao_road_05": {
@@ -126,6 +138,12 @@
       "exits": {
         "west": "village_04",
         "east": "bamboo_06"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": ["zhao_rider"],
+          "message": "赵国游骑封住驿道，交错的马刀挡住了去路。"
+        }
       },
       "npcs": ["zhao_rider", "zhao_rider"]
     },
@@ -145,6 +163,12 @@
         "west": "bamboo_06",
         "east": "camp_08"
       },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": ["zhao_rider", "zhao_retainer"],
+          "message": "追兵守住残帐后的出口，绝不会放你过去。"
+        }
+      },
       "npcs": ["zhao_rider", "zhao_retainer"]
     },
     "camp_08": {
@@ -153,6 +177,12 @@
       "exits": {
         "west": "camp_07",
         "east": "pass_09"
+      },
+      "exitRequirements": {
+        "east": {
+          "requiredItemId": "zongheng_fragment",
+          "message": "残简上的暗记尚未辨明，前路仍藏在纷乱的竹简之后。"
+        }
       },
       "actions": ["inspect_fragment"],
       "npcs": []
@@ -163,6 +193,12 @@
       "exits": {
         "west": "camp_08",
         "east": "gate_09"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": ["retainer_swordsman"],
+          "message": "门客剑士守在断桥尽头，冷冷封住了归路。"
+        }
       },
       "npcs": ["retainer_swordsman"]
     },
