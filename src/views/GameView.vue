@@ -505,12 +505,13 @@ const buildDungeonLeavePrompt = () => {
 
 const syncPendingDungeonLeavePrompt = () => {
     if (!pendingDungeonLeave.value) return;
+    const currentToken = pendingDungeonLeave.value.token;
     const next = buildDungeonLeavePrompt();
     if (!next) {
         pendingDungeonLeave.value = null;
         return;
     }
-    pendingDungeonLeave.value = next;
+    pendingDungeonLeave.value = { ...next, token: currentToken };
 }
 
 const syncDungeonSelectionFromRoom = () => {
@@ -1430,7 +1431,6 @@ const enterDungeon = () => {
 
 const leaveCurrentDungeon = () => {
     if (!checkCanAct('leave_dungeon')) return;
-    if (pendingDungeonLeave.value) return;
     const prompt = buildDungeonLeavePrompt();
     if (!prompt) {
         pendingDungeonLeave.value = null;
