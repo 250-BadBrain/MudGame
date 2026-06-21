@@ -149,6 +149,7 @@ func (r *RuntimeManager) buildRoomPayload(roomID string, players map[string]*mod
 		"safeZone":      room.SafeZone,
 		"function":      room.Function,
 		"actions":       room.Actions,
+		"actionLabels":  room.ActionLabels,
 		"playersInRoom": playersInRoom,
 		"npcs":          npcs,
 		"items":         []interface{}{},

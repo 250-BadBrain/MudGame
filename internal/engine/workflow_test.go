@@ -1510,4 +1510,168 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	if attrs["experience"].(int) < chapterThreeExperience+820 || attrs["potential"].(int) < chapterThreePotential+500 {
 		t.Fatalf("expected chapter four settlement rewards, before exp=%d pot=%d after=%+v", chapterThreeExperience, chapterThreePotential, attrs)
 	}
+
+	dungeons = GetDungeonsView(h.repo, h.playerID)
+	foundChapterFive := false
+	for _, dungeon := range dungeons {
+		if dungeon["id"] == "xunqin_ch05_lianjin_sword" {
+			foundChapterFive = true
+		}
+	}
+	if !foundChapterFive {
+		t.Fatalf("expected chapter five after chapter four settlement, got %+v", dungeons)
+	}
+	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch05_lianjin_sword"); err != nil {
+		t.Fatalf("enter chapter five failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to old sword hall failed: %v", err)
+	}
+	chapterFiveAction, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_sword_rack")
+	if err != nil || !strings.Contains(chapterFiveAction.Message, "护手右侧") {
+		t.Fatalf("inspect sword rack failed: result=%+v err=%v", chapterFiveAction, err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to practice yard failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "trace_practice_steps"); err != nil {
+		t.Fatalf("trace practice steps failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to west gallery failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "compare_blade_mark"); err != nil {
+		t.Fatalf("compare blade mark failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to bamboo court failed: %v", err)
+	}
+	wrongJudge, err := DoRoomActionWithEffects(h.repo, h.playerID, "judge_speed")
+	if err != nil || !strings.Contains(wrongJudge.Message, "退势") {
+		t.Fatalf("expected useful wrong sword-path feedback, result=%+v err=%v", wrongJudge, err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err == nil {
+		t.Fatalf("expected unsolved sword path to block challenge pavilion")
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "judge_feint"); err != nil {
+		t.Fatalf("solve sword path failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to challenge pavilion failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to duel ground failed: %v", err)
+	}
+	lianJinID := roomNPCIDByName(t, h.repo, h.playerID, "连晋")
+	duelStart, err := KillWithEffects(h.repo, h.playerID, lianJinID)
+	if err != nil || !strings.Contains(duelStart.Message, "看破对方招路") {
+		t.Fatalf("expected solved sword puzzle to weaken lian jin, result=%+v err=%v", duelStart, err)
+	}
+	duelFinished := false
+	for i := 0; i < 80; i++ {
+		if _, err := ProcessCombatTickWithEffects(h.repo); err != nil {
+			t.Fatalf("process lian jin duel tick failed: %v", err)
+		}
+		status, err := GetPlayerStatusView(h.repo, h.playerID)
+		if err != nil {
+			t.Fatalf("get status during lian jin duel failed: %v", err)
+		}
+		if status["state"] == "IDLE" {
+			duelFinished = true
+			recoverPlayerBetweenFights(t, h.repo, h.playerID)
+			break
+		}
+	}
+	if !duelFinished {
+		t.Fatalf("expected lian jin duel to finish")
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to witness stand failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "claim_duel_token"); err != nil {
+		t.Fatalf("claim duel token failed: %v", err)
+	}
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "east")
+	if err != nil {
+		t.Fatalf("move to sword hall rear lane failed: %v", err)
+	}
+	dungeonPayload, _ = moveRes.Room["dungeon"].(map[string]interface{})
+	if dungeonPayload["progress"] != 100 {
+		t.Fatalf("expected chapter five progress 100, got %+v", dungeonPayload)
+	}
+	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
+		t.Fatalf("leave chapter five failed: %v", err)
+	}
+
+	dungeons = GetDungeonsView(h.repo, h.playerID)
+	foundChapterSix := false
+	for _, dungeon := range dungeons {
+		if dungeon["id"] == "xunqin_ch06_hostage_undercurrent" {
+			foundChapterSix = true
+		}
+	}
+	if !foundChapterSix {
+		t.Fatalf("expected chapter six after chapter five settlement, got %+v", dungeons)
+	}
+	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch06_hostage_undercurrent"); err != nil {
+		t.Fatalf("enter chapter six failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to outer registry failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_broken_seal"); err != nil {
+		t.Fatalf("inspect broken seal failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to servant court failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "compare_servant_accounts"); err != nil {
+		t.Fatalf("compare servant accounts failed: %v", err)
+	}
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "east")
+	if err != nil {
+		t.Fatalf("move to kitchen crossing failed: %v", err)
+	}
+	labels, _ := moveRes.Room["actionLabels"].(map[string]string)
+	if labels["route_kitchen_cart"] != "判断：西厨换车" {
+		t.Fatalf("expected data-driven puzzle action label, got %+v", moveRes.Room["actionLabels"])
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "route_night_wall"); err != nil {
+		t.Fatalf("wrong route choice should provide feedback without failing command: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "route_kitchen_cart"); err != nil {
+		t.Fatalf("solve dispatch route failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "hide_behind_storage_jars"); err != nil {
+		t.Fatalf("use stealth cover failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to copy room failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "forge_service_pass"); err != nil {
+		t.Fatalf("forge service pass failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("use forged pass to enter inner court failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to inner archive failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "take_swapped_dispatch"); err != nil {
+		t.Fatalf("take swapped dispatch failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "down"); err != nil {
+		t.Fatalf("move to hidden cellar failed: %v", err)
+	}
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "south")
+	if err != nil {
+		t.Fatalf("move to old drain exit failed: %v", err)
+	}
+	dungeonPayload, _ = moveRes.Room["dungeon"].(map[string]interface{})
+	if dungeonPayload["progress"] != 100 {
+		t.Fatalf("expected chapter six progress 100 through forged-pass branch, got %+v", dungeonPayload)
+	}
+	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
+		t.Fatalf("leave chapter six failed: %v", err)
+	}
 }

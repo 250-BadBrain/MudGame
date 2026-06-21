@@ -140,22 +140,24 @@ type SkillDef struct {
 }
 
 type NPC struct {
-	ID            string
-	Name          string
-	Title         string
-	Description   string
-	Faction       string
-	Role          string
-	Importance    string
-	DialogueID    string
-	QuestIDs      []string
-	InstanceOnly  bool
-	SpawnRule     string
-	Aggressive    bool
-	IsShop        bool
-	ShopInventory map[string]int
-	Skills        map[string]int
-	Attributes    Attributes
+	ID                string
+	Name              string
+	Title             string
+	Description       string
+	Faction           string
+	Role              string
+	Importance        string
+	DialogueID        string
+	QuestIDs          []string
+	InstanceOnly      bool
+	SpawnRule         string
+	Aggressive        bool
+	IsShop            bool
+	ShopInventory     map[string]int
+	Skills            map[string]int
+	Attributes        Attributes
+	WeaknessFlag      string
+	WeaknessModifiers map[string]int
 }
 
 type DialogueDef struct {
@@ -231,11 +233,13 @@ type Exit struct {
 }
 
 type ExitRequirement struct {
-	DefeatNPCs     []string
-	RequiredItemID string
-	RequiredAmount int
-	ConsumeItem    bool
-	Message        string
+	DefeatNPCs           []string
+	RequiredItemID       string
+	RequiredAmount       int
+	ConsumeItem          bool
+	RequiredPuzzleStates map[string]string
+	MaxAlert             int
+	Message              string
 }
 
 type Room struct {
@@ -247,8 +251,11 @@ type Room struct {
 	Area             string
 	Tags             []string
 	SafeZone         bool
+	StealthSafe      bool
+	Noise            int
 	Function         string
 	Actions          []string
+	ActionLabels     map[string]string
 	Exits            map[string]Exit
 	ExitRequirements map[string]ExitRequirement
 	NPCIDs           []string

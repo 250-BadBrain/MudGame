@@ -253,6 +253,116 @@
       }
     ]
   },
+  "xunqin_tao_fang_sword": {
+    "id": "xunqin_tao_fang_sword",
+    "npcId": "tao_fang_sword_shadow",
+    "title": "剑馆外的陶方",
+    "opening": "陶方压低声音：‘连晋挑的不是一场普通比剑。他要当着邯郸人的面证明，乌家看中的人不过如此。先别急着进校场，馆里留下的痕迹比战帖诚实。’",
+    "options": [
+      { "id": "ask_sword_clues", "text": "剑馆里该看什么？", "response": "‘先看坏掉的剑，再看练剑人的脚。最后去西廊找被新漆盖住的东西。三处若能互相对上，你才算真正看见他的杀招。’" },
+      { "id": "ask_hidden_purpose", "text": "这场挑战还有什么目的？", "response": "‘赵穆想看你值不值得继续拉拢，连晋想借你立名。至于质子府，恐怕也有人在等胜负结果。’" }
+    ]
+  },
+  "xunqin_sword_disciple": {
+    "id": "xunqin_sword_disciple",
+    "npcId": "sword_hall_disciple",
+    "title": "抱剑的守堂弟子",
+    "opening": "弟子抱紧木剑：‘师兄说，今日谁也不许乱碰剑架。’",
+    "options": [
+      { "id": "ask_broken_swords", "text": "这些剑为何都坏在同一处？", "response": "他看了一眼右侧护手，急忙移开目光：‘每次与连师兄喂招，我们总会不由自主去封左路。等回过神，剑已经磕在那里了。’" },
+      { "id": "ask_practice", "text": "连晋平日在哪里练剑？", "response": "‘东面的白沙校场。沙每天都有人扫，可退步太重，怎么也扫不干净。’" }
+    ]
+  },
+  "xunqin_old_sword_keeper": {
+    "id": "xunqin_old_sword_keeper",
+    "npcId": "old_sword_keeper",
+    "title": "补漆的守剑老人",
+    "opening": "老人没有停下刷漆：‘新漆遮得住剑痕，遮不住出剑的人心。’",
+    "options": [
+      { "id": "ask_low_mark", "text": "最低那道剑痕为何先浅后深？", "response": "‘进剑只是请人入局，回剑才要命。追得越急，那一下便越深。’" },
+      { "id": "ask_lianjin", "text": "你似乎并不看好连晋。", "response": "‘我只看剑。剑若总靠旁人追进来才显威风，遇上一个肯停步的人，也就没那么神了。’" }
+    ]
+  },
+  "xunqin_lian_jin_challenge": {
+    "id": "xunqin_lian_jin_challenge",
+    "npcId": "lian_jin_challenger",
+    "title": "战帖亭中的连晋",
+    "opening": "连晋淡淡一笑：‘你在馆里绕了这么久，可曾看懂一剑？’",
+    "options": [
+      { "id": "answer_feint", "text": "你以虚招逼人封左，再退步诱追。", "response": "连晋眼中笑意稍敛：‘看懂痕迹不等于接得住剑。校场上见。’", "requires": { "flag": "xunqin_ch05_solved_sword_path" } },
+      { "id": "ask_token", "text": "谁替这场比剑作证？", "response": "‘胜负之后，见证席的木匣自会给你答案。前提是你还能走到那里。’" }
+    ]
+  },
+  "xunqin_lian_jin_duel": {
+    "id": "xunqin_lian_jin_duel",
+    "npcId": "lian_jin_duelist",
+    "title": "白线另一侧的连晋",
+    "opening": "连晋剑尖点地：‘我不会偷袭。等你说完最后一句，再拔剑。’",
+    "options": [
+      { "id": "name_counter", "text": "你的退势骗不到我。", "response": "‘那便看看你停得住脚，是否也挡得住回剑。’", "requires": { "flag": "xunqin_ch05_solved_sword_path" } },
+      { "id": "ask_grudge", "text": "你为何执意要这一战？", "response": "‘邯郸只需要记住一柄剑。你挡在我的名字前面，自然该被斩开。’" }
+    ]
+  },
+  "xunqin_tao_fang_hostage": {
+    "id": "xunqin_tao_fang_hostage",
+    "npcId": "tao_fang_hostage_shadow",
+    "title": "墙外的陶方",
+    "opening": "陶方摊开三张抄录：‘账上说午时领走灰马，门卒说午前没有车出去，西厨却少了一卷新封泥。三个人未必都在撒谎。’",
+    "options": [
+      { "id": "ask_investigation_order", "text": "应该先从哪里查起？", "response": "‘先查调令本身，再问仆役。物证不会改口，人的话却要放在时辰里看。’" },
+      { "id": "ask_entry_choices", "text": "查出路线后如何进入内院？", "response": "‘西厨抄房能做腰牌；若不愿冒充杂役，守卫值房也直通内院。后者自然要靠刀说话。’" }
+    ]
+  },
+  "xunqin_outer_clerk": {
+    "id": "xunqin_outer_clerk",
+    "npcId": "hostage_clerk_shadow",
+    "title": "火盆旁的外账吏",
+    "opening": "小吏低声道：‘我只奉命烧旧账，调令怎么夹进来的，我不知道。’",
+    "options": [
+      { "id": "ask_seal", "text": "封泥为何有两层？", "response": "‘上层是后来补的。下面那点火纹……像西厨给车罐封口用的小印。’" },
+      { "id": "ask_missing_clerk", "text": "原本经手调令的人呢？", "response": "‘昨夜便不见了。有人说他逃了，可他的鞋还在值房。’" }
+    ]
+  },
+  "xunqin_kitchen_servant": {
+    "id": "xunqin_kitchen_servant",
+    "npcId": "hostage_servant_shadow",
+    "title": "不肯抬头的西厨仆役",
+    "opening": "仆役反复搓着袖口：‘午前真没有车走正门，这话我敢赌命。’",
+    "options": [
+      { "id": "ask_gray_horse", "text": "那匹灰马去了哪里？", "response": "‘午时有人说泔水车坏了，牵灰马去替了一趟。车从西厨侧门走，不归正门卒管。’" },
+      { "id": "ask_cart_weight", "text": "那辆车为何留下重辙？", "response": "‘空泔水桶不该那么重。回来时车轻了，赶车的人却不是平日那个。’" }
+    ]
+  },
+  "xunqin_archive_guard": {
+    "id": "xunqin_archive_guard",
+    "npcId": "zhao_archive_guard",
+    "title": "值房守卫",
+    "opening": "守卫伸出手：‘腰牌、口令、轮值姓名。少一样，就从原路滚回去。’",
+    "options": [
+      { "id": "ask_order", "text": "你守的是门，还是那份调令？", "response": "他目光一沉：‘看来你知道得太多。现在更不能让你过去。’" },
+      { "id": "show_broken_jade", "text": "认得这枚断纹剑珏吗？", "response": "‘连晋竟把这东西输了？那你今晚更该死在门外。’", "requires": { "items": { "broken_sword_jade": 1 } } }
+    ]
+  },
+  "xunqin_missing_clerk": {
+    "id": "xunqin_missing_clerk",
+    "npcId": "missing_hostage_clerk",
+    "title": "被囚的经手账吏",
+    "opening": "账吏咳了很久才开口：‘他们换走调令，还要我承认是自己私通乌家。’",
+    "options": [
+      { "id": "ask_true_seal", "text": "真正密令来自哪里？", "response": "‘封底是秦地旧印。送令的人没有报姓名，只说邯郸很快会乱，所有知情人都要在今夜消失。’" },
+      { "id": "ask_escape", "text": "哪里还能离开质子府？", "response": "‘南边旧酒窖连着废水门。可梆子一响，追兵也会往那里去。’" }
+    ]
+  },
+  "xunqin_patrol_guard": {
+    "id": "xunqin_patrol_guard",
+    "npcId": "hostage_patrol_guard",
+    "title": "提灯巡院的卫士",
+    "opening": "巡院卫士将灯抬高：‘站住。西厨今夜没有新来的当值人。’",
+    "options": [
+      { "id": "ask_patrol_route", "text": "你每次都要查这几处门吗？", "response": "‘仆役院、西厨、值房，缺一处都要挨罚。少套我的话。’" },
+      { "id": "misdirect_patrol", "text": "外账廊的火盆似乎翻了。", "response": "他迟疑片刻，却没有立刻离岗：‘我走完这一圈自会去看。’" }
+    ]
+  },
   "qingyi_intro": {
     "id": "qingyi_intro",
     "npcId": "qingyi_spy",

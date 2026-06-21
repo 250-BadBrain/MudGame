@@ -38,11 +38,13 @@ func (r *RuntimeManager) GetDungeons(playerID string) []map[string]interface{} {
 		objectives := make([]map[string]interface{}, 0, len(tpl.Objectives))
 		for _, obj := range tpl.Objectives {
 			objectives = append(objectives, map[string]interface{}{
-				"id":          obj.ID,
-				"type":        obj.Type,
-				"targetId":    obj.TargetID,
-				"required":    obj.Required,
-				"description": obj.Description,
+				"id":             obj.ID,
+				"type":           obj.Type,
+				"targetId":       obj.TargetID,
+				"required":       obj.Required,
+				"description":    obj.Description,
+				"optional":       obj.Optional,
+				"exclusiveGroup": obj.ExclusiveGroup,
 			})
 		}
 		out = append(out, map[string]interface{}{
@@ -187,10 +189,12 @@ func (r *RuntimeManager) dungeonPayloadByRoomIDNoLock(roomID string) (map[string
 		return nil, false
 	}
 	return map[string]interface{}{
-		"id":       inst.DungeonID,
-		"name":     inst.Name,
-		"progress": inst.Progress,
-		"sequence": inst.Sequence,
+		"id":           inst.DungeonID,
+		"name":         inst.Name,
+		"progress":     inst.Progress,
+		"sequence":     inst.Sequence,
+		"puzzleStates": inst.PuzzleStates,
+		"alertLevel":   inst.AlertLevel,
 	}, true
 }
 

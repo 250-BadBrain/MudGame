@@ -204,12 +204,26 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 				Name             string            `json:"name"`
 				Exits            map[string]string `json:"exits"`
 				NPCs             []string          `json:"npcs"`
+				Actions          []string          `json:"actions"`
 				ExitRequirements map[string]struct {
-					DefeatNPCs     []string `json:"defeatNpcs"`
-					RequiredItemID string   `json:"requiredItemId"`
-					RequiredAmount int      `json:"requiredAmount"`
+					DefeatNPCs           []string          `json:"defeatNpcs"`
+					RequiredItemID       string            `json:"requiredItemId"`
+					RequiredAmount       int               `json:"requiredAmount"`
+					RequiredPuzzleStates map[string]string `json:"requiredPuzzleStates"`
 				} `json:"exitRequirements"`
 			} `json:"rooms"`
+			PuzzleInitialStates map[string]string `json:"puzzleInitialStates"`
+			PuzzleActions       map[string]struct {
+				PuzzleID      string         `json:"puzzleId"`
+				Rooms         []string       `json:"rooms"`
+				RequiredItems map[string]int `json:"requiredItems"`
+				GiveItems     map[string]int `json:"giveItems"`
+				TakeItems     map[string]int `json:"takeItems"`
+			} `json:"puzzleActions"`
+			Patrols []struct {
+				NPCID string   `json:"npcId"`
+				Route []string `json:"route"`
+			} `json:"patrols"`
 			ProgressOnKill map[string]int `json:"progressOnKill"`
 			Objectives     []struct {
 				ID       string `json:"id"`
@@ -280,6 +294,50 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 						t.Fatalf("dungeon %s room %s exit %s requires missing item %s", dungeon.ID, roomID, direction, requirement.RequiredItemID)
 					}
 				}
+				for puzzleID := range requirement.RequiredPuzzleStates {
+					if _, ok := dungeon.PuzzleInitialStates[puzzleID]; !ok {
+						t.Fatalf("dungeon %s room %s exit %s requires missing puzzle %s", dungeon.ID, roomID, direction, puzzleID)
+					}
+				}
+			}
+			for _, actionID := range room.Actions {
+				if _, ok := dungeon.PuzzleActions[actionID]; ok {
+					continue
+				}
+				known := map[string]bool{"gather": true, "work": true, "listen_rumor": true, "search": true, "inspect_fragment": true, "inspect_token": true, "tame_horse": true, "inspect_guest_register": true}
+				if !known[actionID] {
+					t.Fatalf("dungeon %s room %s references missing action %s", dungeon.ID, roomID, actionID)
+				}
+			}
+		}
+		for actionID, action := range dungeon.PuzzleActions {
+			if _, ok := dungeon.PuzzleInitialStates[action.PuzzleID]; !ok {
+				t.Fatalf("dungeon %s action %s references missing puzzle %s", dungeon.ID, actionID, action.PuzzleID)
+			}
+			for _, roomID := range action.Rooms {
+				if _, ok := dungeon.Rooms[roomID]; !ok {
+					t.Fatalf("dungeon %s action %s references missing room %s", dungeon.ID, actionID, roomID)
+				}
+			}
+			for _, items := range []map[string]int{action.RequiredItems, action.GiveItems, action.TakeItems} {
+				for itemID, amount := range items {
+					if amount <= 0 {
+						t.Fatalf("dungeon %s action %s uses non-positive amount of %s", dungeon.ID, actionID, itemID)
+					}
+					if _, ok := data.Items[itemID]; !ok {
+						t.Fatalf("dungeon %s action %s references missing item %s", dungeon.ID, actionID, itemID)
+					}
+				}
+			}
+		}
+		for _, patrol := range dungeon.Patrols {
+			if !dungeonNPCs[patrol.NPCID] {
+				t.Fatalf("dungeon %s patrol references npc %s not present in dungeon", dungeon.ID, patrol.NPCID)
+			}
+			for _, roomID := range patrol.Route {
+				if _, ok := dungeon.Rooms[roomID]; !ok {
+					t.Fatalf("dungeon %s patrol %s references missing room %s", dungeon.ID, patrol.NPCID, roomID)
+				}
 			}
 		}
 		for npcID, progress := range dungeon.ProgressOnKill {
@@ -309,6 +367,14 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			case "collect":
 				if _, ok := data.Items[obj.TargetID]; !ok {
 					t.Fatalf("dungeon %s objective %s references missing item %s", dungeon.ID, obj.ID, obj.TargetID)
+				}
+			case "puzzle":
+				parts := strings.SplitN(obj.TargetID, ":", 2)
+				if len(parts) != 2 || parts[1] == "" {
+					t.Fatalf("dungeon %s objective %s has invalid puzzle target %s", dungeon.ID, obj.ID, obj.TargetID)
+				}
+				if _, ok := dungeon.PuzzleInitialStates[parts[0]]; !ok {
+					t.Fatalf("dungeon %s objective %s references missing puzzle %s", dungeon.ID, obj.ID, parts[0])
 				}
 			default:
 				t.Fatalf("dungeon %s objective %s has unsupported type %s", dungeon.ID, obj.ID, obj.Type)

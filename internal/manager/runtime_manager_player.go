@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	engruntime "mudgame/server/internal/engine/runtime"
 	"mudgame/server/internal/exception"
 	"mudgame/server/internal/model"
 )
@@ -245,6 +246,10 @@ func (r *RuntimeManager) Move(playerID, direction string) (map[string]interface{
 	}
 	p.RoomID = ex.TargetRoomID
 	r.applyEnterRoomDungeonObjectiveNoLock(p.RoomID)
+	if r.dungeonMgr != nil {
+		r.dungeonMgr.UpdateCheckpointNoLock(p.RoomID)
+		r.dungeonMgr.AdvanceStealthNoLock(p.RoomID)
+	}
 	if err := r.savePlayers(players); err != nil {
 		return nil, err
 	}
@@ -275,6 +280,24 @@ func (r *RuntimeManager) checkExitRequirementNoLock(p *model.Player, room model.
 					return errors.New(requirement.Message)
 				}
 				return errors.New(staticNPC.Name + "拦住了你。")
+			}
+		}
+	}
+	if r.dungeonMgr != nil {
+		if inst, exists := r.dungeonMgr.PlayerInstanceNoLock(p.ID); exists {
+			for puzzleID, expectedState := range requirement.RequiredPuzzleStates {
+				if inst.PuzzleStates[puzzleID] != expectedState {
+					if requirement.Message != "" {
+						return errors.New(requirement.Message)
+					}
+					return errors.New("眼前的机关尚未解开。")
+				}
+			}
+			if requirement.MaxAlert > 0 && inst.AlertLevel > requirement.MaxAlert {
+				if requirement.Message != "" {
+					return errors.New(requirement.Message)
+				}
+				return errors.New("附近戒备森严，此刻无法通过。")
 			}
 		}
 	}
@@ -836,12 +859,109 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 		}
 		result["message"] = message
 	default:
-		return nil, errors.New("action_not_supported")
+		puzzleResult, handled := r.executePuzzleActionNoLock(p, room, action)
+		if !handled {
+			return nil, errors.New("action_not_supported")
+		}
+		for key, value := range puzzleResult {
+			result[key] = value
+		}
 	}
 	if err := r.savePlayers(players); err != nil {
 		return nil, err
 	}
 	return result, nil
+}
+
+func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.Room, actionID string) (map[string]interface{}, bool) {
+	if r.dungeonMgr == nil || p == nil {
+		return nil, false
+	}
+	inst, action, ok := r.dungeonMgr.PuzzleActionNoLock(p.ID, room.ID, actionID)
+	if !ok {
+		return nil, false
+	}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
+	}
+	currentState := inst.PuzzleStates[action.PuzzleID]
+	if currentState == action.NextState && action.RepeatMessage != "" {
+		return map[string]interface{}{
+			"message":     action.RepeatMessage,
+			"puzzleId":    action.PuzzleID,
+			"puzzleState": currentState,
+			"alertLevel":  inst.AlertLevel,
+		}, true
+	}
+	allowedState := len(action.FromStates) == 0
+	for _, state := range action.FromStates {
+		if currentState == state {
+			allowedState = true
+			break
+		}
+	}
+	itemsReady := true
+	for itemID, amount := range action.RequiredItems {
+		if amount > 0 && p.Backpack[itemID] < amount {
+			itemsReady = false
+			break
+		}
+	}
+	if !allowedState || !itemsReady {
+		inst.PuzzleAttempts[action.PuzzleID]++
+		message := action.FailureMessage
+		if message == "" {
+			message = "你试了一番，机关却没有如愿变化。"
+		}
+		return map[string]interface{}{
+			"message":        message,
+			"puzzleId":       action.PuzzleID,
+			"puzzleState":    currentState,
+			"puzzleAttempts": inst.PuzzleAttempts[action.PuzzleID],
+			"alertLevel":     inst.AlertLevel,
+		}, true
+	}
+	for itemID, amount := range action.TakeItems {
+		if amount <= 0 {
+			continue
+		}
+		p.Backpack[itemID] -= amount
+		if p.Backpack[itemID] <= 0 {
+			delete(p.Backpack, itemID)
+		}
+	}
+	for itemID, amount := range action.GiveItems {
+		if amount <= 0 {
+			continue
+		}
+		p.Backpack[itemID] += amount
+		r.applyCollectDungeonObjectiveNoLock(p.ID, itemID)
+	}
+	for flag, value := range action.SetFlags {
+		p.Flags[flag] = value
+	}
+	if action.NextState != "" {
+		inst.PuzzleStates[action.PuzzleID] = action.NextState
+		currentState = action.NextState
+		r.dungeonMgr.ApplyPuzzleObjectiveNoLock(inst, action.PuzzleID, currentState)
+	}
+	inst.AlertLevel += action.AlertDelta
+	if inst.AlertLevel < 0 {
+		inst.AlertLevel = 0
+	}
+	message := action.Message
+	if message == "" {
+		message = "你完成了眼前的操作。"
+	}
+	return map[string]interface{}{
+		"message":     message,
+		"puzzleId":    action.PuzzleID,
+		"puzzleState": currentState,
+		"alertLevel":  inst.AlertLevel,
+	}, true
 }
 
 func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (string, error) {
@@ -1212,13 +1332,23 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		if dnpc.RoomID != p.RoomID {
 			return "", errors.New("target_not_in_room")
 		}
+		counterMessage := ""
+		if !dnpc.WeaknessApplied && dnpc.WeaknessFlag != "" && p.Flags[dnpc.WeaknessFlag] {
+			applyNPCWeaknessNoLock(dnpc)
+			dnpc.WeaknessApplied = true
+			counterMessage = "你已看破对方招路，抢先封住了他的杀招。"
+		}
 		p.State = "COMBAT"
 		p.TargetID = dnpc.ID
 		p.CombatType = "KILL"
 		if err := r.savePlayers(players); err != nil {
 			return "", err
 		}
-		return p.CharacterName + "对" + dnpc.Name + "喝道：纳命来！", nil
+		message := p.CharacterName + "对" + dnpc.Name + "喝道：纳命来！"
+		if counterMessage != "" {
+			message += counterMessage
+		}
+		return message, nil
 	}
 	if _, isNPC := fileNpcs[targetID]; isNPC {
 		room, ok := r.roomByIDNoLock(p.RoomID, fileRooms)
@@ -1262,6 +1392,28 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 	return p.CharacterName + "对" + t.CharacterName + "喝道：纳命来！", nil
 }
 
+func applyNPCWeaknessNoLock(npc *engruntime.NPCState) {
+	if npc == nil {
+		return
+	}
+	for attribute, amount := range npc.WeaknessModifiers {
+		switch attribute {
+		case "attack":
+			npc.Attributes.Derived.Attack = max(0, npc.Attributes.Derived.Attack+amount)
+		case "defense":
+			npc.Attributes.Derived.Defense = max(0, npc.Attributes.Derived.Defense+amount)
+		case "hitRate":
+			npc.Attributes.Derived.HitRate = max(0, npc.Attributes.Derived.HitRate+amount)
+		case "dodge":
+			npc.Attributes.Derived.Dodge = max(0, npc.Attributes.Derived.Dodge+amount)
+		case "parry":
+			npc.Attributes.Derived.Parry = max(0, npc.Attributes.Derived.Parry+amount)
+		case "initiative":
+			npc.Attributes.Derived.Initiative = max(0, npc.Attributes.Derived.Initiative+amount)
+		}
+	}
+}
+
 func (r *RuntimeManager) Relive(playerID string) (string, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
@@ -1282,7 +1434,15 @@ func (r *RuntimeManager) Relive(playerID string) (string, error) {
 	p.CombatType = ""
 	p.Attributes.Resources.HP = effectiveAttributesForPlayerNoLock(p).MaxHP
 	p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
-	p.RoomID = "ly_00"
+	if r.dungeonMgr != nil {
+		if inst, exists := r.dungeonMgr.PlayerInstanceNoLock(playerID); exists && inst.CheckpointRoomID != "" {
+			p.RoomID = inst.CheckpointRoomID
+		} else {
+			p.RoomID = "ly_00"
+		}
+	} else {
+		p.RoomID = "ly_00"
+	}
 	if err := r.savePlayers(players); err != nil {
 		return "", err
 	}

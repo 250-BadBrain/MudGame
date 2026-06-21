@@ -68,3 +68,39 @@ func TestBuildDungeonSettlementProratesRewardsAndWithholdsItems(t *testing.T) {
 		t.Fatalf("expected no item reward before full completion, got %+v", settlement.RewardItems)
 	}
 }
+
+func TestObjectiveProgressSupportsOptionalAndExclusiveBranches(t *testing.T) {
+	m := NewManager(nil, nil, nil, nil, nil, nil)
+	inst := &Instance{
+		Objectives: []Objective{
+			{ID: "clue", Required: 1},
+			{ID: "stealth_entry", Required: 1, ExclusiveGroup: "entry"},
+			{ID: "combat_entry", Required: 1, ExclusiveGroup: "entry"},
+			{ID: "bonus", Required: 1, Optional: true},
+		},
+		ObjectiveProgress: map[string]int{"clue": 1, "stealth_entry": 1},
+	}
+	m.updateObjectiveProgressNoLock(inst)
+	if inst.Progress != 100 {
+		t.Fatalf("expected one exclusive branch plus required objective to complete dungeon, got %d", inst.Progress)
+	}
+}
+
+func TestAdvanceStealthMovesPatrolAndChangesAlertByPlayerTurn(t *testing.T) {
+	inst := &Instance{
+		ID:           "instance",
+		Stealth:      StealthConfig{Enabled: true, AlertOnMove: 1, SafeRoomRecovery: 2, MaxAlert: 6},
+		Rooms:        map[string]model.Room{"a": {ID: "a", NPCIDs: []string{"guard"}}, "b": {ID: "b"}, "safe": {ID: "safe", StealthSafe: true}},
+		NPCs:         map[string]*NPCState{"guard": {ID: "guard", RoomID: "a", Alive: true}},
+		PatrolRoutes: map[string][]string{"guard": {"a", "b"}},
+	}
+	m := NewManager(nil, nil, map[string]*Instance{"instance": inst}, nil, map[string]string{"a": "instance", "b": "instance", "safe": "instance"}, nil)
+	m.AdvanceStealthNoLock("b")
+	if inst.NPCs["guard"].RoomID != "b" || inst.AlertLevel != 2 {
+		t.Fatalf("expected patrol encounter to move guard and raise alert to 2, got room=%s alert=%d", inst.NPCs["guard"].RoomID, inst.AlertLevel)
+	}
+	m.AdvanceStealthNoLock("safe")
+	if inst.AlertLevel != 0 {
+		t.Fatalf("expected safe room to recover alert, got %d", inst.AlertLevel)
+	}
+}

@@ -59,20 +59,22 @@ type rawSkill struct {
 }
 
 type rawNPC struct {
-	Name         string           `json:"name"`
-	Title        string           `json:"title"`
-	Description  string           `json:"description"`
-	Faction      string           `json:"faction"`
-	Role         string           `json:"role"`
-	Importance   string           `json:"importance"`
-	DialogueID   string           `json:"dialogueId"`
-	QuestIDs     []string         `json:"questIds"`
-	InstanceOnly bool             `json:"instanceOnly"`
-	SpawnRule    string           `json:"spawnRule"`
-	Aggressive   bool             `json:"aggressive"`
-	Attributes   model.Attributes `json:"attributes"`
-	ShopItems    []string         `json:"shopItems"`
-	Skills       map[string]int   `json:"skills"`
+	Name              string           `json:"name"`
+	Title             string           `json:"title"`
+	Description       string           `json:"description"`
+	Faction           string           `json:"faction"`
+	Role              string           `json:"role"`
+	Importance        string           `json:"importance"`
+	DialogueID        string           `json:"dialogueId"`
+	QuestIDs          []string         `json:"questIds"`
+	InstanceOnly      bool             `json:"instanceOnly"`
+	SpawnRule         string           `json:"spawnRule"`
+	Aggressive        bool             `json:"aggressive"`
+	Attributes        model.Attributes `json:"attributes"`
+	ShopItems         []string         `json:"shopItems"`
+	Skills            map[string]int   `json:"skills"`
+	WeaknessFlag      string           `json:"weaknessFlag"`
+	WeaknessModifiers map[string]int   `json:"weaknessModifiers"`
 }
 
 type rawWorldFile struct {
@@ -347,22 +349,24 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 		}
 
 		npcs[id] = model.NPC{
-			ID:            id,
-			Name:          raw.Name,
-			Title:         raw.Title,
-			Description:   raw.Description,
-			Faction:       raw.Faction,
-			Role:          raw.Role,
-			Importance:    raw.Importance,
-			DialogueID:    raw.DialogueID,
-			QuestIDs:      append([]string{}, raw.QuestIDs...),
-			InstanceOnly:  raw.InstanceOnly,
-			SpawnRule:     raw.SpawnRule,
-			Aggressive:    raw.Aggressive,
-			IsShop:        len(shopInventory) > 0,
-			ShopInventory: shopInventory,
-			Skills:        skills,
-			Attributes:    model.NormalizeAttributes(raw.Attributes),
+			ID:                id,
+			Name:              raw.Name,
+			Title:             raw.Title,
+			Description:       raw.Description,
+			Faction:           raw.Faction,
+			Role:              raw.Role,
+			Importance:        raw.Importance,
+			DialogueID:        raw.DialogueID,
+			QuestIDs:          append([]string{}, raw.QuestIDs...),
+			InstanceOnly:      raw.InstanceOnly,
+			SpawnRule:         raw.SpawnRule,
+			Aggressive:        raw.Aggressive,
+			IsShop:            len(shopInventory) > 0,
+			ShopInventory:     shopInventory,
+			Skills:            skills,
+			Attributes:        model.NormalizeAttributes(raw.Attributes),
+			WeaknessFlag:      strings.TrimSpace(raw.WeaknessFlag),
+			WeaknessModifiers: cloneIntMap(raw.WeaknessModifiers),
 		}
 	}
 	return npcs, nil
@@ -618,6 +622,7 @@ func cloneStaticData(in StaticData) StaticData {
 			npcCopy.Skills[skillID] = level
 		}
 		npcCopy.QuestIDs = append([]string{}, npc.QuestIDs...)
+		npcCopy.WeaknessModifiers = cloneIntMap(npc.WeaknessModifiers)
 		out.NPCs[id] = npcCopy
 	}
 	for id, dialogue := range in.Dialogues {
@@ -655,6 +660,17 @@ func copyFloatMap(in map[string]float64) map[string]float64 {
 	out := map[string]float64{}
 	for k, v := range in {
 		out[k] = v
+	}
+	return out
+}
+
+func cloneIntMap(in map[string]int) map[string]int {
+	if in == nil {
+		return nil
+	}
+	out := map[string]int{}
+	for key, value := range in {
+		out[key] = value
 	}
 	return out
 }

@@ -1381,5 +1381,156 @@
         "initiative": 80
       }
     }
+  },
+  "tao_fang_sword_shadow": {
+    "name": "陶方",
+    "title": "乌家管事",
+    "description": "陶方守在剑馆外，手中马鞭卷得很紧。他比任何人都清楚，这张战帖背后还有别的文章。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "dialogueId": "xunqin_tao_fang_sword",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 16,
+      "realm": "fighter",
+      "resources": { "hp": 125, "maxHp": 125, "mp": 110, "trainedMaxMp": 110, "maxMp": 110, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 14, "defense": 16, "hitRate": 80, "dodge": 74, "parry": 70, "critRate": 4, "attackSpeed": 4, "initiative": 88 }
+    }
+  },
+  "sword_hall_disciple": {
+    "name": "守堂弟子",
+    "title": "试剑馆门人",
+    "description": "年轻弟子抱着一捆损坏的木剑，明知来者为何而来，却不敢直说师门剑路。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "common",
+    "dialogueId": "xunqin_sword_disciple",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 10,
+      "realm": "fighter",
+      "resources": { "hp": 80, "maxHp": 80, "mp": 70, "trainedMaxMp": 70, "maxMp": 70, "spirit": 90, "maxSpirit": 90 },
+      "derived": { "attack": 9, "defense": 9, "hitRate": 70, "dodge": 60, "parry": 60, "critRate": 3, "attackSpeed": 4, "initiative": 75 }
+    }
+  },
+  "old_sword_keeper": {
+    "name": "守剑老人",
+    "title": "西廊旧仆",
+    "description": "老人正用新漆遮盖廊柱剑痕，手很稳，眼神却不时扫向最靠近地面的那一道。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "common",
+    "dialogueId": "xunqin_old_sword_keeper",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 8,
+      "realm": "common",
+      "resources": { "hp": 70, "maxHp": 70, "mp": 50, "trainedMaxMp": 50, "maxMp": 50, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 6, "defense": 8, "hitRate": 65, "dodge": 55, "parry": 55, "critRate": 2, "attackSpeed": 4, "initiative": 68 }
+    }
+  },
+  "lian_jin_challenger": {
+    "name": "连晋",
+    "title": "下帖之人",
+    "description": "连晋按剑立在亭中，神情从容。他更在意你是否看懂了他的剑，而不是你是否敢拔剑。",
+    "faction": "unknown_assassins",
+    "role": "story",
+    "importance": "special",
+    "dialogueId": "xunqin_lian_jin_challenge",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 22,
+      "realm": "expert",
+      "resources": { "hp": 150, "maxHp": 150, "mp": 200, "trainedMaxMp": 200, "maxMp": 200, "spirit": 120, "maxSpirit": 120 },
+      "derived": { "attack": 18, "defense": 17, "hitRate": 88, "dodge": 76, "parry": 82, "critRate": 9, "attackSpeed": 3, "initiative": 108 }
+    }
+  },
+  "lian_jin_duelist": {
+    "name": "连晋",
+    "title": "校场剑手",
+    "description": "连晋已经拔剑。他的第一招看似凌厉，脚下却悄然留出了诱人追击的半步。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "boss",
+    "dialogueId": "xunqin_lian_jin_duel",
+    "aggressive": true,
+    "weaknessFlag": "xunqin_ch05_solved_sword_path",
+    "weaknessModifiers": { "attack": -2, "defense": -3, "dodge": -12, "parry": -15, "initiative": -10 },
+    "instanceOnly": true,
+    "attributes": {
+      "level": 22,
+      "realm": "expert",
+      "resources": { "hp": 65, "maxHp": 65, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 115, "maxSpirit": 115 },
+      "derived": { "attack": 9, "defense": 10, "hitRate": 82, "dodge": 64, "parry": 68, "critRate": 8, "attackSpeed": 3, "initiative": 102 }
+    }
+  },
+  "tao_fang_hostage_shadow": {
+    "name": "陶方",
+    "title": "墙外接应",
+    "description": "陶方藏在质子府外墙阴影里，已经替你整理出三份互相矛盾的口供。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "dialogueId": "xunqin_tao_fang_hostage",
+    "instanceOnly": true,
+    "attributes": { "level": 16, "realm": "fighter", "resources": { "hp": 125, "maxHp": 125, "mp": 110, "trainedMaxMp": 110, "maxMp": 110, "spirit": 100, "maxSpirit": 100 }, "derived": { "attack": 14, "defense": 16, "hitRate": 80, "dodge": 74, "parry": 70, "critRate": 4, "attackSpeed": 4, "initiative": 88 } }
+  },
+  "hostage_clerk_shadow": {
+    "name": "外账吏",
+    "title": "焚账小吏",
+    "description": "小吏把旧账一页页投入火盆，见你看向残缺调令，手指不由得抖了一下。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "common",
+    "dialogueId": "xunqin_outer_clerk",
+    "instanceOnly": true,
+    "attributes": { "level": 7, "realm": "common", "resources": { "hp": 65, "maxHp": 65, "mp": 40, "trainedMaxMp": 40, "maxMp": 40, "spirit": 85, "maxSpirit": 85 }, "derived": { "attack": 5, "defense": 6, "hitRate": 60, "dodge": 50, "parry": 42, "critRate": 2, "attackSpeed": 4, "initiative": 62 } }
+  },
+  "hostage_servant_shadow": {
+    "name": "西厨仆役",
+    "title": "灰马照料人",
+    "description": "仆役袖口沾着车油和泔水味。他坚持午前没有车出正门，却不肯解释为何少了一匹灰马。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "common",
+    "dialogueId": "xunqin_kitchen_servant",
+    "instanceOnly": true,
+    "attributes": { "level": 8, "realm": "common", "resources": { "hp": 70, "maxHp": 70, "mp": 45, "trainedMaxMp": 45, "maxMp": 45, "spirit": 90, "maxSpirit": 90 }, "derived": { "attack": 6, "defense": 7, "hitRate": 62, "dodge": 52, "parry": 45, "critRate": 2, "attackSpeed": 4, "initiative": 65 } }
+  },
+  "zhao_archive_guard": {
+    "name": "内档守卫",
+    "title": "赵府值房甲士",
+    "description": "守卫坐在内院小门前核对口令，刀未出鞘，视线却从未离开来人的双手。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "elite",
+    "dialogueId": "xunqin_archive_guard",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": { "level": 20, "realm": "fighter", "resources": { "hp": 58, "maxHp": 58, "mp": 120, "trainedMaxMp": 120, "maxMp": 120, "spirit": 105, "maxSpirit": 105 }, "derived": { "attack": 8, "defense": 9, "hitRate": 78, "dodge": 58, "parry": 62, "critRate": 6, "attackSpeed": 4, "initiative": 90 } }
+  },
+  "missing_hostage_clerk": {
+    "name": "失踪账吏",
+    "title": "地窖囚徒",
+    "description": "账吏面色苍白，腕上还缠着断绳。他活着本身，就是有人调换密令的另一份证据。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "dialogueId": "xunqin_missing_clerk",
+    "instanceOnly": true,
+    "attributes": { "level": 6, "realm": "common", "resources": { "hp": 45, "maxHp": 45, "mp": 30, "trainedMaxMp": 30, "maxMp": 30, "spirit": 75, "maxSpirit": 75 }, "derived": { "attack": 4, "defense": 5, "hitRate": 58, "dodge": 45, "parry": 38, "critRate": 1, "attackSpeed": 4, "initiative": 55 } }
+  },
+  "hostage_patrol_guard": {
+    "name": "巡院卫士",
+    "title": "质子府巡哨",
+    "description": "卫士提灯沿西厨与值房之间往返，巡路并不随机，每次都在同几处门槛停步查看。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "dialogueId": "xunqin_patrol_guard",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": { "level": 17, "realm": "fighter", "resources": { "hp": 48, "maxHp": 48, "mp": 90, "trainedMaxMp": 90, "maxMp": 90, "spirit": 95, "maxSpirit": 95 }, "derived": { "attack": 7, "defense": 8, "hitRate": 74, "dodge": 57, "parry": 58, "critRate": 5, "attackSpeed": 4, "initiative": 84 } }
   }
 }

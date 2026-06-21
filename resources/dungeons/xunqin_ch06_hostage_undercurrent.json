@@ -1,0 +1,203 @@
+{
+  "id": "xunqin_ch06_hostage_undercurrent",
+  "name": "寻秦异闻：质子暗潮",
+  "description": "断纹剑珏牵出质子府的一份调令。文书、车马与口供彼此矛盾，真正的去向藏在有人刻意抹去的半日里。",
+  "order": 15,
+  "chainId": "xunqin_legend",
+  "chapter": 6,
+  "spawnRoomId": "hostage_gate_00",
+  "unlockConditions": [
+    { "type": "flag", "targetId": "xunqin_ch06_unlocked", "value": "true" }
+  ],
+  "stealth": { "enabled": true, "alertOnMove": 0, "safeRoomRecovery": 1, "maxAlert": 6 },
+  "patrols": [
+    { "npcId": "hostage_patrol_guard", "route": ["servant_court_02", "kitchen_crossing_03", "guard_barracks_05", "kitchen_crossing_03"] }
+  ],
+  "puzzleInitialStates": {
+    "dispatch_route": "unknown",
+    "inner_dispatch": "hidden",
+    "kitchen_cover": "unused"
+  },
+  "puzzleActions": {
+    "inspect_broken_seal": {
+      "label": "查验封泥",
+      "puzzleId": "dispatch_route",
+      "operation": "investigate",
+      "rooms": ["outer_registry_01"],
+      "fromStates": ["unknown"],
+      "nextState": "seal_checked",
+      "message": "封泥上层是质子府印，下层却残留西厨车马房的细小火纹。文书不是在正门封装，而是在别处换过一次。",
+      "repeatMessage": "双层封泥仍指向同一件事：调令曾在西厨车马房重新封装。"
+    },
+    "compare_servant_accounts": {
+      "label": "核对口供",
+      "puzzleId": "dispatch_route",
+      "operation": "combine",
+      "rooms": ["servant_court_02"],
+      "fromStates": ["seal_checked"],
+      "nextState": "accounts_compared",
+      "message": "仆役说午前没有车出正门，账吏却记着午时领走一匹灰马。唯一能避开正门、又用到灰马的，是西厨每日更换泔水车的时辰。",
+      "repeatMessage": "午时、灰马、西厨泔水车，三条口供已经指向同一条暗线。",
+      "failureMessage": "口供缺少能互相咬合的实物证据。先去外账廊看看那份调令的封泥。"
+    },
+    "route_main_gate": {
+      "label": "判断：调令走正门",
+      "puzzleId": "dispatch_route",
+      "operation": "select",
+      "rooms": ["kitchen_crossing_03"],
+      "fromStates": ["never"],
+      "failureMessage": "正门整日有人验车，与仆役所说午前无车出门相冲突。这个判断无法解释灰马的去向。"
+    },
+    "route_night_wall": {
+      "label": "判断：夜间翻墙",
+      "puzzleId": "dispatch_route",
+      "operation": "select",
+      "rooms": ["kitchen_crossing_03"],
+      "fromStates": ["never"],
+      "failureMessage": "封泥在午时前后便已重做，夜间翻墙无法解释午时领走的灰马。"
+    },
+    "route_kitchen_cart": {
+      "label": "判断：西厨换车",
+      "puzzleId": "dispatch_route",
+      "operation": "select",
+      "rooms": ["kitchen_crossing_03"],
+      "fromStates": ["accounts_compared"],
+      "nextState": "solved",
+      "message": "线索合拢：调令在西厨重新封泥，藏入午时泔水车，再由灰马拖出侧门。西厨墙后的旧甬道正是接应路线。",
+      "repeatMessage": "真正路线已经查明：西厨换封，午时换车，灰马从侧门离府。",
+      "failureMessage": "封泥与两份口供尚未核对完整，现在选择路线只会凭空猜测。",
+      "setFlags": { "xunqin_ch06_found_dispatch_route": true }
+    },
+    "hide_behind_storage_jars": {
+      "label": "藏入陶缸后",
+      "puzzleId": "kitchen_cover",
+      "operation": "hide",
+      "rooms": ["kitchen_crossing_03"],
+      "fromStates": ["unused"],
+      "nextState": "used",
+      "message": "你侧身藏入储物陶缸后的阴影，等巡逻脚步远去才重新现身，附近戒备稍稍松懈。",
+      "repeatMessage": "陶缸后的灰尘已经留下痕迹，再用同一个藏身处只会惹人注意。",
+      "alertDelta": -2
+    },
+    "forge_service_pass": {
+      "label": "誊写腰牌",
+      "puzzleId": "dispatch_route",
+      "operation": "place_item",
+      "rooms": ["copy_room_04"],
+      "fromStates": ["solved"],
+      "nextState": "pass_forged",
+      "message": "你照着西厨轮值簿誊下一枚杂役腰牌。它经不起细查，却足以骗过只认班次的内院门吏。",
+      "repeatMessage": "伪造的杂役腰牌已经在你手中。",
+      "giveItems": { "forged_service_pass": 1 },
+      "setFlags": { "xunqin_ch06_forged_pass": true }
+    },
+    "take_swapped_dispatch": {
+      "label": "取出密令",
+      "puzzleId": "inner_dispatch",
+      "operation": "collect",
+      "rooms": ["inner_archive_07"],
+      "fromStates": ["hidden"],
+      "nextState": "recovered",
+      "message": "暗格里压着被调换的真正密令，落款并非赵穆，而是一枚来自秦地的旧印。邯郸城内有人正替更远处传递消息。",
+      "repeatMessage": "真正密令已经收好，暗格中只剩被割断的封绳。",
+      "giveItems": { "swapped_hostage_dispatch": 1 },
+      "setFlags": { "xunqin_ch06_recovered_dispatch": true }
+    }
+  },
+  "objectives": [
+    { "id": "solve_dispatch_route", "type": "puzzle", "targetId": "dispatch_route:solved", "required": 1, "description": "从封泥与口供中查出调令离府路线。" },
+    { "id": "forge_entry", "type": "collect", "targetId": "forged_service_pass", "required": 1, "description": "伪造杂役腰牌进入内院。", "exclusiveGroup": "inner_entry" },
+    { "id": "force_entry", "type": "kill", "targetId": "zhao_archive_guard", "required": 1, "description": "击败值房守卫强行进入内院。", "exclusiveGroup": "inner_entry" },
+    { "id": "recover_dispatch", "type": "collect", "targetId": "swapped_hostage_dispatch", "required": 1, "description": "找回被调换的真正密令。" },
+    { "id": "hear_clerk", "type": "enter_room", "targetId": "hidden_cellar_08", "required": 1, "description": "进入藏着知情账吏的地窖。", "optional": true },
+    { "id": "leave_hostage_house", "type": "enter_room", "targetId": "drain_exit_09", "required": 1, "description": "从旧水门离开质子府。" }
+  ],
+  "rewards": {
+    "experience": 1160,
+    "potential": 720,
+    "money": 310,
+    "flags": { "xunqin_ch06_completed": true, "xunqin_ch07_unlocked": true }
+  },
+  "rooms": {
+    "hostage_gate_00": {
+      "name": "质子府外墙",
+      "description": "夜色压在高墙上，门前车辙已经被新土盖过。陶方等在背光处，提醒你这一次最危险的不是刀，而是假话。",
+      "checkpoint": true,
+      "exits": { "east": "outer_registry_01" },
+      "npcs": ["tao_fang_hostage_shadow"]
+    },
+    "outer_registry_01": {
+      "name": "外账廊",
+      "description": "廊下堆着待焚的旧账，一份残缺调令夹在其中，封泥颜色深浅不一。",
+      "exits": { "west": "hostage_gate_00", "north": "servant_court_02" },
+      "actions": ["inspect_broken_seal"],
+      "npcs": ["hostage_clerk_shadow"]
+    },
+    "servant_court_02": {
+      "name": "仆役院",
+      "description": "院里晾着尚未干透的车布。仆役与账吏对午时是否有车出府各执一词，灰马槽却空了一格。",
+      "exits": { "south": "outer_registry_01", "east": "kitchen_crossing_03" },
+      "actions": ["compare_servant_accounts"],
+      "npcs": ["hostage_servant_shadow", "hostage_patrol_guard"]
+    },
+    "kitchen_crossing_03": {
+      "name": "西厨夹道",
+      "description": "泔水车每日从这里换马。墙角留着午时拖拽重物的痕迹，三条可能路线都能从此展开。",
+      "exits": { "west": "servant_court_02", "north": "copy_room_04", "east": "guard_barracks_05" },
+      "actions": ["route_main_gate", "route_night_wall", "route_kitchen_cart", "hide_behind_storage_jars"],
+      "npcs": []
+    },
+    "copy_room_04": {
+      "name": "轮值抄房",
+      "description": "墙上挂着西厨杂役腰牌样式与轮值簿。懂得调令如何离府后，伪造一枚当值腰牌并不困难。",
+      "exits": { "south": "kitchen_crossing_03", "east": "inner_court_06" },
+      "exitRequirements": {
+        "east": { "requiredItemId": "forged_service_pass", "message": "内院门吏伸手索要当值腰牌。没有合适凭据，这条路走不通。" }
+      },
+      "actions": ["forge_service_pass"],
+      "npcs": []
+    },
+    "guard_barracks_05": {
+      "name": "守卫值房",
+      "description": "值房直通内院，赵府守卫正核对今夜轮值。他愿意开口盘问，却绝不会主动让路。",
+      "exits": { "west": "kitchen_crossing_03", "north": "inner_court_06" },
+      "exitRequirements": {
+        "north": { "defeatNpcs": ["zhao_archive_guard"], "message": "值房守卫封住内院小门：口令不对，谁也别想过去。" }
+      },
+      "npcs": ["zhao_archive_guard"]
+    },
+    "inner_court_06": {
+      "name": "内院石庭",
+      "description": "两条路线在石庭汇合。北侧档库门缝留着新蜡，地下则传来极轻的咳嗽声。",
+      "checkpoint": true,
+      "stealthSafe": true,
+      "exits": { "west": "copy_room_04", "south": "guard_barracks_05", "north": "inner_archive_07" },
+      "npcs": []
+    },
+    "inner_archive_07": {
+      "name": "内档库",
+      "description": "卷宗按日期排得整齐，唯独午时那一格向内凹陷。木板之后藏着能够容下一卷密令的暗格。",
+      "exits": { "south": "inner_court_06", "down": "hidden_cellar_08" },
+      "exitRequirements": {
+        "down": { "maxAlert": 3, "message": "警戒声已经逼近档库，通往地窖的暗门此刻一开便会被人发现。先设法避开巡逻。" }
+      },
+      "actions": ["take_swapped_dispatch"],
+      "npcs": []
+    },
+    "hidden_cellar_08": {
+      "name": "旧酒窖",
+      "description": "失踪的账吏被关在空酒缸后。他说调令会在今夜送出城，而负责清路的人已经去了南侧旧水门。",
+      "exits": { "up": "inner_archive_07", "south": "drain_exit_09" },
+      "exitRequirements": {
+        "south": { "requiredItemId": "swapped_hostage_dispatch", "message": "没有真正密令便贸然离开，今夜的调查仍缺少能够落定的证据。" }
+      },
+      "npcs": ["missing_hostage_clerk"]
+    },
+    "drain_exit_09": {
+      "name": "旧水门",
+      "description": "废弃水门通向邯郸南渠。城中梆子忽然急响，显然有人已经发现内档库被动过。下一步只能在封城前离开。",
+      "exits": { "north": "hidden_cellar_08" },
+      "npcs": []
+    }
+  }
+}

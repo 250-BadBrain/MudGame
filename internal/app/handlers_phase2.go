@@ -339,7 +339,7 @@ func (s *Server) handleGameDoAction(conn *websocket.Conn, cmd protocol.CommandMe
 	}
 	action := toString(cmd.Args["action"])
 	res, err := engine.DoRoomActionWithEffects(s.repo, playerID, action)
-	s.replyCommand(conn, "do_action", err, map[string]interface{}{"message": res.Message}, []string{res.Message})
+	s.replyCommand(conn, "do_action", err, map[string]interface{}{"message": res.Message, "room": res.Room}, []string{res.Message})
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
 	}
@@ -352,7 +352,7 @@ func (s *Server) handleGameKill(conn *websocket.Conn, cmd protocol.CommandMessag
 	}
 	targetID := toString(cmd.Args["targetId"])
 	res, err := engine.KillWithEffects(s.repo, playerID, targetID)
-	s.replyCommand(conn, "kill", err, map[string]interface{}{"message": res.Message}, nil)
+	s.replyCommand(conn, "kill", err, map[string]interface{}{}, nil)
 	if err == nil && res.NeedRoomMessage {
 		s.emitRoomMessageByPlayer(playerID, res.Message)
 	}

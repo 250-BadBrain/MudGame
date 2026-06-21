@@ -265,5 +265,47 @@
     "unit": "页",
     "limit": 1,
     "source": "寻秦异闻"
+  },
+  "broken_sword_jade": {
+    "name": "断纹剑珏",
+    "description": "试剑馆见证胜负的半枚玉珏，断纹深处藏着质子府旧印，证明连晋的战帖并非单纯争名。",
+    "type": "quest",
+    "subtype": "xunqin_clue",
+    "stackable": true,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 4,
+    "unit": "枚",
+    "limit": 1,
+    "source": "寻秦异闻"
+  },
+  "forged_service_pass": {
+    "name": "杂役腰牌",
+    "description": "依照西厨轮值簿临时誊制的木牌，只能骗过不熟悉当值仆役的门吏。",
+    "type": "quest",
+    "subtype": "credential",
+    "stackable": true,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 2,
+    "unit": "枚",
+    "limit": 1,
+    "source": "寻秦异闻"
+  },
+  "swapped_hostage_dispatch": {
+    "name": "被调换的密令",
+    "description": "从质子府内档库暗格中取出的真正密令，封底留有来自秦地的旧印。",
+    "type": "quest",
+    "subtype": "xunqin_clue",
+    "stackable": true,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 4,
+    "unit": "卷",
+    "limit": 1,
+    "source": "寻秦异闻"
   }
 }

@@ -17,6 +17,7 @@ type TransitionResult struct {
 
 type StateActionResult struct {
 	Message        string
+	Room           map[string]interface{}
 	RoomMessage    string
 	NeedRoomUpdate bool
 }
