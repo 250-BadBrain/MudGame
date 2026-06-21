@@ -399,9 +399,6 @@ func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attacker
 	if crit {
 		msg = attackerName + "发动致命一击，重创" + defenderName + "，造成" + strconv.Itoa(damage) + "点伤害"
 	}
-	if parried {
-		msg += "（被招架减伤）"
-	}
 	if damage <= 0 {
 		msg = attackerName + "一招击中" + defenderName + "，但没有造成任何伤害。"
 		return combatStrikeResult{Damage: 0, Message: msg}

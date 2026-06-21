@@ -7,7 +7,7 @@ import (
 	"mudgame/server/internal/model"
 )
 
-func TestXunqinFirstSixTemplatesMatchRedesign(t *testing.T) {
+func TestXunqinFirstElevenTemplatesMatchDesign(t *testing.T) {
 	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
 	if err := m.LoadTemplatesNoLock(); err != nil {
 		t.Fatalf("load dungeon templates failed: %v", err)
@@ -19,11 +19,16 @@ func TestXunqinFirstSixTemplatesMatchRedesign(t *testing.T) {
 		"xunqin_ch04_hostage_camp_night":  11,
 		"xunqin_ch05_handan_blood_road":   12,
 		"xunqin_ch06_wu_fort_blood_night": 14,
+		"xunqin_ch07_westward_sand":       12,
+		"xunqin_ch08_border_suspicion":    12,
+		"xunqin_ch09_hangu_trials":        10,
+		"xunqin_ch10_xianyang_arrival":    11,
+		"xunqin_ch11_clan_blood_trial":    12,
 	}
 	chapters := map[int]string{}
 	for _, id := range m.DungeonTemplateIDsNoLock() {
 		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID == "xunqin_legend" && tpl.Chapter >= 1 && tpl.Chapter <= 6 {
+		if tpl.ChainID == "xunqin_legend" && tpl.Chapter >= 1 && tpl.Chapter <= 11 {
 			if _, ok := expected[id]; !ok {
 				t.Fatalf("obsolete first-six xunqin dungeon is still loaded: %s", id)
 			}
@@ -37,14 +42,120 @@ func TestXunqinFirstSixTemplatesMatchRedesign(t *testing.T) {
 		if len(tpl.Rooms) != roomCount {
 			t.Fatalf("dungeon %s expected %d rooms, got %d", id, roomCount, len(tpl.Rooms))
 		}
-		if tpl.ChainID != "xunqin_legend" || tpl.Chapter < 1 || tpl.Chapter > 6 {
+		if tpl.ChainID != "xunqin_legend" || tpl.Chapter < 1 || tpl.Chapter > 11 {
 			t.Fatalf("dungeon %s has invalid chain metadata: %+v", id, tpl)
 		}
 		chapters[tpl.Chapter] = id
 	}
-	if !reflect.DeepEqual(chapters, map[int]string{1: "xunqin_ch01_bronze_fall", 2: "xunqin_ch02_wu_fort_trial", 3: "xunqin_ch03_handan_opening", 4: "xunqin_ch04_hostage_camp_night", 5: "xunqin_ch05_handan_blood_road", 6: "xunqin_ch06_wu_fort_blood_night"}) {
+	if !reflect.DeepEqual(chapters, map[int]string{1: "xunqin_ch01_bronze_fall", 2: "xunqin_ch02_wu_fort_trial", 3: "xunqin_ch03_handan_opening", 4: "xunqin_ch04_hostage_camp_night", 5: "xunqin_ch05_handan_blood_road", 6: "xunqin_ch06_wu_fort_blood_night", 7: "xunqin_ch07_westward_sand", 8: "xunqin_ch08_border_suspicion", 9: "xunqin_ch09_hangu_trials", 10: "xunqin_ch10_xianyang_arrival", 11: "xunqin_ch11_clan_blood_trial"}) {
 		t.Fatalf("unexpected first-six chapter ordering: %+v", chapters)
 	}
+}
+
+func TestXunqinPuzzleStateGraphsClassifyEveryConfiguredState(t *testing.T) {
+	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
+	if err := m.LoadTemplatesNoLock(); err != nil {
+		t.Fatalf("load dungeon templates failed: %v", err)
+	}
+	for _, id := range m.DungeonTemplateIDsNoLock() {
+		tpl, _ := m.DungeonTemplateNoLock(id)
+		if tpl.ChainID != "xunqin_legend" {
+			continue
+		}
+		inst := &Instance{DungeonID: id, PuzzleStates: map[string]string{}}
+		choiceActions := map[string]bool{}
+		for _, parent := range tpl.PuzzleActions {
+			for _, choice := range parent.Choices {
+				choiceActions[choice.ID] = true
+			}
+		}
+		for roomID, room := range tpl.Rooms {
+			for _, actionID := range room.Actions {
+				if choiceActions[actionID] {
+					t.Fatalf("dungeon %s room %s exposes message choice %s as a room action", id, roomID, actionID)
+				}
+			}
+		}
+		for puzzleID, initial := range tpl.PuzzleInitialStates {
+			inst.PuzzleStates[puzzleID] = initial
+			reachable := map[string]bool{initial: true}
+			changed := true
+			for changed {
+				changed = false
+				for _, action := range tpl.PuzzleActions {
+					if action.PuzzleID != puzzleID || action.NextState == "" {
+						continue
+					}
+					for _, from := range action.FromStates {
+						if from != "never" && reachable[from] && !reachable[action.NextState] {
+							reachable[action.NextState] = true
+							changed = true
+						}
+					}
+				}
+			}
+			for actionID, action := range tpl.PuzzleActions {
+				if action.PuzzleID != puzzleID {
+					continue
+				}
+				for _, from := range action.FromStates {
+					if from != "never" && !reachable[from] {
+						t.Fatalf("dungeon %s action %s starts from unreachable %s state %s", id, actionID, puzzleID, from)
+					}
+				}
+			}
+		}
+		totalWeight := 0
+		groupWeights := map[string]int{}
+		for _, objective := range tpl.Objectives {
+			if objective.Optional {
+				continue
+			}
+			if objective.ExclusiveGroup == "" {
+				totalWeight += objective.Weight
+			} else if objective.Weight > groupWeights[objective.ExclusiveGroup] {
+				groupWeights[objective.ExclusiveGroup] = objective.Weight
+			}
+		}
+		for _, weight := range groupWeights {
+			totalWeight += weight
+		}
+		if totalWeight != 100 {
+			t.Fatalf("dungeon %s objective weights total %d, want 100", id, totalWeight)
+		}
+		for actionID, action := range tpl.PuzzleActions {
+			if _, ok := tpl.PuzzleInitialStates[action.PuzzleID]; !ok {
+				t.Fatalf("dungeon %s action %s uses unknown puzzle %s", id, actionID, action.PuzzleID)
+			}
+			for _, from := range action.FromStates {
+				inst.PuzzleStates[action.PuzzleID] = from
+				if status := m.PuzzleActionStateStatusNoLock(inst, action); status != PuzzleActionReady {
+					t.Fatalf("dungeon %s action %s should be ready from %s, got %s", id, actionID, from, status)
+				}
+			}
+			if action.NextState != "" && !testContainsString(action.FromStates, action.NextState) {
+				inst.PuzzleStates[action.PuzzleID] = action.NextState
+				if status := m.PuzzleActionStateStatusNoLock(inst, action); status != PuzzleActionRepeat {
+					t.Fatalf("dungeon %s action %s should repeat at %s, got %s", id, actionID, action.NextState, status)
+				}
+			}
+			for _, choice := range action.Choices {
+				child, ok := tpl.PuzzleActions[choice.ID]
+				if !ok || !testContainsString(child.FromStates, action.NextState) && !testContainsString(child.FromStates, "never") {
+					t.Fatalf("dungeon %s action %s choice %s does not consume offered state %s", id, actionID, choice.ID, action.NextState)
+				}
+			}
+		}
+	}
+}
+
+func testContainsString(values []string, target string) bool {
+	for _, value := range values {
+		if value == target {
+			return true
+		}
+	}
+	return false
 }
 
 func TestBuildDungeonSettlementUsesConfiguredRewards(t *testing.T) {

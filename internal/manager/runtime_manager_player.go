@@ -267,7 +267,7 @@ func (r *RuntimeManager) checkExitRequirementNoLock(p *model.Player, room model.
 		blockedTemplates[templateID] = true
 	}
 	for _, npcID := range room.NPCIDs {
-		if dungeonNPC, exists := r.dungeonNPCByIDNoLock(npcID); exists && dungeonNPC.Alive && blockedTemplates[dungeonNPC.TemplateID] {
+		if dungeonNPC, exists := r.dungeonNPCByIDNoLock(npcID); exists && dungeonNPC.Alive && !dungeonNPC.Defeated && blockedTemplates[dungeonNPC.TemplateID] {
 			if requirement.Message != "" {
 				return errors.New(requirement.Message)
 			}
@@ -807,7 +807,6 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 	if !allowed && r.dungeonMgr != nil {
 		if inst, exists := r.dungeonMgr.PlayerInstanceNoLock(playerID); exists && inst.PendingChoices[action] {
 			allowed = true
-			inst.PendingChoices = map[string]bool{}
 		}
 	}
 	if !allowed {
@@ -870,21 +869,29 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 		p.Flags = map[string]bool{}
 	}
 	currentState := inst.PuzzleStates[action.PuzzleID]
-	if currentState == action.NextState && action.RepeatMessage != "" {
-		return map[string]interface{}{
-			"message":     action.RepeatMessage,
-			"puzzleId":    action.PuzzleID,
-			"puzzleState": currentState,
-			"alertLevel":  inst.AlertLevel,
-		}, true
-	}
-	allowedState := len(action.FromStates) == 0
-	for _, state := range action.FromStates {
-		if currentState == state {
-			allowedState = true
-			break
+	stateStatus := r.dungeonMgr.PuzzleActionStateStatusNoLock(inst, action)
+	if stateStatus == engruntime.PuzzleActionRepeat {
+		message := action.RepeatMessage
+		if message == "" {
+			message = "你已经完成“" + action.Label + "”，无需重复。"
 		}
+		result := map[string]interface{}{
+			"message":      message,
+			"puzzleId":     action.PuzzleID,
+			"puzzleState":  currentState,
+			"alertLevel":   inst.AlertLevel,
+			"actionStatus": "repeat",
+		}
+		if len(inst.PendingChoices) > 0 {
+			result["choices"] = dungeonChoicePayload(r.dungeonMgr.PendingActionChoicesNoLock(inst))
+		}
+		if currentState == action.NextState && len(action.Choices) > 0 && len(inst.PendingChoices) == 0 {
+			result["message"] = action.Message
+			result["choices"] = activateDungeonChoices(inst, action.Choices)
+		}
+		return result, true
 	}
+	allowedState := stateStatus == engruntime.PuzzleActionReady
 	itemsReady := true
 	for itemID, amount := range action.RequiredItems {
 		if amount > 0 && p.Backpack[itemID] < amount {
@@ -911,15 +918,23 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 		inst.PuzzleAttempts[action.PuzzleID]++
 		message := action.FailureMessage
 		if message == "" {
-			message = "你试了一番，机关却没有如愿变化。"
+			message = "“" + action.Label + "”所需条件尚未满足。"
 		}
-		return map[string]interface{}{
+		result := map[string]interface{}{
 			"message":        message,
 			"puzzleId":       action.PuzzleID,
 			"puzzleState":    currentState,
 			"puzzleAttempts": inst.PuzzleAttempts[action.PuzzleID],
 			"alertLevel":     inst.AlertLevel,
-		}, true
+			"actionStatus":   "blocked",
+		}
+		if inst.PendingChoices[actionID] {
+			result["choices"] = dungeonChoicePayload(r.dungeonMgr.PendingActionChoicesNoLock(inst))
+		}
+		return result, true
+	}
+	if inst.PendingChoices[actionID] {
+		inst.PendingChoices = map[string]bool{}
 	}
 	for itemID, amount := range action.TakeItems {
 		if amount <= 0 {
@@ -954,21 +969,32 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 		message = "你完成了眼前的操作。"
 	}
 	result := map[string]interface{}{
-		"message":     message,
-		"puzzleId":    action.PuzzleID,
-		"puzzleState": currentState,
-		"alertLevel":  inst.AlertLevel,
+		"message":      message,
+		"puzzleId":     action.PuzzleID,
+		"puzzleState":  currentState,
+		"alertLevel":   inst.AlertLevel,
+		"actionStatus": "success",
 	}
 	if len(action.Choices) > 0 {
-		choices := make([]map[string]string, 0, len(action.Choices))
-		inst.PendingChoices = map[string]bool{}
-		for _, choice := range action.Choices {
-			inst.PendingChoices[choice.ID] = true
-			choices = append(choices, map[string]string{"id": choice.ID, "label": choice.Label})
-		}
-		result["choices"] = choices
+		result["choices"] = activateDungeonChoices(inst, action.Choices)
 	}
 	return result, true
+}
+
+func activateDungeonChoices(inst *engruntime.Instance, choices []engruntime.ActionChoice) []map[string]string {
+	inst.PendingChoices = map[string]bool{}
+	for _, choice := range choices {
+		inst.PendingChoices[choice.ID] = true
+	}
+	return dungeonChoicePayload(choices)
+}
+
+func dungeonChoicePayload(choices []engruntime.ActionChoice) []map[string]string {
+	out := make([]map[string]string, 0, len(choices))
+	for _, choice := range choices {
+		out = append(out, map[string]string{"id": choice.ID, "label": choice.Label})
+	}
+	return out
 }
 
 func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (string, error) {

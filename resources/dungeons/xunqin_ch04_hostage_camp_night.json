@@ -1,5 +1,5 @@
 {
-  "id":"xunqin_ch04_hostage_camp_night","name":"寻秦记第四章：质子营夜变","description":"三更换灯将至，质子营深处的旧客今夜必须消失。","order":13,"chainId":"xunqin_legend","chapter":4,"spawnRoomId":"xqj04_01",
+  "id":"xunqin_ch04_hostage_camp_night","name":"质子营夜变","description":"三更换灯将至，质子营深处的旧客今夜必须消失。","order":13,"chainId":"xunqin_legend","chapter":4,"spawnRoomId":"xqj04_01",
   "unlockConditions":[{"type":"flag","targetId":"xunqin_ch04_unlocked","value":"true"}],"temporaryItems":["xqj_guard_badge","xqj_prison_key","xqj_half_password","xqj_old_token","xqj_torch"],
   "stealth":{"enabled":true,"alertOnMove":0,"safeRoomRecovery":1,"maxAlert":6},"patrols":[{"npcId":"xqj_prison_guard","route":["xqj04_02","xqj04_03","xqj04_04","xqj04_02"]}],
   "puzzleInitialStates":{"entry":"pending","badge":"missing","watch":"unknown","outer_prison":"locked","servant":"chained","stone_door":"locked","youth":"distrust","escape":"pending","ending":"pending"},

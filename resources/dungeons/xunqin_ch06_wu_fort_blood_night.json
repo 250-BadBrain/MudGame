@@ -1,5 +1,5 @@
 {
-  "id":"xunqin_ch06_wu_fort_blood_night","name":"寻秦记第六章：乌堡血夜","description":"乌堡陷入火海，城门、马厩、内鬼与密道同时决定乌家能否活过今夜。","order":15,"chainId":"xunqin_legend","chapter":6,"spawnRoomId":"xqj06_01",
+  "id":"xunqin_ch06_wu_fort_blood_night","name":"乌堡血夜","description":"乌堡陷入火海，城门、马厩、内鬼与密道同时决定乌家能否活过今夜。","order":15,"chainId":"xunqin_legend","chapter":6,"spawnRoomId":"xqj06_01",
   "unlockConditions":[{"type":"flag","targetId":"xunqin_ch06_unlocked","value":"true"}],"temporaryItems":["xqj_wet_cloth","xqj_horse_button","xqj_wind_lamp","xqj_earth_seal","xqj_master_token","xqj_traitor_confession"],
   "puzzleInitialStates":{"entry":"pending","gate":"broken","fire":"burning","stable":"burning","tingfang":"trapped","study":"waiting","traitor":"hidden","mechanism":"empty","evacuation":"waiting","mountain":"blocked","cliff":"open","ending":"pending"},
   "puzzleActions":{

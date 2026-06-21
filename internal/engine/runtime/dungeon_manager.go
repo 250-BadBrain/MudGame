@@ -55,6 +55,14 @@ type ActionChoice struct {
 	Label string
 }
 
+type PuzzleActionStateStatus string
+
+const (
+	PuzzleActionReady   PuzzleActionStateStatus = "ready"
+	PuzzleActionRepeat  PuzzleActionStateStatus = "repeat"
+	PuzzleActionBlocked PuzzleActionStateStatus = "blocked"
+)
+
 type Template struct {
 	ID                  string
 	Name                string
@@ -973,6 +981,90 @@ func (m *Manager) PuzzleActionNoLock(playerID, roomID, actionID string) (*Instan
 		}
 	}
 	return inst, action, true
+}
+
+func (m *Manager) PuzzleActionStateStatusNoLock(inst *Instance, action PuzzleAction) PuzzleActionStateStatus {
+	if inst == nil {
+		return PuzzleActionBlocked
+	}
+	current := inst.PuzzleStates[action.PuzzleID]
+	for _, state := range action.FromStates {
+		if current == state {
+			return PuzzleActionReady
+		}
+	}
+	if len(action.FromStates) == 0 {
+		return PuzzleActionReady
+	}
+	if action.NextState == "" {
+		return PuzzleActionBlocked
+	}
+	if current == action.NextState || m.puzzleStateReachableNoLock(inst.DungeonID, action.PuzzleID, action.NextState, current) {
+		return PuzzleActionRepeat
+	}
+	return PuzzleActionBlocked
+}
+
+func (m *Manager) PendingActionChoicesNoLock(inst *Instance) []ActionChoice {
+	if inst == nil {
+		return nil
+	}
+	tpl, ok := m.templates[inst.DungeonID]
+	if !ok {
+		return nil
+	}
+	ids := make([]string, 0, len(inst.PendingChoices))
+	for id, pending := range inst.PendingChoices {
+		if pending {
+			ids = append(ids, id)
+		}
+	}
+	sort.Strings(ids)
+	out := make([]ActionChoice, 0, len(ids))
+	for _, id := range ids {
+		action, ok := tpl.PuzzleActions[id]
+		if ok {
+			out = append(out, ActionChoice{ID: id, Label: action.Label})
+		}
+	}
+	return out
+}
+
+func (m *Manager) puzzleStateReachableNoLock(dungeonID, puzzleID, start, target string) bool {
+	if start == "" || target == "" || start == target {
+		return start == target
+	}
+	tpl, ok := m.templates[dungeonID]
+	if !ok {
+		return false
+	}
+	seen := map[string]bool{start: true}
+	queue := []string{start}
+	for len(queue) > 0 {
+		state := queue[0]
+		queue = queue[1:]
+		for _, candidate := range tpl.PuzzleActions {
+			if candidate.PuzzleID != puzzleID || candidate.NextState == "" {
+				continue
+			}
+			fromCurrent := len(candidate.FromStates) == 0
+			for _, from := range candidate.FromStates {
+				if from == state {
+					fromCurrent = true
+					break
+				}
+			}
+			if !fromCurrent || seen[candidate.NextState] {
+				continue
+			}
+			if candidate.NextState == target {
+				return true
+			}
+			seen[candidate.NextState] = true
+			queue = append(queue, candidate.NextState)
+		}
+	}
+	return false
 }
 
 func (m *Manager) ApplyPuzzleObjectiveNoLock(inst *Instance, puzzleID, state string) int {

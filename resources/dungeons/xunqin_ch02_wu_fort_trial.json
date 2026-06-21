@@ -1,5 +1,5 @@
 {
-  "id":"xunqin_ch02_wu_fort_trial","name":"寻秦记第二章：乌堡试锋","description":"随陶方进入乌家堡后，武场、惊马与夜袭正等待一个来历不明的客人。","order":11,"chainId":"xunqin_legend","chapter":2,"spawnRoomId":"xqj02_01",
+  "id":"xunqin_ch02_wu_fort_trial","name":"乌堡试锋","description":"随陶方进入乌家堡后，武场、惊马与夜袭正等待一个来历不明的客人。","order":11,"chainId":"xunqin_legend","chapter":2,"spawnRoomId":"xqj02_01",
   "unlockConditions":[{"type":"flag","targetId":"xunqin_ch02_unlocked","value":"true"}],
   "temporaryItems":["xqj_trial_token","xqj_cut_rein","xqj_drugged_fodder","xqj_zhao_coin","xqj_lamp_oil","xqj_stable_whistle"],
   "puzzleInitialStates":{"gate":"new","trial":"pending","stable":"unknown","challenge":"pending","horse":"pending","evidence":"empty","raid":"pending","ending":"pending"},

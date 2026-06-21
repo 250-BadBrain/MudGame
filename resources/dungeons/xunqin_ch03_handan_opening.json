@@ -1,5 +1,5 @@
 {
-  "id":"xunqin_ch03_handan_opening","name":"寻秦记第三章：邯郸初局","description":"赵都邯郸流言与密探交错，一封暗信指向三更后的质子营。","order":12,"chainId":"xunqin_legend","chapter":3,"spawnRoomId":"xqj03_01",
+  "id":"xunqin_ch03_handan_opening","name":"邯郸初局","description":"赵都邯郸流言与密探交错，一封暗信指向三更后的质子营。","order":12,"chainId":"xunqin_legend","chapter":3,"spawnRoomId":"xqj03_01",
   "unlockConditions":[{"type":"flag","targetId":"xunqin_ch03_unlocked","value":"true"}],
   "temporaryItems":["xqj_cargo_list","xqj_code_sheet","xqj_fish_token","xqj_deer_token","xqj_spy_letter"],
   "puzzleInitialStates":{"entry":"new","trade":"pending","rumor":"unknown","shanrou":"pending","zhaoya":"pending","spy":"blocked","cipher":"empty","ending":"pending"},

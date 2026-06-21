@@ -1,5 +1,5 @@
 {
-  "id":"xunqin_ch05_handan_blood_road","name":"寻秦记第五章：邯郸血路","description":"质子营警钟传遍全城，少年必须在封锁合拢前抵达乌家藏身点。","order":14,"chainId":"xunqin_legend","chapter":5,"spawnRoomId":"xqj05_01",
+  "id":"xunqin_ch05_handan_blood_road","name":"邯郸血路","description":"质子营警钟传遍全城，少年必须在封锁合拢前抵达乌家藏身点。","order":14,"chainId":"xunqin_legend","chapter":5,"spawnRoomId":"xqj05_01",
   "unlockConditions":[{"type":"flag","targetId":"xunqin_ch05_unlocked","value":"true"}],"temporaryItems":["xqj_disguise_token","xqj_sewer_hook","xqj_incense_ash","xqj_defense_notice","xqj_patrol_password"],
   "stealth":{"enabled":true,"alertOnMove":1,"safeRoomRecovery":2,"maxAlert":8},
   "puzzleInitialStates":{"escape":"pending","contact":"unknown","intel":"empty","route":"unknown","route_done":"pending","cellar":"open","roadblock":"blocked","hideout":"unknown","ending":"pending"},

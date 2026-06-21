@@ -254,6 +254,10 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			t.Fatalf("duplicate dungeon id %s", dungeon.ID)
 		}
 		seen[dungeon.ID] = true
+		temporaryItems := map[string]bool{}
+		for _, itemID := range dungeon.TemporaryItems {
+			temporaryItems[itemID] = true
+		}
 		if len(dungeon.Rooms) == 0 {
 			t.Fatalf("dungeon %s has no rooms", dungeon.ID)
 		}
@@ -310,7 +314,16 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 				}
 			}
 			for _, actionID := range room.Actions {
-				if _, ok := dungeon.PuzzleActions[actionID]; ok {
+				if action, ok := dungeon.PuzzleActions[actionID]; ok {
+					allowedHere := len(action.Rooms) == 0
+					for _, actionRoomID := range action.Rooms {
+						if actionRoomID == roomID {
+							allowedHere = true
+						}
+					}
+					if !allowedHere {
+						t.Fatalf("dungeon %s room %s exposes action %s that is not allowed there", dungeon.ID, roomID, actionID)
+					}
 					continue
 				}
 				known := map[string]bool{"gather": true, "work": true, "listen_rumor": true, "search": true}
@@ -332,6 +345,17 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 				if _, ok := data.NPCs[npcID]; !ok {
 					t.Fatalf("dungeon %s action %s requires missing npc %s", dungeon.ID, actionID, npcID)
 				}
+				present := false
+				for _, roomID := range action.Rooms {
+					for _, roomNPCID := range dungeon.Rooms[roomID].NPCs {
+						if roomNPCID == npcID {
+							present = true
+						}
+					}
+				}
+				if !present {
+					t.Fatalf("dungeon %s action %s requires npc %s outside its action rooms", dungeon.ID, actionID, npcID)
+				}
 			}
 			for _, items := range []map[string]int{action.RequiredItems, action.GiveItems, action.TakeItems} {
 				for itemID, amount := range items {
@@ -340,6 +364,9 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 					}
 					if _, ok := data.Items[itemID]; !ok {
 						t.Fatalf("dungeon %s action %s references missing item %s", dungeon.ID, actionID, itemID)
+					}
+					if data.Items[itemID].Subtype == "dungeon_temporary" && !temporaryItems[itemID] {
+						t.Fatalf("dungeon %s action %s uses unregistered temporary item %s", dungeon.ID, actionID, itemID)
 					}
 				}
 			}

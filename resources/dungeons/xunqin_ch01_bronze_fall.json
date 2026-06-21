@@ -1,5 +1,5 @@
 {
-  "id": "xunqin_ch01_bronze_fall", "name": "寻秦记第一章：铜匣坠世", "description": "战国遗址深处，一只刻满七国纹路的铜匣正等待后来者触动。", "order": 10, "chainId": "xunqin_legend", "chapter": 1, "spawnRoomId": "xqj01_01",
+  "id": "xunqin_ch01_bronze_fall", "name": "铜匣坠世", "description": "战国遗址深处，一只刻满七国纹路的铜匣正等待后来者触动。", "order": 10, "chainId": "xunqin_legend", "chapter": 1, "spawnRoomId": "xqj01_01",
   "unlockConditions": [{"type":"flag","targetId":"xunqin_ch01_unlocked","value":"true"}],
   "temporaryItems": ["xqj_stele_rubbing","xqj_bronze_cog","xqj_broken_box","xqj_bandit_arrow","xqj_track_mud"],
   "puzzleInitialStates": {"entry":"new","stele":"hidden","bronze":"locked","seven_states":"idle","vision":"idle","wilderness":"new","tracking":"unknown","rescue":"pending","ending":"pending"},
