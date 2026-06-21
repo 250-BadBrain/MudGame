@@ -804,6 +804,12 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 			break
 		}
 	}
+	if !allowed && r.dungeonMgr != nil {
+		if inst, exists := r.dungeonMgr.PlayerInstanceNoLock(playerID); exists && inst.PendingChoices[action] {
+			allowed = true
+			inst.PendingChoices = map[string]bool{}
+		}
+	}
 	if !allowed {
 		return nil, errors.New("action_not_available")
 	}
@@ -830,30 +836,6 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 		result["message"] = roomRumor(room.ID)
 	case "search":
 		message, err := r.searchRoomNoLock(p, room)
-		if err != nil {
-			return nil, err
-		}
-		result["message"] = message
-	case "inspect_fragment":
-		message, err := r.inspectFragmentRoomNoLock(p, room)
-		if err != nil {
-			return nil, err
-		}
-		result["message"] = message
-	case "inspect_token":
-		message, err := r.inspectTokenRoomNoLock(p, room)
-		if err != nil {
-			return nil, err
-		}
-		result["message"] = message
-	case "tame_horse":
-		message, err := r.tameHorseRoomNoLock(p, room)
-		if err != nil {
-			return nil, err
-		}
-		result["message"] = message
-	case "inspect_guest_register":
-		message, err := r.inspectGuestRegisterRoomNoLock(p, room)
 		if err != nil {
 			return nil, err
 		}
@@ -910,7 +892,22 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			break
 		}
 	}
-	if !allowedState || !itemsReady {
+	npcsDefeated := true
+	for _, templateID := range action.RequiredDefeatNPCs {
+		found := false
+		for _, npc := range inst.NPCs {
+			if npc != nil && npc.TemplateID == templateID && npc.RoomID == room.ID {
+				found = true
+				if npc.Alive && !npc.Defeated {
+					npcsDefeated = false
+				}
+			}
+		}
+		if !found {
+			npcsDefeated = false
+		}
+	}
+	if !allowedState || !itemsReady || !npcsDefeated {
 		inst.PuzzleAttempts[action.PuzzleID]++
 		message := action.FailureMessage
 		if message == "" {
@@ -956,12 +953,22 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 	if message == "" {
 		message = "你完成了眼前的操作。"
 	}
-	return map[string]interface{}{
+	result := map[string]interface{}{
 		"message":     message,
 		"puzzleId":    action.PuzzleID,
 		"puzzleState": currentState,
 		"alertLevel":  inst.AlertLevel,
-	}, true
+	}
+	if len(action.Choices) > 0 {
+		choices := make([]map[string]string, 0, len(action.Choices))
+		inst.PendingChoices = map[string]bool{}
+		for _, choice := range action.Choices {
+			inst.PendingChoices[choice.ID] = true
+			choices = append(choices, map[string]string{"id": choice.ID, "label": choice.Label})
+		}
+		result["choices"] = choices
+	}
+	return result, true
 }
 
 func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (string, error) {
@@ -984,94 +991,6 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 		return "你在机关暗格中摸到一枚古铜残片。残片入手微凉，铜匣随即开启，洛阳夜色被一线铜光割开。", nil
 	}
 	return "你仔细搜索四周，没有发现值得带走的东西。", nil
-}
-
-func (r *RuntimeManager) inspectFragmentRoomNoLock(p *model.Player, room model.Room) (string, error) {
-	if p == nil {
-		return "", exception.ErrPlayerNotFound
-	}
-	if p.Flags == nil {
-		p.Flags = map[string]bool{}
-	}
-	if p.Backpack == nil {
-		p.Backpack = map[string]int{}
-	}
-	if room.WorldID == "dungeon_xunqin_ch01_bronze_gate" && strings.HasSuffix(room.ID, "_camp_08") {
-		if p.Flags["xunqin_ch01_read_fragment"] {
-			return "你再次辨认残简，只觉那些断字已深深印在心里：邯郸，质子，少龙。", nil
-		}
-		p.Backpack["zongheng_fragment"] += 1
-		p.Flags["xunqin_ch01_read_fragment"] = true
-		r.applyCollectDungeonObjectiveNoLock(p.ID, "zongheng_fragment")
-		return "你辨出残简上断续的字迹：邯郸、质子、少龙。竹简忽然发热，像是在催你赶往下一段命运。", nil
-	}
-	return "你细细查看眼前物事，没有辨出新的线索。", nil
-}
-
-func (r *RuntimeManager) inspectTokenRoomNoLock(p *model.Player, room model.Room) (string, error) {
-	if p == nil {
-		return "", exception.ErrPlayerNotFound
-	}
-	if p.Flags == nil {
-		p.Flags = map[string]bool{}
-	}
-	if p.Backpack == nil {
-		p.Backpack = map[string]int{}
-	}
-	if room.WorldID != "dungeon_xunqin_ch02_handan_maze" || !strings.HasSuffix(room.ID, "_guard_room_05") {
-		return "你查验了附近的物件，没有发现可用的线索。", nil
-	}
-	if p.Flags["xunqin_ch02_found_wu_token"] {
-		return "你再次翻看值房名帖，乌氏令牌背面的马道已经牢牢记在心中。", nil
-	}
-	p.Backpack["wu_house_token"] += 1
-	p.Flags["xunqin_ch02_found_wu_token"] = true
-	r.applyCollectDungeonObjectiveNoLock(p.ID, "wu_house_token")
-	return "你从名帖下取出一枚乌氏令牌。牌背细字指向城西马厩，质子府与乌家的暗线终于连在了一起。", nil
-}
-
-func (r *RuntimeManager) tameHorseRoomNoLock(p *model.Player, room model.Room) (string, error) {
-	if p == nil {
-		return "", exception.ErrPlayerNotFound
-	}
-	if p.Flags == nil {
-		p.Flags = map[string]bool{}
-	}
-	if p.Backpack == nil {
-		p.Backpack = map[string]int{}
-	}
-	if room.WorldID != "dungeon_xunqin_ch03_wu_ranch" || !strings.HasSuffix(room.ID, "_taming_corral_03") {
-		return "附近没有需要安抚的马匹。", nil
-	}
-	if p.Flags["xunqin_ch03_tamed_black_stallion"] {
-		return "黑鬃马认出你的脚步，安静地低下头，已经不再抗拒这截缰绳。", nil
-	}
-	p.Backpack["black_stallion_rein"] += 1
-	p.Flags["xunqin_ch03_tamed_black_stallion"] = true
-	r.applyCollectDungeonObjectiveNoLock(p.ID, "black_stallion_rein")
-	return "你没有扬鞭，只顺着黑鬃马的呼吸缓缓靠近。它终于停止冲撞，让你重新系好断裂的缰绳。", nil
-}
-
-func (r *RuntimeManager) inspectGuestRegisterRoomNoLock(p *model.Player, room model.Room) (string, error) {
-	if p == nil {
-		return "", exception.ErrPlayerNotFound
-	}
-	if p.Flags == nil {
-		p.Flags = map[string]bool{}
-	}
-	if p.Backpack == nil {
-		p.Backpack = map[string]int{}
-	}
-	if room.WorldID != "dungeon_xunqin_ch04_ya_lake" || !strings.HasSuffix(room.ID, "_archive_room_04") {
-		return "你翻看附近文书，没有找到与夜宴有关的线索。", nil
-	}
-	if p.Flags["xunqin_ch04_found_guest_register"] {
-		return "你再次比对客册，少龙席位旁那道未干的改痕依旧清晰，栽赃者显然早有准备。", nil
-	}
-	p.Backpack["ya_lake_guest_register"] += 1
-	p.Flags["xunqin_ch04_found_guest_register"] = true
-	r.applyCollectDungeonObjectiveNoLock(p.ID, "ya_lake_guest_register")
-	return "你抽出被重新誊写的客册，发现少龙的席位被刻意挪到曲桥旁。墨迹未干，这场伏击尚未来得及收网。", nil
 }
 
 func roomRumor(roomID string) string {
@@ -1245,6 +1164,12 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 		return "", errors.New("self_target")
 	}
 	if dnpc, ok := r.dungeonNPCByIDNoLock(targetID); ok {
+		if dnpc.CombatMode == "protected" {
+			return "", errors.New("target_is_protected")
+		}
+		if dnpc.Defeated {
+			return "", errors.New("target_is_defeated")
+		}
 		if !dnpc.Alive {
 			return "", errors.New("target_is_dead")
 		}

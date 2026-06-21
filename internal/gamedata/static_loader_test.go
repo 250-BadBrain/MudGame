@@ -54,6 +54,9 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 		}
 	}
 	for npcID, npc := range data.NPCs {
+		if npc.CombatMode != "" && npc.CombatMode != "protected" && npc.CombatMode != "defeat" {
+			t.Fatalf("npc %s has invalid combat mode %s", npcID, npc.CombatMode)
+		}
 		if npc.Faction != "" {
 			if _, ok := data.Factions[npc.Faction]; !ok {
 				t.Fatalf("npc %s references missing faction %s", npcID, npc.Faction)
@@ -198,9 +201,10 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			t.Fatalf("read dungeon %s failed: %v", entry.Name(), err)
 		}
 		var dungeon struct {
-			ID          string `json:"id"`
-			SpawnRoomID string `json:"spawnRoomId"`
-			Rooms       map[string]struct {
+			ID             string   `json:"id"`
+			SpawnRoomID    string   `json:"spawnRoomId"`
+			TemporaryItems []string `json:"temporaryItems"`
+			Rooms          map[string]struct {
 				Name             string            `json:"name"`
 				Exits            map[string]string `json:"exits"`
 				NPCs             []string          `json:"npcs"`
@@ -214,11 +218,16 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			} `json:"rooms"`
 			PuzzleInitialStates map[string]string `json:"puzzleInitialStates"`
 			PuzzleActions       map[string]struct {
-				PuzzleID      string         `json:"puzzleId"`
-				Rooms         []string       `json:"rooms"`
-				RequiredItems map[string]int `json:"requiredItems"`
-				GiveItems     map[string]int `json:"giveItems"`
-				TakeItems     map[string]int `json:"takeItems"`
+				PuzzleID           string         `json:"puzzleId"`
+				Rooms              []string       `json:"rooms"`
+				RequiredDefeatNPCs []string       `json:"requiredDefeatNpcs"`
+				RequiredItems      map[string]int `json:"requiredItems"`
+				GiveItems          map[string]int `json:"giveItems"`
+				TakeItems          map[string]int `json:"takeItems"`
+				Choices            []struct {
+					ID    string `json:"id"`
+					Label string `json:"label"`
+				} `json:"choices"`
 			} `json:"puzzleActions"`
 			Patrols []struct {
 				NPCID string   `json:"npcId"`
@@ -304,7 +313,7 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 				if _, ok := dungeon.PuzzleActions[actionID]; ok {
 					continue
 				}
-				known := map[string]bool{"gather": true, "work": true, "listen_rumor": true, "search": true, "inspect_fragment": true, "inspect_token": true, "tame_horse": true, "inspect_guest_register": true}
+				known := map[string]bool{"gather": true, "work": true, "listen_rumor": true, "search": true}
 				if !known[actionID] {
 					t.Fatalf("dungeon %s room %s references missing action %s", dungeon.ID, roomID, actionID)
 				}
@@ -319,6 +328,11 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 					t.Fatalf("dungeon %s action %s references missing room %s", dungeon.ID, actionID, roomID)
 				}
 			}
+			for _, npcID := range action.RequiredDefeatNPCs {
+				if _, ok := data.NPCs[npcID]; !ok {
+					t.Fatalf("dungeon %s action %s requires missing npc %s", dungeon.ID, actionID, npcID)
+				}
+			}
 			for _, items := range []map[string]int{action.RequiredItems, action.GiveItems, action.TakeItems} {
 				for itemID, amount := range items {
 					if amount <= 0 {
@@ -328,6 +342,23 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 						t.Fatalf("dungeon %s action %s references missing item %s", dungeon.ID, actionID, itemID)
 					}
 				}
+			}
+			for _, choice := range action.Choices {
+				if strings.TrimSpace(choice.ID) == "" || strings.TrimSpace(choice.Label) == "" {
+					t.Fatalf("dungeon %s action %s has an incomplete choice", dungeon.ID, actionID)
+				}
+				if _, ok := dungeon.PuzzleActions[choice.ID]; !ok {
+					t.Fatalf("dungeon %s action %s choice references missing action %s", dungeon.ID, actionID, choice.ID)
+				}
+			}
+		}
+		for _, itemID := range dungeon.TemporaryItems {
+			item, ok := data.Items[itemID]
+			if !ok {
+				t.Fatalf("dungeon %s references missing temporary item %s", dungeon.ID, itemID)
+			}
+			if item.Subtype != "dungeon_temporary" || !item.QuestItem {
+				t.Fatalf("dungeon %s item %s is not marked dungeon_temporary quest item", dungeon.ID, itemID)
 			}
 		}
 		for _, patrol := range dungeon.Patrols {

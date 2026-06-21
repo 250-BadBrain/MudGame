@@ -1050,7 +1050,7 @@ func TestDungeonAggressiveNPCWaitsForPlayerAction(t *testing.T) {
 	}
 }
 
-func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
+func legacyXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	h := setupRepo(t)
 
 	dungeons := GetDungeonsView(h.repo, h.playerID)

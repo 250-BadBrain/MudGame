@@ -1,10 +1,51 @@
 package runtime
 
 import (
+	"reflect"
 	"testing"
 
 	"mudgame/server/internal/model"
 )
+
+func TestXunqinFirstSixTemplatesMatchRedesign(t *testing.T) {
+	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
+	if err := m.LoadTemplatesNoLock(); err != nil {
+		t.Fatalf("load dungeon templates failed: %v", err)
+	}
+	expected := map[string]int{
+		"xunqin_ch01_bronze_fall":         12,
+		"xunqin_ch02_wu_fort_trial":       10,
+		"xunqin_ch03_handan_opening":      12,
+		"xunqin_ch04_hostage_camp_night":  11,
+		"xunqin_ch05_handan_blood_road":   12,
+		"xunqin_ch06_wu_fort_blood_night": 14,
+	}
+	chapters := map[int]string{}
+	for _, id := range m.DungeonTemplateIDsNoLock() {
+		tpl, _ := m.DungeonTemplateNoLock(id)
+		if tpl.ChainID == "xunqin_legend" && tpl.Chapter >= 1 && tpl.Chapter <= 6 {
+			if _, ok := expected[id]; !ok {
+				t.Fatalf("obsolete first-six xunqin dungeon is still loaded: %s", id)
+			}
+		}
+	}
+	for id, roomCount := range expected {
+		tpl, ok := m.DungeonTemplateNoLock(id)
+		if !ok {
+			t.Fatalf("missing redesigned dungeon %s", id)
+		}
+		if len(tpl.Rooms) != roomCount {
+			t.Fatalf("dungeon %s expected %d rooms, got %d", id, roomCount, len(tpl.Rooms))
+		}
+		if tpl.ChainID != "xunqin_legend" || tpl.Chapter < 1 || tpl.Chapter > 6 {
+			t.Fatalf("dungeon %s has invalid chain metadata: %+v", id, tpl)
+		}
+		chapters[tpl.Chapter] = id
+	}
+	if !reflect.DeepEqual(chapters, map[int]string{1: "xunqin_ch01_bronze_fall", 2: "xunqin_ch02_wu_fort_trial", 3: "xunqin_ch03_handan_opening", 4: "xunqin_ch04_hostage_camp_night", 5: "xunqin_ch05_handan_blood_road", 6: "xunqin_ch06_wu_fort_blood_night"}) {
+		t.Fatalf("unexpected first-six chapter ordering: %+v", chapters)
+	}
+}
 
 func TestBuildDungeonSettlementUsesConfiguredRewards(t *testing.T) {
 	m := NewManager(nil, nil, nil, nil, nil, nil)
@@ -83,6 +124,49 @@ func TestObjectiveProgressSupportsOptionalAndExclusiveBranches(t *testing.T) {
 	m.updateObjectiveProgressNoLock(inst)
 	if inst.Progress != 100 {
 		t.Fatalf("expected one exclusive branch plus required objective to complete dungeon, got %d", inst.Progress)
+	}
+}
+
+func TestObjectiveProgressUsesWeightsAndOneExclusiveBranch(t *testing.T) {
+	m := NewManager(nil, nil, nil, nil, nil, nil)
+	inst := &Instance{
+		Objectives: []Objective{
+			{ID: "story", Required: 1, Weight: 70},
+			{ID: "front_gate", Required: 1, Weight: 30, ExclusiveGroup: "route"},
+			{ID: "secret_tunnel", Required: 1, Weight: 30, ExclusiveGroup: "route"},
+		},
+		ObjectiveProgress: map[string]int{"story": 1, "secret_tunnel": 1},
+	}
+	m.updateObjectiveProgressNoLock(inst)
+	if inst.Progress != 100 {
+		t.Fatalf("expected weighted story plus one route to complete dungeon, got %d", inst.Progress)
+	}
+}
+
+func TestDefeatModeNPCRemainsInRoomWithoutBeingKillableAgain(t *testing.T) {
+	npc := &NPCState{
+		ID:         "trial_master@instance",
+		TemplateID: "trial_master",
+		RoomID:     "trial_room@instance",
+		Alive:      true,
+		Aggressive: true,
+		CombatMode: "defeat",
+		Attributes: model.Attributes{Resources: model.ResourceAttributes{HP: 40, MaxHP: 40}},
+	}
+	inst := &Instance{
+		ID:                "instance",
+		Rooms:             map[string]model.Room{npc.RoomID: {ID: npc.RoomID, NPCIDs: []string{npc.ID}}},
+		NPCs:              map[string]*NPCState{npc.ID: npc},
+		Objectives:        []Objective{{ID: "win_trial", Type: "kill", TargetID: "trial_master", Required: 1}},
+		ObjectiveProgress: map[string]int{},
+	}
+	m := NewManager(nil, nil, map[string]*Instance{inst.ID: inst}, nil, map[string]string{npc.RoomID: inst.ID}, map[string]*NPCState{npc.ID: npc})
+	_, defeated, _, ok := m.DefeatNPCNoLock(npc.ID)
+	if !ok || !defeated.Alive || !defeated.Defeated || defeated.Aggressive {
+		t.Fatalf("expected defeated npc to remain peacefully in room, got %+v", defeated)
+	}
+	if defeated.Attributes.Resources.HP != 10 {
+		t.Fatalf("expected defeated npc to retain quarter health, got %d", defeated.Attributes.Resources.HP)
 	}
 }
 

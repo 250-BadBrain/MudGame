@@ -158,6 +158,7 @@ type NPC struct {
 	Attributes        Attributes
 	WeaknessFlag      string
 	WeaknessModifiers map[string]int
+	CombatMode        string
 }
 
 type DialogueDef struct {

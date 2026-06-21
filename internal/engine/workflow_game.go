@@ -134,11 +134,12 @@ func DoRoomActionWithEffects(repo RuntimeRepository, playerID, action string) (S
 		return StateActionResult{}, err
 	}
 	msg := asString(res["message"])
+	choices, _ := res["choices"].([]map[string]string)
 	room, _, err := repo.GetRoomSnapshot(playerID)
 	if err != nil {
 		return StateActionResult{}, err
 	}
-	return StateActionResult{Message: msg, Room: room, NeedRoomUpdate: true}, nil
+	return StateActionResult{Message: msg, Room: room, Choices: choices, NeedRoomUpdate: true}, nil
 }
 
 func TalkWithView(repo RuntimeRepository, playerID, npcID string) (DialogueResult, error) {

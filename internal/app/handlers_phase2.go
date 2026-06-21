@@ -339,7 +339,7 @@ func (s *Server) handleGameDoAction(conn *websocket.Conn, cmd protocol.CommandMe
 	}
 	action := toString(cmd.Args["action"])
 	res, err := engine.DoRoomActionWithEffects(s.repo, playerID, action)
-	s.replyCommand(conn, "do_action", err, map[string]interface{}{"message": res.Message, "room": res.Room}, []string{res.Message})
+	s.replyCommand(conn, "do_action", err, map[string]interface{}{"message": res.Message, "room": res.Room, "choices": res.Choices}, []string{res.Message})
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
 	}

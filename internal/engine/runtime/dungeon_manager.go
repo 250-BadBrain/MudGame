@@ -31,21 +31,28 @@ type TemplateRoom struct {
 }
 
 type PuzzleAction struct {
-	ID             string
-	Label          string
-	PuzzleID       string
-	Operation      string
-	Rooms          []string
-	FromStates     []string
-	NextState      string
-	Message        string
-	RepeatMessage  string
-	FailureMessage string
-	RequiredItems  map[string]int
-	GiveItems      map[string]int
-	TakeItems      map[string]int
-	SetFlags       map[string]bool
-	AlertDelta     int
+	ID                 string
+	Label              string
+	PuzzleID           string
+	Operation          string
+	Rooms              []string
+	FromStates         []string
+	NextState          string
+	Message            string
+	RepeatMessage      string
+	FailureMessage     string
+	RequiredItems      map[string]int
+	RequiredDefeatNPCs []string
+	GiveItems          map[string]int
+	TakeItems          map[string]int
+	SetFlags           map[string]bool
+	AlertDelta         int
+	Choices            []ActionChoice
+}
+
+type ActionChoice struct {
+	ID    string
+	Label string
 }
 
 type Template struct {
@@ -65,6 +72,7 @@ type Template struct {
 	PuzzleActions       map[string]PuzzleAction
 	Stealth             StealthConfig
 	Patrols             []PatrolConfig
+	TemporaryItems      []string
 }
 
 type StealthConfig struct {
@@ -87,6 +95,7 @@ type Objective struct {
 	Description    string
 	Optional       bool
 	ExclusiveGroup string
+	Weight         int
 }
 
 type UnlockCondition struct {
@@ -113,6 +122,7 @@ type templateFile struct {
 	PuzzleActions       map[string]puzzleActionFile `json:"puzzleActions"`
 	Stealth             stealthFile                 `json:"stealth"`
 	Patrols             []patrolFile                `json:"patrols"`
+	TemporaryItems      []string                    `json:"temporaryItems"`
 }
 
 type templateRoomFile struct {
@@ -138,20 +148,27 @@ type exitRequirementFile struct {
 }
 
 type puzzleActionFile struct {
-	Label          string          `json:"label"`
-	PuzzleID       string          `json:"puzzleId"`
-	Operation      string          `json:"operation"`
-	Rooms          []string        `json:"rooms"`
-	FromStates     []string        `json:"fromStates"`
-	NextState      string          `json:"nextState"`
-	Message        string          `json:"message"`
-	RepeatMessage  string          `json:"repeatMessage"`
-	FailureMessage string          `json:"failureMessage"`
-	RequiredItems  map[string]int  `json:"requiredItems"`
-	GiveItems      map[string]int  `json:"giveItems"`
-	TakeItems      map[string]int  `json:"takeItems"`
-	SetFlags       map[string]bool `json:"setFlags"`
-	AlertDelta     int             `json:"alertDelta"`
+	Label              string             `json:"label"`
+	PuzzleID           string             `json:"puzzleId"`
+	Operation          string             `json:"operation"`
+	Rooms              []string           `json:"rooms"`
+	FromStates         []string           `json:"fromStates"`
+	NextState          string             `json:"nextState"`
+	Message            string             `json:"message"`
+	RepeatMessage      string             `json:"repeatMessage"`
+	FailureMessage     string             `json:"failureMessage"`
+	RequiredItems      map[string]int     `json:"requiredItems"`
+	RequiredDefeatNPCs []string           `json:"requiredDefeatNpcs"`
+	GiveItems          map[string]int     `json:"giveItems"`
+	TakeItems          map[string]int     `json:"takeItems"`
+	SetFlags           map[string]bool    `json:"setFlags"`
+	AlertDelta         int                `json:"alertDelta"`
+	Choices            []actionChoiceFile `json:"choices"`
+}
+
+type actionChoiceFile struct {
+	ID    string `json:"id"`
+	Label string `json:"label"`
 }
 
 type stealthFile struct {
@@ -174,6 +191,7 @@ type objectiveFile struct {
 	Description    string `json:"description"`
 	Optional       bool   `json:"optional"`
 	ExclusiveGroup string `json:"exclusiveGroup"`
+	Weight         int    `json:"weight"`
 }
 
 type unlockConditionFile struct {
@@ -200,6 +218,8 @@ type NPCState struct {
 	WeaknessFlag      string
 	WeaknessModifiers map[string]int
 	WeaknessApplied   bool
+	CombatMode        string
+	Defeated          bool
 }
 
 type Instance struct {
@@ -225,6 +245,8 @@ type Instance struct {
 	TurnCount         int
 	PatrolRoutes      map[string][]string
 	Stealth           StealthConfig
+	TemporaryItems    []string
+	PendingChoices    map[string]bool
 	Rewards           model.Rewards
 }
 
@@ -339,7 +361,8 @@ func (m *Manager) LoadTemplatesNoLock() error {
 				SafeRoomRecovery: df.Stealth.SafeRoomRecovery,
 				MaxAlert:         df.Stealth.MaxAlert,
 			},
-			Patrols: loadPatrols(df.Patrols),
+			Patrols:        loadPatrols(df.Patrols),
+			TemporaryItems: append([]string{}, df.TemporaryItems...),
 		}
 		if tpl.Name == "" {
 			tpl.Name = tplID
@@ -447,21 +470,35 @@ func loadPuzzleActions(files map[string]puzzleActionFile) map[string]PuzzleActio
 			continue
 		}
 		out[id] = PuzzleAction{
-			ID:             id,
-			Label:          strings.TrimSpace(action.Label),
-			PuzzleID:       strings.TrimSpace(action.PuzzleID),
-			Operation:      strings.TrimSpace(action.Operation),
-			Rooms:          append([]string{}, action.Rooms...),
-			FromStates:     append([]string{}, action.FromStates...),
-			NextState:      strings.TrimSpace(action.NextState),
-			Message:        strings.TrimSpace(action.Message),
-			RepeatMessage:  strings.TrimSpace(action.RepeatMessage),
-			FailureMessage: strings.TrimSpace(action.FailureMessage),
-			RequiredItems:  copyIntMap(action.RequiredItems),
-			GiveItems:      copyIntMap(action.GiveItems),
-			TakeItems:      copyIntMap(action.TakeItems),
-			SetFlags:       copyBoolMap(action.SetFlags),
-			AlertDelta:     action.AlertDelta,
+			ID:                 id,
+			Label:              strings.TrimSpace(action.Label),
+			PuzzleID:           strings.TrimSpace(action.PuzzleID),
+			Operation:          strings.TrimSpace(action.Operation),
+			Rooms:              append([]string{}, action.Rooms...),
+			FromStates:         append([]string{}, action.FromStates...),
+			NextState:          strings.TrimSpace(action.NextState),
+			Message:            strings.TrimSpace(action.Message),
+			RepeatMessage:      strings.TrimSpace(action.RepeatMessage),
+			FailureMessage:     strings.TrimSpace(action.FailureMessage),
+			RequiredItems:      copyIntMap(action.RequiredItems),
+			RequiredDefeatNPCs: append([]string{}, action.RequiredDefeatNPCs...),
+			GiveItems:          copyIntMap(action.GiveItems),
+			TakeItems:          copyIntMap(action.TakeItems),
+			SetFlags:           copyBoolMap(action.SetFlags),
+			AlertDelta:         action.AlertDelta,
+			Choices:            loadActionChoices(action.Choices),
+		}
+	}
+	return out
+}
+
+func loadActionChoices(files []actionChoiceFile) []ActionChoice {
+	out := make([]ActionChoice, 0, len(files))
+	for _, choice := range files {
+		id := strings.TrimSpace(choice.ID)
+		label := strings.TrimSpace(choice.Label)
+		if id != "" && label != "" {
+			out = append(out, ActionChoice{ID: id, Label: label})
 		}
 	}
 	return out
@@ -513,6 +550,7 @@ func loadObjectives(files []objectiveFile) []Objective {
 			Description:    strings.TrimSpace(obj.Description),
 			Optional:       obj.Optional,
 			ExclusiveGroup: strings.TrimSpace(obj.ExclusiveGroup),
+			Weight:         max(1, obj.Weight),
 		})
 	}
 	return out
@@ -632,6 +670,8 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 		PuzzleAttempts:    map[string]int{},
 		PatrolRoutes:      map[string][]string{},
 		Stealth:           tpl.Stealth,
+		TemporaryItems:    append([]string{}, tpl.TemporaryItems...),
+		PendingChoices:    map[string]bool{},
 		Rewards:           cloneRewards(tpl.Rewards),
 	}
 
@@ -696,6 +736,7 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 				Alive:             true,
 				WeaknessFlag:      npcTemplate.WeaknessFlag,
 				WeaknessModifiers: copyIntMap(npcTemplate.WeaknessModifiers),
+				CombatMode:        npcTemplate.CombatMode,
 			}
 			inst.NPCs[npcID] = npcState
 			m.npcs[npcID] = npcState
@@ -831,7 +872,13 @@ func (m *Manager) DefeatNPCNoLock(npcID string) (*Instance, *NPCState, int, bool
 		return nil, nil, 0, false
 	}
 
-	npc.Alive = false
+	if npc.CombatMode == "defeat" {
+		npc.Defeated = true
+		npc.Aggressive = false
+		npc.Attributes.Resources.HP = max(1, npc.Attributes.Resources.MaxHP/4)
+	} else {
+		npc.Alive = false
+	}
 
 	oldProgress := inst.Progress
 	progressGain := 0
@@ -1010,7 +1057,7 @@ func (m *Manager) updateObjectiveProgressNoLock(inst *Instance) {
 	completed := 0
 	total := 0
 	groupCompleted := map[string]bool{}
-	groups := map[string]bool{}
+	groupWeights := map[string]int{}
 	for _, obj := range inst.Objectives {
 		if obj.Optional {
 			continue
@@ -1020,22 +1067,25 @@ func (m *Manager) updateObjectiveProgressNoLock(inst *Instance) {
 			required = 1
 		}
 		isComplete := inst.ObjectiveProgress[obj.ID] >= required
+		weight := max(1, obj.Weight)
 		if obj.ExclusiveGroup != "" {
-			groups[obj.ExclusiveGroup] = true
+			if weight > groupWeights[obj.ExclusiveGroup] {
+				groupWeights[obj.ExclusiveGroup] = weight
+			}
 			if isComplete {
 				groupCompleted[obj.ExclusiveGroup] = true
 			}
 			continue
 		}
-		total++
+		total += weight
 		if isComplete {
-			completed++
+			completed += weight
 		}
 	}
-	for group := range groups {
-		total++
+	for group, weight := range groupWeights {
+		total += weight
 		if groupCompleted[group] {
-			completed++
+			completed += weight
 		}
 	}
 	if total == 0 {

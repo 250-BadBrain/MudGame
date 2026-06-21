@@ -18,6 +18,7 @@ type TransitionResult struct {
 type StateActionResult struct {
 	Message        string
 	Room           map[string]interface{}
+	Choices        []map[string]string
 	RoomMessage    string
 	NeedRoomUpdate bool
 }

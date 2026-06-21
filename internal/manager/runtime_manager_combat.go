@@ -226,6 +226,7 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 
 	if dungeonTarget.Attributes.Resources.HP == 0 {
 		defeatedName := dungeonTarget.Name
+		defeatOnly := dungeonTarget.CombatMode == "defeat"
 		progress := 0
 		if inst, defeated, progressGain, ok := r.defeatDungeonNPCNoLock(dungeonTarget.ID); ok {
 			if defeated != nil && defeated.Name != "" {
@@ -236,7 +237,11 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: attacker.ID, Message: "你击败了" + defeatedName + "。当前完成度" + intToString(progress) + "%"})
 			}
 		}
-		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: defeatedName + "大叫一声，倒在地上，死了！"})
+		if defeatOnly {
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: defeatedName + "踉跄后退，已经无力再战。"})
+		} else {
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: defeatedName + "大叫一声，倒在地上，死了！"})
+		}
 		r.clearCombatNoLock(attacker)
 	}
 

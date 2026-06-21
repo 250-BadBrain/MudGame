@@ -75,6 +75,7 @@ type rawNPC struct {
 	Skills            map[string]int   `json:"skills"`
 	WeaknessFlag      string           `json:"weaknessFlag"`
 	WeaknessModifiers map[string]int   `json:"weaknessModifiers"`
+	CombatMode        string           `json:"combatMode"`
 }
 
 type rawWorldFile struct {
@@ -367,6 +368,7 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 			Attributes:        model.NormalizeAttributes(raw.Attributes),
 			WeaknessFlag:      strings.TrimSpace(raw.WeaknessFlag),
 			WeaknessModifiers: cloneIntMap(raw.WeaknessModifiers),
+			CombatMode:        strings.TrimSpace(raw.CombatMode),
 		}
 	}
 	return npcs, nil

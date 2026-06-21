@@ -369,6 +369,9 @@ func (r *RuntimeManager) EnterDungeon(playerID, dungeonID string) (map[string]in
 	if err != nil {
 		return nil, err
 	}
+	for _, itemID := range inst.TemporaryItems {
+		delete(p.Backpack, itemID)
+	}
 	spawn := inst.SpawnRoomID
 	if spawn == "" {
 		spawn = p.RoomID
@@ -415,6 +418,9 @@ func (r *RuntimeManager) LeaveDungeon(playerID string) (map[string]interface{}, 
 		s := r.buildDungeonSettlementNoLock(inst)
 		settlement = &s
 		applyDungeonSettlementReward(p, s)
+		for _, itemID := range inst.TemporaryItems {
+			delete(p.Backpack, itemID)
+		}
 	}
 	fallback := "ly_00"
 	if inst != nil && inst.EntryRoomID != "" {

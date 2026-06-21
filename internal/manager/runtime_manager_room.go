@@ -200,6 +200,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		npcIsShop := false
 		npcAggressive := false
 		npcState := "IDLE"
+		combatMode := "kill"
 		dialogueID := ""
 		questIDs := []string{}
 		skills := map[string]int{}
@@ -220,6 +221,9 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			npcDescription = npc.Description
 			npcIsShop = npc.IsShop
 			npcAggressive = npc.Aggressive
+			if npc.CombatMode != "" {
+				combatMode = npc.CombatMode
+			}
 			dialogueID = npc.DialogueID
 			questIDs = append([]string{}, npc.QuestIDs...)
 			for skillID, level := range npc.Skills {
@@ -245,6 +249,9 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			npcDescription = dnpc.Description
 			npcIsShop = dnpc.IsShop
 			npcAggressive = dnpc.Aggressive
+			if dnpc.CombatMode != "" {
+				combatMode = dnpc.CombatMode
+			}
 			dialogueID = dnpc.DialogueID
 			for skillID, level := range dnpc.Skills {
 				skills[skillID] = level
@@ -298,6 +305,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			"capabilities": capabilities,
 			"skills":       skills,
 			"state":        npcState,
+			"combatMode":   combatMode,
 		})
 	}
 	return playersInRoom, npcs, nil
