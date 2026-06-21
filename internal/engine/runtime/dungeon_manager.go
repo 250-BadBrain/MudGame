@@ -48,6 +48,10 @@ type PuzzleAction struct {
 	SetFlags           map[string]bool
 	AlertDelta         int
 	Choices            []ActionChoice
+	DialogueNPCID      string
+	MoveToRoomID       string
+	RemoveNPCs         []string
+	KillNPCs           []string
 }
 
 type ActionChoice struct {
@@ -172,6 +176,10 @@ type puzzleActionFile struct {
 	SetFlags           map[string]bool    `json:"setFlags"`
 	AlertDelta         int                `json:"alertDelta"`
 	Choices            []actionChoiceFile `json:"choices"`
+	DialogueNPCID      string             `json:"dialogueNpcId"`
+	MoveToRoomID       string             `json:"moveToRoomId"`
+	RemoveNPCs         []string           `json:"removeNpcs"`
+	KillNPCs           []string           `json:"killNpcs"`
 }
 
 type actionChoiceFile struct {
@@ -231,31 +239,32 @@ type NPCState struct {
 }
 
 type Instance struct {
-	ID                string
-	DungeonID         string
-	Name              string
-	Sequence          int
-	ChainID           string
-	Chapter           int
-	Progress          int
-	OwnerPlayer       string
-	EntryRoomID       string
-	SpawnRoomID       string
-	Rooms             map[string]model.Room
-	NPCs              map[string]*NPCState
-	ProgressOnKill    map[string]int
-	Objectives        []Objective
-	ObjectiveProgress map[string]int
-	PuzzleStates      map[string]string
-	PuzzleAttempts    map[string]int
-	CheckpointRoomID  string
-	AlertLevel        int
-	TurnCount         int
-	PatrolRoutes      map[string][]string
-	Stealth           StealthConfig
-	TemporaryItems    []string
-	PendingChoices    map[string]bool
-	Rewards           model.Rewards
+	ID                  string
+	DungeonID           string
+	Name                string
+	Sequence            int
+	ChainID             string
+	Chapter             int
+	Progress            int
+	OwnerPlayer         string
+	EntryRoomID         string
+	SpawnRoomID         string
+	Rooms               map[string]model.Room
+	NPCs                map[string]*NPCState
+	ProgressOnKill      map[string]int
+	Objectives          []Objective
+	ObjectiveProgress   map[string]int
+	PuzzleStates        map[string]string
+	PuzzleAttempts      map[string]int
+	CheckpointRoomID    string
+	AlertLevel          int
+	TurnCount           int
+	PatrolRoutes        map[string][]string
+	Stealth             StealthConfig
+	TemporaryItems      []string
+	PendingChoices      map[string]bool
+	PendingChoicePrompt string
+	Rewards             model.Rewards
 }
 
 type Settlement struct {
@@ -495,6 +504,10 @@ func loadPuzzleActions(files map[string]puzzleActionFile) map[string]PuzzleActio
 			SetFlags:           copyBoolMap(action.SetFlags),
 			AlertDelta:         action.AlertDelta,
 			Choices:            loadActionChoices(action.Choices),
+			DialogueNPCID:      strings.TrimSpace(action.DialogueNPCID),
+			MoveToRoomID:       strings.TrimSpace(action.MoveToRoomID),
+			RemoveNPCs:         append([]string{}, action.RemoveNPCs...),
+			KillNPCs:           append([]string{}, action.KillNPCs...),
 		}
 	}
 	return out
@@ -1028,6 +1041,158 @@ func (m *Manager) PendingActionChoicesNoLock(inst *Instance) []ActionChoice {
 		}
 	}
 	return out
+}
+
+func (m *Manager) PendingChoicePromptNoLock(inst *Instance) string {
+	if inst == nil || len(inst.PendingChoices) == 0 {
+		return ""
+	}
+	if inst.PendingChoicePrompt != "" {
+		return inst.PendingChoicePrompt
+	}
+	tpl, ok := m.templates[inst.DungeonID]
+	if !ok {
+		return ""
+	}
+	for _, action := range tpl.PuzzleActions {
+		if len(action.Choices) == 0 {
+			continue
+		}
+		allPending := true
+		for _, choice := range action.Choices {
+			if !inst.PendingChoices[choice.ID] {
+				allPending = false
+				break
+			}
+		}
+		if allPending {
+			return action.Message
+		}
+	}
+	return ""
+}
+
+func (m *Manager) RoomActionsForPayloadNoLock(roomID string, actions []string) []string {
+	instanceID, ok := m.roomInstance[roomID]
+	if !ok {
+		return append([]string{}, actions...)
+	}
+	inst := m.instances[instanceID]
+	if inst == nil {
+		return append([]string{}, actions...)
+	}
+	tpl, ok := m.templates[inst.DungeonID]
+	if !ok {
+		return append([]string{}, actions...)
+	}
+	out := make([]string, 0, len(actions))
+	for _, actionID := range actions {
+		action, exists := tpl.PuzzleActions[actionID]
+		if !exists || action.DialogueNPCID == "" {
+			out = append(out, actionID)
+		}
+	}
+	return out
+}
+
+func (m *Manager) ExitVisibleNoLock(roomID string, requirement model.ExitRequirement) bool {
+	if len(requirement.RequiredPuzzleStates) == 0 {
+		return true
+	}
+	instanceID, ok := m.roomInstance[roomID]
+	if !ok {
+		return true
+	}
+	inst := m.instances[instanceID]
+	if inst == nil {
+		return true
+	}
+	for puzzleID, expected := range requirement.RequiredPuzzleStates {
+		if inst.PuzzleStates[puzzleID] != expected {
+			return false
+		}
+	}
+	return true
+}
+
+func (m *Manager) DialogueActionsNoLock(playerID, roomID, npcTemplateID string) []PuzzleAction {
+	inst, ok := m.PlayerInstanceNoLock(playerID)
+	if !ok || inst == nil {
+		return nil
+	}
+	tpl, ok := m.templates[inst.DungeonID]
+	if !ok {
+		return nil
+	}
+	out := []PuzzleAction{}
+	for _, action := range tpl.PuzzleActions {
+		if action.DialogueNPCID != npcTemplateID {
+			continue
+		}
+		allowedRoom := len(action.Rooms) == 0
+		for _, baseRoomID := range action.Rooms {
+			if strings.HasSuffix(roomID, "_"+baseRoomID) {
+				allowedRoom = true
+			}
+		}
+		if !allowedRoom {
+			continue
+		}
+		status := m.PuzzleActionStateStatusNoLock(inst, action)
+		if status == PuzzleActionReady || status == PuzzleActionRepeat && len(inst.PendingChoices) > 0 {
+			out = append(out, action)
+		}
+	}
+	sort.Slice(out, func(i, j int) bool { return out[i].ID < out[j].ID })
+	return out
+}
+
+func (m *Manager) InstanceRoomIDNoLock(inst *Instance, baseRoomID string) string {
+	if inst == nil || baseRoomID == "" {
+		return ""
+	}
+	for roomID := range inst.Rooms {
+		if strings.HasSuffix(roomID, "_"+baseRoomID) {
+			return roomID
+		}
+	}
+	return ""
+}
+
+func (m *Manager) ApplyActionNPCEffectsNoLock(inst *Instance, roomID string, removeTemplates, killTemplates []string) {
+	if inst == nil {
+		return
+	}
+	removeSet := map[string]bool{}
+	killSet := map[string]bool{}
+	for _, id := range removeTemplates {
+		removeSet[id] = true
+	}
+	for _, id := range killTemplates {
+		killSet[id] = true
+	}
+	room := inst.Rooms[roomID]
+	remaining := make([]string, 0, len(room.NPCIDs))
+	for _, npcID := range room.NPCIDs {
+		npc := inst.NPCs[npcID]
+		if npc == nil {
+			continue
+		}
+		if removeSet[npc.TemplateID] {
+			delete(inst.NPCs, npcID)
+			delete(m.npcs, npcID)
+			continue
+		}
+		if killSet[npc.TemplateID] {
+			npc.Alive = false
+			npc.Defeated = false
+			npc.Aggressive = false
+			npc.Attributes.Resources.HP = 0
+		}
+		remaining = append(remaining, npcID)
+	}
+	room.NPCIDs = remaining
+	inst.Rooms[roomID] = room
 }
 
 func (m *Manager) puzzleStateReachableNoLock(dungeonID, puzzleID, start, target string) bool {

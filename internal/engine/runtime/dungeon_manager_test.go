@@ -158,6 +158,32 @@ func testContainsString(values []string, target string) bool {
 	return false
 }
 
+func TestXunqinPendingChoicesKeepTheirExactPrompt(t *testing.T) {
+	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
+	if err := m.LoadTemplatesNoLock(); err != nil {
+		t.Fatalf("load dungeon templates failed: %v", err)
+	}
+	for _, id := range m.DungeonTemplateIDsNoLock() {
+		tpl, _ := m.DungeonTemplateNoLock(id)
+		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 11 {
+			continue
+		}
+		for actionID, action := range tpl.PuzzleActions {
+			if len(action.Choices) == 0 {
+				continue
+			}
+			pending := map[string]bool{}
+			for _, choice := range action.Choices {
+				pending[choice.ID] = true
+			}
+			inst := &Instance{DungeonID: id, PendingChoices: pending, PendingChoicePrompt: action.Message}
+			if got := m.PendingChoicePromptNoLock(inst); got != action.Message {
+				t.Fatalf("dungeon %s action %s lost its pending prompt: got %q want %q", id, actionID, got, action.Message)
+			}
+		}
+	}
+}
+
 func TestBuildDungeonSettlementUsesConfiguredRewards(t *testing.T) {
 	m := NewManager(nil, nil, nil, nil, nil, nil)
 	inst := &Instance{
@@ -278,6 +304,29 @@ func TestDefeatModeNPCRemainsInRoomWithoutBeingKillableAgain(t *testing.T) {
 	}
 	if defeated.Attributes.Resources.HP != 10 {
 		t.Fatalf("expected defeated npc to retain quarter health, got %d", defeated.Attributes.Resources.HP)
+	}
+}
+
+func TestPuzzleActionNPCEffectsRemoveOrLeaveCorpse(t *testing.T) {
+	roomID := "room@instance"
+	removed := &NPCState{ID: "wounded", TemplateID: "wounded", RoomID: roomID, Alive: true}
+	killed := &NPCState{ID: "enemy", TemplateID: "enemy", RoomID: roomID, Alive: true, Aggressive: true, Attributes: model.Attributes{Resources: model.ResourceAttributes{HP: 20, MaxHP: 20}}}
+	inst := &Instance{
+		ID:    "instance",
+		Rooms: map[string]model.Room{roomID: {ID: roomID, NPCIDs: []string{removed.ID, killed.ID}}},
+		NPCs:  map[string]*NPCState{removed.ID: removed, killed.ID: killed},
+	}
+	m := NewManager(nil, nil, map[string]*Instance{inst.ID: inst}, nil, map[string]string{roomID: inst.ID}, map[string]*NPCState{removed.ID: removed, killed.ID: killed})
+	m.ApplyActionNPCEffectsNoLock(inst, roomID, []string{"wounded"}, []string{"enemy"})
+	if _, exists := inst.NPCs[removed.ID]; exists {
+		t.Fatalf("expected removed npc deleted from instance")
+	}
+	if killed.Alive || killed.Attributes.Resources.HP != 0 || killed.Aggressive {
+		t.Fatalf("expected killed npc to remain as non-hostile corpse, got %+v", killed)
+	}
+	room := inst.Rooms[roomID]
+	if len(room.NPCIDs) != 1 || room.NPCIDs[0] != killed.ID {
+		t.Fatalf("expected only corpse to remain in room, got %+v", room.NPCIDs)
 	}
 }
 

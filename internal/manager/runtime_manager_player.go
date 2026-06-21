@@ -883,11 +883,14 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			"actionStatus": "repeat",
 		}
 		if len(inst.PendingChoices) > 0 {
+			if prompt := r.dungeonMgr.PendingChoicePromptNoLock(inst); prompt != "" {
+				result["message"] = prompt
+			}
 			result["choices"] = dungeonChoicePayload(r.dungeonMgr.PendingActionChoicesNoLock(inst))
 		}
 		if currentState == action.NextState && len(action.Choices) > 0 && len(inst.PendingChoices) == 0 {
 			result["message"] = action.Message
-			result["choices"] = activateDungeonChoices(inst, action.Choices)
+			result["choices"] = activateDungeonChoices(inst, action.Choices, action.Message)
 		}
 		return result, true
 	}
@@ -935,6 +938,7 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 	}
 	if inst.PendingChoices[actionID] {
 		inst.PendingChoices = map[string]bool{}
+		inst.PendingChoicePrompt = ""
 	}
 	for itemID, amount := range action.TakeItems {
 		if amount <= 0 {
@@ -960,6 +964,16 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 		currentState = action.NextState
 		r.dungeonMgr.ApplyPuzzleObjectiveNoLock(inst, action.PuzzleID, currentState)
 	}
+	r.dungeonMgr.ApplyActionNPCEffectsNoLock(inst, room.ID, action.RemoveNPCs, action.KillNPCs)
+	moved := false
+	if action.MoveToRoomID != "" {
+		if targetRoomID := r.dungeonMgr.InstanceRoomIDNoLock(inst, action.MoveToRoomID); targetRoomID != "" {
+			p.RoomID = targetRoomID
+			moved = true
+			r.applyEnterRoomDungeonObjectiveNoLock(targetRoomID)
+			r.dungeonMgr.UpdateCheckpointNoLock(targetRoomID)
+		}
+	}
 	inst.AlertLevel += action.AlertDelta
 	if inst.AlertLevel < 0 {
 		inst.AlertLevel = 0
@@ -974,15 +988,17 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 		"puzzleState":  currentState,
 		"alertLevel":   inst.AlertLevel,
 		"actionStatus": "success",
+		"moved":        moved,
 	}
 	if len(action.Choices) > 0 {
-		result["choices"] = activateDungeonChoices(inst, action.Choices)
+		result["choices"] = activateDungeonChoices(inst, action.Choices, action.Message)
 	}
 	return result, true
 }
 
-func activateDungeonChoices(inst *engruntime.Instance, choices []engruntime.ActionChoice) []map[string]string {
+func activateDungeonChoices(inst *engruntime.Instance, choices []engruntime.ActionChoice, prompt string) []map[string]string {
 	inst.PendingChoices = map[string]bool{}
+	inst.PendingChoicePrompt = prompt
 	for _, choice := range choices {
 		inst.PendingChoices[choice.ID] = true
 	}

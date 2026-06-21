@@ -221,6 +221,10 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 				PuzzleID           string         `json:"puzzleId"`
 				Rooms              []string       `json:"rooms"`
 				RequiredDefeatNPCs []string       `json:"requiredDefeatNpcs"`
+				DialogueNPCID      string         `json:"dialogueNpcId"`
+				MoveToRoomID       string         `json:"moveToRoomId"`
+				RemoveNPCs         []string       `json:"removeNpcs"`
+				KillNPCs           []string       `json:"killNpcs"`
 				RequiredItems      map[string]int `json:"requiredItems"`
 				GiveItems          map[string]int `json:"giveItems"`
 				TakeItems          map[string]int `json:"takeItems"`
@@ -339,6 +343,44 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			for _, roomID := range action.Rooms {
 				if _, ok := dungeon.Rooms[roomID]; !ok {
 					t.Fatalf("dungeon %s action %s references missing room %s", dungeon.ID, actionID, roomID)
+				}
+			}
+			if action.MoveToRoomID != "" {
+				if _, ok := dungeon.Rooms[action.MoveToRoomID]; !ok {
+					t.Fatalf("dungeon %s action %s moves to missing room %s", dungeon.ID, actionID, action.MoveToRoomID)
+				}
+			}
+			for _, npcID := range append(append([]string{}, action.RemoveNPCs...), action.KillNPCs...) {
+				present := false
+				for _, roomID := range action.Rooms {
+					for _, roomNPCID := range dungeon.Rooms[roomID].NPCs {
+						if roomNPCID == npcID {
+							present = true
+						}
+					}
+				}
+				if !present {
+					t.Fatalf("dungeon %s action %s affects npc %s outside its rooms", dungeon.ID, actionID, npcID)
+				}
+			}
+			if action.DialogueNPCID != "" {
+				npc, ok := data.NPCs[action.DialogueNPCID]
+				if !ok {
+					t.Fatalf("dungeon %s action %s references missing dialogue npc %s", dungeon.ID, actionID, action.DialogueNPCID)
+				}
+				if npc.DialogueID == "" {
+					t.Fatalf("dungeon %s action %s binds npc %s without dialogue", dungeon.ID, actionID, action.DialogueNPCID)
+				}
+				present := false
+				for _, roomID := range action.Rooms {
+					for _, roomNPCID := range dungeon.Rooms[roomID].NPCs {
+						if roomNPCID == action.DialogueNPCID {
+							present = true
+						}
+					}
+				}
+				if !present {
+					t.Fatalf("dungeon %s action %s dialogue npc %s is not in its rooms", dungeon.ID, actionID, action.DialogueNPCID)
 				}
 			}
 			for _, npcID := range action.RequiredDefeatNPCs {

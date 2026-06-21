@@ -151,14 +151,20 @@ func TalkWithView(repo RuntimeRepository, playerID, npcID string) (DialogueResul
 }
 
 func ChooseDialogueWithEffects(repo RuntimeRepository, playerID, npcID, optionID string) (DialogueResult, error) {
-	dialogue, message, logs, err := repo.ChooseDialogue(playerID, npcID, optionID)
+	dialogue, message, logs, actionResult, err := repo.ChooseDialogue(playerID, npcID, optionID)
 	if err != nil {
 		return DialogueResult{}, err
 	}
 	if message != "" {
 		logs = append([]string{message}, logs...)
 	}
-	return DialogueResult{Dialogue: dialogue, Message: message, Logs: logs}, nil
+	choices, _ := actionResult["choices"].([]map[string]string)
+	moved, _ := actionResult["moved"].(bool)
+	room, _, roomErr := repo.GetRoomSnapshot(playerID)
+	if roomErr != nil {
+		return DialogueResult{}, roomErr
+	}
+	return DialogueResult{Dialogue: dialogue, Message: message, Logs: logs, Choices: choices, Room: room, Moved: moved}, nil
 }
 
 func GetQuestsView(repo RuntimeRepository, playerID string) (QuestListResult, error) {

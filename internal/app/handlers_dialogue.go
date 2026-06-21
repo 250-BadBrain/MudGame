@@ -25,7 +25,7 @@ func (s *Server) handleGameChooseDialogue(conn *websocket.Conn, cmd protocol.Com
 	npcID := toString(cmd.Args["npcId"])
 	optionID := toString(cmd.Args["optionId"])
 	res, err := engine.ChooseDialogueWithEffects(s.repo, playerID, npcID, optionID)
-	s.replyCommand(conn, "choose_dialogue", err, map[string]interface{}{"dialogue": res.Dialogue, "message": res.Message}, res.Logs)
+	s.replyCommand(conn, "choose_dialogue", err, map[string]interface{}{"dialogue": res.Dialogue, "message": res.Message, "choices": res.Choices, "room": res.Room, "moved": res.Moved}, res.Logs)
 }
 
 func (s *Server) handleGameGetQuests(conn *websocket.Conn, _ protocol.CommandMessage) {

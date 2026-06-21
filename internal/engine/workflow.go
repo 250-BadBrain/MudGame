@@ -86,6 +86,9 @@ type DialogueResult struct {
 	Dialogue map[string]interface{}
 	Message  string
 	Logs     []string
+	Choices  []map[string]string
+	Room     map[string]interface{}
+	Moved    bool
 }
 
 type QuestListResult struct {
@@ -127,7 +130,7 @@ type RuntimeRepository interface {
 	Mine(playerID string) (int, int, string, error)
 	DoRoomAction(playerID, action string) (map[string]interface{}, error)
 	Talk(playerID, npcID string) (map[string]interface{}, error)
-	ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, error)
+	ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, map[string]interface{}, error)
 	GetQuests(playerID string) ([]map[string]interface{}, error)
 	GetFactions(playerID string) ([]map[string]interface{}, error)
 	Heal(playerID string) (string, error)

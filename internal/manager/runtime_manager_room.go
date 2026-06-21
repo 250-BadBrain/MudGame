@@ -136,7 +136,14 @@ func (r *RuntimeManager) buildRoomPayload(roomID string, players map[string]*mod
 	}
 	exits := map[string]map[string]interface{}{}
 	for dir, ex := range room.Exits {
+		if requirement, exists := room.ExitRequirements[dir]; exists && r.dungeonMgr != nil && !r.dungeonMgr.ExitVisibleNoLock(room.ID, requirement) {
+			continue
+		}
 		exits[dir] = map[string]interface{}{"targetRoomId": ex.TargetRoomID, "targetRoomName": ex.TargetRoomName}
+	}
+	actions := room.Actions
+	if r.dungeonMgr != nil {
+		actions = r.dungeonMgr.RoomActionsForPayloadNoLock(room.ID, room.Actions)
 	}
 	roomPayload := map[string]interface{}{
 		"id":            room.ID,
@@ -148,7 +155,7 @@ func (r *RuntimeManager) buildRoomPayload(roomID string, players map[string]*mod
 		"tags":          room.Tags,
 		"safeZone":      room.SafeZone,
 		"function":      room.Function,
-		"actions":       room.Actions,
+		"actions":       actions,
 		"actionLabels":  room.ActionLabels,
 		"playersInRoom": playersInRoom,
 		"npcs":          npcs,

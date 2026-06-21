@@ -3,8 +3,10 @@ package manager
 import (
 	"errors"
 	"sort"
+	"strings"
 	"time"
 
+	engruntime "mudgame/server/internal/engine/runtime"
 	"mudgame/server/internal/exception"
 	"mudgame/server/internal/model"
 )
@@ -35,17 +37,17 @@ func (r *RuntimeManager) Talk(playerID, npcID string) (map[string]interface{}, e
 	return r.dialoguePayloadNoLock(p, npc, dialogue), nil
 }
 
-func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, error) {
+func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, map[string]interface{}, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
 	players, err := r.loadPlayers()
 	if err != nil {
-		return nil, "", nil, err
+		return nil, "", nil, nil, err
 	}
 	p, ok := players[playerID]
 	if !ok {
-		return nil, "", nil, exception.ErrPlayerNotFound
+		return nil, "", nil, nil, exception.ErrPlayerNotFound
 	}
 	if p.QuestStates == nil {
 		p.QuestStates = map[string]model.QuestState{}
@@ -58,11 +60,40 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	}
 	npc, err := r.npcInPlayerRoomNoLock(p, npcID)
 	if err != nil {
-		return nil, "", nil, err
+		return nil, "", nil, nil, err
 	}
 	dialogue, ok := fileDialogues[npc.DialogueID]
 	if !ok {
-		return nil, "", nil, errors.New("dialogue_not_found")
+		return nil, "", nil, nil, errors.New("dialogue_not_found")
+	}
+	if strings.HasPrefix(optionID, "dungeon_action:") {
+		actionID := strings.TrimPrefix(optionID, "dungeon_action:")
+		room, ok := r.roomByIDNoLock(p.RoomID, map[string]model.Room{})
+		if !ok {
+			staticRooms, loadErr := r.loadRooms()
+			if loadErr != nil {
+				return nil, "", nil, nil, loadErr
+			}
+			room, ok = r.roomByIDNoLock(p.RoomID, staticRooms)
+		}
+		if !ok {
+			return nil, "", nil, nil, exception.ErrRoomNotFound
+		}
+		inst, action, exists := r.dungeonMgr.PuzzleActionNoLock(p.ID, room.ID, actionID)
+		dnpc, npcExists := r.dungeonNPCByIDNoLock(npc.ID)
+		if !exists || !npcExists || action.DialogueNPCID != dnpc.TemplateID || !r.puzzleActionRequirementsMetNoLock(p, room, inst, action) {
+			return nil, "", nil, nil, errors.New("dialogue_option_not_found")
+		}
+		actionResult, handled := r.executePuzzleActionNoLock(p, room, actionID)
+		if !handled {
+			return nil, "", nil, nil, errors.New("dialogue_option_not_found")
+		}
+		if err := r.savePlayers(players); err != nil {
+			return nil, "", nil, nil, err
+		}
+		payload := r.dialoguePayloadNoLock(p, npc, dialogue)
+		message, _ := actionResult["message"].(string)
+		return payload, message, nil, actionResult, nil
 	}
 	var selected *model.DialogueOption
 	for i := range dialogue.Options {
@@ -73,7 +104,7 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 		}
 	}
 	if selected == nil {
-		return nil, "", nil, errors.New("dialogue_option_not_found")
+		return nil, "", nil, nil, errors.New("dialogue_option_not_found")
 	}
 
 	logs := []string{}
@@ -107,16 +138,16 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	if selected.CompleteQuestID != "" {
 		questLogs, err := r.completeQuestNoLock(p, selected.CompleteQuestID)
 		if err != nil {
-			return nil, "", nil, err
+			return nil, "", nil, nil, err
 		}
 		logs = append(logs, questLogs...)
 	}
 
 	if err := r.savePlayers(players); err != nil {
-		return nil, "", nil, err
+		return nil, "", nil, nil, err
 	}
 	payload := r.dialoguePayloadNoLock(p, npc, dialogue)
-	return payload, selected.Response, logs, nil
+	return payload, selected.Response, logs, nil, nil
 }
 
 func (r *RuntimeManager) GetQuests(playerID string) ([]map[string]interface{}, error) {
@@ -195,6 +226,20 @@ func (r *RuntimeManager) dialoguePayloadNoLock(p *model.Player, npc model.NPC, d
 			"text": opt.Text,
 		})
 	}
+	if r.dungeonMgr != nil {
+		if dnpc, ok := r.dungeonNPCByIDNoLock(npc.ID); ok {
+			staticRooms, _ := r.loadRooms()
+			room, roomOK := r.roomByIDNoLock(p.RoomID, staticRooms)
+			if roomOK {
+				for _, action := range r.dungeonMgr.DialogueActionsNoLock(p.ID, room.ID, dnpc.TemplateID) {
+					inst, _, _ := r.dungeonMgr.PuzzleActionNoLock(p.ID, room.ID, action.ID)
+					if r.puzzleActionRequirementsMetNoLock(p, room, inst, action) {
+						options = append(options, map[string]interface{}{"id": "dungeon_action:" + action.ID, "text": action.Label})
+					}
+				}
+			}
+		}
+	}
 	return map[string]interface{}{
 		"id":      dialogue.ID,
 		"npcId":   npc.ID,
@@ -203,6 +248,35 @@ func (r *RuntimeManager) dialoguePayloadNoLock(p *model.Player, npc model.NPC, d
 		"opening": dialogue.Opening,
 		"options": options,
 	}
+}
+
+func (r *RuntimeManager) puzzleActionRequirementsMetNoLock(p *model.Player, room model.Room, inst *engruntime.Instance, action engruntime.PuzzleAction) bool {
+	if p == nil || inst == nil {
+		return false
+	}
+	if len(inst.PendingChoices) > 0 && r.dungeonMgr.PuzzleActionStateStatusNoLock(inst, action) == engruntime.PuzzleActionRepeat {
+		return true
+	}
+	for itemID, amount := range action.RequiredItems {
+		if p.Backpack[itemID] < amount {
+			return false
+		}
+	}
+	for _, templateID := range action.RequiredDefeatNPCs {
+		found := false
+		for _, npc := range inst.NPCs {
+			if npc != nil && npc.RoomID == room.ID && npc.TemplateID == templateID {
+				found = true
+				if npc.Alive && !npc.Defeated {
+					return false
+				}
+			}
+		}
+		if !found {
+			return false
+		}
+	}
+	return true
 }
 
 func (r *RuntimeManager) dialogueRequirementMetNoLock(p *model.Player, req model.DialogueRequire) bool {
