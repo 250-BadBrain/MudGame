@@ -130,7 +130,6 @@
                     <template v-else>{{ getLogText(log) }}</template>
                 </template>
                 <template v-else-if="isDungeonChoiceLog(log)">
-                    <span>{{ getLogText(log) }}</span>
                     <span class="dungeon-choice-buttons">
                         <button v-for="choice in log.choices" :key="choice.id" :disabled="log.used" @click="chooseDungeonAction(log, choice.id)">{{ choice.label }}</button>
                     </span>
@@ -1280,7 +1279,7 @@ const handleMessage = (msg) => {
           }
           (msg.logs || []).forEach(l => addLog(l));
           if (Array.isArray(msg.results?.choices) && msg.results.choices.length) {
-              logs.value.push({ type: 'dungeon_choice', text: '请选择：', choices: msg.results.choices, used: false });
+              logs.value.push({ type: 'dungeon_choice', text: '', choices: msg.results.choices, used: false });
               scrollToBottom();
           }
           if (showInfoPanel.value && currentPanel.value === 'backpack') {
@@ -2598,10 +2597,10 @@ const formatMoney = (money) => {
 }
 
 .dungeon-choice-buttons {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-left: 8px;
+    margin-top: 4px;
 }
 
 .dungeon-choice-buttons button {

@@ -186,7 +186,7 @@
       <div v-if="currentPanel === 'dungeons'" class="maps-panel-container">
         <div class="map-list-area">
           <ul v-if="dungeonsList && dungeonsList.length > 0" class="map-list">
-            <li v-for="dungeon in dungeonsList" :key="dungeon.id" class="map-item"
+            <li v-for="dungeon in standaloneDungeons" :key="dungeon.id" class="map-item"
               :class="{ 'selected': selectedDungeonId === dungeon.id }"
               @mousedown.prevent
               @click="$emit('selectDungeon', dungeon.id)">
@@ -194,6 +194,24 @@
                 <span class="map-name">{{ dungeon.name }}</span>
               </div>
             </li>
+            <li v-if="xunqinDungeons.length" class="map-item dungeon-folder-item"
+              @mousedown.prevent
+              @click="xunqinExpanded = !xunqinExpanded">
+              <div class="map-item-line dungeon-folder-line">
+                <span class="map-name">寻秦记</span>
+                <span class="folder-state">{{ xunqinExpanded ? '收起' : '展开' }}</span>
+              </div>
+            </li>
+            <template v-if="xunqinExpanded">
+              <li v-for="dungeon in xunqinDungeons" :key="dungeon.id" class="map-item dungeon-child-item"
+                :class="{ 'selected': selectedDungeonId === dungeon.id }"
+                @mousedown.prevent
+                @click="$emit('selectDungeon', dungeon.id)">
+                <div class="map-item-line">
+                  <span class="map-name">{{ dungeon.name }}</span>
+                </div>
+              </li>
+            </template>
           </ul>
           <p v-else class="empty-msg">暂无可用副本。</p>
         </div>
@@ -211,6 +229,7 @@
 </template>
 
 <script setup>
+import { computed, ref } from 'vue'
 import GameFactionPanel from './GameFactionPanel.vue'
 import GameQuestPanel from './GameQuestPanel.vue'
 
@@ -250,6 +269,10 @@ const props = defineProps({
   questsList: { type: Array, default: () => [] },
   factionsList: { type: Array, default: () => [] }
 })
+
+const xunqinExpanded = ref(true)
+const xunqinDungeons = computed(() => props.dungeonsList.filter(dungeon => dungeon.chainId === 'xunqin_legend'))
+const standaloneDungeons = computed(() => props.dungeonsList.filter(dungeon => dungeon.chainId !== 'xunqin_legend'))
 
 defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'sellItem',
   'changeDiscardAmount', 'confirmDiscard', 'cancelDiscard',
@@ -365,6 +388,11 @@ const getSkillBonusText = (skill) => {
 .map-item:focus, .map-item:focus-visible { outline: none; }
 .map-item.selected { background: rgba(241,196,15,0.1); border-left: 3px solid #f1c40f; color: #f1c40f; }
 .map-name { font-weight: bold; }
+.map-item-line { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-width: 0; }
+.dungeon-folder-item { position: sticky; top: 0; z-index: 2; background: #141414; border-top: 1px solid #8d6a23; border-bottom-color: #8d6a23; }
+.dungeon-folder-line { color: #f1c40f; }
+.folder-state { flex: 0 0 auto; color: #888; font-size: 11px; font-weight: normal; }
+.dungeon-child-item { padding-left: 18px; }
 .map-description-area { flex: 0 0 auto; max-height: 45%; overflow-y: auto; overflow-x: hidden; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 12px; scrollbar-width: none; -ms-overflow-style: none; }
 .map-desc-text { color: #b0b0b0; margin-bottom: 8px; }
 .map-sub-line { color: #888; font-size: 11px; margin-bottom: 4px; }
