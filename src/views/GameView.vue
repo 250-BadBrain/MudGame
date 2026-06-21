@@ -1136,6 +1136,18 @@ const handleMessage = (msg) => {
           activeDialogue.value = msg.results.dialogue || activeDialogue.value;
           showDialoguePanel.value = !!activeDialogue.value;
           (msg.logs || []).forEach(l => addLog(l));
+          if (msg.results?.room) {
+              room.value = msg.results.room;
+              keepCurrentPlayerOnlineInRoom();
+          }
+          if (Array.isArray(msg.results?.choices) && msg.results.choices.length) {
+              logs.value.push({ type: 'dungeon_choice', text: '', choices: msg.results.choices, used: false });
+              showDialoguePanel.value = false;
+              scrollToBottom();
+          }
+          if (msg.results?.moved) {
+              showDialoguePanel.value = false;
+          }
           sendGameCommand("command", "get_quests", characterId.value, {});
           sendGameCommand("command", "get_attributes", characterId.value, {});
           if (showInfoPanel.value && currentPanel.value === 'factions') {
