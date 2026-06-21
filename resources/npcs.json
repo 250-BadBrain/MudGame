@@ -1155,6 +1155,83 @@
       }
     }
   },
+  "zhao_ya_shadow": {
+    "name": "赵雅",
+    "title": "雅湖主人",
+    "description": "她立在水榭灯影间，语气亲近，目光却能捕捉最细微的迟疑。温柔与试探在她身上从不矛盾。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 18,
+      "realm": "expert",
+      "resources": { "hp": 120, "maxHp": 120, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 140, "maxSpirit": 140 },
+      "derived": { "attack": 12, "defense": 14, "hitRate": 86, "dodge": 78, "parry": 65, "critRate": 6, "attackSpeed": 4, "initiative": 105 }
+    }
+  },
+  "zhao_mu_banquet_shadow": {
+    "name": "赵穆",
+    "title": "赵国权臣",
+    "description": "他高居宴席上首，谈笑间便能决定旁人的荣辱。那份漫不经心，更像确信所有人都已落在局中。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 25,
+      "realm": "expert",
+      "resources": { "hp": 180, "maxHp": 180, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 130, "maxSpirit": 130 },
+      "derived": { "attack": 18, "defense": 22, "hitRate": 82, "dodge": 62, "parry": 72, "critRate": 5, "attackSpeed": 4, "initiative": 95 }
+    }
+  },
+  "lian_jin_guest_shadow": {
+    "name": "连晋",
+    "title": "宴中剑客",
+    "description": "他换下渡口的杀气，举杯时风度从容，但每一次目光相触都像在丈量下一场比剑的距离。",
+    "faction": "neutral",
+    "role": "story",
+    "importance": "special",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 24,
+      "realm": "expert",
+      "resources": { "hp": 170, "maxHp": 170, "mp": 220, "trainedMaxMp": 220, "maxMp": 220, "spirit": 120, "maxSpirit": 120 },
+      "derived": { "attack": 22, "defense": 18, "hitRate": 92, "dodge": 78, "parry": 85, "critRate": 10, "attackSpeed": 3, "initiative": 115 }
+    }
+  },
+  "ya_lake_assassin": {
+    "name": "雅湖伏客",
+    "title": "栽赃死士",
+    "description": "伏客蒙着面，腰间却故意悬着乌家马纹。他们不求脱身，只求把一场刺杀变成无法辩解的证据。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 19,
+      "realm": "fighter",
+      "resources": { "hp": 38, "maxHp": 38, "mp": 120, "trainedMaxMp": 120, "maxMp": 120, "spirit": 100, "maxSpirit": 100 },
+      "derived": { "attack": 7, "defense": 8, "hitRate": 76, "dodge": 60, "parry": 56, "critRate": 6, "attackSpeed": 4, "initiative": 94 }
+    }
+  },
+  "zhao_hidden_guard_captain": {
+    "name": "赵府暗卫首领",
+    "title": "后坞灭口者",
+    "description": "暗卫首领半身藏在芦影中，袖口沾着烧毁名帖的灰。他比宴上的门客更清楚今夜真正的安排。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "boss",
+    "aggressive": true,
+    "instanceOnly": true,
+    "attributes": {
+      "level": 26,
+      "realm": "expert",
+      "resources": { "hp": 60, "maxHp": 60, "mp": 210, "trainedMaxMp": 210, "maxMp": 210, "spirit": 120, "maxSpirit": 120 },
+      "derived": { "attack": 9, "defense": 11, "hitRate": 84, "dodge": 66, "parry": 72, "critRate": 9, "attackSpeed": 3, "initiative": 108 }
+    }
+  },
   "wu_yingyuan_shadow": {
     "name": "乌应元",
     "title": "乌家之主",

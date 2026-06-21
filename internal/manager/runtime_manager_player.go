@@ -778,6 +778,12 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 			return nil, err
 		}
 		result["message"] = message
+	case "inspect_guest_register":
+		message, err := r.inspectGuestRegisterRoomNoLock(p, room)
+		if err != nil {
+			return nil, err
+		}
+		result["message"] = message
 	default:
 		return nil, errors.New("action_not_supported")
 	}
@@ -873,6 +879,28 @@ func (r *RuntimeManager) tameHorseRoomNoLock(p *model.Player, room model.Room) (
 	p.Flags["xunqin_ch03_tamed_black_stallion"] = true
 	r.applyCollectDungeonObjectiveNoLock(p.ID, "black_stallion_rein")
 	return "你没有扬鞭，只顺着黑鬃马的呼吸缓缓靠近。它终于停止冲撞，让你重新系好断裂的缰绳。", nil
+}
+
+func (r *RuntimeManager) inspectGuestRegisterRoomNoLock(p *model.Player, room model.Room) (string, error) {
+	if p == nil {
+		return "", exception.ErrPlayerNotFound
+	}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
+	}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	if room.WorldID != "dungeon_xunqin_ch04_ya_lake" || !strings.HasSuffix(room.ID, "_archive_room_04") {
+		return "你翻看附近文书，没有找到与夜宴有关的线索。", nil
+	}
+	if p.Flags["xunqin_ch04_found_guest_register"] {
+		return "你再次比对客册，少龙席位旁那道未干的改痕依旧清晰，栽赃者显然早有准备。", nil
+	}
+	p.Backpack["ya_lake_guest_register"] += 1
+	p.Flags["xunqin_ch04_found_guest_register"] = true
+	r.applyCollectDungeonObjectiveNoLock(p.ID, "ya_lake_guest_register")
+	return "你抽出被重新誊写的客册，发现少龙的席位被刻意挪到曲桥旁。墨迹未干，这场伏击尚未来得及收网。", nil
 }
 
 func roomRumor(roomID string) string {

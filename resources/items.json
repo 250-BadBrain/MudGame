@@ -210,6 +210,20 @@
     "unit": "枚",
     "source": "秘境异闻"
   },
+  "ya_lake_guest_register": {
+    "name": "雅湖客册",
+    "description": "一页被重新誊写的宴客名册，少龙的席位被刻意移到曲桥旁，墨迹与画舫中的伪造信物如出一辙。",
+    "type": "quest",
+    "subtype": "xunqin_clue",
+    "stackable": true,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 3,
+    "unit": "页",
+    "limit": 1,
+    "source": "寻秦异闻"
+  },
   "black_stallion_rein": {
     "name": "黑鬃马缰",
     "description": "一截重新结好的旧缰绳，黑鬃马已经认可握住它的人。乌家用它记下这场无须鞭索的驯服。",

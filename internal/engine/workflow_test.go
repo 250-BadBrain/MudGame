@@ -1387,4 +1387,103 @@ func TestXunqinDungeonUnlocksFromStorytellerAndRewardsItem(t *testing.T) {
 	if attrs["experience"].(int) < chapterTwoExperience+680 || attrs["potential"].(int) < chapterTwoPotential+420 {
 		t.Fatalf("expected chapter three settlement rewards, before exp=%d pot=%d after=%+v", chapterTwoExperience, chapterTwoPotential, attrs)
 	}
+	chapterThreeExperience := attrs["experience"].(int)
+	chapterThreePotential := attrs["potential"].(int)
+
+	dungeons = GetDungeonsView(h.repo, h.playerID)
+	foundChapterFour := false
+	for _, dungeon := range dungeons {
+		if dungeon["id"] == "xunqin_ch04_ya_lake" {
+			foundChapterFour = true
+			if dungeon["chapter"] != 4 || dungeon["chainId"] != "xunqin_legend" {
+				t.Fatalf("expected chapter four chain metadata, got %+v", dungeon)
+			}
+		}
+	}
+	if !foundChapterFour {
+		t.Fatalf("expected xunqin chapter four after chapter three settlement, got %+v", dungeons)
+	}
+	if _, err := EnterDungeonWithTransition(h.repo, h.playerID, "xunqin_ch04_ya_lake"); err != nil {
+		t.Fatalf("enter xunqin chapter four failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to lakeside villa failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "north"); err != nil {
+		t.Fatalf("move to banquet corridor failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to guest hall failed: %v", err)
+	}
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "north")
+	if err != nil {
+		t.Fatalf("move to archive room failed: %v", err)
+	}
+	actions, _ = moveRes.Room["actions"].([]string)
+	hasInspectRegister := false
+	for _, action := range actions {
+		if action == "inspect_guest_register" {
+			hasInspectRegister = true
+		}
+	}
+	if !hasInspectRegister {
+		t.Fatalf("expected inspect_guest_register action, got %+v", moveRes.Room["actions"])
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_guest_register"); err != nil {
+		t.Fatalf("inspect guest register failed: %v", err)
+	}
+	if _, err := DoRoomActionWithEffects(h.repo, h.playerID, "inspect_guest_register"); err != nil {
+		t.Fatalf("repeat inspect guest register failed: %v", err)
+	}
+	backpack, err = GetBackpackView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get backpack after guest register failed: %v", err)
+	}
+	registerCount := 0
+	for _, item := range backpack.Items {
+		if item["id"] == "ya_lake_guest_register" {
+			registerCount = item["count"].(int)
+		}
+	}
+	if registerCount != 1 {
+		t.Fatalf("expected exactly one ya lake guest register, got %d in %+v", registerCount, backpack.Items)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "south"); err != nil {
+		t.Fatalf("return to guest hall failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to waterside banquet failed: %v", err)
+	}
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to lotus bridge failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "雅湖伏客")
+	killRoomNPCByName(t, h.repo, h.playerID, "雅湖伏客")
+	if _, err := MoveWithTransition(h.repo, h.playerID, "east"); err != nil {
+		t.Fatalf("move to lake barge failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "雅湖伏客")
+	moveRes, err = MoveWithTransition(h.repo, h.playerID, "north")
+	if err != nil {
+		t.Fatalf("move to rear wharf failed: %v", err)
+	}
+	killRoomNPCByName(t, h.repo, h.playerID, "赵府暗卫首领")
+	roomAtChapterFourEnd, err := GetRoomSnapshotView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get chapter four ending room failed: %v", err)
+	}
+	dungeonPayload, _ = roomAtChapterFourEnd.Room["dungeon"].(map[string]interface{})
+	if dungeonPayload["progress"] != 100 {
+		t.Fatalf("expected chapter four progress 100, got %+v", dungeonPayload)
+	}
+	if _, err := LeaveDungeonWithTransition(h.repo, h.playerID); err != nil {
+		t.Fatalf("leave xunqin chapter four failed: %v", err)
+	}
+	attrs, err = GetAttributesView(h.repo, h.playerID)
+	if err != nil {
+		t.Fatalf("get attributes after chapter four failed: %v", err)
+	}
+	if attrs["experience"].(int) < chapterThreeExperience+820 || attrs["potential"].(int) < chapterThreePotential+500 {
+		t.Fatalf("expected chapter four settlement rewards, before exp=%d pot=%d after=%+v", chapterThreeExperience, chapterThreePotential, attrs)
+	}
 }
