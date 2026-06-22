@@ -35,12 +35,6 @@
           @selectItem="selectLearnSkill"
           @buy="startLearning" />
 
-        <GameDialoguePanel
-          v-else-if="showDialoguePanel"
-          :dialogue="activeDialogue"
-          @close="closeDialogue"
-          @choose="chooseDialogue" />
-
         <div v-else class="room-entities-area">
           <GameRoomPanel
             :entities="combinedEntities"
@@ -251,7 +245,6 @@ import { initWebSocket, removeMessageHandler, sendGameCommand as rawSendGameComm
 import GameShop from '../components/GameShop.vue'
 import GameRoomPanel from '../components/GameRoomPanel.vue'
 import GameInfoPanel from '../components/GameInfoPanel.vue'
-import GameDialoguePanel from '../components/GameDialoguePanel.vue'
 import { useChatState } from '../composables/useChatState.js'
 
 const router = useRouter()
@@ -377,11 +370,6 @@ const showLearnPanel = ref(false)
 const learnSkills = ref([])
 const currentTeacher = ref(null)
 const selectedLearnSkill = ref(null)
-
-// Dialogue State
-const showDialoguePanel = ref(false)
-const activeDialogue = ref(null)
-const activeDialogueNpcId = ref('')
 
 // Backpack State
 const selectedBackpackItem = ref(null)
@@ -844,7 +832,6 @@ const handleMessage = (msg) => {
       room.value = msg.results.room
             closeShop();
             closeLearn();
-            closeDialogue();
       
       // 注意：后端 Player 对象现在包含 characterName/username
       // 根据您的 Player.java 结构，它有一个 getUsername()，我们假设在后端
@@ -874,7 +861,6 @@ const handleMessage = (msg) => {
       selectedEntityKey.value = null;
     closeShop();
     closeLearn();
-            closeDialogue();
             keepCurrentPlayerOnlineInRoom();
             syncDungeonSelectionFromRoom();
             syncPendingDungeonLeavePrompt();
@@ -1011,7 +997,6 @@ const handleMessage = (msg) => {
           closeInfoPanel();
           closeShop();
           closeLearn();
-            closeDialogue();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
@@ -1026,7 +1011,6 @@ const handleMessage = (msg) => {
           closeInfoPanel();
           closeShop();
           closeLearn();
-            closeDialogue();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
@@ -1041,7 +1025,6 @@ const handleMessage = (msg) => {
           closeInfoPanel();
           closeShop();
           closeLearn();
-            closeDialogue();
           keepCurrentPlayerOnlineInRoom();
           syncDungeonSelectionFromRoom();
           pendingDungeonLeave.value = null;
@@ -1123,18 +1106,8 @@ const handleMessage = (msg) => {
       }
   } else if (msg.type === 'command' && msg.subtype === 'talk') {
       if (msg.flag) {
-          activeDialogue.value = msg.results.dialogue || null;
-          activeDialogueNpcId.value = activeDialogue.value?.npcId || activeDialogueNpcId.value;
           showShopPanel.value = false;
           showLearnPanel.value = false;
-          showDialoguePanel.value = !!activeDialogue.value;
-      } else {
-          addLog(describeCommandError(msg.results.error, '对方此刻无意交谈。'));
-      }
-  } else if (msg.type === 'command' && msg.subtype === 'choose_dialogue') {
-      if (msg.flag) {
-          activeDialogue.value = msg.results.dialogue || activeDialogue.value;
-          showDialoguePanel.value = !!activeDialogue.value;
           (msg.logs || []).forEach(l => addLog(l));
           if (msg.results?.room) {
               room.value = msg.results.room;
@@ -1142,11 +1115,26 @@ const handleMessage = (msg) => {
           }
           if (Array.isArray(msg.results?.choices) && msg.results.choices.length) {
               logs.value.push({ type: 'dungeon_choice', text: '', choices: msg.results.choices, used: false });
-              showDialoguePanel.value = false;
               scrollToBottom();
           }
-          if (msg.results?.moved) {
-              showDialoguePanel.value = false;
+          sendGameCommand("command", "get_quests", characterId.value, {});
+          sendGameCommand("command", "get_attributes", characterId.value, {});
+          if (showInfoPanel.value && currentPanel.value === 'backpack') {
+              sendGameCommand("command", "get_backpack", characterId.value, {});
+          }
+      } else {
+          addLog(describeCommandError(msg.results.error, '对方此刻无意交谈。'));
+      }
+  } else if (msg.type === 'command' && msg.subtype === 'choose_dialogue') {
+      if (msg.flag) {
+          (msg.logs || []).forEach(l => addLog(l));
+          if (msg.results?.room) {
+              room.value = msg.results.room;
+              keepCurrentPlayerOnlineInRoom();
+          }
+          if (Array.isArray(msg.results?.choices) && msg.results.choices.length) {
+              logs.value.push({ type: 'dungeon_choice', text: '', choices: msg.results.choices, used: false });
+              scrollToBottom();
           }
           sendGameCommand("command", "get_quests", characterId.value, {});
           sendGameCommand("command", "get_attributes", characterId.value, {});
@@ -1487,12 +1475,6 @@ const closeInfoPanel = () => {
     selectedBackpackItem.value = null;
 }
 
-const closeDialogue = () => {
-    showDialoguePanel.value = false;
-    activeDialogue.value = null;
-    activeDialogueNpcId.value = '';
-}
-
 // ------------------- 实体交互 -------------------
 
 const getEntityKey = (id, index, type) => {
@@ -1601,16 +1583,7 @@ const talkEntity = (entity) => {
         addLog('只能和 NPC 交谈。');
         return;
     }
-    activeDialogueNpcId.value = entity.id;
     sendGameCommand("command", "talk", characterId.value, { npcId: entity.id });
-}
-
-const chooseDialogue = (optionId) => {
-    if (!activeDialogueNpcId.value || !optionId) return;
-    sendGameCommand("command", "choose_dialogue", characterId.value, {
-        npcId: activeDialogueNpcId.value,
-        optionId
-    });
 }
 
 const killEntity = (entity) => {
@@ -1751,7 +1724,6 @@ const logout = () => {
 
 const openShop = (npc) => {
     if (!checkCanAct('open_shop')) return;
-    closeDialogue();
     sendGameCommand("command", "get_shop", characterId.value, { npcId: npc.id });
 }
 
@@ -1763,7 +1735,6 @@ const closeShop = () => {
 
 const openLearn = (npc) => {
     if (!checkCanAct('learn')) return;
-    closeDialogue();
     currentTeacher.value = npc;
     // Convert skills map to array for display
     // npc.skills is { "skillId": level }
