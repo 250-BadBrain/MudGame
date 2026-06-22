@@ -143,11 +143,26 @@ func DoRoomActionWithEffects(repo RuntimeRepository, playerID, action string) (S
 }
 
 func TalkWithView(repo RuntimeRepository, playerID, npcID string) (DialogueResult, error) {
-	dialogue, err := repo.Talk(playerID, npcID)
+	result, err := repo.Talk(playerID, npcID)
 	if err != nil {
 		return DialogueResult{}, err
 	}
-	return DialogueResult{Dialogue: dialogue}, nil
+	dialogue, _ := result["dialogue"].(map[string]interface{})
+	if dialogue == nil && result["id"] != nil {
+		dialogue = result
+	}
+	message := asString(result["message"])
+	logs, _ := result["logs"].([]string)
+	if message != "" {
+		logs = append([]string{message}, logs...)
+	}
+	choices, _ := result["choices"].([]map[string]string)
+	moved, _ := result["moved"].(bool)
+	room, _, roomErr := repo.GetRoomSnapshot(playerID)
+	if roomErr != nil {
+		return DialogueResult{}, roomErr
+	}
+	return DialogueResult{Dialogue: dialogue, Message: message, Logs: logs, Choices: choices, Room: room, Moved: moved}, nil
 }
 
 func ChooseDialogueWithEffects(repo RuntimeRepository, playerID, npcID, optionID string) (DialogueResult, error) {

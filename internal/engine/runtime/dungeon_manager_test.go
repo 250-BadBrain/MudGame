@@ -192,6 +192,35 @@ func TestXunqinPendingChoicesKeepTheirExactPrompt(t *testing.T) {
 	}
 }
 
+func TestXunqinDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
+	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
+	if err := m.LoadTemplatesNoLock(); err != nil {
+		t.Fatalf("load dungeon templates failed: %v", err)
+	}
+	covered := 0
+	for _, id := range m.DungeonTemplateIDsNoLock() {
+		tpl, _ := m.DungeonTemplateNoLock(id)
+		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 11 {
+			continue
+		}
+		for actionID, action := range tpl.PuzzleActions {
+			if action.DialogueNPCID == "" {
+				continue
+			}
+			covered++
+			if len(action.DialogueLines) < 2 {
+				t.Fatalf("dungeon %s action %s needs at least two ordered dialogue lines", id, actionID)
+			}
+			if action.DialogueDoneMessage == "" {
+				t.Fatalf("dungeon %s action %s needs a contextual completion response", id, actionID)
+			}
+		}
+	}
+	if covered != 53 {
+		t.Fatalf("expected all 53 current story dialogue actions, got %d", covered)
+	}
+}
+
 func TestBuildDungeonSettlementUsesConfiguredRewards(t *testing.T) {
 	m := NewManager(nil, nil, nil, nil, nil, nil)
 	inst := &Instance{

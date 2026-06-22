@@ -2,6 +2,7 @@ package manager
 
 import (
 	"errors"
+	"fmt"
 	"sort"
 	"strings"
 	"time"
@@ -12,8 +13,8 @@ import (
 )
 
 func (r *RuntimeManager) Talk(playerID, npcID string) (map[string]interface{}, error) {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
+	r.mu.Lock()
+	defer r.mu.Unlock()
 
 	players, err := r.loadPlayers()
 	if err != nil {
@@ -22,6 +23,15 @@ func (r *RuntimeManager) Talk(playerID, npcID string) (map[string]interface{}, e
 	p, ok := players[playerID]
 	if !ok {
 		return nil, exception.ErrPlayerNotFound
+	}
+	if p.QuestStates == nil {
+		p.QuestStates = map[string]model.QuestState{}
+	}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
+	}
+	if p.Reputations == nil {
+		p.Reputations = map[string]int{}
 	}
 	npc, err := r.npcInPlayerRoomNoLock(p, npcID)
 	if err != nil {
@@ -34,7 +44,217 @@ func (r *RuntimeManager) Talk(playerID, npcID string) (map[string]interface{}, e
 	if !ok {
 		return nil, errors.New("dialogue_not_found")
 	}
-	return r.dialoguePayloadNoLock(p, npc, dialogue), nil
+	result := map[string]interface{}{"dialogue": r.dialoguePayloadNoLock(p, npc, dialogue)}
+	if dnpc, exists := r.dungeonNPCByIDNoLock(npc.ID); exists && r.dungeonMgr != nil {
+		room, roomOK := r.roomByIDNoLock(p.RoomID, map[string]model.Room{})
+		if !roomOK {
+			staticRooms, loadErr := r.loadRooms()
+			if loadErr != nil {
+				return nil, loadErr
+			}
+			room, roomOK = r.roomByIDNoLock(p.RoomID, staticRooms)
+		}
+		if !roomOK {
+			return nil, exception.ErrRoomNotFound
+		}
+		inst, inDungeon := r.dungeonMgr.PlayerInstanceNoLock(playerID)
+		bound := r.dungeonMgr.RoomDialogueActionsNoLock(playerID, room.ID, dnpc.TemplateID)
+		if inDungeon && len(bound) > 0 {
+			message, actionResult, stepErr := r.advanceDungeonDialogueNoLock(p, room, npc, inst)
+			if stepErr != nil {
+				return nil, stepErr
+			}
+			for key, value := range actionResult {
+				result[key] = value
+			}
+			result["message"] = message
+			if err := r.savePlayers(players); err != nil {
+				return nil, err
+			}
+			return result, nil
+		}
+		if inDungeon {
+			if inst.DialogueHistory == nil {
+				inst.DialogueHistory = map[string]bool{}
+			}
+			message, logs, stepErr := r.advanceStaticDialogueNoLock(p, npc, dialogue, inst.DialogueHistory)
+			if stepErr != nil {
+				return nil, stepErr
+			}
+			result["message"] = message
+			result["logs"] = logs
+			if err := r.savePlayers(players); err != nil {
+				return nil, err
+			}
+			return result, nil
+		}
+	}
+	if p.DialogueHistory == nil {
+		p.DialogueHistory = map[string]bool{}
+	}
+	message, logs, err := r.advanceStaticDialogueNoLock(p, npc, dialogue, p.DialogueHistory)
+	if err != nil {
+		return nil, err
+	}
+	result["message"] = message
+	result["logs"] = logs
+	if err := r.savePlayers(players); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (r *RuntimeManager) advanceDungeonDialogueNoLock(p *model.Player, room model.Room, npc model.NPC, inst *engruntime.Instance) (string, map[string]interface{}, error) {
+	if inst.DialogueProgress == nil {
+		inst.DialogueProgress = map[string]int{}
+	}
+	if inst.DialogueDoneMessages == nil {
+		inst.DialogueDoneMessages = map[string]string{}
+	}
+	if len(inst.PendingChoices) > 0 {
+		return r.dungeonMgr.PendingChoicePromptNoLock(inst), map[string]interface{}{
+			"choices": dungeonChoicePayload(r.dungeonMgr.PendingActionChoicesNoLock(inst)),
+		}, nil
+	}
+	for _, action := range r.dungeonMgr.DialogueActionsNoLock(p.ID, room.ID, dungeonNPCTemplateID(inst, npc.ID)) {
+		if !r.puzzleActionRequirementsMetNoLock(p, room, inst, action) {
+			message := action.FailureMessage
+			if message == "" {
+				message = "眼下时机未到，再问也得不到更多消息。"
+			}
+			return message, nil, nil
+		}
+		lines := action.DialogueLines
+		if len(lines) == 0 {
+			lines = []string{npcSpeech(npc.Name, action.Message, 0)}
+		}
+		step := inst.DialogueProgress[action.ID]
+		if step >= len(lines) {
+			step = len(lines) - 1
+		}
+		message := lines[step]
+		inst.DialogueProgress[action.ID] = step + 1
+		if step+1 < len(lines) {
+			return message, nil, nil
+		}
+		actionResult, handled := r.executePuzzleActionNoLock(p, room, action.ID)
+		if !handled {
+			return "", nil, errors.New("dialogue_action_not_available")
+		}
+		if len(action.Choices) > 0 {
+			inst.PendingChoicePrompt = message
+		}
+		if action.DialogueDoneMessage != "" {
+			inst.DialogueDoneMessages[npc.ID] = action.DialogueDoneMessage
+		}
+		return message, actionResult, nil
+	}
+	if message := inst.DialogueDoneMessages[npc.ID]; message != "" {
+		return message, nil, nil
+	}
+	return fmt.Sprintf("%s已无更多话要说。", npc.Name), nil, nil
+}
+
+func dungeonNPCTemplateID(inst *engruntime.Instance, npcID string) string {
+	if inst != nil {
+		if npc := inst.NPCs[npcID]; npc != nil {
+			return npc.TemplateID
+		}
+	}
+	return ""
+}
+
+func (r *RuntimeManager) advanceStaticDialogueNoLock(p *model.Player, npc model.NPC, dialogue model.DialogueDef, history map[string]bool) (string, []string, error) {
+	if history == nil {
+		return "", nil, errors.New("dialogue_history_not_initialized")
+	}
+	openingKey := npc.ID + "|opening"
+	if !history[openingKey] {
+		history[openingKey] = true
+		return npcSpeech(npc.Name, dialogue.Opening, 0), nil, nil
+	}
+	for i := range dialogue.Options {
+		option := dialogue.Options[i]
+		key := npc.ID + "|" + option.ID
+		if history[key] || !r.dialogueRequirementMetNoLock(p, option.Requires) {
+			continue
+		}
+		logs, err := r.applyDialogueOptionEffectsNoLock(p, &option)
+		if err != nil {
+			return "", nil, err
+		}
+		history[key] = true
+		return npcSpeech(npc.Name, option.Response, i+1), logs, nil
+	}
+	endings := []string{
+		"该说的都已说了，余下的路要你自己走。",
+		"言尽于此，莫要误了眼前的事。",
+		"你已经知道该怎么做了，快去吧。",
+		"再问也是旧话，先把眼前之事办妥。",
+	}
+	return npcSpeech(npc.Name, endings[dialogueVariant(npc.ID, len(endings))], len(dialogue.Options)+1), nil, nil
+}
+
+func npcSpeech(name, text string, step int) string {
+	text = strings.TrimSpace(text)
+	if text == "" {
+		return name + "没有开口。"
+	}
+	if strings.Contains(text, name) || strings.Contains(text, "说道") || strings.Contains(text, "道：") {
+		return text
+	}
+	manners := []string{"压低声音", "略一沉吟", "缓缓", "正色", "淡淡", "侧目看了看四周，低声"}
+	return fmt.Sprintf("%s%s说道：%s", name, manners[step%len(manners)], text)
+}
+
+func dialogueVariant(value string, count int) int {
+	if count <= 1 {
+		return 0
+	}
+	total := 0
+	for _, r := range value {
+		total += int(r)
+	}
+	return total % count
+}
+
+func (r *RuntimeManager) applyDialogueOptionEffectsNoLock(p *model.Player, selected *model.DialogueOption) ([]string, error) {
+	logs := []string{}
+	if p.Backpack == nil {
+		p.Backpack = map[string]int{}
+	}
+	for itemID, amount := range selected.TakeItems {
+		if amount <= 0 {
+			continue
+		}
+		p.Backpack[itemID] -= amount
+		if p.Backpack[itemID] <= 0 {
+			delete(p.Backpack, itemID)
+		}
+	}
+	for itemID, amount := range selected.GiveItems {
+		if amount <= 0 {
+			continue
+		}
+		p.Backpack[itemID] += amount
+		r.applyCollectDungeonObjectiveNoLock(p.ID, itemID)
+	}
+	for flag, value := range selected.SetFlags {
+		p.Flags[flag] = value
+	}
+	if selected.StartQuestID != "" {
+		if log := r.startQuestNoLock(p, selected.StartQuestID); log != "" {
+			logs = append(logs, log)
+		}
+	}
+	if selected.CompleteQuestID != "" {
+		questLogs, err := r.completeQuestNoLock(p, selected.CompleteQuestID)
+		if err != nil {
+			return nil, err
+		}
+		logs = append(logs, questLogs...)
+	}
+	return logs, nil
 }
 
 func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, map[string]interface{}, error) {
@@ -107,40 +327,9 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 		return nil, "", nil, nil, errors.New("dialogue_option_not_found")
 	}
 
-	logs := []string{}
-	if p.Backpack == nil {
-		p.Backpack = map[string]int{}
-	}
-	for itemID, amount := range selected.TakeItems {
-		if amount <= 0 {
-			continue
-		}
-		p.Backpack[itemID] -= amount
-		if p.Backpack[itemID] <= 0 {
-			delete(p.Backpack, itemID)
-		}
-	}
-	for itemID, amount := range selected.GiveItems {
-		if amount <= 0 {
-			continue
-		}
-		p.Backpack[itemID] += amount
-		r.applyCollectDungeonObjectiveNoLock(p.ID, itemID)
-	}
-	for flag, value := range selected.SetFlags {
-		p.Flags[flag] = value
-	}
-	if selected.StartQuestID != "" {
-		if log := r.startQuestNoLock(p, selected.StartQuestID); log != "" {
-			logs = append(logs, log)
-		}
-	}
-	if selected.CompleteQuestID != "" {
-		questLogs, err := r.completeQuestNoLock(p, selected.CompleteQuestID)
-		if err != nil {
-			return nil, "", nil, nil, err
-		}
-		logs = append(logs, questLogs...)
+	logs, err := r.applyDialogueOptionEffectsNoLock(p, selected)
+	if err != nil {
+		return nil, "", nil, nil, err
 	}
 
 	if err := r.savePlayers(players); err != nil {

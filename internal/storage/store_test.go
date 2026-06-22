@@ -56,9 +56,10 @@ func TestFileStorePlayersAndRoomsRoundTrip(t *testing.T) {
 			Attributes: model.Attributes{
 				Resources: model.ResourceAttributes{HP: 88, MaxHP: 100},
 			},
-			Skills:    map[string]int{"basic_unarmed": 2},
-			Backpack:  map[string]int{"iron_pickaxe": 1},
-			Equipment: map[string]string{},
+			Skills:          map[string]int{"basic_unarmed": 2},
+			Backpack:        map[string]int{"iron_pickaxe": 1},
+			Equipment:       map[string]string{},
+			DialogueHistory: map[string]bool{"storyteller|opening": true},
 		},
 	}
 	if err := store.SavePlayers(players); err != nil {
@@ -78,6 +79,9 @@ func TestFileStorePlayersAndRoomsRoundTrip(t *testing.T) {
 	loadedPlayer := loadedPlayers["p1"]
 	if loadedPlayer.State != "LEARNING" || loadedPlayer.StateTickCountdown != 7 || loadedPlayer.LearningSkillID != "basic_unarmed" || loadedPlayer.LearningTeacherID != "weapon_school_master" || loadedPlayer.LearningTeacherLevel != 300 || loadedPlayer.SkillLearningProgress["basic_unarmed"] != 2 {
 		t.Fatalf("unexpected learning state payload: %+v", loadedPlayer)
+	}
+	if !loadedPlayer.DialogueHistory["storyteller|opening"] {
+		t.Fatalf("expected dialogue progress to survive reload, got %+v", loadedPlayer.DialogueHistory)
 	}
 
 	rooms := map[string]RoomDynamic{

@@ -54,6 +54,72 @@ func TestRepeatedPuzzlePromptKeepsOriginalChoiceLabels(t *testing.T) {
 	}
 }
 
+func TestDungeonNPCDialogueForcesSequentialStoryActions(t *testing.T) {
+	r := NewRuntimeManager(t.TempDir())
+	t.Cleanup(func() { _ = r.Close() })
+	if err := r.Register("guard_dialogue_user", "pass123"); err != nil {
+		t.Fatalf("register failed: %v", err)
+	}
+	playerID, err := r.CreateCharacter("guard_dialogue_user", "guardhero", 16, 16, 16, 16, 16)
+	if err != nil {
+		t.Fatalf("create character failed: %v", err)
+	}
+
+	r.mu.Lock()
+	inst, err := r.dungeonMgr.CreateInstanceNoLock(playerID, "xunqin_ch04_hostage_camp_night", "ly_00")
+	if err != nil {
+		r.mu.Unlock()
+		t.Fatalf("create dungeon failed: %v", err)
+	}
+	roomID := r.dungeonMgr.InstanceRoomIDNoLock(inst, "xqj04_05")
+	players, _ := r.loadPlayers()
+	players[playerID].RoomID = roomID
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save player failed: %v", err)
+	}
+	r.mu.Unlock()
+	guardID := dungeonNPCIDByTemplateInRoom(t, inst, roomID, "xqj_prison_guard")
+
+	blocked, err := r.Talk(playerID, guardID)
+	if err != nil || inst.DialogueProgress["show_badge"] != 0 || inst.PuzzleStates["outer_prison"] != "locked" {
+		t.Fatalf("expected missing badge to block dialogue progression, result=%+v state=%+v err=%v", blocked, inst.PuzzleStates, err)
+	}
+	r.mu.Lock()
+	players, _ = r.loadPlayers()
+	players[playerID].Backpack["xqj_guard_badge"] = 1
+	_ = r.savePlayers(players)
+	r.mu.Unlock()
+	if _, err := r.Talk(playerID, guardID); err != nil {
+		t.Fatalf("first badge dialogue line failed: %v", err)
+	}
+	if inst.PuzzleStates["outer_prison"] != "locked" {
+		t.Fatalf("expected first line not to execute badge action, got %s", inst.PuzzleStates["outer_prison"])
+	}
+	if _, err := r.Talk(playerID, guardID); err != nil {
+		t.Fatalf("final badge dialogue line failed: %v", err)
+	}
+	if inst.PuzzleStates["outer_prison"] != "open" {
+		t.Fatalf("expected badge action before key dialogue, got %s", inst.PuzzleStates["outer_prison"])
+	}
+	if _, err := r.Talk(playerID, guardID); err != nil {
+		t.Fatalf("first key dialogue line failed: %v", err)
+	}
+	if inst.PuzzleStates["outer_prison"] != "open" {
+		t.Fatalf("expected first key line not to grant key, got %s", inst.PuzzleStates["outer_prison"])
+	}
+	if _, err := r.Talk(playerID, guardID); err != nil {
+		t.Fatalf("final key dialogue line failed: %v", err)
+	}
+	if inst.PuzzleStates["outer_prison"] != "key_taken" {
+		t.Fatalf("expected second story action after its final line, got %s", inst.PuzzleStates["outer_prison"])
+	}
+	players, _ = r.loadPlayers()
+	if players[playerID].Backpack["xqj_prison_key"] != 1 {
+		t.Fatalf("expected key granted after ordered dialogue, backpack=%+v", players[playerID].Backpack)
+	}
+}
+
 func TestDungeonActionsDistinguishSuccessRepeatBlockedAndRetryableChoice(t *testing.T) {
 	r := NewRuntimeManager(t.TempDir())
 	t.Cleanup(func() { _ = r.Close() })
@@ -170,17 +236,19 @@ func TestBronzeFallDialogueGatesNPCOutcomeHiddenExitAndOneWayVision(t *testing.T
 		t.Fatalf("inspect ruins failed: %v", err)
 	}
 	woundedID := dungeonNPCIDByTemplateInRoom(t, inst, inst.SpawnRoomID, "xqj_wounded_raider")
-	dialogue, err := r.Talk(playerID, woundedID)
-	if err != nil || !dialogueHasOption(dialogue, "dungeon_action:question_raider_choice") {
-		t.Fatalf("expected disposal option after observation, dialogue=%+v err=%v", dialogue, err)
+	firstLine, err := r.Talk(playerID, woundedID)
+	if err != nil || firstLine["message"] == "" || firstLine["choices"] != nil {
+		t.Fatalf("expected first dialogue line without choices, result=%+v err=%v", firstLine, err)
 	}
-	_, firstMessage, _, firstEffect, err := r.ChooseDialogue(playerID, woundedID, "dungeon_action:question_raider_choice")
-	if err != nil || len(firstEffect["choices"].([]map[string]string)) != 3 {
-		t.Fatalf("expected first disposal prompt, message=%s effect=%+v err=%v", firstMessage, firstEffect, err)
+	choiceLine, err := r.Talk(playerID, woundedID)
+	choices, _ := choiceLine["choices"].([]map[string]string)
+	if err != nil || len(choices) != 3 {
+		t.Fatalf("expected choices after final dialogue line, result=%+v err=%v", choiceLine, err)
 	}
-	_, secondMessage, _, secondEffect, err := r.ChooseDialogue(playerID, woundedID, "dungeon_action:question_raider_choice")
-	if err != nil || secondMessage != "受伤盗墓贼连声求饶。" || len(secondEffect["choices"].([]map[string]string)) != 3 {
-		t.Fatalf("expected repeated prompt rather than completed text, message=%s effect=%+v err=%v", secondMessage, secondEffect, err)
+	repeatedChoiceLine, err := r.Talk(playerID, woundedID)
+	repeatedChoices, _ := repeatedChoiceLine["choices"].([]map[string]string)
+	if err != nil || repeatedChoiceLine["message"] != choiceLine["message"] || !reflect.DeepEqual(repeatedChoices, choices) {
+		t.Fatalf("expected repeated final line and choices, first=%+v repeated=%+v err=%v", choiceLine, repeatedChoiceLine, err)
 	}
 	if _, err := r.DoRoomAction(playerID, "spare_raider"); err != nil {
 		t.Fatalf("spare raider failed: %v", err)
@@ -222,9 +290,9 @@ func TestBronzeFallDialogueGatesNPCOutcomeHiddenExitAndOneWayVision(t *testing.T
 	_ = r.savePlayers(players)
 	r.mu.Unlock()
 	taoID := dungeonNPCIDByTemplateInRoom(t, inst, lastRoom, "xqj_tao_fang")
-	dialogue, _ = r.Talk(playerID, taoID)
-	if dialogueHasOption(dialogue, "dungeon_action:invite_wu_fort") {
-		t.Fatalf("expected Tao Fang invitation hidden while enemies live, got %+v", dialogue)
+	blockedTalk, _ := r.Talk(playerID, taoID)
+	if blockedTalk["choices"] != nil {
+		t.Fatalf("expected Tao Fang invitation blocked while enemies live, got %+v", blockedTalk)
 	}
 	r.mu.Lock()
 	for _, npc := range inst.NPCs {
@@ -234,9 +302,11 @@ func TestBronzeFallDialogueGatesNPCOutcomeHiddenExitAndOneWayVision(t *testing.T
 		}
 	}
 	r.mu.Unlock()
-	dialogue, _ = r.Talk(playerID, taoID)
-	if !dialogueHasOption(dialogue, "dungeon_action:invite_wu_fort") {
-		t.Fatalf("expected Tao Fang invitation after both enemies fall, got %+v", dialogue)
+	firstTaoLine, _ := r.Talk(playerID, taoID)
+	finalTaoLine, _ := r.Talk(playerID, taoID)
+	finalChoices, _ := finalTaoLine["choices"].([]map[string]string)
+	if firstTaoLine["choices"] != nil || len(finalChoices) != 3 {
+		t.Fatalf("expected Tao Fang invitation after two dialogue lines, first=%+v final=%+v", firstTaoLine, finalTaoLine)
 	}
 }
 
@@ -249,16 +319,6 @@ func dungeonNPCIDByTemplateInRoom(t *testing.T, inst *engruntime.Instance, roomI
 	}
 	t.Fatalf("missing dungeon npc template %s", templateID)
 	return ""
-}
-
-func dialogueHasOption(dialogue map[string]interface{}, optionID string) bool {
-	options, _ := dialogue["options"].([]map[string]interface{})
-	for _, option := range options {
-		if option["id"] == optionID {
-			return true
-		}
-	}
-	return false
 }
 
 func testStringSliceContains(values []string, target string) bool {

@@ -239,11 +239,15 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for fk, fv := range v.Flags {
 			flags[fk] = fv
 		}
+		dialogueHistory := map[string]bool{}
+		for dk, dv := range v.DialogueHistory {
+			dialogueHistory[dk] = dv
+		}
 		reputations := map[string]int{}
 		for rk, rv := range v.Reputations {
 			reputations[rk] = rv
 		}
-		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, Reputations: reputations, Online: v.Online}
+		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online}
 	}
 	return out
 }

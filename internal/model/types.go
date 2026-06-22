@@ -97,6 +97,7 @@ type Player struct {
 	Equipment             map[string]string
 	QuestStates           map[string]QuestState
 	Flags                 map[string]bool
+	DialogueHistory       map[string]bool
 	Reputations           map[string]int
 	Online                bool
 }

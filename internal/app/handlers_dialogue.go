@@ -14,7 +14,7 @@ func (s *Server) handleGameTalk(conn *websocket.Conn, cmd protocol.CommandMessag
 	}
 	npcID := toString(cmd.Args["npcId"])
 	res, err := engine.TalkWithView(s.repo, playerID, npcID)
-	s.replyCommand(conn, "talk", err, map[string]interface{}{"dialogue": res.Dialogue}, nil)
+	s.replyCommand(conn, "talk", err, map[string]interface{}{"message": res.Message, "choices": res.Choices, "room": res.Room, "moved": res.Moved}, res.Logs)
 }
 
 func (s *Server) handleGameChooseDialogue(conn *websocket.Conn, cmd protocol.CommandMessage) {
