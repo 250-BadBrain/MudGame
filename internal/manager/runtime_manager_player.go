@@ -939,6 +939,7 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 	if inst.PendingChoices[actionID] {
 		inst.PendingChoices = map[string]bool{}
 		inst.PendingChoicePrompt = ""
+		inst.PendingChoiceOptions = nil
 	}
 	for itemID, amount := range action.TakeItems {
 		if amount <= 0 {
@@ -999,6 +1000,7 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 func activateDungeonChoices(inst *engruntime.Instance, choices []engruntime.ActionChoice, prompt string) []map[string]string {
 	inst.PendingChoices = map[string]bool{}
 	inst.PendingChoicePrompt = prompt
+	inst.PendingChoiceOptions = append([]engruntime.ActionChoice{}, choices...)
 	for _, choice := range choices {
 		inst.PendingChoices[choice.ID] = true
 	}

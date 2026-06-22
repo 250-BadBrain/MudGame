@@ -176,9 +176,17 @@ func TestXunqinPendingChoicesKeepTheirExactPrompt(t *testing.T) {
 			for _, choice := range action.Choices {
 				pending[choice.ID] = true
 			}
-			inst := &Instance{DungeonID: id, PendingChoices: pending, PendingChoicePrompt: action.Message}
+			inst := &Instance{
+				DungeonID:            id,
+				PendingChoices:       pending,
+				PendingChoicePrompt:  action.Message,
+				PendingChoiceOptions: append([]ActionChoice{}, action.Choices...),
+			}
 			if got := m.PendingChoicePromptNoLock(inst); got != action.Message {
 				t.Fatalf("dungeon %s action %s lost its pending prompt: got %q want %q", id, actionID, got, action.Message)
+			}
+			if got := m.PendingActionChoicesNoLock(inst); !reflect.DeepEqual(got, action.Choices) {
+				t.Fatalf("dungeon %s action %s exposed internal action labels: got %+v want %+v", id, actionID, got, action.Choices)
 			}
 		}
 	}

@@ -1,11 +1,58 @@
 package manager
 
 import (
+	"reflect"
 	"strings"
 	"testing"
 
 	engruntime "mudgame/server/internal/engine/runtime"
 )
+
+func TestRepeatedPuzzlePromptKeepsOriginalChoiceLabels(t *testing.T) {
+	r := NewRuntimeManager(t.TempDir())
+	t.Cleanup(func() { _ = r.Close() })
+	if err := r.Register("cipher_user", "pass123"); err != nil {
+		t.Fatalf("register failed: %v", err)
+	}
+	playerID, err := r.CreateCharacter("cipher_user", "cipher_hero", 16, 16, 16, 16, 16)
+	if err != nil {
+		t.Fatalf("create character failed: %v", err)
+	}
+
+	r.mu.Lock()
+	inst, err := r.dungeonMgr.CreateInstanceNoLock(playerID, "xunqin_ch03_handan_opening", "ly_00")
+	if err != nil {
+		r.mu.Unlock()
+		t.Fatalf("create dungeon failed: %v", err)
+	}
+	players, _ := r.loadPlayers()
+	player := players[playerID]
+	player.RoomID = r.dungeonMgr.InstanceRoomIDNoLock(inst, "xqj03_11")
+	player.Backpack = map[string]int{
+		"xqj_code_sheet": 1,
+		"xqj_fish_token": 1,
+		"xqj_deer_token": 1,
+		"xqj_spy_letter": 1,
+	}
+	inst.PuzzleStates["cipher"] = "tokens"
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save player failed: %v", err)
+	}
+	r.mu.Unlock()
+
+	first, err := r.DoRoomAction(playerID, "decode_letter")
+	if err != nil {
+		t.Fatalf("first decode prompt failed: %v", err)
+	}
+	second, err := r.DoRoomAction(playerID, "decode_letter")
+	if err != nil {
+		t.Fatalf("repeated decode prompt failed: %v", err)
+	}
+	if !reflect.DeepEqual(first["choices"], second["choices"]) {
+		t.Fatalf("repeated prompt changed visible labels: first=%+v second=%+v", first["choices"], second["choices"])
+	}
+}
 
 func TestDungeonActionsDistinguishSuccessRepeatBlockedAndRetryableChoice(t *testing.T) {
 	r := NewRuntimeManager(t.TempDir())

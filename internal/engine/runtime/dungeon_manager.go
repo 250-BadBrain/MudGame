@@ -239,32 +239,33 @@ type NPCState struct {
 }
 
 type Instance struct {
-	ID                  string
-	DungeonID           string
-	Name                string
-	Sequence            int
-	ChainID             string
-	Chapter             int
-	Progress            int
-	OwnerPlayer         string
-	EntryRoomID         string
-	SpawnRoomID         string
-	Rooms               map[string]model.Room
-	NPCs                map[string]*NPCState
-	ProgressOnKill      map[string]int
-	Objectives          []Objective
-	ObjectiveProgress   map[string]int
-	PuzzleStates        map[string]string
-	PuzzleAttempts      map[string]int
-	CheckpointRoomID    string
-	AlertLevel          int
-	TurnCount           int
-	PatrolRoutes        map[string][]string
-	Stealth             StealthConfig
-	TemporaryItems      []string
-	PendingChoices      map[string]bool
-	PendingChoicePrompt string
-	Rewards             model.Rewards
+	ID                   string
+	DungeonID            string
+	Name                 string
+	Sequence             int
+	ChainID              string
+	Chapter              int
+	Progress             int
+	OwnerPlayer          string
+	EntryRoomID          string
+	SpawnRoomID          string
+	Rooms                map[string]model.Room
+	NPCs                 map[string]*NPCState
+	ProgressOnKill       map[string]int
+	Objectives           []Objective
+	ObjectiveProgress    map[string]int
+	PuzzleStates         map[string]string
+	PuzzleAttempts       map[string]int
+	CheckpointRoomID     string
+	AlertLevel           int
+	TurnCount            int
+	PatrolRoutes         map[string][]string
+	Stealth              StealthConfig
+	TemporaryItems       []string
+	PendingChoices       map[string]bool
+	PendingChoicePrompt  string
+	PendingChoiceOptions []ActionChoice
+	Rewards              model.Rewards
 }
 
 type Settlement struct {
@@ -1021,6 +1022,9 @@ func (m *Manager) PuzzleActionStateStatusNoLock(inst *Instance, action PuzzleAct
 func (m *Manager) PendingActionChoicesNoLock(inst *Instance) []ActionChoice {
 	if inst == nil {
 		return nil
+	}
+	if len(inst.PendingChoiceOptions) > 0 {
+		return append([]ActionChoice{}, inst.PendingChoiceOptions...)
 	}
 	tpl, ok := m.templates[inst.DungeonID]
 	if !ok {
