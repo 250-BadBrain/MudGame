@@ -902,6 +902,13 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			break
 		}
 	}
+	puzzlesReady := true
+	for puzzleID, requiredState := range action.RequiredPuzzleStates {
+		if inst.PuzzleStates[puzzleID] != requiredState {
+			puzzlesReady = false
+			break
+		}
+	}
 	npcsDefeated := true
 	for _, templateID := range action.RequiredDefeatNPCs {
 		found := false
@@ -917,8 +924,15 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			npcsDefeated = false
 		}
 	}
-	if !allowedState || !itemsReady || !npcsDefeated {
+	if !allowedState || !itemsReady || !puzzlesReady || !npcsDefeated {
 		inst.PuzzleAttempts[action.PuzzleID]++
+		if len(action.FailureSpawnNPCs) > 0 || action.FailureResetAfter > 0 {
+			r.dungeonMgr.ApplyActionNPCEffectsNoLock(inst, room.ID, nil, nil, action.FailureSpawnNPCs)
+			if action.FailureResetAfter > 0 && inst.PuzzleAttempts[action.PuzzleID] >= action.FailureResetAfter {
+				inst.PuzzleStates[action.PuzzleID] = action.FailureResetState
+				inst.PuzzleAttempts[action.PuzzleID] = 0
+			}
+		}
 		message := action.FailureMessage
 		if message == "" {
 			message = "“" + action.Label + "”所需条件尚未满足。"
@@ -965,7 +979,8 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 		currentState = action.NextState
 		r.dungeonMgr.ApplyPuzzleObjectiveNoLock(inst, action.PuzzleID, currentState)
 	}
-	r.dungeonMgr.ApplyActionNPCEffectsNoLock(inst, room.ID, action.RemoveNPCs, action.KillNPCs)
+	r.dungeonMgr.CompleteObjectivesNoLock(inst, action.CompleteObjectives)
+	r.dungeonMgr.ApplyActionNPCEffectsNoLock(inst, room.ID, action.RemoveNPCs, action.KillNPCs, action.SpawnNPCs)
 	moved := false
 	if action.MoveToRoomID != "" {
 		if targetRoomID := r.dungeonMgr.InstanceRoomIDNoLock(inst, action.MoveToRoomID); targetRoomID != "" {

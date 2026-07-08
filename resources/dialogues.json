@@ -402,5 +402,14 @@
         "response": "“等一个知道自己为什么来洛阳的人。现在看来，还不是你。”"
       }
     ]
-  }
+  },
+  "xqj_rewrite_observer":{"id":"xqj_rewrite_observer","npcId":"xqj_black_observer","title":"青铜幻境","opening":"黑衣虚影隔着漫天黄沙望来：‘铜匣不是门，只是把你推到了门的另一边。’","options":[{"id":"ask_where","text":"这里是什么地方？","response":"‘战国赵境。前方马嘶处，会有人替你回答更多问题。’"}]},
+  "xqj_rewrite_old_groom":{"id":"xqj_rewrite_old_groom","npcId":"xqj_old_groom","title":"老马夫的证词","opening":"老马夫先看马，再看人：‘牲口不会说谎，动过草料的人却会。’","options":[{"id":"ask_night","text":"昨夜谁进过草料房？","response":"‘二更时内鬼管事提灯进去过，说是查账，可账册从不放在马场。’"}]},
+  "xqj_rewrite_innkeeper":{"id":"xqj_rewrite_innkeeper","npcId":"xqj_innkeeper","title":"赵都酒楼掌柜","opening":"掌柜低头擦着酒盏：‘小店只卖酒，客官若问别的，须先让我知道你听见了什么。’","options":[{"id":"ask_bridge","text":"白水桥今夜可有鱼？","response":"掌柜手上一顿：‘若有人这样问，只答鱼不上钩。’"}]},
+  "xqj_rewrite_zhao_noble":{"id":"xqj_rewrite_zhao_noble","npcId":"xqj_zhao_noble","title":"二楼贵客","opening":"赵国贵客晃着酒盏：‘邯郸最值钱的消息，从来不在大街上卖。’","options":[{"id":"ask_hostage","text":"质子营近来为何换守？","response":"‘知道那地方的人，往往活不到下一次换灯。’"}]},
+  "xqj_rewrite_inn_cook":{"id":"xqj_rewrite_inn_cook","npcId":"xqj_inn_cook","title":"后厨灶火","opening":"厨子添了一把柴：‘灶灰里有人藏过纸，后门也总有不吃饭的客人来。’","options":[{"id":"ask_alley","text":"后巷的人等什么？","response":"‘等一句暗号，也等说错暗号的人。’"}]},
+  "xqj_rewrite_white_assassin":{"id":"xqj_rewrite_white_assassin","npcId":"xqj_white_assassin","title":"白水桥验语","opening":"白衣刺客按住剑柄：‘桥上只认暗号，不认脸。’","options":[{"id":"ask_failure","text":"若暗号答错呢？","response":"‘桥下的人会替我送你上路。’"}]},
+  "xqj_rewrite_old_servant":{"id":"xqj_rewrite_old_servant","npcId":"xqj_old_servant","title":"内牢旧口令","opening":"老仆咳了许久才抬头：‘内牢不认钥，只认每夜换守口令。’","options":[{"id":"ask_password","text":"今夜口令是什么？","response":"‘旧客归秦。四字不能错一个。’"}]},
+  "xqj_rewrite_ruined_woman":{"id":"xqj_rewrite_ruined_woman","npcId":"xqj_ruined_house_woman","title":"西坊旧巷","opening":"老妇听着街外脚步：‘官兵认得大路，却未必认得我们这些人走了一辈子的窄巷。’","options":[{"id":"ask_cart","text":"哪里能通后街？","response":"‘前院柴车后面。推开它，旧巷还在。’"}]},
+  "xqj_rewrite_shanrou_shadow":{"id":"xqj_rewrite_shanrou_shadow","npcId":"xqj_shanrou_shadow","title":"善柔的警告","opening":"暗处传来善柔的声音：‘城墙下有人等你，先听弩弦，再迈步。’","options":[{"id":"ask_crossbow","text":"伏弩藏在哪里？","response":"‘贴左侧残垣走，第一轮箭便射不中你。’"}]}
 }

@@ -218,17 +218,21 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			} `json:"rooms"`
 			PuzzleInitialStates map[string]string `json:"puzzleInitialStates"`
 			PuzzleActions       map[string]struct {
-				PuzzleID           string         `json:"puzzleId"`
-				Rooms              []string       `json:"rooms"`
-				RequiredDefeatNPCs []string       `json:"requiredDefeatNpcs"`
-				DialogueNPCID      string         `json:"dialogueNpcId"`
-				MoveToRoomID       string         `json:"moveToRoomId"`
-				RemoveNPCs         []string       `json:"removeNpcs"`
-				KillNPCs           []string       `json:"killNpcs"`
-				RequiredItems      map[string]int `json:"requiredItems"`
-				GiveItems          map[string]int `json:"giveItems"`
-				TakeItems          map[string]int `json:"takeItems"`
-				Choices            []struct {
+				PuzzleID             string            `json:"puzzleId"`
+				Rooms                []string          `json:"rooms"`
+				RequiredDefeatNPCs   []string          `json:"requiredDefeatNpcs"`
+				RequiredPuzzleStates map[string]string `json:"requiredPuzzleStates"`
+				DialogueNPCID        string            `json:"dialogueNpcId"`
+				MoveToRoomID         string            `json:"moveToRoomId"`
+				RemoveNPCs           []string          `json:"removeNpcs"`
+				KillNPCs             []string          `json:"killNpcs"`
+				SpawnNPCs            []string          `json:"spawnNpcs"`
+				FailureSpawnNPCs     []string          `json:"failureSpawnNpcs"`
+				CompleteObjectives   []string          `json:"completeObjectives"`
+				RequiredItems        map[string]int    `json:"requiredItems"`
+				GiveItems            map[string]int    `json:"giveItems"`
+				TakeItems            map[string]int    `json:"takeItems"`
+				Choices              []struct {
 					ID    string `json:"id"`
 					Label string `json:"label"`
 				} `json:"choices"`
@@ -293,6 +297,19 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 			roomNPCs := map[string]bool{}
 			for _, npcID := range room.NPCs {
 				roomNPCs[npcID] = true
+			}
+			for _, action := range dungeon.PuzzleActions {
+				allowedHere := len(action.Rooms) == 0
+				for _, actionRoomID := range action.Rooms {
+					if actionRoomID == roomID {
+						allowedHere = true
+					}
+				}
+				if allowedHere {
+					for _, npcID := range append(append([]string{}, action.SpawnNPCs...), action.FailureSpawnNPCs...) {
+						roomNPCs[npcID] = true
+					}
+				}
 			}
 			for direction, requirement := range room.ExitRequirements {
 				if _, ok := room.Exits[direction]; !ok {
@@ -363,6 +380,20 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 					t.Fatalf("dungeon %s action %s affects npc %s outside its rooms", dungeon.ID, actionID, npcID)
 				}
 			}
+			for _, npcID := range append(append([]string{}, action.SpawnNPCs...), action.FailureSpawnNPCs...) {
+				if _, ok := data.NPCs[npcID]; !ok {
+					t.Fatalf("dungeon %s action %s spawns missing npc %s", dungeon.ID, actionID, npcID)
+				}
+			}
+			objectiveIDs := map[string]bool{}
+			for _, objective := range dungeon.Objectives {
+				objectiveIDs[objective.ID] = true
+			}
+			for _, objectiveID := range action.CompleteObjectives {
+				if !objectiveIDs[objectiveID] {
+					t.Fatalf("dungeon %s action %s completes missing objective %s", dungeon.ID, actionID, objectiveID)
+				}
+			}
 			if action.DialogueNPCID != "" {
 				npc, ok := data.NPCs[action.DialogueNPCID]
 				if !ok {
@@ -397,6 +428,11 @@ func validateDungeonResources(t *testing.T, data StaticData) {
 				}
 				if !present {
 					t.Fatalf("dungeon %s action %s requires npc %s outside its action rooms", dungeon.ID, actionID, npcID)
+				}
+			}
+			for puzzleID := range action.RequiredPuzzleStates {
+				if _, ok := dungeon.PuzzleInitialStates[puzzleID]; !ok {
+					t.Fatalf("dungeon %s action %s requires missing puzzle %s", dungeon.ID, actionID, puzzleID)
 				}
 			}
 			for _, items := range []map[string]int{action.RequiredItems, action.GiveItems, action.TakeItems} {

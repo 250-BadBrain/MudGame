@@ -152,6 +152,11 @@ func (r *RuntimeManager) advanceDungeonDialogueNoLock(p *model.Player, room mode
 	if message := inst.DialogueDoneMessages[npc.ID]; message != "" {
 		return message, nil, nil
 	}
+	for _, action := range r.dungeonMgr.RoomDialogueActionsNoLock(p.ID, room.ID, dungeonNPCTemplateID(inst, npc.ID)) {
+		if action.FailureMessage != "" {
+			return action.FailureMessage, nil, nil
+		}
+	}
 	return fmt.Sprintf("%s已无更多话要说。", npc.Name), nil, nil
 }
 
@@ -448,6 +453,11 @@ func (r *RuntimeManager) puzzleActionRequirementsMetNoLock(p *model.Player, room
 	}
 	for itemID, amount := range action.RequiredItems {
 		if p.Backpack[itemID] < amount {
+			return false
+		}
+	}
+	for puzzleID, requiredState := range action.RequiredPuzzleStates {
+		if inst.PuzzleStates[puzzleID] != requiredState {
 			return false
 		}
 	}

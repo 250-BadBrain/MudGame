@@ -31,29 +31,35 @@ type TemplateRoom struct {
 }
 
 type PuzzleAction struct {
-	ID                  string
-	Label               string
-	PuzzleID            string
-	Operation           string
-	Rooms               []string
-	FromStates          []string
-	NextState           string
-	Message             string
-	RepeatMessage       string
-	FailureMessage      string
-	RequiredItems       map[string]int
-	RequiredDefeatNPCs  []string
-	GiveItems           map[string]int
-	TakeItems           map[string]int
-	SetFlags            map[string]bool
-	AlertDelta          int
-	Choices             []ActionChoice
-	DialogueNPCID       string
-	DialogueLines       []string
-	DialogueDoneMessage string
-	MoveToRoomID        string
-	RemoveNPCs          []string
-	KillNPCs            []string
+	ID                   string
+	Label                string
+	PuzzleID             string
+	Operation            string
+	Rooms                []string
+	FromStates           []string
+	NextState            string
+	Message              string
+	RepeatMessage        string
+	FailureMessage       string
+	RequiredItems        map[string]int
+	RequiredPuzzleStates map[string]string
+	RequiredDefeatNPCs   []string
+	GiveItems            map[string]int
+	TakeItems            map[string]int
+	SetFlags             map[string]bool
+	AlertDelta           int
+	Choices              []ActionChoice
+	DialogueNPCID        string
+	DialogueLines        []string
+	DialogueDoneMessage  string
+	MoveToRoomID         string
+	RemoveNPCs           []string
+	KillNPCs             []string
+	SpawnNPCs            []string
+	FailureSpawnNPCs     []string
+	FailureResetAfter    int
+	FailureResetState    string
+	CompleteObjectives   []string
 }
 
 type ActionChoice struct {
@@ -162,26 +168,32 @@ type exitRequirementFile struct {
 }
 
 type puzzleActionFile struct {
-	Label              string             `json:"label"`
-	PuzzleID           string             `json:"puzzleId"`
-	Operation          string             `json:"operation"`
-	Rooms              []string           `json:"rooms"`
-	FromStates         []string           `json:"fromStates"`
-	NextState          string             `json:"nextState"`
-	Message            string             `json:"message"`
-	RepeatMessage      string             `json:"repeatMessage"`
-	FailureMessage     string             `json:"failureMessage"`
-	RequiredItems      map[string]int     `json:"requiredItems"`
-	RequiredDefeatNPCs []string           `json:"requiredDefeatNpcs"`
-	GiveItems          map[string]int     `json:"giveItems"`
-	TakeItems          map[string]int     `json:"takeItems"`
-	SetFlags           map[string]bool    `json:"setFlags"`
-	AlertDelta         int                `json:"alertDelta"`
-	Choices            []actionChoiceFile `json:"choices"`
-	DialogueNPCID      string             `json:"dialogueNpcId"`
-	MoveToRoomID       string             `json:"moveToRoomId"`
-	RemoveNPCs         []string           `json:"removeNpcs"`
-	KillNPCs           []string           `json:"killNpcs"`
+	Label                string             `json:"label"`
+	PuzzleID             string             `json:"puzzleId"`
+	Operation            string             `json:"operation"`
+	Rooms                []string           `json:"rooms"`
+	FromStates           []string           `json:"fromStates"`
+	NextState            string             `json:"nextState"`
+	Message              string             `json:"message"`
+	RepeatMessage        string             `json:"repeatMessage"`
+	FailureMessage       string             `json:"failureMessage"`
+	RequiredItems        map[string]int     `json:"requiredItems"`
+	RequiredPuzzleStates map[string]string  `json:"requiredPuzzleStates"`
+	RequiredDefeatNPCs   []string           `json:"requiredDefeatNpcs"`
+	GiveItems            map[string]int     `json:"giveItems"`
+	TakeItems            map[string]int     `json:"takeItems"`
+	SetFlags             map[string]bool    `json:"setFlags"`
+	AlertDelta           int                `json:"alertDelta"`
+	Choices              []actionChoiceFile `json:"choices"`
+	DialogueNPCID        string             `json:"dialogueNpcId"`
+	MoveToRoomID         string             `json:"moveToRoomId"`
+	RemoveNPCs           []string           `json:"removeNpcs"`
+	KillNPCs             []string           `json:"killNpcs"`
+	SpawnNPCs            []string           `json:"spawnNpcs"`
+	FailureSpawnNPCs     []string           `json:"failureSpawnNpcs"`
+	FailureResetAfter    int                `json:"failureResetAfter"`
+	FailureResetState    string             `json:"failureResetState"`
+	CompleteObjectives   []string           `json:"completeObjectives"`
 }
 
 type dungeonDialogueScript struct {
@@ -529,27 +541,33 @@ func loadPuzzleActions(files map[string]puzzleActionFile) map[string]PuzzleActio
 			continue
 		}
 		out[id] = PuzzleAction{
-			ID:                 id,
-			Label:              strings.TrimSpace(action.Label),
-			PuzzleID:           strings.TrimSpace(action.PuzzleID),
-			Operation:          strings.TrimSpace(action.Operation),
-			Rooms:              append([]string{}, action.Rooms...),
-			FromStates:         append([]string{}, action.FromStates...),
-			NextState:          strings.TrimSpace(action.NextState),
-			Message:            strings.TrimSpace(action.Message),
-			RepeatMessage:      strings.TrimSpace(action.RepeatMessage),
-			FailureMessage:     strings.TrimSpace(action.FailureMessage),
-			RequiredItems:      copyIntMap(action.RequiredItems),
-			RequiredDefeatNPCs: append([]string{}, action.RequiredDefeatNPCs...),
-			GiveItems:          copyIntMap(action.GiveItems),
-			TakeItems:          copyIntMap(action.TakeItems),
-			SetFlags:           copyBoolMap(action.SetFlags),
-			AlertDelta:         action.AlertDelta,
-			Choices:            loadActionChoices(action.Choices),
-			DialogueNPCID:      strings.TrimSpace(action.DialogueNPCID),
-			MoveToRoomID:       strings.TrimSpace(action.MoveToRoomID),
-			RemoveNPCs:         append([]string{}, action.RemoveNPCs...),
-			KillNPCs:           append([]string{}, action.KillNPCs...),
+			ID:                   id,
+			Label:                strings.TrimSpace(action.Label),
+			PuzzleID:             strings.TrimSpace(action.PuzzleID),
+			Operation:            strings.TrimSpace(action.Operation),
+			Rooms:                append([]string{}, action.Rooms...),
+			FromStates:           append([]string{}, action.FromStates...),
+			NextState:            strings.TrimSpace(action.NextState),
+			Message:              strings.TrimSpace(action.Message),
+			RepeatMessage:        strings.TrimSpace(action.RepeatMessage),
+			FailureMessage:       strings.TrimSpace(action.FailureMessage),
+			RequiredItems:        copyIntMap(action.RequiredItems),
+			RequiredPuzzleStates: copyStringMap(action.RequiredPuzzleStates),
+			RequiredDefeatNPCs:   append([]string{}, action.RequiredDefeatNPCs...),
+			GiveItems:            copyIntMap(action.GiveItems),
+			TakeItems:            copyIntMap(action.TakeItems),
+			SetFlags:             copyBoolMap(action.SetFlags),
+			AlertDelta:           action.AlertDelta,
+			Choices:              loadActionChoices(action.Choices),
+			DialogueNPCID:        strings.TrimSpace(action.DialogueNPCID),
+			MoveToRoomID:         strings.TrimSpace(action.MoveToRoomID),
+			RemoveNPCs:           append([]string{}, action.RemoveNPCs...),
+			KillNPCs:             append([]string{}, action.KillNPCs...),
+			SpawnNPCs:            append([]string{}, action.SpawnNPCs...),
+			FailureSpawnNPCs:     append([]string{}, action.FailureSpawnNPCs...),
+			FailureResetAfter:    action.FailureResetAfter,
+			FailureResetState:    strings.TrimSpace(action.FailureResetState),
+			CompleteObjectives:   append([]string{}, action.CompleteObjectives...),
 		}
 	}
 	return out
@@ -1217,7 +1235,7 @@ func (m *Manager) InstanceRoomIDNoLock(inst *Instance, baseRoomID string) string
 	return ""
 }
 
-func (m *Manager) ApplyActionNPCEffectsNoLock(inst *Instance, roomID string, removeTemplates, killTemplates []string) {
+func (m *Manager) ApplyActionNPCEffectsNoLock(inst *Instance, roomID string, removeTemplates, killTemplates, spawnTemplates []string) {
 	if inst == nil {
 		return
 	}
@@ -1250,6 +1268,27 @@ func (m *Manager) ApplyActionNPCEffectsNoLock(inst *Instance, roomID string, rem
 		remaining = append(remaining, npcID)
 	}
 	room.NPCIDs = remaining
+	for _, templateID := range spawnTemplates {
+		template, ok := m.npcTemplates[templateID]
+		if !ok {
+			continue
+		}
+		npcID := fmt.Sprintf("%s_spawn%d", roomID, len(room.NPCIDs)+1)
+		for inst.NPCs[npcID] != nil {
+			npcID += "x"
+		}
+		state := &NPCState{
+			ID: npcID, TemplateID: templateID, RoomID: roomID, Name: template.Name,
+			Title: template.Title, Description: template.Description, DialogueID: template.DialogueID,
+			Aggressive: template.Aggressive, Attributes: model.NormalizeAttributes(template.Attributes),
+			ShopInventory: copyIntMap(template.ShopInventory), Skills: copyIntMap(template.Skills),
+			IsShop: template.IsShop, Alive: true, WeaknessFlag: template.WeaknessFlag,
+			WeaknessModifiers: copyIntMap(template.WeaknessModifiers), CombatMode: template.CombatMode,
+		}
+		inst.NPCs[npcID] = state
+		m.npcs[npcID] = state
+		room.NPCIDs = append(room.NPCIDs, npcID)
+	}
 	inst.Rooms[roomID] = room
 }
 
@@ -1302,6 +1341,22 @@ func (m *Manager) ApplyPuzzleObjectiveNoLock(inst *Instance, puzzleID, state str
 	}
 	m.updateObjectiveProgressNoLock(inst)
 	return inst.Progress
+}
+
+func (m *Manager) CompleteObjectivesNoLock(inst *Instance, objectiveIDs []string) {
+	if inst == nil || len(objectiveIDs) == 0 {
+		return
+	}
+	wanted := map[string]bool{}
+	for _, id := range objectiveIDs {
+		wanted[id] = true
+	}
+	for _, obj := range inst.Objectives {
+		if wanted[obj.ID] {
+			inst.ObjectiveProgress[obj.ID] = max(1, obj.Required)
+		}
+	}
+	m.updateObjectiveProgressNoLock(inst)
 }
 
 func (m *Manager) UpdateCheckpointNoLock(roomID string) {

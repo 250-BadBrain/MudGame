@@ -1,0 +1,33 @@
+{
+  "id":"xunqin_ch02_wild_convoy","name":"荒原马队","description":"黄沙尽头传来马嘶与喊杀，一支乌家马队正被马贼分割围攻。","order":11,"chainId":"xunqin_legend","chapter":2,"spawnRoomId":"xqj_02_01",
+  "unlockConditions":[{"type":"flag","targetId":"xunqin_ch02_unlocked","value":"true"}],"temporaryItems":[],
+  "puzzleInitialStates":{"where":"unknown","trail":"unknown","rescue":"pending","ending":"pending"},
+  "puzzleActions":{
+    "ask_old_refugee":{"label":"询问此地","dialogueNpcId":"xqj_old_refugee","puzzleId":"where","rooms":["xqj_02_01"],"fromStates":["unknown"],"nextState":"known","message":"流民老者告诉你这里是赵境荒坡，西边刚有马贼追着乌家车队过去。"},
+    "inspect_wagon_tracks":{"label":"查看车辙","puzzleId":"trail","rooms":["xqj_02_03"],"fromStates":["unknown"],"nextState":"tracked","message":"车辙深而乱，西北方向沙土翻起，马队像是被迫分开。"},
+    "search_broken_arrows":{"label":"搜索断箭","puzzleId":"trail","rooms":["xqj_02_04"],"fromStates":["tracked"],"nextState":"found","message":"断箭尾羽染着马贼惯用的黑漆，箭头却朝东，主力显然已绕往西侧营地。"},
+    "steady_wu_guard":{"label":"扶起乌家护卫","dialogueNpcId":"xqj_wu_guard_a","puzzleId":"rescue","rooms":["xqj_02_05"],"fromStates":["pending"],"requiredDefeatNpcs":["xqj_bandit"],"nextState":"complete","message":"乌家护卫喘息着说，陶方被两名头目追进了前方马贼营地。"},
+    "meet_tao_fang":{"label":"与陶方会合","dialogueNpcId":"xqj_tao_fang","puzzleId":"ending","rooms":["xqj_02_07"],"fromStates":["pending"],"nextState":"complete","message":"陶方扶起伤员，向你深施一礼，并邀请你随乌家马队前往乌堡。"}
+  },
+  "rooms":{
+    "xqj_02_01":{"name":"赵境荒坡","description":"黄沙漫过枯骨，一名流民老者缩在背风石后。","checkpoint":true,"actions":["ask_old_refugee"],"exits":{"west":"xqj_02_02"},"npcs":["xqj_old_refugee"]},
+    "xqj_02_02":{"name":"枯草路","description":"狼群伏在齐腰枯草中，血迹一路拖向西北。","exits":{"east":"xqj_02_01","west":"xqj_02_03"},"exitRequirements":{"west":{"defeatNpcs":["xqj_wild_wolf"],"message":"荒原狼群封住了去路。"}},"npcs":["xqj_wild_wolf","xqj_wild_wolf"]},
+    "xqj_02_03":{"name":"破车道","description":"翻倒的车辕压着乌家旗布，三股车辙在此交错。","actions":["inspect_wagon_tracks"],"exits":{"east":"xqj_02_02","northwest":"xqj_02_04","west":"xqj_02_05"},"exitRequirements":{"west":{"requiredPuzzleStates":{"trail":"tracked"},"message":"还没有看清马队被迫转向何处。"}},"npcs":[]},
+    "xqj_02_04":{"name":"断箭坡","description":"折断的箭杆散在坡间，一名赵国逃卒正翻找尸身。","actions":["search_broken_arrows"],"exits":{"southeast":"xqj_02_03"},"npcs":["xqj_zhao_enemy"]},
+    "xqj_02_05":{"name":"马队伏击处","description":"乌家护卫被马贼围在破车之后，远处仍有两骑向西奔逃。","actions":["steady_wu_guard"],"exits":{"east":"xqj_02_03","northwest":"xqj_02_06a","southwest":"xqj_02_06b"},"exitRequirements":{"northwest":{"requiredPuzzleStates":{"trail":"found","rescue":"complete"},"message":"先救下护卫并查明马贼主力去向。"},"southwest":{"requiredPuzzleStates":{"trail":"tracked","rescue":"complete"},"message":"乌家护卫仍被困在车后。"}},"npcs":["xqj_wu_guard_a","xqj_bandit","xqj_bandit"]},
+    "xqj_02_06a":{"name":"马贼营地","description":"你循断箭绕到营地侧后，头目身边只剩一名匆忙回援的马贼。","exits":{"south":"xqj_02_07"},"exitRequirements":{"south":{"defeatNpcs":["xqj_bandit_captain","xqj_bandit_boss"],"message":"两名马贼头目仍守着乌家马车。"}},"npcs":["xqj_bandit","xqj_bandit_captain","xqj_bandit_boss"]},
+    "xqj_02_06b":{"name":"马贼营地","description":"你从正面闯入营地，三名伏兵与两名头目同时围了上来。","exits":{"south":"xqj_02_07"},"exitRequirements":{"south":{"defeatNpcs":["xqj_bandit_captain","xqj_bandit_boss"],"message":"马贼主力尚未清除。"}},"npcs":["xqj_bandit","xqj_bandit","xqj_bandit","xqj_bandit_captain","xqj_bandit_boss"]},
+    "xqj_02_07":{"name":"乌家马车","description":"倾斜的马车旁，陶方正替受伤护卫包扎。","actions":["meet_tao_fang"],"exits":{},"npcs":["xqj_tao_fang"]}
+  },
+  "objectives":[
+    {"id":"know_zhao","type":"puzzle","targetId":"where:known","required":1,"weight":5,"description":"确认身处赵境。"},
+    {"id":"kill_wolves","type":"kill","targetId":"xqj_wild_wolf","required":2,"weight":10,"description":"击杀荒原狼群。"},
+    {"id":"read_tracks","type":"puzzle","targetId":"trail:tracked","required":1,"weight":10,"description":"查看破车道车辙。"},
+    {"id":"find_arrows","type":"puzzle","targetId":"trail:found","required":1,"weight":15,"description":"搜索断箭判断马贼路线。"},
+    {"id":"save_guard","type":"puzzle","targetId":"rescue:complete","required":1,"weight":15,"description":"救下乌家护卫。"},
+    {"id":"kill_captain","type":"kill","targetId":"xqj_bandit_captain","required":1,"weight":15,"description":"击败马贼小头目。"},
+    {"id":"kill_boss","type":"kill","targetId":"xqj_bandit_boss","required":1,"weight":25,"description":"击败马贼大头目。"},
+    {"id":"meet_tao","type":"puzzle","targetId":"ending:complete","required":1,"weight":5,"description":"与陶方会合。"}
+  ],
+  "rewards":{"experience":520,"potential":340,"flags":{"xunqin_ch02_completed":true,"xunqin_ch03_unlocked":true}}
+}

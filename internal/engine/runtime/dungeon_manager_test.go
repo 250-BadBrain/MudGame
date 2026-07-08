@@ -7,30 +7,25 @@ import (
 	"mudgame/server/internal/model"
 )
 
-func TestXunqinFirstElevenTemplatesMatchDesign(t *testing.T) {
+func TestXunqinRewrittenFirstSixTemplatesMatchDesign(t *testing.T) {
 	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
 	if err := m.LoadTemplatesNoLock(); err != nil {
 		t.Fatalf("load dungeon templates failed: %v", err)
 	}
 	expected := map[string]int{
-		"xunqin_ch01_bronze_fall":         12,
-		"xunqin_ch02_wu_fort_trial":       10,
-		"xunqin_ch03_handan_opening":      12,
-		"xunqin_ch04_hostage_camp_night":  11,
-		"xunqin_ch05_handan_blood_road":   12,
-		"xunqin_ch06_wu_fort_blood_night": 14,
-		"xunqin_ch07_westward_sand":       12,
-		"xunqin_ch08_border_suspicion":    12,
-		"xunqin_ch09_hangu_trials":        10,
-		"xunqin_ch10_xianyang_arrival":    11,
-		"xunqin_ch11_clan_blood_trial":    12,
+		"xunqin_ch01_bronze_tomb":  6,
+		"xunqin_ch02_wild_convoy":  8,
+		"xunqin_ch03_wu_stables":   8,
+		"xunqin_ch04_zhao_inn":     8,
+		"xunqin_ch05_hostage_camp": 9,
+		"xunqin_ch06_handan_alley": 9,
 	}
 	chapters := map[int]string{}
 	for _, id := range m.DungeonTemplateIDsNoLock() {
 		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID == "xunqin_legend" && tpl.Chapter >= 1 && tpl.Chapter <= 11 {
+		if tpl.ChainID == "xunqin_legend" {
 			if _, ok := expected[id]; !ok {
-				t.Fatalf("obsolete first-six xunqin dungeon is still loaded: %s", id)
+				t.Fatalf("unexpected xunqin dungeon remains loaded: %s", id)
 			}
 		}
 	}
@@ -42,13 +37,13 @@ func TestXunqinFirstElevenTemplatesMatchDesign(t *testing.T) {
 		if len(tpl.Rooms) != roomCount {
 			t.Fatalf("dungeon %s expected %d rooms, got %d", id, roomCount, len(tpl.Rooms))
 		}
-		if tpl.ChainID != "xunqin_legend" || tpl.Chapter < 1 || tpl.Chapter > 11 {
+		if tpl.ChainID != "xunqin_legend" || tpl.Chapter < 1 || tpl.Chapter > 6 {
 			t.Fatalf("dungeon %s has invalid chain metadata: %+v", id, tpl)
 		}
 		chapters[tpl.Chapter] = id
 	}
-	if !reflect.DeepEqual(chapters, map[int]string{1: "xunqin_ch01_bronze_fall", 2: "xunqin_ch02_wu_fort_trial", 3: "xunqin_ch03_handan_opening", 4: "xunqin_ch04_hostage_camp_night", 5: "xunqin_ch05_handan_blood_road", 6: "xunqin_ch06_wu_fort_blood_night", 7: "xunqin_ch07_westward_sand", 8: "xunqin_ch08_border_suspicion", 9: "xunqin_ch09_hangu_trials", 10: "xunqin_ch10_xianyang_arrival", 11: "xunqin_ch11_clan_blood_trial"}) {
-		t.Fatalf("unexpected first-six chapter ordering: %+v", chapters)
+	if !reflect.DeepEqual(chapters, map[int]string{1: "xunqin_ch01_bronze_tomb", 2: "xunqin_ch02_wild_convoy", 3: "xunqin_ch03_wu_stables", 4: "xunqin_ch04_zhao_inn", 5: "xunqin_ch05_hostage_camp", 6: "xunqin_ch06_handan_alley"}) {
+		t.Fatalf("unexpected rewritten chapter ordering: %+v", chapters)
 	}
 }
 
@@ -165,7 +160,7 @@ func TestXunqinPendingChoicesKeepTheirExactPrompt(t *testing.T) {
 	}
 	for _, id := range m.DungeonTemplateIDsNoLock() {
 		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 11 {
+		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 6 {
 			continue
 		}
 		for actionID, action := range tpl.PuzzleActions {
@@ -200,7 +195,7 @@ func TestXunqinDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
 	covered := 0
 	for _, id := range m.DungeonTemplateIDsNoLock() {
 		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 11 {
+		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 6 {
 			continue
 		}
 		for actionID, action := range tpl.PuzzleActions {
@@ -216,8 +211,8 @@ func TestXunqinDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
 			}
 		}
 	}
-	if covered != 53 {
-		t.Fatalf("expected all 53 current story dialogue actions, got %d", covered)
+	if covered != 15 {
+		t.Fatalf("expected all 15 rewritten story dialogue actions, got %d", covered)
 	}
 }
 
@@ -354,7 +349,7 @@ func TestPuzzleActionNPCEffectsRemoveOrLeaveCorpse(t *testing.T) {
 		NPCs:  map[string]*NPCState{removed.ID: removed, killed.ID: killed},
 	}
 	m := NewManager(nil, nil, map[string]*Instance{inst.ID: inst}, nil, map[string]string{roomID: inst.ID}, map[string]*NPCState{removed.ID: removed, killed.ID: killed})
-	m.ApplyActionNPCEffectsNoLock(inst, roomID, []string{"wounded"}, []string{"enemy"})
+	m.ApplyActionNPCEffectsNoLock(inst, roomID, []string{"wounded"}, []string{"enemy"}, nil)
 	if _, exists := inst.NPCs[removed.ID]; exists {
 		t.Fatalf("expected removed npc deleted from instance")
 	}
