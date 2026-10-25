@@ -1,0 +1,198 @@
+{
+  "id": "posui_zhanshen",
+  "name": "战神殿",
+  "description": "战神殿真身现于雪山之腹。传鹰只身入殿参悟最后一页，蒙古萨满以秘术凝出他的道心心象阻道——你为他护法：清道、参图、斩碎那尊由千年战意凝成的心象。",
+  "order": 14,
+  "chainId": "posui_xukong",
+  "chainName": "破碎虚空",
+  "chapter": 3,
+  "spawnRoomId": "zd_00",
+  "puzzleInitialStates": {
+    "atlas": "unseen",
+    "box": "unopened",
+    "briefing_zd": "new"
+  },
+  "puzzleActions": {
+    "listen_ying": {
+      "label": "听传鹰留下的话",
+      "puzzleId": "briefing_zd",
+      "rooms": [
+        "zd_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "zd_chuan_ying",
+      "message": "传鹰的话穿过殿门，落在山道上。",
+      "repeatMessage": "传鹰入定如山，不再多言。"
+    },
+    "view_atlas": {
+      "label": "观战神全图",
+      "puzzleId": "atlas",
+      "rooms": [
+        "zd_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "viewed",
+      "message": "殿门全图在你眼前铺开：千军、万马、山河、日月——最后一页却是一片空白，白得让人心慌。",
+      "repeatMessage": "全图犹在，你却总在最后一页停住。"
+    },
+    "comprehend_atlas": {
+      "label": "神游图境",
+      "puzzleId": "atlas",
+      "rooms": [
+        "zd_02"
+      ],
+      "fromStates": [
+        "viewed"
+      ],
+      "nextState": "comprehended",
+      "setFlags": {
+        "wujin_quantu": true
+      },
+      "message": "你踏进那片空白——千军万马俱碎，山河日月俱寂。图录真意入心：所谓战神，战的是自己。",
+      "repeatMessage": "图录真意已在你心中。"
+    },
+    "open_box": {
+      "label": "拾取遗落玉盒",
+      "puzzleId": "box",
+      "rooms": [
+        "zd_03"
+      ],
+      "fromStates": [
+        "unopened"
+      ],
+      "nextState": "opened",
+      "requiredDefeatNpcs": [
+        "zd_war_phantom"
+      ],
+      "failureMessage": "心象未碎，殿中气机乱作一团——谁也不敢在这个时候伸手。",
+      "message": "心象崩解处，一只旧玉盒滚落在地——里面躺着一粒药香犹在的大还丹。",
+      "repeatMessage": "玉盒已被你收起。",
+      "giveItems": {
+        "dahuandan": 1
+      }
+    }
+  },
+  "rooms": {
+    "zd_00": {
+      "name": "雪原山道",
+      "description": "雪山环抱中的山道积着经年不化的雪。传鹰的背影远远立在大殿门口，萨满的铜铃声从四面八方逼近。",
+      "exits": {
+        "north": "zd_01"
+      },
+      "npcs": [
+        "zd_chuan_ying",
+        "zd_shaman_guard",
+        "zd_shaman_guard"
+      ],
+      "actions": [
+        "listen_ying"
+      ]
+    },
+    "zd_01": {
+      "name": "图录长阶",
+      "description": "千级白玉长阶直上殿门，阶上高手按枪而立——他们守了三十年，守的其实不是殿。",
+      "exits": {
+        "south": "zd_00",
+        "north": "zd_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "zd_tulu_adept"
+          ],
+          "message": "长阶上的图录高手寸步不退。"
+        }
+      },
+      "npcs": [
+        "zd_tulu_adept",
+        "zd_tulu_adept"
+      ]
+    },
+    "zd_02": {
+      "name": "殿门",
+      "description": "战神大殿的整面门扉就是一幅全图：千军万马、山河日月，笔势到最后一页戛然而止。",
+      "exits": {
+        "south": "zd_01",
+        "north": "zd_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "atlas": "comprehended"
+          },
+          "message": "全图未悟，殿门纹丝不动——心象还在等你。"
+        }
+      },
+      "actions": [
+        "view_atlas",
+        "comprehend_atlas"
+      ]
+    },
+    "zd_03": {
+      "name": "战神大殿",
+      "description": "大殿中央，传鹰入定的身影对面，一尊由金铁与血气凝成的心象缓缓抬起了眼——它用的是传鹰的招，眼里却全是你的破绽。",
+      "exits": {
+        "south": "zd_02"
+      },
+      "npcs": [
+        "zd_war_phantom"
+      ],
+      "actions": [
+        "open_box"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_shaman",
+      "type": "kill",
+      "targetId": "zd_shaman_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿雪原萨满武士"
+    },
+    {
+      "id": "kill_tulu",
+      "type": "kill",
+      "targetId": "zd_tulu_adept",
+      "required": 2,
+      "weight": 20,
+      "description": "破图录长阶守卫"
+    },
+    {
+      "id": "comprehend_atlas",
+      "type": "puzzle",
+      "targetId": "atlas:comprehended",
+      "required": 1,
+      "weight": 15,
+      "description": "参悟殿门战神全图"
+    },
+    {
+      "id": "slay_phantom",
+      "type": "kill",
+      "targetId": "zd_war_phantom",
+      "required": 1,
+      "weight": 45,
+      "description": "斩碎战神心象"
+    },
+    {
+      "id": "open_box",
+      "type": "puzzle",
+      "targetId": "box:opened",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "拾取传鹰遗落的玉盒"
+    }
+  ],
+  "rewards": {
+    "experience": 1240,
+    "potential": 740,
+    "money": 420
+  }
+}

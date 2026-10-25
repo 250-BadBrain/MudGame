@@ -6089,5 +6089,278 @@
       "hitRate": -18,
       "defense": -8
     }
+  },
+  "zd_chuan_ying": {
+    "name": "传鹰",
+    "title": "破碎虚空·传人",
+    "description": "披着旧披风的青年立在战神大殿中央，闭目入定，周身气机与整座大殿的嗡鸣融成一体——他正在走前人未走完的那条路。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_zd_ying",
+    "attributes": {
+      "level": 30,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 30,
+        "constitution": 30,
+        "agility": 30,
+        "perception": 30,
+        "willpower": 30,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 520,
+        "maxHp": 520,
+        "mp": 200,
+        "trainedMaxMp": 200,
+        "maxMp": 200,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 30,
+        "defense": 30,
+        "hitRate": 130,
+        "dodge": 120,
+        "parry": 110,
+        "critRate": 10,
+        "attackSpeed": 4,
+        "initiative": 120,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "zd_shaman_guard": {
+    "name": "萨满武士",
+    "title": "汗庭秘术",
+    "description": "脸上涂着骨纹的萨满武士，铜铃与弯刀一起响，守住通往战神殿的雪原山道。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 24,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 28,
+        "constitution": 27,
+        "agility": 22,
+        "perception": 15,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 340,
+        "maxHp": 340,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 51,
+        "defense": 25,
+        "hitRate": 126,
+        "dodge": 92,
+        "parry": 96,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 88,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "zd_tulu_adept": {
+    "name": "图录高手",
+    "title": "殿阶守卫",
+    "description": "守在图录长阶的高手，枪尖挑着的不是杀气，而是近乎朝圣的执拗——他们守的其实是殿里那东西。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 26,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 30,
+        "constitution": 28,
+        "agility": 23,
+        "perception": 16,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 370,
+        "maxHp": 370,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 55,
+        "defense": 27,
+        "hitRate": 130,
+        "dodge": 94,
+        "parry": 100,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 92,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "zd_war_phantom": {
+    "name": "战神心象",
+    "title": "传鹰心魔",
+    "description": "由千年战意与传鹰自己的道心交织而成的心象——每一招都是传鹰的招，每一式都恰好在你的旧伤处。",
+    "faction": "neutral",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 36,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 40,
+        "constitution": 40,
+        "agility": 38,
+        "perception": 26,
+        "willpower": 28,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 800,
+        "maxHp": 800,
+        "mp": 170,
+        "trainedMaxMp": 170,
+        "maxMp": 170,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 60,
+        "defense": 31,
+        "hitRate": 140,
+        "dodge": 116,
+        "parry": 108,
+        "critRate": 14,
+        "attackSpeed": 4,
+        "initiative": 118,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "wujin_quantu",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
   }
 }

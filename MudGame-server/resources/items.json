@@ -484,5 +484,21 @@
     "effects": {
       "learnSkill": "wuzhen_pian"
     }
+  },
+  "dahuandan": {
+    "name": "大还丹",
+    "description": "战神殿中丹炉里留下的最后一粒大还丹，药香千年不散。气血重创亦可一粒回春。",
+    "type": "medicine",
+    "subtype": "pill",
+    "stackable": true,
+    "sellable": true,
+    "value": 800,
+    "rarity": 4,
+    "unit": "粒",
+    "source": "战神殿",
+    "usable": true,
+    "effects": {
+      "recoverHp": 150
+    }
   }
 }
