@@ -35,7 +35,7 @@ npm run build
 
 ## Cloudflare Pages + Tunnel 部署要点
 
-1. 前端部署到 Cloudflare Pages，构建命令为 `npm run build`，输出目录为 `dist`。
+1. 前端部署到 Cloudflare Pages，构建命令为 `npm run build`，输出目录为 `dist`。**monorepo 注意**：仓库根目录是整个项目，Pages 项目设置中需把 **Root directory（高级）设为 `MudGame`**；并在 **Settings → Builds & deployments → Build watch paths** 配置包含路径 `/MudGame/**`——仅设根目录不会自动跳过无关提交，需 watch paths 才能让只改后端/文档的 push 不触发前端重建。
 2. 本机启动后端：在仓库根目录运行 `start.bat`（等价于在 `MudGame-server` 下执行 `go run ./cmd/mudserver`）。
 3. 用 Cloudflare Tunnel 将本机 4009 暴露到公网域名。
 4. 在 Cloudflare Pages 环境变量中设置 `VITE_WS_URL=wss://api-mud.game.h2seo4.win/ws` 后重新部署。

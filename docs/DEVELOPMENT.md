@@ -4,15 +4,17 @@
 
 ## 1. 仓库结构与职责
 
-工作区根目录下共三个 Git 仓库，职责严格分离：
+**单一 Git 仓库（monorepo）**，前后端与文档在同一仓库中一起提交、一起回退：
 
-| 位置 | 职责 | 内容 |
-|---|---|---|
-| `./`（根仓库） | **文档与运维脚本** | `docs/`（全部设计/内容文档，本文档所在地）、`start.bat`、`deploy.bat` |
-| `./MudGame` | 前端 | Vue 3 + Vite + Pinia + Vue Router |
-| `./MudGame-server` | 后端 | Go，WebSocket 服务，默认端口 4009 |
+| 目录 | 职责 |
+|---|---|
+| `docs/` | 全部设计/内容文档（本文档所在地） |
+| `MudGame/` | 前端（Vue 3 + Vite + Pinia + Vue Router），子目录内有自己的 `.gitignore` |
+| `MudGame-server/` | 后端（Go，WebSocket 服务，默认端口 4009），子目录内有自己的 `.gitignore` |
+| `start.bat` / `deploy.bat` | 本地启动 / 远程部署脚本 |
+| `data/` | 后端运行时动态数据（玩家存档），**已在 .gitignore 忽略，禁止提交** |
 
-`./data/` 是后端运行时动态数据（玩家存档等），**不属于任何仓库**，禁止提交。根目录下的 `MudGame/`、`MudGame-server/`、`data/` 均在根仓库 `.gitignore` 中忽略。
+> 历史备注：2026-10 由三个独立仓库（文档仓 + 前端仓 + 后端仓）通过 `git subtree` 合并为本单仓库，三段提交历史全部保留（导入提交 `2896cd5`/`00ebe20`）。注意 subtree 导入的历史中文件路径不带 `MudGame/`、`MudGame-server/` 前缀，因此 `git log -- MudGame/` 只能追溯到导入提交；更早的历史通过导入提交的第二个父提交浏览（`git log 2896cd5^2`）。
 
 ## 2. 运行与调试
 
@@ -152,11 +154,10 @@ node smoke.js   # 注册 → 登录 → 创角 → 进入游戏 → 执行目标
 ### 第五步：文档留存与提交
 
 1. **回写文档**：实现与设计如有偏差，以最终实现回写权威文档；新副本补 dungeon_flows.md；新文档在 README.md 索引登记；删除功能时**同步清理引用它的文档**（防止过期文档误导后续开发）。
-2. **提交**（文档仓与代码仓各自提交，一次特性通常 = 1 个文档提交 + 1~2 个代码提交）：
+2. **提交**（单仓库，一次特性一笔提交，文档与代码天然原子）：
 
 ```sh
-git -C . add docs && git commit -m "文档：xxx"          # 根仓库（文档/脚本）
-git -C MudGame add -A && git commit -m "前端：xxx"      # 或 MudGame-server
+git add -A && git commit -m "xxx"
 ```
 
 3. 提交信息用中文短句、动词开头（例：“将NPC交谈改为消息区逐句展示”、“开放战斗中使用药品”）。**不主动 push**，推送时机由维护者决定。
