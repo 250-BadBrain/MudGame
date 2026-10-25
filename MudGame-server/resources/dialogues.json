@@ -536,5 +536,19 @@
     "title": "东都告急",
     "opening": "校尉抱拳，声音沙哑：\"罗士信兵临洛北，围而不攻——他在等城中自乱。可城里先乱的，会是民心。\"",
     "options": []
+  },
+  "dlg_ca2_soldier": {
+    "id": "dlg_ca2_soldier",
+    "npcId": "ca2_erci_soldier",
+    "title": "安门盘查",
+    "opening": "骁果卫士横戟一拦：\"皇城重地，闲人止步。——看在你不像乱党的份上，提醒一句：慈航别院那边，昨夜又有人影翻墙。\"",
+    "options": []
+  },
+  "dlg_ca2_monk": {
+    "id": "dlg_ca2_monk",
+    "npcId": "ca2_monk",
+    "title": "别院问讯",
+    "opening": "知客僧合十：\"仙子闭关参悟和氏璧的启示，不见客。施主若有江湖急难，老衲倒可代传一句话。\"",
+    "options": []
   }
 }

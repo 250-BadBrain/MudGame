@@ -1,0 +1,107 @@
+{
+  "id": "changan",
+  "name": "长安",
+  "description": "大隋的另一座雄城——九衢百市，胡汉杂处。和氏璧的风波让它成了天下目光的焦点：西市柜坊的胡商、皇城的骁果卫士、慈航别院的青灯，都在等同一个消息。",
+  "order": 2,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "ca2_west_market",
+  "rooms": {
+    "ca2_west_market": {
+      "name": "长安西市",
+      "description": "长安西市比洛阳任何一座市集都大——胡商驼队、波斯银币、高昌骏马挤在同一条街上，叫卖声能盖过钟鼓。",
+      "area": "长安",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "ca2_west_keeper"
+      ],
+      "exits": {
+        "east": "ca2_sky_street",
+        "south": "ca2_beitian_fang"
+      }
+    },
+    "ca2_sky_street": {
+      "name": "朱雀天街",
+      "description": "宽一百步的朱雀天街笔直向北，直通皇城。两侧槐树成行，槐叶落了一地金。",
+      "area": "长安",
+      "tags": [
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "west": "ca2_west_market",
+        "north": "ca2_anyang_gate",
+        "east": "ca2_hechun_pavilion"
+      }
+    },
+    "ca2_anyang_gate": {
+      "name": "皇城安上门",
+      "description": "安上门城楼高耸，骁果卫士按戟而立。门后就是皇城——大隋的脉搏从这里传向天下。",
+      "area": "长安",
+      "tags": [
+        "government",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "ca2_erci_soldier"
+      ],
+      "exits": {
+        "south": "ca2_sky_street"
+      }
+    },
+    "ca2_hechun_pavilion": {
+      "name": "和春亭",
+      "description": "曲江池畔的和春亭依旧垂帘青灯——师妃暄长安之行的驻处。亭外游人如织，亭内清净如禅。",
+      "area": "长安",
+      "tags": [
+        "quest",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "ca2_monk"
+      ],
+      "exits": {
+        "west": "ca2_sky_street",
+        "north": "ca2_cixiang_yuan"
+      }
+    },
+    "ca2_cixiang_yuan": {
+      "name": "慈航别院",
+      "description": "慈航静斋在长安的驻锡别院，院墙高耸，竹影婆娑。院门虚掩，门上悬一枚木剑——天下人都认得这枚剑。",
+      "area": "长安",
+      "tags": [
+        "faction",
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "south": "ca2_hechun_pavilion"
+      }
+    },
+    "ca2_beitian_fang": {
+      "name": "悲田坊",
+      "description": "西市南面的贫民坊，窝棚与破庙挤作一处。战乱把北方的流民一波波送到这里——佛寺的施粥棚前，队伍从早排到晚。",
+      "area": "长安",
+      "tags": [
+        "unsafe"
+      ],
+      "safeZone": false,
+      "actions": [
+        "listen_rumor"
+      ],
+      "exits": {
+        "north": "ca2_west_market"
+      }
+    }
+  }
+}

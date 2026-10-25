@@ -7181,5 +7181,207 @@
       "hitRate": -16,
       "defense": -8
     }
+  },
+  "ca2_west_keeper": {
+    "name": "胡商安伽奴",
+    "title": "长安西市柜坊",
+    "description": "粟特胡商，西市柜坊的主人，能把一匹绢的价钱讲出花的来。西域酒与波斯地毯在他柜上应有尽有。",
+    "faction": "heluo_merchant_guild",
+    "role": "shopkeeper",
+    "importance": "local",
+    "shopItems": [
+      "simple_medicine",
+      "smoke_powder",
+      "darts"
+    ],
+    "attributes": {
+      "level": 12,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 50,
+        "trainedMaxMp": 50,
+        "maxMp": 50,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 13,
+        "defense": 12,
+        "hitRate": 78,
+        "dodge": 58,
+        "parry": 55,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 58,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ca2_erci_soldier": {
+    "name": "骁果卫士",
+    "title": "皇城宿卫",
+    "description": "皇城安上门的骁果卫士，甲胄崭新，眼神却倦——长安的夜，最近太不太平。",
+    "faction": "luoyang_office",
+    "role": "guard",
+    "importance": "local",
+    "dialogueId": "dlg_ca2_soldier",
+    "attributes": {
+      "level": 16,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 17,
+        "agility": 14,
+        "perception": 12,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 170,
+        "maxHp": 170,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 22,
+        "defense": 16,
+        "hitRate": 96,
+        "dodge": 62,
+        "parry": 72,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 58,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ca2_monk": {
+    "name": "化度寺知客僧",
+    "title": "佛门知客",
+    "description": "化度寺派驻别院的知客僧，为师妃暄打理起居。合十的姿势常年不变，耳朵却把满城动静听了个七成。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_ca2_monk",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 13,
+        "agility": 12,
+        "perception": 15,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 70,
+        "trainedMaxMp": 70,
+        "maxMp": 70,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 11,
+        "defense": 11,
+        "hitRate": 76,
+        "dodge": 58,
+        "parry": 55,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 54,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
   }
 }

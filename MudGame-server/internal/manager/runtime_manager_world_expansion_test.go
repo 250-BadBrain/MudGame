@@ -112,3 +112,32 @@ func TestBeaconSearchSetsSignalFlag(t *testing.T) {
 		t.Fatal("expected found_beacon_signal flag")
 	}
 }
+
+// 跨城：enter_world 直达长安出生点，再切回洛阳
+func TestEnterWorldChangan(t *testing.T) {
+	r := NewRuntimeManager(t.TempDir())
+	t.Cleanup(func() { _ = r.Close() })
+	if err := r.Register("traveler", "pass123"); err != nil {
+		t.Fatalf("register failed: %v", err)
+	}
+	playerID, err := r.CreateCharacter("traveler", "两京客", 16, 16, 16, 16, 16)
+	if err != nil {
+		t.Fatalf("create character failed: %v", err)
+	}
+
+	if _, err := r.EnterWorld(playerID, "changan"); err != nil {
+		t.Fatalf("enter changan failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	if after[playerID].RoomID != "ca2_west_market" {
+		t.Fatalf("expected changan spawn, got %s", after[playerID].RoomID)
+	}
+
+	if _, err := r.EnterWorld(playerID, "luoyang"); err != nil {
+		t.Fatalf("enter luoyang failed: %v", err)
+	}
+	after, _ = r.loadPlayers()
+	if after[playerID].RoomID != "ly_00" {
+		t.Fatalf("expected luoyang spawn, got %s", after[playerID].RoomID)
+	}
+}
