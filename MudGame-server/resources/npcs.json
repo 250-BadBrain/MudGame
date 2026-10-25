@@ -2996,7 +2996,8 @@
       "tianmo_ce": 120,
       "talang_jue": 120,
       "fuhu_jin": 120,
-      "tiebi_gong": 120
+      "tiebi_gong": 120,
+      "wuzhen_pian": 120
     },
     "attributes": {
       "level": 30,
@@ -5813,6 +5814,279 @@
     "weaknessModifiers": {
       "attack": -12,
       "hitRate": -16,
+      "defense": -8
+    }
+  },
+  "jm_qi_bishao": {
+    "name": "祁碧芍",
+    "title": "侠女",
+    "description": "青衫佩剑的女侠守在山脚古道口，为传鹰的战约断后。她看你的眼神像在看一把还没出鞘的刀。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_jm_qi",
+    "attributes": {
+      "level": 18,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 16,
+        "constitution": 16,
+        "agility": 20,
+        "perception": 16,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 200,
+        "maxHp": 200,
+        "mp": 90,
+        "trainedMaxMp": 90,
+        "maxMp": 90,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 16,
+        "defense": 15,
+        "hitRate": 100,
+        "dodge": 92,
+        "parry": 82,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 88,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jm_mongol_warrior": {
+    "name": "蒙古武士",
+    "title": "汗庭铁卫",
+    "description": "封山的蒙古武士，弯刀出了鞘就不再回鞘——国师的战约，不许任何人搅局。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 21,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 25,
+        "constitution": 24,
+        "agility": 20,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 300,
+        "maxHp": 300,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 45,
+        "defense": 22,
+        "hitRate": 120,
+        "dodge": 88,
+        "parry": 90,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 82,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jm_mongol_adept": {
+    "name": "蒙古高手",
+    "title": "国师座下",
+    "description": "国师座下的高手，一手摔撇功夫硬桥硬马，藏獒般的体魄里藏着精准的杀意。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 23,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 27,
+        "constitution": 26,
+        "agility": 21,
+        "perception": 15,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 330,
+        "maxHp": 330,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 49,
+        "defense": 24,
+        "hitRate": 124,
+        "dodge": 90,
+        "parry": 94,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 86,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jm_si_hanfei": {
+    "name": "思汉飞",
+    "title": "蒙古国师",
+    "description": "紫袍金冠的蒙古国师立在山巅，天妖气如潮水般外放，压得满山鸟雀噤声。他与传鹰的战约，是当世武道的巅峰对决。",
+    "faction": "mongol_khan",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 34,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 38,
+        "constitution": 38,
+        "agility": 34,
+        "perception": 24,
+        "willpower": 26,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 760,
+        "maxHp": 760,
+        "mp": 160,
+        "trainedMaxMp": 160,
+        "maxMp": 160,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 58,
+        "defense": 30,
+        "hitRate": 136,
+        "dodge": 108,
+        "parry": 104,
+        "critRate": 12,
+        "attackSpeed": 4,
+        "initiative": 116,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "posui_insight",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -18,
       "defense": -8
     }
   }

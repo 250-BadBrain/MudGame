@@ -9,7 +9,8 @@
   "spawnRoomId": "vault_00",
   "puzzleInitialStates": {
     "mechanism": "locked",
-    "chess": "unsolved"
+    "chess": "unsolved",
+    "annotation": "unread"
   },
   "puzzleActions": {
     "turn_mechanism": {
@@ -37,6 +38,22 @@
       "nextState": "solved",
       "message": "枰上黑白之势看似必死，你忽然省起鲁妙子批注的八个字：\"弃子争先，以拙破巧。\"一子落枰，满枰石机倒转，北门应声而开。",
       "repeatMessage": "棋局已破，枰上残子再无变化。"
+    },
+    "read_annotation": {
+      "label": "研读鲁妙子批注",
+      "puzzleId": "annotation",
+      "rooms": [
+        "vault_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "read",
+      "message": "你凑近门楣上\"弃子争先，以拙破巧\"的批注，逐字玩味——批注背后竟还藏着一套读书悟道的法门，《悟真篇》残页赫然在目。",
+      "repeatMessage": "批注你早已烂熟于心。",
+      "giveItems": {
+        "wuzhen_page": 1
+      }
     }
   },
   "rooms": {
@@ -115,7 +132,8 @@
         }
       },
       "actions": [
-        "solve_chess"
+        "solve_chess",
+        "read_annotation"
       ],
       "npcs": []
     },
@@ -199,6 +217,15 @@
       "required": 1,
       "weight": 40,
       "description": "斩杀突厥第一高手康鞘利。"
+    },
+    {
+      "id": "read_annotation",
+      "type": "puzzle",
+      "targetId": "annotation:read",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "研读鲁妙子批注，寻得读书法门"
     }
   ],
   "rewards": {

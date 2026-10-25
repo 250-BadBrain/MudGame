@@ -1,0 +1,209 @@
+{
+  "id": "posui_jiming",
+  "name": "鸡鸣山之约",
+  "description": "蒙古国师思汉飞相约鸡鸣山巅一战，传鹰只身赴会。蒙古武士封锁了整座山——你从山脚古道杀上山巅，在传鹰留下的战神图录残纹里悟得一丝破碎之意，与那紫袍国师在天下人眼前分了个高下。",
+  "order": 13,
+  "chainId": "posui_xukong",
+  "chainName": "破碎虚空",
+  "chapter": 2,
+  "spawnRoomId": "jm_00",
+  "puzzleInitialStates": {
+    "carving": "untouched",
+    "briefing_jm": "new",
+    "supply": "untouched"
+  },
+  "puzzleActions": {
+    "listen_qi": {
+      "label": "听祁碧芍交代战约",
+      "puzzleId": "briefing_jm",
+      "rooms": [
+        "jm_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "jm_qi_bishao",
+      "message": "祁碧芍把战约的来龙去脉说了一遍。",
+      "repeatMessage": "祁碧芍只余一个守山的背影。"
+    },
+    "view_carving": {
+      "label": "静观残纹",
+      "puzzleId": "carving",
+      "rooms": [
+        "jm_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "viewed",
+      "message": "石壁上的残纹笔势断续，像刀劈斧凿，又像雷过长空——你看得越久，越觉得那不是纹路，是\"破\"字的半边。",
+      "repeatMessage": "残纹犹在，你的心却静不下来。"
+    },
+    "comprehend_void": {
+      "label": "悟破碎之意",
+      "puzzleId": "carving",
+      "rooms": [
+        "jm_03"
+      ],
+      "fromStates": [
+        "viewed"
+      ],
+      "nextState": "comprehended",
+      "setFlags": {
+        "posui_insight": true
+      },
+      "message": "雷声在识海炸开——残纹崩碎，碎处竟是一片无边无际的虚空。你懂了：破的不是招，是\"有\"与\"无\"之间那道墙。",
+      "repeatMessage": "破碎之意已在你心中，山风都为之侧目。"
+    },
+    "take_supply": {
+      "label": "取走供品箱",
+      "puzzleId": "supply",
+      "rooms": [
+        "jm_04"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "taken",
+      "requiredDefeatNpcs": [
+        "jm_si_hanfei"
+      ],
+      "failureMessage": "国师还立在山巅，谁敢动大汗的供品箱。",
+      "message": "拜服退走的国师留下了大汗御赐的供品箱——干粮与铜片，塞得满满当当。",
+      "repeatMessage": "供品箱已被你搬空。",
+      "giveItems": {
+        "dry_ration": 2,
+        "bronze_fragment": 2
+      }
+    }
+  },
+  "rooms": {
+    "jm_00": {
+      "name": "山脚古道",
+      "description": "鸡鸣山古道口插着一排蒙古弯刀，刀下压着战书。祁碧芍按剑立于道旁，山风卷起她的衣角。",
+      "exits": {
+        "north": "jm_01"
+      },
+      "npcs": [
+        "jm_qi_bishao"
+      ],
+      "actions": [
+        "listen_qi"
+      ]
+    },
+    "jm_01": {
+      "name": "迎客坡",
+      "description": "坡道两侧巨石嶙峋，蒙古武士以逸待劳，弯刀斜指来路——这是国师给客人的\"见面礼\"。",
+      "exits": {
+        "south": "jm_00",
+        "north": "jm_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jm_mongol_warrior"
+          ],
+          "message": "迎客坡的蒙古武士把坡道堵得铁桶一般。"
+        }
+      },
+      "npcs": [
+        "jm_mongol_warrior",
+        "jm_mongol_warrior"
+      ]
+    },
+    "jm_02": {
+      "name": "千级石阶",
+      "description": "千级石阶笔直而上，尽头云雾深处就是山巅。石阶上高手林立，每一步都要用刀锋去量。",
+      "exits": {
+        "south": "jm_01",
+        "north": "jm_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jm_mongol_adept"
+          ],
+          "message": "石阶上的蒙古高手寸步不让。"
+        }
+      },
+      "npcs": [
+        "jm_mongol_adept",
+        "jm_mongol_adept"
+      ]
+    },
+    "jm_03": {
+      "name": "图纹石壁",
+      "description": "半山一处天然石室，石壁上布满断续的刻纹——传说传鹰登顶前，在此壁前坐了三日三夜。",
+      "exits": {
+        "south": "jm_02",
+        "north": "jm_04"
+      },
+      "actions": [
+        "view_carving",
+        "comprehend_void"
+      ]
+    },
+    "jm_04": {
+      "name": "鸡鸣山巅",
+      "description": "山巅风声如号角。传鹰的背影立在崖边，对面紫袍金冠的思汉飞缓缓抬手——天下第一的名头，就要在这方寸之间见了分晓。",
+      "exits": {
+        "south": "jm_03"
+      },
+      "npcs": [
+        "jm_si_hanfei"
+      ],
+      "actions": [
+        "take_supply"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_warriors",
+      "type": "kill",
+      "targetId": "jm_mongol_warrior",
+      "required": 2,
+      "weight": 15,
+      "description": "破迎客坡蒙古武士"
+    },
+    {
+      "id": "kill_adepts",
+      "type": "kill",
+      "targetId": "jm_mongol_adept",
+      "required": 2,
+      "weight": 15,
+      "description": "破石阶蒙古高手"
+    },
+    {
+      "id": "comprehend_void",
+      "type": "puzzle",
+      "targetId": "carving:comprehended",
+      "required": 1,
+      "weight": 15,
+      "description": "从残纹中悟破碎之意"
+    },
+    {
+      "id": "repel_si",
+      "type": "kill",
+      "targetId": "jm_si_hanfei",
+      "required": 1,
+      "weight": 55,
+      "description": "助传鹰逐走思汉飞"
+    },
+    {
+      "id": "take_supply",
+      "type": "puzzle",
+      "targetId": "supply:taken",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "取走大汗供品箱"
+    }
+  ],
+  "rewards": {
+    "experience": 1160,
+    "potential": 700,
+    "money": 400
+  }
+}

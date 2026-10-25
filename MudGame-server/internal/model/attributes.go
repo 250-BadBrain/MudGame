@@ -14,6 +14,8 @@ type EffectiveAttributes struct {
 	MaxMP           int
 	// MeditateRecoveryBonus 打坐内力恢复加成（仅秘籍装备规则下的 meditate_recovery_per_10_levels 来源）
 	MeditateRecoveryBonus int
+	// LearningInvestBonus 学习结算注入上限加成（仅秘籍装备规则下的 learning_invest_bonus_per_10_levels 来源）
+	LearningInvestBonus int
 	Spirit                int
 	MaxSpirit             int
 	Strength        int

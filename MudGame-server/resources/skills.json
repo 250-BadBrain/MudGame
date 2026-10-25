@@ -353,5 +353,24 @@
         "level": 20
       }
     }
+  },
+  "wuzhen_pian": {
+    "name": "悟真篇",
+    "description": "鲁妙子毕所学批注参悟的读书法门——书读进去了，潜能便如活水涌来。",
+    "rarity": 3,
+    "type": "ADVANCED",
+    "category": "knowledge",
+    "school": "hidden",
+    "bonuses": {
+      "learning_invest_bonus_per_10_levels": 1,
+      "intelligence_check_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "wuzhen_page",
+      "prerequisite": {
+        "skill": "basic_literacy",
+        "level": 20
+      }
+    }
   }
 }

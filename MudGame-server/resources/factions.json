@@ -138,5 +138,13 @@
     "category": "local",
     "visible": true,
     "order": 1002
+  },
+  "mongol_khan": {
+    "id": "mongol_khan",
+    "name": "蒙古汗庭",
+    "description": "北方大汗麾下的铁骑与萨满，国师思汉飞一身天妖气纵横当世。",
+    "category": "military",
+    "visible": false,
+    "order": 1003
   }
 }

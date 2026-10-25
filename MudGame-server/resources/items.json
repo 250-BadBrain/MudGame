@@ -468,5 +468,21 @@
     "effects": {
       "recoverHp": 100
     }
+  },
+  "wuzhen_page": {
+    "name": "悟真篇残页",
+    "description": "鲁妙子手书的读书法门残页，笔走龙蛇间尽是机枢至理。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 3,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "wuzhen_pian"
+    }
   }
 }

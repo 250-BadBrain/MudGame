@@ -1731,7 +1731,9 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 				remainingPotential = requiredPotential
 				p.SkillLearningProgress[skillID] = 0
 			}
-			spentPotential := min(model.LearningPotentialPerTick, p.Attributes.Potential, remainingPotential)
+			// 学习注入上限可被读书秘籍（如悟真篇）按装备规则提升（见公式文档 3.3 学习效率加成）
+			investCap := model.LearningPotentialPerTick + effectiveAttributesForPlayerNoLock(p).LearningInvestBonus
+			spentPotential := min(investCap, p.Attributes.Potential, remainingPotential)
 			p.Attributes.Potential -= spentPotential
 			p.SkillLearningProgress[skillID] += spentPotential
 			if p.SkillLearningProgress[skillID] >= requiredPotential {
