@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "sunken": "afloat",
     "briefing_hy2": "new",
-    "cabin_hy2": "untouched"
+    "cabin_hy2": "untouched",
+    "deck_hy2": "untouched"
   },
   "puzzleActions": {
     "listen_scout": {
@@ -57,6 +58,22 @@
       "repeatMessage": "已被你翻遍，再无他物。",
       "giveItems": {
         "suolang_page": 1
+      }
+    },
+    "search_deck": {
+      "label": "搜查甲板",
+      "puzzleId": "deck_hy2",
+      "rooms": [
+        "hy2_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "jingang_page": 1
       }
     }
   },
@@ -126,6 +143,9 @@
       },
       "npcs": [
         "hy2_chilaowen"
+      ],
+      "actions": [
+        "search_deck"
       ]
     }
   },
@@ -170,6 +190,15 @@
       "weight": 10,
       "optional": true,
       "description": "搜检船舱，寻得钩法法门"
+    },
+    {
+      "id": "search_deck",
+      "type": "puzzle",
+      "targetId": "deck_hy2:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查甲板"
     }
   ],
   "rewards": {

@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "atlas": "unseen",
     "box": "unopened",
-    "briefing_zd": "new"
+    "briefing_zd": "new",
+    "hall_zd": "untouched"
   },
   "puzzleActions": {
     "listen_ying": {
@@ -74,6 +75,22 @@
       "repeatMessage": "玉盒已被你收起。",
       "giveItems": {
         "dahuandan": 1
+      }
+    },
+    "search_hall": {
+      "label": "搜查大殿",
+      "puzzleId": "hall_zd",
+      "rooms": [
+        "zd_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "tiandao_pojun_page": 1
       }
     }
   },
@@ -143,7 +160,8 @@
         "zd_war_phantom"
       ],
       "actions": [
-        "open_box"
+        "open_box",
+        "search_hall"
       ]
     }
   },
@@ -188,6 +206,15 @@
       "weight": 10,
       "optional": true,
       "description": "拾取传鹰遗落的玉盒"
+    },
+    {
+      "id": "search_hall",
+      "type": "puzzle",
+      "targetId": "hall_zd:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查大殿"
     }
   ],
   "rewards": {

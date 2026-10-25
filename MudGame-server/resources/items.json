@@ -1004,5 +1004,133 @@
     "effects": {
       "learnSkill": "fengmo_gun"
     }
+  },
+  "tiandao_pojun_page": {
+    "name": "天刀·破军残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "tiandao_pojun"
+    }
+  },
+  "taiyi_xiajuan_page": {
+    "name": "太乙剑法·下卷残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "taiyi_xiajuan"
+    }
+  },
+  "changsheng_xiajuan_page": {
+    "name": "长生诀·下卷残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "changsheng_xiajuan"
+    }
+  },
+  "taxue_page": {
+    "name": "踏雪无痕残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "taxue_wuhen"
+    }
+  },
+  "jingang_page": {
+    "name": "金刚不坏残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "jingang_buhuai"
+    }
+  },
+  "tianmo_xiajuan_page": {
+    "name": "天魔策·下卷残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "tianmo_xiajuan"
+    }
+  },
+  "xiulou_pojia_page": {
+    "name": "修罗刀法·破甲残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "xiulou_pojia"
+    }
+  },
+  "taiyi_tianming_page": {
+    "name": "太乙剑法·天命残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "taiyi_tianming"
+    }
   }
 }

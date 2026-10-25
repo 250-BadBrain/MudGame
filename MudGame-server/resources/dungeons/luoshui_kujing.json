@@ -9,7 +9,8 @@
   "spawnRoomId": "kj_00",
   "puzzleInitialStates": {
     "well": "covered",
-    "briefing_kj": "new"
+    "briefing_kj": "new",
+    "cellar_kj": "untouched"
   },
   "puzzleActions": {
     "listen_rope": {
@@ -40,6 +41,22 @@
       "repeatMessage": "井绳还在，井底的灯还亮着。",
       "setFlags": {
         "jingdi_xunhen": true
+      }
+    },
+    "search_cellar": {
+      "label": "搜查地窖",
+      "puzzleId": "cellar_kj",
+      "rooms": [
+        "kj_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "changsheng_xiajuan_page": 1
       }
     }
   },
@@ -107,6 +124,9 @@
       },
       "npcs": [
         "kj_kujing_weng"
+      ],
+      "actions": [
+        "search_cellar"
       ]
     }
   },
@@ -142,6 +162,15 @@
       "required": 1,
       "weight": 45,
       "description": "逐走枯井翁"
+    },
+    {
+      "id": "search_cellar",
+      "type": "puzzle",
+      "targetId": "cellar_kj:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查地窖"
     }
   ],
   "rewards": {

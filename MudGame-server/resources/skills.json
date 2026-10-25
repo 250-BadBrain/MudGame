@@ -581,5 +581,161 @@
         "level": 40
       }
     }
+  },
+  "tiandao_pojun": {
+    "name": "天刀·破军",
+    "description": "宋缺亲传的天刀后半段——破军之势，一往无前。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "crit_rate_per_10_levels": 1,
+      "hit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "tiandao_pojun_page",
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 60
+      }
+    }
+  },
+  "taiyi_xiajuan": {
+    "name": "太乙剑法·下卷",
+    "description": "太乙剑法的下卷，剑走青冥，后发先至。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "hit_rate_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "taiyi_xiajuan_page",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 60
+      }
+    }
+  },
+  "changsheng_xiajuan": {
+    "name": "长生诀·下卷",
+    "description": "长生诀的下卷，内功精纯如水。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 20,
+      "trained_mp_to_max_hp_percent": 0.6
+    },
+    "requirements": {
+      "item": "changsheng_xiajuan_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 60
+      }
+    }
+  },
+  "taxue_wuhen": {
+    "name": "踏雪无痕",
+    "description": "轻功之绝——踏雪不留痕。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "dodge_per_10_levels": 2,
+      "initiative_per_10_levels": 3
+    },
+    "requirements": {
+      "item": "taxue_page",
+      "prerequisite": {
+        "skill": "basic_qinggong",
+        "level": 60
+      }
+    }
+  },
+  "jingang_buhuai": {
+    "name": "金刚不坏",
+    "description": "守御之绝——金刚不坏，刀枪不入。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "parry_per_10_levels": 2,
+      "defense_per_10_levels": 3
+    },
+    "requirements": {
+      "item": "jingang_page",
+      "prerequisite": {
+        "skill": "basic_parry",
+        "level": 60
+      }
+    }
+  },
+  "tianmo_xiajuan": {
+    "name": "天魔策·下卷",
+    "description": "天魔策的下卷，魔气如潮。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 15,
+      "crit_rate_per_10_levels": 2,
+      "attack_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "tianmo_xiajuan_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 80
+      }
+    }
+  },
+  "xiulou_pojia": {
+    "name": "修罗刀法·破甲",
+    "description": "修罗刀法的破甲篇。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "xiulou_pojia_page",
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 80
+      }
+    }
+  },
+  "taiyi_tianming": {
+    "name": "太乙剑法·天命",
+    "description": "太乙剑法的天命篇。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "crit_rate_per_10_levels": 1,
+      "dodge_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "taiyi_tianming_page",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 80
+      }
+    }
   }
 }

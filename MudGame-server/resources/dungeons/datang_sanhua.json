@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "lodge": "unseen",
     "briefing_sh": "new",
-    "box_sh": "hidden"
+    "box_sh": "hidden",
+    "attic_sh": "untouched"
   },
   "puzzleActions": {
     "listen_informant": {
@@ -61,6 +62,22 @@
       "repeatMessage": "锦盒已被你收起。",
       "giveItems": {
         "lingxu_page": 1
+      }
+    },
+    "search_attic": {
+      "label": "搜查阁楼",
+      "puzzleId": "attic_sh",
+      "rooms": [
+        "sh_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "tianmo_xiajuan_page": 1
       }
     }
   },
@@ -130,7 +147,8 @@
         "sh_hua_wuying"
       ],
       "actions": [
-        "open_box_sh"
+        "open_box_sh",
+        "search_attic"
       ]
     }
   },
@@ -175,6 +193,15 @@
       "weight": 10,
       "optional": true,
       "description": "打开暗格锦盒寻得身法残页"
+    },
+    {
+      "id": "search_attic",
+      "type": "puzzle",
+      "targetId": "attic_sh:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查阁楼"
     }
   ],
   "rewards": {

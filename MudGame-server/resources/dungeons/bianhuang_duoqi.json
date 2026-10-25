@@ -9,7 +9,8 @@
   "spawnRoomId": "bd_00",
   "puzzleInitialStates": {
     "flag_bd": "standing",
-    "briefing_bd": "new"
+    "briefing_bd": "new",
+    "tent_bd": "untouched"
   },
   "puzzleActions": {
     "listen_caravan": {
@@ -41,6 +42,22 @@
       },
       "message": "你攀上旗杆，帅旗应手而落——满营的号角声戛然而止。旗倒了，燕军的心气也倒了。",
       "repeatMessage": "帅旗已在你手中。"
+    },
+    "search_tent2": {
+      "label": "搜查中军帐",
+      "puzzleId": "tent_bd",
+      "rooms": [
+        "bd_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "xiulou_pojia_page": 1
+      }
     }
   },
   "rooms": {
@@ -94,6 +111,9 @@
       },
       "npcs": [
         "bd_flag_vanguard"
+      ],
+      "actions": [
+        "search_tent2"
       ]
     },
     "bd_03": {
@@ -142,6 +162,15 @@
       "required": 1,
       "weight": 45,
       "description": "逐走燕军千夫长拓跋孤"
+    },
+    {
+      "id": "search_tent2",
+      "type": "puzzle",
+      "targetId": "tent_bd:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查中军帐"
     }
   ],
   "rewards": {

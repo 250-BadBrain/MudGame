@@ -9,7 +9,8 @@
   "spawnRoomId": "ca_00",
   "puzzleInitialStates": {
     "chan": "unheard",
-    "gift": "unoffered"
+    "gift": "unoffered",
+    "pavilion_ca": "untouched"
   },
   "puzzleActions": {
     "listen_tea": {
@@ -61,6 +62,22 @@
       "repeatMessage": "玉瓶已在你怀中。",
       "giveItems": {
         "xiaohuandan": 2
+      }
+    },
+    "search_pavilion": {
+      "label": "搜查别院",
+      "puzzleId": "pavilion_ca",
+      "rooms": [
+        "ca_04"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "taiyi_tianming_page": 1
       }
     }
   },
@@ -142,7 +159,8 @@
         "ca_bian_bufu"
       ],
       "actions": [
-        "accept_gift"
+        "accept_gift",
+        "search_pavilion"
       ]
     }
   },
@@ -179,6 +197,15 @@
       "weight": 10,
       "optional": true,
       "description": "受仙子赠丹为谢"
+    },
+    {
+      "id": "search_pavilion",
+      "type": "puzzle",
+      "targetId": "pavilion_ca:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查别院"
     }
   ],
   "rewards": {

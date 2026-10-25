@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "granary": "intact",
     "briefing_wt": "new",
-    "vault_wt": "untouched"
+    "vault_wt": "untouched",
+    "warehouse_wt": "untouched"
   },
   "puzzleActions": {
     "listen_scout": {
@@ -57,6 +58,22 @@
       "repeatMessage": "私库已被你翻遍。",
       "giveItems": {
         "xiulou_page": 1
+      }
+    },
+    "search_warehouse": {
+      "label": "搜查旧库",
+      "puzzleId": "warehouse_wt",
+      "rooms": [
+        "wt_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "taiyi_xiajuan_page": 1
       }
     }
   },
@@ -114,7 +131,8 @@
         "wt_chief"
       ],
       "actions": [
-        "burn_granary"
+        "burn_granary",
+        "search_warehouse"
       ]
     },
     "wt_03": {
@@ -172,6 +190,15 @@
       "weight": 10,
       "optional": true,
       "description": "搜王帐私库，寻得魔门刀谱"
+    },
+    {
+      "id": "search_warehouse",
+      "type": "puzzle",
+      "targetId": "warehouse_wt:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查旧库"
     }
   ],
   "rewards": {

@@ -9,7 +9,8 @@
   "spawnRoomId": "jn2_00",
   "puzzleInitialStates": {
     "spring": "sealed",
-    "briefing_jn2": "new"
+    "briefing_jn2": "new",
+    "pool_jn": "untouched"
   },
   "puzzleActions": {
     "listen_zither": {
@@ -40,6 +41,22 @@
       "repeatMessage": "石门已开，通道里的水声清晰可闻。",
       "setFlags": {
         "quanxin_kai": true
+      }
+    },
+    "search_pool": {
+      "label": "搜查池底",
+      "puzzleId": "pool_jn",
+      "rooms": [
+        "jn2_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
+      "repeatMessage": "已被你搜遍。",
+      "giveItems": {
+        "taxue_page": 1
       }
     }
   },
@@ -104,6 +121,9 @@
       },
       "npcs": [
         "jn2_sword_thief"
+      ],
+      "actions": [
+        "search_pool"
       ]
     }
   },
@@ -131,6 +151,15 @@
       "required": 1,
       "weight": 65,
       "description": "泉底夺回名剑"
+    },
+    {
+      "id": "search_pool",
+      "type": "puzzle",
+      "targetId": "pool_jn:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查池底"
     }
   ],
   "rewards": {
