@@ -68,8 +68,10 @@ const loading = ref(false)
 const currentSum = computed(() => strength.value + constitution.value + agility.value + perception.value + willpower.value)
 
 const isValid = computed(() => {
-  return characterName.value.length >= 2 && 
-         characterName.value.length <= 16 && 
+  // 校验和提交使用同一个 trim 后的名字，避免纯空白名通过长度校验
+  const name = characterName.value.trim()
+  return name.length >= 2 &&
+         name.length <= 16 &&
          currentSum.value === 80 &&
          !loading.value
 })

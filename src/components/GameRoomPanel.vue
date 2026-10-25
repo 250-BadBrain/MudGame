@@ -63,7 +63,6 @@ const isCorpse = (entity) => entity?.isCorpse || entity?.state === 'DEAD'
 const stateNames = {
   HEALING: '疗伤',
   MEDITATING: '打坐',
-  MINING: '挖矿',
   COMBAT: '战斗',
   LEARNING: '学习',
   DEAD: '死亡'

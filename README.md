@@ -2,6 +2,8 @@
 
 MudGame 前端仓库，基于 Vue 3、Vite、Pinia 和 Vue Router。
 
+统一开发流程（模块职责、标准开发步骤、测试门禁）见根目录 `../docs/DEVELOPMENT.md`。前端两条硬性约定：composables 之间禁止互相 import（由 `GameView.vue` 装配注入）；父组件 scoped CSS 只能命中子组件根元素。
+
 ## 开发
 
 ```sh
@@ -34,7 +36,7 @@ npm run build
 ## Cloudflare Pages + Tunnel 部署要点
 
 1. 前端部署到 Cloudflare Pages，构建命令为 `npm run build`，输出目录为 `dist`。
-2. 本机启动后端：`mvn spring-boot:run`。
+2. 本机启动后端：在仓库根目录运行 `start.bat`（等价于在 `MudGame-server` 下执行 `go run ./cmd/mudserver`）。
 3. 用 Cloudflare Tunnel 将本机 4009 暴露到公网域名。
 4. 在 Cloudflare Pages 环境变量中设置 `VITE_WS_URL=wss://api-mud.game.h2seo4.win/ws` 后重新部署。
 

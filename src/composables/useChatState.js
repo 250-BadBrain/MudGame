@@ -40,9 +40,7 @@ export function useChatState({ sendGameCommand, getPlayerId, addLog }) {
   return {
     chatMessages,
     command,
-    chatHistoryEl,
     addChatMessage,
-    sendChatCommand,
-    scrollChatToBottom
+    sendChatCommand
   }
 }

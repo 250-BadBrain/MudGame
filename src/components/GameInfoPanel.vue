@@ -20,6 +20,7 @@
               </div>
               <div v-if="(selectedBackpackItem?.uniqueId || selectedBackpackItem?.id) === (item.uniqueId || item.id)" class="item-actions">
                 <button @click.stop="$emit('viewItem', item)" class="action-btn">查看</button>
+                <button v-if="item.usable" @click.stop="$emit('useItem', item)" class="action-btn use-btn">使用</button>
                 <button @click.stop="$emit('discardItem', item)" class="action-btn discard-btn">丢弃</button>
                 <button v-if="item.equipmentSlot" @click.stop="$emit('equipItem', item)" class="action-btn">装备</button>
                 <button v-if="item.sellable && hasShopNpc" @click.stop="$emit('sellItem', item)" class="action-btn">出售</button>
@@ -71,7 +72,7 @@
         <div class="skill-tabs">
           <span :class="{ active: skillTab === 'basic' }" @click="$emit('changeSkillTab', 'basic')">基础武功</span>
           <span class="tab-separator">|</span>
-          <span :class="{ active: skillTab === 'special' }" @click="$emit('changeSkillTab', 'special')">特殊武功</span>
+          <span :class="{ active: skillTab === 'special' }" @click="$emit('changeSkillTab', 'special')">进阶武学</span>
         </div>
         <div class="backpack-list">
           <ul v-if="filteredSkills && filteredSkills.length > 0">
@@ -186,40 +187,47 @@
       <div v-if="currentPanel === 'dungeons'" class="maps-panel-container">
         <div class="map-list-area">
           <ul v-if="dungeonsList && dungeonsList.length > 0" class="map-list">
-            <li v-for="dungeon in standaloneDungeons" :key="dungeon.id" class="map-item"
-              :class="{ 'selected': selectedDungeonId === dungeon.id }"
-              @mousedown.prevent
-              @click="$emit('selectDungeon', dungeon.id)">
-              <div class="map-item-line">
-                <span class="map-name">{{ dungeon.name }}</span>
-              </div>
-            </li>
-            <li v-if="xunqinDungeons.length" class="map-item dungeon-folder-item"
-              @mousedown.prevent
-              @click="xunqinExpanded = !xunqinExpanded">
-              <div class="map-item-line dungeon-folder-line">
-                <span class="map-name">寻秦记</span>
-                <span class="folder-state">{{ xunqinExpanded ? '收起' : '展开' }}</span>
-              </div>
-            </li>
-            <template v-if="xunqinExpanded">
-              <li v-for="dungeon in xunqinDungeons" :key="dungeon.id" class="map-item dungeon-child-item"
-                :class="{ 'selected': selectedDungeonId === dungeon.id }"
+            <template v-for="group in dungeonChainGroups" :key="group.id">
+              <li v-if="group.list.length === 1" class="map-item"
+                :class="{ 'selected': selectedDungeonId === group.list[0].id }"
                 @mousedown.prevent
-                @click="$emit('selectDungeon', dungeon.id)">
+                @click="$emit('selectDungeon', group.list[0].id)">
                 <div class="map-item-line">
-                  <span class="map-name">{{ dungeon.name }}</span>
+                  <span class="map-name">{{ group.list[0].locked ? '🔒 ' : '' }}{{ group.list[0].name }}</span>
+                  <span v-if="group.list[0].locked" class="folder-state">{{ group.list[0].lockHint }}</span>
                 </div>
               </li>
+              <template v-else>
+                <li class="map-item dungeon-folder-item"
+                  @mousedown.prevent
+                  @click="toggleChain(group.id)">
+                  <div class="map-item-line dungeon-folder-line">
+                    <span class="map-name">{{ group.name }}</span>
+                    <span class="folder-state">{{ isChainExpanded(group.id) ? '收起' : '展开' }}</span>
+                  </div>
+                </li>
+                <template v-if="isChainExpanded(group.id)">
+                  <li v-for="dungeon in group.list" :key="dungeon.id" class="map-item dungeon-child-item"
+                    :class="{ 'selected': selectedDungeonId === dungeon.id }"
+                    @mousedown.prevent
+                    @click="$emit('selectDungeon', dungeon.id)">
+                    <div class="map-item-line">
+                      <span class="map-name">{{ dungeon.locked ? '🔒 ' : '' }}{{ dungeon.name }}</span>
+                      <span v-if="dungeon.locked" class="folder-state">{{ dungeon.lockHint }}</span>
+                    </div>
+                  </li>
+                </template>
+              </template>
             </template>
           </ul>
           <p v-else class="empty-msg">暂无可用副本。</p>
         </div>
         <div v-if="selectedDungeon" class="map-description-area collapsible-detail" @click="$emit('selectDungeon', selectedDungeon.id)">
           <div class="map-desc-text">{{ selectedDungeon.description }}</div>
-          <div class="map-sub-line">满额奖励：{{ selectedDungeon.rewardBase || 0 }}经验 {{ selectedDungeon.rewardBase || 0 }}潜能</div>
+          <div class="map-sub-line">满额奖励：{{ fullRewardExperience }}经验 {{ fullRewardPotential }}潜能</div>
           <div v-if="isInDungeon && dungeonRoomId === selectedDungeon?.id" class="map-sub-line">当前进度：{{ dungeonProgress ?? 0 }}%</div>
-          <button @click.stop="$emit('enterDungeon')" class="enter-world-btn" :disabled="isInDungeon">进入副本</button>
+          <div v-if="selectedDungeon.locked" class="map-sub-line">{{ selectedDungeon.lockHint }}</div>
+          <button @click.stop="$emit('enterDungeon')" class="enter-world-btn" :disabled="isInDungeon || !!selectedDungeon.locked">{{ selectedDungeon.locked ? '尚未解锁' : '进入副本' }}</button>
         </div>
       </div>
       <GameQuestPanel v-if="currentPanel === 'quests'" :quests="questsList" />
@@ -270,11 +278,37 @@ const props = defineProps({
   factionsList: { type: Array, default: () => [] }
 })
 
-const xunqinExpanded = ref(true)
-const xunqinDungeons = computed(() => props.dungeonsList.filter(dungeon => dungeon.chainId === 'xunqin_legend'))
-const standaloneDungeons = computed(() => props.dungeonsList.filter(dungeon => dungeon.chainId !== 'xunqin_legend'))
+const collapsedChains = ref({})
 
-defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'sellItem',
+const toggleChain = (chainId) => {
+  collapsedChains.value[chainId] = !collapsedChains.value[chainId]
+}
+
+const isChainExpanded = (chainId) => !collapsedChains.value[chainId]
+
+// 副本按所属小说分卷展示：单副本的卷直接列出，多副本的卷可折叠
+const dungeonChainGroups = computed(() => {
+  const groups = new Map()
+  for (const dungeon of props.dungeonsList) {
+    const chainId = dungeon.chainId || 'other'
+    if (!groups.has(chainId)) {
+      groups.set(chainId, { id: chainId, name: dungeon.chainName || '其他秘境', list: [] })
+    }
+    groups.get(chainId).list.push(dungeon)
+  }
+  const list = [...groups.values()]
+  for (const group of list) {
+    group.list.sort((a, b) => (Number(a.order) || 999) - (Number(b.order) || 999))
+  }
+  list.sort((a, b) => (Number(a.list[0]?.order) || 999) - (Number(b.list[0]?.order) || 999))
+  return list
+})
+
+// 满额奖励：优先取副本结算配置 rewards，缺失时回退到基础奖励 rewardBase
+const fullRewardExperience = computed(() => Number(props.selectedDungeon?.rewards?.experience ?? props.selectedDungeon?.rewardBase) || 0)
+const fullRewardPotential = computed(() => Number(props.selectedDungeon?.rewards?.potential ?? props.selectedDungeon?.rewardBase) || 0)
+
+defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'useItem', 'sellItem',
   'changeDiscardAmount', 'confirmDiscard', 'cancelDiscard',
   'changeSellAmount', 'confirmSell', 'cancelSell',
   'changeSkillTab', 'selectSkill', 'viewSkill',
@@ -333,6 +367,7 @@ const getSkillBonusText = (skill) => {
 .action-btn { padding: 4px 8px; background: #444; color: #ecf0f1; border: 1px solid #666; cursor: pointer; font-size: 11px; border-radius: 3px; font-family: inherit; }
 .action-btn:hover { background: #555; }
 .discard-btn { color: #e74c3c; }
+.use-btn { color: #2ecc71; }
 .empty-msg { color: #666; text-align: center; padding: 15px; font-style: italic; font-size: 12px; }
 .backpack-bottom-area { flex: 0 0 auto; max-height: 45%; overflow-y: auto; overflow-x: hidden; margin-top: 8px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; scrollbar-width: none; -ms-overflow-style: none; }
 .item-details-view { }

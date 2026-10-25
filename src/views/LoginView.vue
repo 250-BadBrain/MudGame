@@ -114,6 +114,8 @@ onUnmounted(() => {
 })
 
 const login = () => {
+  // 回车连按与按钮点击共用此函数，loading 期间防重复提交
+  if (loading.value) return
   error.value = ''
   if (!username.value || !password.value) {
     error.value = '请输入用户名和密码'

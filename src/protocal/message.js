@@ -6,14 +6,6 @@ export function createSystemMessage(subtype, args = {}) {
   }
 }
 
-export function createCommandMessage(subtype, args = {}) {
-  return {
-    type: "command",
-    subtype,
-    args
-  }
-}
-
 export function createGameCommandMessage(subtype, playerId, args = {}) {
   return {
     type: "command",
