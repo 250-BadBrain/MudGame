@@ -1,0 +1,105 @@
+{
+  "id": "feima_trial_hall",
+  "name": "飞马试炼殿",
+  "description": "商秀珣在飞马牧场深处设试炼殿——殿中凝着婠婠的残影。那个白衣少女的笑声，至今还在牧场回荡。",
+  "order": 39,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 15,
+  "spawnRoomId": "ft_00",
+  "puzzleInitialStates": {
+    "trial_gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取试炼说明",
+      "puzzleId": "briefing",
+      "rooms": [
+        "ft_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "试炼的规矩交代分明。",
+      "repeatMessage": "话已说完，去吧。"
+    },
+    "open_trial": {
+      "label": "开启试炼之门",
+      "puzzleId": "trial_gate",
+      "rooms": [
+        "ft_00"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "feima_zhixin": true
+      },
+      "message": "香烛燃尽，试炼之门缓缓开启——残影的气息扑面而来。",
+      "repeatMessage": "试炼之门已开。"
+    }
+  },
+  "rooms": {
+    "ft_00": {
+      "name": "试炼殿前",
+      "description": "试炼殿的门前燃着两排白蜡烛，烛光照出一道石门。",
+      "exits": {
+        "north": "ft_01"
+      },
+      "npcs": [
+        "fm_shang_xiuxun"
+      ],
+      "actions": [
+        "listen_brief",
+        "open_trial"
+      ]
+    },
+    "ft_01": {
+      "name": "殿内回廊",
+      "description": "回廊两壁刻满刀痕剑印——都是历代挑战者留下的。",
+      "exits": {
+        "south": "ft_00",
+        "north": "ft_02"
+      }
+    },
+    "ft_02": {
+      "name": "残影之殿",
+      "description": "大殿中央，一道半透明的身影缓缓抬头——它的眼里全是战意。",
+      "exits": {
+        "south": "ft_01"
+      },
+      "npcs": [
+        "ft_wanwan_phantom"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "open_trial",
+      "type": "puzzle",
+      "targetId": "trial_gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启试炼之门"
+    },
+    {
+      "id": "defeat_phantom",
+      "type": "kill",
+      "targetId": "ft_wanwan_phantom",
+      "required": 1,
+      "weight": 85,
+      "description": "击败婠婠残影"
+    }
+  ],
+  "rewards": {
+    "experience": 2400,
+    "potential": 1200,
+    "money": 800,
+    "items": {
+      "wanwan_feather": 1
+    }
+  }
+}

@@ -1360,5 +1360,77 @@
       "defense": 5
     },
     "source": "沉船探秘"
+  },
+  "kangshi_remnant": {
+    "name": "突厥金刀令",
+    "description": "康鞘利残影崩解后遗落的金刀令——突厥王庭的信物，持此令者可在塞北通行无阻。",
+    "type": "equipment",
+    "subtype": "token",
+    "stackable": false,
+    "sellable": true,
+    "value": 2800,
+    "rarity": 4,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 4,
+      "hitRate": 4,
+      "critRate": 2
+    },
+    "source": "竟陵试炼殿"
+  },
+  "songque_testament": {
+    "name": "天刀遗篇",
+    "description": "宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。",
+    "type": "equipment",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": true,
+    "value": 3000,
+    "rarity": 5,
+    "unit": "卷",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 4,
+      "critRate": 2,
+      "initiative": 2
+    },
+    "source": "天刀试炼殿"
+  },
+  "wanwan_feather": {
+    "name": "天魔羽",
+    "description": "婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。",
+    "type": "equipment",
+    "subtype": "feather",
+    "stackable": false,
+    "sellable": true,
+    "value": 3000,
+    "rarity": 5,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "dodge": 3,
+      "critRate": 2,
+      "maxMp": 15
+    },
+    "source": "飞马试炼殿"
+  },
+  "bianbuou_wisdom": {
+    "name": "边不负的念珠",
+    "description": "边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。",
+    "type": "equipment",
+    "subtype": "rosary",
+    "stackable": false,
+    "sellable": true,
+    "value": 3200,
+    "rarity": 5,
+    "unit": "串",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "defense": 5,
+      "hitRate": 3,
+      "maxMp": 10
+    },
+    "source": "长安试炼殿"
   }
 }

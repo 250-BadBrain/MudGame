@@ -1,0 +1,105 @@
+{
+  "id": "changan_trial_hall",
+  "name": "长安试炼殿",
+  "description": "师妃暄离开长安前设了一座试炼殿——殿中凝着边不负的残影。魔门元老的力量，即使只是残影也不可小觑。",
+  "order": 40,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 16,
+  "spawnRoomId": "ct_00",
+  "puzzleInitialStates": {
+    "trial_gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取试炼说明",
+      "puzzleId": "briefing",
+      "rooms": [
+        "ct_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "试炼的规矩交代分明。",
+      "repeatMessage": "话已说完，去吧。"
+    },
+    "open_trial": {
+      "label": "开启试炼之门",
+      "puzzleId": "trial_gate",
+      "rooms": [
+        "ct_00"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "changan_zhixin": true
+      },
+      "message": "香烛燃尽，试炼之门缓缓开启——残影的气息扑面而来。",
+      "repeatMessage": "试炼之门已开。"
+    }
+  },
+  "rooms": {
+    "ct_00": {
+      "name": "试炼殿前",
+      "description": "试炼殿的门前燃着两排白蜡烛，烛光照出一道石门。",
+      "exits": {
+        "north": "ct_01"
+      },
+      "npcs": [
+        "ca2_monk"
+      ],
+      "actions": [
+        "listen_brief",
+        "open_trial"
+      ]
+    },
+    "ct_01": {
+      "name": "殿内回廊",
+      "description": "回廊两壁刻满刀痕剑印——都是历代挑战者留下的。",
+      "exits": {
+        "south": "ct_00",
+        "north": "ct_02"
+      }
+    },
+    "ct_02": {
+      "name": "残影之殿",
+      "description": "大殿中央，一道半透明的身影缓缓抬头——它的眼里全是战意。",
+      "exits": {
+        "south": "ct_01"
+      },
+      "npcs": [
+        "ct_bian_phantom"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "open_trial",
+      "type": "puzzle",
+      "targetId": "trial_gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启试炼之门"
+    },
+    {
+      "id": "defeat_phantom",
+      "type": "kill",
+      "targetId": "ct_bian_phantom",
+      "required": 1,
+      "weight": 85,
+      "description": "击败边不负残影"
+    }
+  ],
+  "rewards": {
+    "experience": 2400,
+    "potential": 1200,
+    "money": 800,
+    "items": {
+      "bianbuou_wisdom": 1
+    }
+  }
+}
