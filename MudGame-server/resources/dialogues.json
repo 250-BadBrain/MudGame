@@ -671,5 +671,26 @@
     "title": "蜀道之约",
     "opening": "女镖头扬鞭指向栈道：\"猿叟占了剑阁十年，官府剿了三次都没剿动。这趟蜀锦是巴蜀百家凑的货——丢在他手里，巴蜀的门就彻底关上了。\"",
     "options": []
+  },
+  "dlg_yz_salt": {
+    "id": "dlg_yz_salt",
+    "npcId": "yz_salt_merchant",
+    "title": "盐商哭账",
+    "opening": "程盐商一见客人就抹泪：\"三万两漕银哪！装船就没了——客官若能帮小老儿找回，谢银两百两！\"",
+    "options": []
+  },
+  "dlg_yz_boat": {
+    "id": "dlg_yz_boat",
+    "npcId": "yz_boat_girl",
+    "title": "湖上旧曲",
+    "opening": "船娘摇着橹笑：\"客官坐稳——二十四桥的月亮，瘦西湖的水，都在这支曲子里。\"",
+    "options": []
+  },
+  "dlg_yz_clerk": {
+    "id": "dlg_yz_clerk",
+    "npcId": "yz_yamen_clerk",
+    "title": "衙门书办",
+    "opening": "书办翻着账本，眼皮不抬：\"漕银失窃，上头催得紧。本官只提醒一句——水上的事，去水边查。\"",
+    "options": []
   }
 }

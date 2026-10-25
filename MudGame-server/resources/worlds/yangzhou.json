@@ -1,0 +1,112 @@
+{
+  "id": "yangzhou",
+  "name": "扬州",
+  "description": "淮左名都，竹西佳处——漕运把天下的银钱都从这条运河送进扬州。盐商的园林、二十四桥的月色、瘦西湖的桨声，掩着一城的水路玄机。",
+  "order": 3,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "yz_dock",
+  "rooms": {
+    "yz_dock": {
+      "name": "扬州码头",
+      "description": "运河码头千帆云集，漕船、盐船、客船挤成一团。脚夫的号子声里，隐隐混着镖局的喝道。",
+      "area": "扬州",
+      "tags": [
+        "trade",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "yz_salt_merchant"
+      ],
+      "exits": {
+        "west": "yz_guanjie",
+        "south": "yz_reed_marsh"
+      }
+    },
+    "yz_guanjie": {
+      "name": "东关街",
+      "description": "扬州最热闹的一条街，茶楼酒肆比邻而立——扬州人的日子，是从东关街的早茶开始的。",
+      "area": "扬州",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "exits": {
+        "east": "yz_dock",
+        "west": "yz_yamen"
+      }
+    },
+    "yz_yamen": {
+      "name": "盐运使署",
+      "description": "盐运使署的门前石狮威武，进出的人却都轻手轻脚——漕银失窃的案子，把整个衙门搅得人心惶惶。",
+      "area": "扬州",
+      "tags": [
+        "government",
+        "quest",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "yz_yamen_clerk"
+      ],
+      "exits": {
+        "east": "yz_guanjie",
+        "south": "yz_bridge"
+      }
+    },
+    "yz_bridge": {
+      "name": "二十四桥",
+      "description": "二十四桥明月夜——桥上玉人吹箫的传说还在，桥下的运河水却悄悄通向苇荡深处。",
+      "area": "扬州",
+      "tags": [
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "yz_boat_girl"
+      ],
+      "exits": {
+        "north": "yz_yamen",
+        "south": "yz_lake"
+      }
+    },
+    "yz_lake": {
+      "name": "瘦西湖畔",
+      "description": "瘦西湖的画舫泊在柳荫里，水面浮着落花。远处苇荡连天，水路七拐八绕，没本地人带路必迷。",
+      "area": "扬州",
+      "tags": [
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "north": "yz_bridge",
+        "west": "yz_reed_marsh"
+      }
+    },
+    "yz_reed_marsh": {
+      "name": "城郊苇荡",
+      "description": "运河与瘦西湖水脉交汇的大苇荡，芦花如雪。苇荡深处水道纵横——漕银的下落，多半藏在这里。",
+      "area": "扬州",
+      "tags": [
+        "wild",
+        "gather",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "actions": [
+        "gather",
+        "search"
+      ],
+      "exits": {
+        "north": "yz_dock",
+        "east": "yz_lake"
+      }
+    }
+  }
+}

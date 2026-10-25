@@ -1057,6 +1057,10 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 		p.Backpack = map[string]int{}
 	}
 	// 剧情调查点：按房间脚本化（一次性旗标，供任务目标使用）
+	if room.ID == "yz_reed_marsh" && !p.Flags["found_caoyin_clue"] {
+		p.Flags["found_caoyin_clue"] = true
+		return "你在苇荡深处的泥滩上刨出几只空银箱——箱底的官印拓痕清清楚楚，是盐运司的封条。水路通向运河下游，箱子是从船上搬下来的。", nil
+	}
 	if room.ID == "ly_salt_wharf" && !p.Flags["found_smuggling_evidence"] {
 		p.Flags["found_smuggling_evidence"] = true
 		return "你伏在盐垛后看了半晌：几条黑影正把官盐搬上无籍小船，船帮上刻着一只歪歪扭扭的鹞子——是水匪的记号。你默默记下了船号。", nil
@@ -1084,6 +1088,8 @@ func roomRumor(roomID string) string {
 		return "驿丞给往来的客商斟茶：长安来的邸报说，唐国公府最近车马进出得勤——改元也好、变天也罢，咱们小驿站只管把火把备足。"
 	case "ca2_west_market":
 		return "胡商们压低嗓门谈和氏璧——有人说慈航静斋已经带着它出了城，有人说它还在别院的青灯之下。"
+	case "yz_guanjie":
+		return "茶楼里的闲人压着嗓子：三万两漕银没了影，盐运司的书办却半点不急——有人赌定，这案子查不到他头上。"
 	case "ca2_beitian_fang":
 		return "施粥棚前的老流民喃喃自语：北边来的那位白衣娘娘，在长安也有人烧香了。"
 	case "ly_north_market":
@@ -1562,6 +1568,11 @@ func (r *RuntimeManager) settleWorldLaborNoLock(p *model.Player, result *model.C
 		itemName := "干粮"
 		// 采集收益按房间区分（见收益与经济设计 1.1）：默认城郊=古铜残片，芦苇滩=止血草
 		switch roomID {
+		case "yz_reed_marsh":
+			if rand.Intn(100) < 60 {
+				itemID = "reed_root"
+				itemName = "芦根"
+			}
 		case "ly_reed_marsh":
 			if rand.Intn(100) < 60 {
 				itemID = "herb"

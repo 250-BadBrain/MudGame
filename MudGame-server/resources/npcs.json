@@ -9713,5 +9713,208 @@
         "seal": 0
       }
     }
+  },
+  "yz_salt_merchant": {
+    "name": "程盐商",
+    "title": "扬州盐商",
+    "description": "扬州城数一数二的盐商，圆脸细眼，算盘打得比谁都精——他的账房昨夜丢了三万两漕银。",
+    "faction": "heluo_merchant_guild",
+    "role": "shopkeeper",
+    "importance": "local",
+    "shopItems": [
+      "simple_medicine",
+      "dry_ration",
+      "common_clothes"
+    ],
+    "dialogueId": "dlg_yz_salt",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 13,
+        "agility": 12,
+        "perception": 15,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 140,
+        "maxHp": 140,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 84,
+        "dodge": 62,
+        "parry": 58,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 56,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yz_boat_girl": {
+    "name": "二十四桥船娘",
+    "title": "瘦西湖船娘",
+    "description": "在瘦西湖上摇了十年橹的船娘，会唱二十四桥的旧曲——曲子里藏着扬州城的水路。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_yz_boat",
+    "attributes": {
+      "level": 12,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 11,
+        "constitution": 12,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 11,
+        "hitRate": 78,
+        "dodge": 58,
+        "parry": 54,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 56,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yz_yamen_clerk": {
+    "name": "盐运司书办",
+    "title": "衙门书办",
+    "description": "盐运司的书办，袖子里永远揣着三份账——一份给上官，一份给自己，一份给得罪不起的人。",
+    "faction": "luoyang_office",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_yz_clerk",
+    "attributes": {
+      "level": 15,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 15,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 135,
+        "maxHp": 135,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 84,
+        "dodge": 60,
+        "parry": 58,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 54,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
   }
 }

@@ -115,5 +115,35 @@
       }
     },
     "repeatable": false
+  },
+  "caoyin_case": {
+    "id": "caoyin_case",
+    "name": "漕银失窃",
+    "description": "扬州盐商程老爷的三万两漕银装船即失。去瘦西湖问船娘、去盐运司问书办，把银子的下落查个水落石出。",
+    "giverNpcId": "yz_salt_merchant",
+    "turnInNpcId": "yz_salt_merchant",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "found_caoyin_clue",
+        "description": "查出漕银的下落。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 150,
+      "potential": 110,
+      "money": 200,
+      "items": {
+        "smoke_powder": 1
+      },
+      "flags": {
+        "caoyin_case_completed": true
+      },
+      "reputations": {
+        "salt_gang": 10
+      }
+    },
+    "repeatable": false
   }
 }

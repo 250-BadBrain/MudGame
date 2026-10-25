@@ -813,5 +813,17 @@
       "defense": 13
     },
     "source": "蜀道护镖"
+  },
+  "reed_root": {
+    "name": "芦根",
+    "description": "扬州苇荡里挖出的芦根，晒干可入药，药铺按株收。",
+    "type": "material",
+    "subtype": "herb",
+    "stackable": true,
+    "sellable": true,
+    "value": 12,
+    "rarity": 1,
+    "unit": "株",
+    "source": "扬州苇荡采集"
   }
 }
