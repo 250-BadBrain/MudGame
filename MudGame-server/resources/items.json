@@ -2347,5 +2347,525 @@
     "effects": {
       "learnSkill": "bengshan_zj"
     }
+  },
+  "xb2_relic": {
+    "name": "绝壁悬栈遗物",
+    "description": "绝壁悬栈遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 3,
+      "defense": 2,
+      "maxMp": 5
+    },
+    "source": "绝壁悬栈"
+  },
+  "ht2_relic": {
+    "name": "寒潭蛟影遗物",
+    "description": "寒潭蛟影遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4100,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "attack": 3,
+      "defense": 2,
+      "maxMp": 7
+    },
+    "source": "寒潭蛟影"
+  },
+  "sh2_relic": {
+    "name": "沙海孤城遗物",
+    "description": "沙海孤城遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 3,
+      "defense": 2,
+      "maxMp": 9
+    },
+    "source": "沙海孤城"
+  },
+  "dz2_relic": {
+    "name": "毒瘴密林遗物",
+    "description": "毒瘴密林遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4300,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 4,
+      "defense": 2,
+      "maxMp": 11
+    },
+    "source": "毒瘴密林"
+  },
+  "tg2_relic": {
+    "name": "天罡北斗遗物",
+    "description": "天罡北斗遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4400,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 4,
+      "defense": 3,
+      "maxMp": 13
+    },
+    "source": "天罡北斗"
+  },
+  "ym2_relic": {
+    "name": "幽冥鬼市遗物",
+    "description": "幽冥鬼市遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4500,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "attack": 4,
+      "defense": 3,
+      "maxMp": 15
+    },
+    "source": "幽冥鬼市"
+  },
+  "tx2_relic": {
+    "name": "铁血雄关遗物",
+    "description": "铁血雄关遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4600,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 5,
+      "defense": 3,
+      "maxMp": 17
+    },
+    "source": "铁血雄关"
+  },
+  "yy2_relic": {
+    "name": "烟雨剑冢遗物",
+    "description": "烟雨剑冢遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4700,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 5,
+      "defense": 3,
+      "maxMp": 19
+    },
+    "source": "烟雨剑冢"
+  },
+  "th2_relic": {
+    "name": "天火熔炉遗物",
+    "description": "天火熔炉遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4800,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 5,
+      "defense": 4,
+      "maxMp": 21
+    },
+    "source": "天火熔炉"
+  },
+  "bf2_relic": {
+    "name": "冰封王座遗物",
+    "description": "冰封王座遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4900,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "attack": 6,
+      "defense": 4,
+      "maxMp": 23
+    },
+    "source": "冰封王座"
+  },
+  "lm2_relic": {
+    "name": "雷鸣峡谷遗物",
+    "description": "雷鸣峡谷遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 5000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 6,
+      "defense": 4,
+      "maxMp": 25
+    },
+    "source": "雷鸣峡谷"
+  },
+  "cj2_relic": {
+    "name": "苍穹之眼遗物",
+    "description": "苍穹之眼遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 5100,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 6,
+      "defense": 4,
+      "maxMp": 27
+    },
+    "source": "苍穹之眼"
+  },
+  "wr2_relic": {
+    "name": "万刃窟遗物",
+    "description": "万刃窟遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 5200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 7,
+      "defense": 5,
+      "maxMp": 29
+    },
+    "source": "万刃窟"
+  },
+  "yg2_relic": {
+    "name": "幽谷回音遗物",
+    "description": "幽谷回音遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 5300,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "attack": 7,
+      "defense": 5,
+      "maxMp": 31
+    },
+    "source": "幽谷回音"
+  },
+  "tx3_relic": {
+    "name": "太虚幻境遗物",
+    "description": "太虚幻境遗物。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 5400,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 7,
+      "defense": 5,
+      "maxMp": 33
+    },
+    "source": "太虚幻境"
+  },
+  "page_r204_0": {
+    "name": "无双枪残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_0"
+    }
+  },
+  "page_r204_1": {
+    "name": "游丝鞭残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_1"
+    }
+  },
+  "page_r204_2": {
+    "name": "碎玉锏残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_2"
+    }
+  },
+  "page_r204_3": {
+    "name": "寒泉钩残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_3"
+    }
+  },
+  "page_r204_4": {
+    "name": "流星雨残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_4"
+    }
+  },
+  "page_r204_5": {
+    "name": "疯魔棍二式残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_5",
+      "dodge": 1
+    }
+  },
+  "page_r204_6": {
+    "name": "修罗刀·终残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_6",
+      "dodge": 1
+    }
+  },
+  "page_r204_7": {
+    "name": "太乙剑·终残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_7",
+      "dodge": 1
+    }
+  },
+  "page_r204_8": {
+    "name": "长生诀·终残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_8",
+      "dodge": 1
+    }
+  },
+  "page_r204_9": {
+    "name": "凌波微步残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_9",
+      "dodge": 1
+    }
+  },
+  "page_r204_10": {
+    "name": "金刚罡残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_10",
+      "dodge": 1
+    }
+  },
+  "page_r204_11": {
+    "name": "伏虎拳·终残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_11",
+      "dodge": 1
+    }
+  },
+  "page_r204_12": {
+    "name": "裂天刀残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_12",
+      "dodge": 1
+    }
+  },
+  "page_r204_13": {
+    "name": "穿云剑残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_13",
+      "dodge": 1
+    }
+  },
+  "page_r204_14": {
+    "name": "混元一气残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "manual_r204_14",
+      "dodge": 1
+    }
   }
 }

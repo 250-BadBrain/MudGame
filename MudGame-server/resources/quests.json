@@ -802,5 +802,245 @@
       }
     },
     "repeatable": false
+  },
+  "quest_r204_0": {
+    "id": "quest_r204_0",
+    "name": "绝壁悬栈试炼",
+    "description": "绝壁悬栈试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datangdoubledragonxb2",
+        "description": "绝壁悬栈试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 350,
+      "potential": 250,
+      "money": 500,
+      "flags": {
+        "quest_r204_0_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_1": {
+    "id": "quest_r204_1",
+    "name": "寒潭蛟影试炼",
+    "description": "寒潭蛟影试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_fuyufanyunht2",
+        "description": "寒潭蛟影试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 360,
+      "potential": 250,
+      "money": 520,
+      "flags": {
+        "quest_r204_1_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_2": {
+    "id": "quest_r204_2",
+    "name": "沙海孤城试炼",
+    "description": "沙海孤城试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_posuixukongsh2",
+        "description": "沙海孤城试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 370,
+      "potential": 250,
+      "money": 540,
+      "flags": {
+        "quest_r204_2_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_3": {
+    "id": "quest_r204_3",
+    "name": "毒瘴密林试炼",
+    "description": "毒瘴密林试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_bianhuanglegenddz2",
+        "description": "毒瘴密林试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 380,
+      "potential": 250,
+      "money": 560,
+      "flags": {
+        "quest_r204_3_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_4": {
+    "id": "quest_r204_4",
+    "name": "天罡北斗试炼",
+    "description": "天罡北斗试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_luoshuiraiderstg2",
+        "description": "天罡北斗试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 390,
+      "potential": 250,
+      "money": 580,
+      "flags": {
+        "quest_r204_4_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_5": {
+    "id": "quest_r204_5",
+    "name": "幽冥鬼市试炼",
+    "description": "幽冥鬼市试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_yangzhoucaoyunym2",
+        "description": "幽冥鬼市试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 400,
+      "potential": 250,
+      "money": 600,
+      "flags": {
+        "quest_r204_5_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_6": {
+    "id": "quest_r204_6",
+    "name": "铁血雄关试炼",
+    "description": "铁血雄关试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datangdoubledragontx2",
+        "description": "铁血雄关试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 410,
+      "potential": 250,
+      "money": 620,
+      "flags": {
+        "quest_r204_6_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_7": {
+    "id": "quest_r204_7",
+    "name": "烟雨剑冢试炼",
+    "description": "烟雨剑冢试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_fuyufanyunyy2",
+        "description": "烟雨剑冢试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 420,
+      "potential": 250,
+      "money": 640,
+      "flags": {
+        "quest_r204_7_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_8": {
+    "id": "quest_r204_8",
+    "name": "天火熔炉试炼",
+    "description": "天火熔炉试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_posuixukongth2",
+        "description": "天火熔炉试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 430,
+      "potential": 250,
+      "money": 660,
+      "flags": {
+        "quest_r204_8_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "quest_r204_9": {
+    "id": "quest_r204_9",
+    "name": "冰封王座试炼",
+    "description": "冰封王座试炼",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_bianhuanglegendbf2",
+        "description": "冰封王座试炼",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 440,
+      "potential": 250,
+      "money": 680,
+      "flags": {
+        "quest_r204_9_completed": true
+      }
+    },
+    "repeatable": false
   }
 }

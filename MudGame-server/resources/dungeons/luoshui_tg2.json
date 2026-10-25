@@ -1,0 +1,137 @@
+{
+  "id": "luoshui_tg2",
+  "name": "天罡北斗",
+  "description": "天罡北斗——洛水风浪的又一个考验。",
+  "order": 61,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 14,
+  "spawnRoomId": "tg2_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "tg2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "tg2_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "tg2_gate": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "tg2_00": {
+      "name": "入口",
+      "description": "天罡北斗入口。",
+      "exits": {
+        "north": "tg2_01"
+      }
+    },
+    "tg2_01": {
+      "name": "通道",
+      "description": "天罡北斗通道。",
+      "exits": {
+        "south": "tg2_00",
+        "north": "tg2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "tg2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "tg2_guard",
+        "tg2_guard"
+      ]
+    },
+    "tg2_02": {
+      "name": "关隘",
+      "description": "天罡北斗关隘。",
+      "exits": {
+        "south": "tg2_01",
+        "north": "tg2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "tg2_03": {
+      "name": "决战",
+      "description": "天罡北斗决战。",
+      "exits": {
+        "south": "tg2_02"
+      },
+      "npcs": [
+        "tg2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "tg2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "tg2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫天罡北斗之主之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2740,
+    "potential": 1250,
+    "money": 980,
+    "items": {
+      "tg2_relic": 1
+    }
+  }
+}

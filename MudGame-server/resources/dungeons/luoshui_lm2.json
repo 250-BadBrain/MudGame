@@ -1,0 +1,137 @@
+{
+  "id": "luoshui_lm2",
+  "name": "雷鸣峡谷",
+  "description": "雷鸣峡谷——洛水风浪的又一个考验。",
+  "order": 67,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 15,
+  "spawnRoomId": "lm2_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "lm2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "lm2_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "lm2_gate": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "lm2_00": {
+      "name": "入口",
+      "description": "雷鸣峡谷入口。",
+      "exits": {
+        "north": "lm2_01"
+      }
+    },
+    "lm2_01": {
+      "name": "通道",
+      "description": "雷鸣峡谷通道。",
+      "exits": {
+        "south": "lm2_00",
+        "north": "lm2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "lm2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "lm2_guard",
+        "lm2_guard"
+      ]
+    },
+    "lm2_02": {
+      "name": "关隘",
+      "description": "雷鸣峡谷关隘。",
+      "exits": {
+        "south": "lm2_01",
+        "north": "lm2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "lm2_03": {
+      "name": "决战",
+      "description": "雷鸣峡谷决战。",
+      "exits": {
+        "south": "lm2_02"
+      },
+      "npcs": [
+        "lm2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "lm2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "lm2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫雷鸣峡谷之主之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 3100,
+    "potential": 1250,
+    "money": 1100,
+    "items": {
+      "lm2_relic": 1
+    }
+  }
+}

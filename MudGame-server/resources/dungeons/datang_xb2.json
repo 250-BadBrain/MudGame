@@ -1,0 +1,137 @@
+{
+  "id": "datang_xb2",
+  "name": "绝壁悬栈",
+  "description": "绝壁悬栈——大唐双龙传的又一个考验。",
+  "order": 57,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 14,
+  "spawnRoomId": "xb2_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "xb2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "xb2_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "xb2_gate": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "xb2_00": {
+      "name": "入口",
+      "description": "绝壁悬栈入口。",
+      "exits": {
+        "north": "xb2_01"
+      }
+    },
+    "xb2_01": {
+      "name": "通道",
+      "description": "绝壁悬栈通道。",
+      "exits": {
+        "south": "xb2_00",
+        "north": "xb2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "xb2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "xb2_guard",
+        "xb2_guard"
+      ]
+    },
+    "xb2_02": {
+      "name": "关隘",
+      "description": "绝壁悬栈关隘。",
+      "exits": {
+        "south": "xb2_01",
+        "north": "xb2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "xb2_03": {
+      "name": "决战",
+      "description": "绝壁悬栈决战。",
+      "exits": {
+        "south": "xb2_02"
+      },
+      "npcs": [
+        "xb2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "xb2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "xb2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫绝壁悬栈之主之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2500,
+    "potential": 1250,
+    "money": 900,
+    "items": {
+      "xb2_relic": 1
+    }
+  }
+}

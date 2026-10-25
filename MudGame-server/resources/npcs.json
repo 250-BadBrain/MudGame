@@ -3039,7 +3039,22 @@
       "lieshi_zj": 120,
       "hanshui_zj": 120,
       "wugou_zj": 120,
-      "bengshan_zj": 120
+      "bengshan_zj": 120,
+      "manual_r204_0": 120,
+      "manual_r204_1": 120,
+      "manual_r204_2": 120,
+      "manual_r204_3": 120,
+      "manual_r204_4": 120,
+      "manual_r204_5": 120,
+      "manual_r204_6": 120,
+      "manual_r204_7": 120,
+      "manual_r204_8": 120,
+      "manual_r204_9": 120,
+      "manual_r204_10": 120,
+      "manual_r204_11": 120,
+      "manual_r204_12": 120,
+      "manual_r204_13": 120,
+      "manual_r204_14": 120
     },
     "attributes": {
       "level": 30,
@@ -17843,6 +17858,2421 @@
         "critRate": 5,
         "attackSpeed": 4,
         "initiative": 14,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "xb2_guard": {
+    "name": "绝壁悬栈守卫",
+    "title": "守卫",
+    "description": "绝壁悬栈守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 62,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 62,
+        "constitution": 60,
+        "agility": 57,
+        "perception": 31,
+        "willpower": 31,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 800,
+        "maxHp": 800,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 62,
+        "defense": 31,
+        "hitRate": 182,
+        "dodge": 68,
+        "parry": 66,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 62,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "xb2_boss": {
+    "name": "绝壁悬栈之主",
+    "title": "绝壁悬栈之主",
+    "description": "绝壁悬栈之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 82,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 82,
+        "constitution": 80,
+        "agility": 77,
+        "perception": 41,
+        "willpower": 41,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1550,
+        "maxHp": 1550,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 82,
+        "defense": 41,
+        "hitRate": 202,
+        "dodge": 88,
+        "parry": 86,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 82,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "xb2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "ht2_guard": {
+    "name": "寒潭蛟影守卫",
+    "title": "守卫",
+    "description": "寒潭蛟影守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 63,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 63,
+        "constitution": 61,
+        "agility": 58,
+        "perception": 31,
+        "willpower": 31,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 830,
+        "maxHp": 830,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 63,
+        "defense": 31,
+        "hitRate": 183,
+        "dodge": 69,
+        "parry": 67,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 63,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ht2_boss": {
+    "name": "寒潭蛟影之主",
+    "title": "寒潭蛟影之主",
+    "description": "寒潭蛟影之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 83,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 83,
+        "constitution": 81,
+        "agility": 78,
+        "perception": 41,
+        "willpower": 41,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1580,
+        "maxHp": 1580,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 83,
+        "defense": 41,
+        "hitRate": 203,
+        "dodge": 89,
+        "parry": 87,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 83,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "ht2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "sh2_guard": {
+    "name": "沙海孤城守卫",
+    "title": "守卫",
+    "description": "沙海孤城守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 64,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 64,
+        "constitution": 62,
+        "agility": 59,
+        "perception": 32,
+        "willpower": 32,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 860,
+        "maxHp": 860,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 64,
+        "defense": 32,
+        "hitRate": 184,
+        "dodge": 70,
+        "parry": 68,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 64,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sh2_boss": {
+    "name": "沙海孤城之主",
+    "title": "沙海孤城之主",
+    "description": "沙海孤城之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 84,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 84,
+        "constitution": 82,
+        "agility": 79,
+        "perception": 42,
+        "willpower": 42,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1610,
+        "maxHp": 1610,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 84,
+        "defense": 42,
+        "hitRate": 204,
+        "dodge": 90,
+        "parry": 88,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 84,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "sh2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "dz2_guard": {
+    "name": "毒瘴密林守卫",
+    "title": "守卫",
+    "description": "毒瘴密林守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 65,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 65,
+        "constitution": 63,
+        "agility": 60,
+        "perception": 32,
+        "willpower": 32,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 890,
+        "maxHp": 890,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 65,
+        "defense": 32,
+        "hitRate": 185,
+        "dodge": 71,
+        "parry": 69,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 65,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dz2_boss": {
+    "name": "毒瘴密林之主",
+    "title": "毒瘴密林之主",
+    "description": "毒瘴密林之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 85,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 85,
+        "constitution": 83,
+        "agility": 80,
+        "perception": 42,
+        "willpower": 42,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1640,
+        "maxHp": 1640,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 85,
+        "defense": 42,
+        "hitRate": 205,
+        "dodge": 91,
+        "parry": 89,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 85,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "dz2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "tg2_guard": {
+    "name": "天罡北斗守卫",
+    "title": "守卫",
+    "description": "天罡北斗守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 66,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 66,
+        "constitution": 64,
+        "agility": 61,
+        "perception": 33,
+        "willpower": 33,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 920,
+        "maxHp": 920,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 66,
+        "defense": 33,
+        "hitRate": 186,
+        "dodge": 72,
+        "parry": 70,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 66,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "tg2_boss": {
+    "name": "天罡北斗之主",
+    "title": "天罡北斗之主",
+    "description": "天罡北斗之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 86,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 86,
+        "constitution": 84,
+        "agility": 81,
+        "perception": 43,
+        "willpower": 43,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1670,
+        "maxHp": 1670,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 86,
+        "defense": 43,
+        "hitRate": 206,
+        "dodge": 92,
+        "parry": 90,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 86,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "tg2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "ym2_guard": {
+    "name": "幽冥鬼市守卫",
+    "title": "守卫",
+    "description": "幽冥鬼市守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 67,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 67,
+        "constitution": 65,
+        "agility": 62,
+        "perception": 33,
+        "willpower": 33,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 950,
+        "maxHp": 950,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 67,
+        "defense": 33,
+        "hitRate": 187,
+        "dodge": 73,
+        "parry": 71,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 67,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ym2_boss": {
+    "name": "幽冥鬼市之主",
+    "title": "幽冥鬼市之主",
+    "description": "幽冥鬼市之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 87,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 87,
+        "constitution": 85,
+        "agility": 82,
+        "perception": 43,
+        "willpower": 43,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1700,
+        "maxHp": 1700,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 87,
+        "defense": 43,
+        "hitRate": 207,
+        "dodge": 93,
+        "parry": 91,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 87,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "ym2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "tx2_guard": {
+    "name": "铁血雄关守卫",
+    "title": "守卫",
+    "description": "铁血雄关守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 68,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 68,
+        "constitution": 66,
+        "agility": 63,
+        "perception": 34,
+        "willpower": 34,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 980,
+        "maxHp": 980,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 68,
+        "defense": 34,
+        "hitRate": 188,
+        "dodge": 74,
+        "parry": 72,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 68,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "tx2_boss": {
+    "name": "铁血雄关之主",
+    "title": "铁血雄关之主",
+    "description": "铁血雄关之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 88,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 88,
+        "constitution": 86,
+        "agility": 83,
+        "perception": 44,
+        "willpower": 44,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1730,
+        "maxHp": 1730,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 88,
+        "defense": 44,
+        "hitRate": 208,
+        "dodge": 94,
+        "parry": 92,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 88,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "tx2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "yy2_guard": {
+    "name": "烟雨剑冢守卫",
+    "title": "守卫",
+    "description": "烟雨剑冢守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 69,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 69,
+        "constitution": 67,
+        "agility": 64,
+        "perception": 34,
+        "willpower": 34,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1010,
+        "maxHp": 1010,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 69,
+        "defense": 34,
+        "hitRate": 189,
+        "dodge": 75,
+        "parry": 73,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 69,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yy2_boss": {
+    "name": "烟雨剑冢之主",
+    "title": "烟雨剑冢之主",
+    "description": "烟雨剑冢之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 89,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 89,
+        "constitution": 87,
+        "agility": 84,
+        "perception": 44,
+        "willpower": 44,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1760,
+        "maxHp": 1760,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 89,
+        "defense": 44,
+        "hitRate": 209,
+        "dodge": 95,
+        "parry": 93,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 89,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "yy2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "th2_guard": {
+    "name": "天火熔炉守卫",
+    "title": "守卫",
+    "description": "天火熔炉守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 70,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 70,
+        "constitution": 68,
+        "agility": 65,
+        "perception": 35,
+        "willpower": 35,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1040,
+        "maxHp": 1040,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 70,
+        "defense": 35,
+        "hitRate": 190,
+        "dodge": 76,
+        "parry": 74,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 70,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "th2_boss": {
+    "name": "天火熔炉之主",
+    "title": "天火熔炉之主",
+    "description": "天火熔炉之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 90,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 90,
+        "constitution": 88,
+        "agility": 85,
+        "perception": 45,
+        "willpower": 45,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1790,
+        "maxHp": 1790,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 90,
+        "defense": 45,
+        "hitRate": 210,
+        "dodge": 96,
+        "parry": 94,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 90,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "th2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "bf2_guard": {
+    "name": "冰封王座守卫",
+    "title": "守卫",
+    "description": "冰封王座守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 71,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 71,
+        "constitution": 69,
+        "agility": 66,
+        "perception": 35,
+        "willpower": 35,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1070,
+        "maxHp": 1070,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 71,
+        "defense": 35,
+        "hitRate": 191,
+        "dodge": 77,
+        "parry": 75,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 71,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "bf2_boss": {
+    "name": "冰封王座之主",
+    "title": "冰封王座之主",
+    "description": "冰封王座之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 91,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 91,
+        "constitution": 89,
+        "agility": 86,
+        "perception": 45,
+        "willpower": 45,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1820,
+        "maxHp": 1820,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 91,
+        "defense": 45,
+        "hitRate": 211,
+        "dodge": 97,
+        "parry": 95,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 91,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "bf2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "lm2_guard": {
+    "name": "雷鸣峡谷守卫",
+    "title": "守卫",
+    "description": "雷鸣峡谷守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 72,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 72,
+        "constitution": 70,
+        "agility": 67,
+        "perception": 36,
+        "willpower": 36,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1100,
+        "maxHp": 1100,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 72,
+        "defense": 36,
+        "hitRate": 192,
+        "dodge": 78,
+        "parry": 76,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 72,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "lm2_boss": {
+    "name": "雷鸣峡谷之主",
+    "title": "雷鸣峡谷之主",
+    "description": "雷鸣峡谷之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 92,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 92,
+        "constitution": 90,
+        "agility": 87,
+        "perception": 46,
+        "willpower": 46,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1850,
+        "maxHp": 1850,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 92,
+        "defense": 46,
+        "hitRate": 212,
+        "dodge": 98,
+        "parry": 96,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 92,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "lm2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "cj2_guard": {
+    "name": "苍穹之眼守卫",
+    "title": "守卫",
+    "description": "苍穹之眼守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 73,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 73,
+        "constitution": 71,
+        "agility": 68,
+        "perception": 36,
+        "willpower": 36,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1130,
+        "maxHp": 1130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 73,
+        "defense": 36,
+        "hitRate": 193,
+        "dodge": 79,
+        "parry": 77,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 73,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "cj2_boss": {
+    "name": "苍穹之眼之主",
+    "title": "苍穹之眼之主",
+    "description": "苍穹之眼之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 93,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 93,
+        "constitution": 91,
+        "agility": 88,
+        "perception": 46,
+        "willpower": 46,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1880,
+        "maxHp": 1880,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 93,
+        "defense": 46,
+        "hitRate": 213,
+        "dodge": 99,
+        "parry": 97,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 93,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "cj2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "wr2_guard": {
+    "name": "万刃窟守卫",
+    "title": "守卫",
+    "description": "万刃窟守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 74,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 74,
+        "constitution": 72,
+        "agility": 69,
+        "perception": 37,
+        "willpower": 37,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1160,
+        "maxHp": 1160,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 74,
+        "defense": 37,
+        "hitRate": 194,
+        "dodge": 80,
+        "parry": 78,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 74,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "wr2_boss": {
+    "name": "万刃窟之主",
+    "title": "万刃窟之主",
+    "description": "万刃窟之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 94,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 94,
+        "constitution": 92,
+        "agility": 89,
+        "perception": 47,
+        "willpower": 47,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1910,
+        "maxHp": 1910,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 94,
+        "defense": 47,
+        "hitRate": 214,
+        "dodge": 100,
+        "parry": 98,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 94,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "wr2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "yg2_guard": {
+    "name": "幽谷回音守卫",
+    "title": "守卫",
+    "description": "幽谷回音守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 75,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 75,
+        "constitution": 73,
+        "agility": 70,
+        "perception": 37,
+        "willpower": 37,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1190,
+        "maxHp": 1190,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 75,
+        "defense": 37,
+        "hitRate": 195,
+        "dodge": 81,
+        "parry": 79,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 75,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yg2_boss": {
+    "name": "幽谷回音之主",
+    "title": "幽谷回音之主",
+    "description": "幽谷回音之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 95,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 95,
+        "constitution": 93,
+        "agility": 90,
+        "perception": 47,
+        "willpower": 47,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1940,
+        "maxHp": 1940,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 95,
+        "defense": 47,
+        "hitRate": 215,
+        "dodge": 101,
+        "parry": 99,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 95,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "yg2_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "tx3_guard": {
+    "name": "太虚幻境守卫",
+    "title": "守卫",
+    "description": "太虚幻境守卫。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 76,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 76,
+        "constitution": 74,
+        "agility": 71,
+        "perception": 38,
+        "willpower": 38,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1220,
+        "maxHp": 1220,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 76,
+        "defense": 38,
+        "hitRate": 196,
+        "dodge": 82,
+        "parry": 80,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 76,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "tx3_boss": {
+    "name": "太虚幻境之主",
+    "title": "太虚幻境之主",
+    "description": "太虚幻境之主。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 96,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 96,
+        "constitution": 94,
+        "agility": 91,
+        "perception": 48,
+        "willpower": 48,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1970,
+        "maxHp": 1970,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 96,
+        "defense": 48,
+        "hitRate": 216,
+        "dodge": 102,
+        "parry": 100,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 96,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "tx3_gate",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "r204_npc_0": {
+    "name": "太行剑客",
+    "title": "剑客",
+    "description": "太行剑客。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_r204_npc_0",
+    "attributes": {
+      "level": 20,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 18,
+        "agility": 15,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 200,
+        "maxHp": 200,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 20,
+        "defense": 10,
+        "hitRate": 140,
+        "dodge": 26,
+        "parry": 24,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 20,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "r204_npc_1": {
+    "name": "蜀中药王",
+    "title": "药王",
+    "description": "蜀中药王。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_r204_npc_1",
+    "attributes": {
+      "level": 20,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 18,
+        "agility": 15,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 200,
+        "maxHp": 200,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 20,
+        "defense": 10,
+        "hitRate": 140,
+        "dodge": 26,
+        "parry": 24,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 20,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "r204_npc_2": {
+    "name": "漠北刀王",
+    "title": "刀王",
+    "description": "漠北刀王。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_r204_npc_2",
+    "attributes": {
+      "level": 20,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 18,
+        "agility": 15,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 200,
+        "maxHp": 200,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 20,
+        "defense": 10,
+        "hitRate": 140,
+        "dodge": 26,
+        "parry": 24,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 20,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "r204_npc_3": {
+    "name": "东海渔隐",
+    "title": "渔隐",
+    "description": "东海渔隐。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_r204_npc_3",
+    "attributes": {
+      "level": 20,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 18,
+        "agility": 15,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 200,
+        "maxHp": 200,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 20,
+        "defense": 10,
+        "hitRate": 140,
+        "dodge": 26,
+        "parry": 24,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 20,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "r204_npc_4": {
+    "name": "岭南琴圣",
+    "title": "琴圣",
+    "description": "岭南琴圣。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_r204_npc_4",
+    "attributes": {
+      "level": 20,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 18,
+        "agility": 15,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 200,
+        "maxHp": 200,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 20,
+        "defense": 10,
+        "hitRate": 140,
+        "dodge": 26,
+        "parry": 24,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 20,
         "guardBreak": 0,
         "damageReduction": 0
       },

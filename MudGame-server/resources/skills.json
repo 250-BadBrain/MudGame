@@ -1197,5 +1197,305 @@
         "level": 80
       }
     }
+  },
+  "manual_r204_0": {
+    "name": "无双枪",
+    "description": "无双枪。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_0",
+      "prerequisite": {
+        "skill": "basic_spear",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_1": {
+    "name": "游丝鞭",
+    "description": "游丝鞭。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_1",
+      "prerequisite": {
+        "skill": "basic_whip",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_2": {
+    "name": "碎玉锏",
+    "description": "碎玉锏。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_2",
+      "prerequisite": {
+        "skill": "basic_mace",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_3": {
+    "name": "寒泉钩",
+    "description": "寒泉钩。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_3",
+      "prerequisite": {
+        "skill": "basic_hook",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_4": {
+    "name": "流星雨",
+    "description": "流星雨。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_4",
+      "prerequisite": {
+        "skill": "basic_hidden_weapon",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_5": {
+    "name": "疯魔棍二式",
+    "description": "疯魔棍二式。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_5",
+      "prerequisite": {
+        "skill": "basic_staff",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_6": {
+    "name": "修罗刀·终",
+    "description": "修罗刀·终。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_6",
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 80
+      }
+    }
+  },
+  "manual_r204_7": {
+    "name": "太乙剑·终",
+    "description": "太乙剑·终。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 1,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_7",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 80
+      }
+    }
+  },
+  "manual_r204_8": {
+    "name": "长生诀·终",
+    "description": "长生诀·终。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_8",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 80
+      }
+    }
+  },
+  "manual_r204_9": {
+    "name": "凌波微步",
+    "description": "凌波微步。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_9",
+      "prerequisite": {
+        "skill": "basic_qinggong",
+        "level": 80
+      }
+    }
+  },
+  "manual_r204_10": {
+    "name": "金刚罡",
+    "description": "金刚罡。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 4,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_10",
+      "prerequisite": {
+        "skill": "basic_parry",
+        "level": 80
+      }
+    }
+  },
+  "manual_r204_11": {
+    "name": "伏虎拳·终",
+    "description": "伏虎拳·终。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 4,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_11",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 80
+      }
+    }
+  },
+  "manual_r204_12": {
+    "name": "裂天刀",
+    "description": "裂天刀。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 4,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_12",
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_13": {
+    "name": "穿云剑",
+    "description": "穿云剑。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 4,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_13",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 60
+      }
+    }
+  },
+  "manual_r204_14": {
+    "name": "混元一气",
+    "description": "混元一气。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 4,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "page_r204_14",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 60
+      }
+    }
   }
 }

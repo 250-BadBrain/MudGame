@@ -1,0 +1,137 @@
+{
+  "id": "fuyu_yg2",
+  "name": "幽谷回音",
+  "description": "幽谷回音——覆雨翻云的又一个考验。",
+  "order": 70,
+  "chainId": "fuyu_fan_yun",
+  "chainName": "覆雨翻云",
+  "chapter": 16,
+  "spawnRoomId": "yg2_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "yg2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "yg2_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "yg2_gate": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "yg2_00": {
+      "name": "入口",
+      "description": "幽谷回音入口。",
+      "exits": {
+        "north": "yg2_01"
+      }
+    },
+    "yg2_01": {
+      "name": "通道",
+      "description": "幽谷回音通道。",
+      "exits": {
+        "south": "yg2_00",
+        "north": "yg2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "yg2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "yg2_guard",
+        "yg2_guard"
+      ]
+    },
+    "yg2_02": {
+      "name": "关隘",
+      "description": "幽谷回音关隘。",
+      "exits": {
+        "south": "yg2_01",
+        "north": "yg2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "yg2_03": {
+      "name": "决战",
+      "description": "幽谷回音决战。",
+      "exits": {
+        "south": "yg2_02"
+      },
+      "npcs": [
+        "yg2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "yg2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "yg2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫幽谷回音之主之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 3280,
+    "potential": 1250,
+    "money": 1160,
+    "items": {
+      "yg2_relic": 1
+    }
+  }
+}

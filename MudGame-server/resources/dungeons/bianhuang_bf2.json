@@ -1,0 +1,137 @@
+{
+  "id": "bianhuang_bf2",
+  "name": "冰封王座",
+  "description": "冰封王座——边荒传说的又一个考验。",
+  "order": 66,
+  "chainId": "bianhuang_legend",
+  "chainName": "边荒传说",
+  "chapter": 15,
+  "spawnRoomId": "bf2_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "bf2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "bf2_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "bf2_gate": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "bf2_00": {
+      "name": "入口",
+      "description": "冰封王座入口。",
+      "exits": {
+        "north": "bf2_01"
+      }
+    },
+    "bf2_01": {
+      "name": "通道",
+      "description": "冰封王座通道。",
+      "exits": {
+        "south": "bf2_00",
+        "north": "bf2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "bf2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "bf2_guard",
+        "bf2_guard"
+      ]
+    },
+    "bf2_02": {
+      "name": "关隘",
+      "description": "冰封王座关隘。",
+      "exits": {
+        "south": "bf2_01",
+        "north": "bf2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "bf2_03": {
+      "name": "决战",
+      "description": "冰封王座决战。",
+      "exits": {
+        "south": "bf2_02"
+      },
+      "npcs": [
+        "bf2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "bf2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "bf2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫冰封王座之主之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 3040,
+    "potential": 1250,
+    "money": 1080,
+    "items": {
+      "bf2_relic": 1
+    }
+  }
+}

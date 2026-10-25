@@ -1,0 +1,137 @@
+{
+  "id": "posui_sh2",
+  "name": "沙海孤城",
+  "description": "沙海孤城——破碎虚空的又一个考验。",
+  "order": 59,
+  "chainId": "posui_xukong",
+  "chainName": "破碎虚空",
+  "chapter": 14,
+  "spawnRoomId": "sh2_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "sh2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "sh2_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "sh2_gate": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "sh2_00": {
+      "name": "入口",
+      "description": "沙海孤城入口。",
+      "exits": {
+        "north": "sh2_01"
+      }
+    },
+    "sh2_01": {
+      "name": "通道",
+      "description": "沙海孤城通道。",
+      "exits": {
+        "south": "sh2_00",
+        "north": "sh2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "sh2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "sh2_guard",
+        "sh2_guard"
+      ]
+    },
+    "sh2_02": {
+      "name": "关隘",
+      "description": "沙海孤城关隘。",
+      "exits": {
+        "south": "sh2_01",
+        "north": "sh2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "sh2_03": {
+      "name": "决战",
+      "description": "沙海孤城决战。",
+      "exits": {
+        "south": "sh2_02"
+      },
+      "npcs": [
+        "sh2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "sh2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "sh2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫沙海孤城之主之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2620,
+    "potential": 1250,
+    "money": 940,
+    "items": {
+      "sh2_relic": 1
+    }
+  }
+}

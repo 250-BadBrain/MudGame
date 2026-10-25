@@ -981,5 +981,40 @@
     "title": "老水手",
     "opening": "东溟水手朝你点头。",
     "options": []
+  },
+  "dlg_r204_npc_0": {
+    "id": "dlg_r204_npc_0",
+    "npcId": "r204_npc_0",
+    "title": "剑客",
+    "opening": "太行剑客朝你点头。",
+    "options": []
+  },
+  "dlg_r204_npc_1": {
+    "id": "dlg_r204_npc_1",
+    "npcId": "r204_npc_1",
+    "title": "药王",
+    "opening": "蜀中药王朝你点头。",
+    "options": []
+  },
+  "dlg_r204_npc_2": {
+    "id": "dlg_r204_npc_2",
+    "npcId": "r204_npc_2",
+    "title": "刀王",
+    "opening": "漠北刀王朝你点头。",
+    "options": []
+  },
+  "dlg_r204_npc_3": {
+    "id": "dlg_r204_npc_3",
+    "npcId": "r204_npc_3",
+    "title": "渔隐",
+    "opening": "东海渔隐朝你点头。",
+    "options": []
+  },
+  "dlg_r204_npc_4": {
+    "id": "dlg_r204_npc_4",
+    "npcId": "r204_npc_4",
+    "title": "琴圣",
+    "opening": "岭南琴圣朝你点头。",
+    "options": []
   }
 }
