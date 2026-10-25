@@ -141,3 +141,55 @@ func TestEnterWorldChangan(t *testing.T) {
 		t.Fatalf("expected luoyang spawn, got %s", after[playerID].RoomID)
 	}
 }
+
+// 流民疑云：接取 → 哑婆旗标 → 交付（对话数据闭环）
+func TestRefugeeRumorQuest(t *testing.T) {
+	r := NewRuntimeManager(t.TempDir())
+	t.Cleanup(func() { _ = r.Close() })
+	if err := r.Register("rumorhunter", "pass123"); err != nil {
+		t.Fatalf("register failed: %v", err)
+	}
+	playerID, err := r.CreateCharacter("rumorhunter", "探谣客", 16, 16, 16, 16, 16)
+	if err != nil {
+		t.Fatalf("create character failed: %v", err)
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].RoomID = "ly_refugee_camp"
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+
+	// 接取
+	if _, _, _, _, err := r.ChooseDialogue(playerID, "old_refugee", "start_rumor_case"); err != nil {
+		t.Fatalf("start quest failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	if after[playerID].QuestStates["refugee_rumor_case"].Status != "active" {
+		t.Fatal("expected quest active")
+	}
+	// 打听旗标
+	if _, _, _, _, err := r.ChooseDialogue(playerID, "old_refugee", "gather_rumor"); err != nil {
+		t.Fatalf("gather rumor failed: %v", err)
+	}
+	after, _ = r.loadPlayers()
+	if !after[playerID].Flags["heard_refugee_whisper"] {
+		t.Fatal("expected whisper flag")
+	}
+	// 交付
+	if _, _, logs, _, err := r.ChooseDialogue(playerID, "old_refugee", "turn_in_rumor"); err != nil {
+		t.Fatalf("turn in failed: %v", err)
+	} else if len(logs) == 0 {
+		t.Fatal("expected quest completion logs")
+	}
+	after, _ = r.loadPlayers()
+	p := after[playerID]
+	if p.QuestStates["refugee_rumor_case"].Status != "completed" {
+		t.Fatal("expected quest completed")
+	}
+	if p.Backpack["smoke_powder"] != 1 {
+		t.Fatalf("expected smoke powder reward, got %d", p.Backpack["smoke_powder"])
+	}
+}

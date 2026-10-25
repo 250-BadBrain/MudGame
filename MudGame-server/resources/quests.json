@@ -88,5 +88,32 @@
       }
     },
     "repeatable": false
+  },
+  "refugee_rumor_case": {
+    "id": "refugee_rumor_case",
+    "name": "流民疑云",
+    "description": "流民营的孩子传唱着白衣娘娘的童谣，老瘸子认定那不是善神。去营南向哑婆打听，把她的只言片语带回来。",
+    "giverNpcId": "old_refugee",
+    "turnInNpcId": "old_refugee",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "heard_refugee_whisper",
+        "description": "向哑婆打听白衣娘娘的踪迹。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 140,
+      "potential": 100,
+      "money": 160,
+      "items": {
+        "smoke_powder": 1
+      },
+      "flags": {
+        "refugee_rumor_case_completed": true
+      }
+    },
+    "repeatable": false
   }
 }

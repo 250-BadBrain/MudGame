@@ -492,14 +492,36 @@
     "opening": "老瘸子眯眼看你半晌：\"后生，肯蹲下来听老朽说话的，这营里一年碰不上几个。\"",
     "options": [
       {
-        "id": "ask_north",
-        "text": "北边来的，路上可太平？",
-        "response": "\"太平？河北道上连官驿都换了旗。老朽只记得逃难那晚，有个白衫姑娘从死人堆里飘过去，碰过的人都说梦见了亡母——第二天就没一个爬得起来的。\""
+        "id": "start_rumor_case",
+        "text": "营里的孩子都在唱白衣娘娘的童谣——到底是怎么回事？",
+        "response": "老瘸子的脸一下子沉了：\"那不是善神。十年前河北闹瘟，也有人这么唱——唱过的村子，后来一个活人都不剩。你去营南问问拾荒的哑婆，她见过那白衣女子两次。回来告诉我她说了什么，这事关人命。\"",
+        "startQuestId": "refugee_rumor_case",
+        "requires": {
+          "questId": "refugee_rumor_case",
+          "questStatus": "not_started"
+        }
       },
       {
-        "id": "ask_leg",
-        "text": "您的腿怎么废的？",
-        "response": "\"替东家挡的一刀。东家如今锦衣玉食，老朽在这里啃观音土——这世道，忠义喂不饱肚子。\""
+        "id": "gather_rumor",
+        "text": "（向营南的哑婆打听白衣娘娘的事）",
+        "response": "哑婆不会说话，只在地上用炭条画了三笔：一口井，一条河，一个倒着写的\"隋\"字——画完她就躲回了窝棚。你把这三笔刻在了心里。",
+        "setFlags": {
+          "heard_refugee_whisper": true
+        },
+        "requires": {
+          "questId": "refugee_rumor_case",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "turn_in_rumor",
+        "text": "哑婆画了：一口井，一条河，一个倒写的\"隋\"字。",
+        "response": "老瘸子的手抖了：\"井……河……倒隋……\"他猛地抓住你的手腕，\"去查洛水上游的枯井，还有漕运的船！白衣娘娘在找什么'种子'——这不是传说，是有人在为某个东西开路。拿着这包烟尘粉，防身。这债，魔门欠我们北边人一条河的命。\"",
+        "completeQuestId": "refugee_rumor_case",
+        "requires": {
+          "questId": "refugee_rumor_case",
+          "questStatus": "active"
+        }
       }
     ]
   },
