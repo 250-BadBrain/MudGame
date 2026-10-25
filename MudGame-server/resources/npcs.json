@@ -10347,7 +10347,8 @@
     "shopItems": [
       "simple_medicine",
       "dry_ration",
-      "darts"
+      "darts",
+      "smoke_powder"
     ],
     "attributes": {
       "level": 13,

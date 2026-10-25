@@ -1132,5 +1132,21 @@
     "effects": {
       "learnSkill": "taiyi_tianming"
     }
+  },
+  "tezhong_dahuandan": {
+    "name": "特级大还丹",
+    "description": "回春堂孙回春倾尽毕生功力炼制的极品大还丹——一粒下去，断骨重续，气血翻涌。",
+    "type": "medicine",
+    "subtype": "pill",
+    "stackable": true,
+    "sellable": true,
+    "value": 1500,
+    "rarity": 5,
+    "unit": "粒",
+    "source": "回春堂秘制",
+    "usable": true,
+    "effects": {
+      "recoverHp": 300
+    }
   }
 }

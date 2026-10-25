@@ -382,5 +382,113 @@
       }
     },
     "repeatable": false
+  },
+  "saibei_treasure": {
+    "id": "saibei_treasure",
+    "name": "狼王遗宝",
+    "description": "白狼主虽然败退，但他积累十年的宝藏还在狼山口——回鹘马商愿意出路费让你去翻。",
+    "giverNpcId": "sb_horse_trader",
+    "turnInNpcId": "sb_horse_trader",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_saibei_langshan",
+        "description": "在狼山口挫败白狼主。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 240,
+      "potential": 160,
+      "money": 350,
+      "items": {
+        "dahuandan": 1
+      },
+      "flags": {
+        "saibei_treasure_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "jiangnan_heart": {
+    "id": "jiangnan_heart",
+    "name": "琴师心结",
+    "description": "抚琴女子的师父是沉剑入池的人——她想在剑池找回师父的佩剑。",
+    "giverNpcId": "jn_zither_player",
+    "turnInNpcId": "jn_zither_player",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_jiangnan_jianchi",
+        "description": "在剑池夺回名剑。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 250,
+      "potential": 170,
+      "money": 300,
+      "items": {
+        "dahuandan": 1
+      },
+      "flags": {
+        "jiangnan_heart_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "dongdu_truth": {
+    "id": "dongdu_truth",
+    "name": "诗人的真相",
+    "description": "前朝账册的最后一笔记着科举舞弊——诗人要你去宫门广场，当众焚账昭雪。",
+    "giverNpcId": "dd2_pool_poet",
+    "turnInNpcId": "dd2_pool_poet",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_dongdu_tianjin",
+        "description": "在天津晓月取出前朝账册。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 260,
+      "potential": 180,
+      "money": 320,
+      "items": {
+        "dahuandan": 1
+      },
+      "flags": {
+        "dongdu_truth_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "dongming_song": {
+    "id": "dongming_song",
+    "name": "鲛人之歌",
+    "description": "你取回了沧溟玉简，鲛人一族要为你唱一首只唱给恩人的歌。",
+    "giverNpcId": "dm_jiaoren",
+    "turnInNpcId": "dm_jiaoren",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_dongming_haisi",
+        "description": "在海市取出沧溟玉简。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 270,
+      "potential": 190,
+      "money": 350,
+      "items": {
+        "dahuandan": 1
+      },
+      "flags": {
+        "dongming_song_completed": true
+      }
+    },
+    "repeatable": false
   }
 }

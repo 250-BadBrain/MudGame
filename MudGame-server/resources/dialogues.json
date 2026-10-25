@@ -418,6 +418,25 @@
         "id": "ask_herbs",
         "text": "哪里能采到止血草？",
         "response": "\"南市过了漕运码头，芦苇滩里长得漫山遍野——也有些不长眼的东西。胆子小就在老夫这儿抓现成的，胆子大就自己去薅。\""
+      },
+      {
+        "id": "brew_te_huan",
+        "text": "炼一炉特级大还丹（大还丹×2 + 古铜残片×3 + 300两）",
+        "response": "孙回春搓着手：\"两粒大还丹提药底，三片铜引天火，三百两工钱——特级大还丹！老夫这辈子就炼出来过三粒。\"",
+        "requires": {
+          "items": {
+            "dahuandan": 2,
+            "bronze_fragment": 3
+          }
+        },
+        "takeItems": {
+          "dahuandan": 2,
+          "bronze_fragment": 3
+        },
+        "takeMoney": 300,
+        "giveItems": {
+          "tezhong_dahuandan": 1
+        }
       }
     ]
   },
@@ -803,6 +822,41 @@
     "npcId": "bs_tang_steward",
     "title": "唐门谢礼",
     "opening": "唐门管事难得露出笑容：\"栈道的场子找回来了，唐家坳上下都很感激。这份谢礼——唐家的暗器囊，收好。\"",
+    "options": []
+  },
+  "dlg_sb_treasure": {
+    "id": "dlg_sb_treasure",
+    "npcId": "sb_horse_trader",
+    "title": "狼王遗宝",
+    "opening": "回鹘马商压低嗓音：\"白狼主虽然退了，但他的宝藏还在山口——那可是他抢了十年的家底。你要是敢去翻，我出路费。\"",
+    "options": []
+  },
+  "dlg_jn_heart": {
+    "id": "dlg_jn_heart",
+    "npcId": "jn_zither_player",
+    "title": "琴师心结",
+    "opening": "抚琴女子终于放下琴：\"实不相瞒——我师父就是沉剑入池的人。剑池的剑找回了一把，但另一把是我师父的佩剑。你若能帮我找回，我教你一支曲子里的剑意。\"",
+    "options": []
+  },
+  "dlg_dd2_truth": {
+    "id": "dlg_dd2_truth",
+    "npcId": "dd2_pool_poet",
+    "title": "诗人真相",
+    "opening": "诗人第一次认真地看你：\"账册里的最后一笔，记的是当年的科举舞弊——主考官收了钱，把我换成了一位高门子弟。你既然取回了账册，我要去宫门广场把它烧了。\"",
+    "options": []
+  },
+  "dlg_dm_song": {
+    "id": "dlg_dm_song",
+    "npcId": "dm_jiaoren",
+    "title": "鲛人之歌",
+    "opening": "珠娘的眼里泛起水光：\"你取回了玉简——沧溟宫的主人留下它，就是为了让人知道海市的存在。鲛人一族欠你一句谢谢。这首歌，只唱给恩人。\"",
+    "options": []
+  },
+  "dlg_sb_horse": {
+    "id": "dlg_sb_horse",
+    "npcId": "sb_horse_trader",
+    "title": "马市杂货",
+    "opening": "回鹘马商呵呵一笑：\"客人要买马？马不卖——但边关的杂货，老仆这里应有尽有。\"",
     "options": []
   }
 }
