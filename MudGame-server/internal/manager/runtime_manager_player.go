@@ -740,6 +740,10 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	if p.SkillLearningProgress == nil {
 		p.SkillLearningProgress = map[string]int{}
 	}
+	// 新学技能立即注册 0 级条目，学习期间面板可见（首次 10 秒结算后升 1 级）
+	if _, exists := p.Skills[skillID]; !exists {
+		p.Skills[skillID] = 0
+	}
 	p.State = "LEARNING"
 	p.StateTickCountdown = stateSettlementSeconds
 	p.LearningSkillID = skillID

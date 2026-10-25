@@ -8,7 +8,8 @@
   "chapter": 1,
   "spawnRoomId": "ls_00",
   "puzzleInitialStates": {
-    "captives": "locked"
+    "captives": "locked",
+    "crate": "sunken"
   },
   "puzzleActions": {
     "listen_captive": {
@@ -37,6 +38,22 @@
       "nextState": "freed",
       "message": "你劈开船舱的闩，被掳的漕工连滚带爬涌出舱门，回头给你磕了三个响头。",
       "repeatMessage": "船舱已经空了，船工们躲在船舷后不肯再回去。"
+    },
+    "salvage_crate": {
+      "label": "打捞江底沉箱",
+      "puzzleId": "crate",
+      "rooms": [
+        "ls_01"
+      ],
+      "fromStates": [
+        "sunken"
+      ],
+      "nextState": "salvaged",
+      "message": "你潜入芦荡深水，从淤泥里拖出一只铁皮沉箱——箱底夹层里，一页泛黄绢帛隐隐透出剑纹。",
+      "repeatMessage": "沉箱已被你翻遍，江底再无别物。",
+      "giveItems": {
+        "cihang_page": 1
+      }
     }
   },
   "rooms": {
@@ -77,6 +94,9 @@
       "npcs": [
         "ls_pirate",
         "ls_pirate"
+      ],
+      "actions": [
+        "salvage_crate"
       ]
     },
     "ls_02": {
@@ -119,6 +139,15 @@
       "required": 1,
       "weight": 50,
       "description": "斩杀鹞子帮头目"
+    },
+    {
+      "id": "salvage_crate",
+      "type": "puzzle",
+      "targetId": "crate:salvaged",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "打捞江底沉箱中的秘籍"
     }
   ],
   "rewards": {

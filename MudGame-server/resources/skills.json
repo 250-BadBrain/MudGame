@@ -154,5 +154,93 @@
       "hit_rate_per_10_levels": 1,
       "crit_rate_per_10_levels": 1
     }
+  },
+  "thunder_sword": {
+    "id": "thunder_sword",
+    "name": "奔雷剑法",
+    "description": "军中剑客把直刺练到极致的产物，出手如奔雷贯耳，又快又正。",
+    "rarity": 2,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "attack_per_10_levels": 1,
+      "hit_rate_per_10_levels": 1
+    }
+  },
+  "bloody_blade": {
+    "id": "bloody_blade",
+    "name": "血战刀法",
+    "description": "沙场滚出来的刀法，没有花巧，每一刀都奔着收人性命去。",
+    "rarity": 2,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "attack_per_10_levels": 2
+    }
+  },
+  "basic_spear": {
+    "id": "basic_spear",
+    "name": "基本枪法",
+    "description": "拦、拿、扎的基本枪路，大路兵器，军府营中人人先学这一门。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "attack_per_10_levels": 1
+    }
+  },
+  "basic_whip": {
+    "id": "basic_whip",
+    "name": "基本鞭法",
+    "description": "软鞭长于游斗，甩、缠、抽、放，讲究一个让敌人摸不着衣角。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "dodge_per_10_levels": 1
+    }
+  },
+  "basic_mace": {
+    "id": "basic_mace",
+    "name": "基本锏法",
+    "description": "重锏无刃，靠的是格挡与砸落，一步一稳，最宜守住门户。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "parry_per_10_levels": 1
+    }
+  },
+  "basic_hook": {
+    "id": "basic_hook",
+    "name": "基本钩法",
+    "description": "船工挠钩演变来的奇门兵器，钩、拉、锁、带，刁钻难防。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "hit_rate_per_10_levels": 1
+    }
+  },
+  "cihang_jiandian": {
+    "name": "慈航剑典",
+    "description": "传自静斋的佛门剑典，剑走中正，守心为先，后发而先至。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "sword",
+    "school": "hidden",
+    "bonuses": {
+      "hit_rate_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "cihang_page"
+    }
   }
 }

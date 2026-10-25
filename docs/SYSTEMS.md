@@ -96,8 +96,9 @@ Kill（决斗，至死）/ Spar（切磋，单次伤害上限 MaxHP/5，不可�
 
 基础技能（武馆/军府等世界 NPC 教）+ 进阶武学（type ADVANCED）。学习为会话式：进入 LEARNING 状态后**每 10 秒注入 10 潜能**，实际学习上限 = min(经验共享上限, 老师等级)。升级必然成功、无随机。
 
-- **加基础技能**：skills.json + 老师 NPC 的 `skills` 映射。
+- **加基础技能**：skills.json + 老师 NPC 的 `skills` 映射。**武学总谱（流派/段位/老师/秘籍来源）见 [martial_arts_curriculum.md](../design/martial_arts_curriculum.md)**——新增任何武学前先对谱，避免破坏段位覆盖设计。
 - **加进阶武学（完整链路）**：① skills.json（type ADVANCED + bonuses + requirements.item=残页）；② items.json 加残页（usable + effects.learnSkill）；③ 来源副本 rewards.items 掉落；④ `ancient_scroll_keeper`（灰袍老者）skills 加传授上限 120。未参悟残页时 LearnSkill 被拒。
+- **宗师亲传机制零代码**：LearnSkill 原生支持副本 NPC 教学（defeat 模式 Boss 败而不死留在房内，teachSkills 配高上限即可，参考宋缺教天刀八诀 320）。
 - **注意**：经验曲线因子与潜能档位是全局常量（`model/skill_progression.go`），改动即影响所有技能成长，必须先过 formulas.md §3。
 
 ## 7. 物品与背包

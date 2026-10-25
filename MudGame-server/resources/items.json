@@ -353,5 +353,22 @@
     "effects": {
       "recoverHp": 60
     }
+  },
+  "cihang_page": {
+    "name": "慈航剑典残页",
+    "description": "录有慈航剑典片段的残页，随江底沉箱漂了不知多少年。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "source": "洛水风浪",
+    "usable": true,
+    "effects": {
+      "learnSkill": "cihang_jiandian"
+    }
   }
 }

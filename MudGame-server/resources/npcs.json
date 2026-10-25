@@ -286,7 +286,8 @@
       "basic_parry": 300,
       "basic_blade": 220,
       "basic_sword": 220,
-      "basic_qinggong": 180
+      "basic_qinggong": 180,
+      "basic_mace": 160
     },
     "attributes": {
       "level": 20,
@@ -425,7 +426,10 @@
     "skills": {
       "basic_blade": 260,
       "basic_parry": 240,
-      "basic_qinggong": 160
+      "basic_qinggong": 160,
+      "basic_spear": 180,
+      "thunder_sword": 200,
+      "bloody_blade": 200
     },
     "attributes": {
       "level": 20,
@@ -755,7 +759,8 @@
       }
     },
     "skills": {
-      "basic_hidden_weapon": 240
+      "basic_hidden_weapon": 240,
+      "basic_whip": 150
     }
   },
   "black_market_broker": {
@@ -2985,7 +2990,8 @@
     "skills": {
       "csj_changshengjue": 120,
       "jyg_zhanshentu_dao": 120,
-      "tiandao_blade": 120
+      "tiandao_blade": 120,
+      "cihang_jiandian": 120
     },
     "attributes": {
       "level": 30,
@@ -4057,6 +4063,9 @@
       "attack": -12,
       "hitRate": -18,
       "defense": -6
+    },
+    "skills": {
+      "tiandao_blade": 320
     }
   },
   "salt_hall_master": {
@@ -4069,7 +4078,8 @@
     "dialogueId": "dlg_salt_hall",
     "skills": {
       "basic_staff": 240,
-      "basic_parry": 180
+      "basic_parry": 180,
+      "basic_hook": 160
     },
     "attributes": {
       "level": 18,

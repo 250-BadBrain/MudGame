@@ -10,6 +10,7 @@
 - [黄易世界格局设计](design/world_design_huangyi.md)
 - [玩家与 NPC 属性系统设计](design/attribute_system_design.md)（已实施，背景依据）
 - [技能学习成长设计](design/skill_learning_progression_design.md)（流程规则）
+- [武学谱系设计](design/martial_arts_curriculum.md)（流派·段位·传承：全部技能/老师/秘籍总谱）
 - [属性与战斗公式文档](design/formulas.md)（数值公式唯一权威来源，先改文档再改代码）
 - [收益与经济设计](design/economy_design.md)（资源来源/消耗/死亡规则）
 
