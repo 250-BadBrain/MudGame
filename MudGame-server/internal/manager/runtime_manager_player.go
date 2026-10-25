@@ -54,6 +54,7 @@ func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{},
 		"fame":               eff.Fame, "notoriety": eff.Notoriety, "authority": eff.Authority, "credit": eff.Credit,
 		"base": a.Base, "growth": a.Growth, "resources": a.Resources,
 		"derived": a.Derived, "social": a.Social, "resistances": a.Resistances,
+		"titles":  getPlayerTitles(p),
 		// 虚弱剩余秒数（0 = 无虚弱），前端据此展示虚弱状态
 		"weakRemainingSeconds": p.WeakRemainingSeconds(time.Now().Unix()),
 	}, nil
