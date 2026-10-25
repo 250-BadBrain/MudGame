@@ -730,5 +730,22 @@
       "attack": 12
     },
     "source": "方夜羽复仇"
+  },
+  "fenshui_ci": {
+    "name": "分水刺",
+    "description": "水战专用的三棱分水刺，破浪如分水——怒蛟帮水战的看家家伙。",
+    "type": "equipment",
+    "subtype": "hidden_weapon",
+    "stackable": false,
+    "sellable": true,
+    "value": 2000,
+    "rarity": 3,
+    "unit": "对",
+    "equipmentSlot": "HIDDEN_WEAPON",
+    "effects": {
+      "attack": 9,
+      "critRate": 2
+    },
+    "source": "怒蛟水战"
   }
 }

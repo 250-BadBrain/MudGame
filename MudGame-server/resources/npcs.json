@@ -8347,5 +8347,278 @@
       "hitRate": -18,
       "defense": -10
     }
+  },
+  "hy2_scout": {
+    "name": "怒蛟哨船头",
+    "title": "江面眼线",
+    "description": "怒蛟帮哨船的老船头，在江上漂了半辈子——他一声锣，半个怒蛟帮都会醒。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_hy2_scout",
+    "attributes": {
+      "level": 16,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 15,
+        "agility": 13,
+        "perception": 12,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 150,
+        "maxHp": 150,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 13,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 60,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 54,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "hy2_yuan_sailor": {
+    "name": "元军水手",
+    "title": "水师桨手",
+    "description": "元军水师的桨手，赤着上身肌肉虬结，跳帮接舷的功夫是从浪里泡出来的。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 34,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 35,
+        "constitution": 33,
+        "agility": 28,
+        "perception": 17,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 480,
+        "maxHp": 480,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 71,
+        "defense": 33,
+        "hitRate": 146,
+        "dodge": 106,
+        "parry": 114,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 100,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "hy2_yuan_captain": {
+    "name": "水师百户",
+    "title": "接舷督战",
+    "description": "元军水师百户，督战队就站在他身后——他的刀先砍自己人，再砍敌人。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 36,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 37,
+        "constitution": 35,
+        "agility": 29,
+        "perception": 18,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 510,
+        "maxHp": 510,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 75,
+        "defense": 35,
+        "hitRate": 150,
+        "dodge": 106,
+        "parry": 116,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 102,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "hy2_chilaowen": {
+    "name": "赤老温",
+    "title": "元军水师万户",
+    "description": "元军水师万户赤老温，楼船大纛下的老人——他打过的水战比怒蛟帮帮众见过的江还多。",
+    "faction": "mongol_khan",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 46,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 50,
+        "constitution": 47,
+        "agility": 42,
+        "perception": 28,
+        "willpower": 26,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 940,
+        "maxHp": 940,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 72,
+        "defense": 36,
+        "hitRate": 154,
+        "dodge": 124,
+        "parry": 120,
+        "critRate": 13,
+        "attackSpeed": 4,
+        "initiative": 118,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "chenfei_suojiang",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
   }
 }

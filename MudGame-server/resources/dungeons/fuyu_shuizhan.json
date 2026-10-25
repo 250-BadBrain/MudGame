@@ -1,0 +1,156 @@
+{
+  "id": "fuyu_shuizhan",
+  "name": "怒蛟水战",
+  "description": "方夜羽引元军水师入江，楼船直逼怒蛟帮总舵。你随哨船老船头夜战江面：接舷、凿船、沉船锁江——水里的仗，要用水的打法。",
+  "order": 22,
+  "chainId": "fuyu_fan_yun",
+  "chainName": "覆雨翻云",
+  "chapter": 5,
+  "spawnRoomId": "hy2_00",
+  "puzzleInitialStates": {
+    "sunken": "afloat",
+    "briefing_hy2": "new"
+  },
+  "puzzleActions": {
+    "listen_scout": {
+      "label": "听哨船头讲水情",
+      "puzzleId": "briefing_hy2",
+      "rooms": [
+        "hy2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "hy2_scout",
+      "message": "老船头把江面的水情讲了个透。",
+      "repeatMessage": "老船头的锣已经敲哑了。"
+    },
+    "sink_ships": {
+      "label": "凿沉锁江船",
+      "puzzleId": "sunken",
+      "rooms": [
+        "hy2_02"
+      ],
+      "fromStates": [
+        "afloat"
+      ],
+      "nextState": "locked",
+      "setFlags": {
+        "chenfei_suojiang": true
+      },
+      "message": "你凿穿了封江的旧船，反手把它们拖进江口最窄处——楼船进退不得，江面成了瓮。赤老温的令旗挥得再急，也调不回一条困住的楼船。",
+      "repeatMessage": "沉船锁着江口，江水打着旋。"
+    }
+  },
+  "rooms": {
+    "hy2_00": {
+      "name": "怒蛟哨船",
+      "description": "哨船藏在礁石影里，江面上元军楼船的灯火连成一条火线。老船头的锣悬在手边。",
+      "exits": {
+        "north": "hy2_01"
+      },
+      "npcs": [
+        "hy2_scout"
+      ],
+      "actions": [
+        "listen_scout"
+      ]
+    },
+    "hy2_01": {
+      "name": "接舷江面",
+      "description": "元军的划子靠上帮舵水门，接舷战在浪头之间展开——落水的人连喊都来不及。",
+      "exits": {
+        "south": "hy2_00",
+        "north": "hy2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "hy2_yuan_sailor"
+          ],
+          "message": "元军水手跳帮如潮，退不得。"
+        }
+      },
+      "npcs": [
+        "hy2_yuan_sailor",
+        "hy2_yuan_sailor"
+      ]
+    },
+    "hy2_02": {
+      "name": "沉船锁口",
+      "description": "江口最窄处泊着两条封江旧船——凿沉它们，堵住楼船的进路。百户的督战队就守在船边。",
+      "exits": {
+        "south": "hy2_01",
+        "north": "hy2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "hy2_yuan_captain"
+          ],
+          "message": "督战队死守江口，凿船的斧子抡不开。"
+        }
+      },
+      "npcs": [
+        "hy2_yuan_captain",
+        "hy2_yuan_captain"
+      ],
+      "actions": [
+        "sink_ships"
+      ]
+    },
+    "hy2_03": {
+      "name": "楼船大纛",
+      "description": "赤老温的楼船在火光里进退失据，大纛歪了。他立在船头怒吼——困兽犹斗，何况是打了一辈子水战的老将。",
+      "exits": {
+        "south": "hy2_02"
+      },
+      "npcs": [
+        "hy2_chilaowen"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_sailors",
+      "type": "kill",
+      "targetId": "hy2_yuan_sailor",
+      "required": 2,
+      "weight": 20,
+      "description": "击退接舷元军水手"
+    },
+    {
+      "id": "kill_captains",
+      "type": "kill",
+      "targetId": "hy2_yuan_captain",
+      "required": 2,
+      "weight": 20,
+      "description": "破督战队百户"
+    },
+    {
+      "id": "sink_ships",
+      "type": "puzzle",
+      "targetId": "sunken:locked",
+      "required": 1,
+      "weight": 15,
+      "description": "凿沉锁江船困住楼船"
+    },
+    {
+      "id": "repel_chi",
+      "type": "kill",
+      "targetId": "hy2_chilaowen",
+      "required": 1,
+      "weight": 45,
+      "description": "困兽之斗挫赤老温"
+    }
+  ],
+  "rewards": {
+    "experience": 1720,
+    "potential": 900,
+    "money": 580,
+    "items": {
+      "fenshui_ci": 1
+    }
+  }
+}
