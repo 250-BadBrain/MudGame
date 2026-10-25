@@ -4721,5 +4721,71 @@
         "seal": 0
       }
     }
+  },
+  "herbalist_sun": {
+    "name": "孙回春",
+    "title": "回春堂坐堂",
+    "description": "回春堂的坐堂大夫，三缕长须，搭脉时眼观鼻鼻观心。嘴上说医者仁心，手底下却从不肯让一个铜板的价。",
+    "faction": "heluo_merchant_guild",
+    "role": "shopkeeper",
+    "importance": "local",
+    "dialogueId": "dlg_herbalist_sun",
+    "attributes": {
+      "level": 9,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 10,
+        "constitution": 11,
+        "agility": 11,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 90,
+        "maxHp": 90,
+        "mp": 45,
+        "trainedMaxMp": 45,
+        "maxMp": 45,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 9,
+        "defense": 9,
+        "hitRate": 62,
+        "dodge": 46,
+        "parry": 42,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 48,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
   }
 }

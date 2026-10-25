@@ -191,7 +191,7 @@
       "exits": {
         "east": "ly_00",
         "north": "ly_old_alley",
-        "south": "ly_inn",
+        "south": "ly_herbal_hall",
         "west": "ly_west_gate"
       }
     },
@@ -237,7 +237,8 @@
         "north": "ly_00",
         "south": "ly_outskirts",
         "west": "ly_inn",
-        "east": "ly_nan_market"
+        "east": "ly_nan_market",
+        "north_west": "ly_herbal_hall"
       }
     },
     "ly_outskirts": {
@@ -486,6 +487,23 @@
       ],
       "exits": {
         "east": "tg_taolin_station"
+      }
+    },
+    "ly_herbal_hall": {
+      "name": "回春堂",
+      "description": "临街的三间门面，百子柜顶天立地，药香混着当归与艾灰的气味。坐堂的孙大夫一副悬壶济世的做派，可算账时一文钱都要掰成两半。",
+      "area": "西城",
+      "tags": [
+        "shop",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "herbalist_sun"
+      ],
+      "exits": {
+        "west": "ly_west_market",
+        "east": "ly_south_gate"
       }
     }
   }

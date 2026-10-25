@@ -311,5 +311,68 @@
         }
       }
     ]
+  },
+  "dlg_herbalist_sun": {
+    "id": "dlg_herbalist_sun",
+    "npcId": "herbalist_sun",
+    "title": "回春堂问诊",
+    "opening": "孙回春眼皮不抬：\"看病？抓药？还是……卖草？滩涂上那点止血草，老夫这里一贯收。\"",
+    "options": [
+      {
+        "id": "brew_with_herbs",
+        "text": "替我炼一炉金创药（止血草×3 + 干粮×1）",
+        "response": "孙回春拨了拨算盘：\"三株草管药性，一袋粮抵柴火。炉上坐一个时辰，自己来取。\"——金创药到手。",
+        "requires": {
+          "items": {
+            "herb": 3,
+            "dry_ration": 1
+          }
+        },
+        "takeItems": {
+          "herb": 3,
+          "dry_ration": 1
+        },
+        "giveItems": {
+          "simple_medicine": 1
+        }
+      },
+      {
+        "id": "brew_with_rations",
+        "text": "用干粮抵全部材料（干粮×4）",
+        "response": "孙回春皱眉看了看你抱来的干粮：\"全拿粮凑……药性差些，胜在管饱。\"——凑合着一炉。",
+        "requires": {
+          "items": {
+            "dry_ration": 4
+          }
+        },
+        "takeItems": {
+          "dry_ration": 4
+        },
+        "giveItems": {
+          "simple_medicine": 1
+        }
+      },
+      {
+        "id": "sell_herbs",
+        "text": "出手止血草（×2 换干粮×1）",
+        "response": "孙回春捻起止血草对着光看：\"成色尚可。老夫不赊账——两株草换一袋粮，爱换不换。\"",
+        "requires": {
+          "items": {
+            "herb": 2
+          }
+        },
+        "takeItems": {
+          "herb": 2
+        },
+        "giveItems": {
+          "dry_ration": 1
+        }
+      },
+      {
+        "id": "ask_herbs",
+        "text": "哪里能采到止血草？",
+        "response": "\"南市过了漕运码头，芦苇滩里长得漫山遍野——也有些不长眼的东西。胆子小就在老夫这儿抓现成的，胆子大就自己去薅。\""
+      }
+    ]
   }
 }
