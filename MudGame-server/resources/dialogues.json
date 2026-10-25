@@ -608,5 +608,12 @@
     "title": "别院问讯",
     "opening": "知客僧合十：\"仙子闭关参悟和氏璧的启示，不见客。施主若有江湖急难，老衲倒可代传一句话。\"",
     "options": []
+  },
+  "dlg_ld_courier": {
+    "id": "dlg_ld_courier",
+    "npcId": "ld_courier_chief",
+    "title": "粮道告急",
+    "opening": "郑镖头苦笑：\"瓦岗大军走了，偏师留下了。粮车十辆烧了六辆——这趟粮要是进不了城，城里就要易子而食。\"",
+    "options": []
   }
 }

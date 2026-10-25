@@ -633,5 +633,21 @@
     "effects": {
       "learnSkill": "taiyi_jianfa"
     }
+  },
+  "zhanma_dao": {
+    "name": "斩马刀",
+    "description": "瓦岗阵前斩马用的厚背长刀，刀身上一道深豁——那是砍在铁骑甲上的印记。",
+    "type": "equipment",
+    "subtype": "blade",
+    "stackable": false,
+    "sellable": true,
+    "value": 1900,
+    "rarity": 3,
+    "unit": "把",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11
+    },
+    "source": "洛阳粮道"
   }
 }

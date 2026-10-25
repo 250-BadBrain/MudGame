@@ -1,0 +1,144 @@
+{
+  "id": "datang_liangdao",
+  "name": "洛阳粮道",
+  "description": "瓦岗撤围，偏师截粮。东都的粮道就是命脉——你随郑镖头押车闯山口：断桥拒马队，箭雨里见一见那位瓦岗神箭。",
+  "order": 18,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 8,
+  "spawnRoomId": "ld_00",
+  "puzzleInitialStates": {
+    "bridge": "intact",
+    "briefing_ld": "new"
+  },
+  "puzzleActions": {
+    "listen_courier": {
+      "label": "听郑镖头讲粮道",
+      "puzzleId": "briefing_ld",
+      "rooms": [
+        "ld_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "ld_courier_chief",
+      "message": "郑镖头把粮道的凶险讲了一遍。",
+      "repeatMessage": "郑镖头只顾着催车夫快些。"
+    },
+    "break_bridge": {
+      "label": "拆断桥梁",
+      "puzzleId": "bridge",
+      "rooms": [
+        "ld_02"
+      ],
+      "fromStates": [
+        "intact"
+      ],
+      "nextState": "broken",
+      "setFlags": {
+        "duanqiao_juodi": true
+      },
+      "message": "你撬断桥索，木桥轰然塌进涧底——马队被隔在对岸嘶鸣。王伯当的箭再准，也罩不住断了桥的战场。",
+      "repeatMessage": "断桥残木还在涧底冒烟。"
+    }
+  },
+  "rooms": {
+    "ld_00": {
+      "name": "粮道官驿",
+      "description": "官驿前停着残破的粮车队，烧焦的车辕还冒着烟。郑镖头一脸苦相地迎上来。",
+      "exits": {
+        "north": "ld_01"
+      },
+      "npcs": [
+        "ld_courier_chief"
+      ],
+      "actions": [
+        "listen_courier"
+      ]
+    },
+    "ld_01": {
+      "name": "山口隘道",
+      "description": "山口两壁陡峭，官道窄得只容两车并行——绝佳的伏击地形，游骑的马蹄声在山壁间回荡。",
+      "exits": {
+        "south": "ld_00",
+        "north": "ld_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "ld_wagang_rider"
+          ],
+          "message": "山口游骑来回冲杀，车队过不去。"
+        }
+      },
+      "npcs": [
+        "ld_wagang_rider",
+        "ld_wagang_rider"
+      ]
+    },
+    "ld_02": {
+      "name": "断桥涧",
+      "description": "官道被一道深涧截断，唯一的木桥通向对岸——桥那头，神箭手的箭已在弦上。",
+      "exits": {
+        "south": "ld_01",
+        "north": "ld_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "bridge": "broken"
+          },
+          "message": "桥未断，马队随时会从对岸冲过来——先拆桥！"
+        }
+      },
+      "actions": [
+        "break_bridge"
+      ]
+    },
+    "ld_03": {
+      "name": "北岸箭阵",
+      "description": "王伯当立马在北岸高坡，长弓如满月——他看着断了桥的涧底，忽然收了箭，拔出了腰刀。",
+      "exits": {
+        "south": "ld_02"
+      },
+      "npcs": [
+        "ld_wang_bodang"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_riders",
+      "type": "kill",
+      "targetId": "ld_wagang_rider",
+      "required": 2,
+      "weight": 20,
+      "description": "击退山口游骑"
+    },
+    {
+      "id": "break_bridge",
+      "type": "puzzle",
+      "targetId": "bridge:broken",
+      "required": 1,
+      "weight": 15,
+      "description": "拆断桥梁拒马队"
+    },
+    {
+      "id": "repel_wang",
+      "type": "kill",
+      "targetId": "ld_wang_bodang",
+      "required": 1,
+      "weight": 65,
+      "description": "箭雨中挫瓦岗神箭之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 1480,
+    "potential": 820,
+    "money": 500,
+    "items": {
+      "zhanma_dao": 1
+    }
+  }
+}
