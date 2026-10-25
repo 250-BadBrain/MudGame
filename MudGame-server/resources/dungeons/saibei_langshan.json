@@ -1,0 +1,158 @@
+{
+  "id": "saibei_langshan",
+  "name": "狼山口",
+  "description": "白狼主封了狼山口，马邑成了一座死城。你带着边军百夫长的嘱托闯山口：破狼群、拔狼旗，在白狼王帐前讨一个商路的公道——江湖人的刀，朝廷管不着。",
+  "order": 29,
+  "chainId": "bianhuang_legend",
+  "chainName": "边荒传说",
+  "chapter": 4,
+  "spawnRoomId": "sb2_00",
+  "puzzleInitialStates": {
+    "wolfflag": "flying",
+    "briefing_sb2": "new"
+  },
+  "puzzleActions": {
+    "listen_centurion": {
+      "label": "听百夫长托付",
+      "puzzleId": "briefing_sb2",
+      "rooms": [
+        "sb2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "sb_centurion",
+      "message": "百夫长把狼山口的敌情与苦衷讲了个透。",
+      "repeatMessage": "百夫长按刀望着山口，不再多言。"
+    },
+    "pull_wolfflag": {
+      "label": "拔狼王旗",
+      "puzzleId": "wolfflag",
+      "rooms": [
+        "sb2_03"
+      ],
+      "fromStates": [
+        "flying"
+      ],
+      "nextState": "pulled",
+      "setFlags": {
+        "langwang_qidao": true
+      },
+      "message": "你纵身拔起狼王旗——山口里此起彼伏的狼嚎戛然而止。旗倒了，白狼主的手下第一次露出了猎物般的慌乱。",
+      "repeatMessage": "狼王旗已在你手中。"
+    }
+  },
+  "rooms": {
+    "sb2_00": {
+      "name": "山口戍堡",
+      "description": "狼山口外的戍堡残破不堪，百夫长的兵只剩一半。他把最后的箭囊推到你面前。",
+      "exits": {
+        "north": "sb2_01"
+      },
+      "npcs": [
+        "sb_centurion"
+      ],
+      "actions": [
+        "listen_centurion"
+      ]
+    },
+    "sb2_01": {
+      "name": "狼口窄道",
+      "description": "窄道两侧的石壁挂满白骨，白狼主的哨探在骨堆间移动——他们守的不是山口，是名声。",
+      "exits": {
+        "south": "sb2_00",
+        "north": "sb2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "sb2_wolf_guard"
+          ],
+          "message": "狼口窄道的白狼死士寸步不让。"
+        }
+      },
+      "npcs": [
+        "sb2_wolf_guard",
+        "sb2_wolf_guard"
+      ]
+    },
+    "sb2_02": {
+      "name": "白狼王帐",
+      "description": "白狼王帐前篝火通明，狼牙旗在帐顶猎猎作响——旗杆就插在王帐之前。",
+      "exits": {
+        "south": "sb2_01",
+        "north": "sb2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "wolfflag": "pulled"
+          },
+          "message": "狼旗未拔，帐中伏兵尽出。"
+        }
+      },
+      "npcs": [
+        "sb2_wolf_champion"
+      ]
+    },
+    "sb2_03": {
+      "name": "白狼王座",
+      "description": "白狼主盘坐在狼皮王座上，狼牙巨锤拄在膝前——他见过太多来抢旗的人，你是第一个走过窄道站到他面前的。",
+      "exits": {
+        "south": "sb2_02"
+      },
+      "npcs": [
+        "sb2_white_wolf"
+      ],
+      "actions": [
+        "pull_wolfflag"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_guards",
+      "type": "kill",
+      "targetId": "sb2_wolf_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "破狼口死士"
+    },
+    {
+      "id": "kill_champion",
+      "type": "kill",
+      "targetId": "sb2_wolf_champion",
+      "required": 1,
+      "weight": 20,
+      "description": "破王帐狼卫长"
+    },
+    {
+      "id": "pull_wolfflag",
+      "type": "puzzle",
+      "targetId": "wolfflag:pulled",
+      "required": 1,
+      "weight": 15,
+      "description": "拔狼王旗乱其军心"
+    },
+    {
+      "id": "repel_whitewolf",
+      "type": "kill",
+      "targetId": "sb2_white_wolf",
+      "required": 1,
+      "weight": 45,
+      "description": "王帐前挫白狼主"
+    }
+  ],
+  "rewards": {
+    "experience": 2080,
+    "potential": 1020,
+    "money": 700,
+    "items": {
+      "langya_chui": 1
+    },
+    "flags": {
+      "langshan_case_done": true
+    }
+  }
+}

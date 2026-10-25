@@ -1,0 +1,97 @@
+{
+  "id": "saibei",
+  "name": "塞北",
+  "description": "长城以北，风像刀，草像浪。马邑的边军、互市的胡商、草原深处的马贼，在烽燧的狼烟下各自讨生活——塞外的规矩只有一条：活下来。",
+  "order": 5,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "sb_mayi",
+  "rooms": {
+    "sb_mayi": {
+      "name": "马邑城",
+      "description": "马邑城是塞外第一座边城，城墙被风沙磨了百年。城门内外的胡汉口音混成一片。",
+      "area": "塞北",
+      "tags": [
+        "gate",
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "east": "sb_market",
+        "north": "sb_grassland"
+      }
+    },
+    "sb_market": {
+      "name": "边关马市",
+      "description": "边关马市是官府默许的互市之地——南边的茶盐绢帛换北边的骏马皮货，价錢看谁的马刀更亮。",
+      "area": "塞北",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "sb_horse_trader"
+      ],
+      "exits": {
+        "west": "sb_mayi",
+        "north": "sb_beacon"
+      }
+    },
+    "sb_beacon": {
+      "name": "烽燧台",
+      "description": "烽燧台上的柴堆日夜有人看守——狼烟一起，九边皆惊。戍卒们说，最近草原上的狼嚎，比烽火多。",
+      "area": "塞北",
+      "tags": [
+        "government",
+        "quest",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "sb_centurion",
+        "sb_beacon_guard"
+      ],
+      "exits": {
+        "south": "sb_market",
+        "north": "sb_wolf_pass"
+      }
+    },
+    "sb_grassland": {
+      "name": "塞外草原",
+      "description": "草原一直铺到天边，风一过，草浪就往一个方向倒——那是风的方向，也是狼群走的方向。",
+      "area": "塞北",
+      "tags": [
+        "wild",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "exits": {
+        "south": "sb_mayi",
+        "west": "sb_wolf_pass"
+      }
+    },
+    "sb_wolf_pass": {
+      "name": "狼山口",
+      "description": "狼山口的石壁上挂满了白骨与破旗——白狼主的地界，从这儿开始。",
+      "area": "塞北",
+      "tags": [
+        "wild",
+        "unsafe",
+        "quest"
+      ],
+      "safeZone": false,
+      "npcs": [
+        "sb_wolf_scout"
+      ],
+      "exits": {
+        "east": "sb_grassland",
+        "south": "sb_beacon"
+      }
+    }
+  }
+}

@@ -423,3 +423,70 @@ func TestZhandaoFullFlow(t *testing.T) {
 		t.Fatalf("expected rewards, got tili=%d flags=%v", p.Backpack["tangmen_tili"], p.Flags)
 	}
 }
+
+// 狼山口全流程：死士/狼卫长 → 拔狼王旗破招 → 挫白狼主 → 巨锤+任务旗标结算
+func TestLangshanFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "saibei_langshan")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_centurion"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	pass := room("sb2_01")
+	moveDungeonTestPlayer(t, r, playerID, pass)
+	defeatAll(pass, "sb2_wolf_guard", 2)
+	tent := room("sb2_02")
+	moveDungeonTestPlayer(t, r, playerID, tent)
+	defeatAll(tent, "sb2_wolf_champion", 1)
+	flagRoom := room("sb2_03")
+	moveDungeonTestPlayer(t, r, playerID, flagRoom)
+	if _, err := r.DoRoomAction(playerID, "pull_wolfflag"); err != nil {
+		t.Fatalf("pull wolfflag failed: %v", err)
+	}
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, flagRoom, "sb2_white_wolf")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage white wolf failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected flag pull to weaken white wolf")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat white wolf failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d", inst.Progress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["langya_chui"] != 1 || !p.Flags["dungeon_cleared_saibei_langshan"] || !p.Flags["langshan_case_done"] {
+		t.Fatalf("expected rewards, got chui=%d flags=%v", p.Backpack["langya_chui"], p.Flags)
+	}
+}

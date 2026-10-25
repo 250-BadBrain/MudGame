@@ -842,5 +842,21 @@
       "critRate": 2
     },
     "source": "蜀道栈桥"
+  },
+  "langya_chui": {
+    "name": "狼牙巨锤",
+    "description": "白狼主的狼牙巨锤，锤头拔自狼王颅骨——塞外的规矩：谁的锤重，谁说话。",
+    "type": "equipment",
+    "subtype": "mace",
+    "stackable": false,
+    "sellable": true,
+    "value": 2600,
+    "rarity": 4,
+    "unit": "柄",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 13
+    },
+    "source": "狼山口"
   }
 }

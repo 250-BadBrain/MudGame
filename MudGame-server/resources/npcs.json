@@ -10256,5 +10256,478 @@
       "hitRate": -16,
       "defense": -8
     }
+  },
+  "sb_centurion": {
+    "name": "李百夫长",
+    "title": "边军百夫长",
+    "description": "守了烽燧十五年的百夫长，脸被风沙刻成了岩石。他的兵册上，近一个月少了十一个名字。",
+    "faction": "luoyang_military",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_sb_centurion",
+    "attributes": {
+      "level": 22,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 19,
+        "agility": 15,
+        "perception": 13,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 210,
+        "maxHp": 210,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 24,
+        "defense": 17,
+        "hitRate": 100,
+        "dodge": 66,
+        "parry": 76,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 60,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sb_horse_trader": {
+    "name": "回鹘马商",
+    "title": "马市胡商",
+    "description": "回鹘来的马商，一口流利的汉话夹着价钱——他的马群里混着几匹认得狼山口路的快马。",
+    "faction": "neutral",
+    "role": "shopkeeper",
+    "importance": "local",
+    "shopItems": [
+      "simple_medicine",
+      "dry_ration",
+      "darts"
+    ],
+    "attributes": {
+      "level": 13,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 125,
+        "maxHp": 125,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 13,
+        "defense": 12,
+        "hitRate": 80,
+        "dodge": 58,
+        "parry": 55,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 58,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sb_beacon_guard": {
+    "name": "烽燧戍卒",
+    "title": "守燧卒",
+    "description": "守燧的年轻戍卒，手心全是冻疮。他说他不怕狼，怕的是狼烟点起来的时候。",
+    "faction": "luoyang_military",
+    "role": "guard",
+    "importance": "common",
+    "dialogueId": "dlg_sb_guard",
+    "attributes": {
+      "level": 12,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 12,
+        "perception": 11,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 115,
+        "maxHp": 115,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 13,
+        "defense": 11,
+        "hitRate": 78,
+        "dodge": 54,
+        "parry": 60,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sb_wolf_scout": {
+    "name": "白狼哨探",
+    "title": "狼山眼线",
+    "description": "白狼主的哨探，白狼皮披风在草原上就是一封战书。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "dialogueId": "",
+    "attributes": {
+      "level": 38,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 36,
+        "constitution": 34,
+        "agility": 30,
+        "perception": 17,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 500,
+        "maxHp": 500,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 74,
+        "defense": 36,
+        "hitRate": 150,
+        "dodge": 110,
+        "parry": 116,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 100,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sb2_wolf_guard": {
+    "name": "白狼死士",
+    "title": "狼口守卫",
+    "description": "白狼主豢养的死士，白衣白骨——他们把守山口当作祭狼的仪式。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 39,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 39,
+        "constitution": 37,
+        "agility": 31,
+        "perception": 18,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 530,
+        "maxHp": 530,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 79,
+        "defense": 37,
+        "hitRate": 154,
+        "dodge": 110,
+        "parry": 118,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 100,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sb2_wolf_champion": {
+    "name": "狼卫长",
+    "title": "王帐亲卫",
+    "description": "白狼主的狼卫长，狼牙棒抡起来带风——他是白狼主从死人堆里刨出来的兄弟。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 41,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 41,
+        "constitution": 39,
+        "agility": 32,
+        "perception": 18,
+        "willpower": 17,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 560,
+        "maxHp": 560,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 83,
+        "defense": 39,
+        "hitRate": 158,
+        "dodge": 112,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 104,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sb2_white_wolf": {
+    "name": "白狼主",
+    "title": "草原马贼王",
+    "description": "白狼主，草原上最老的马贼王——他的白发和白狼皮一样旧，可他的锤比山口的石头还硬。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 54,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 58,
+        "constitution": 55,
+        "agility": 46,
+        "perception": 28,
+        "willpower": 27,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1060,
+        "maxHp": 1060,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 84,
+        "defense": 42,
+        "hitRate": 168,
+        "dodge": 130,
+        "parry": 128,
+        "critRate": 13,
+        "attackSpeed": 4,
+        "initiative": 122,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "langwang_qidao",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
   }
 }

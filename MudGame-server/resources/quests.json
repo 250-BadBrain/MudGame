@@ -172,5 +172,32 @@
       }
     },
     "repeatable": false
+  },
+  "bianguan_fenghuo": {
+    "id": "bianguan_fenghuo",
+    "name": "边关烽火",
+    "description": "白狼主封了狼山口，马邑告急而边军不得擅动。江湖人的刀朝廷管不着——助百夫长破狼山口，重开商路。",
+    "giverNpcId": "sb_centurion",
+    "turnInNpcId": "sb_centurion",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "langshan_case_done",
+        "description": "在狼山口挫败白狼主。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 170,
+      "potential": 130,
+      "money": 240,
+      "flags": {
+        "bianguan_fenghuo_completed": true
+      },
+      "reputations": {
+        "luoyang_military": 15
+      }
+    },
+    "repeatable": false
   }
 }

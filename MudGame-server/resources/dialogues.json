@@ -706,5 +706,19 @@
     "title": "栈道余患",
     "opening": "驿丞指着栈道深处：\"猿叟是死了，可他的徒子徒孙还在栈道上收'过路钱'。唐家坳的药箱被劫了三回——唐门发话了：谁替他们把场子找回来，蜀地任行。\"",
     "options": []
+  },
+  "dlg_sb_centurion": {
+    "id": "dlg_sb_centurion",
+    "npcId": "sb_centurion",
+    "title": "烽火之约",
+    "opening": "百夫长把兵册往案上一摔：\"白狼主封了狼山口，商路断了，戍卒天天折——边军的告急文书，出不了马邑。\"",
+    "options": []
+  },
+  "dlg_sb_guard": {
+    "id": "dlg_sb_guard",
+    "npcId": "sb_beacon_guard",
+    "title": "戍卒闲话",
+    "opening": "年轻戍卒搓着手：\"客人从南边来？南边好啊……南边的月亮，应该比这儿的圆。\"",
+    "options": []
   }
 }
