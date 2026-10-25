@@ -1645,11 +1645,12 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			}
 			updatedRoom[roomID] = true
 		case "MEDITATING":
-			effectiveMaxMP := effectiveAttributesForPlayerNoLock(p).MaxMP
+			effTick := effectiveAttributesForPlayerNoLock(p)
+			effectiveMaxMP := effTick.MaxMP
 			if p.Attributes.Resources.MP < p.Attributes.Resources.TrainedMaxMP {
 				beforeMP := p.Attributes.Resources.MP
-				// 打坐回复量与基本内功等级挂钩（见公式文档 1.4）
-				recovery := 15 + p.Skills["basic_neigong"]/2
+				// 打坐回复量与基本内功等级挂钩，秘籍（如混元功）装备后追加恢复（见公式文档 1.4 / 3.3）
+				recovery := 15 + p.Skills["basic_neigong"]/2 + effTick.MeditateRecoveryBonus
 				p.Attributes.Resources.MP += recovery
 				if p.Attributes.Resources.MP > p.Attributes.Resources.TrainedMaxMP {
 					p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP

@@ -258,5 +258,43 @@
         "level": 20
       }
     }
+  },
+  "hunyuan_neigong": {
+    "name": "混元功",
+    "description": "道家正宗养气功法，行功如百川归海，打坐时内力滋生格外绵长。",
+    "rarity": 3,
+    "type": "ADVANCED",
+    "category": "neigong",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 8,
+      "meditate_recovery_per_10_levels": 3
+    },
+    "requirements": {
+      "item": "hunyuan_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 20
+      }
+    }
+  },
+  "tianmo_ce": {
+    "name": "天魔策",
+    "description": "阴癸派至高心法之残篇，真气诡谲凌厉，于杀伐中滋养魔气。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "neigong",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 12,
+      "crit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "tianmo_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 30
+      }
+    }
   }
 }

@@ -20,6 +20,7 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	eff.HitRate = 0
 	eff.Dodge = 0
 	eff.Parry = 0
+	eff.MeditateRecoveryBonus = 0
 	applySkillBonusesNoLock(&eff, p.Skills, p.EquippedSkills)
 	applyEquipmentEffectsNoLock(&eff, p.Equipment)
 	directAttack := eff.Attack
@@ -119,6 +120,8 @@ func applyEquipmentEffectsNoLock(eff *model.EffectiveAttributes, equipment map[s
 
 func applyLeveledBonus(eff *model.EffectiveAttributes, key string, value float64, level int) {
 	switch key {
+	case "meditate_recovery_per_10_levels":
+		eff.MeditateRecoveryBonus += int(value) * (level / 10)
 	case "post_strength_per_10_levels":
 		eff.Strength += int(value) * (level / 10)
 	case "post_constitution_per_10_levels":

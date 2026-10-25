@@ -473,5 +473,19 @@
     "title": "舱中呼救",
     "opening": "被掳船工声音发颤：\"好汉饶命——小人是漕运上的苦力，水匪劫船把我们都锁在这儿！\"",
     "options": []
+  },
+  "dlg_fm_shang": {
+    "id": "dlg_fm_shang",
+    "npcId": "fm_shang_xiuxun",
+    "title": "牧场夜警",
+    "opening": "商秀珣按着缰绳：\"阴癸派的人今夜必来——他们要的是牧场的马和地脉。朋友既是来援手的，请随我来。\"",
+    "options": []
+  },
+  "dlg_fm_hand": {
+    "id": "dlg_fm_hand",
+    "npcId": "fm_ranch_hand",
+    "title": "马师求援",
+    "opening": "老马师抖着嘴唇：\"天马厩的马全惊了！没有哨声压不住，可刺客就在马厩外转悠——壮士行行好……\"",
+    "options": []
   }
 }

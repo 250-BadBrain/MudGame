@@ -2991,7 +2991,9 @@
       "csj_changshengjue": 120,
       "jyg_zhanshentu_dao": 120,
       "tiandao_blade": 120,
-      "cihang_jiandian": 120
+      "cihang_jiandian": 120,
+      "hunyuan_neigong": 120,
+      "tianmo_ce": 120
     },
     "attributes": {
       "level": 30,
@@ -4066,7 +4068,8 @@
     },
     "skills": {
       "tiandao_blade": 320
-    }
+    },
+    "dialogueId": ""
   },
   "salt_hall_master": {
     "name": "雷万钧",
@@ -5181,6 +5184,341 @@
         "critRate": 1,
         "attackSpeed": 4,
         "initiative": 48,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "fm_shang_xiuxun": {
+    "name": "商秀珣",
+    "title": "飞马牧场主",
+    "description": "飞马牧场年轻的主事人，眉目清朗，握缰的手却稳如铁铸。阴癸派夜袭之后，她的声音冷得像牧场凌晨的霜。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_fm_shang",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 14,
+        "agility": 14,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 70,
+        "trainedMaxMp": 70,
+        "maxMp": 70,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 11,
+        "hitRate": 72,
+        "dodge": 55,
+        "parry": 50,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 55,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "fm_yinkui_acolyte": {
+    "name": "阴葵刺客",
+    "title": "魔门夜行",
+    "description": "一身黑衣贴着马厩阴影移动的刺客，袖口绣着一朵小小的葵花。",
+    "faction": "yinkui_sect",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 17,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 19,
+        "agility": 20,
+        "perception": 14,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 250,
+        "maxHp": 250,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 37,
+        "defense": 17,
+        "hitRate": 112,
+        "dodge": 92,
+        "parry": 78,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 78,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "fm_yinkui_slasher": {
+    "name": "阴葵杀手",
+    "title": "魔门行刑",
+    "description": "阴癸派的外堂杀手，双钩淬着幽蓝药汁，招招搏命。",
+    "faction": "yinkui_sect",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 19,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 20,
+        "agility": 21,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 275,
+        "maxHp": 275,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 41,
+        "defense": 19,
+        "hitRate": 116,
+        "dodge": 94,
+        "parry": 84,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 84,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "fm_wanwan": {
+    "name": "婠婠",
+    "title": "阴癸派·白衣",
+    "description": "白衣胜雪的少女赤足立在主宅檐上，笑起来眼睛弯成月牙——南市买素帕的是她，流民营童谣里的白衣娘娘也是她。天魔真气在她指间流转，像在逗一只猫。",
+    "faction": "yinkui_sect",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 30,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 34,
+        "constitution": 32,
+        "agility": 40,
+        "perception": 24,
+        "willpower": 22,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 600,
+        "maxHp": 600,
+        "mp": 160,
+        "trainedMaxMp": 160,
+        "maxMp": 160,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 54,
+        "defense": 26,
+        "hitRate": 132,
+        "dodge": 122,
+        "parry": 96,
+        "critRate": 14,
+        "attackSpeed": 4,
+        "initiative": 120,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "fm_ranch_hand": {
+    "name": "牧场马师",
+    "title": "驯马人",
+    "description": "老马师缩在草料堆后发抖，手里的驯马哨攥得死紧——那是他一辈子的家当。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_fm_hand",
+    "attributes": {
+      "level": 8,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 12,
+        "agility": 11,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 85,
+        "maxHp": 85,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 68,
+        "dodge": 48,
+        "parry": 45,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
         "guardBreak": 0,
         "damageReduction": 0
       },

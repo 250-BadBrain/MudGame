@@ -1,0 +1,213 @@
+{
+  "id": "datang_feima",
+  "name": "飞马牧场",
+  "description": "阴癸派的黑衣人夜袭飞马牧场，目标直指牧场赖以立身的马群。你与牧场主商秀珣分头御敌：稳住天马厩的惊马，再会一会那位赤足立在檐上的白衣少女。",
+  "order": 11,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 5,
+  "spawnRoomId": "fm_00",
+  "puzzleInitialStates": {
+    "horses": "startled",
+    "relic": "untouched",
+    "briefing_fm": "new"
+  },
+  "puzzleActions": {
+    "listen_shang": {
+      "label": "听商秀珣布置防务",
+      "puzzleId": "briefing_fm",
+      "rooms": [
+        "fm_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "fm_shang_xiuxun",
+      "message": "商秀珣说完了阴癸派的来势。",
+      "repeatMessage": "商秀珣已驰向正门，只余背影。"
+    },
+    "listen_hand": {
+      "label": "向马师问明哨令",
+      "puzzleId": "horses",
+      "rooms": [
+        "fm_03"
+      ],
+      "fromStates": [
+        "startled"
+      ],
+      "nextState": "ready",
+      "dialogueNpcId": "fm_ranch_hand",
+      "message": "老马师把安群哨的调子教给了你。",
+      "repeatMessage": "三长两短，你已默记于心。"
+    },
+    "calm_horses": {
+      "label": "吹响安群哨",
+      "puzzleId": "horses",
+      "rooms": [
+        "fm_03"
+      ],
+      "fromStates": [
+        "ready"
+      ],
+      "nextState": "calmed",
+      "message": "三长两短，哨音穿过夜色。狂奔的马群渐渐收住蹄步，围拢到天马厩的护栏之内——牧场立身的根本保住了。",
+      "repeatMessage": "马群安卧，夜色重归平静。"
+    },
+    "retrieve_relic": {
+      "label": "拾取遗落的玉匣",
+      "puzzleId": "relic",
+      "rooms": [
+        "fm_04"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "taken",
+      "message": "婠婠退走时遗下一只白玉小匣，匣中残页魔气森然——正是阴癸派至高心法《天魔策》的残篇。收或不收，只在你一念。",
+      "repeatMessage": "玉匣已被你收起，檐上空空如也。",
+      "giveItems": {
+        "tianmo_page": 1
+      }
+    }
+  },
+  "rooms": {
+    "fm_00": {
+      "name": "牧场大门",
+      "description": "飞马牧场的大门彻夜火把不熄，商秀珣一身劲装立在旗下，身后是严阵以待的牧场帮工。",
+      "exits": {
+        "north": "fm_01"
+      },
+      "npcs": [
+        "fm_shang_xiuxun"
+      ],
+      "actions": [
+        "listen_shang"
+      ]
+    },
+    "fm_01": {
+      "name": "马厩场",
+      "description": "成排的马厩在夜色里延伸出去，草料与马汗的气味混着血腥气——刺客已经摸进来了。",
+      "exits": {
+        "south": "fm_00",
+        "north": "fm_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "fm_yinkui_acolyte"
+          ],
+          "message": "阴葵刺客封住马厩长街，袖中短刃寒光闪烁。"
+        }
+      },
+      "npcs": [
+        "fm_yinkui_acolyte",
+        "fm_yinkui_acolyte"
+      ]
+    },
+    "fm_02": {
+      "name": "桑田阡陌",
+      "description": "牧场外围的桑田阡陌纵横，月光下田埂上人影幢幢——杀手们借着桑树交错掩进。",
+      "exits": {
+        "south": "fm_01",
+        "north": "fm_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "fm_yinkui_slasher"
+          ],
+          "message": "阴葵杀手据守田埂，双钩在月下泛着幽蓝。"
+        }
+      },
+      "npcs": [
+        "fm_yinkui_slasher",
+        "fm_yinkui_slasher"
+      ]
+    },
+    "fm_03": {
+      "name": "天马厩",
+      "description": "牧场最深处的高厩里马嘶连连——名驹们被魔门真气所惊，绕栏狂奔。老马师缩在草料堆后，把驯马哨攥得死紧。",
+      "exits": {
+        "south": "fm_02",
+        "north": "fm_04"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "horses": "calmed"
+          },
+          "message": "惊马未平，主宅方向大门紧闭——先帮马师稳住马群。"
+        }
+      },
+      "npcs": [
+        "fm_ranch_hand"
+      ],
+      "actions": [
+        "listen_hand",
+        "calm_horses"
+      ]
+    },
+    "fm_04": {
+      "name": "主宅庭院",
+      "description": "主宅庭院静得反常。婠婠赤足坐在檐上，白衣在夜风里轻轻摆动，像一只收拢翅膀的蛾。",
+      "exits": {
+        "south": "fm_03"
+      },
+      "npcs": [
+        "fm_wanwan"
+      ],
+      "actions": [
+        "retrieve_relic"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_acolytes",
+      "type": "kill",
+      "targetId": "fm_yinkui_acolyte",
+      "required": 2,
+      "weight": 20,
+      "description": "击退马厩场阴葵刺客"
+    },
+    {
+      "id": "kill_slashers",
+      "type": "kill",
+      "targetId": "fm_yinkui_slasher",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿桑田阴葵杀手"
+    },
+    {
+      "id": "calm_horses",
+      "type": "puzzle",
+      "targetId": "horses:calmed",
+      "required": 1,
+      "weight": 15,
+      "description": "吹响安群哨稳住马群"
+    },
+    {
+      "id": "repel_wanwan",
+      "type": "kill",
+      "targetId": "fm_wanwan",
+      "required": 1,
+      "weight": 45,
+      "description": "逼退阴癸派婠婠"
+    },
+    {
+      "id": "retrieve_relic",
+      "type": "puzzle",
+      "targetId": "relic:taken",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "拾取婠婠遗落的玉匣"
+    }
+  ],
+  "rewards": {
+    "experience": 1060,
+    "potential": 660,
+    "money": 380
+  }
+}

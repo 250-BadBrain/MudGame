@@ -370,5 +370,39 @@
     "effects": {
       "learnSkill": "cihang_jiandian"
     }
+  },
+  "hunyuan_page": {
+    "name": "混元功残页",
+    "description": "录有混元功养气篇的残页，纸墨间隐有松风之意。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 3,
+    "unit": "页",
+    "questItem": true,
+    "source": "天刀试炼",
+    "usable": true,
+    "effects": {
+      "learnSkill": "hunyuan_neigong"
+    }
+  },
+  "tianmo_page": {
+    "name": "天魔策残页",
+    "description": "自婠婠遗落的玉匣中取得的残页，魔气森然。使用后可参悟入门——但魔门心法，修前请三思。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "source": "飞马牧场",
+    "usable": true,
+    "effects": {
+      "learnSkill": "tianmo_ce"
+    }
   }
 }
