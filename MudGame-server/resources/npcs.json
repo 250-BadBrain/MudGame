@@ -11066,5 +11066,346 @@
       "hitRate": -18,
       "defense": -10
     }
+  },
+  "dd2_palace_guard": {
+    "name": "金吾卫校尉",
+    "title": "宫门宿卫",
+    "description": "金吾卫的校尉，面无表情地盯着每一个靠近宫门的人——他的职责就是让所有人保持距离。",
+    "faction": "luoyang_office",
+    "role": "guard",
+    "importance": "local",
+    "dialogueId": "dlg_dd2_guard",
+    "attributes": {
+      "level": 24,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 21,
+        "constitution": 20,
+        "agility": 16,
+        "perception": 14,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 220,
+        "maxHp": 220,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 26,
+        "defense": 18,
+        "hitRate": 102,
+        "dodge": 68,
+        "parry": 78,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 62,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dd2_silk_merchant": {
+    "name": "锦绸庄主",
+    "title": "东都绸商",
+    "description": "东都锦绸庄的庄主，货通南北——他的商队最近总在瓦岗与官府的夹缝里走钢丝。",
+    "faction": "heluo_merchant_guild",
+    "role": "shopkeeper",
+    "importance": "local",
+    "shopItems": [
+      "simple_medicine",
+      "dahuandan",
+      "darts"
+    ],
+    "attributes": {
+      "level": 18,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 15,
+        "constitution": 15,
+        "agility": 14,
+        "perception": 15,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 170,
+        "maxHp": 170,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 15,
+        "defense": 14,
+        "hitRate": 96,
+        "dodge": 70,
+        "parry": 66,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 62,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dd2_pool_poet": {
+    "name": "落魄诗人",
+    "title": "万曲池畔醉客",
+    "description": "自称科举落第的诗人，终日在万曲池畔饮酒赋诗——他的诗里，藏着东都坊间的所有秘辛。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_dd2_poet",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 11,
+        "constitution": 12,
+        "agility": 12,
+        "perception": 17,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 11,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 56,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 52,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dd3_water_ghost": {
+    "name": "桥洞水鬼",
+    "title": "旧账守卫",
+    "description": "守桥洞的水鬼，青苔长满了他的皮——他守的不是账，是他自己也记不清的年头。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 43,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 43,
+        "constitution": 41,
+        "agility": 34,
+        "perception": 18,
+        "willpower": 17,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 560,
+        "maxHp": 560,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 83,
+        "defense": 40,
+        "hitRate": 158,
+        "dodge": 114,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 106,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dd3_ledger_guard": {
+    "name": "起居郎",
+    "title": "前朝记室",
+    "description": "前朝的起居郎根本没老、没疯、也没死——他把前朝的账记到了今天，谁翻账他杀谁。",
+    "faction": "neutral",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 56,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 59,
+        "constitution": 56,
+        "agility": 48,
+        "perception": 30,
+        "willpower": 29,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1100,
+        "maxHp": 1100,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 88,
+        "defense": 43,
+        "hitRate": 172,
+        "dodge": 132,
+        "parry": 130,
+        "critRate": 14,
+        "attackSpeed": 4,
+        "initiative": 126,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "shui_gui_tui",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -18,
+      "defense": -10
+    }
   }
 }

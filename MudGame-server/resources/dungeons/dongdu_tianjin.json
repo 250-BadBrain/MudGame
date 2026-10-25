@@ -1,0 +1,167 @@
+{
+  "id": "dongdu_tianjin",
+  "name": "天津晓月",
+  "description": "天津桥的桥洞下住着前朝的起居郎，也藏着前朝的账。你踏着晓月的碎光潜入桥洞：水鬼守着旧账，旧账压着新朝——东都的夜，从桥洞开始见底。",
+  "order": 31,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 4,
+  "spawnRoomId": "dd3_00",
+  "puzzleInitialStates": {
+    "ledger": "hidden",
+    "briefing_dd3": "new",
+    "poem": "unrecited"
+  },
+  "puzzleActions": {
+    "listen_poet": {
+      "label": "听诗人讲桥洞旧事",
+      "puzzleId": "briefing_dd3",
+      "rooms": [
+        "dd3_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "dd2_pool_poet",
+      "message": "诗人把桥洞与古砚的传闻讲了一遍。",
+      "repeatMessage": "诗人举杯遥祝：小心水鬼。"
+    },
+    "take_ledger": {
+      "label": "取出前朝账册",
+      "puzzleId": "ledger",
+      "rooms": [
+        "dd3_03"
+      ],
+      "fromStates": [
+        "hidden"
+      ],
+      "nextState": "taken",
+      "requiredDefeatNpcs": [
+        "dd3_ledger_guard"
+      ],
+      "failureMessage": "水鬼未退，桥洞里的水压得人抬不起头。",
+      "message": "你从桥洞的石缝里取出一方裹着油布的账册——前朝的账，记到最后一笔，是当今天下的债。",
+      "repeatMessage": "账册已在你怀中。"
+    },
+    "recite_poem": {
+      "label": "跟着诗人吟诵旧朝的诗",
+      "puzzleId": "poem",
+      "rooms": [
+        "dd3_00"
+      ],
+      "fromStates": [
+        "unrecited"
+      ],
+      "nextState": "recited",
+      "setFlags": {
+        "shui_gui_tui": true
+      },
+      "message": "你跟着诗人低声吟诵那首前朝的旧诗——诗声入水，桥洞里的水鬼竟真的松了挠钩，缓缓沉了下去。守了太多年的东西，最怕有人还记得它为什么开始。",
+      "repeatMessage": "旧诗你已能背诵。"
+    }
+  },
+  "rooms": {
+    "dd3_00": {
+      "name": "天津桥北",
+      "description": "晓月把桥面照成一片银霜，桥洞的阴影里水声幽幽。诗人的酒杯搁在桥栏上。",
+      "exits": {
+        "down": "dd3_01"
+      },
+      "npcs": [
+        "dd2_pool_poet"
+      ],
+      "actions": [
+        "listen_poet",
+        "recite_poem"
+      ]
+    },
+    "dd3_01": {
+      "name": "桥洞浅滩",
+      "description": "桥洞浅滩的水没过腰际，守着旧账的水鬼从倒悬的桥架间翻身而下。",
+      "exits": {
+        "up": "dd3_00",
+        "down": "dd3_02"
+      },
+      "exitRequirements": {
+        "down": {
+          "defeatNpcs": [
+            "dd3_water_ghost"
+          ],
+          "message": "桥洞水鬼的挠钩封住深水道。"
+        }
+      },
+      "npcs": [
+        "dd3_water_ghost",
+        "dd3_water_ghost"
+      ]
+    },
+    "dd3_02": {
+      "name": "深水石廊",
+      "description": "深水石廊里别有洞天——前朝的漕运暗渠直通宫墙之下，石壁上历年的水位线记录着王朝的兴衰。",
+      "exits": {
+        "up": "dd3_01",
+        "down": "dd3_03"
+      },
+      "exitRequirements": {
+        "down": {
+          "requiredPuzzleStates": {
+            "ledger": "taken"
+          },
+          "message": "账册未取，暗渠深处的铁闸落着。"
+        }
+      },
+      "npcs": []
+    },
+    "dd3_03": {
+      "name": "前朝账房",
+      "description": "前朝账房的残卷堆到半人高，最深处一方古砚压着最后一页账——砚下是东都真正的账。",
+      "exits": {
+        "up": "dd3_02"
+      },
+      "npcs": [
+        "dd3_ledger_guard"
+      ],
+      "actions": [
+        "take_ledger"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_ghosts",
+      "type": "kill",
+      "targetId": "dd3_water_ghost",
+      "required": 2,
+      "weight": 20,
+      "description": "击退桥洞水鬼"
+    },
+    {
+      "id": "take_ledger",
+      "type": "puzzle",
+      "targetId": "ledger:taken",
+      "required": 1,
+      "weight": 15,
+      "description": "取出前朝账册"
+    },
+    {
+      "id": "explore_ledger",
+      "type": "kill",
+      "targetId": "dd3_ledger_guard",
+      "required": 1,
+      "weight": 65,
+      "description": "账房深处挫守账人"
+    }
+  ],
+  "rewards": {
+    "experience": 2200,
+    "potential": 1060,
+    "money": 740,
+    "items": {
+      "tianjin_yuepei": 1
+    },
+    "flags": {
+      "tianjin_case_done": true
+    }
+  }
+}

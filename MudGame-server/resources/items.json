@@ -875,5 +875,22 @@
       "hitRate": 3
     },
     "source": "剑池"
+  },
+  "tianjin_yuepei": {
+    "name": "天津晓月佩",
+    "description": "以洛阳天津桥晓月为主题的玉佩，玉里封着一线晨光——佩之者心明眼亮，夜战如昼。",
+    "type": "equipment",
+    "subtype": "necklace",
+    "stackable": false,
+    "sellable": true,
+    "value": 2600,
+    "rarity": 4,
+    "unit": "枚",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "hitRate": 5,
+      "dodge": 2
+    },
+    "source": "天津晓月"
   }
 }

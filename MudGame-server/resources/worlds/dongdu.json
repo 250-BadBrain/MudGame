@@ -1,0 +1,80 @@
+{
+  "id": "dongdu",
+  "name": "东都",
+  "description": "洛阳以东的东都洛阳城——大隋真正的权力心脏。宫墙高耸，漕运如织，杨广的仪仗与瓦岗的探马在同一条官道上交错。天下的棋局，一半在这里落子。",
+  "order": 7,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "dd2_tianjin",
+  "rooms": {
+    "dd2_tianjin": {
+      "name": "天津桥",
+      "description": "东都的天津桥横跨洛水，晓月将桥面照得雪亮——桥头石狮阅尽了王朝的车马与江湖的刀光。",
+      "area": "东都",
+      "tags": [
+        "center",
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "north": "dd2_gongmen",
+        "east": "dd2_market",
+        "south": "dd2_wanqu"
+      }
+    },
+    "dd2_gongmen": {
+      "name": "宫门广场",
+      "description": "宫门广场的石板一尘不染，骁果军的甲光在宫墙下连成一线——杨广的仪仗偶尔出巡，百姓跪伏如草。",
+      "area": "东都",
+      "tags": [
+        "government",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "dd2_palace_guard"
+      ],
+      "exits": {
+        "south": "dd2_tianjin"
+      }
+    },
+    "dd2_market": {
+      "name": "南市",
+      "description": "东都南市天下第一富——三万五千家商铺昼夜不休，胡汉商旅在货栈间穿行。",
+      "area": "东都",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "dd2_silk_merchant"
+      ],
+      "exits": {
+        "west": "dd2_tianjin",
+        "south": "dd2_wanqu"
+      }
+    },
+    "dd2_wanqu": {
+      "name": "万曲池畔",
+      "description": "万曲池畔柳色如烟，东都的权贵在此泛舟——池水深处沉着的东西，比权贵的秘辛更沉。",
+      "area": "东都",
+      "tags": [
+        "quest",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "dd2_pool_poet"
+      ],
+      "exits": {
+        "north": "dd2_tianjin",
+        "west": "dd2_market"
+      }
+    }
+  }
+}

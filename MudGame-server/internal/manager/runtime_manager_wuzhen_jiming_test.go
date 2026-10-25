@@ -556,3 +556,75 @@ func TestJianchiFullFlow(t *testing.T) {
 		t.Fatalf("expected rewards, got jian=%d flags=%v", p.Backpack["jianchi_jian"], p.Flags)
 	}
 }
+
+// 天津晓月全流程：水鬼 → 取账册（破招）→ 挫起居郎 → 晓月佩+任务旗标结算
+func TestTianjinFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "dongdu_tianjin")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_poet"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	if _, err := r.DoRoomAction(playerID, "recite_poem"); err != nil {
+		t.Fatalf("recite poem failed: %v", err)
+	}
+	shallows := room("dd3_01")
+	moveDungeonTestPlayer(t, r, playerID, shallows)
+	defeatAll(shallows, "dd3_water_ghost", 2)
+	corridor := room("dd3_02")
+	moveDungeonTestPlayer(t, r, playerID, corridor)
+	if _, err := r.DoRoomAction(playerID, "take_ledger"); err == nil {
+		t.Fatal("ledger must be gated behind the keeper")
+	}
+	chamber := room("dd3_03")
+	moveDungeonTestPlayer(t, r, playerID, chamber)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, chamber, "dd3_ledger_guard")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage keeper failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected water ghosts retreat to weaken keeper")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat keeper failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if _, err := r.DoRoomAction(playerID, "take_ledger"); err != nil {
+		t.Fatalf("take ledger failed: %v", err)
+	}
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d", inst.Progress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["tianjin_yuepei"] != 1 || !p.Flags["dungeon_cleared_dongdu_tianjin"] || !p.Flags["tianjin_case_done"] {
+		t.Fatalf("expected rewards, got pei=%d flags=%v", p.Backpack["tianjin_yuepei"], p.Flags)
+	}
+}

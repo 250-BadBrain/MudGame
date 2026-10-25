@@ -741,5 +741,19 @@
     "title": "木牌问询",
     "opening": "哑叔举起木牌：【池水最近涨了三寸。池底的剑，少了两把。】",
     "options": []
+  },
+  "dlg_dd2_guard": {
+    "id": "dlg_dd2_guard",
+    "npcId": "dd2_palace_guard",
+    "title": "宫门禁令",
+    "opening": "金吾卫校尉长戟一横：\"宫门重地，止步。——东都的规矩：看，可以；碰，不行。\"",
+    "options": []
+  },
+  "dlg_dd2_poet": {
+    "id": "dlg_dd2_poet",
+    "npcId": "dd2_pool_poet",
+    "title": "醉里乾坤",
+    "opening": "诗人举着空酒杯：\"你可知东都的月亮为什么比洛阳的圆？——因为宫墙里的人都在看它，看了太多年，看的人多了，月亮就重了。\"",
+    "options": []
   }
 }

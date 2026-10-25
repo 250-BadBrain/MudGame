@@ -226,5 +226,29 @@
       }
     },
     "repeatable": false
+  },
+  "gongmen_ye": {
+    "id": "gongmen_ye",
+    "name": "宫门夜",
+    "description": "万曲池畔的诗人在找一首诗的下落——传说天津桥的晓月之下沉着一方前朝古砚，砚中藏着他落第的真相。东都天津晓月的夜，比宫墙里的更深。",
+    "giverNpcId": "dd2_pool_poet",
+    "turnInNpcId": "dd2_pool_poet",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "tianjin_case_done",
+        "description": "在天津晓月的桥洞下查明古砚的下落（《天津晓月》副本）。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 190,
+      "potential": 150,
+      "money": 280,
+      "flags": {
+        "gongmen_ye_completed": true
+      }
+    },
+    "repeatable": false
   }
 }
