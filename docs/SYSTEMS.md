@@ -9,6 +9,11 @@
 | 系统 | 核心代码 | 数据文件 |
 |---|---|---|
 | 账号与角色 | `app/handlers_system_game.go` | storage: users/players |
+| 秘籍装备 | `manager/runtime_manager_player.go`（EquipSkill） | skills.json requirements.prerequisite |
+| 装备强化 | `manager/runtime_manager_enhance.go`（EnhanceItem） | Player.EnhancedItems（0-5级，费用递增） |
+| 称号系统 | `manager/runtime_manager_titles.go`（getPlayerTitles） | titles.json（33个旗标→称号映射） |
+| 马车跨城 | `manager/runtime_manager_player.go`（EnterWorld 收费100两） | worlds/*.json（8座城市） |
+| 多世界 | `manager/runtime_manager_player.go`（EnterWorld） | worlds/*.json |
 | 房间与世界 | `manager/runtime_manager_room.go` | `resources/worlds/*.json` |
 | 副本 | `manager/runtime_manager_dungeon.go` + `engine/runtime/dungeon_manager.go` | `resources/dungeons/*.json` |
 | 战斗 | `manager/runtime_manager_combat.go` | — |
@@ -156,6 +161,19 @@ items.json：`usable` + `effects`（`recoverHp` 回血 / `learnSkill` 参悟）�
 - 请求 `{type, subtype, id, args}`：type ∈ `system`（账号）/ **`command`（游戏指令）** / `chat`。
 - 响应 `{type, subtype, flag, results, logs}`：**flag 布尔即成败**，subtype 回显命令名；game 命令的响应 type 也是 `command`。
 - 新指令全链路：`protocol`（如需）→ `app/command_registry.go` + handler → `engine/workflow*.go` → `manager` 方法 → 前端 `game/messageText.js`（错误码→文案）+ composable + GameView 装配。
+
+### 当前全部游戏指令
+
+| type | subtype | 功能 |
+|---|---|---|
+| system | register/login/delete_character/create_character/select_character/reconnect | 账号与角色 |
+| command | get_attributes/get_backpack/get_skills/get_equipment/get_worlds/get_dungeons/get_quests/get_factions/get_shop | 查询 |
+| command | enter_world/enter_dungeon/leave_dungeon/go | 移动与世界 |
+| command | buy/sell/discard_item/equip/unequip/use_item/enhance_item | 物品与装备 |
+| command | learn/equip_skill/talk/choose_dialogue | 技能与对话 |
+| command | heal/meditate/stop/do_action | 状态与恢复 |
+| command | kill/spar/relive | 战斗 |
+| chat | public | 聊天 |
 
 ## 环境注意事项（Windows 开发机）
 
