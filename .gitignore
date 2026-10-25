@@ -1,7 +1,3 @@
-# 子仓库（各自独立 Git 仓库）
-MudGame/
-MudGame-server/
-
 # 运行时动态数据（玩家存档等）
 data/
 
