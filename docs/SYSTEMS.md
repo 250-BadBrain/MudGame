@@ -13,6 +13,7 @@
 | 副本 | `manager/runtime_manager_dungeon.go` + `engine/runtime/dungeon_manager.go` | `resources/dungeons/*.json` |
 | 战斗 | `manager/runtime_manager_combat.go` | — |
 | 属性 | `model/attributes.go` + `manager/runtime_manager_effective.go` | — |
+| 秘籍装备 | `manager/runtime_manager_player.go`（EquipSkill）+ `runtime_manager_effective.go`（装备过滤） | skills.json requirements.prerequisite |
 | 技能与学习 | `manager/runtime_manager_player.go`（ProcessStatusTick） | `resources/skills.json` |
 | 物品与背包 | `manager/runtime_manager_player.go`（UseItem/Buy/SellItem） | `resources/items.json` |
 | 商店 | 同上 + `manager/runtime_manager_static_npc.go` | NPC 模板 `shopItems` 字段 |
@@ -35,7 +36,7 @@
 
 ## 2. 房间与世界
 
-静态地图：世界 → 房间（name/description/exits/npcs/actions/tags/safeZone/function）。移动 `Move(playerID, direction)`；副本外 NPC 挂在房间 `npcs` 数组。
+静态地图：世界 → 房间。**多世界**：`worlds/*.json` 每世界一文件（luoyang/changan），`enter_world {worldId}` 跨城直达出生点（name/description/exits/npcs/actions/tags/safeZone/function）。移动 `Move(playerID, direction)`；副本外 NPC 挂在房间 `npcs` 数组。
 
 - **加房间/改地图**：编辑 `worlds/luoyang.json`（或新世界文件），跑 `go test ./internal/gamedata/`——`validateRooms` 会拦重复房间 ID、悬空出口、出生点缺失。
 - **注意**：世界是**公共空间不做战斗资源产出**（设计原则，见 economy_design.md §0）；采集/帮工通过房间 `actions: ["gather"/"work"]` 声明，收益在 ProcessStatusTick 结算（30s/60s 忙碌）。
@@ -90,7 +91,7 @@ Kill（决斗，至死）/ Spar（切磋，单次伤害上限 MaxHP/5，不可�
 **两层公式，实际生效的是第二层**：`NormalizeAttributes`（存档兜底）≠ `effectiveAttributesForPlayerNoLock`（真实：四维→衍生重组 + 技能加成 + 装备加成 + 虚弱减半）。NPC 不走此链路（模板直读）。
 
 - **改数值**：先改 formulas.md（含代码对照表定位），再动 `model/attributes.go` / `runtime_manager_effective.go` / `model/skill_progression.go`。
-- **注意**：技能加成字段固定集合（`*_per_10_levels` / `max_mp_per_level` 等，见 runtime_manager_effective.go applyLeveledBonus）——设计新技能加成前先确认字段被支持，否则加成静默无效。
+- **注意**：技能加成字段固定集合（`*_per_10_levels` / `max_mp_per_level` / `meditate_recovery_per_10_levels` / `learning_invest_bonus_per_10_levels` / `initiative_per_10_levels` 等，见 applyLeveledBonus）；秘籍（ADVANCED）需 `requirements.prerequisite`（前置基本武功+门槛）且**装备后生效**（指令 equip_skill）——设计新技能加成前先确认字段被支持，否则加成静默无效。
 
 ## 6. 技能与学习系统
 
