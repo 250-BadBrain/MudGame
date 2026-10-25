@@ -410,5 +410,24 @@
         "level": 40
       }
     }
+  },
+  "dongting_xinf": {
+    "name": "洞庭心法",
+    "description": "洞庭渔隐一脉的内功，以水养气，绵长不绝。",
+    "rarity": 3,
+    "type": "ADVANCED",
+    "category": "neigong",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 10,
+      "trained_mp_to_max_hp_percent": 0.35
+    },
+    "requirements": {
+      "item": "dongting_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 20
+      }
+    }
   }
 }

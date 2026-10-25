@@ -155,3 +155,76 @@ func TestLiangdaoFullFlow(t *testing.T) {
 		t.Fatalf("expected rewards, got dao=%d flag=%v", p.Backpack["zhanma_dao"], p.Flags["dungeon_cleared_datang_liangdao"])
 	}
 }
+
+// 巴陵夜泊全流程：哨探 → 烧桥破招 → 挫张绣 → 软甲+沉箱结算
+func TestBalingFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "datang_baling")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_boatwoman"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	reed := room("db_01")
+	moveDungeonTestPlayer(t, r, playerID, reed)
+	if _, err := r.DoRoomAction(playerID, "salvage_float_box"); err != nil {
+		t.Fatalf("salvage failed: %v", err)
+	}
+	defeatAll(reed, "db_scout", 2)
+	bridge := room("db_02")
+	moveDungeonTestPlayer(t, r, playerID, bridge)
+	defeatAll(bridge, "db_commander", 2)
+	if _, err := r.DoRoomAction(playerID, "burn_float_bridge"); err != nil {
+		t.Fatalf("burn bridge failed: %v", err)
+	}
+	ship := room("db_03")
+	moveDungeonTestPlayer(t, r, playerID, ship)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, ship, "db_zhang_xiu")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage zhang failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected bridge fire to weaken zhang xiu")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat zhang failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["dongting_ruanjia"] != 1 || p.Backpack["dongting_page"] != 1 {
+		t.Fatalf("expected rewards, got ruanjia=%d page=%d", p.Backpack["dongting_ruanjia"], p.Backpack["dongting_page"])
+	}
+	if !p.Flags["dungeon_cleared_datang_baling"] {
+		t.Fatal("expected cleared flag")
+	}
+}

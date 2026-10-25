@@ -649,5 +649,37 @@
       "attack": 11
     },
     "source": "洛阳粮道"
+  },
+  "dongting_ruanjia": {
+    "name": "洞庭软甲",
+    "description": "洞庭渔家秘传的软甲，浸过桐油鱼胶，柔如布衣，韧若鳞甲。",
+    "type": "equipment",
+    "subtype": "armor",
+    "stackable": false,
+    "sellable": true,
+    "value": 2100,
+    "rarity": 3,
+    "unit": "领",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 12
+    },
+    "source": "巴陵夜泊"
+  },
+  "dongting_page": {
+    "name": "洞庭心法残页",
+    "description": "洞庭渔隐一脉的内功残篇，讲究以水养气。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 3,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "dongting_xinf"
+    }
   }
 }

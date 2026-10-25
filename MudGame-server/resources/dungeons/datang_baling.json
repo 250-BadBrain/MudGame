@@ -1,0 +1,185 @@
+{
+  "id": "datang_baling",
+  "name": "巴陵夜泊",
+  "description": "萧铣的水军夜泊巴陵，楼船连寨、浮桥锁江。你随洞庭渔娘的轻舟潜入芦洲：烧桥断退路，在楼船灯火下会一会萧铣麾下大将张绣。",
+  "order": 19,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 9,
+  "spawnRoomId": "db_00",
+  "puzzleInitialStates": {
+    "bridge_baling": "intact",
+    "briefing_db": "new",
+    "floatbox": "sunk"
+  },
+  "puzzleActions": {
+    "listen_boatwoman": {
+      "label": "听渔娘交代水寨",
+      "puzzleId": "briefing_db",
+      "rooms": [
+        "db_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "db_boatwoman",
+      "message": "渔娘把水寨的命门交代分明。",
+      "repeatMessage": "渔娘摇橹远去，只余橹声。"
+    },
+    "burn_float_bridge": {
+      "label": "火烧浮桥",
+      "puzzleId": "bridge_baling",
+      "rooms": [
+        "db_02"
+      ],
+      "fromStates": [
+        "intact"
+      ],
+      "nextState": "burned",
+      "setFlags": {
+        "huoshao_fuqiao": true
+      },
+      "message": "火油泼上浮桥，火光冲天而起——九曲浮桥烧成一条火龙，楼船与营寨断了往来。张绣的水，今晚靠不住了。",
+      "repeatMessage": "浮桥只剩焦黑的木桩。"
+    },
+    "salvage_float_box": {
+      "label": "打捞沉箱",
+      "puzzleId": "floatbox",
+      "rooms": [
+        "db_01"
+      ],
+      "fromStates": [
+        "sunk"
+      ],
+      "nextState": "raised",
+      "message": "芦洲浅水里沉着一只桐油木箱——箱中一页以油纸包裹的心法残篇，写着\"以水养气\"四字。",
+      "repeatMessage": "沉箱已被你捞空。",
+      "giveItems": {
+        "dongting_page": 1
+      }
+    }
+  },
+  "rooms": {
+    "db_00": {
+      "name": "洞庭泊口",
+      "description": "夜泊的渔火星星点点，远处水寨的楼船灯火连成一片。洞庭渔娘的轻舟泊在芦苇影里。",
+      "exits": {
+        "north": "db_01"
+      },
+      "npcs": [
+        "db_boatwoman"
+      ],
+      "actions": [
+        "listen_boatwoman"
+      ]
+    },
+    "db_01": {
+      "name": "芦洲浅滩",
+      "description": "芦苇高过人头，浅滩水没脚踝。水军哨探的轻舟在苇荡外游弋，哨音此起彼伏。",
+      "exits": {
+        "south": "db_00",
+        "north": "db_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "db_scout"
+          ],
+          "message": "哨探未清，哨音一起全寨皆惊。"
+        }
+      },
+      "npcs": [
+        "db_scout",
+        "db_scout"
+      ],
+      "actions": [
+        "salvage_float_box"
+      ]
+    },
+    "db_02": {
+      "name": "水寨浮桥",
+      "description": "九曲浮桥连起楼船与营寨，水军校尉提刀立于桥头——火油就泼在你脚下的桥板上。",
+      "exits": {
+        "south": "db_01",
+        "north": "db_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "db_commander"
+          ],
+          "message": "浮桥校尉守得水泄不通。"
+        }
+      },
+      "npcs": [
+        "db_commander",
+        "db_commander"
+      ],
+      "actions": [
+        "burn_float_bridge"
+      ]
+    },
+    "db_03": {
+      "name": "中军楼船",
+      "description": "三层楼船便是张绣的中军，船头灯火通明。他按刀立于船楼之上，看着远处的火光，脸色一点点沉下去。",
+      "exits": {
+        "south": "db_02"
+      },
+      "npcs": [
+        "db_zhang_xiu"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_scouts",
+      "type": "kill",
+      "targetId": "db_scout",
+      "required": 2,
+      "weight": 20,
+      "description": "清除芦洲哨探"
+    },
+    {
+      "id": "kill_commanders",
+      "type": "kill",
+      "targetId": "db_commander",
+      "required": 2,
+      "weight": 20,
+      "description": "破浮桥水军校尉"
+    },
+    {
+      "id": "burn_float_bridge",
+      "type": "puzzle",
+      "targetId": "bridge_baling:burned",
+      "required": 1,
+      "weight": 15,
+      "description": "火烧浮桥断退路"
+    },
+    {
+      "id": "repel_zhang",
+      "type": "kill",
+      "targetId": "db_zhang_xiu",
+      "required": 1,
+      "weight": 45,
+      "description": "楼船之上挫张绣之锋"
+    },
+    {
+      "id": "salvage_float_box",
+      "type": "puzzle",
+      "targetId": "floatbox:raised",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "打捞沉箱寻得内功残篇"
+    }
+  ],
+  "rewards": {
+    "experience": 1540,
+    "potential": 840,
+    "money": 520,
+    "items": {
+      "dongting_ruanjia": 1
+    }
+  }
+}
