@@ -1446,7 +1446,8 @@
     "equipmentSlot": "WEAPON",
     "effects": {
       "attack": 5,
-      "critRate": 3
+      "critRate": 3,
+      "initiative": 3
     },
     "source": "东都宫变"
   },
@@ -1463,7 +1464,8 @@
     "equipmentSlot": "BODY",
     "effects": {
       "defense": 10,
-      "dodge": 3
+      "dodge": 3,
+      "parry": 2
     },
     "source": "运河追击"
   },
@@ -1480,7 +1482,8 @@
     "equipmentSlot": "RING",
     "effects": {
       "critRate": 4,
-      "maxMp": 20
+      "maxMp": 20,
+      "attack": 2
     },
     "source": "魔师宫秘道"
   },
@@ -1498,7 +1501,8 @@
     "effects": {
       "attack": 3,
       "defense": 3,
-      "maxMp": 20
+      "maxMp": 20,
+      "dodge": 3
     },
     "source": "战神图录·终卷"
   },
@@ -1515,7 +1519,8 @@
     "equipmentSlot": "BODY",
     "effects": {
       "defense": 8,
-      "parry": 3
+      "parry": 3,
+      "hitRate": 3
     },
     "source": "边荒传奇"
   },
@@ -1532,7 +1537,8 @@
     "equipmentSlot": "NECKLACE",
     "effects": {
       "maxMp": 25,
-      "hitRate": 4
+      "hitRate": 4,
+      "maxHp": 40
     },
     "source": "洛水龙吟"
   },
@@ -1549,7 +1555,8 @@
     "equipmentSlot": "NECKLACE",
     "effects": {
       "defense": 6,
-      "hitRate": 5
+      "hitRate": 5,
+      "critRate": 2
     },
     "source": "盐帮内乱"
   },
@@ -1566,7 +1573,8 @@
     "equipmentSlot": "RING",
     "effects": {
       "critRate": 5,
-      "attack": 3
+      "attack": 3,
+      "hitRate": 2
     },
     "source": "唐门试炼"
   },
@@ -1583,7 +1591,8 @@
     "equipmentSlot": "WEAPON",
     "effects": {
       "attack": 6,
-      "initiative": 3
+      "initiative": 3,
+      "defense": 3
     },
     "source": "狼烟再起"
   },
@@ -1600,8 +1609,89 @@
     "equipmentSlot": "WEAPON",
     "effects": {
       "attack": 8,
-      "hitRate": 5
+      "hitRate": 5,
+      "critRate": 2
     },
     "source": "剑首之争"
+  },
+  "wugou_page": {
+    "name": "无钩剑法残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "wugou_jianfa"
+    }
+  },
+  "hanshui_page": {
+    "name": "寒水内功残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "hanshui_neigong"
+    }
+  },
+  "bengshan_page": {
+    "name": "崩山拳残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "bengshan_quan"
+    }
+  },
+  "wuying_page": {
+    "name": "无影身法残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "wuying_shenfa"
+    }
+  },
+  "liangyi_page": {
+    "name": "两仪真罡残页",
+    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "liangyi_zhengang"
+    }
   }
 }

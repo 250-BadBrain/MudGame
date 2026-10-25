@@ -737,5 +737,101 @@
         "level": 80
       }
     }
+  },
+  "wugou_jianfa": {
+    "name": "无钩剑法",
+    "description": "无钩而有钩——剑意的最高境界是不依赖兵刃。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "hit_rate_per_10_levels": 3,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "wugou_page",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 40
+      }
+    }
+  },
+  "hanshui_neigong": {
+    "name": "寒水内功",
+    "description": "北冥寒水之气的内功心法，冰冷刺骨，绵长不绝。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 12,
+      "trained_mp_to_max_hp_percent": 0.4
+    },
+    "requirements": {
+      "item": "hanshui_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 40
+      }
+    }
+  },
+  "bengshan_quan": {
+    "name": "崩山拳",
+    "description": "拳出如山崩——拳劲刚猛，势不可挡。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "max_hp_per_level": 5
+    },
+    "requirements": {
+      "item": "bengshan_page",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 40
+      }
+    }
+  },
+  "wuying_shenfa": {
+    "name": "无影身法",
+    "description": "身法之绝——无影无形，无声无息。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "dodge_per_10_levels": 2,
+      "initiative_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "wuying_page",
+      "prerequisite": {
+        "skill": "basic_qinggong",
+        "level": 40
+      }
+    }
+  },
+  "liangyi_zhengang": {
+    "name": "两仪真罡",
+    "description": "攻守一体的真罡心法——两仪生四象，攻中有守，守中有攻。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 1,
+      "parry_per_10_levels": 2,
+      "defense_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "liangyi_page",
+      "prerequisite": {
+        "skill": "basic_parry",
+        "level": 40
+      }
+    }
   }
 }

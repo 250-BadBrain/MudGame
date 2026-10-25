@@ -876,5 +876,40 @@
     "title": "马市杂货",
     "opening": "回鹘马商呵呵一笑：\"客人要买马？马不卖——但边关的杂货，老仆这里应有尽有。\"",
     "options": []
+  },
+  "dlg_yz_tea2": {
+    "id": "dlg_yz_tea2",
+    "npcId": "yz_tea_master",
+    "title": "茶楼掌柜",
+    "opening": "扬州茶博士朝你点头致意。江湖路远，多一个朋友多一条路。",
+    "options": []
+  },
+  "dlg_bs_wine": {
+    "id": "dlg_bs_wine",
+    "npcId": "bs_wine_maker",
+    "title": "酒坊主人",
+    "opening": "巴蜀酒娘朝你点头致意。江湖路远，多一个朋友多一条路。",
+    "options": []
+  },
+  "dlg_sb_smith": {
+    "id": "dlg_sb_smith",
+    "npcId": "sb_iron_smith",
+    "title": "马邑铁匠",
+    "opening": "塞北铁匠朝你点头致意。江湖路远，多一个朋友多一条路。",
+    "options": []
+  },
+  "dlg_jn_silk": {
+    "id": "dlg_jn_silk",
+    "npcId": "jn_silk_merchant",
+    "title": "丝绸商人",
+    "opening": "江南绸商朝你点头致意。江湖路远，多一个朋友多一条路。",
+    "options": []
+  },
+  "dlg_dm_diver": {
+    "id": "dlg_dm_diver",
+    "npcId": "dm_pearl_diver",
+    "title": "海底采珠",
+    "opening": "采珠人朝你点头致意。江湖路远，多一个朋友多一条路。",
+    "options": []
   }
 }

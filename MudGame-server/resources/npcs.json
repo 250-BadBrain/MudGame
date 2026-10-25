@@ -3015,7 +3015,12 @@
       "jingang_buhuai": 120,
       "tianmo_xiajuan": 120,
       "xiulou_pojia": 120,
-      "taiyi_tianming": 120
+      "taiyi_tianming": 120,
+      "wugou_jianfa": 120,
+      "hanshui_neigong": 120,
+      "bengshan_quan": 120,
+      "wuying_shenfa": 120,
+      "liangyi_zhengang": 120
     },
     "attributes": {
       "level": 30,
@@ -14066,6 +14071,336 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
+    }
+  },
+  "yz_tea_master": {
+    "name": "扬州茶博士",
+    "title": "茶楼掌柜",
+    "description": "扬州东关街的茶博士，一张嘴能把二十四桥的月色说出花来。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_yz_tea2",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 56,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 56,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "bs_wine_maker": {
+    "name": "巴蜀酒娘",
+    "title": "酒坊主人",
+    "description": "巴蜀酒坊的女主人，酿的酒叫'剑南春'——喝过的人都说，一杯忘忧。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_bs_wine",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 56,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 56,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sb_iron_smith": {
+    "name": "塞北铁匠",
+    "title": "马邑铁匠",
+    "description": "马邑的铁匠，打了三十年的弯刀——他的铁锤上全是狼牙印。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_sb_smith",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 56,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 56,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jn_silk_merchant": {
+    "name": "江南绸商",
+    "title": "丝绸商人",
+    "description": "江南的丝绸商人，丝绸比他的话还柔滑——他的货通南北。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_jn_silk",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 56,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 56,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dm_pearl_diver": {
+    "name": "采珠人",
+    "title": "海底采珠",
+    "description": "东溟的采珠人，能在万丈海底憋一炷香——他见过的海底秘密，比龙王爷还多。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_dm_diver",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 56,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 56,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   }
 }

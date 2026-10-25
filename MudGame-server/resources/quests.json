@@ -490,5 +490,125 @@
       }
     },
     "repeatable": false
+  },
+  "gongbian_aftermath": {
+    "id": "gongbian_aftermath",
+    "name": "宫变余波",
+    "description": "宫变之后，东都戒严——金吾卫旧部托你查清余党的退路。",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datang_gongbian",
+        "description": "宫变之后，东都戒严——金吾卫旧部托你查清余党的退路。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 260,
+      "potential": 170,
+      "money": 320,
+      "flags": {
+        "gongbian_aftermath_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "yunhe_houyi": {
+    "id": "yunhe_houyi",
+    "name": "运河后患",
+    "description": "运河追击后，漕运司要你确保水路安全——去苇荡做最后一查。",
+    "giverNpcId": "yz_yamen_clerk",
+    "turnInNpcId": "yz_yamen_clerk",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datang_yunhe",
+        "description": "运河追击后，漕运司要你确保水路安全——去苇荡做最后一查。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 270,
+      "potential": 180,
+      "money": 340,
+      "flags": {
+        "yunhe_houyi_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "mishi_aftermath": {
+    "id": "mishi_aftermath",
+    "name": "秘道封堵",
+    "description": "魔师宫的秘道虽然断了，但入口还没封死——去塞北找李百夫长安排封堵。",
+    "giverNpcId": "sb_centurion",
+    "turnInNpcId": "sb_centurion",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_fuyu_mishi",
+        "description": "魔师宫的秘道虽然断了，但入口还没封死——去塞北找李百夫长安排封堵。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 280,
+      "potential": 190,
+      "money": 360,
+      "flags": {
+        "mishi_aftermath_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "zhongjuan_daozhen": {
+    "id": "zhongjuan_daozhen",
+    "name": "终卷道真",
+    "description": "战神图录终卷的最后一页你看懂了——去雪山小寺告诉守图老僧。",
+    "giverNpcId": "jm2_old_monk",
+    "turnInNpcId": "jm2_old_monk",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_posui_zhongjuan",
+        "description": "战神图录终卷的最后一页你看懂了——去雪山小寺告诉守图老僧。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 290,
+      "potential": 200,
+      "money": 380,
+      "flags": {
+        "zhongjuan_daozhen_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "longyin_zhengming": {
+    "id": "longyin_zhengming",
+    "name": "龙吟正名",
+    "description": "洛水守灵被你逐走后，前朝的秘密终于浮出水面——去告诉落魄诗人。",
+    "giverNpcId": "dd2_pool_poet",
+    "turnInNpcId": "dd2_pool_poet",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_luoshui_longyin",
+        "description": "洛水守灵被你逐走后，前朝的秘密终于浮出水面——去告诉落魄诗人。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 300,
+      "potential": 210,
+      "money": 400,
+      "flags": {
+        "longyin_zhengming_completed": true
+      }
+    },
+    "repeatable": false
   }
 }
