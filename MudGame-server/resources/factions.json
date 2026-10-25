@@ -122,5 +122,13 @@
     "category": "military",
     "visible": false,
     "order": 1000
+  },
+  "song_clan": {
+    "id": "song_clan",
+    "name": "宋阀山城",
+    "description": "岭南宋缺一手撑起的门阀，海贸天下、刀冠九州，向来不涉中原纷争。",
+    "category": "merchant",
+    "visible": false,
+    "order": 1001
   }
 }

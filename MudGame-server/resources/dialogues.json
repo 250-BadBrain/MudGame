@@ -194,5 +194,12 @@
     "title": "水门民情",
     "opening": "民夫头领攥着你的衣角：渠里伏兵不清，老的小的都不敢下水。",
     "options": []
+  },
+  "dlg_td_steward": {
+    "id": "dlg_td_steward",
+    "npcId": "td_steward",
+    "title": "三关之约",
+    "opening": "宋阀管事拱手：刀堂三关，木人试其功，石壁试其悟，心镜试其胆。过了三关，阀主亲自接你三刀。",
+    "options": []
   }
 }

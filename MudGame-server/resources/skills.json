@@ -113,5 +113,20 @@
     "requirements": {
       "item": "jyg_zhanshentu_rubbing"
     }
+  },
+  "tiandao_blade": {
+    "name": "天刀八诀",
+    "description": "宋缺天刀刀意之传，快而准，后发先至。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "blade",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "hit_rate_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "tiandao_page"
+    }
   }
 }

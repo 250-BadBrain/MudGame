@@ -1,0 +1,237 @@
+{
+  "id": "datang_tiandao",
+  "name": "天刀试炼",
+  "description": "宋阀商队入洛，宋缺于城南别院设刀堂三日，以三关试天下用刀之人。破木人阵、悟石壁刀意、斩心镜心魔，最后到演武场上，接那位天下第一刀的三刀。",
+  "order": 9,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 4,
+  "spawnRoomId": "td_00",
+  "puzzleInitialStates": {
+    "blade": "untouched",
+    "intro": "new"
+  },
+  "puzzleActions": {
+    "listen_steward": {
+      "label": "听管事说明三关之约",
+      "puzzleId": "intro",
+      "rooms": [
+        "td_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "td_steward",
+      "message": "管事把三关规矩说得分明。",
+      "repeatMessage": "管事只重复了一句：木人、石壁、心镜，然后是阀主的三刀。"
+    },
+    "trace_carving": {
+      "label": "临摹壁上刀痕",
+      "puzzleId": "blade",
+      "rooms": [
+        "td_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "traced",
+      "message": "你以指代刀，把壁上刀痕一笔一划临在掌心——每一道痕都又快又直，快得没有一丝犹豫。",
+      "repeatMessage": "刀痕已在你掌心，该闭眼把它忘掉了。"
+    },
+    "ponder_blade": {
+      "label": "闭目自悟刀意",
+      "puzzleId": "blade",
+      "rooms": [
+        "td_02"
+      ],
+      "fromStates": [
+        "traced"
+      ],
+      "nextState": "pondering",
+      "message": "你闭目立于壁前。临下的刀痕渐渐淡去，只剩下那股快而直的意思在胸中盘旋——像水，也像雷。",
+      "repeatMessage": "胸中刀意将成未成，只差一个出口。"
+    },
+    "choose_intent": {
+      "label": "领悟刀意",
+      "puzzleId": "blade",
+      "rooms": [
+        "td_02"
+      ],
+      "fromStates": [
+        "pondering"
+      ],
+      "nextState": "choosing",
+      "message": "刀意到了临界处，必须给它一个方向。石壁不语，只等你自己开口。",
+      "choices": [
+        {
+          "id": "fierce_path",
+          "label": "以刚为纲"
+        },
+        {
+          "id": "flow_path",
+          "label": "以灵为要"
+        }
+      ]
+    },
+    "fierce_path": {
+      "label": "以刚为纲",
+      "puzzleId": "blade",
+      "rooms": [
+        "td_02"
+      ],
+      "fromStates": [
+        "choosing"
+      ],
+      "nextState": "enlightened",
+      "setFlags": {
+        "enlightened_blade": true
+      },
+      "message": "你睁开眼，掌心一劈——刀意如雷贯下，直得不能再直。石壁嗡嗡作响，仿佛在应和这刚猛一诺。"
+    },
+    "flow_path": {
+      "label": "以灵为要",
+      "puzzleId": "blade",
+      "rooms": [
+        "td_02"
+      ],
+      "fromStates": [
+        "choosing"
+      ],
+      "nextState": "enlightened",
+      "setFlags": {
+        "enlightened_blade": true
+      },
+      "message": "你睁开眼，手腕一转——刀意如水绕行，快得没有形状。石壁风声微动，仿佛在应和这灵动一诺。"
+    }
+  },
+  "rooms": {
+    "td_00": {
+      "name": "刀堂前院",
+      "description": "城南别院挂白幡三面，上书一个刀字。院中寂静，只听得后堂木人转轴的吱呀声。",
+      "exits": {
+        "north": "td_01"
+      },
+      "npcs": [
+        "td_steward"
+      ],
+      "actions": [
+        "listen_steward"
+      ]
+    },
+    "td_01": {
+      "name": "木人阵廊",
+      "description": "长廊两侧立着八具铁皮木人，此刻只醒了四具，刀臂缓缓抬起，齐齐指向来人。",
+      "exits": {
+        "south": "td_00",
+        "north": "td_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "td_wood_puppet"
+          ],
+          "message": "木人刀臂交错如林，不破此阵，石壁廊门不开。"
+        }
+      },
+      "npcs": [
+        "td_wood_puppet",
+        "td_wood_puppet",
+        "td_wood_puppet",
+        "td_wood_puppet"
+      ]
+    },
+    "td_02": {
+      "name": "刀意石壁",
+      "description": "一面打磨如镜的青石壁，壁上刀痕深浅不一，最深的几道笔直如尺。据说那是宋缺年轻时留下的。",
+      "exits": {
+        "south": "td_01",
+        "north": "td_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "blade": "enlightened"
+          },
+          "message": "石壁廊门紧闭——刀意未成，宋阀不放人过第二关。"
+        }
+      },
+      "actions": [
+        "trace_carving",
+        "ponder_blade",
+        "choose_intent"
+      ]
+    },
+    "td_03": {
+      "name": "心镜水榭",
+      "description": "水榭四面架镜，镜中身影层层叠叠。走到榭心，众镜里的影子忽然一齐停下——只剩一个黑影还在向你走来。",
+      "exits": {
+        "south": "td_02",
+        "north": "td_04"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "td_inner_shadow"
+          ],
+          "message": "心魔未斩，镜影缠身——这关过不去，见了宋缺也是徒然受辱。"
+        }
+      },
+      "npcs": [
+        "td_inner_shadow"
+      ]
+    },
+    "td_04": {
+      "name": "演武场",
+      "description": "空旷的演武场只扫出一条刀道。宋缺负手立在道尾，见你进来，只说了三个字：请出刀。",
+      "exits": {
+        "south": "td_03"
+      },
+      "npcs": [
+        "td_song_que"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "break_puppets",
+      "type": "kill",
+      "targetId": "td_wood_puppet",
+      "required": 4,
+      "weight": 20,
+      "description": "击碎木人阵四具木人"
+    },
+    {
+      "id": "comprehend_blade",
+      "type": "puzzle",
+      "targetId": "blade:enlightened",
+      "required": 1,
+      "weight": 15,
+      "description": "于石壁前悟出刀意"
+    },
+    {
+      "id": "defeat_inner_shadow",
+      "type": "kill",
+      "targetId": "td_inner_shadow",
+      "required": 1,
+      "weight": 25,
+      "description": "斩落心镜中的心魔"
+    },
+    {
+      "id": "accept_three_blades",
+      "type": "kill",
+      "targetId": "td_song_que",
+      "required": 1,
+      "weight": 40,
+      "description": "在宋缺刀下撑过三刀之约"
+    }
+  ],
+  "rewards": {
+    "experience": 940,
+    "potential": 610,
+    "money": 400,
+    "items": {
+      "tiandao_page": 1
+    }
+  }
+}
