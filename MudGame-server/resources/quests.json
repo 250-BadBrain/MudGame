@@ -250,5 +250,29 @@
       }
     },
     "repeatable": false
+  },
+  "cangming_yijuan": {
+    "id": "cangming_yijuan",
+    "name": "沧溟遗卷",
+    "description": "归墟港的老船长、鲛人市的珠娘、海市的守阁人——三句话凑出一段三百年前的旧事：沧溟宫的主人留下一枚玉简，在等有缘人。去海市深处取回它。",
+    "giverNpcId": "dm_old_captain",
+    "turnInNpcId": "dm_old_captain",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "haisi_case_done",
+        "description": "在海市深处取得沧溟玉简（《海市》副本）。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 200,
+      "potential": 160,
+      "money": 300,
+      "flags": {
+        "cangming_yijuan_completed": true
+      }
+    },
+    "repeatable": false
   }
 }

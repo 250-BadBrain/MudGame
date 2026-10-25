@@ -11407,5 +11407,412 @@
       "hitRate": -18,
       "defense": -10
     }
+  },
+  "dm_old_captain": {
+    "name": "老船长",
+    "title": "归墟港主",
+    "description": "归墟港的老船长，年轻时是海上最凶的海盗——他见过海市，也见过海市里的东西。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_dm_captain",
+    "attributes": {
+      "level": 24,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 21,
+        "agility": 17,
+        "perception": 14,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 230,
+        "maxHp": 230,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 26,
+        "defense": 18,
+        "hitRate": 102,
+        "dodge": 68,
+        "parry": 78,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 62,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dm_jiaoren": {
+    "name": "鲛人珠娘",
+    "title": "鲛人市珠商",
+    "description": "鲛人珠娘只在大潮时现身，她的珠贝是海上最好的——她也是海上唯一知道海市入口的人。",
+    "faction": "neutral",
+    "role": "shopkeeper",
+    "importance": "local",
+    "shopItems": [
+      "dahuandan",
+      "simple_medicine"
+    ],
+    "dialogueId": "dlg_dm_jiaoren",
+    "attributes": {
+      "level": 20,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 15,
+        "agility": 15,
+        "perception": 17,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 170,
+        "maxHp": 170,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 15,
+        "defense": 15,
+        "hitRate": 96,
+        "dodge": 74,
+        "parry": 70,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 68,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dm_mirage_keeper": {
+    "name": "守阁人",
+    "title": "海市守阁",
+    "description": "守阁人脸上戴着青铜面具，面具后传出苍老的声音——他说他等海市的主人回来，已经等了三百年。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_dm_keeper",
+    "attributes": {
+      "level": 28,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 20,
+        "agility": 18,
+        "perception": 17,
+        "willpower": 18,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 240,
+        "maxHp": 240,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 28,
+        "defense": 19,
+        "hitRate": 104,
+        "dodge": 70,
+        "parry": 80,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 64,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dm2_loot_cultivator": {
+    "name": "贪婪散修",
+    "title": "海市盗宝人",
+    "description": "从各地赶来盗宝的散修，在海市里迷了十年——他们的眼睛已经变成琉璃色。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 44,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 44,
+        "constitution": 42,
+        "agility": 35,
+        "perception": 19,
+        "willpower": 17,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 570,
+        "maxHp": 570,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 85,
+        "defense": 40,
+        "hitRate": 160,
+        "dodge": 116,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 108,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dm2_lost_soul": {
+    "name": "迷失亡魂",
+    "title": "海市怨灵",
+    "description": "在海市里迷失了三百年的亡魂，低语里满是绝望——它们不害人，只是太孤独。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 46,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 40,
+        "constitution": 38,
+        "agility": 34,
+        "perception": 20,
+        "willpower": 20,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 600,
+        "maxHp": 600,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 80,
+        "defense": 38,
+        "hitRate": 156,
+        "dodge": 118,
+        "parry": 118,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 108,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dm2_mirage_phantom": {
+    "name": "宫主幻影",
+    "title": "沧溟宫记忆",
+    "description": "沧溟宫主人留下的记忆幻影——它守护玉简三百年，等一个不是来盗宝的人。",
+    "faction": "neutral",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 58,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 62,
+        "constitution": 58,
+        "agility": 50,
+        "perception": 30,
+        "willpower": 30,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1120,
+        "maxHp": 1120,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 90,
+        "defense": 44,
+        "hitRate": 174,
+        "dodge": 136,
+        "parry": 130,
+        "critRate": 14,
+        "attackSpeed": 4,
+        "initiative": 128,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "cangming_renzhi",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -18,
+      "defense": -12
+    }
   }
 }

@@ -892,5 +892,21 @@
       "dodge": 2
     },
     "source": "天津晓月"
+  },
+  "cangming_juan": {
+    "name": "沧溟玉简",
+    "description": "海市主人以千年鲛绡与深海玉髓制成的玉简——据说海上的潮汐，全记在它里面。",
+    "type": "equipment",
+    "subtype": "necklace",
+    "stackable": false,
+    "sellable": true,
+    "value": 3000,
+    "rarity": 4,
+    "unit": "枚",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "maxMp": 30
+    },
+    "source": "海市"
   }
 }

@@ -1,0 +1,159 @@
+{
+  "id": "dongming_haisi",
+  "name": "海市",
+  "description": "海市不是蜃楼，是一座沉睡了三百年的城。你带着守阁人的告诫走进海市的光影：盗宝的散修、迷失的亡魂、沧溟宫的遗民——都在等你取出那枚玉简。",
+  "order": 32,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 5,
+  "spawnRoomId": "dm2_00",
+  "puzzleInitialStates": {
+    "yujian": "hidden",
+    "briefing_dm2": "new"
+  },
+  "puzzleActions": {
+    "listen_keeper": {
+      "label": "听守阁人的告诫",
+      "puzzleId": "briefing_dm2",
+      "rooms": [
+        "dm2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "dm_mirage_keeper",
+      "message": "守阁人把海市的规矩讲了一遍。",
+      "repeatMessage": "青铜面具后的潮声停了。"
+    },
+    "take_yujian": {
+      "label": "取出沧溟玉简",
+      "puzzleId": "yujian",
+      "rooms": [
+        "dm2_03"
+      ],
+      "fromStates": [
+        "hidden"
+      ],
+      "nextState": "taken",
+      "requiredDefeatNpcs": [
+        "dm2_mirage_phantom"
+      ],
+      "failureMessage": "宫主的幻影还在殿中游荡——玉简不认你。",
+      "message": "你从沧溟宫主座之上取出沧溟玉简——玉简入手温润，三百年的潮声在耳边一一退去。海市的主人，后继有人。",
+      "repeatMessage": "玉简已在你怀中。"
+    }
+  },
+  "rooms": {
+    "dm2_00": {
+      "name": "海市门",
+      "description": "海市的光影在浪尖上裂开一道门。守阁人的青铜面具映着门内的琉璃之光。",
+      "exits": {
+        "north": "dm2_01"
+      },
+      "npcs": [
+        "dm_mirage_keeper"
+      ],
+      "actions": [
+        "listen_keeper"
+      ]
+    },
+    "dm2_01": {
+      "name": "蜃楼街巷",
+      "description": "蜃楼街巷里人来人往——都是海市的幻民。散修们混在幻民中间，翻找着他们以为的宝藏。",
+      "exits": {
+        "south": "dm2_00",
+        "north": "dm2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "dm2_loot_cultivator"
+          ],
+          "message": "贪婪的散修堵住街巷：\"宝藏是我的！\""
+        }
+      },
+      "npcs": [
+        "dm2_loot_cultivator",
+        "dm2_loot_cultivator"
+      ]
+    },
+    "dm2_02": {
+      "name": "宫前长阶",
+      "description": "沧溟宫的宫前长阶以整块海玉铺成，阶上飘着迷失亡魂的低语——他们生前也来寻宝。",
+      "exits": {
+        "south": "dm2_01",
+        "north": "dm2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "dm2_lost_soul"
+          ],
+          "message": "迷失亡魂的低语摄人心魄。"
+        }
+      },
+      "npcs": [
+        "dm2_lost_soul"
+      ]
+    },
+    "dm2_03": {
+      "name": "沧溟宫主殿",
+      "description": "主殿空空荡荡，只有一张白玉主座——座上悬着一枚发光的玉简。一只由宫主记忆凝成的幻影盘绕在玉简周围。",
+      "exits": {
+        "south": "dm2_02"
+      },
+      "npcs": [
+        "dm2_mirage_phantom"
+      ],
+      "actions": [
+        "take_yujian"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_cultivators",
+      "type": "kill",
+      "targetId": "dm2_loot_cultivator",
+      "required": 2,
+      "weight": 25,
+      "description": "驱逐贪婪散修"
+    },
+    {
+      "id": "kill_souls",
+      "type": "kill",
+      "targetId": "dm2_lost_soul",
+      "required": 1,
+      "weight": 20,
+      "description": "安抚迷失亡魂"
+    },
+    {
+      "id": "take_yujian",
+      "type": "puzzle",
+      "targetId": "yujian:taken",
+      "required": 1,
+      "weight": 10,
+      "description": "取出沧溟玉简"
+    },
+    {
+      "id": "repel_phantom",
+      "type": "kill",
+      "targetId": "dm2_mirage_phantom",
+      "required": 1,
+      "weight": 45,
+      "description": "挫宫主幻影之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2260,
+    "potential": 1080,
+    "money": 760,
+    "items": {
+      "cangming_juan": 1
+    },
+    "flags": {
+      "haisi_case_done": true
+    }
+  }
+}

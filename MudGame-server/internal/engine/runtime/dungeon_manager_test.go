@@ -48,6 +48,7 @@ func TestHuangyiChapterTemplatesMatchDesign(t *testing.T) {
 		"saibei_langshan":       {4, "bianhuang_legend", "边荒传说", 4},
 		"jiangnan_jianchi":      {4, "luoshui_raiders", "洛水风浪", 3},
 		"dongdu_tianjin":        {4, "luoshui_raiders", "洛水风浪", 4},
+		"dongming_haisi":        {4, "luoshui_raiders", "洛水风浪", 5},
 	}
 	loaded := map[string]bool{}
 	for _, id := range m.DungeonTemplateIDsNoLock() {
@@ -237,8 +238,8 @@ func TestDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
 			}
 		}
 	}
-	if covered != 33 {
-		t.Fatalf("expected all 33 story dialogue actions, got %d", covered)
+	if covered != 34 {
+		t.Fatalf("expected all 34 story dialogue actions, got %d", covered)
 	}
 }
 

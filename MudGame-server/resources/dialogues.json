@@ -755,5 +755,26 @@
     "title": "醉里乾坤",
     "opening": "诗人举着空酒杯：\"你可知东都的月亮为什么比洛阳的圆？——因为宫墙里的人都在看它，看了太多年，看的人多了，月亮就重了。\"",
     "options": []
+  },
+  "dlg_dm_captain": {
+    "id": "dlg_dm_captain",
+    "npcId": "dm_old_captain",
+    "title": "归墟夜话",
+    "opening": "老船长把酒囊塞进你怀里：\"你问海市？海市不是蜃楼——是一座城。它在浪底下等主人回来，等了三百年。\"",
+    "options": []
+  },
+  "dlg_dm_jiaoren": {
+    "id": "dlg_dm_jiaoren",
+    "npcId": "dm_jiaoren",
+    "title": "鲛珠之约",
+    "opening": "珠娘的歌声像海浪：\"客人要看海市？鲛人的歌能引路——但海市的门，只对拿着沧溟玉简的人开。\"",
+    "options": []
+  },
+  "dlg_dm_keeper": {
+    "id": "dlg_dm_keeper",
+    "npcId": "dm_mirage_keeper",
+    "title": "守阁之言",
+    "opening": "青铜面具后的声音苍老如潮：\"沧溟宫的主人走了三百年，玉简在我手里守了三百年。你来，就是玉简认的人。\"",
+    "options": []
   }
 }

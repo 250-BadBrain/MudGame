@@ -1,0 +1,93 @@
+{
+  "id": "dongming",
+  "name": "东溟",
+  "description": "东海之外的海外秘境——传说中仙人遗落的海岛，潮汐之间若隐若现。鲛人的歌、海盗的帆、失落的古卷，都在这片沧溟之上。",
+  "order": 8,
+  "category": "secret_realm",
+  "visible": true,
+  "spawnRoomId": "dm_harbor",
+  "rooms": {
+    "dm_harbor": {
+      "name": "归墟港",
+      "description": "东溟唯一的海港，归墟港的栈桥以巨鲸骨搭建——海上人说，这座港是前朝流放的方士建的。",
+      "area": "东溟",
+      "tags": [
+        "gate",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "dm_old_captain"
+      ],
+      "exits": {
+        "east": "dm_market",
+        "north": "dm_reef"
+      }
+    },
+    "dm_market": {
+      "name": "鲛人市",
+      "description": "鲛人市只在天文大潮时露出水面——鲛绡、珠贝、深海的珊瑚，换中原的茶与铁。",
+      "area": "东溟",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "dm_jiaoren"
+      ],
+      "exits": {
+        "west": "dm_harbor"
+      }
+    },
+    "dm_reef": {
+      "name": "暗礁群",
+      "description": "暗礁群在海面下犬牙交错，船骸的桅杆从浪里探出——归墟港的水手管这里叫'船坟'。",
+      "area": "东溟",
+      "tags": [
+        "wild",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "exits": {
+        "south": "dm_harbor",
+        "east": "dm_mirage"
+      }
+    },
+    "dm_mirage": {
+      "name": "海市入口",
+      "description": "海市蜃楼的光影在浪尖上浮动——归墟港最老的水手说，那不是光，是另一座城的倒影。",
+      "area": "东溟",
+      "tags": [
+        "wild",
+        "unsafe",
+        "quest"
+      ],
+      "safeZone": false,
+      "npcs": [
+        "dm_mirage_keeper"
+      ],
+      "exits": {
+        "west": "dm_reef",
+        "north": "dm_palace"
+      }
+    },
+    "dm_palace": {
+      "name": "沧溟宫",
+      "description": "沧溟宫的琉璃瓦在海市中若隐若现——海外秘境最深处的宫殿，传说里仙人遗落的地方。",
+      "area": "东溟",
+      "tags": [
+        "faction",
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "south": "dm_mirage"
+      }
+    }
+  }
+}
