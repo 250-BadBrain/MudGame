@@ -2936,5 +2936,24 @@
       "critRate": 2
     },
     "source": "幽冥鬼市"
+  },
+  "beidou_xingpan": {
+    "name": "北斗星盘",
+    "description": "北斗七星的星盘——七颗星对应七个阵眼，全部点亮即可破阵。星盘背面刻着一行小字：'顺天应人，七星归位。'",
+    "type": "equipment",
+    "subtype": "compass",
+    "stackable": false,
+    "sellable": true,
+    "value": 5000,
+    "rarity": 5,
+    "unit": "座",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 5,
+      "defense": 5,
+      "hitRate": 5,
+      "maxMp": 25
+    },
+    "source": "天罡北斗阵"
   }
 }
