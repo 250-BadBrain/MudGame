@@ -1,0 +1,137 @@
+{
+  "id": "jiangnan_jianchi2",
+  "name": "剑池深处",
+  "description": "剑池深处。",
+  "order": 55,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 12,
+  "spawnRoomId": "jiangn_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "jiangn_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "jc_sc": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "jiangn_00": {
+      "name": "入口",
+      "description": "剑池深处入口。",
+      "exits": {
+        "north": "jiangn_01"
+      }
+    },
+    "jiangn_01": {
+      "name": "通道",
+      "description": "剑池深处通道。",
+      "exits": {
+        "south": "jiangn_00",
+        "north": "jiangn_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jn3_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "jn3_guard",
+        "jn3_guard"
+      ]
+    },
+    "jiangn_02": {
+      "name": "关隘",
+      "description": "剑池深处关隘。",
+      "exits": {
+        "south": "jiangn_01",
+        "north": "jiangn_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "jiangn_03": {
+      "name": "决战",
+      "description": "剑池深处决战。",
+      "exits": {
+        "south": "jiangn_02"
+      },
+      "npcs": [
+        "jn3_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "jn3_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "jn3_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫池底剑灵之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2880,
+    "potential": 1220,
+    "money": 1010,
+    "items": {
+      "jianchi_m": 1
+    }
+  }
+}

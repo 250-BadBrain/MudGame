@@ -833,5 +833,369 @@
         "level": 40
       }
     }
+  },
+  "posui_zhizun": {
+    "name": "破碎至尊",
+    "description": "破碎至尊——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "posui_zz_page",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 60
+      }
+    }
+  },
+  "wujin_bian": {
+    "name": "无尽鞭",
+    "description": "无尽鞭。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "dodge_per_10_levels": 2,
+      "hit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "wujin_pg",
+      "prerequisite": {
+        "skill": "basic_whip",
+        "level": 60
+      }
+    }
+  },
+  "leiting_qiangfa": {
+    "name": "雷霆枪法",
+    "description": "雷霆枪法——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "crit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "leiting_page",
+      "prerequisite": {
+        "skill": "basic_spear",
+        "level": 60
+      }
+    }
+  },
+  "yaotong_suoli": {
+    "name": "妖瞳锁灵",
+    "description": "妖瞳锁灵——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "hit_rate_per_10_levels": 2,
+      "crit_rate_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "yaotong_page",
+      "prerequisite": {
+        "skill": "basic_hidden_weapon",
+        "level": 60
+      }
+    }
+  },
+  "jinhuan_goufa": {
+    "name": "金环钩法",
+    "description": "金环钩法——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "jinhuan_page",
+      "prerequisite": {
+        "skill": "basic_hook",
+        "level": 60
+      }
+    }
+  },
+  "shanshan_gunfa": {
+    "name": "闪闪棍法",
+    "description": "闪闪棍法——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "parry_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "shanshan_page",
+      "prerequisite": {
+        "skill": "basic_staff",
+        "level": 60
+      }
+    }
+  },
+  "lieshi_zhijue": {
+    "name": "裂石之锏",
+    "description": "裂石之锏——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "lieshi_zz_page",
+      "prerequisite": {
+        "skill": "basic_mace",
+        "level": 60
+      }
+    }
+  },
+  "hanshui_zhijue": {
+    "name": "寒水之诀",
+    "description": "寒水之诀——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 15,
+      "trained_mp_to_max_hp_percent": 0.5
+    },
+    "requirements": {
+      "item": "hanshui_zz_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 60
+      }
+    }
+  },
+  "wugou_zhijue": {
+    "name": "无钩之诀",
+    "description": "无钩之诀——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "hit_rate_per_10_levels": 2,
+      "dodge_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "wugou_zz_page",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 80
+      }
+    }
+  },
+  "bengshan_zhijue": {
+    "name": "崩山之诀",
+    "description": "崩山之诀——武学之绝。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "max_hp_per_level": 8
+    },
+    "requirements": {
+      "item": "bengshan_zz_page",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 80
+      }
+    }
+  },
+  "posui_zz": {
+    "name": "破碎至尊",
+    "description": "破碎至尊。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "defense_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "posui_zz_pg",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 60
+      }
+    }
+  },
+  "leiting_qf": {
+    "name": "雷霆枪法",
+    "description": "雷霆枪法。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "crit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "leiting_pg",
+      "prerequisite": {
+        "skill": "basic_spear",
+        "level": 60
+      }
+    }
+  },
+  "yaotong_sl": {
+    "name": "妖瞳锁灵",
+    "description": "妖瞳锁灵。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "hit_rate_per_10_levels": 2,
+      "crit_rate_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "yaotong_pg",
+      "prerequisite": {
+        "skill": "basic_hidden_weapon",
+        "level": 60
+      }
+    }
+  },
+  "jinhuan_gf": {
+    "name": "金环钩法",
+    "description": "金环钩法。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "jinhuan_pg",
+      "prerequisite": {
+        "skill": "basic_hook",
+        "level": 60
+      }
+    }
+  },
+  "shanshan_gf": {
+    "name": "闪闪棍法",
+    "description": "闪闪棍法。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "parry_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "shanshan_pg",
+      "prerequisite": {
+        "skill": "basic_staff",
+        "level": 60
+      }
+    }
+  },
+  "lieshi_zj": {
+    "name": "裂石之锏",
+    "description": "裂石之锏。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "lieshi_zz_pg",
+      "prerequisite": {
+        "skill": "basic_mace",
+        "level": 60
+      }
+    }
+  },
+  "hanshui_zj": {
+    "name": "寒水之诀",
+    "description": "寒水之诀。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 15,
+      "trained_mp_to_max_hp_percent": 0.5
+    },
+    "requirements": {
+      "item": "hanshui_zz_pg",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 60
+      }
+    }
+  },
+  "wugou_zj": {
+    "name": "无钩之诀",
+    "description": "无钩之诀。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "hit_rate_per_10_levels": 2,
+      "dodge_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "wugou_zz_pg",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 80
+      }
+    }
+  },
+  "bengshan_zj": {
+    "name": "崩山之诀",
+    "description": "崩山之诀。",
+    "rarity": 5,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "max_hp_per_level": 8
+    },
+    "requirements": {
+      "item": "bengshan_zz_pg",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 80
+      }
+    }
   }
 }

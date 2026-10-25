@@ -1,0 +1,137 @@
+{
+  "id": "posui_kongming",
+  "name": "破碎空明",
+  "description": "空明试炼。",
+  "order": 49,
+  "chainId": "posui_xukong",
+  "chainName": "破碎虚空",
+  "chapter": 6,
+  "spawnRoomId": "posui__00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "posui__00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "posui__02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "km_sl": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "posui__00": {
+      "name": "入口",
+      "description": "破碎空明入口。",
+      "exits": {
+        "north": "posui__01"
+      }
+    },
+    "posui__01": {
+      "name": "通道",
+      "description": "破碎空明通道。",
+      "exits": {
+        "south": "posui__00",
+        "north": "posui__02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "pk_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "pk_guard",
+        "pk_guard"
+      ]
+    },
+    "posui__02": {
+      "name": "关隘",
+      "description": "破碎空明关隘。",
+      "exits": {
+        "south": "posui__01",
+        "north": "posui__03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "posui__03": {
+      "name": "决战",
+      "description": "破碎空明决战。",
+      "exits": {
+        "south": "posui__02"
+      },
+      "npcs": [
+        "pk_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "pk_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "pk_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫空明之影之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2520,
+    "potential": 1220,
+    "money": 890,
+    "items": {
+      "kongming_z": 1
+    }
+  }
+}

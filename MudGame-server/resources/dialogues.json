@@ -911,5 +911,75 @@
     "title": "海底采珠",
     "opening": "采珠人朝你点头致意。江湖路远，多一个朋友多一条路。",
     "options": []
+  },
+  "dlg_yz_musician": {
+    "id": "dlg_yz_musician",
+    "npcId": "yz_musician",
+    "title": "琴师",
+    "opening": "扬州琴师朝你点头致意。",
+    "options": []
+  },
+  "dlg_bs_tea": {
+    "id": "dlg_bs_tea",
+    "npcId": "bs_tea_house",
+    "title": "茶掌柜",
+    "opening": "巴蜀茶掌柜朝你点头致意。",
+    "options": []
+  },
+  "dlg_sb_scout": {
+    "id": "dlg_sb_scout",
+    "npcId": "sb_scout_captain",
+    "title": "斥候长",
+    "opening": "塞北斥候长朝你点头致意。",
+    "options": []
+  },
+  "dlg_jn_poet": {
+    "id": "dlg_jn_poet",
+    "npcId": "jn_poet",
+    "title": "诗人",
+    "opening": "江南诗人朝你点头致意。",
+    "options": []
+  },
+  "dlg_dm_sailor": {
+    "id": "dlg_dm_sailor",
+    "npcId": "dm_sailor",
+    "title": "老水手",
+    "opening": "东溟水手朝你点头致意。",
+    "options": []
+  },
+  "dlg_yz_m2": {
+    "id": "dlg_yz_m2",
+    "npcId": "yz_m2",
+    "title": "琴师",
+    "opening": "扬州琴师朝你点头。",
+    "options": []
+  },
+  "dlg_bs_t2": {
+    "id": "dlg_bs_t2",
+    "npcId": "bs_t2",
+    "title": "茶掌柜",
+    "opening": "巴蜀茶掌柜朝你点头。",
+    "options": []
+  },
+  "dlg_sb_s2": {
+    "id": "dlg_sb_s2",
+    "npcId": "sb_s2",
+    "title": "斥候长",
+    "opening": "塞北斥候长朝你点头。",
+    "options": []
+  },
+  "dlg_jn_p2": {
+    "id": "dlg_jn_p2",
+    "npcId": "jn_p2",
+    "title": "诗人",
+    "opening": "江南诗人朝你点头。",
+    "options": []
+  },
+  "dlg_dm_s2": {
+    "id": "dlg_dm_s2",
+    "npcId": "dm_s2",
+    "title": "老水手",
+    "opening": "东溟水手朝你点头。",
+    "options": []
   }
 }

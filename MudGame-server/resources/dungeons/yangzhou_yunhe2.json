@@ -1,0 +1,137 @@
+{
+  "id": "yangzhou_yunhe2",
+  "name": "运河夜战",
+  "description": "运河夜战。",
+  "order": 52,
+  "chainId": "yangzhou_caoyun",
+  "chainName": "运河风云",
+  "chapter": 4,
+  "spawnRoomId": "yangzh_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "yangzh_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "yangzh_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "yh_yz": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "yangzh_00": {
+      "name": "入口",
+      "description": "运河夜战入口。",
+      "exits": {
+        "north": "yangzh_01"
+      }
+    },
+    "yangzh_01": {
+      "name": "通道",
+      "description": "运河夜战通道。",
+      "exits": {
+        "south": "yangzh_00",
+        "north": "yangzh_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "yz2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "yz2_guard",
+        "yz2_guard"
+      ]
+    },
+    "yangzh_02": {
+      "name": "关隘",
+      "description": "运河夜战关隘。",
+      "exits": {
+        "south": "yangzh_01",
+        "north": "yangzh_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "yangzh_03": {
+      "name": "决战",
+      "description": "运河夜战决战。",
+      "exits": {
+        "south": "yangzh_02"
+      },
+      "npcs": [
+        "yz2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "yz2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "yz2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫漕帮叛首之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2700,
+    "potential": 1220,
+    "money": 950,
+    "items": {
+      "yunhe_g": 1
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "id": "bashu_tangmen2",
+  "name": "唐门天梯",
+  "description": "唐门天梯。",
+  "order": 53,
+  "chainId": "yangzhou_caoyun",
+  "chainName": "运河风云",
+  "chapter": 5,
+  "spawnRoomId": "bashu__00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "bashu__00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "bashu__02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "tm_tt": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "bashu__00": {
+      "name": "入口",
+      "description": "唐门天梯入口。",
+      "exits": {
+        "north": "bashu__01"
+      }
+    },
+    "bashu__01": {
+      "name": "通道",
+      "description": "唐门天梯通道。",
+      "exits": {
+        "south": "bashu__00",
+        "north": "bashu__02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "tm2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "tm2_guard",
+        "tm2_guard"
+      ]
+    },
+    "bashu__02": {
+      "name": "关隘",
+      "description": "唐门天梯关隘。",
+      "exits": {
+        "south": "bashu__01",
+        "north": "bashu__03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "bashu__03": {
+      "name": "决战",
+      "description": "唐门天梯决战。",
+      "exits": {
+        "south": "bashu__02"
+      },
+      "npcs": [
+        "tm2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "tm2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "tm2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫唐门大长老之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2760,
+    "potential": 1220,
+    "money": 970,
+    "items": {
+      "tangmen_z": 1
+    }
+  }
+}

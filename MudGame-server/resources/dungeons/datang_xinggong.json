@@ -1,0 +1,137 @@
+{
+  "id": "datang_xinggong",
+  "name": "行宫惊变",
+  "description": "行宫夜变。",
+  "order": 47,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 19,
+  "spawnRoomId": "datang_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "datang_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "datang_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "xb_xg": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "datang_00": {
+      "name": "入口",
+      "description": "行宫惊变入口。",
+      "exits": {
+        "north": "datang_01"
+      }
+    },
+    "datang_01": {
+      "name": "通道",
+      "description": "行宫惊变通道。",
+      "exits": {
+        "south": "datang_00",
+        "north": "datang_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "gb2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "gb2_guard",
+        "gb2_guard"
+      ]
+    },
+    "datang_02": {
+      "name": "关隘",
+      "description": "行宫惊变关隘。",
+      "exits": {
+        "south": "datang_01",
+        "north": "datang_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "datang_03": {
+      "name": "决战",
+      "description": "行宫惊变决战。",
+      "exits": {
+        "south": "datang_02"
+      },
+      "npcs": [
+        "gb2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "gb2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "gb2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫行宫刺客首之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2400,
+    "potential": 1220,
+    "money": 850,
+    "items": {
+      "xinggong_jian": 1
+    }
+  }
+}

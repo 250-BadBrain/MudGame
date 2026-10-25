@@ -1,0 +1,137 @@
+{
+  "id": "bianhuang_jueji",
+  "name": "边荒绝地",
+  "description": "边荒绝地。",
+  "order": 50,
+  "chainId": "bianhuang_legend",
+  "chainName": "边荒传说",
+  "chapter": 8,
+  "spawnRoomId": "bianhu_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "bianhu_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "bianhu_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "jj_sl": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "bianhu_00": {
+      "name": "入口",
+      "description": "边荒绝地入口。",
+      "exits": {
+        "north": "bianhu_01"
+      }
+    },
+    "bianhu_01": {
+      "name": "通道",
+      "description": "边荒绝地通道。",
+      "exits": {
+        "south": "bianhu_00",
+        "north": "bianhu_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "bh2_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "bh2_guard",
+        "bh2_guard"
+      ]
+    },
+    "bianhu_02": {
+      "name": "关隘",
+      "description": "边荒绝地关隘。",
+      "exits": {
+        "south": "bianhu_01",
+        "north": "bianhu_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "bianhu_03": {
+      "name": "决战",
+      "description": "边荒绝地决战。",
+      "exits": {
+        "south": "bianhu_02"
+      },
+      "npcs": [
+        "bh2_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "bh2_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "bh2_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫绝地之主之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2580,
+    "potential": 1220,
+    "money": 910,
+    "items": {
+      "jueji_h": 1
+    }
+  }
+}

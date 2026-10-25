@@ -610,5 +610,197 @@
       }
     },
     "repeatable": false
+  },
+  "xinggong_aftermath": {
+    "id": "xinggong_aftermath",
+    "name": "行宫余波",
+    "description": "行宫余波",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datang_xinggong",
+        "description": "行宫余波",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 300,
+      "potential": 200,
+      "money": 400,
+      "flags": {
+        "xinggong_aftermath_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "langfan_legacy": {
+    "id": "langfan_legacy",
+    "name": "浪翻云遗篇",
+    "description": "浪翻云遗篇",
+    "giverNpcId": "jn_zither_player",
+    "turnInNpcId": "jn_zither_player",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_fuyu_langfan",
+        "description": "浪翻云遗篇",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 310,
+      "potential": 210,
+      "money": 420,
+      "flags": {
+        "langfan_legacy_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "kongming_daozhen": {
+    "id": "kongming_daozhen",
+    "name": "空明道真",
+    "description": "空明道真",
+    "giverNpcId": "jm2_old_monk",
+    "turnInNpcId": "jm2_old_monk",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_posui_kongming",
+        "description": "空明道真",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 320,
+      "potential": 220,
+      "money": 440,
+      "flags": {
+        "kongming_daozhen_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "jueji_houji": {
+    "id": "jueji_houji",
+    "name": "绝地后记",
+    "description": "绝地后记",
+    "giverNpcId": "sb_centurion",
+    "turnInNpcId": "sb_centurion",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_bianhuang_jueji",
+        "description": "绝地后记",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 330,
+      "potential": 230,
+      "money": 460,
+      "flags": {
+        "jueji_houji_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "longgong_yiji": {
+    "id": "longgong_yiji",
+    "name": "龙宫遗事",
+    "description": "龙宫遗事",
+    "giverNpcId": "dm_old_captain",
+    "turnInNpcId": "dm_old_captain",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_luoshui_guilou",
+        "description": "龙宫遗事",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 340,
+      "potential": 240,
+      "money": 480,
+      "flags": {
+        "longgong_yiji_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "xinggong_after": {
+    "id": "xinggong_after",
+    "name": "行宫余波",
+    "description": "行宫余波",
+    "giverNpcId": "dd2_palace_guard",
+    "turnInNpcId": "dd2_palace_guard",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datang_xinggong",
+        "description": "行宫余波",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 300,
+      "potential": 200,
+      "money": 400,
+      "flags": {
+        "xinggong_after_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "kongming_dao": {
+    "id": "kongming_dao",
+    "name": "空明道真",
+    "description": "空明道真",
+    "giverNpcId": "jm2_old_monk",
+    "turnInNpcId": "jm2_old_monk",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_posui_kongming",
+        "description": "空明道真",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 320,
+      "potential": 220,
+      "money": 440,
+      "flags": {
+        "kongming_dao_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "longgong_yi": {
+    "id": "longgong_yi",
+    "name": "龙宫遗事",
+    "description": "龙宫遗事",
+    "giverNpcId": "dm_old_captain",
+    "turnInNpcId": "dm_old_captain",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_luoshui_guilou",
+        "description": "龙宫遗事",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 340,
+      "potential": 240,
+      "money": 480,
+      "flags": {
+        "longgong_yi_completed": true
+      }
+    },
+    "repeatable": false
   }
 }

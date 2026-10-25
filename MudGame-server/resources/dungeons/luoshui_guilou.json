@@ -1,0 +1,137 @@
+{
+  "id": "luoshui_guilou",
+  "name": "归墟龙宫",
+  "description": "龙宫遗址。",
+  "order": 51,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 11,
+  "spawnRoomId": "luoshu_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务",
+      "puzzleId": "briefing",
+      "rooms": [
+        "luoshu_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "要点已明。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "lg_tw": true
+      },
+      "message": "通道开启。",
+      "repeatMessage": "已开。"
+    }
+  },
+  "rooms": {
+    "luoshu_00": {
+      "name": "入口",
+      "description": "归墟龙宫入口。",
+      "exits": {
+        "north": "luoshu_01"
+      }
+    },
+    "luoshu_01": {
+      "name": "通道",
+      "description": "归墟龙宫通道。",
+      "exits": {
+        "south": "luoshu_00",
+        "north": "luoshu_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "gw_guard"
+          ],
+          "message": "敌人堵住去路。"
+        }
+      },
+      "npcs": [
+        "gw_guard",
+        "gw_guard"
+      ]
+    },
+    "luoshu_02": {
+      "name": "关隘",
+      "description": "归墟龙宫关隘。",
+      "exits": {
+        "south": "luoshu_01",
+        "north": "luoshu_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "luoshu_03": {
+      "name": "决战",
+      "description": "归墟龙宫决战。",
+      "exits": {
+        "south": "luoshu_02"
+      },
+      "npcs": [
+        "gw_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "gw_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "gw_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "挫龙王虚影之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2640,
+    "potential": 1220,
+    "money": 930,
+    "items": {
+      "longgong_z": 1
+    }
+  }
+}

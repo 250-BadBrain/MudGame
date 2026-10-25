@@ -1447,7 +1447,8 @@
     "effects": {
       "attack": 5,
       "critRate": 3,
-      "initiative": 3
+      "initiative": 3,
+      "dodge": 2
     },
     "source": "东都宫变"
   },
@@ -1465,7 +1466,8 @@
     "effects": {
       "defense": 10,
       "dodge": 3,
-      "parry": 2
+      "parry": 2,
+      "maxHp": 30
     },
     "source": "运河追击"
   },
@@ -1483,7 +1485,8 @@
     "effects": {
       "critRate": 4,
       "maxMp": 20,
-      "attack": 2
+      "attack": 2,
+      "hitRate": 2
     },
     "source": "魔师宫秘道"
   },
@@ -1502,7 +1505,8 @@
       "attack": 3,
       "defense": 3,
       "maxMp": 20,
-      "dodge": 3
+      "dodge": 3,
+      "initiative": 2
     },
     "source": "战神图录·终卷"
   },
@@ -1519,7 +1523,7 @@
     "equipmentSlot": "BODY",
     "effects": {
       "defense": 8,
-      "parry": 3,
+      "parry": 2,
       "hitRate": 3
     },
     "source": "边荒传奇"
@@ -1538,7 +1542,8 @@
     "effects": {
       "maxMp": 25,
       "hitRate": 4,
-      "maxHp": 40
+      "maxHp": 40,
+      "critRate": 1
     },
     "source": "洛水龙吟"
   },
@@ -1556,7 +1561,8 @@
     "effects": {
       "defense": 6,
       "hitRate": 5,
-      "critRate": 2
+      "critRate": 2,
+      "dodge": 2
     },
     "source": "盐帮内乱"
   },
@@ -1574,7 +1580,8 @@
     "effects": {
       "critRate": 5,
       "attack": 3,
-      "hitRate": 2
+      "hitRate": 2,
+      "defense": 2
     },
     "source": "唐门试炼"
   },
@@ -1592,7 +1599,8 @@
     "effects": {
       "attack": 6,
       "initiative": 3,
-      "defense": 3
+      "defense": 3,
+      "hitRate": 2
     },
     "source": "狼烟再起"
   },
@@ -1610,7 +1618,8 @@
     "effects": {
       "attack": 8,
       "hitRate": 5,
-      "critRate": 2
+      "critRate": 2,
+      "dodge": 2
     },
     "source": "剑首之争"
   },
@@ -1692,6 +1701,651 @@
     "usable": true,
     "effects": {
       "learnSkill": "liangyi_zhengang"
+    }
+  },
+  "xinggong_jian": {
+    "name": "行宫密剑",
+    "description": "行宫惊变奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3600,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 9,
+      "critRate": 3
+    },
+    "source": "行宫惊变"
+  },
+  "langfan_jian": {
+    "name": "浪翻云剑穗",
+    "description": "浪翻云试炼的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3800,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 6,
+      "hitRate": 4
+    },
+    "source": "浪翻云试炼"
+  },
+  "kongming_zhu": {
+    "name": "空明珠",
+    "description": "破碎空明的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3800,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "maxMp": 30,
+      "defense": 4
+    },
+    "source": "破碎空明"
+  },
+  "jueji_hu": {
+    "name": "绝地护符",
+    "description": "边荒绝地的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3800,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 8,
+      "maxHp": 60
+    },
+    "source": "边荒绝地"
+  },
+  "longgong_zhu": {
+    "name": "龙宫宝珠",
+    "description": "归墟龙宫的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 5,
+      "maxMp": 25
+    },
+    "source": "归墟龙宫"
+  },
+  "yunhe_gangdao": {
+    "name": "漕运钢刀",
+    "description": "运河夜战的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 10,
+      "defense": 3
+    },
+    "source": "运河夜战"
+  },
+  "tangmen_zhenzhu": {
+    "name": "唐门毒珠",
+    "description": "唐门天梯的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "critRate": 4,
+      "attack": 4
+    },
+    "source": "唐门天梯"
+  },
+  "xueling_hu": {
+    "name": "雪岭护符",
+    "description": "狼山雪岭的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 7,
+      "dodge": 3
+    },
+    "source": "狼山雪岭"
+  },
+  "jianchi_mingjian": {
+    "name": "剑池名剑",
+    "description": "剑池深处的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4400,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11,
+      "hitRate": 4
+    },
+    "source": "剑池深处"
+  },
+  "shengong_qi": {
+    "name": "神工遗器",
+    "description": "神工秘殿的奖励装备。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4600,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 6,
+      "defense": 6,
+      "maxMp": 20
+    },
+    "source": "神工秘殿"
+  },
+  "posui_zz_page": {
+    "name": "破碎至尊残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "posui_zhizun"
+    }
+  },
+  "wujin_bian_page": {
+    "name": "无尽鞭残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "wujin_bian"
+    }
+  },
+  "leiting_page": {
+    "name": "雷霆枪法残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "leiting_qiangfa"
+    }
+  },
+  "yaotong_page": {
+    "name": "妖瞳锁灵残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "yaotong_suoli"
+    }
+  },
+  "jinhuan_page": {
+    "name": "金环钩法残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "jinhuan_goufa"
+    }
+  },
+  "shanshan_page": {
+    "name": "闪闪棍法残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "shanshan_gunfa"
+    }
+  },
+  "lieshi_zz_page": {
+    "name": "裂石之锏残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "lieshi_zhijue"
+    }
+  },
+  "hanshui_zz_page": {
+    "name": "寒水之诀残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "hanshui_zhijue"
+    }
+  },
+  "wugou_zz_page": {
+    "name": "无钩之诀残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "wugou_zhijue"
+    }
+  },
+  "bengshan_zz_page": {
+    "name": "崩山之诀残页",
+    "description": "使用后可参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "bengshan_zhijue"
+    }
+  },
+  "langfan_j": {
+    "name": "浪翻云剑穗",
+    "description": "浪翻云试炼奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3800,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 6,
+      "hitRate": 4
+    },
+    "source": "浪翻云试炼"
+  },
+  "kongming_z": {
+    "name": "空明珠",
+    "description": "破碎空明奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3800,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "maxMp": 30,
+      "defense": 4
+    },
+    "source": "破碎空明"
+  },
+  "jueji_h": {
+    "name": "绝地护符",
+    "description": "边荒绝地奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3800,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 8,
+      "maxHp": 60
+    },
+    "source": "边荒绝地"
+  },
+  "longgong_z": {
+    "name": "龙宫宝珠",
+    "description": "归墟龙宫奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 5,
+      "maxMp": 25
+    },
+    "source": "归墟龙宫"
+  },
+  "yunhe_g": {
+    "name": "漕运钢刀",
+    "description": "运河夜战奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 10,
+      "defense": 3
+    },
+    "source": "运河夜战"
+  },
+  "tangmen_z": {
+    "name": "唐门毒珠",
+    "description": "唐门天梯奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "critRate": 4,
+      "attack": 4
+    },
+    "source": "唐门天梯"
+  },
+  "xueling_h": {
+    "name": "雪岭护符",
+    "description": "狼山雪岭奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 7,
+      "dodge": 3
+    },
+    "source": "狼山雪岭"
+  },
+  "jianchi_m": {
+    "name": "剑池名剑",
+    "description": "剑池深处奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4400,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11,
+      "hitRate": 4
+    },
+    "source": "剑池深处"
+  },
+  "shengong_q": {
+    "name": "神工遗器",
+    "description": "神工秘殿奖励。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 4600,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 6,
+      "defense": 6,
+      "maxMp": 20
+    },
+    "source": "神工秘殿"
+  },
+  "posui_zz_pg": {
+    "name": "破碎至尊残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "posui_zz"
+    }
+  },
+  "wujin_pg": {
+    "name": "无尽鞭残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "wujin_bian"
+    }
+  },
+  "leiting_pg": {
+    "name": "雷霆枪法残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "leiting_qf"
+    }
+  },
+  "yaotong_pg": {
+    "name": "妖瞳锁灵残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "yaotong_sl"
+    }
+  },
+  "jinhuan_pg": {
+    "name": "金环钩法残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "jinhuan_gf"
+    }
+  },
+  "shanshan_pg": {
+    "name": "闪闪棍法残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "shanshan_gf"
+    }
+  },
+  "lieshi_zz_pg": {
+    "name": "裂石之锏残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "lieshi_zj"
+    }
+  },
+  "hanshui_zz_pg": {
+    "name": "寒水之诀残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "hanshui_zj"
+    }
+  },
+  "wugou_zz_pg": {
+    "name": "无钩之诀残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "wugou_zj"
+    }
+  },
+  "bengshan_zz_pg": {
+    "name": "崩山之诀残页",
+    "description": "参悟入门。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 800,
+    "rarity": 5,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "bengshan_zj"
     }
   }
 }
