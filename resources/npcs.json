@@ -1024,52 +1024,708 @@
       }
     }
   },
-  "tingfang_shadow": {
-    "name": "婷芳氏",
-    "title": "赵境少女",
-    "description": "她衣衫虽旧，神色却倔强清亮。她似乎知道这个时代的险恶，也隐约觉得你并不完全属于此处。",
+  "csj_boatman": {
+    "name": "老船夫",
+    "title": "扬子渡艄公",
+    "description": "老船夫在渡口撑了三十年船，见过太多少年郎意气风发地上船，再没回来。",
     "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "dialogueId": "xunqin_tingfang_intro",
+    "role": "enemy",
+    "importance": "common",
     "instanceOnly": true,
     "attributes": {
-      "level": 1,
-      "realm": "ordinary",
+      "level": 3,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 11,
+        "perception": 9,
+        "willpower": 9,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
       "resources": {
-        "hp": 70,
-        "maxHp": 70,
-        "mp": 60,
-        "trainedMaxMp": 60,
-        "maxMp": 60,
+        "hp": 80,
+        "maxHp": 80,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
         "spirit": 100,
         "maxSpirit": 100
       },
       "derived": {
-        "attack": 8,
-        "defense": 8,
-        "hitRate": 70,
-        "dodge": 70,
-        "parry": 40,
-        "critRate": 1,
+        "attack": 12,
+        "defense": 10,
+        "hitRate": 75,
+        "dodge": 60,
+        "parry": 50,
+        "critRate": 2,
         "attackSpeed": 4,
-        "initiative": 80
+        "initiative": 70,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "aggressive": false,
+    "combatMode": "protected",
+    "dialogueId": "dlg_csj_boatman"
+  },
+  "csj_yuwen_soldier": {
+    "name": "宇文阀武士",
+    "title": "宇文阀亲兵",
+    "description": "铁甲外罩着黑色披风，刀是北方好钢，出手没有多余的花巧。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 6,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 16,
+        "constitution": 16,
+        "agility": 14,
+        "perception": 11,
+        "willpower": 11,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 115,
+        "maxHp": 115,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 20,
+        "defense": 12,
+        "hitRate": 88,
+        "dodge": 70,
+        "parry": 60,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 78,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
       }
     }
   },
-  "zhao_bully": {
-    "name": "荒村恶霸",
-    "title": "横行村里",
-    "description": "这恶霸仗着几分蛮力在荒村欺人，见你插手，脸色顿时凶狠起来。",
-    "faction": "bandits",
+  "csj_yuwen_scout": {
+    "name": "巡江刀手",
+    "title": "宇文阀斥候",
+    "description": "巡江刀手一身短打，步法滑溜，刀专挑下三路招呼。",
+    "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
-    "dialogueId": "xunqin_bully_confrontation",
-    "aggressive": true,
     "instanceOnly": true,
     "attributes": {
-      "level": 5,
+      "level": 8,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 18,
+        "agility": 16,
+        "perception": 12,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 23,
+        "defense": 13,
+        "hitRate": 92,
+        "dodge": 76,
+        "parry": 62,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 82,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "csj_yuwen_vanguard": {
+    "name": "宇文阀先锋",
+    "title": "宇文阀先锋统领",
+    "description": "先锋统领纵马立在洲头，屡经沙场的煞气不用拔刀便已逼人。",
+    "faction": "unknown_assassins",
+    "role": "elite",
+    "importance": "elite",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 11,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 21,
+        "constitution": 21,
+        "agility": 19,
+        "perception": 13,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 170,
+        "maxHp": 170,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 27,
+        "defense": 15,
+        "hitRate": 98,
+        "dodge": 82,
+        "parry": 68,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 85,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "csj_yuwen_huaji": {
+    "name": "宇文化及",
+    "title": "宇文阀少主",
+    "description": "宇文阀少主宇文化及按剑立于柳林之前，眼高于顶，杀意却实实在在。",
+    "faction": "unknown_assassins",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 15,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 25,
+        "constitution": 25,
+        "agility": 23,
+        "perception": 15,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 230,
+        "maxHp": 230,
+        "mp": 80,
+        "trainedMaxMp": 80,
+        "maxMp": 80,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 33,
+        "defense": 18,
+        "hitRate": 108,
+        "dodge": 90,
+        "parry": 76,
+        "critRate": 8,
+        "attackSpeed": 4,
+        "initiative": 88,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "csj_fu_junzhuo": {
+    "name": "傅君婥",
+    "title": "高丽弈剑门客",
+    "description": "白衣女子抱剑倚柳，气息紊乱却掩不住一身剑气——正是携《长生诀》北上的傅君婥。",
+    "faction": "neutral",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 18,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 28,
+        "constitution": 28,
+        "agility": 26,
+        "perception": 17,
+        "willpower": 17,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 240,
+        "maxHp": 240,
+        "mp": 100,
+        "trainedMaxMp": 100,
+        "maxMp": 100,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 36,
+        "defense": 20,
+        "hitRate": 110,
+        "dodge": 96,
+        "parry": 80,
+        "critRate": 8,
+        "attackSpeed": 4,
+        "initiative": 90,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "aggressive": false,
+    "combatMode": "protected",
+    "dialogueId": "dlg_csj_fu_junzhuo"
+  },
+  "nj_sentinel": {
+    "name": "怒蛟帮哨兵",
+    "title": "水寨哨卫",
+    "description": "哨兵肩头中了一刀，血浸了半边衣襟，仍死死盯着寨外。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 7,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 17,
+        "constitution": 17,
+        "agility": 15,
+        "perception": 11,
+        "willpower": 11,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 100,
+        "maxHp": 100,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 16,
+        "defense": 12,
+        "hitRate": 86,
+        "dodge": 74,
+        "parry": 58,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 78,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "aggressive": false,
+    "combatMode": "protected",
+    "dialogueId": "dlg_nj_sentinel"
+  },
+  "nj_wounded": {
+    "name": "怒蛟帮伤兵",
+    "title": "聚义庭守卫",
+    "description": "帮众背上插着一支短箭，靠着廊柱喘息，手里还攥着刀。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 6,
       "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 16,
+        "constitution": 16,
+        "agility": 14,
+        "perception": 11,
+        "willpower": 11,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 70,
+        "maxHp": 70,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 10,
+        "hitRate": 80,
+        "dodge": 64,
+        "parry": 52,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 70,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "aggressive": false,
+    "combatMode": "protected",
+    "dialogueId": "dlg_nj_wounded",
+    "nonCombat": true
+  },
+  "nj_daoshou": {
+    "name": "魔师宫刀手",
+    "title": "方夜羽麾下",
+    "description": "魔师宫刀手刀法狠辣干净，一言不发便拔刀砍人。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 8,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 18,
+        "agility": 16,
+        "perception": 12,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 35,
+        "trainedMaxMp": 35,
+        "maxMp": 35,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 24,
+        "defense": 13,
+        "hitRate": 94,
+        "dodge": 78,
+        "parry": 64,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 82,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "nj_qiangwei": {
+    "name": "魔师宫枪卫",
+    "title": "方夜羽麾下",
+    "description": "枪卫的长枪使开了泼水不进，枪尖始终不离敌人咽喉。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 10,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 20,
+        "agility": 18,
+        "perception": 13,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 150,
+        "maxHp": 150,
+        "mp": 35,
+        "trainedMaxMp": 35,
+        "maxMp": 35,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 26,
+        "defense": 15,
+        "hitRate": 96,
+        "dodge": 76,
+        "parry": 72,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "nj_spy": {
+    "name": "魔师宫细作",
+    "title": "方夜羽麾下",
+    "description": "细作身法鬼魅般飘忽，专拣人背後放火偷袭。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 9,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 19,
+        "constitution": 19,
+        "agility": 17,
+        "perception": 12,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
       "resources": {
         "hp": 120,
         "maxHp": 120,
@@ -1080,290 +1736,330 @@
         "maxSpirit": 100
       },
       "derived": {
-        "attack": 3,
-        "defense": 3,
-        "hitRate": 62,
-        "dodge": 40,
-        "parry": 30,
-        "critRate": 3,
-        "attackSpeed": 4,
-        "initiative": 80
-      }
-    }
-  },
-  "zhao_rider": {
-    "name": "赵国游骑",
-    "title": "追兵",
-    "description": "游骑披着轻甲，刀锋上带着风沙。他们认定你就是要追的人，出手毫不迟疑。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "common",
-    "dialogueId": "xunqin_rider_warning",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": {
-      "level": 7,
-      "realm": "trainee",
-      "resources": {
-        "hp": 16,
-        "maxHp": 16,
-        "mp": 50,
-        "trainedMaxMp": 50,
-        "maxMp": 50,
-        "spirit": 100,
-        "maxSpirit": 100
-      },
-      "derived": {
-        "attack": 3,
-        "defense": 4,
-        "hitRate": 64,
-        "dodge": 44,
-        "parry": 34,
-        "critRate": 4,
-        "attackSpeed": 4,
-        "initiative": 80
-      }
-    }
-  },
-  "zhao_retainer": {
-    "name": "赵府门客",
-    "title": "追踪者",
-    "description": "这名门客眼神阴沉，盯着你手中的铜光痕迹，显然并非只为追杀而来。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "elite",
-    "dialogueId": "xunqin_retainer_warning",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": {
-      "level": 9,
-      "realm": "fighter",
-      "resources": {
-        "hp": 22,
-        "maxHp": 22,
-        "mp": 70,
-        "trainedMaxMp": 70,
-        "maxMp": 70,
-        "spirit": 100,
-        "maxSpirit": 100
-      },
-      "derived": {
-        "attack": 3,
-        "defense": 4,
-        "hitRate": 64,
-        "dodge": 42,
-        "parry": 34,
+        "attack": 25,
+        "defense": 12,
+        "hitRate": 100,
+        "dodge": 88,
+        "parry": 58,
         "critRate": 5,
         "attackSpeed": 4,
-        "initiative": 80
+        "initiative": 90,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
       }
     }
   },
-  "zhao_ya_shadow": {
-    "name": "赵雅",
-    "title": "雅湖主人",
-    "description": "她立在水榭灯影间，语气亲近，目光却能捕捉最细微的迟疑。温柔与试探在她身上从不矛盾。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 18,
-      "realm": "expert",
-      "resources": { "hp": 120, "maxHp": 120, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 140, "maxSpirit": 140 },
-      "derived": { "attack": 12, "defense": 14, "hitRate": 86, "dodge": 78, "parry": 65, "critRate": 6, "attackSpeed": 4, "initiative": 105 }
-    }
-  },
-  "zhao_mu_banquet_shadow": {
-    "name": "赵穆",
-    "title": "赵国权臣",
-    "description": "他高居宴席上首，谈笑间便能决定旁人的荣辱。那份漫不经心，更像确信所有人都已落在局中。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 25,
-      "realm": "expert",
-      "resources": { "hp": 180, "maxHp": 180, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 130, "maxSpirit": 130 },
-      "derived": { "attack": 18, "defense": 22, "hitRate": 82, "dodge": 62, "parry": 72, "critRate": 5, "attackSpeed": 4, "initiative": 95 }
-    }
-  },
-  "lian_jin_guest_shadow": {
-    "name": "连晋",
-    "title": "宴中剑客",
-    "description": "他换下渡口的杀气，举杯时风度从容，但每一次目光相触都像在丈量下一场比剑的距离。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 24,
-      "realm": "expert",
-      "resources": { "hp": 170, "maxHp": 170, "mp": 220, "trainedMaxMp": 220, "maxMp": 220, "spirit": 120, "maxSpirit": 120 },
-      "derived": { "attack": 22, "defense": 18, "hitRate": 92, "dodge": 78, "parry": 85, "critRate": 10, "attackSpeed": 3, "initiative": 115 }
-    }
-  },
-  "ya_lake_assassin": {
-    "name": "雅湖伏客",
-    "title": "栽赃死士",
-    "description": "伏客蒙着面，腰间却故意悬着乌家马纹。他们不求脱身，只求把一场刺杀变成无法辩解的证据。",
+  "nj_shuangjian": {
+    "name": "魔师宫双剑卫",
+    "title": "方夜羽贴身护卫",
+    "description": "双剑卫左右手各持一剑，攻守之间如臂使指。",
     "faction": "unknown_assassins",
+    "role": "elite",
+    "importance": "elite",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 13,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 23,
+        "constitution": 23,
+        "agility": 21,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 45,
+        "trainedMaxMp": 45,
+        "maxMp": 45,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 30,
+        "defense": 16,
+        "hitRate": 102,
+        "dodge": 90,
+        "parry": 70,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 88,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "nj_fang_yeyu": {
+    "name": "方夜羽",
+    "title": "魔师宫少主",
+    "description": "魔师宫少主方夜羽白衣胜雪，儒雅从容，出手却是魔门最狠辣的路子。",
+    "faction": "unknown_assassins",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 17,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 27,
+        "constitution": 27,
+        "agility": 25,
+        "perception": 16,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 280,
+        "maxHp": 280,
+        "mp": 90,
+        "trainedMaxMp": 90,
+        "maxMp": 90,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 36,
+        "defense": 19,
+        "hitRate": 110,
+        "dodge": 96,
+        "parry": 80,
+        "critRate": 8,
+        "attackSpeed": 4,
+        "initiative": 92,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "combatMode": "defeat"
+  },
+  "jyg_stone_guard": {
+    "name": "惊雁宫石像卫",
+    "title": "上古守卫",
+    "description": "石像卫兵通体青灰，行动迟缓，长戟势大力沉。",
+    "faction": "neutral",
     "role": "enemy",
     "importance": "common",
-    "aggressive": true,
     "instanceOnly": true,
     "attributes": {
-      "level": 19,
+      "level": 10,
       "realm": "fighter",
-      "resources": { "hp": 38, "maxHp": 38, "mp": 120, "trainedMaxMp": 120, "maxMp": 120, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 7, "defense": 8, "hitRate": 76, "dodge": 60, "parry": 56, "critRate": 6, "attackSpeed": 4, "initiative": 94 }
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 20,
+        "agility": 18,
+        "perception": 13,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 20,
+        "trainedMaxMp": 20,
+        "maxMp": 20,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 25,
+        "defense": 18,
+        "hitRate": 90,
+        "dodge": 58,
+        "parry": 70,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 72,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
-  "zhao_hidden_guard_captain": {
-    "name": "赵府暗卫首领",
-    "title": "后坞灭口者",
-    "description": "暗卫首领半身藏在芦影中，袖口沾着烧毁名帖的灰。他比宴上的门客更清楚今夜真正的安排。",
-    "faction": "unknown_assassins",
+  "jyg_sword_guard": {
+    "name": "惊雁宫石剑卫",
+    "title": "剑冢守卫",
+    "description": "石剑卫破壁而出，古拙剑势里藏着斩尽闯宫者的决意。",
+    "faction": "neutral",
     "role": "enemy",
-    "importance": "boss",
-    "aggressive": true,
+    "importance": "common",
     "instanceOnly": true,
     "attributes": {
-      "level": 26,
-      "realm": "expert",
-      "resources": { "hp": 60, "maxHp": 60, "mp": 210, "trainedMaxMp": 210, "maxMp": 210, "spirit": 120, "maxSpirit": 120 },
-      "derived": { "attack": 9, "defense": 11, "hitRate": 84, "dodge": 66, "parry": 72, "critRate": 9, "attackSpeed": 3, "initiative": 108 }
+      "level": 13,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 23,
+        "constitution": 23,
+        "agility": 21,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 190,
+        "maxHp": 190,
+        "mp": 25,
+        "trainedMaxMp": 25,
+        "maxMp": 25,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 30,
+        "defense": 20,
+        "hitRate": 98,
+        "dodge": 66,
+        "parry": 74,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 76,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
-  "wu_yingyuan_shadow": {
-    "name": "乌应元",
-    "title": "乌家之主",
-    "description": "他衣着并不奢华，目光却像在衡量一匹千里马的筋骨。乌家的每条商路与退路，都藏在这份沉稳之后。",
+  "jyg_war_phantom": {
+    "name": "战神幻影",
+    "title": "图录兵戈之气",
+    "description": "由殿中千载兵戈之气凝成的巨大幻影，每一招都是战神图录的入门真意。",
     "faction": "neutral",
-    "role": "story",
-    "importance": "special",
+    "role": "boss",
+    "importance": "boss",
     "instanceOnly": true,
     "attributes": {
       "level": 20,
-      "realm": "expert",
-      "resources": { "hp": 150, "maxHp": 150, "mp": 160, "trainedMaxMp": 160, "maxMp": 160, "spirit": 120, "maxSpirit": 120 },
-      "derived": { "attack": 16, "defense": 20, "hitRate": 82, "dodge": 68, "parry": 74, "critRate": 5, "attackSpeed": 4, "initiative": 90 }
-    }
-  },
-  "ranch_raider": {
-    "name": "牧场蒙面客",
-    "title": "夜袭者",
-    "description": "蒙面客靴底沾着邯郸城泥，出手只求逼退阻拦者。他们熟悉牧场哨位，显然有人提前画过路线。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "common",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": {
-      "level": 15,
-      "realm": "fighter",
-      "resources": { "hp": 32, "maxHp": 32, "mp": 90, "trainedMaxMp": 90, "maxMp": 90, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 6, "defense": 7, "hitRate": 72, "dodge": 54, "parry": 50, "critRate": 5, "attackSpeed": 4, "initiative": 88 }
-    }
-  },
-  "zhao_retainer_captain": {
-    "name": "赵府门客首领",
-    "title": "石岭截路",
-    "description": "这名门客披着暗甲，刀法没有军中痕迹，眼神却习惯发号施令。他奉命寻找的东西远比一群战马重要。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "boss",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": {
-      "level": 22,
-      "realm": "expert",
-      "resources": { "hp": 55, "maxHp": 55, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 110, "maxSpirit": 110 },
-      "derived": { "attack": 9, "defense": 10, "hitRate": 82, "dodge": 62, "parry": 68, "critRate": 9, "attackSpeed": 3, "initiative": 105 }
-    }
-  },
-  "wu_tingfang_shadow": {
-    "name": "乌廷芳",
-    "title": "乌家小姐",
-    "description": "她一身利落骑装，眉目间英气逼人。面对邯郸暗流，她更愿相信自己的眼睛，而不是旁人的传闻。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 12,
-      "realm": "fighter",
-      "resources": { "hp": 100, "maxHp": 100, "mp": 90, "trainedMaxMp": 90, "maxMp": 90, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 12, "defense": 12, "hitRate": 76, "dodge": 82, "parry": 60, "critRate": 5, "attackSpeed": 4, "initiative": 90 }
-    }
-  },
-  "tao_fang_shadow": {
-    "name": "陶方",
-    "title": "乌家管事",
-    "description": "他风尘仆仆，言语谨慎，腰间的马鞭却从未离手。邯郸城里每一条退路，他似乎都预先看过。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "dialogueId": "xunqin_tao_fang_handan",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 14,
-      "realm": "fighter",
-      "resources": { "hp": 120, "maxHp": 120, "mp": 100, "trainedMaxMp": 100, "maxMp": 100, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 14, "defense": 15, "hitRate": 78, "dodge": 72, "parry": 68, "critRate": 4, "attackSpeed": 4, "initiative": 85 }
-    }
-  },
-  "zhao_mansion_guard": {
-    "name": "赵府卫士",
-    "title": "封巷甲士",
-    "description": "卫士甲叶压得很低，只露出一双审视来人的眼睛。刀鞘上的赵府印记在灯下泛着冷光。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "common",
-    "dialogueId": "xunqin_zhao_guard",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": {
-      "level": 11,
-      "realm": "fighter",
-      "resources": { "hp": 26, "maxHp": 26, "mp": 70, "trainedMaxMp": 70, "maxMp": 70, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 4, "defense": 6, "hitRate": 68, "dodge": 46, "parry": 45, "critRate": 4, "attackSpeed": 4, "initiative": 80 }
-    }
-  },
-  "lian_jin_shadow": {
-    "name": "连晋",
-    "title": "赵境剑客",
-    "description": "他持剑站在渡口，神情从容得近乎倨傲。剑锋尚未抬起，四周退路已像被无形剑势封住。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "boss",
-    "dialogueId": "xunqin_lian_jin_crossing",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": {
-      "level": 18,
-      "realm": "expert",
-      "resources": { "hp": 45, "maxHp": 45, "mp": 140, "trainedMaxMp": 140, "maxMp": 140, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 7, "defense": 8, "hitRate": 78, "dodge": 58, "parry": 62, "critRate": 8, "attackSpeed": 3, "initiative": 100 }
-    }
-  },
-  "retainer_swordsman": {
-    "name": "门客剑士",
-    "title": "断桥拦路",
-    "description": "剑士衣袖无风自动，目光冷得像铁。他守在断桥前，不许任何异数带着残简离开。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "boss",
-    "dialogueId": "xunqin_swordsman_warning",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": {
-      "level": 12,
-      "realm": "fighter",
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 30,
+        "constitution": 30,
+        "agility": 28,
+        "perception": 18,
+        "willpower": 18,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
       "resources": {
-        "hp": 32,
-        "maxHp": 32,
+        "hp": 330,
+        "maxHp": 330,
         "mp": 100,
         "trainedMaxMp": 100,
         "maxMp": 100,
@@ -1371,246 +2067,977 @@
         "maxSpirit": 100
       },
       "derived": {
-        "attack": 5,
-        "defense": 6,
-        "hitRate": 70,
-        "dodge": 48,
-        "parry": 42,
-        "critRate": 7,
+        "attack": 40,
+        "defense": 22,
+        "hitRate": 114,
+        "dodge": 98,
+        "parry": 82,
+        "critRate": 10,
         "attackSpeed": 4,
-        "initiative": 80
+        "initiative": 95,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "read_star_map",
+    "weaknessModifiers": {
+      "attack": -8,
+      "hitRate": -12,
+      "defense": -6
+    }
+  },
+  "bh_ji_qianqian": {
+    "name": "纪千千",
+    "title": "边荒名妓",
+    "description": "纪千千素衣不加钗环，眉目间却自有令千军侧目的气度。",
+    "faction": "neutral",
+    "role": "elite",
+    "importance": "elite",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 12,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 22,
+        "agility": 20,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 110,
+        "maxHp": 110,
+        "mp": 80,
+        "trainedMaxMp": 80,
+        "maxMp": 80,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 18,
+        "defense": 14,
+        "hitRate": 92,
+        "dodge": 84,
+        "parry": 56,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 84,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "aggressive": false,
+    "combatMode": "protected",
+    "dialogueId": "dlg_bh_ji_qianqian"
+  },
+  "bh_swordsman": {
+    "name": "荒集剑手",
+    "title": "护卫队剑手",
+    "description": "边荒集最好的剑手里挑出来的一个，话不多，剑很快。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 9,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 19,
+        "constitution": 19,
+        "agility": 17,
+        "perception": 12,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 20,
+        "defense": 12,
+        "hitRate": 90,
+        "dodge": 80,
+        "parry": 60,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "aggressive": false,
+    "combatMode": "protected"
+  },
+  "bh_rider": {
+    "name": "燕军游骑",
+    "title": "慕容垂麾下",
+    "description": "燕军游骑马术精湛，弯刀借马力劈砍，一击即走。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 11,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 21,
+        "constitution": 21,
+        "agility": 19,
+        "perception": 13,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 150,
+        "maxHp": 150,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 27,
+        "defense": 14,
+        "hitRate": 98,
+        "dodge": 80,
+        "parry": 64,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 86,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
       }
     }
   },
-  "tao_fang_sword_shadow": {
-    "name": "陶方",
-    "title": "乌家管事",
-    "description": "陶方守在剑馆外，手中马鞭卷得很紧。他比任何人都清楚，这张战帖背后还有别的文章。",
+  "bh_archer": {
+    "name": "燕军弓手",
+    "title": "慕容垂麾下",
+    "description": "燕军弓手开的是硬弓，箭箭咬着要害。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 12,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 22,
+        "agility": 20,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 30,
+        "trainedMaxMp": 30,
+        "maxMp": 30,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 29,
+        "defense": 11,
+        "hitRate": 106,
+        "dodge": 70,
+        "parry": 54,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 84,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "bh_captain": {
+    "name": "燕军骑督",
+    "title": "前锋骑兵统领",
+    "description": "燕军骑督久经战阵，长矛使开了如毒龙出洞。",
+    "faction": "unknown_assassins",
+    "role": "elite",
+    "importance": "elite",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 15,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 25,
+        "constitution": 25,
+        "agility": 23,
+        "perception": 15,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 210,
+        "maxHp": 210,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 33,
+        "defense": 17,
+        "hitRate": 106,
+        "dodge": 86,
+        "parry": 72,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 90,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "bh_general": {
+    "name": "慕容前锋督将",
+    "title": "燕军前锋统帅",
+    "description": "前锋督将铁甲染霜，横戟立在渡口，身后是必得的军令。",
+    "faction": "unknown_assassins",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 19,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 29,
+        "constitution": 29,
+        "agility": 27,
+        "perception": 17,
+        "willpower": 17,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 300,
+        "maxHp": 300,
+        "mp": 50,
+        "trainedMaxMp": 50,
+        "maxMp": 50,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 38,
+        "defense": 19,
+        "hitRate": 112,
+        "dodge": 88,
+        "parry": 78,
+        "critRate": 7,
+        "attackSpeed": 4,
+        "initiative": 92,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yg_turkic_soldier": {
+    "name": "突厥武士",
+    "title": "康鞘利前锋",
+    "description": "突厥武士体魄雄壮，弯刀劈砍带着草原上的野性。",
+    "faction": "unknown_assassins",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 12,
+      "realm": "fighter",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 22,
+        "agility": 20,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 175,
+        "maxHp": 175,
+        "mp": 35,
+        "trainedMaxMp": 35,
+        "maxMp": 35,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 28,
+        "defense": 15,
+        "hitRate": 98,
+        "dodge": 78,
+        "parry": 66,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 84,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yg_yinkui_witch": {
+    "name": "阴癸派妖女",
+    "title": "魔门高手",
+    "description": "妖女眼波流转，天魔舞步飘忽不定，笑声比方才更近了一步。",
+    "faction": "unknown_assassins",
+    "role": "elite",
+    "importance": "elite",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 14,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 24,
+        "constitution": 24,
+        "agility": 22,
+        "perception": 15,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 185,
+        "maxHp": 185,
+        "mp": 70,
+        "trainedMaxMp": 70,
+        "maxMp": 70,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 31,
+        "defense": 14,
+        "hitRate": 104,
+        "dodge": 96,
+        "parry": 62,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 92,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yg_stone_golem": {
+    "name": "宝库石人卫",
+    "title": "鲁妙子机关傀儡",
+    "description": "石人卫是鲁妙子留下的机关傀儡，只认机关令，不认活人。",
     "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "dialogueId": "xunqin_tao_fang_sword",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 13,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 23,
+        "constitution": 23,
+        "agility": 21,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 210,
+        "maxHp": 210,
+        "mp": 20,
+        "trainedMaxMp": 20,
+        "maxMp": 20,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 27,
+        "defense": 24,
+        "hitRate": 88,
+        "dodge": 52,
+        "parry": 76,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 68,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "yg_kang_xiaoli": {
+    "name": "康鞘利",
+    "title": "突厥第一高手",
+    "description": "突厥第一高手康鞘利，武功马术俱是一时之选，为宝库而来，为宝库而留。",
+    "faction": "unknown_assassins",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 21,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 31,
+        "constitution": 31,
+        "agility": 29,
+        "perception": 18,
+        "willpower": 18,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 350,
+        "maxHp": 350,
+        "mp": 90,
+        "trainedMaxMp": 90,
+        "maxMp": 90,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 41,
+        "defense": 22,
+        "hitRate": 114,
+        "dodge": 96,
+        "parry": 84,
+        "critRate": 8,
+        "attackSpeed": 4,
+        "initiative": 94,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "lj_old_boatman": {
+    "name": "老船翁",
+    "title": "当年那夜的路人",
+    "description": "老船翁自称当年就在江上，亲眼见过那一战，此后再没离开过大江。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 5,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 15,
+        "constitution": 15,
+        "agility": 13,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 85,
+        "maxHp": 85,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 10,
+        "hitRate": 76,
+        "dodge": 62,
+        "parry": 50,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 68,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "aggressive": false,
+    "combatMode": "protected",
+    "dialogueId": "dlg_lj_old_boatman"
+  },
+  "lj_phantom_soldier": {
+    "name": "江雾幻兵",
+    "title": "江气所凝",
+    "description": "幻兵由江雾凝成，戟上水声如潮，散而复聚。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
     "instanceOnly": true,
     "attributes": {
       "level": 16,
-      "realm": "fighter",
-      "resources": { "hp": 125, "maxHp": 125, "mp": 110, "trainedMaxMp": 110, "maxMp": 110, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 14, "defense": 16, "hitRate": 80, "dodge": 74, "parry": 70, "critRate": 4, "attackSpeed": 4, "initiative": 88 }
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 26,
+        "constitution": 26,
+        "agility": 24,
+        "perception": 16,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 230,
+        "maxHp": 230,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 34,
+        "defense": 17,
+        "hitRate": 106,
+        "dodge": 88,
+        "parry": 72,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 90,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   },
-  "sword_hall_disciple": {
-    "name": "守堂弟子",
-    "title": "试剑馆门人",
-    "description": "年轻弟子抱着一捆损坏的木剑，明知来者为何而来，却不敢直说师门剑路。",
+  "lj_pang_ban": {
+    "name": "庞斑残影",
+    "title": "魔师残影",
+    "description": "魔师庞斑的残影，虽只是百年江气所凝，渊渟岳峙的气机仍是宗师气象。",
     "faction": "neutral",
-    "role": "story",
-    "importance": "common",
-    "dialogueId": "xunqin_sword_disciple",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 10,
-      "realm": "fighter",
-      "resources": { "hp": 80, "maxHp": 80, "mp": 70, "trainedMaxMp": 70, "maxMp": 70, "spirit": 90, "maxSpirit": 90 },
-      "derived": { "attack": 9, "defense": 9, "hitRate": 70, "dodge": 60, "parry": 60, "critRate": 3, "attackSpeed": 4, "initiative": 75 }
-    }
-  },
-  "old_sword_keeper": {
-    "name": "守剑老人",
-    "title": "西廊旧仆",
-    "description": "老人正用新漆遮盖廊柱剑痕，手很稳，眼神却不时扫向最靠近地面的那一道。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "common",
-    "dialogueId": "xunqin_old_sword_keeper",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 8,
-      "realm": "common",
-      "resources": { "hp": 70, "maxHp": 70, "mp": 50, "trainedMaxMp": 50, "maxMp": 50, "spirit": 100, "maxSpirit": 100 },
-      "derived": { "attack": 6, "defense": 8, "hitRate": 65, "dodge": 55, "parry": 55, "critRate": 2, "attackSpeed": 4, "initiative": 68 }
-    }
-  },
-  "lian_jin_challenger": {
-    "name": "连晋",
-    "title": "下帖之人",
-    "description": "连晋按剑立在亭中，神情从容。他更在意你是否看懂了他的剑，而不是你是否敢拔剑。",
-    "faction": "unknown_assassins",
-    "role": "story",
-    "importance": "special",
-    "dialogueId": "xunqin_lian_jin_challenge",
-    "instanceOnly": true,
-    "attributes": {
-      "level": 22,
-      "realm": "expert",
-      "resources": { "hp": 150, "maxHp": 150, "mp": 200, "trainedMaxMp": 200, "maxMp": 200, "spirit": 120, "maxSpirit": 120 },
-      "derived": { "attack": 18, "defense": 17, "hitRate": 88, "dodge": 76, "parry": 82, "critRate": 9, "attackSpeed": 3, "initiative": 108 }
-    }
-  },
-  "lian_jin_duelist": {
-    "name": "连晋",
-    "title": "校场剑手",
-    "description": "连晋已经拔剑。他的第一招看似凌厉，脚下却悄然留出了诱人追击的半步。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
+    "role": "boss",
     "importance": "boss",
-    "dialogueId": "xunqin_lian_jin_duel",
-    "aggressive": true,
-    "weaknessFlag": "xunqin_ch05_solved_sword_path",
-    "weaknessModifiers": { "attack": -2, "defense": -3, "dodge": -12, "parry": -15, "initiative": -10 },
     "instanceOnly": true,
     "attributes": {
-      "level": 22,
-      "realm": "expert",
-      "resources": { "hp": 65, "maxHp": 65, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 115, "maxSpirit": 115 },
-      "derived": { "attack": 9, "defense": 10, "hitRate": 82, "dodge": 64, "parry": 68, "critRate": 8, "attackSpeed": 3, "initiative": 102 }
+      "level": 26,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 36,
+        "constitution": 36,
+        "agility": 34,
+        "perception": 21,
+        "willpower": 21,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 470,
+        "maxHp": 470,
+        "mp": 120,
+        "trainedMaxMp": 120,
+        "maxMp": 120,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 46,
+        "defense": 26,
+        "hitRate": 118,
+        "dodge": 100,
+        "parry": 88,
+        "critRate": 10,
+        "attackSpeed": 4,
+        "initiative": 96,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "saw_through_pang_ban",
+    "weaknessModifiers": {
+      "attack": -10,
+      "hitRate": -15,
+      "defense": -8
     }
   },
-  "tao_fang_hostage_shadow": {
-    "name": "陶方",
-    "title": "墙外接应",
-    "description": "陶方藏在质子府外墙阴影里，已经替你整理出三份互相矛盾的口供。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "dialogueId": "xunqin_tao_fang_hostage",
-    "instanceOnly": true,
-    "attributes": { "level": 16, "realm": "fighter", "resources": { "hp": 125, "maxHp": 125, "mp": 110, "trainedMaxMp": 110, "maxMp": 110, "spirit": 100, "maxSpirit": 100 }, "derived": { "attack": 14, "defense": 16, "hitRate": 80, "dodge": 74, "parry": 70, "critRate": 4, "attackSpeed": 4, "initiative": 88 } }
-  },
-  "hostage_clerk_shadow": {
-    "name": "外账吏",
-    "title": "焚账小吏",
-    "description": "小吏把旧账一页页投入火盆，见你看向残缺调令，手指不由得抖了一下。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "common",
-    "dialogueId": "xunqin_outer_clerk",
-    "instanceOnly": true,
-    "attributes": { "level": 7, "realm": "common", "resources": { "hp": 65, "maxHp": 65, "mp": 40, "trainedMaxMp": 40, "maxMp": 40, "spirit": 85, "maxSpirit": 85 }, "derived": { "attack": 5, "defense": 6, "hitRate": 60, "dodge": 50, "parry": 42, "critRate": 2, "attackSpeed": 4, "initiative": 62 } }
-  },
-  "hostage_servant_shadow": {
-    "name": "西厨仆役",
-    "title": "灰马照料人",
-    "description": "仆役袖口沾着车油和泔水味。他坚持午前没有车出正门，却不肯解释为何少了一匹灰马。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "common",
-    "dialogueId": "xunqin_kitchen_servant",
-    "instanceOnly": true,
-    "attributes": { "level": 8, "realm": "common", "resources": { "hp": 70, "maxHp": 70, "mp": 45, "trainedMaxMp": 45, "maxMp": 45, "spirit": 90, "maxSpirit": 90 }, "derived": { "attack": 6, "defense": 7, "hitRate": 62, "dodge": 52, "parry": 45, "critRate": 2, "attackSpeed": 4, "initiative": 65 } }
-  },
-  "zhao_archive_guard": {
-    "name": "内档守卫",
-    "title": "赵府值房甲士",
-    "description": "守卫坐在内院小门前核对口令，刀未出鞘，视线却从未离开来人的双手。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "elite",
-    "dialogueId": "xunqin_archive_guard",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": { "level": 20, "realm": "fighter", "resources": { "hp": 58, "maxHp": 58, "mp": 120, "trainedMaxMp": 120, "maxMp": 120, "spirit": 105, "maxSpirit": 105 }, "derived": { "attack": 8, "defense": 9, "hitRate": 78, "dodge": 58, "parry": 62, "critRate": 6, "attackSpeed": 4, "initiative": 90 } }
-  },
-  "missing_hostage_clerk": {
-    "name": "失踪账吏",
-    "title": "地窖囚徒",
-    "description": "账吏面色苍白，腕上还缠着断绳。他活着本身，就是有人调换密令的另一份证据。",
-    "faction": "neutral",
-    "role": "story",
-    "importance": "special",
-    "dialogueId": "xunqin_missing_clerk",
-    "instanceOnly": true,
-    "attributes": { "level": 6, "realm": "common", "resources": { "hp": 45, "maxHp": 45, "mp": 30, "trainedMaxMp": 30, "maxMp": 30, "spirit": 75, "maxSpirit": 75 }, "derived": { "attack": 4, "defense": 5, "hitRate": 58, "dodge": 45, "parry": 38, "critRate": 1, "attackSpeed": 4, "initiative": 55 } }
-  },
-  "hostage_patrol_guard": {
-    "name": "巡院卫士",
-    "title": "质子府巡哨",
-    "description": "卫士提灯沿西厨与值房之间往返，巡路并不随机，每次都在同几处门槛停步查看。",
-    "faction": "unknown_assassins",
-    "role": "enemy",
-    "importance": "common",
-    "dialogueId": "xunqin_patrol_guard",
-    "aggressive": true,
-    "instanceOnly": true,
-    "attributes": { "level": 17, "realm": "fighter", "resources": { "hp": 48, "maxHp": 48, "mp": 90, "trainedMaxMp": 90, "maxMp": 90, "spirit": 95, "maxSpirit": 95 }, "derived": { "attack": 7, "defense": 8, "hitRate": 74, "dodge": 57, "parry": 58, "critRate": 5, "attackSpeed": 4, "initiative": 84 } }
-  },
-  "xqj_tao_fang": { "name": "陶方", "title": "乌家管事", "description": "他言语谨慎，马鞭从不离手，危局中总在替乌家寻找退路。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_tao_fang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 18, "realm": "fighter", "resources": { "hp": 130, "maxHp": 130, "mp": 120, "trainedMaxMp": 120, "maxMp": 120, "spirit": 110, "maxSpirit": 110 }, "derived": { "attack": 14, "defense": 16, "hitRate": 80, "dodge": 72, "parry": 68, "critRate": 4, "attackSpeed": 4, "initiative": 88 } } },
-  "xqj_wu_tingfang": { "name": "乌廷芳", "title": "乌家小姐", "description": "她骑装利落，性情骄傲，越是危急时越不肯退让。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_wu_tingfang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 18, "realm": "fighter", "resources": { "hp": 125, "maxHp": 125, "mp": 115, "trainedMaxMp": 115, "maxMp": 115, "spirit": 110, "maxSpirit": 110 }, "derived": { "attack": 14, "defense": 14, "hitRate": 82, "dodge": 80, "parry": 65, "critRate": 6, "attackSpeed": 4, "initiative": 96 } } },
-  "xqj_wu_yingyuan": { "name": "乌应元", "title": "乌家家主", "description": "他沉稳地审视局势，乌家财货、族人与退路都压在他的每一个决定上。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_wu_yingyuan", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 22, "realm": "expert", "resources": { "hp": 160, "maxHp": 160, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 120, "maxSpirit": 120 }, "derived": { "attack": 16, "defense": 18, "hitRate": 82, "dodge": 68, "parry": 78, "critRate": 5, "attackSpeed": 4, "initiative": 90 } } },
-  "xqj_mysterious_youth": { "name": "神秘少年", "title": "质子营旧客", "description": "少年衣衫虽旧，目光却冷静得不像一个久囚之人。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_mysterious_youth", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 8, "realm": "common", "resources": { "hp": 75, "maxHp": 75, "mp": 40, "trainedMaxMp": 40, "maxMp": 40, "spirit": 120, "maxSpirit": 120 }, "derived": { "attack": 5, "defense": 6, "hitRate": 65, "dodge": 55, "parry": 40, "critRate": 2, "attackSpeed": 4, "initiative": 72 } } },
-  "xqj_old_refugee": { "name": "流民老者", "title": "破庙避难人", "description": "老人熟悉赵境兵灾与马贼，也听过乌家以养马立足的名声。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_old_refugee", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 5, "realm": "common", "resources": { "hp": 55, "maxHp": 55, "mp": 20, "trainedMaxMp": 20, "maxMp": 20, "spirit": 80, "maxSpirit": 80 }, "derived": { "attack": 3, "defense": 4, "hitRate": 55, "dodge": 40, "parry": 35, "critRate": 1, "attackSpeed": 4, "initiative": 50 } } },
-  "xqj_wounded_raider": { "name": "受伤盗墓贼", "title": "遗址前哨", "description": "他伤势不轻，既怕首领，也怕那个出重金的黑衣买主。", "faction": "unknown_assassins", "role": "enemy", "importance": "common", "dialogueId": "xqj_wounded_raider", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 7, "realm": "common", "resources": { "hp": 28, "maxHp": 28, "mp": 20, "trainedMaxMp": 20, "maxMp": 20, "spirit": 70, "maxSpirit": 70 }, "derived": { "attack": 5, "defense": 4, "hitRate": 62, "dodge": 44, "parry": 38, "critRate": 2, "attackSpeed": 4, "initiative": 60 } } },
-  "xqj_tomb_raider": { "name": "盗墓贼", "title": "黑衣买主的爪牙", "description": "他带着铁铲和短刀，显然已在遗址中搜寻多时。", "faction": "unknown_assassins", "role": "enemy", "importance": "common", "aggressive": true, "instanceOnly": true, "attributes": { "level": 8, "realm": "common", "resources": { "hp": 32, "maxHp": 32, "mp": 25, "trainedMaxMp": 25, "maxMp": 25, "spirit": 75, "maxSpirit": 75 }, "derived": { "attack": 5, "defense": 5, "hitRate": 64, "dodge": 46, "parry": 40, "critRate": 3, "attackSpeed": 4, "initiative": 62 } } },
-  "xqj_tomb_chief": { "name": "盗墓首领", "title": "铜匣掠夺者", "description": "他守着祭台上的铜匣，只知道买主声称此物能够改天命。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_tomb_chief", "aggressive": true, "instanceOnly": true, "attributes": { "level": 13, "realm": "fighter", "resources": { "hp": 48, "maxHp": 48, "mp": 60, "trainedMaxMp": 60, "maxMp": 60, "spirit": 90, "maxSpirit": 90 }, "derived": { "attack": 7, "defense": 7, "hitRate": 72, "dodge": 52, "parry": 54, "critRate": 5, "attackSpeed": 4, "initiative": 75 } } },
-  "xqj_bronze_guard": { "name": "机关铜人", "title": "七国盘守卫", "description": "铜人胸口齿轮转动，双臂在甬道中发出沉重摩擦声。", "faction": "unknown_assassins", "role": "enemy", "importance": "elite", "aggressive": true, "instanceOnly": true, "attributes": { "level": 12, "realm": "fighter", "resources": { "hp": 42, "maxHp": 42, "mp": 0, "trainedMaxMp": 0, "maxMp": 0, "spirit": 100, "maxSpirit": 100 }, "derived": { "attack": 7, "defense": 9, "hitRate": 65, "dodge": 25, "parry": 55, "critRate": 2, "attackSpeed": 5, "initiative": 48 } } },
-  "xqj_bandit": { "name": "赵境马贼", "title": "荒野劫掠者", "description": "马贼箭羽与乌家马车旁的断箭完全相同。", "faction": "unknown_assassins", "role": "enemy", "importance": "common", "aggressive": true, "instanceOnly": true, "attributes": { "level": 10, "realm": "fighter", "resources": { "hp": 36, "maxHp": 36, "mp": 40, "trainedMaxMp": 40, "maxMp": 40, "spirit": 80, "maxSpirit": 80 }, "derived": { "attack": 6, "defense": 6, "hitRate": 68, "dodge": 50, "parry": 45, "critRate": 4, "attackSpeed": 4, "initiative": 70 } } },
-  "xqj_bandit_boss": { "name": "马贼头目", "title": "乱石谷围攻者", "description": "他的目标并不只是财货，而是陶方护着的文书匣。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_bandit_boss", "aggressive": true, "instanceOnly": true, "attributes": { "level": 15, "realm": "fighter", "resources": { "hp": 55, "maxHp": 55, "mp": 70, "trainedMaxMp": 70, "maxMp": 70, "spirit": 95, "maxSpirit": 95 }, "derived": { "attack": 8, "defense": 8, "hitRate": 74, "dodge": 55, "parry": 58, "critRate": 5, "attackSpeed": 4, "initiative": 80 } } },
-  "xqj_wu_guard": { "name": "乌堡门卫", "title": "乌家护卫", "description": "他奉命盘问陌生来客，手中木枪摆出试招架势。", "faction": "neutral", "role": "guard", "importance": "common", "dialogueId": "xqj_wu_guard", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 12, "realm": "fighter", "resources": { "hp": 45, "maxHp": 45, "mp": 60, "trainedMaxMp": 60, "maxMp": 60, "spirit": 90, "maxSpirit": 90 }, "derived": { "attack": 7, "defense": 8, "hitRate": 72, "dodge": 54, "parry": 58, "critRate": 3, "attackSpeed": 4, "initiative": 74 } } },
-  "xqj_wu_trainer": { "name": "乌家武师", "title": "武场试炼者", "description": "武师只为试出客人的真实本领，并无取命之意。", "faction": "neutral", "role": "teacher", "importance": "elite", "dialogueId": "xqj_wu_trainer", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 15, "realm": "fighter", "resources": { "hp": 52, "maxHp": 52, "mp": 80, "trainedMaxMp": 80, "maxMp": 80, "spirit": 100, "maxSpirit": 100 }, "derived": { "attack": 8, "defense": 9, "hitRate": 76, "dodge": 58, "parry": 64, "critRate": 4, "attackSpeed": 4, "initiative": 82 } } },
-  "xqj_suspicious_servant": { "name": "可疑仆役", "title": "马厩内应", "description": "他近日突然阔绰，鞋底还沾着马厩草屑。", "faction": "unknown_assassins", "role": "story", "importance": "elite", "dialogueId": "xqj_suspicious_servant", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 9, "realm": "common", "resources": { "hp": 34, "maxHp": 34, "mp": 30, "trainedMaxMp": 30, "maxMp": 30, "spirit": 75, "maxSpirit": 75 }, "derived": { "attack": 5, "defense": 5, "hitRate": 65, "dodge": 48, "parry": 42, "critRate": 3, "attackSpeed": 4, "initiative": 64 } } },
-  "xqj_zhao_enemy": { "name": "赵国死士", "title": "权贵府中爪牙", "description": "死士衣下藏着赵国权贵府印，行动只为灭口。", "faction": "unknown_assassins", "role": "enemy", "importance": "common", "aggressive": true, "instanceOnly": true, "attributes": { "level": 16, "realm": "fighter", "resources": { "hp": 44, "maxHp": 44, "mp": 85, "trainedMaxMp": 85, "maxMp": 85, "spirit": 95, "maxSpirit": 95 }, "derived": { "attack": 8, "defense": 8, "hitRate": 76, "dodge": 58, "parry": 60, "critRate": 6, "attackSpeed": 4, "initiative": 86 } } },
-  "xqj_shanrou": { "name": "善柔", "title": "暗巷女刺客", "description": "蒙面女子短刃在手，既像要杀人，也像在试探来者是否值得合作。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_shanrou", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 22, "realm": "expert", "resources": { "hp": 70, "maxHp": 70, "mp": 160, "trainedMaxMp": 160, "maxMp": 160, "spirit": 115, "maxSpirit": 115 }, "derived": { "attack": 11, "defense": 10, "hitRate": 88, "dodge": 85, "parry": 72, "critRate": 10, "attackSpeed": 3, "initiative": 112 } } },
-  "xqj_zhao_ya": { "name": "赵雅", "title": "赵国贵女", "description": "车帘后的女子言笑从容，每一句话都在试探玩家与乌家的立场。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_zhao_ya", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 16, "realm": "common", "resources": { "hp": 100, "maxHp": 100, "mp": 100, "trainedMaxMp": 100, "maxMp": 100, "spirit": 125, "maxSpirit": 125 }, "derived": { "attack": 8, "defense": 9, "hitRate": 78, "dodge": 70, "parry": 50, "critRate": 4, "attackSpeed": 4, "initiative": 88 } } },
-  "xqj_prison_guard": { "name": "质子营守卫", "title": "换灯甲士", "description": "守卫奉命严查腰牌与口令，对内牢中的旧客讳莫如深。", "faction": "unknown_assassins", "role": "enemy", "importance": "common", "dialogueId": "xqj_prison_guard", "aggressive": true, "instanceOnly": true, "attributes": { "level": 17, "realm": "fighter", "resources": { "hp": 48, "maxHp": 48, "mp": 90, "trainedMaxMp": 90, "maxMp": 90, "spirit": 95, "maxSpirit": 95 }, "derived": { "attack": 8, "defense": 9, "hitRate": 78, "dodge": 55, "parry": 62, "critRate": 5, "attackSpeed": 4, "initiative": 86 } } },
-  "xqj_camp_commander": { "name": "质子营守将", "title": "夜营统领", "description": "守将率重甲甲士封住校场，他知道少年的价值，也知道今夜不能留下活口。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_camp_commander", "aggressive": true, "instanceOnly": true, "attributes": { "level": 24, "realm": "expert", "resources": { "hp": 75, "maxHp": 75, "mp": 170, "trainedMaxMp": 170, "maxMp": 170, "spirit": 115, "maxSpirit": 115 }, "derived": { "attack": 11, "defense": 12, "hitRate": 86, "dodge": 62, "parry": 75, "critRate": 8, "attackSpeed": 3, "initiative": 108 } } },
-  "xqj_pursuit_captain": { "name": "赵国追捕队长", "title": "城墙伏弩主将", "description": "队长奉命追杀神秘少年，在残垣下布置了第一轮弩箭齐射。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_pursuit_captain", "aggressive": true, "weaknessFlag":"tmp_xqj_06_warned_crossbow","weaknessModifiers":{"attack":-3,"hitRate":-12,"initiative":-20}, "instanceOnly": true, "attributes": { "level": 25, "realm": "expert", "resources": { "hp": 78, "maxHp": 78, "mp": 180, "trainedMaxMp": 180, "maxMp": 180, "spirit": 115, "maxSpirit": 115 }, "derived": { "attack": 11, "defense": 12, "hitRate": 87, "dodge": 64, "parry": 74, "critRate": 8, "attackSpeed": 3, "initiative": 110 } } },
-  "xqj_traitor": { "name": "内鬼管事", "title": "马场纵火内应", "description": "他把火油与赵军夜袭图藏在床板下，正准备烧毁证据。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_traitor", "aggressive": true, "instanceOnly": true, "attributes": { "level": 15, "realm": "fighter", "resources": { "hp": 50, "maxHp": 50, "mp": 70, "trainedMaxMp": 70, "maxMp": 70, "spirit": 90, "maxSpirit": 90 }, "derived": { "attack": 7, "defense": 7, "hitRate": 72, "dodge": 54, "parry": 52, "critRate": 4, "attackSpeed": 4, "initiative": 76 } } },
-  "xqj_siege_general": { "name": "赵国围剿将领", "title": "乌堡血夜主将", "description": "他率精骑堵住后山，真正目标是灭乌家、夺少年，不留任何见证。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_siege_general", "aggressive": true, "instanceOnly": true, "attributes": { "level": 28, "realm": "expert", "resources": { "hp": 90, "maxHp": 90, "mp": 210, "trainedMaxMp": 210, "maxMp": 210, "spirit": 125, "maxSpirit": 125 }, "derived": { "attack": 13, "defense": 13, "hitRate": 90, "dodge": 65, "parry": 78, "critRate": 9, "attackSpeed": 3, "initiative": 115 } } },
-  "xqj_wu_scout": { "name": "乌家斥候", "title": "西行探路人", "description": "他熟悉赵西荒原，却对今夜反常的风向没有把握。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_westward_ally", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 18, "resources": { "hp": 70, "maxHp": 70 } } },
-  "xqj_wu_guard_a": { "name": "乌家护卫甲", "title": "守车护卫", "description": "他整夜守着马车，熟悉乌家腰牌的三道鬃线。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_westward_ally", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 18, "resources": { "hp": 70, "maxHp": 70 } } },
-  "xqj_wu_guard_b": { "name": "乌家护卫乙", "title": "马栏嫌疑人", "description": "他承认夜里去过马栏，证词仍有一处无法印证。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_westward_ally", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 18, "resources": { "hp": 70, "maxHp": 70 } } },
-  "xqj_wu_guard_c": { "name": "乌家护卫丙", "title": "烽燧目击者", "description": "他看见跛脚黑影从旧烽燧方向离开。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_westward_ally", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 18, "resources": { "hp": 70, "maxHp": 70 } } },
-  "xqj_wu_wounded": { "name": "乌家伤兵", "title": "负伤护卫", "description": "他肩上箭伤未合，仍不肯丢下兵刃。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_westward_ally", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 15, "resources": { "hp": 55, "maxHp": 55 } } },
-  "xqj_refugee_woman": { "name": "流民老妪", "title": "荒原识路人", "description": "她靠辨认风沙与野草在荒原活了许多年。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_refugee_woman", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 5, "resources": { "hp": 35, "maxHp": 35 } } },
-  "xqj_wild_wolf": { "name": "荒原恶狼", "title": "饥饿狼群", "description": "饥饿使它们一路尾随伤员车队。", "faction": "unknown_assassins", "role": "enemy", "importance": "common", "aggressive": true, "instanceOnly": true, "attributes": { "level": 20, "resources": { "hp": 58, "maxHp": 58 }, "derived": { "attack": 10, "defense": 8, "hitRate": 82, "dodge": 74, "parry": 20, "attackSpeed": 3, "initiative": 98 } } },
-  "xqj_zhao_cavalry": { "name": "赵国轻骑", "title": "西行追兵", "description": "轻骑沿车辙追来，试图拖住整支队伍。", "faction": "unknown_assassins", "role": "enemy", "importance": "common", "dialogueId": "xqj_zhao_pursuer", "aggressive": true, "instanceOnly": true, "attributes": { "level": 27, "resources": { "hp": 82, "maxHp": 82 }, "derived": { "attack": 13, "defense": 12, "hitRate": 88, "dodge": 70, "parry": 72, "attackSpeed": 3, "initiative": 112 } } },
-  "xqj_pursuit_officer": { "name": "赵国追击校尉", "title": "风沙谷追兵主将", "description": "他奉命将少年与乌家残部一并带回赵国。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_zhao_pursuer", "aggressive": true, "instanceOnly": true, "attributes": { "level": 32, "resources": { "hp": 108, "maxHp": 108 }, "derived": { "attack": 15, "defense": 15, "hitRate": 94, "dodge": 72, "parry": 82, "critRate": 9, "attackSpeed": 3, "initiative": 120 } } },
-  "xqj_qin_scout": { "name": "秦军哨骑", "title": "黑石关巡骑", "description": "他不信任任何从赵地越境而来的人。", "faction": "neutral", "role": "guard", "importance": "common", "dialogueId": "xqj_qin_border", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 28, "resources": { "hp": 86, "maxHp": 86 }, "derived": { "attack": 13, "defense": 14, "hitRate": 90, "dodge": 66, "parry": 78 } } },
-  "xqj_border_general": { "name": "边关守将", "title": "黑石关主将", "description": "他的冷硬来自边关职责，而非刻意敌视。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_qin_border", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 38, "resources": { "hp": 150, "maxHp": 150 } } },
-  "xqj_qin_captain": { "name": "秦军校尉", "title": "遇刺军官", "description": "他负伤后仍记得刺客握刃的赵军手法。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_qin_border", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 30, "resources": { "hp": 95, "maxHp": 95 } } },
-  "xqj_zhao_assassin": { "name": "赵国伪装刺客", "title": "嫁祸者", "description": "他套着乌家衣装，左腿伤势使脚印一深一浅。", "faction": "unknown_assassins", "role": "enemy", "importance": "elite", "dialogueId": "xqj_zhao_assassin", "aggressive": true, "instanceOnly": true, "attributes": { "level": 31, "resources": { "hp": 96, "maxHp": 96 }, "derived": { "attack": 15, "defense": 13, "hitRate": 94, "dodge": 82, "parry": 70, "critRate": 11, "attackSpeed": 3, "initiative": 124 } } },
-  "xqj_assassin_leader": { "name": "赵国刺客首领", "title": "烽火台伏杀者", "description": "他要用一场刺杀让秦军亲手毁掉乌家残部。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_zhao_assassin", "aggressive": true, "instanceOnly": true, "attributes": { "level": 35, "resources": { "hp": 122, "maxHp": 122 }, "derived": { "attack": 17, "defense": 15, "hitRate": 98, "dodge": 86, "parry": 76, "critRate": 12, "attackSpeed": 3, "initiative": 132 } } },
-  "xqj_qin_strategist": { "name": "秦国谋士", "title": "函谷三试主考", "description": "他相信有用比忠诚更容易验证。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_qin_trial", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 35, "resources": { "hp": 120, "maxHp": 120 } } },
-  "xqj_qin_soldier": { "name": "秦军锐士", "title": "函谷试武者", "description": "锐士只分胜负，不取来客性命。", "faction": "neutral", "role": "guard", "importance": "elite", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 34, "resources": { "hp": 112, "maxHp": 112 }, "derived": { "attack": 16, "defense": 17, "hitRate": 96, "dodge": 68, "parry": 88 } } },
-  "xqj_tactics_clerk": { "name": "兵家老吏", "title": "沙盘守局人", "description": "他只说一句：兵贵断粮，不贵争桥。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_qin_trial", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 26, "resources": { "hp": 90, "maxHp": 90 } } },
-  "xqj_qin_examiner": { "name": "秦国审官", "title": "忠伪问心者", "description": "他不评善恶，只记录回答是否自相矛盾。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_qin_trial", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 28, "resources": { "hp": 95, "maxHp": 95 } } },
-  "xqj_sword_examiner": { "name": "秦军试剑者", "title": "函谷守关高手", "description": "他的剑只为验证来客是否有资格继续西行。", "faction": "neutral", "role": "boss", "importance": "boss", "dialogueId": "xqj_qin_trial", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 40, "resources": { "hp": 150, "maxHp": 150 }, "derived": { "attack": 19, "defense": 19, "hitRate": 105, "dodge": 90, "parry": 96, "critRate": 10, "attackSpeed": 3, "initiative": 142 } } },
-  "xqj_guest_clerk": { "name": "客馆令吏", "title": "咸阳外客主簿", "description": "他掌管客馆名册与临时客牌。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_xianyang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 18, "resources": { "hp": 65, "maxHp": 65 } } },
-  "xqj_xianyang_merchant": { "name": "咸阳商贾", "title": "市肆消息人", "description": "他认得东方商旅的暗话，也知道何时该闭嘴。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_xianyang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 14, "resources": { "hp": 55, "maxHp": 55 } } },
-  "xqj_wandering_scholar": { "name": "咸阳游士", "title": "市井说客", "description": "他从布幡和车辙里读出见不得光的约会。", "faction": "neutral", "role": "story", "importance": "common", "dialogueId": "xqj_xianyang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 16, "resources": { "hp": 60, "maxHp": 60 } } },
-  "xqj_qin_commandant": { "name": "秦军都尉", "title": "咸阳军方代表", "description": "他重视战绩，也警惕权臣对外来高手的拉拢。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_xianyang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 42, "resources": { "hp": 165, "maxHp": 165 } } },
-  "xqj_minister_retainer": { "name": "权臣门客", "title": "咸阳说客", "description": "他笑意温和，开出的每个条件都藏着绳索。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_xianyang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 30, "resources": { "hp": 100, "maxHp": 100 } } },
-  "xqj_clan_steward": { "name": "宗室管事", "title": "宗室外围耳目", "description": "他反复追问少年旧事，为正式验血探路。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_xianyang", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 28, "resources": { "hp": 95, "maxHp": 95 } } },
-  "xqj_six_states_spy": { "name": "六国密探", "title": "咸阳暗线", "description": "他以市肆暗号寻找值得刺杀或拉拢的目标。", "faction": "unknown_assassins", "role": "enemy", "importance": "elite", "dialogueId": "xqj_six_states", "aggressive": true, "instanceOnly": true, "attributes": { "level": 38, "resources": { "hp": 132, "maxHp": 132 }, "derived": { "attack": 18, "defense": 16, "hitRate": 102, "dodge": 92, "parry": 82, "critRate": 12, "attackSpeed": 3, "initiative": 140 } } },
-  "xqj_six_states_tester": { "name": "六国试探者", "title": "城南空宅主人", "description": "他并非最终主使，只负责衡量少年与护送者的价值。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_six_states", "aggressive": true, "instanceOnly": true, "attributes": { "level": 42, "resources": { "hp": 165, "maxHp": 165 }, "derived": { "attack": 20, "defense": 18, "hitRate": 108, "dodge": 95, "parry": 88, "critRate": 13, "attackSpeed": 3, "initiative": 148 } } },
-  "xqj_clan_elder": { "name": "宗室长者", "title": "验血主礼人", "description": "他更相信证词、旧档与礼器相互印证，而非一滴血。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_clan_trial", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 40, "resources": { "hp": 150, "maxHp": 150 } } },
-  "xqj_qin_archivist": { "name": "秦吏", "title": "旧档玉册守吏", "description": "他发现玉册近日被人暗中调阅，却不敢声张。", "faction": "neutral", "role": "story", "importance": "special", "dialogueId": "xqj_clan_trial", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 22, "resources": { "hp": 76, "maxHp": 76 } } },
-  "xqj_suspicious_eunuch": { "name": "可疑内侍", "title": "礼器调包人", "description": "他的鞋底沾着器具房独有的暗红印泥。", "faction": "unknown_assassins", "role": "story", "importance": "elite", "dialogueId": "xqj_clan_trial", "combatMode": "defeat", "instanceOnly": true, "attributes": { "level": 33, "resources": { "hp": 106, "maxHp": 106 }, "derived": { "attack": 15, "defense": 14, "hitRate": 94, "dodge": 88, "parry": 70 } } },
-  "xqj_ritual_guard": { "name": "器具看守", "title": "宗室礼器守卫", "description": "他奉命守门，却不知道礼器底座已经被动过。", "faction": "neutral", "role": "guard", "importance": "common", "dialogueId": "xqj_clan_trial", "combatMode": "protected", "instanceOnly": true, "attributes": { "level": 28, "resources": { "hp": 92, "maxHp": 92 } } },
-  "xqj_ritual_assassin": { "name": "仪式刺客", "title": "别宫伏杀者", "description": "伪证败露后，他奉命在后廊灭口。", "faction": "unknown_assassins", "role": "enemy", "importance": "elite", "aggressive": true, "instanceOnly": true, "attributes": { "level": 41, "resources": { "hp": 145, "maxHp": 145 }, "derived": { "attack": 20, "defense": 17, "hitRate": 106, "dodge": 94, "parry": 84, "critRate": 12 } } },
-  "xqj_forgery_master": { "name": "伪证主使", "title": "宗室密阶伏线", "description": "他与六国密探及秦国内部小派系勾连，却并非真正的大人物。", "faction": "unknown_assassins", "role": "enemy", "importance": "boss", "dialogueId": "xqj_six_states", "aggressive": true, "instanceOnly": true, "attributes": { "level": 45, "resources": { "hp": 185, "maxHp": 185 }, "derived": { "attack": 22, "defense": 20, "hitRate": 112, "dodge": 96, "parry": 92, "critRate": 14, "attackSpeed": 3, "initiative": 154 } } },
-  "xqj_bronze_phantom":{"name":"铜匣守护幻影","title":"七国兵戈残影","description":"七国兵戈之气在祭台前凝成人形。","faction":"unknown_assassins","role":"boss","importance":"boss","aggressive":true,"instanceOnly":true,"attributes":{"level":16,"resources":{"hp":62,"maxHp":62}}},
-  "xqj_bronze_snake":{"name":"机关铜蛇","title":"铜盘惩戒机括","description":"错位铜环放出的蛇形机关。","faction":"unknown_assassins","role":"enemy","importance":"common","aggressive":true,"instanceOnly":true,"attributes":{"level":10,"resources":{"hp":28,"maxHp":28}}},
-  "xqj_black_observer":{"name":"黑衣观望者虚影","title":"青铜幻境来客","description":"看不清面目的黑衣虚影立在战车与黄沙之间。","faction":"neutral","role":"story","importance":"special","dialogueId":"xqj_rewrite_observer","combatMode":"protected","instanceOnly":true,"attributes":{"level":30,"resources":{"hp":120,"maxHp":120}}},
-  "xqj_bandit_captain":{"name":"马贼小头目","title":"营地副首领","description":"他负责驱赶伏兵围堵乌家马车。","faction":"unknown_assassins","role":"enemy","importance":"elite","aggressive":true,"instanceOnly":true,"attributes":{"level":14,"resources":{"hp":48,"maxHp":48}}},
-  "xqj_stable_servant":{"name":"马厩仆役","title":"照料病马之人","description":"他忙着替病马擦去口边白沫。","faction":"neutral","role":"story","importance":"common","combatMode":"protected","instanceOnly":true,"attributes":{"level":5,"resources":{"hp":35,"maxHp":35}}},
-  "xqj_old_groom":{"name":"老马夫","title":"乌家养马老人","description":"他记得马场每一匹马，也记得昨夜每一盏灯。","faction":"neutral","role":"story","importance":"special","dialogueId":"xqj_rewrite_old_groom","combatMode":"protected","instanceOnly":true,"attributes":{"level":7,"resources":{"hp":42,"maxHp":42}}},
-  "xqj_inn_thug":{"name":"酒楼恶客","title":"霸梯豪客","description":"他借酒闹事，堵住了通往二楼的木梯。","faction":"unknown_assassins","role":"enemy","importance":"common","aggressive":true,"instanceOnly":true,"attributes":{"level":17,"resources":{"hp":50,"maxHp":50}}},
-  "xqj_innkeeper":{"name":"酒楼掌柜","title":"白水桥知情人","description":"他只肯对听懂屏风密谈的人提起暗号。","faction":"neutral","role":"story","importance":"special","dialogueId":"xqj_rewrite_innkeeper","combatMode":"protected","instanceOnly":true,"attributes":{"level":8,"resources":{"hp":45,"maxHp":45}}},
-  "xqj_zhao_noble":{"name":"赵国贵客","title":"二楼闲谈者","description":"他知道邯郸权势流向，却把质子营视为禁忌。","faction":"neutral","role":"story","importance":"common","dialogueId":"xqj_rewrite_zhao_noble","combatMode":"protected","instanceOnly":true,"attributes":{"level":10,"resources":{"hp":55,"maxHp":55}}},
-  "xqj_secret_retainer":{"name":"密谈门客","title":"屏风后的声音","description":"他正向同伴传递质子营换守时辰。","faction":"neutral","role":"story","importance":"common","combatMode":"protected","instanceOnly":true,"attributes":{"level":12,"resources":{"hp":60,"maxHp":60}}},
-  "xqj_inn_cook":{"name":"酒楼厨子","title":"后厨知情人","description":"他假装只顾灶火，眼神却总往后巷飘。","faction":"neutral","role":"story","importance":"common","dialogueId":"xqj_rewrite_inn_cook","combatMode":"protected","instanceOnly":true,"attributes":{"level":6,"resources":{"hp":38,"maxHp":38}}},
-  "xqj_contact_spy":{"name":"接头密探","title":"后巷守路人","description":"他在后巷核验来客，刀柄藏在袖下。","faction":"unknown_assassins","role":"enemy","importance":"elite","aggressive":true,"instanceOnly":true,"attributes":{"level":19,"resources":{"hp":58,"maxHp":58}}},
-  "xqj_white_assassin":{"name":"白衣刺客","title":"白水桥验语人","description":"他只凭一句暗号判断来者是友是敌。","faction":"unknown_assassins","role":"enemy","importance":"elite","dialogueId":"xqj_rewrite_white_assassin","combatMode":"defeat","instanceOnly":true,"attributes":{"level":20,"resources":{"hp":62,"maxHp":62}}},
-  "xqj_spy_reinforcement":{"name":"伏桥密探","title":"暗号惩戒伏兵","description":"错误暗号惊动的桥下伏兵。","faction":"unknown_assassins","role":"enemy","importance":"common","aggressive":true,"instanceOnly":true,"attributes":{"level":17,"resources":{"hp":46,"maxHp":46}}},
-  "xqj_spy_chief":{"name":"密探头目","title":"质子营暗线主事","description":"他正准备烧毁记录旧客与换守时辰的竹简。","faction":"unknown_assassins","role":"boss","importance":"boss","aggressive":true,"instanceOnly":true,"attributes":{"level":23,"resources":{"hp":74,"maxHp":74}}},
-  "xqj_night_guard":{"name":"巡夜甲士","title":"质子营巡卒","description":"他沿外墙阴影巡查每一处可供翻越的石缝。","faction":"unknown_assassins","role":"enemy","importance":"common","aggressive":true,"instanceOnly":true,"attributes":{"level":20,"resources":{"hp":60,"maxHp":60}}},
-  "xqj_old_servant":{"name":"被囚老仆","title":"质子营旧日看守","description":"他知道内牢换守口令，也知道少年被关押了多久。","faction":"neutral","role":"story","importance":"special","dialogueId":"xqj_rewrite_old_servant","combatMode":"protected","instanceOnly":true,"attributes":{"level":6,"resources":{"hp":36,"maxHp":36}}},
-  "xqj_jailer":{"name":"内牢牢卒","title":"口令警铃援兵","description":"错误口令惊动的内牢守卒。","faction":"unknown_assassins","role":"enemy","importance":"common","aggressive":true,"instanceOnly":true,"attributes":{"level":20,"resources":{"hp":58,"maxHp":58}}},
-  "xqj_zhao_pursuer":{"name":"赵国追兵","title":"暗道出口搜捕者","description":"他们循着质子营警钟堵住暗道出口。","faction":"unknown_assassins","role":"enemy","importance":"common","aggressive":true,"instanceOnly":true,"attributes":{"level":23,"resources":{"hp":68,"maxHp":68}}},
-  "xqj_notice_officer":{"name":"告示官","title":"封城令宣读者","description":"他贴完告示便催促巡兵分赴各处城门。","faction":"neutral","role":"story","importance":"common","combatMode":"protected","instanceOnly":true,"attributes":{"level":9,"resources":{"hp":48,"maxHp":48}}},
-  "xqj_ruined_house_woman":{"name":"破宅老妇","title":"西坊旧巷知情人","description":"她在西坊住了数十年，知道柴车后封住的旧路。","faction":"neutral","role":"story","importance":"special","dialogueId":"xqj_rewrite_ruined_woman","combatMode":"protected","instanceOnly":true,"attributes":{"level":5,"resources":{"hp":34,"maxHp":34}}},
-  "xqj_checkpoint_guard":{"name":"赵国关卡兵","title":"牌楼重兵","description":"他与同伴结阵封住出城近路。","faction":"unknown_assassins","role":"enemy","importance":"elite","aggressive":true,"instanceOnly":true,"attributes":{"level":27,"resources":{"hp":82,"maxHp":82}}},
-  "xqj_checkpoint_captain":{"name":"关卡校尉","title":"牌楼守将","description":"他负责最严密也最直接的封城关卡。","faction":"unknown_assassins","role":"boss","importance":"boss","aggressive":true,"instanceOnly":true,"attributes":{"level":30,"resources":{"hp":100,"maxHp":100}}},
-  "xqj_patrol_guard":{"name":"邯郸巡兵","title":"后街搜捕队","description":"他们逐户搜查，正向废宅矮门逼近。","faction":"unknown_assassins","role":"enemy","importance":"common","aggressive":true,"instanceOnly":true,"attributes":{"level":24,"resources":{"hp":72,"maxHp":72}}},
-  "xqj_shanrou_shadow":{"name":"善柔的影子","title":"废宅暗记主人","description":"她藏在地窖暗处，只留下一句关于城墙伏弩的提醒。","faction":"neutral","role":"story","importance":"special","dialogueId":"xqj_rewrite_shanrou_shadow","combatMode":"protected","instanceOnly":true,"attributes":{"level":25,"resources":{"hp":78,"maxHp":78}}}
+  "ancient_scroll_keeper": {
+    "name": "灰袍老者",
+    "title": "残卷守护者",
+    "description": "常年蛰居暗巷的神秘老人，身前摊着几卷发黄残页。传说只有参悟过传承残页的人，才入得了他的眼。",
+    "role": "teacher",
+    "importance": "local",
+    "skills": {
+      "csj_changshengjue": 120,
+      "jyg_zhanshentu_dao": 120
+    },
+    "attributes": {
+      "level": 30,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 50,
+        "constitution": 40,
+        "agility": 45,
+        "perception": 35,
+        "willpower": 50,
+        "charm": 15,
+        "luck": 12
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 2000,
+        "maxHp": 2000,
+        "mp": 800,
+        "trainedMaxMp": 800,
+        "maxMp": 800,
+        "spirit": 120,
+        "maxSpirit": 120
+      },
+      "derived": {
+        "attack": 180,
+        "defense": 150,
+        "hitRate": 200,
+        "dodge": 170,
+        "parry": 190,
+        "critRate": 10,
+        "attackSpeed": 4,
+        "initiative": 110,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  }
 }

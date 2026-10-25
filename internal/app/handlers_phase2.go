@@ -11,47 +11,43 @@ import (
 )
 
 func (s *Server) requireSelectedPlayer(conn *websocket.Conn) (string, bool) {
-	ss := s.session(conn)
-	if ss.playerID == "" {
+	playerID := s.sessionPlayerID(conn)
+	if playerID == "" {
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "error", false, map[string]interface{}{"error": exception.ErrPlayerNotSelected.Error()}, nil))
 		return "", false
 	}
-	return ss.playerID, true
+	return playerID, true
 }
 
 func (s *Server) handleSystemDeleteAccount(conn *websocket.Conn, cmd protocol.CommandMessage) {
-	ss := s.session(conn)
 	username := toString(cmd.Args["username"])
 	password := toString(cmd.Args["password"])
 	if err := s.repo.DeleteAccount(username, password); err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "delete_account", false, map[string]interface{}{"error": err.Error()}, nil))
 		return
 	}
-	if ss.userID == username {
-		ss.userID = ""
-		ss.playerID = ""
+	if s.sessionUserID(conn) == username {
+		s.bindSessionUser(conn, "")
 	}
 	s.write(conn, protocol.NewResult(protocol.TypeSystem, "delete_account", true, map[string]interface{}{"message": "账号已删除"}, nil))
 }
 
 func (s *Server) handleSystemDeleteCharacter(conn *websocket.Conn, cmd protocol.CommandMessage) {
-	ss := s.session(conn)
 	characterID := toString(cmd.Args["characterId"])
-	if err := s.repo.DeleteCharacter(ss.userID, characterID); err != nil {
+	if err := s.repo.DeleteCharacter(s.sessionUserID(conn), characterID); err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "delete_character", false, map[string]interface{}{"error": err.Error()}, nil))
 		return
 	}
-	if ss.playerID == characterID {
-		ss.playerID = ""
+	if s.sessionPlayerID(conn) == characterID {
+		s.setSessionPlayerID(conn, "")
 	}
 	s.write(conn, protocol.NewResult(protocol.TypeSystem, "delete_character", true, map[string]interface{}{"message": "角色已删除"}, nil))
 }
 
 func (s *Server) handleSystemReconnect(conn *websocket.Conn, cmd protocol.CommandMessage) {
-	ss := s.session(conn)
 	res, err := engine.Reconnect(s.repo,
 		toString(cmd.Args["userId"]),
-		ss.userID,
+		s.sessionUserID(conn),
 		toString(cmd.Args["reconnectToken"]),
 		toString(cmd.Args["playerId"]),
 	)
@@ -59,26 +55,25 @@ func (s *Server) handleSystemReconnect(conn *websocket.Conn, cmd protocol.Comman
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "reconnect", false, map[string]interface{}{"error": err.Error()}, nil))
 		return
 	}
-	ss.userID = res.UserID
+	// 恢复到账号会话：若本次恢复未带角色，须清掉旧绑定，避免残留上一账号的角色
+	s.bindSessionUser(conn, res.UserID)
 	if res.PlayerID != "" {
 		s.handleCharacterRebind(res.PlayerID, conn)
-		ss.playerID = res.PlayerID
+		s.setSessionPlayerID(conn, res.PlayerID)
 		s.repo.SetPlayerOnline(res.PlayerID, true)
 		s.emitPlayerStatusChanged(res.PlayerID, "恢复连接", res.PlayerID)
 	}
 	results := map[string]interface{}{"message": "重新连接成功"}
-	if ss.playerID != "" {
-		results["playerId"] = ss.playerID
+	if pid := s.sessionPlayerID(conn); pid != "" {
+		results["playerId"] = pid
 	}
 	s.write(conn, protocol.NewResult(protocol.TypeSystem, "reconnect", true, results, nil))
 }
 
 func (s *Server) handleSystemDeselectCharacter(conn *websocket.Conn, _ protocol.CommandMessage) {
-	ss := s.session(conn)
-	if ss.playerID != "" {
-		oldPlayerID := ss.playerID
-		s.repo.SetPlayerOnline(ss.playerID, false)
-		ss.playerID = ""
+	oldPlayerID := s.setSessionPlayerID(conn, "")
+	if oldPlayerID != "" {
+		s.repo.SetPlayerOnline(oldPlayerID, false)
 		s.emitPlayerStatusChanged(oldPlayerID, "断开了连接", oldPlayerID)
 	}
 	s.write(conn, protocol.NewResult(protocol.TypeSystem, "deselect_character", true, map[string]interface{}{"message": "已返回角色选择"}, nil))
@@ -190,7 +185,7 @@ func (s *Server) handleGameHeal(conn *websocket.Conn, _ protocol.CommandMessage)
 		return
 	}
 	res, err := engine.HealWithEffects(s.repo, playerID)
-	s.replyCommand(conn, "heal", err, map[string]interface{}{}, nil)
+	s.replyCommand(conn, "heal", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.RoomMessage != "" {
 		s.emitRoomMessageToOthersByPlayer(playerID, res.RoomMessage)
 	}
@@ -317,16 +312,14 @@ func (s *Server) handleGameLearn(conn *websocket.Conn, cmd protocol.CommandMessa
 	}
 }
 
-func (s *Server) handleGameMine(conn *websocket.Conn, _ protocol.CommandMessage) {
+func (s *Server) handleGameUseItem(conn *websocket.Conn, cmd protocol.CommandMessage) {
 	playerID, ok := s.requireSelectedPlayer(conn)
 	if !ok {
 		return
 	}
-	res, err := engine.MineWithEffects(s.repo, playerID)
-	s.replyCommand(conn, "mine", err, map[string]interface{}{"experience": res.Experience, "potential": res.Potential}, res.Logs)
-	if err == nil && res.RoomMessage != "" {
-		s.emitRoomMessageToOthersByPlayer(playerID, res.RoomMessage)
-	}
+	itemID := toString(cmd.Args["itemId"])
+	res, err := engine.UseItemWithEffects(s.repo, playerID, itemID)
+	s.replyCommand(conn, "use_item", err, map[string]interface{}{"message": res.Message}, nil)
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
 	}

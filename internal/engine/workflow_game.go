@@ -96,8 +96,6 @@ func StopWithEffects(repo RuntimeRepository, playerID string) StateActionResult 
 	roomMsg := ""
 	if name != "" {
 		switch msg {
-		case "你收起铁镐，停止了挖矿。":
-			roomMsg = name + "收起铁镐，停止了挖矿。"
 		case "你停止了运功疗伤。":
 			roomMsg = name + "停止了运功疗伤。"
 		case "你停止了打坐。":
@@ -111,21 +109,12 @@ func StopWithEffects(repo RuntimeRepository, playerID string) StateActionResult 
 	return StateActionResult{Message: msg, RoomMessage: roomMsg, NeedRoomUpdate: true}
 }
 
-func MineWithEffects(repo RuntimeRepository, playerID string) (MineActionResult, error) {
-	exp, potential, gemName, err := repo.Mine(playerID)
+func UseItemWithEffects(repo RuntimeRepository, playerID, itemID string) (StateActionResult, error) {
+	msg, err := repo.UseItem(playerID, itemID)
 	if err != nil {
-		return MineActionResult{}, err
+		return StateActionResult{}, err
 	}
-	logs := []string{"你挥舞着铁镐，开始卖力地挖矿。"}
-	if gemName != "" {
-		logs = append(logs, "你在矿脉里挖出了"+gemName)
-	}
-	name := playerName(repo, playerID)
-	roomMsg := ""
-	if name != "" {
-		roomMsg = name + "挥舞着铁镐，开始卖力地挖矿。"
-	}
-	return MineActionResult{Experience: exp, Potential: potential, Logs: logs, RoomMessage: roomMsg, NeedRoomUpdate: true}, nil
+	return StateActionResult{Message: msg, NeedRoomUpdate: true}, nil
 }
 
 func DoRoomActionWithEffects(repo RuntimeRepository, playerID, action string) (StateActionResult, error) {
@@ -327,11 +316,11 @@ func GetRoomPayloadView(repo RuntimeRepository, roomID string) (map[string]inter
 }
 
 func GetRoomUpdateView(repo RuntimeRepository, roomID string) (RoomUpdateResult, error) {
-	players, npcs, err := repo.GetRoomUpdate(roomID)
+	players, npcs, dungeon, err := repo.GetRoomUpdate(roomID)
 	if err != nil {
 		return RoomUpdateResult{}, err
 	}
-	return RoomUpdateResult{Players: players, NPCs: npcs}, nil
+	return RoomUpdateResult{Players: players, NPCs: npcs, Dungeon: dungeon}, nil
 }
 
 func GetPlayerRoomView(repo RuntimeRepository, playerID string) (string, string, error) {

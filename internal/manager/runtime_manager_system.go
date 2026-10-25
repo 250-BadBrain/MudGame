@@ -23,7 +23,11 @@ func (r *RuntimeManager) Register(username, password string) error {
 	if _, exists := users[username]; exists {
 		return errors.New("username_exists")
 	}
-	users[username] = &model.User{Username: username, PasswordHash: hashPBKDF2Password(password)}
+	passwordHash, err := hashPBKDF2Password(password)
+	if err != nil {
+		return err
+	}
+	users[username] = &model.User{Username: username, PasswordHash: passwordHash}
 	return r.saveUsers(users)
 }
 

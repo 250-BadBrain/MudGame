@@ -29,7 +29,10 @@ type RuntimeManager struct {
 
 	dungeonLoadErr error
 	dungeonMgr     *engruntime.Manager
-	staticNPCs     map[string]*engruntime.NPCState
+	// staticNPCs 会在 RLock 路径（房间快照/更新）中懒加载写入，
+	// 单独用一把锁保护 map 本身，避免两个读锁持有者并发写 map 导致 fatal
+	staticNPCsMu sync.Mutex
+	staticNPCs   map[string]*engruntime.NPCState
 }
 
 var (

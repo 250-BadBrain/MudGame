@@ -2,6 +2,7 @@ package manager
 
 import (
 	"math"
+	"time"
 
 	"mudgame/server/internal/model"
 )
@@ -12,7 +13,8 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	}
 	attrs := model.NormalizeAttributes(p.Attributes)
 	eff := model.BuildEffectiveAttributes(attrs)
-	eff.MaxHP = 80
+	// 玩家气血上限 = 60 + 根骨×4（根骨生效），再叠加内功转化与技能/装备加成
+	eff.MaxHP = 60 + eff.Constitution*4
 	eff.Attack = 0
 	eff.Defense = 0
 	eff.HitRate = 0
@@ -31,7 +33,21 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	eff.HitRate = derived.HitRate + directHitRate
 	eff.Dodge = derived.Dodge + directDodge
 	eff.Parry = derived.Parry + directParry
+	applyWeaknessNoLock(&eff, p)
 	return eff
+}
+
+// applyWeaknessNoLock 死亡复活后的虚弱期内战斗属性减半（见 docs/design/formulas.md 1.5）
+func applyWeaknessNoLock(eff *model.EffectiveAttributes, p *model.Player) {
+	if p == nil || !p.IsWeak(time.Now().Unix()) {
+		return
+	}
+	eff.Attack /= 2
+	eff.Defense /= 2
+	eff.HitRate /= 2
+	eff.Dodge /= 2
+	eff.Parry /= 2
+	eff.Initiative /= 2
 }
 
 func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]int) {

@@ -136,3 +136,94 @@ func TestFileStoreLoadPlayersSanitizesDungeonRoomIDs(t *testing.T) {
 		t.Fatalf("expected dungeon room to sanitize to ly_00, got %q", loaded["p1"].RoomID)
 	}
 }
+
+func TestFileStoreSavesReplaceStaleFilesAndLeaveNoTempFiles(t *testing.T) {
+	dir := t.TempDir()
+	store := NewFileStore(dir)
+
+	users := map[string]*model.User{
+		"u1": {Username: "u1", PasswordHash: "h1", CharacterIDs: []string{}},
+		"u2": {Username: "u2", PasswordHash: "h2", CharacterIDs: []string{}},
+	}
+	if err := store.SaveUsers(users); err != nil {
+		t.Fatalf("save users failed: %v", err)
+	}
+	if err := store.SaveUsers(map[string]*model.User{"u1": users["u1"]}); err != nil {
+		t.Fatalf("resave users failed: %v", err)
+	}
+	if _, err := os.Stat(filepath.Join(dir, "users", "u2.json")); !os.IsNotExist(err) {
+		t.Fatalf("expected stale user file to be removed, got err=%v", err)
+	}
+
+	players := map[string]*model.Player{
+		"p1": {ID: "p1", UserID: "u1", CharacterName: "hero", Money: 100},
+		"p2": {ID: "p2", UserID: "u1", CharacterName: "hero2", Money: 200},
+	}
+	if err := store.SavePlayers(players); err != nil {
+		t.Fatalf("save players failed: %v", err)
+	}
+	if err := store.SavePlayers(map[string]*model.Player{"p1": players["p1"]}); err != nil {
+		t.Fatalf("resave players failed: %v", err)
+	}
+	if _, err := os.Stat(filepath.Join(dir, "players", "p2.json")); !os.IsNotExist(err) {
+		t.Fatalf("expected stale player file to be removed, got err=%v", err)
+	}
+
+	// 覆盖写不应破坏既有内容（tmp+rename 语义）
+	players["p1"].Money = 777
+	if err := store.SavePlayers(players); err != nil {
+		t.Fatalf("overwrite player failed: %v", err)
+	}
+	loaded, err := store.LoadPlayers()
+	if err != nil {
+		t.Fatalf("load players failed: %v", err)
+	}
+	if loaded["p1"].Money != 777 {
+		t.Fatalf("expected overwritten money 777, got %d", loaded["p1"].Money)
+	}
+
+	for _, sub := range []string{"users", "players", "rooms"} {
+		entries, err := os.ReadDir(filepath.Join(dir, sub))
+		if err != nil {
+			t.Fatalf("read dir %s failed: %v", sub, err)
+		}
+		for _, entry := range entries {
+			if filepath.Ext(entry.Name()) == ".tmp" {
+				t.Fatalf("unexpected temp file leftover: %s/%s", sub, entry.Name())
+			}
+		}
+	}
+}
+
+func TestFileStoreQuarantinesCorruptFiles(t *testing.T) {
+	dir := t.TempDir()
+	store := NewFileStore(dir)
+
+	// 正常保存一名玩家，再注入一个损坏的玩家文件
+	if err := store.SavePlayers(map[string]*model.Player{
+		"p_ok": {ID: "p_ok", CharacterName: "ok", UserID: "u1"},
+	}); err != nil {
+		t.Fatalf("save players failed: %v", err)
+	}
+	corruptPath := filepath.Join(dir, "players", "p_bad.json")
+	if err := os.WriteFile(corruptPath, []byte("{not valid json"), 0o644); err != nil {
+		t.Fatalf("write corrupt file failed: %v", err)
+	}
+
+	loaded, err := store.LoadPlayers()
+	if err != nil {
+		t.Fatalf("load players should tolerate corrupt files, got error: %v", err)
+	}
+	if _, ok := loaded["p_ok"]; !ok {
+		t.Fatalf("healthy player should still load: %+v", loaded)
+	}
+	if _, ok := loaded["p_bad"]; ok {
+		t.Fatalf("corrupt player should not load")
+	}
+	if _, err := os.Stat(corruptPath + ".corrupt"); err != nil {
+		t.Fatalf("corrupt file should be quarantined: %v", err)
+	}
+	if _, err := os.Stat(corruptPath); err == nil {
+		t.Fatalf("corrupt file should no longer sit in load path")
+	}
+}

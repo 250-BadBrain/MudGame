@@ -5,7 +5,7 @@ import "math"
 const (
 	InitialSkillLevelCap       = 20
 	SkillLevelCapStep          = 10
-	SkillExperienceCurveFactor = 250
+	SkillExperienceCurveFactor = 40
 	LearningPotentialPerTick   = 10
 )
 

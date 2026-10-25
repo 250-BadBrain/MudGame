@@ -25,8 +25,6 @@ type TemplateRoom struct {
 	Actions          []string
 	ActionLabels     map[string]string
 	Checkpoint       bool
-	StealthSafe      bool
-	Noise            int
 	ExitRequirements map[string]model.ExitRequirement
 }
 
@@ -47,7 +45,6 @@ type PuzzleAction struct {
 	GiveItems            map[string]int
 	TakeItems            map[string]int
 	SetFlags             map[string]bool
-	AlertDelta           int
 	Choices              []ActionChoice
 	DialogueNPCID        string
 	DialogueLines        []string
@@ -81,6 +78,7 @@ type Template struct {
 	Description         string
 	Order               int
 	ChainID             string
+	ChainName           string
 	Chapter             int
 	SpawnRoomID         string
 	Rooms               map[string]TemplateRoom
@@ -90,16 +88,7 @@ type Template struct {
 	UnlockConditions    []UnlockCondition
 	PuzzleInitialStates map[string]string
 	PuzzleActions       map[string]PuzzleAction
-	Stealth             StealthConfig
-	Patrols             []PatrolConfig
 	TemporaryItems      []string
-}
-
-type StealthConfig struct {
-	Enabled          bool
-	AlertOnMove      int
-	SafeRoomRecovery int
-	MaxAlert         int
 }
 
 type PatrolConfig struct {
@@ -131,6 +120,7 @@ type templateFile struct {
 	Description         string                      `json:"description"`
 	Order               int                         `json:"order"`
 	ChainID             string                      `json:"chainId"`
+	ChainName           string                      `json:"chainName"`
 	Chapter             int                         `json:"chapter"`
 	SpawnRoomID         string                      `json:"spawnRoomId"`
 	Rooms               map[string]templateRoomFile `json:"rooms"`
@@ -140,8 +130,6 @@ type templateFile struct {
 	UnlockConditions    []unlockConditionFile       `json:"unlockConditions"`
 	PuzzleInitialStates map[string]string           `json:"puzzleInitialStates"`
 	PuzzleActions       map[string]puzzleActionFile `json:"puzzleActions"`
-	Stealth             stealthFile                 `json:"stealth"`
-	Patrols             []patrolFile                `json:"patrols"`
 	TemporaryItems      []string                    `json:"temporaryItems"`
 }
 
@@ -152,8 +140,6 @@ type templateRoomFile struct {
 	NPCs             []string                       `json:"npcs"`
 	Actions          []string                       `json:"actions"`
 	Checkpoint       bool                           `json:"checkpoint"`
-	StealthSafe      bool                           `json:"stealthSafe"`
-	Noise            int                            `json:"noise"`
 	ExitRequirements map[string]exitRequirementFile `json:"exitRequirements"`
 }
 
@@ -163,7 +149,6 @@ type exitRequirementFile struct {
 	RequiredAmount       int               `json:"requiredAmount"`
 	ConsumeItem          bool              `json:"consumeItem"`
 	RequiredPuzzleStates map[string]string `json:"requiredPuzzleStates"`
-	MaxAlert             int               `json:"maxAlert"`
 	Message              string            `json:"message"`
 }
 
@@ -183,7 +168,6 @@ type puzzleActionFile struct {
 	GiveItems            map[string]int     `json:"giveItems"`
 	TakeItems            map[string]int     `json:"takeItems"`
 	SetFlags             map[string]bool    `json:"setFlags"`
-	AlertDelta           int                `json:"alertDelta"`
 	Choices              []actionChoiceFile `json:"choices"`
 	DialogueNPCID        string             `json:"dialogueNpcId"`
 	MoveToRoomID         string             `json:"moveToRoomId"`
@@ -204,18 +188,6 @@ type dungeonDialogueScript struct {
 type actionChoiceFile struct {
 	ID    string `json:"id"`
 	Label string `json:"label"`
-}
-
-type stealthFile struct {
-	Enabled          bool `json:"enabled"`
-	AlertOnMove      int  `json:"alertOnMove"`
-	SafeRoomRecovery int  `json:"safeRoomRecovery"`
-	MaxAlert         int  `json:"maxAlert"`
-}
-
-type patrolFile struct {
-	NPCID string   `json:"npcId"`
-	Route []string `json:"route"`
 }
 
 type objectiveFile struct {
@@ -245,6 +217,7 @@ type NPCState struct {
 	Description       string
 	DialogueID        string
 	Aggressive        bool
+	NonCombat         bool
 	Attributes        model.Attributes
 	ShopInventory     map[string]int
 	Skills            map[string]int
@@ -276,10 +249,8 @@ type Instance struct {
 	PuzzleStates         map[string]string
 	PuzzleAttempts       map[string]int
 	CheckpointRoomID     string
-	AlertLevel           int
 	TurnCount            int
 	PatrolRoutes         map[string][]string
-	Stealth              StealthConfig
 	TemporaryItems       []string
 	PendingChoices       map[string]bool
 	PendingChoicePrompt  string
@@ -390,6 +361,7 @@ func (m *Manager) LoadTemplatesNoLock() error {
 			Description:         strings.TrimSpace(df.Description),
 			Order:               df.Order,
 			ChainID:             strings.TrimSpace(df.ChainID),
+			ChainName:           strings.TrimSpace(df.ChainName),
 			Chapter:             df.Chapter,
 			SpawnRoomID:         strings.TrimSpace(df.SpawnRoomID),
 			Rooms:               map[string]TemplateRoom{},
@@ -399,14 +371,7 @@ func (m *Manager) LoadTemplatesNoLock() error {
 			UnlockConditions:    loadUnlockConditions(df.UnlockConditions),
 			PuzzleInitialStates: copyStringMap(df.PuzzleInitialStates),
 			PuzzleActions:       loadPuzzleActions(df.PuzzleActions),
-			Stealth: StealthConfig{
-				Enabled:          df.Stealth.Enabled,
-				AlertOnMove:      df.Stealth.AlertOnMove,
-				SafeRoomRecovery: df.Stealth.SafeRoomRecovery,
-				MaxAlert:         df.Stealth.MaxAlert,
-			},
-			Patrols:        loadPatrols(df.Patrols),
-			TemporaryItems: append([]string{}, df.TemporaryItems...),
+			TemporaryItems:      append([]string{}, df.TemporaryItems...),
 		}
 		for actionID, script := range dialogueScripts[tplID] {
 			action, exists := tpl.PuzzleActions[actionID]
@@ -459,7 +424,6 @@ func (m *Manager) LoadTemplatesNoLock() error {
 					RequiredAmount:       requirement.RequiredAmount,
 					ConsumeItem:          requirement.ConsumeItem,
 					RequiredPuzzleStates: copyStringMap(requirement.RequiredPuzzleStates),
-					MaxAlert:             requirement.MaxAlert,
 					Message:              strings.TrimSpace(requirement.Message),
 				}
 			}
@@ -478,8 +442,6 @@ func (m *Manager) LoadTemplatesNoLock() error {
 				Actions:          append([]string{}, rf.Actions...),
 				ActionLabels:     actionLabels,
 				Checkpoint:       rf.Checkpoint,
-				StealthSafe:      rf.StealthSafe,
-				Noise:            rf.Noise,
 				ExitRequirements: exitRequirements,
 			}
 		}
@@ -521,18 +483,6 @@ func loadDungeonDialogueScripts(path string) (map[string]map[string]dungeonDialo
 	return out, nil
 }
 
-func loadPatrols(files []patrolFile) []PatrolConfig {
-	out := make([]PatrolConfig, 0, len(files))
-	for _, patrol := range files {
-		npcID := strings.TrimSpace(patrol.NPCID)
-		if npcID == "" || len(patrol.Route) < 2 {
-			continue
-		}
-		out = append(out, PatrolConfig{NPCID: npcID, Route: append([]string{}, patrol.Route...)})
-	}
-	return out
-}
-
 func loadPuzzleActions(files map[string]puzzleActionFile) map[string]PuzzleAction {
 	out := map[string]PuzzleAction{}
 	for id, action := range files {
@@ -557,7 +507,6 @@ func loadPuzzleActions(files map[string]puzzleActionFile) map[string]PuzzleActio
 			GiveItems:            copyIntMap(action.GiveItems),
 			TakeItems:            copyIntMap(action.TakeItems),
 			SetFlags:             copyBoolMap(action.SetFlags),
-			AlertDelta:           action.AlertDelta,
 			Choices:              loadActionChoices(action.Choices),
 			DialogueNPCID:        strings.TrimSpace(action.DialogueNPCID),
 			MoveToRoomID:         strings.TrimSpace(action.MoveToRoomID),
@@ -689,15 +638,6 @@ func cloneObjectivesForInstance(in []Objective, oldToNew map[string]string) []Ob
 	return out
 }
 
-func cloneUnlockConditions(in []UnlockCondition) []UnlockCondition {
-	if len(in) == 0 {
-		return nil
-	}
-	out := make([]UnlockCondition, len(in))
-	copy(out, in)
-	return out
-}
-
 func cloneRewards(in model.Rewards) model.Rewards {
 	return model.Rewards{
 		Experience:  in.Experience,
@@ -750,7 +690,6 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 		PuzzleStates:         copyStringMap(tpl.PuzzleInitialStates),
 		PuzzleAttempts:       map[string]int{},
 		PatrolRoutes:         map[string][]string{},
-		Stealth:              tpl.Stealth,
 		TemporaryItems:       append([]string{}, tpl.TemporaryItems...),
 		PendingChoices:       map[string]bool{},
 		DialogueProgress:     map[string]int{},
@@ -781,8 +720,6 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 			WorldName:        tpl.Name,
 			Name:             tr.Name,
 			Description:      tr.Description,
-			StealthSafe:      tr.StealthSafe,
-			Noise:            tr.Noise,
 			Actions:          append([]string{}, tr.Actions...),
 			ActionLabels:     copyStringMap(tr.ActionLabels),
 			Exits:            exits,
@@ -813,6 +750,7 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 				Description:       npcTemplate.Description,
 				DialogueID:        npcTemplate.DialogueID,
 				Aggressive:        npcTemplate.Aggressive,
+				NonCombat:         npcTemplate.NonCombat,
 				Attributes:        attrs,
 				ShopInventory:     copyIntMap(npcTemplate.ShopInventory),
 				Skills:            copyIntMap(npcTemplate.Skills),
@@ -828,28 +766,6 @@ func (m *Manager) CreateInstanceNoLock(playerID, dungeonID, entryRoomID string) 
 		}
 		inst.Rooms[roomID] = room
 	}
-	for _, patrol := range tpl.Patrols {
-		var npcInstanceID string
-		for id, npc := range inst.NPCs {
-			if npc.TemplateID == patrol.NPCID {
-				npcInstanceID = id
-				break
-			}
-		}
-		if npcInstanceID == "" {
-			continue
-		}
-		route := make([]string, 0, len(patrol.Route))
-		for _, baseRoomID := range patrol.Route {
-			if roomID := oldToNew[baseRoomID]; roomID != "" {
-				route = append(route, roomID)
-			}
-		}
-		if len(route) >= 2 {
-			inst.PatrolRoutes[npcInstanceID] = route
-		}
-	}
-
 	inst.SpawnRoomID = oldToNew[tpl.SpawnRoomID]
 	if inst.CheckpointRoomID == "" {
 		inst.CheckpointRoomID = inst.SpawnRoomID
@@ -1377,49 +1293,6 @@ func (m *Manager) UpdateCheckpointNoLock(roomID string) {
 	}
 }
 
-func (m *Manager) AdvanceStealthNoLock(playerRoomID string) {
-	instanceID, ok := m.roomInstance[playerRoomID]
-	if !ok {
-		return
-	}
-	inst := m.instances[instanceID]
-	if inst == nil || !inst.Stealth.Enabled {
-		return
-	}
-	inst.TurnCount++
-	room := inst.Rooms[playerRoomID]
-	if room.StealthSafe {
-		inst.AlertLevel -= inst.Stealth.SafeRoomRecovery
-	} else {
-		inst.AlertLevel += inst.Stealth.AlertOnMove + room.Noise
-	}
-	for npcID, route := range inst.PatrolRoutes {
-		npc := inst.NPCs[npcID]
-		if npc == nil || !npc.Alive || len(route) < 2 {
-			continue
-		}
-		oldRoom := inst.Rooms[npc.RoomID]
-		oldRoom.NPCIDs = removeString(oldRoom.NPCIDs, npcID)
-		inst.Rooms[npc.RoomID] = oldRoom
-		newRoomID := route[inst.TurnCount%len(route)]
-		newRoom := inst.Rooms[newRoomID]
-		if !containsString(newRoom.NPCIDs, npcID) {
-			newRoom.NPCIDs = append(newRoom.NPCIDs, npcID)
-		}
-		inst.Rooms[newRoomID] = newRoom
-		npc.RoomID = newRoomID
-		if newRoomID == playerRoomID {
-			inst.AlertLevel++
-		}
-	}
-	if inst.AlertLevel < 0 {
-		inst.AlertLevel = 0
-	}
-	if inst.Stealth.MaxAlert > 0 && inst.AlertLevel > inst.Stealth.MaxAlert {
-		inst.AlertLevel = inst.Stealth.MaxAlert
-	}
-}
-
 func (m *Manager) updateObjectiveProgressNoLock(inst *Instance) {
 	if inst == nil || len(inst.Objectives) == 0 {
 		return
@@ -1553,14 +1426,6 @@ func (m *Manager) BuildDungeonSettlementNoLock(inst *Instance) Settlement {
 	}
 }
 
-func FormatDungeonSettlementMessage(s Settlement) string {
-	prefix := "副本结算"
-	if s.Progress >= 100 {
-		prefix = "副本完成"
-	}
-	return fmt.Sprintf("%s：完成度%d%%，获得%d点经验，%d点潜能。", prefix, s.Progress, s.RewardExperience, s.RewardPotential)
-}
-
 func (m *Manager) ProcessDungeonAggroNoLock(_ map[string]*model.Player, _ *model.CombatTickResult, _ map[string]bool) {
 }
 
@@ -1636,23 +1501,4 @@ func copyStringMap(in map[string]string) map[string]string {
 		out[key] = value
 	}
 	return out
-}
-
-func removeString(values []string, target string) []string {
-	out := values[:0]
-	for _, value := range values {
-		if value != target {
-			out = append(out, value)
-		}
-	}
-	return out
-}
-
-func containsString(values []string, target string) bool {
-	for _, value := range values {
-		if value == target {
-			return true
-		}
-	}
-	return false
 }

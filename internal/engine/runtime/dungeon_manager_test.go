@@ -1,105 +1,120 @@
 package runtime
 
 import (
-	"reflect"
+	"strings"
 	"testing"
 
 	"mudgame/server/internal/model"
 )
 
-func TestXunqinRewrittenFirstSixTemplatesMatchDesign(t *testing.T) {
+func TestHuangyiChapterTemplatesMatchDesign(t *testing.T) {
 	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
 	if err := m.LoadTemplatesNoLock(); err != nil {
 		t.Fatalf("load dungeon templates failed: %v", err)
 	}
-	expected := map[string]int{
-		"xunqin_ch01_bronze_tomb":  6,
-		"xunqin_ch02_wild_convoy":  8,
-		"xunqin_ch03_wu_stables":   8,
-		"xunqin_ch04_zhao_inn":     8,
-		"xunqin_ch05_hostage_camp": 9,
-		"xunqin_ch06_handan_alley": 9,
+	expected := map[string]struct {
+		rooms     int
+		chainID   string
+		chainName string
+		chapter   int
+	}{
+		"abandoned_temple_rain": {3, "luoyang_rain_temple", "洛阳轶事", 1},
+		"datang_changshengjue":  {5, "datang_double_dragon", "大唐双龙传", 1},
+		"fuyu_nujiao":           {5, "fuyu_fan_yun", "覆雨翻云", 1},
+		"posui_jingyan":         {5, "posui_xukong", "破碎虚空", 1},
+		"bianhuang_escort":      {5, "bianhuang_legend", "边荒传说", 1},
+		"datang_yanggong":       {6, "datang_double_dragon", "大唐双龙传", 2},
+		"fuyu_lanjiang":         {3, "fuyu_fan_yun", "覆雨翻云", 2},
 	}
-	chapters := map[int]string{}
+	loaded := map[string]bool{}
 	for _, id := range m.DungeonTemplateIDsNoLock() {
-		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID == "xunqin_legend" {
-			if _, ok := expected[id]; !ok {
-				t.Fatalf("unexpected xunqin dungeon remains loaded: %s", id)
-			}
+		loaded[id] = true
+		if strings.HasPrefix(id, "xunqin") {
+			t.Fatalf("xunqin dungeon should have been removed, got %s", id)
 		}
 	}
-	for id, roomCount := range expected {
+	for id, meta := range expected {
 		tpl, ok := m.DungeonTemplateNoLock(id)
 		if !ok {
 			t.Fatalf("missing redesigned dungeon %s", id)
 		}
-		if len(tpl.Rooms) != roomCount {
-			t.Fatalf("dungeon %s expected %d rooms, got %d", id, roomCount, len(tpl.Rooms))
+		if len(tpl.Rooms) != meta.rooms {
+			t.Fatalf("dungeon %s expected %d rooms, got %d", id, meta.rooms, len(tpl.Rooms))
 		}
-		if tpl.ChainID != "xunqin_legend" || tpl.Chapter < 1 || tpl.Chapter > 6 {
-			t.Fatalf("dungeon %s has invalid chain metadata: %+v", id, tpl)
+		if tpl.ChainID != meta.chainID || tpl.ChainName != meta.chainName || tpl.Chapter != meta.chapter {
+			t.Fatalf("dungeon %s has invalid chain metadata: chain=%s name=%s chapter=%d", id, tpl.ChainID, tpl.ChainName, tpl.Chapter)
 		}
-		chapters[tpl.Chapter] = id
 	}
-	if !reflect.DeepEqual(chapters, map[int]string{1: "xunqin_ch01_bronze_tomb", 2: "xunqin_ch02_wild_convoy", 3: "xunqin_ch03_wu_stables", 4: "xunqin_ch04_zhao_inn", 5: "xunqin_ch05_hostage_camp", 6: "xunqin_ch06_handan_alley"}) {
-		t.Fatalf("unexpected rewritten chapter ordering: %+v", chapters)
+	if len(loaded) != len(expected) {
+		t.Fatalf("unexpected extra dungeons loaded: %+v", loaded)
 	}
 }
 
-func TestXunqinPuzzleStateGraphsClassifyEveryConfiguredState(t *testing.T) {
+// TestCombatFocusedDesignConstraints 落实"战斗为主、解谜克制"的设计约束：
+// 击杀权重必须过半、解谜动作至多两个、终局副本必须由前序副本完成旗标解锁。
+func TestCombatFocusedDesignConstraints(t *testing.T) {
 	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
 	if err := m.LoadTemplatesNoLock(); err != nil {
 		t.Fatalf("load dungeon templates failed: %v", err)
 	}
 	for _, id := range m.DungeonTemplateIDsNoLock() {
 		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID != "xunqin_legend" {
-			continue
+		killWeight := 0
+		puzzleWeight := 0
+		for _, objective := range tpl.Objectives {
+			if objective.Optional {
+				continue
+			}
+			switch objective.Type {
+			case "kill":
+				killWeight += objective.Weight
+			case "puzzle":
+				puzzleWeight += objective.Weight
+			}
 		}
+		if killWeight < 50 {
+			t.Fatalf("dungeon %s is not combat focused: kill weight %d", id, killWeight)
+		}
+		if puzzleWeight > 20 {
+			t.Fatalf("dungeon %s carries too much puzzle weight: %d", id, puzzleWeight)
+		}
+	}
+
+	lanjiang, ok := m.DungeonTemplateNoLock("fuyu_lanjiang")
+	if !ok {
+		t.Fatalf("missing finale dungeon fuyu_lanjiang")
+	}
+	if len(lanjiang.UnlockConditions) != 2 {
+		t.Fatalf("finale dungeon must require two completion flags, got %+v", lanjiang.UnlockConditions)
+	}
+	requiredFlags := map[string]bool{}
+	for _, cond := range lanjiang.UnlockConditions {
+		if cond.Type != "flag" {
+			t.Fatalf("finale unlock must use flag conditions, got %+v", lanjiang.UnlockConditions)
+		}
+		requiredFlags[cond.TargetID] = true
+	}
+	if !requiredFlags["fuyu_nujiao_completed"] || !requiredFlags["posui_jingyan_completed"] {
+		t.Fatalf("finale unlock flags mismatch: %+v", lanjiang.UnlockConditions)
+	}
+	nujiao, _ := m.DungeonTemplateNoLock("fuyu_nujiao")
+	if !nujiao.Rewards.Flags["fuyu_nujiao_completed"] {
+		t.Fatalf("fuyu_nujiao must reward its completion flag")
+	}
+	posui, _ := m.DungeonTemplateNoLock("posui_jingyan")
+	if !posui.Rewards.Flags["posui_jingyan_completed"] {
+		t.Fatalf("posui_jingyan must reward its completion flag")
+	}
+}
+
+func TestDungeonPuzzleStateGraphsClassifyEveryConfiguredState(t *testing.T) {
+	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
+	if err := m.LoadTemplatesNoLock(); err != nil {
+		t.Fatalf("load dungeon templates failed: %v", err)
+	}
+	for _, id := range m.DungeonTemplateIDsNoLock() {
+		tpl, _ := m.DungeonTemplateNoLock(id)
 		inst := &Instance{DungeonID: id, PuzzleStates: map[string]string{}}
-		choiceActions := map[string]bool{}
-		for _, parent := range tpl.PuzzleActions {
-			for _, choice := range parent.Choices {
-				choiceActions[choice.ID] = true
-			}
-		}
-		for roomID, room := range tpl.Rooms {
-			for _, actionID := range room.Actions {
-				if choiceActions[actionID] {
-					t.Fatalf("dungeon %s room %s exposes message choice %s as a room action", id, roomID, actionID)
-				}
-			}
-		}
-		for puzzleID, initial := range tpl.PuzzleInitialStates {
-			inst.PuzzleStates[puzzleID] = initial
-			reachable := map[string]bool{initial: true}
-			changed := true
-			for changed {
-				changed = false
-				for _, action := range tpl.PuzzleActions {
-					if action.PuzzleID != puzzleID || action.NextState == "" {
-						continue
-					}
-					for _, from := range action.FromStates {
-						if from != "never" && reachable[from] && !reachable[action.NextState] {
-							reachable[action.NextState] = true
-							changed = true
-						}
-					}
-				}
-			}
-			for actionID, action := range tpl.PuzzleActions {
-				if action.PuzzleID != puzzleID {
-					continue
-				}
-				for _, from := range action.FromStates {
-					if from != "never" && !reachable[from] {
-						t.Fatalf("dungeon %s action %s starts from unreachable %s state %s", id, actionID, puzzleID, from)
-					}
-				}
-			}
-		}
 		totalWeight := 0
 		groupWeights := map[string]int{}
 		for _, objective := range tpl.Objectives {
@@ -122,7 +137,13 @@ func TestXunqinPuzzleStateGraphsClassifyEveryConfiguredState(t *testing.T) {
 			if _, ok := tpl.PuzzleInitialStates[action.PuzzleID]; !ok {
 				t.Fatalf("dungeon %s action %s uses unknown puzzle %s", id, actionID, action.PuzzleID)
 			}
+			if action.DialogueNPCID == "" && len(action.Rooms) == 0 {
+				t.Fatalf("dungeon %s action %s is bound to no room", id, actionID)
+			}
 			for _, from := range action.FromStates {
+				if !stateReachableNoLock(tpl, action.PuzzleID, from) {
+					t.Fatalf("dungeon %s action %s starts from unreachable %s state %s", id, actionID, action.PuzzleID, from)
+				}
 				inst.PuzzleStates[action.PuzzleID] = from
 				if status := m.PuzzleActionStateStatusNoLock(inst, action); status != PuzzleActionReady {
 					t.Fatalf("dungeon %s action %s should be ready from %s, got %s", id, actionID, from, status)
@@ -134,14 +155,33 @@ func TestXunqinPuzzleStateGraphsClassifyEveryConfiguredState(t *testing.T) {
 					t.Fatalf("dungeon %s action %s should repeat at %s, got %s", id, actionID, action.NextState, status)
 				}
 			}
-			for _, choice := range action.Choices {
-				child, ok := tpl.PuzzleActions[choice.ID]
-				if !ok || !testContainsString(child.FromStates, action.NextState) && !testContainsString(child.FromStates, "never") {
-					t.Fatalf("dungeon %s action %s choice %s does not consume offered state %s", id, actionID, choice.ID, action.NextState)
+		}
+	}
+}
+
+func stateReachableNoLock(tpl Template, puzzleID, target string) bool {
+	if initial, ok := tpl.PuzzleInitialStates[puzzleID]; !ok {
+		return false
+	} else if initial == target {
+		return true
+	}
+	reachable := map[string]bool{tpl.PuzzleInitialStates[puzzleID]: true}
+	changed := true
+	for changed {
+		changed = false
+		for _, action := range tpl.PuzzleActions {
+			if action.PuzzleID != puzzleID || action.NextState == "" {
+				continue
+			}
+			for _, from := range action.FromStates {
+				if reachable[from] && !reachable[action.NextState] {
+					reachable[action.NextState] = true
+					changed = true
 				}
 			}
 		}
 	}
+	return reachable[target]
 }
 
 func testContainsString(values []string, target string) bool {
@@ -153,41 +193,7 @@ func testContainsString(values []string, target string) bool {
 	return false
 }
 
-func TestXunqinPendingChoicesKeepTheirExactPrompt(t *testing.T) {
-	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
-	if err := m.LoadTemplatesNoLock(); err != nil {
-		t.Fatalf("load dungeon templates failed: %v", err)
-	}
-	for _, id := range m.DungeonTemplateIDsNoLock() {
-		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 6 {
-			continue
-		}
-		for actionID, action := range tpl.PuzzleActions {
-			if len(action.Choices) == 0 {
-				continue
-			}
-			pending := map[string]bool{}
-			for _, choice := range action.Choices {
-				pending[choice.ID] = true
-			}
-			inst := &Instance{
-				DungeonID:            id,
-				PendingChoices:       pending,
-				PendingChoicePrompt:  action.Message,
-				PendingChoiceOptions: append([]ActionChoice{}, action.Choices...),
-			}
-			if got := m.PendingChoicePromptNoLock(inst); got != action.Message {
-				t.Fatalf("dungeon %s action %s lost its pending prompt: got %q want %q", id, actionID, got, action.Message)
-			}
-			if got := m.PendingActionChoicesNoLock(inst); !reflect.DeepEqual(got, action.Choices) {
-				t.Fatalf("dungeon %s action %s exposed internal action labels: got %+v want %+v", id, actionID, got, action.Choices)
-			}
-		}
-	}
-}
-
-func TestXunqinDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
+func TestDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
 	m := NewManager(map[string]model.NPC{}, map[string]Template{}, map[string]*Instance{}, map[string]string{}, map[string]string{}, map[string]*NPCState{})
 	if err := m.LoadTemplatesNoLock(); err != nil {
 		t.Fatalf("load dungeon templates failed: %v", err)
@@ -195,9 +201,6 @@ func TestXunqinDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
 	covered := 0
 	for _, id := range m.DungeonTemplateIDsNoLock() {
 		tpl, _ := m.DungeonTemplateNoLock(id)
-		if tpl.ChainID != "xunqin_legend" || tpl.Chapter > 6 {
-			continue
-		}
 		for actionID, action := range tpl.PuzzleActions {
 			if action.DialogueNPCID == "" {
 				continue
@@ -211,8 +214,8 @@ func TestXunqinDungeonDialogueScriptsCoverEveryStoryAction(t *testing.T) {
 			}
 		}
 	}
-	if covered != 15 {
-		t.Fatalf("expected all 15 rewritten story dialogue actions, got %d", covered)
+	if covered != 5 {
+		t.Fatalf("expected all 5 story dialogue actions, got %d", covered)
 	}
 }
 
@@ -359,24 +362,5 @@ func TestPuzzleActionNPCEffectsRemoveOrLeaveCorpse(t *testing.T) {
 	room := inst.Rooms[roomID]
 	if len(room.NPCIDs) != 1 || room.NPCIDs[0] != killed.ID {
 		t.Fatalf("expected only corpse to remain in room, got %+v", room.NPCIDs)
-	}
-}
-
-func TestAdvanceStealthMovesPatrolAndChangesAlertByPlayerTurn(t *testing.T) {
-	inst := &Instance{
-		ID:           "instance",
-		Stealth:      StealthConfig{Enabled: true, AlertOnMove: 1, SafeRoomRecovery: 2, MaxAlert: 6},
-		Rooms:        map[string]model.Room{"a": {ID: "a", NPCIDs: []string{"guard"}}, "b": {ID: "b"}, "safe": {ID: "safe", StealthSafe: true}},
-		NPCs:         map[string]*NPCState{"guard": {ID: "guard", RoomID: "a", Alive: true}},
-		PatrolRoutes: map[string][]string{"guard": {"a", "b"}},
-	}
-	m := NewManager(nil, nil, map[string]*Instance{"instance": inst}, nil, map[string]string{"a": "instance", "b": "instance", "safe": "instance"}, nil)
-	m.AdvanceStealthNoLock("b")
-	if inst.NPCs["guard"].RoomID != "b" || inst.AlertLevel != 2 {
-		t.Fatalf("expected patrol encounter to move guard and raise alert to 2, got room=%s alert=%d", inst.NPCs["guard"].RoomID, inst.AlertLevel)
-	}
-	m.AdvanceStealthNoLock("safe")
-	if inst.AlertLevel != 0 {
-		t.Fatalf("expected safe room to recover alert, got %d", inst.AlertLevel)
 	}
 }

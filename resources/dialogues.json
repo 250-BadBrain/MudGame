@@ -14,12 +14,11 @@
         }
       },
       {
-        "id": "ask_bronze_box",
-        "text": "听说城中有战国铜匣的怪谈？",
-        "response": "他目光一闪：“铜匣旧痕不像中原手艺，倒像是从很远的年月里挖出来的。若你真想知道，夜深后去西市旧货巷寻那阵铜响。”",
+        "id": "ask_legend_tales",
+        "text": "问问近日江湖上有什么传说",
+        "response": "说书人醒木轻拍：近来江湖可热闹了——扬子江上有人为《长生诀》杀得血染芦苇荡；怒蛟帮水寨一夜火起；惊雁宫重见天日；边荒集外燕军夜截纪千千。诸位少侠若是手痒，城郊荒庙那点动静也值得一探。",
         "setFlags": {
-          "heard_bronze_box_rumor": true,
-          "xunqin_ch01_unlocked": true
+          "heard_legend_tales": true
         }
       }
     ]
@@ -106,290 +105,6 @@
       }
     ]
   },
-  "xunqin_tingfang_intro": {
-    "id": "xunqin_tingfang_intro",
-    "npcId": "tingfang_shadow",
-    "title": "枯井村少女",
-    "opening": "婷芳氏警惕地望着村口，又看了看你身上的陌生装束：‘这里是赵境。那些人喊你少龙，你却像是第一次听见这个名字。’",
-    "options": [
-      {
-        "id": "ask_where",
-        "text": "这里究竟是什么地方？",
-        "response": "‘向东是通往邯郸的官道。赵府的人近来四处搜捕异乡人，村里的恶霸便借他们的名头欺人。若你真要往邯郸去，先别让他继续堵着村口。’",
-        "setFlags": { "xunqin_ch01_heard_tingfang": true }
-      },
-      {
-        "id": "ask_shaolong",
-        "text": "他们为何叫我少龙？",
-        "response": "她摇头道：‘我只听追兵这样喊。这个名字似乎牵着邯郸的一桩大事，你若想活着弄明白，便不能在此久留。’"
-      }
-    ]
-  },
-  "xunqin_bully_confrontation": {
-    "id": "xunqin_bully_confrontation",
-    "npcId": "zhao_bully",
-    "title": "村口恶霸",
-    "opening": "恶霸横在路中，指着婷芳氏冷笑：‘外乡人，少管赵境的闲事。’",
-    "options": [
-      {
-        "id": "demand_release",
-        "text": "让开道路，放她离开。",
-        "response": "他啐了一口，抄起木棍：‘想从这里过去，就先问过爷爷手里的家伙。’"
-      },
-      {
-        "id": "ask_backer",
-        "text": "是谁准你在村中横行？",
-        "response": "‘赵府正在拿人，谁敢管我？你既被叫作少龙，正好拿你去领赏。’"
-      }
-    ]
-  },
-  "xunqin_rider_warning": {
-    "id": "xunqin_rider_warning",
-    "npcId": "zhao_rider",
-    "title": "赵国追骑",
-    "opening": "游骑勒住坐骑，刀锋斜指地面：‘少龙，跟我们回邯郸，尚可少受些苦。’",
-    "options": [
-      {
-        "id": "ask_charge",
-        "text": "赵府为何追我？",
-        "response": "‘你知道了不该知道的事，又带走了不该带走的东西。其余的话，等你跪在主人面前再问。’"
-      },
-      {
-        "id": "refuse_capture",
-        "text": "这条路，我一定要走。",
-        "response": "游骑收紧缰绳：‘那便只好把你绑在马后带走。’"
-      }
-    ]
-  },
-  "xunqin_retainer_warning": {
-    "id": "xunqin_retainer_warning",
-    "npcId": "zhao_retainer",
-    "title": "赵府门客",
-    "opening": "门客盯着你身上的铜光痕迹：‘追的不是一条命，是你从旧岁月里带来的东西。’",
-    "options": [
-      {
-        "id": "ask_fragment",
-        "text": "你们在找什么？",
-        "response": "‘一页能牵动邯郸局势的残简。交出来，我可以让你死得痛快些。’"
-      }
-    ]
-  },
-  "xunqin_swordsman_warning": {
-    "id": "xunqin_swordsman_warning",
-    "npcId": "retainer_swordsman",
-    "title": "断桥剑士",
-    "opening": "剑士守在断桥中央：‘能乱时局的异数，不能带着残简离开。’",
-    "options": [
-      {
-        "id": "ask_master",
-        "text": "是谁命你守在这里？",
-        "response": "‘活人没有资格知道主人的名号。你若能胜过这柄剑，自会在邯郸找到答案。’"
-      }
-    ]
-  },
-  "xunqin_tao_fang_handan": {
-    "id": "xunqin_tao_fang_handan",
-    "npcId": "tao_fang_shadow",
-    "title": "乌家管事陶方",
-    "opening": "陶方将院门掩上：‘你在赵境惹出的动静不小。想在邯郸活下去，先要明白乌家、质子府和赵穆的人为何都盯上了你。’",
-    "options": [
-      {
-        "id": "ask_handan_situation",
-        "text": "请讲讲邯郸眼下的局势。",
-        "response": "‘乌家以马匹和商路立足，赵穆却想把这些都握在手中。质子府里还藏着另一条暗线。你被人称作少龙，又带着纵横残简，已经成了几方都想抢先找到的人。’",
-        "setFlags": { "xunqin_ch02_heard_tao_background": true },
-        "requires": { "flag": "xunqin_ch02_received_wu_token", "flagValue": false }
-      },
-      {
-        "id": "request_wu_token",
-        "text": "我要如何进入质子府查明此事？",
-        "response": "陶方取出一枚乌氏令牌：‘偏门守卫认得这块牌子，但赵府卫士未必肯让路。收好它，暗廊里有人改过乌家的出入记录。’",
-        "giveItems": { "wu_house_token": 1 },
-        "setFlags": { "xunqin_ch02_received_wu_token": true },
-        "requires": { "flag": "xunqin_ch02_heard_tao_background" }
-      },
-      {
-        "id": "after_token",
-        "text": "令牌背面的马道通向哪里？",
-        "response": "‘通向乌家在城西的马厩和河畔密院。先查质子府的名册，再从西城退走，我会在马厩留下绳结指路。’",
-        "requires": { "flag": "xunqin_ch02_received_wu_token" }
-      }
-    ]
-  },
-  "xunqin_zhao_guard": {
-    "id": "xunqin_zhao_guard",
-    "npcId": "zhao_mansion_guard",
-    "title": "赵府封巷卫士",
-    "opening": "卫士按住刀柄：‘赵府办事，闲人退开。乌家的牌子也护不住来历不明的人。’",
-    "options": [
-      {
-        "id": "show_token",
-        "text": "这是乌氏令牌，让开。",
-        "response": "他只瞥了一眼便冷笑：‘令牌可以过偏门，却过不了我的刀。’",
-        "requires": { "items": { "wu_house_token": 1 } }
-      },
-      {
-        "id": "ask_orders",
-        "text": "你们奉谁的命令封路？",
-        "response": "‘不该问的别问。少龙若在这里，今日便休想走脱。’"
-      }
-    ]
-  },
-  "xunqin_lian_jin_crossing": {
-    "id": "xunqin_lian_jin_crossing",
-    "npcId": "lian_jin_shadow",
-    "title": "漳水边的连晋",
-    "opening": "连晋横剑望来：‘乌家把希望押在你身上，实在叫人失望。把令牌和残简留下，我让你自行回头。’",
-    "options": [
-      {
-        "id": "ask_rivalry",
-        "text": "你为何处处与乌家为敌？",
-        "response": "‘我只与配做对手的人争。乌家、赵府、邯郸名士，最后都只会记住胜者的名字。’"
-      },
-      {
-        "id": "refuse_lian_jin",
-        "text": "我不会交出令牌。",
-        "response": "连晋缓缓拔剑：‘很好。死人最能守住秘密。’"
-      }
-    ]
-  },
-  "xunqin_tao_fang_sword": {
-    "id": "xunqin_tao_fang_sword",
-    "npcId": "tao_fang_sword_shadow",
-    "title": "剑馆外的陶方",
-    "opening": "陶方压低声音：‘连晋挑的不是一场普通比剑。他要当着邯郸人的面证明，乌家看中的人不过如此。先别急着进校场，馆里留下的痕迹比战帖诚实。’",
-    "options": [
-      { "id": "ask_sword_clues", "text": "剑馆里该看什么？", "response": "‘先看坏掉的剑，再看练剑人的脚。最后去西廊找被新漆盖住的东西。三处若能互相对上，你才算真正看见他的杀招。’" },
-      { "id": "ask_hidden_purpose", "text": "这场挑战还有什么目的？", "response": "‘赵穆想看你值不值得继续拉拢，连晋想借你立名。至于质子府，恐怕也有人在等胜负结果。’" }
-    ]
-  },
-  "xunqin_sword_disciple": {
-    "id": "xunqin_sword_disciple",
-    "npcId": "sword_hall_disciple",
-    "title": "抱剑的守堂弟子",
-    "opening": "弟子抱紧木剑：‘师兄说，今日谁也不许乱碰剑架。’",
-    "options": [
-      { "id": "ask_broken_swords", "text": "这些剑为何都坏在同一处？", "response": "他看了一眼右侧护手，急忙移开目光：‘每次与连师兄喂招，我们总会不由自主去封左路。等回过神，剑已经磕在那里了。’" },
-      { "id": "ask_practice", "text": "连晋平日在哪里练剑？", "response": "‘东面的白沙校场。沙每天都有人扫，可退步太重，怎么也扫不干净。’" }
-    ]
-  },
-  "xunqin_old_sword_keeper": {
-    "id": "xunqin_old_sword_keeper",
-    "npcId": "old_sword_keeper",
-    "title": "补漆的守剑老人",
-    "opening": "老人没有停下刷漆：‘新漆遮得住剑痕，遮不住出剑的人心。’",
-    "options": [
-      { "id": "ask_low_mark", "text": "最低那道剑痕为何先浅后深？", "response": "‘进剑只是请人入局，回剑才要命。追得越急，那一下便越深。’" },
-      { "id": "ask_lianjin", "text": "你似乎并不看好连晋。", "response": "‘我只看剑。剑若总靠旁人追进来才显威风，遇上一个肯停步的人，也就没那么神了。’" }
-    ]
-  },
-  "xunqin_lian_jin_challenge": {
-    "id": "xunqin_lian_jin_challenge",
-    "npcId": "lian_jin_challenger",
-    "title": "战帖亭中的连晋",
-    "opening": "连晋淡淡一笑：‘你在馆里绕了这么久，可曾看懂一剑？’",
-    "options": [
-      { "id": "answer_feint", "text": "你以虚招逼人封左，再退步诱追。", "response": "连晋眼中笑意稍敛：‘看懂痕迹不等于接得住剑。校场上见。’", "requires": { "flag": "xunqin_ch05_solved_sword_path" } },
-      { "id": "ask_token", "text": "谁替这场比剑作证？", "response": "‘胜负之后，见证席的木匣自会给你答案。前提是你还能走到那里。’" }
-    ]
-  },
-  "xunqin_lian_jin_duel": {
-    "id": "xunqin_lian_jin_duel",
-    "npcId": "lian_jin_duelist",
-    "title": "白线另一侧的连晋",
-    "opening": "连晋剑尖点地：‘我不会偷袭。等你说完最后一句，再拔剑。’",
-    "options": [
-      { "id": "name_counter", "text": "你的退势骗不到我。", "response": "‘那便看看你停得住脚，是否也挡得住回剑。’", "requires": { "flag": "xunqin_ch05_solved_sword_path" } },
-      { "id": "ask_grudge", "text": "你为何执意要这一战？", "response": "‘邯郸只需要记住一柄剑。你挡在我的名字前面，自然该被斩开。’" }
-    ]
-  },
-  "xunqin_tao_fang_hostage": {
-    "id": "xunqin_tao_fang_hostage",
-    "npcId": "tao_fang_hostage_shadow",
-    "title": "墙外的陶方",
-    "opening": "陶方摊开三张抄录：‘账上说午时领走灰马，门卒说午前没有车出去，西厨却少了一卷新封泥。三个人未必都在撒谎。’",
-    "options": [
-      { "id": "ask_investigation_order", "text": "应该先从哪里查起？", "response": "‘先查调令本身，再问仆役。物证不会改口，人的话却要放在时辰里看。’" },
-      { "id": "ask_entry_choices", "text": "查出路线后如何进入内院？", "response": "‘西厨抄房能做腰牌；若不愿冒充杂役，守卫值房也直通内院。后者自然要靠刀说话。’" }
-    ]
-  },
-  "xunqin_outer_clerk": {
-    "id": "xunqin_outer_clerk",
-    "npcId": "hostage_clerk_shadow",
-    "title": "火盆旁的外账吏",
-    "opening": "小吏低声道：‘我只奉命烧旧账，调令怎么夹进来的，我不知道。’",
-    "options": [
-      { "id": "ask_seal", "text": "封泥为何有两层？", "response": "‘上层是后来补的。下面那点火纹……像西厨给车罐封口用的小印。’" },
-      { "id": "ask_missing_clerk", "text": "原本经手调令的人呢？", "response": "‘昨夜便不见了。有人说他逃了，可他的鞋还在值房。’" }
-    ]
-  },
-  "xunqin_kitchen_servant": {
-    "id": "xunqin_kitchen_servant",
-    "npcId": "hostage_servant_shadow",
-    "title": "不肯抬头的西厨仆役",
-    "opening": "仆役反复搓着袖口：‘午前真没有车走正门，这话我敢赌命。’",
-    "options": [
-      { "id": "ask_gray_horse", "text": "那匹灰马去了哪里？", "response": "‘午时有人说泔水车坏了，牵灰马去替了一趟。车从西厨侧门走，不归正门卒管。’" },
-      { "id": "ask_cart_weight", "text": "那辆车为何留下重辙？", "response": "‘空泔水桶不该那么重。回来时车轻了，赶车的人却不是平日那个。’" }
-    ]
-  },
-  "xunqin_archive_guard": {
-    "id": "xunqin_archive_guard",
-    "npcId": "zhao_archive_guard",
-    "title": "值房守卫",
-    "opening": "守卫伸出手：‘腰牌、口令、轮值姓名。少一样，就从原路滚回去。’",
-    "options": [
-      { "id": "ask_order", "text": "你守的是门，还是那份调令？", "response": "他目光一沉：‘看来你知道得太多。现在更不能让你过去。’" },
-      { "id": "show_broken_jade", "text": "认得这枚断纹剑珏吗？", "response": "‘连晋竟把这东西输了？那你今晚更该死在门外。’", "requires": { "items": { "broken_sword_jade": 1 } } }
-    ]
-  },
-  "xunqin_missing_clerk": {
-    "id": "xunqin_missing_clerk",
-    "npcId": "missing_hostage_clerk",
-    "title": "被囚的经手账吏",
-    "opening": "账吏咳了很久才开口：‘他们换走调令，还要我承认是自己私通乌家。’",
-    "options": [
-      { "id": "ask_true_seal", "text": "真正密令来自哪里？", "response": "‘封底是秦地旧印。送令的人没有报姓名，只说邯郸很快会乱，所有知情人都要在今夜消失。’" },
-      { "id": "ask_escape", "text": "哪里还能离开质子府？", "response": "‘南边旧酒窖连着废水门。可梆子一响，追兵也会往那里去。’" }
-    ]
-  },
-  "xunqin_patrol_guard": {
-    "id": "xunqin_patrol_guard",
-    "npcId": "hostage_patrol_guard",
-    "title": "提灯巡院的卫士",
-    "opening": "巡院卫士将灯抬高：‘站住。西厨今夜没有新来的当值人。’",
-    "options": [
-      { "id": "ask_patrol_route", "text": "你每次都要查这几处门吗？", "response": "‘仆役院、西厨、值房，缺一处都要挨罚。少套我的话。’" },
-      { "id": "misdirect_patrol", "text": "外账廊的火盆似乎翻了。", "response": "他迟疑片刻，却没有立刻离岗：‘我走完这一圈自会去看。’" }
-    ]
-  },
-  "xqj_tao_fang": { "id": "xqj_tao_fang", "npcId": "xqj_tao_fang", "title": "乌家管事陶方", "opening": "陶方看清四周后才低声开口：‘乌家卷进的事越来越大，眼下每一步都不能只靠刀。’", "options": [ { "id": "ask_wu_house", "text": "乌家如今处境如何？", "response": "‘乌家靠马政立足，也因此被赵国权贵盯上。财货能买路，也最容易招祸。’" }, { "id": "ask_next_step", "text": "接下来该做什么？", "response": "‘先看清房中的人和物，再决定动手。错过的线索往往比眼前敌人更危险。’" } ] },
-  "xqj_wu_tingfang": { "id": "xqj_wu_tingfang", "npcId": "xqj_wu_tingfang", "title": "乌家小姐乌廷芳", "opening": "乌廷芳扬眉道：‘别以为救过陶方，乌家便会毫无保留地信你。’", "options": [ { "id": "ask_distrust", "text": "你为何不信我？", "response": "‘来历不明、言语古怪，偏偏又有一身本领。换作是你，难道不会提防？’" }, { "id": "ask_danger", "text": "乌家真正的危险是什么？", "response": "‘外面有人想夺乌家的马，里面也有人替他们开门。’" } ] },
-  "xqj_wu_yingyuan": { "id": "xqj_wu_yingyuan", "npcId": "xqj_wu_yingyuan", "title": "乌家家主乌应元", "opening": "乌应元放下手中竹简：‘乌家可以用一个有本事的外人，却不能把全族性命交给一个看不透的人。’", "options": [ { "id": "ask_pressure", "text": "赵国权贵为何针对乌家？", "response": "‘马匹、商路和乌家私兵，任何一项都足以令人眼红。’" }, { "id": "ask_service", "text": "我能为乌家做什么？", "response": "‘先证明你能看清局势，再证明你肯在危局中留下。’" } ] },
-  "xqj_mysterious_youth": { "id": "xqj_mysterious_youth", "npcId": "xqj_mysterious_youth", "title": "质子营中的神秘少年", "opening": "少年没有求救，只冷静地问：‘你救我，是为秦，还是为你自己？’", "options": [ { "id": "answer_save", "text": "为救该救之人。", "response": "他看了你片刻：‘这句话未必可信，但至少比天下大势更像人话。’" }, { "id": "ask_identity", "text": "你知道自己为何被关吗？", "response": "‘因为有人怕我活着，也有人怕我死在他们手里。’" } ] },
-  "xqj_old_refugee": { "id": "xqj_old_refugee", "npcId": "xqj_old_refugee", "title": "流民老者", "opening": "老人拨了拨火堆：‘这里是赵境边地。兵灾之后是马贼，马贼之后还是兵灾。’", "options": [ { "id": "ask_where", "text": "这里是哪国？", "response": "‘赵国边地，往东南走才是邯郸。’" }, { "id": "ask_wu", "text": "乌家是什么？", "response": "‘养马起家，富甲赵地。方才有一支乌家马队被马贼追进乱石谷。’" } ] },
-  "xqj_wounded_raider": { "id": "xqj_wounded_raider", "npcId": "xqj_wounded_raider", "title": "受伤盗墓贼", "opening": "他捂着伤口求道：‘别杀我，铜匣已经被首领带进祭台了！’", "options": [ { "id": "ask_box", "text": "里面有什么？", "response": "‘一只刻满七国纹路的铜匣。首领说交给黑衣买主便一世不愁。’" }, { "id": "ask_door", "text": "墓门机关如何开启？", "response": "‘坡上的断碑写着方位，铜人胸口还有机关齿片。’" } ] },
-  "xqj_tomb_chief": { "id": "xqj_tomb_chief", "npcId": "xqj_tomb_chief", "title": "盗墓首领", "opening": "首领握刀守在祭台前：‘黑衣买主要的是能改天命的东西，谁挡路谁死。’", "options": [ { "id": "ask_buyer", "text": "黑衣买主是谁？", "response": "‘我若知道，还用替人卖命？我只知道他出得起让人灭族的价钱。’" } ] },
-  "xqj_bandit_boss": { "id": "xqj_bandit_boss", "npcId": "xqj_bandit_boss", "title": "乱石谷马贼头目", "opening": "马贼头目冷笑：‘留下文书匣，我可以让你们死得快些。’", "options": [ { "id": "ask_employer", "text": "谁让你截乌家马队？", "response": "‘死人不必知道雇主。’" } ] },
-  "xqj_wu_guard": { "id": "xqj_wu_guard", "npcId": "xqj_wu_guard", "title": "乌堡门卫", "opening": "门卫横枪道：‘陶管事可以带你回来，能不能进门还要看你的本事。’", "options": [ { "id": "ask_trial", "text": "不服便试试。", "response": "‘好。只分高下，不伤性命。’" }, { "id": "ask_guest", "text": "我是陶管事带来的客人。", "response": "‘乌堡眼下不敢只认人情。’" } ] },
-  "xqj_wu_trainer": { "id": "xqj_wu_trainer", "npcId": "xqj_wu_trainer", "title": "乌家武师", "opening": "武师递来一柄木剑：‘试炼只看你临阵如何应对，不取性命。’", "options": [ { "id": "start_trial", "text": "开始吧。", "response": "‘请。’" } ] },
-  "xqj_suspicious_servant": { "id": "xqj_suspicious_servant", "npcId": "xqj_suspicious_servant", "title": "可疑仆役", "opening": "仆役避开你的目光：‘昨夜我一直在屋里，没去过马厩。’", "options": [ { "id": "ask_coin", "text": "这些赵国铜钱从何而来？", "response": "‘是赌钱赢的。’" }, { "id": "ask_stable", "text": "鞋底为何有马厩草屑？", "response": "‘我……白日也去过马厩。’" } ] },
-  "xqj_shanrou": { "id": "xqj_shanrou", "npcId": "xqj_shanrou", "title": "暗巷中的善柔", "opening": "善柔短刃微抬：‘我还没决定该杀你，还是借你的手杀别人。’", "options": [ { "id": "ask_master", "text": "你是谁派来的？", "response": "‘问刺客雇主，是想逼我现在便杀你？’" }, { "id": "offer_alliance", "text": "我们也许不是敌人。", "response": "‘等你活过今夜再说。’" } ] },
-  "xqj_zhao_ya": { "id": "xqj_zhao_ya", "npcId": "xqj_zhao_ya", "title": "车驾中的赵雅", "opening": "赵雅隔帘笑道：‘邯郸近来都在谈一个来历不明的人，偏偏你还敢替乌家四处走动。’", "options": [ { "id": "ask_hostage", "text": "质子营将有何变？", "response": "‘三更换灯之后，有些旧客便会永远消失。’" }, { "id": "ask_code", "text": "换灯是什么意思？", "response": "‘调换守卫，也调换该活与该死的人。’", "setFlags": { "xqj03_learned_lamp_code": true } } ] },
-  "xqj_prison_guard": { "id": "xqj_prison_guard", "npcId": "xqj_prison_guard", "title": "质子营守卫", "opening": "守卫伸手索要腰牌：‘今夜换灯，口令与腰牌少一样都不能过去。’", "options": [ { "id": "ask_old_guest", "text": "里面的旧客还活着吗？", "response": "‘不该问的别问。’" } ] },
-  "xqj_camp_commander": { "id": "xqj_camp_commander", "npcId": "xqj_camp_commander", "title": "质子营守将", "opening": "守将率甲士封住校场：‘把少年留下，我准你独自离开。’", "options": [ { "id": "refuse", "text": "你不过是别人手中的刀。", "response": "‘刀只要够快，何必知道握刀的是谁。’" } ] },
-  "xqj_pursuit_captain": { "id": "xqj_pursuit_captain", "npcId": "xqj_pursuit_captain", "title": "赵国追捕队长", "opening": "队长在城门背街勒马：‘交出少年，乌家或许还能多活一夜。’", "options": [ { "id": "ask_reason", "text": "你们为何非杀这少年不可？", "response": "‘因为他活着，很多人的位置便坐不稳。’" } ] },
-  "xqj_traitor": { "id": "xqj_traitor", "npcId": "xqj_traitor", "title": "内鬼管事", "opening": "管事退向暗洞：‘乌家已经完了，我不过替自己留条活路。’", "options": [ { "id": "ask_buyer", "text": "谁收买你？", "response": "‘赵国不缺想吞乌家的人。’" }, { "id": "ask_ambush", "text": "后山还有什么埋伏？", "response": "‘精骑守着密道出口，你们一个也走不了。’" } ] },
-  "xqj_siege_general": { "id": "xqj_siege_general", "npcId": "xqj_siege_general", "title": "后山围剿将领", "opening": "将领横刀拦路：‘乌家可以逃，那个少年必须留下。’", "options": [ { "id": "ask_youth", "text": "你真正要的是那个少年？", "response": "‘知道得越多，越没有活路。’" } ] },
-  "xqj_westward_ally": { "id": "xqj_westward_ally", "npcId": "xqj_wu_scout", "title": "西行残部", "opening": "乌家众人望向风沙深处，既疲惫又不肯停步。", "options": [ { "id": "ask_condition", "text": "队伍还能撑多久？", "response": "‘水只够半日，伤员和马车都经不起绕路。’" }, { "id": "ask_road", "text": "前路如何？", "response": "‘南边黑石谷有伏击痕迹，西北白石路或许可走。’" } ] },
-  "xqj_refugee_woman": { "id": "xqj_refugee_woman", "npcId": "xqj_refugee_woman", "title": "荒原流民", "opening": "老妪打量着干裂水囊：‘井早枯了，想活便要看风认石。’", "options": [ { "id": "ask_spring", "text": "请指点可饮水源。", "response": "‘往西北去，避开黑石谷。南风起时，沿白石路能找到石泉。’" }, { "id": "ask_pursuit", "text": "可曾见到赵国追兵？", "response": "‘今晨有大队马蹄往西，离你们不远。’" } ] },
-  "xqj_zhao_pursuer": { "id": "xqj_zhao_pursuer", "npcId": "xqj_pursuit_officer", "title": "赵国西行追兵", "opening": "追兵勒马封路：‘交出少年，乌家残部尚可留尸。’", "options": [ { "id": "ask_order", "text": "谁命你们追到秦境？", "response": "‘死人不必知道军令出自何处。’" } ] },
-  "xqj_qin_border": { "id": "xqj_qin_border", "npcId": "xqj_border_general", "title": "黑石关秦军", "opening": "秦人按剑审视这支赵地来客，不肯轻信半句话。", "options": [ { "id": "explain_origin", "text": "说明乌家遭围与少年身份。", "response": "‘秦关不收来历不明的祸患。先留在关外，待查明刺杀真相再说。’" }, { "id": "ask_wound", "text": "刺客有什么特征？", "response": "‘穿乌家衣装，握刃却是赵军死士路数，左腿似乎有伤。’" } ] },
-  "xqj_zhao_assassin": { "id": "xqj_zhao_assassin", "npcId": "xqj_zhao_assassin", "title": "赵国嫁祸刺客", "opening": "黑衣人冷笑：‘秦军若杀了乌家，便省得我们再追。’", "options": [ { "id": "expose_plot", "text": "伪造腰牌与短刃都已被找到。", "response": "‘那便只好让证人全都闭嘴。’" } ] },
-  "xqj_qin_trial": { "id": "xqj_qin_trial", "npcId": "xqj_qin_strategist", "title": "函谷三试", "opening": "主考者指向三道营门：‘秦国不缺亡命徒。证明你有勇、有谋，也不是只会愚忠。’", "options": [ { "id": "ask_rules", "text": "三试如何进行？", "response": "‘先过锐士，再解兵棋，最后回答审官。三令齐备，才可登试剑台。’" }, { "id": "ask_board", "text": "兵棋关键何在？", "response": "老吏低声道：‘兵贵断粮，不贵争桥。’" } ] },
-  "xqj_xianyang": { "id": "xqj_xianyang", "npcId": "xqj_guest_clerk", "title": "咸阳诸方", "opening": "咸阳人说话都留着半句，仿佛另一半已经写进官府名册。", "options": [ { "id": "ask_rules", "text": "外客在咸阳应守什么规矩？", "response": "‘持客牌、记去处，不得擅闯内府。有人盯着你，比门卒更多。’" }, { "id": "ask_cipher", "text": "鱼、车、月是什么意思？", "response": "‘鱼是东方来客，车在城南，月指见不得光的时辰。’" }, { "id": "ask_factions", "text": "谁在打听少年？", "response": "‘权臣、宗室、军方，还有不肯露面的六国人。’" } ] },
-  "xqj_six_states": { "id": "xqj_six_states", "npcId": "xqj_six_states_tester", "title": "六国暗线", "opening": "密探掩上门：‘我们只想知道，那少年和他身边的人值不值得六国记住。’", "options": [ { "id": "ask_master", "text": "谁让你们来试探？", "response": "‘六国都有人盼秦乱，也都有人怕秦乱得太早。’" } ] },
-  "xqj_clan_trial": { "id": "xqj_clan_trial", "npcId": "xqj_clan_elder", "title": "宗室验血", "opening": "别宫中每个人都称这是礼法，目光却都落在少年能带来的权力上。", "options": [ { "id": "ask_rules", "text": "验证以什么为准？", "response": "‘旧档、赵地证词、血印礼器与宗室问答，四者相互印证。’" }, { "id": "ask_archive", "text": "玉册近日可曾异动？", "response": "‘封绳重结，朱砂压痕也不齐，有人夜里翻过旧档。’" }, { "id": "ask_servant", "text": "少年在赵地经历如何？", "response": "‘他长期被秘密看押。有人怕他活，也有人怕他死在自己手里。’" } ] },
   "qingyi_intro": {
     "id": "qingyi_intro",
     "npcId": "qingyi_spy",
@@ -403,13 +118,53 @@
       }
     ]
   },
-  "xqj_rewrite_observer":{"id":"xqj_rewrite_observer","npcId":"xqj_black_observer","title":"青铜幻境","opening":"黑衣虚影隔着漫天黄沙望来：‘铜匣不是门，只是把你推到了门的另一边。’","options":[{"id":"ask_where","text":"这里是什么地方？","response":"‘战国赵境。前方马嘶处，会有人替你回答更多问题。’"}]},
-  "xqj_rewrite_old_groom":{"id":"xqj_rewrite_old_groom","npcId":"xqj_old_groom","title":"老马夫的证词","opening":"老马夫先看马，再看人：‘牲口不会说谎，动过草料的人却会。’","options":[{"id":"ask_night","text":"昨夜谁进过草料房？","response":"‘二更时内鬼管事提灯进去过，说是查账，可账册从不放在马场。’"}]},
-  "xqj_rewrite_innkeeper":{"id":"xqj_rewrite_innkeeper","npcId":"xqj_innkeeper","title":"赵都酒楼掌柜","opening":"掌柜低头擦着酒盏：‘小店只卖酒，客官若问别的，须先让我知道你听见了什么。’","options":[{"id":"ask_bridge","text":"白水桥今夜可有鱼？","response":"掌柜手上一顿：‘若有人这样问，只答鱼不上钩。’"}]},
-  "xqj_rewrite_zhao_noble":{"id":"xqj_rewrite_zhao_noble","npcId":"xqj_zhao_noble","title":"二楼贵客","opening":"赵国贵客晃着酒盏：‘邯郸最值钱的消息，从来不在大街上卖。’","options":[{"id":"ask_hostage","text":"质子营近来为何换守？","response":"‘知道那地方的人，往往活不到下一次换灯。’"}]},
-  "xqj_rewrite_inn_cook":{"id":"xqj_rewrite_inn_cook","npcId":"xqj_inn_cook","title":"后厨灶火","opening":"厨子添了一把柴：‘灶灰里有人藏过纸，后门也总有不吃饭的客人来。’","options":[{"id":"ask_alley","text":"后巷的人等什么？","response":"‘等一句暗号，也等说错暗号的人。’"}]},
-  "xqj_rewrite_white_assassin":{"id":"xqj_rewrite_white_assassin","npcId":"xqj_white_assassin","title":"白水桥验语","opening":"白衣刺客按住剑柄：‘桥上只认暗号，不认脸。’","options":[{"id":"ask_failure","text":"若暗号答错呢？","response":"‘桥下的人会替我送你上路。’"}]},
-  "xqj_rewrite_old_servant":{"id":"xqj_rewrite_old_servant","npcId":"xqj_old_servant","title":"内牢旧口令","opening":"老仆咳了许久才抬头：‘内牢不认钥，只认每夜换守口令。’","options":[{"id":"ask_password","text":"今夜口令是什么？","response":"‘旧客归秦。四字不能错一个。’"}]},
-  "xqj_rewrite_ruined_woman":{"id":"xqj_rewrite_ruined_woman","npcId":"xqj_ruined_house_woman","title":"西坊旧巷","opening":"老妇听着街外脚步：‘官兵认得大路，却未必认得我们这些人走了一辈子的窄巷。’","options":[{"id":"ask_cart","text":"哪里能通后街？","response":"‘前院柴车后面。推开它，旧巷还在。’"}]},
-  "xqj_rewrite_shanrou_shadow":{"id":"xqj_rewrite_shanrou_shadow","npcId":"xqj_shanrou_shadow","title":"善柔的警告","opening":"暗处传来善柔的声音：‘城墙下有人等你，先听弩弦，再迈步。’","options":[{"id":"ask_crossbow","text":"伏弩藏在哪里？","response":"‘贴左侧残垣走，第一轮箭便射不中你。’"}]}
+  "dlg_csj_boatman": {
+    "id": "dlg_csj_boatman",
+    "npcId": "csj_boatman",
+    "title": "渡口闲话",
+    "opening": "老船夫压低声音说道：客官也是听说了长生诀的事吧？宇文阀的人马天不亮就封了渡口，连船都给凿沉了。",
+    "options": []
+  },
+  "dlg_csj_fu_junzhuo": {
+    "id": "dlg_csj_fu_junzhuo",
+    "npcId": "csj_fu_junzhuo",
+    "title": "柳林谢礼",
+    "opening": "傅君婥抱剑还礼：仗义的少侠，请了。",
+    "options": []
+  },
+  "dlg_nj_sentinel": {
+    "id": "dlg_nj_sentinel",
+    "npcId": "nj_sentinel",
+    "title": "敌情急报",
+    "opening": "哨兵咬牙说道：魔师宫的人是踩着水路摸进来的，帮主还在聚义厅！",
+    "options": []
+  },
+  "dlg_nj_wounded": {
+    "id": "dlg_nj_wounded",
+    "npcId": "nj_wounded",
+    "title": "月门遗言",
+    "opening": "伤兵抓住你的衣角：兄弟……月门后头，就是聚义厅……",
+    "options": []
+  },
+  "dlg_bh_ji_qianqian": {
+    "id": "dlg_bh_ji_qianqian",
+    "npcId": "bh_ji_qianqian",
+    "title": "北门托付",
+    "opening": "纪千千敛衽一礼：此去渡口一路凶险，委实劳烦诸位了。",
+    "options": []
+  },
+  "dlg_bh_swordsman": {
+    "id": "dlg_bh_swordsman",
+    "npcId": "bh_swordsman",
+    "title": "剑手请战",
+    "opening": "荒集剑手缓缓拔刀：燕军的游骑就在前头，随时可以动身。",
+    "options": []
+  },
+  "dlg_lj_old_boatman": {
+    "id": "dlg_lj_old_boatman",
+    "npcId": "lj_old_boatman",
+    "title": "船翁讲古",
+    "opening": "老船翁眯眼望着江心：那一战之后，再没人见过浪翻云。台上的影子等了很久啦。",
+    "options": []
+  }
 }

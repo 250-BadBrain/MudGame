@@ -247,7 +247,7 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for rk, rv := range v.Reputations {
 			reputations[rk] = rv
 		}
-		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online}
+		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online, WeakUntil: v.WeakUntil}
 	}
 	return out
 }
@@ -294,14 +294,15 @@ func hashReconnectToken(token string) string {
 	return fmt.Sprintf("tokenv1$%s", base64.RawURLEncoding.EncodeToString(dk))
 }
 
-func hashPBKDF2Password(password string) string {
+func hashPBKDF2Password(password string) (string, error) {
 	iter := 210000
 	salt := make([]byte, 16)
 	if _, err := cryptorand.Read(salt); err != nil {
-		return password
+		// 绝不能回退为明文落盘：直接报错让注册失败
+		return "", fmt.Errorf("generate salt: %w", err)
 	}
 	dk := pbkdf2SHA256([]byte(password), salt, iter, 32)
-	return fmt.Sprintf("pbkdf2$%d$%s$%s", iter, base64.RawURLEncoding.EncodeToString(salt), base64.RawURLEncoding.EncodeToString(dk))
+	return fmt.Sprintf("pbkdf2$%d$%s$%s", iter, base64.RawURLEncoding.EncodeToString(salt), base64.RawURLEncoding.EncodeToString(dk)), nil
 }
 
 func verifyPBKDF2Password(password, encoded string) bool {

@@ -19,6 +19,7 @@ func (s *Server) registerCommandHandlers() {
 	s.handlersSys["reconnect"] = s.handleSystemReconnect
 	s.handlersSys["deselect_character"] = s.handleSystemDeselectCharacter
 	s.handlersSys["get_room"] = s.handleSystemGetRoom
+	s.handlersSys["ping"] = s.handleSystemPing
 
 	// game commands (legacy wire type is command)
 	s.handlersGame["get_attributes"] = s.handleGameGetAttributes
@@ -38,7 +39,7 @@ func (s *Server) registerCommandHandlers() {
 	s.handlersGame["equip"] = s.handleGameEquip
 	s.handlersGame["unequip"] = s.handleGameUnequip
 	s.handlersGame["learn"] = s.handleGameLearn
-	s.handlersGame["mine"] = s.handleGameMine
+	s.handlersGame["use_item"] = s.handleGameUseItem
 	s.handlersGame["do_action"] = s.handleGameDoAction
 	s.handlersGame["talk"] = s.handleGameTalk
 	s.handlersGame["choose_dialogue"] = s.handleGameChooseDialogue

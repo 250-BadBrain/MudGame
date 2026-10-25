@@ -46,14 +46,11 @@ func (r *RuntimeManager) Talk(playerID, npcID string) (map[string]interface{}, e
 	}
 	result := map[string]interface{}{"dialogue": r.dialoguePayloadNoLock(p, npc, dialogue)}
 	if dnpc, exists := r.dungeonNPCByIDNoLock(npc.ID); exists && r.dungeonMgr != nil {
-		room, roomOK := r.roomByIDNoLock(p.RoomID, map[string]model.Room{})
-		if !roomOK {
-			staticRooms, loadErr := r.loadRooms()
-			if loadErr != nil {
-				return nil, loadErr
-			}
-			room, roomOK = r.roomByIDNoLock(p.RoomID, staticRooms)
+		staticRooms, loadErr := r.loadRooms()
+		if loadErr != nil {
+			return nil, loadErr
 		}
+		room, roomOK := r.roomByIDNoLock(p.RoomID, staticRooms)
 		if !roomOK {
 			return nil, exception.ErrRoomNotFound
 		}
@@ -184,7 +181,7 @@ func (r *RuntimeManager) advanceStaticDialogueNoLock(p *model.Player, npc model.
 		if history[key] || !r.dialogueRequirementMetNoLock(p, option.Requires) {
 			continue
 		}
-		logs, err := r.applyDialogueOptionEffectsNoLock(p, &option)
+		logs, err := r.applyDialogueOptionEffectsNoLock(p, &option, npc.ID)
 		if err != nil {
 			return "", nil, err
 		}
@@ -223,7 +220,7 @@ func dialogueVariant(value string, count int) int {
 	return total % count
 }
 
-func (r *RuntimeManager) applyDialogueOptionEffectsNoLock(p *model.Player, selected *model.DialogueOption) ([]string, error) {
+func (r *RuntimeManager) applyDialogueOptionEffectsNoLock(p *model.Player, selected *model.DialogueOption, npcID string) ([]string, error) {
 	logs := []string{}
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
@@ -253,7 +250,7 @@ func (r *RuntimeManager) applyDialogueOptionEffectsNoLock(p *model.Player, selec
 		}
 	}
 	if selected.CompleteQuestID != "" {
-		questLogs, err := r.completeQuestNoLock(p, selected.CompleteQuestID)
+		questLogs, err := r.completeQuestNoLock(p, selected.CompleteQuestID, npcID)
 		if err != nil {
 			return nil, err
 		}
@@ -293,14 +290,11 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	}
 	if strings.HasPrefix(optionID, "dungeon_action:") {
 		actionID := strings.TrimPrefix(optionID, "dungeon_action:")
-		room, ok := r.roomByIDNoLock(p.RoomID, map[string]model.Room{})
-		if !ok {
-			staticRooms, loadErr := r.loadRooms()
-			if loadErr != nil {
-				return nil, "", nil, nil, loadErr
-			}
-			room, ok = r.roomByIDNoLock(p.RoomID, staticRooms)
+		staticRooms, loadErr := r.loadRooms()
+		if loadErr != nil {
+			return nil, "", nil, nil, loadErr
 		}
+		room, ok := r.roomByIDNoLock(p.RoomID, staticRooms)
 		if !ok {
 			return nil, "", nil, nil, exception.ErrRoomNotFound
 		}
@@ -332,7 +326,7 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 		return nil, "", nil, nil, errors.New("dialogue_option_not_found")
 	}
 
-	logs, err := r.applyDialogueOptionEffectsNoLock(p, selected)
+	logs, err := r.applyDialogueOptionEffectsNoLock(p, selected, npc.ID)
 	if err != nil {
 		return nil, "", nil, nil, err
 	}
@@ -530,10 +524,13 @@ func (r *RuntimeManager) startQuestNoLock(p *model.Player, questID string) strin
 	return "你接下了任务：" + quest.Name
 }
 
-func (r *RuntimeManager) completeQuestNoLock(p *model.Player, questID string) ([]string, error) {
+func (r *RuntimeManager) completeQuestNoLock(p *model.Player, questID, npcID string) ([]string, error) {
 	quest, ok := fileQuests[questID]
 	if !ok {
 		return nil, errors.New("quest_not_found")
+	}
+	if quest.TurnInNPCID != "" && npcID != quest.TurnInNPCID {
+		return nil, errors.New("quest_wrong_npc")
 	}
 	state, ok := p.QuestStates[questID]
 	if !ok || state.Status != "active" {

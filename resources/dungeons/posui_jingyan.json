@@ -1,0 +1,228 @@
+{
+  "id": "posui_jingyan",
+  "name": "惊雁宫夺图",
+  "description": "上古惊雁宫重现人间，宫中石像守卫寸步不让。传鹰等七奇客已先一步入宫，《战神图录》真容只差最后一重殿门。",
+  "order": 4,
+  "chainId": "posui_xukong",
+  "chainName": "破碎虚空",
+  "chapter": 1,
+  "spawnRoomId": "palace_00",
+  "puzzleInitialStates": {
+    "star_map": "unread"
+  },
+  "puzzleActions": {
+    "observe_star_map": {
+      "label": "观察穹顶星图",
+      "puzzleId": "star_map",
+      "rooms": [
+        "palace_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "sketched",
+      "message": "你仰头细看穹顶星图，主要星官的位置在心中渐渐连成一幅图。",
+      "repeatMessage": "穹顶星象你已默记于心。"
+    },
+    "compare_murals": {
+      "label": "对照殿壁星官壁画",
+      "puzzleId": "star_map",
+      "rooms": [
+        "palace_02"
+      ],
+      "fromStates": [
+        "sketched"
+      ],
+      "nextState": "matched",
+      "message": "你将星图与殿壁壁画一一对照，发现壁画中北斗斗柄的指向与穹顶略有偏差——斗柄遥指左侧。",
+      "repeatMessage": "壁画与星图的对应你已了然于胸。"
+    },
+    "turn_star_dial": {
+      "label": "转动石门星盘",
+      "puzzleId": "star_map",
+      "rooms": [
+        "palace_02"
+      ],
+      "fromStates": [
+        "matched"
+      ],
+      "nextState": "choosing",
+      "message": "石门前的星盘可以左右转动。壁画中的北斗斗柄指向左侧。",
+      "choices": [
+        {
+          "id": "dial_left",
+          "label": "向左转动星盘"
+        },
+        {
+          "id": "dial_right",
+          "label": "向右转动星盘"
+        }
+      ]
+    },
+    "dial_left": {
+      "label": "向左转动星盘",
+      "puzzleId": "star_map",
+      "rooms": [
+        "palace_02"
+      ],
+      "fromStates": [
+        "choosing"
+      ],
+      "nextState": "read",
+      "setFlags": {
+        "read_star_map": true
+      },
+      "message": "你依斗柄之指向左转动星盘，机括连响，尘封的石门缓缓开启！"
+    },
+    "dial_right": {
+      "label": "向右转动星盘",
+      "puzzleId": "star_map",
+      "rooms": [
+        "palace_02"
+      ],
+      "fromStates": [
+        "choosing"
+      ],
+      "nextState": "sketched",
+      "message": "星盘向右转了半圈便咔哒卡死、原样弹回——方向不对。你需重新对照壁画。"
+    }
+  },
+  "rooms": {
+    "palace_00": {
+      "name": "宫门石阶",
+      "description": "百级石阶尽头，惊雁宫大门半开，两尊石像卫兵眼泛幽光，长戟交叉拦在门前。",
+      "exits": {
+        "north": "palace_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jyg_stone_guard"
+          ],
+          "message": "石像卫兵长戟横扫，把石阶封得死死的。"
+        }
+      },
+      "npcs": [
+        "jyg_stone_guard",
+        "jyg_stone_guard"
+      ]
+    },
+    "palace_01": {
+      "name": "前殿回廊",
+      "description": "回廊立柱上刻满上古战阵，又有两尊石像卫兵自壁龛中走出，石足踏地作金石之声。",
+      "exits": {
+        "south": "palace_00",
+        "north": "palace_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jyg_stone_guard"
+          ],
+          "message": "石像卫兵拦在回廊深处，不斩石像无法深入。"
+        }
+      },
+      "npcs": [
+        "jyg_stone_guard",
+        "jyg_stone_guard"
+      ]
+    },
+    "palace_02": {
+      "name": "星槎大殿",
+      "description": "殿顶穹窿如夜空，缀满明珠星辰，地心一座星槎石盘缓缓转动。殿北石门上浮现星轨纹路，与穹顶遥相呼应。",
+      "exits": {
+        "south": "palace_01",
+        "north": "palace_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "star_map": "read"
+          },
+          "message": "石门上星轨流转不息，你尚未参透穹顶星图，找不到开启的门道。"
+        }
+      },
+      "actions": [
+        "observe_star_map",
+        "compare_murals",
+        "turn_star_dial"
+      ],
+      "npcs": []
+    },
+    "palace_03": {
+      "name": "剑冢长廊",
+      "description": "长廊两壁插满断剑残锋，两尊持剑石像破壁而出，剑势古朴而沉重。",
+      "exits": {
+        "south": "palace_02",
+        "north": "palace_04"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jyg_sword_guard"
+          ],
+          "message": "石剑卫剑阵森然，封住了通往大殿的长廊。"
+        }
+      },
+      "npcs": [
+        "jyg_sword_guard",
+        "jyg_sword_guard"
+      ]
+    },
+    "palace_04": {
+      "name": "图录大殿",
+      "description": "大殿中央悬浮着一卷流光溢彩的图录虚影，一道由殿中兵戈之气凝成的巨大幻影自影中踏步而出，气势沉沉如渊。",
+      "exits": {
+        "south": "palace_03"
+      },
+      "npcs": [
+        "jyg_war_phantom"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_stone_guards",
+      "type": "kill",
+      "targetId": "jyg_stone_guard",
+      "required": 4,
+      "weight": 30,
+      "description": "击碎惊雁宫石像卫兵。"
+    },
+    {
+      "id": "kill_sword_guards",
+      "type": "kill",
+      "targetId": "jyg_sword_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "击碎剑冢石剑卫。"
+    },
+    {
+      "id": "read_star_map",
+      "type": "puzzle",
+      "targetId": "star_map:read",
+      "required": 1,
+      "weight": 10,
+      "description": "观演星槎大殿的穹顶星图。"
+    },
+    {
+      "id": "defeat_phantom",
+      "type": "kill",
+      "targetId": "jyg_war_phantom",
+      "required": 1,
+      "weight": 40,
+      "description": "击败战神幻影，取得图录之秘。"
+    }
+  ],
+  "rewards": {
+    "experience": 380,
+    "potential": 260,
+    "money": 100,
+    "items": {
+      "jyg_zhanshentu_rubbing": 1
+    },
+    "flags": {
+      "posui_jingyan_completed": true
+    }
+  }
+}

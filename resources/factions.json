@@ -86,5 +86,33 @@
     "category": "neutral",
     "visible": false,
     "order": 999
+  },
+  "moshi_palace": {
+    "name": "魔师宫",
+    "description": "魔师庞斑座下的势力，江湖人闻之色变。",
+    "category": "sect",
+    "visible": false,
+    "order": 20
+  },
+  "yan_army": {
+    "name": "燕军",
+    "description": "慕容垂麾下的南征大军，兵锋直指边荒。",
+    "category": "military",
+    "visible": false,
+    "order": 21
+  },
+  "turkic_khan": {
+    "name": "突厥",
+    "description": "草原狼主帐下的高手与武士。",
+    "category": "foreign",
+    "visible": false,
+    "order": 22
+  },
+  "yinkui_sect": {
+    "name": "阴癸派",
+    "description": "魔门大派，行事诡秘妖异。",
+    "category": "sect",
+    "visible": false,
+    "order": 23
   }
 }

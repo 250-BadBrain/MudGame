@@ -27,6 +27,13 @@ type sessionState struct {
 
 type commandHandler func(conn *websocket.Conn, cmd protocol.CommandMessage)
 
+const (
+	// 单条上行消息的最大字节数，超限连接将被服务端断开
+	maxMessageBytes = 1 << 20
+	// 单次下行写的超时，防止僵死客户端无限期占住全局写锁
+	writeWait = 10 * time.Second
+)
+
 type Server struct {
 	upgrader websocket.Upgrader
 	repo     engine.RuntimeRepository
@@ -75,6 +82,8 @@ func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer conn.Close()
+	// 限制单条消息大小，防止恶意超大帧耗尽内存
+	conn.SetReadLimit(maxMessageBytes)
 
 	s.mu.Lock()
 	s.sessions[conn] = &sessionState{id: conn.RemoteAddr().String()}
@@ -97,7 +106,6 @@ func (s *Server) handleWS(w http.ResponseWriter, r *http.Request) {
 			s.write(conn, protocol.NewResult(protocol.TypeSystem, "error", false, map[string]interface{}{"error": "无效请求"}, nil))
 			continue
 		}
-
 		if cmd.Args == nil {
 			cmd.Args = map[string]interface{}{}
 		}
@@ -128,22 +136,6 @@ func (s *Server) dispatch(conn *websocket.Conn, cmd protocol.CommandMessage) {
 	h(conn, cmd)
 }
 
-func (s *Server) handleSystem(conn *websocket.Conn, cmd protocol.CommandMessage) {
-	s.writeUnknownCommand(conn, cmd)
-}
-
-func (s *Server) handleCommand(conn *websocket.Conn, cmd protocol.CommandMessage) {
-	s.writeUnknownCommand(conn, cmd)
-}
-
-func (s *Server) handleChat(conn *websocket.Conn, cmd protocol.CommandMessage) {
-	if cmd.Subtype == "public" {
-		s.handleChatPublic(conn, cmd)
-		return
-	}
-	s.writeUnknownCommand(conn, cmd)
-}
-
 func (s *Server) replyCommand(conn *websocket.Conn, subtype string, err error, okData map[string]interface{}, logs []string) {
 	if err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeCommand, subtype, false, map[string]interface{}{"error": s.localizedError(err)}, nil))
@@ -152,43 +144,86 @@ func (s *Server) replyCommand(conn *websocket.Conn, subtype string, err error, o
 	s.write(conn, protocol.NewResult(protocol.TypeCommand, subtype, true, okData, logs))
 }
 
-func (s *Server) session(conn *websocket.Conn) *sessionState {
+// sessionState 的字段会被各连接读循环与后台 ticker 并发读写，
+// 读写必须经以下带锁访问器，避免无锁写与 RLock 读形成数据竞争。
+
+func (s *Server) sessionUserID(conn *websocket.Conn) string {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if ss, ok := s.sessions[conn]; ok {
+		return ss.userID
+	}
+	return ""
+}
+
+func (s *Server) sessionPlayerID(conn *websocket.Conn) string {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+	if ss, ok := s.sessions[conn]; ok {
+		return ss.playerID
+	}
+	return ""
+}
+
+// bindSessionUser 将会话切换到指定账号，并解除该会话上残留的旧角色绑定，
+// 防止换账号登录后继续以他人角色身份执行指令。
+func (s *Server) bindSessionUser(conn *websocket.Conn, userID string) {
+	s.mu.Lock()
+	ss, ok := s.sessions[conn]
+	if !ok {
+		s.mu.Unlock()
+		return
+	}
+	oldPlayer := ss.playerID
+	ss.userID = userID
+	ss.playerID = ""
+	s.mu.Unlock()
+	if oldPlayer != "" {
+		s.repo.SetPlayerOnline(oldPlayer, false)
+		s.emitPlayerStatusChanged(oldPlayer, "断开了连接", oldPlayer)
+	}
+}
+
+// setSessionPlayerID 绑定当前会话的角色，返回旧的角色 ID（可为空）。
+func (s *Server) setSessionPlayerID(conn *websocket.Conn, playerID string) string {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 	ss, ok := s.sessions[conn]
 	if !ok {
-		ss = &sessionState{id: conn.RemoteAddr().String()}
-		s.sessions[conn] = ss
+		return ""
 	}
-	return ss
-}
-
-func (s *Server) broadcast(result protocol.GameResult) {
-	s.mu.RLock()
-	defer s.mu.RUnlock()
-	for c := range s.sessions {
-		s.write(c, result)
-	}
+	old := ss.playerID
+	ss.playerID = playerID
+	return old
 }
 
 func (s *Server) handleSessionClosed(conn *websocket.Conn) {
-	ss := s.session(conn)
-	if ss.playerID != "" {
-		s.repo.SetPlayerOnline(ss.playerID, false)
-		s.emitPlayerStatusChanged(ss.playerID, "断开了连接", ss.playerID)
+	playerID := s.sessionPlayerID(conn)
+	if playerID != "" {
+		s.repo.SetPlayerOnline(playerID, false)
+		s.emitPlayerStatusChanged(playerID, "断开了连接", playerID)
 	}
 }
 
 func (s *Server) handleCharacterRebind(playerID string, newConn *websocket.Conn) {
+	// 先在锁内摘除旧会话的角色绑定并收集连接，再在锁外写消息/关闭，
+	// 避免向可能停滞的连接写入时长期持有 sessions 写锁。
+	type victim struct {
+		conn *websocket.Conn
+	}
+	victims := make([]victim, 0)
 	s.mu.Lock()
-	defer s.mu.Unlock()
 	for c, ss := range s.sessions {
 		if c != newConn && ss.playerID == playerID {
-			replaced := protocol.NewResult(protocol.TypeSystem, "session_replaced", false, map[string]interface{}{"error": "该角色已在另一个窗口中被选择，当前连接已断开"}, nil)
-			s.write(c, replaced)
-			_ = c.Close()
 			ss.playerID = ""
+			victims = append(victims, victim{conn: c})
 		}
+	}
+	s.mu.Unlock()
+	for _, v := range victims {
+		replaced := protocol.NewResult(protocol.TypeSystem, "session_replaced", false, map[string]interface{}{"error": "该角色已在另一个窗口中被选择，当前连接已断开"}, nil)
+		s.write(v.conn, replaced)
+		_ = v.conn.Close()
 	}
 }
 
@@ -260,11 +295,15 @@ func (s *Server) emitRoomUpdate(roomID string) {
 	if err != nil {
 		return
 	}
-	payload := protocol.NewResult(protocol.TypeEvent, "room_update", true, map[string]interface{}{
+	payload := map[string]interface{}{
 		"players": res.Players,
 		"npcs":    res.NPCs,
-	}, nil)
-	s.broadcastToRoom(roomID, payload, "")
+	}
+	if res.Dungeon != nil {
+		payload["dungeon"] = res.Dungeon
+	}
+	result := protocol.NewResult(protocol.TypeEvent, "room_update", true, payload, nil)
+	s.broadcastToRoom(roomID, result, "")
 }
 
 func (s *Server) emitRoomUpdateByPlayer(playerID string) {
@@ -380,9 +419,12 @@ func (s *Server) connectionsByRoom(roomID, excludePlayerID string) []*websocket.
 func (s *Server) write(conn *websocket.Conn, result protocol.GameResult) {
 	s.writeMu.Lock()
 	defer s.writeMu.Unlock()
+	// 写超时兜底：客户端停止读取时 WriteJSON 会永久阻塞并占住全局写锁，冻结全服下发
+	_ = conn.SetWriteDeadline(time.Now().Add(writeWait))
 	if err := conn.WriteJSON(result); err != nil {
 		log.Printf("write failed: %v", err)
 	}
+	_ = conn.SetWriteDeadline(time.Time{})
 }
 
 func toString(v interface{}) string {
@@ -399,11 +441,15 @@ func (s *Server) runBackgroundTicker() {
 	for {
 		select {
 		case <-statusTicker.C:
-			if statusRes, err := engine.ProcessStatusTickWithEffects(s.repo); err == nil {
+			if statusRes, err := engine.ProcessStatusTickWithEffects(s.repo); err != nil {
+				log.Printf("status tick failed: %v", err)
+			} else {
 				s.emitTickResult(statusRes)
 			}
 		case <-combatTicker.C:
-			if combatRes, err := engine.ProcessCombatTickWithEffects(s.repo); err == nil {
+			if combatRes, err := engine.ProcessCombatTickWithEffects(s.repo); err != nil {
+				log.Printf("combat tick failed: %v", err)
+			} else {
 				s.emitTickResult(combatRes)
 			}
 		}

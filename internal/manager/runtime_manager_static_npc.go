@@ -10,6 +10,8 @@ func (r *RuntimeManager) staticNPCStateNoLock(npcID, roomID string) (*engruntime
 	if !ok || npc.InstanceOnly {
 		return nil, false
 	}
+	r.staticNPCsMu.Lock()
+	defer r.staticNPCsMu.Unlock()
 	if r.staticNPCs == nil {
 		r.staticNPCs = map[string]*engruntime.NPCState{}
 	}
@@ -26,6 +28,7 @@ func (r *RuntimeManager) staticNPCStateNoLock(npcID, roomID string) (*engruntime
 		Description:   npc.Description,
 		DialogueID:    npc.DialogueID,
 		Aggressive:    npc.Aggressive,
+		NonCombat:     npc.NonCombat,
 		Attributes:    attrs,
 		ShopInventory: copyIntMap(npc.ShopInventory),
 		Skills:        copyIntMap(npc.Skills),

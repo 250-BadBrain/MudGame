@@ -89,16 +89,28 @@ func NormalizeAttributes(a Attributes) Attributes {
 	if a.Resources.MaxMP <= 0 {
 		a.Resources.MaxMP = max(50, (a.Base.Perception+a.Base.Willpower)*5)
 	}
-	if a.Resources.TrainedMaxMP <= 0 {
+	// 与 HP 的兜底策略一致：只有当上限字段本身缺失（旧存档）时才回满当前值，
+	// 正常游戏中耗尽的 MP 不能在存/读档时被免费回满
+	trainedMaxMPMissing := a.Resources.TrainedMaxMP <= 0
+	if trainedMaxMPMissing {
 		a.Resources.TrainedMaxMP = min(a.Resources.MaxMP, max(30, a.Resources.MaxMP/2))
 	}
-	if a.Resources.MP <= 0 || a.Resources.MP > a.Resources.TrainedMaxMP {
+	if trainedMaxMPMissing && a.Resources.MP <= 0 {
+		a.Resources.MP = a.Resources.TrainedMaxMP
+	} else if a.Resources.MP < 0 {
+		a.Resources.MP = 0
+	} else if a.Resources.MP > a.Resources.TrainedMaxMP {
 		a.Resources.MP = a.Resources.TrainedMaxMP
 	}
-	if a.Resources.MaxSpirit <= 0 {
+	maxSpiritMissing := a.Resources.MaxSpirit <= 0
+	if maxSpiritMissing {
 		a.Resources.MaxSpirit = max(60, (a.Base.Perception+a.Base.Willpower)*3)
 	}
-	if a.Resources.Spirit <= 0 || a.Resources.Spirit > a.Resources.MaxSpirit {
+	if maxSpiritMissing && a.Resources.Spirit <= 0 {
+		a.Resources.Spirit = a.Resources.MaxSpirit
+	} else if a.Resources.Spirit < 0 {
+		a.Resources.Spirit = 0
+	} else if a.Resources.Spirit > a.Resources.MaxSpirit {
 		a.Resources.Spirit = a.Resources.MaxSpirit
 	}
 	eff := BuildEffectiveAttributes(a)
@@ -183,16 +195,6 @@ func BuildEffectiveAttributes(a Attributes) EffectiveAttributes {
 		CharmResist:     a.Resistances.Charm,
 		SealResist:      a.Resistances.Seal,
 	}
-}
-
-func ApplyEffectiveResources(a *Attributes, eff EffectiveAttributes) {
-	a.Resources.HP = eff.HP
-	a.Resources.MaxHP = eff.MaxHP
-	a.Resources.MP = eff.MP
-	a.Resources.TrainedMaxMP = eff.TrainedMaxMP
-	a.Resources.MaxMP = eff.MaxMP
-	a.Resources.Spirit = eff.Spirit
-	a.Resources.MaxSpirit = eff.MaxSpirit
 }
 
 func firstNonEmpty(a, b string) string {

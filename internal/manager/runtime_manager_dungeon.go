@@ -9,6 +9,31 @@ import (
 	"mudgame/server/internal/model"
 )
 
+// dungeonTemplatesNoLock 返回按 (order, id) 排序的全部副本模板。
+func (r *RuntimeManager) dungeonTemplatesNoLock() []engruntime.Template {
+	ids := r.dungeonMgr.DungeonTemplateIDsNoLock()
+	templates := make([]engruntime.Template, 0, len(ids))
+	for _, id := range ids {
+		if tpl, ok := r.dungeonMgr.DungeonTemplateNoLock(id); ok {
+			templates = append(templates, tpl)
+		}
+	}
+	sort.Slice(templates, func(i, j int) bool {
+		oi, oj := templates[i].Order, templates[j].Order
+		if oi <= 0 {
+			oi = 1
+		}
+		if oj <= 0 {
+			oj = 1
+		}
+		if oi != oj {
+			return oi < oj
+		}
+		return templates[i].ID < templates[j].ID
+	})
+	return templates
+}
+
 func (r *RuntimeManager) GetDungeons(playerID string) []map[string]interface{} {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
@@ -20,21 +45,15 @@ func (r *RuntimeManager) GetDungeons(playerID string) []map[string]interface{} {
 		return []map[string]interface{}{}
 	}
 	player := players[playerID]
-	ids := r.dungeonMgr.DungeonTemplateIDsNoLock()
-	sort.Strings(ids)
-	out := make([]map[string]interface{}, 0, len(ids))
-	for _, id := range ids {
-		tpl, ok := r.dungeonMgr.DungeonTemplateNoLock(id)
-		if !ok {
-			continue
-		}
-		if !dungeonUnlockedForPlayer(player, tpl.UnlockConditions) {
-			continue
-		}
+
+	templates := r.dungeonTemplatesNoLock()
+	out := make([]map[string]interface{}, 0, len(templates))
+	for _, tpl := range templates {
 		order := tpl.Order
 		if order <= 0 {
 			order = 1
 		}
+		locked, lockHint := r.dungeonLockStateNoLock(player, tpl, templates)
 		objectives := make([]map[string]interface{}, 0, len(tpl.Objectives))
 		for _, obj := range tpl.Objectives {
 			objectives = append(objectives, map[string]interface{}{
@@ -53,13 +72,49 @@ func (r *RuntimeManager) GetDungeons(playerID string) []map[string]interface{} {
 			"description": tpl.Description,
 			"order":       order,
 			"chainId":     tpl.ChainID,
+			"chainName":   tpl.ChainName,
 			"chapter":     tpl.Chapter,
 			"objectives":  objectives,
 			"rewards":     tpl.Rewards,
 			"rewardBase":  order * 100,
+			"locked":      locked,
+			"lockHint":    lockHint,
 		})
 	}
 	return out
+}
+
+// dungeonLockStateNoLock 综合显式 unlockConditions 与章节链规则判定锁定状态。
+// 章节链：order N 需任一 order N-1 副本达成一次 100% 通关（dungeon_cleared_<id> 旗标）；
+// 若不存在 order N-1 的副本（序号稀疏），不构成锁定。
+func (r *RuntimeManager) dungeonLockStateNoLock(player *model.Player, tpl engruntime.Template, templates []engruntime.Template) (bool, string) {
+	if !dungeonUnlockedForPlayer(player, tpl.UnlockConditions) {
+		return true, "尚未满足进入条件"
+	}
+	order := tpl.Order
+	if order <= 1 {
+		return false, ""
+	}
+	prevOrderExists := false
+	prevCleared := false
+	firstPendingName := ""
+	for _, other := range templates {
+		if other.Order != order-1 {
+			continue
+		}
+		prevOrderExists = true
+		if player != nil && player.Flags["dungeon_cleared_"+other.ID] {
+			prevCleared = true
+			break
+		}
+		if firstPendingName == "" {
+			firstPendingName = other.Name
+		}
+	}
+	if prevOrderExists && !prevCleared {
+		return true, "需先通关《" + firstPendingName + "》"
+	}
+	return false, ""
 }
 
 func dungeonUnlockedForPlayer(p *model.Player, conditions []engruntime.UnlockCondition) bool {
@@ -119,13 +174,6 @@ func (r *RuntimeManager) destroyDungeonInstanceNoLock(instanceID string) {
 	r.dungeonMgr.DestroyInstanceNoLock(instanceID)
 }
 
-func (r *RuntimeManager) destroyPlayerDungeonInstanceNoLock(playerID string) *engruntime.Instance {
-	if r.dungeonMgr == nil {
-		return nil
-	}
-	return r.dungeonMgr.DestroyPlayerInstanceNoLock(playerID)
-}
-
 func (r *RuntimeManager) roomByIDNoLock(roomID string, staticRooms map[string]model.Room) (model.Room, bool) {
 	if r.dungeonMgr != nil {
 		if room, ok := r.dungeonMgr.RoomByIDNoLock(roomID, staticRooms); ok {
@@ -134,13 +182,6 @@ func (r *RuntimeManager) roomByIDNoLock(roomID string, staticRooms map[string]mo
 	}
 	room, ok := staticRooms[roomID]
 	return room, ok
-}
-
-func (r *RuntimeManager) isDungeonRoomIDNoLock(roomID string) bool {
-	if r.dungeonMgr == nil {
-		return false
-	}
-	return r.dungeonMgr.IsDungeonRoomIDNoLock(roomID)
 }
 
 func (r *RuntimeManager) dungeonNPCByIDNoLock(npcID string) (*engruntime.NPCState, bool) {
@@ -188,35 +229,19 @@ func (r *RuntimeManager) dungeonPayloadByRoomIDNoLock(roomID string) (map[string
 	if !ok || inst == nil {
 		return nil, false
 	}
+	// 深拷贝机关状态：payload 会在锁外被 JSON 序列化，直接引用实例的活 map
+	// 会与持写锁的机关指令产生并发读写
+	puzzleStates := make(map[string]string, len(inst.PuzzleStates))
+	for puzzleID, state := range inst.PuzzleStates {
+		puzzleStates[puzzleID] = state
+	}
 	return map[string]interface{}{
 		"id":           inst.DungeonID,
 		"name":         inst.Name,
 		"progress":     inst.Progress,
 		"sequence":     inst.Sequence,
-		"puzzleStates": inst.PuzzleStates,
-		"alertLevel":   inst.AlertLevel,
+		"puzzleStates": puzzleStates,
 	}, true
-}
-
-func (r *RuntimeManager) removeDungeonNPCFromRoomNoLock(inst *engruntime.Instance, npcID string) {
-	if r.dungeonMgr == nil {
-		return
-	}
-	r.dungeonMgr.RemoveDungeonNPCFromRoomNoLock(inst, npcID)
-}
-
-func (r *RuntimeManager) firstAggressiveDungeonNPCInRoomNoLock(roomID string) (*engruntime.NPCState, bool) {
-	if r.dungeonMgr == nil {
-		return nil, false
-	}
-	return r.dungeonMgr.FirstAggressiveDungeonNPCInRoomNoLock(roomID)
-}
-
-func (r *RuntimeManager) dungeonBaseRewardNoLock(inst *engruntime.Instance) int {
-	if r.dungeonMgr == nil {
-		return 0
-	}
-	return r.dungeonMgr.DungeonBaseRewardNoLock(inst)
 }
 
 func (r *RuntimeManager) buildDungeonSettlementNoLock(inst *engruntime.Instance) engruntime.Settlement {
@@ -238,10 +263,6 @@ func (r *RuntimeManager) applyCollectDungeonObjectiveNoLock(playerID, itemID str
 		return 0
 	}
 	return r.dungeonMgr.ApplyCollectObjectiveNoLock(playerID, itemID)
-}
-
-func formatDungeonSettlementMessage(settlement engruntime.Settlement) string {
-	return engruntime.FormatDungeonSettlementMessage(settlement)
 }
 
 func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlement) {
@@ -277,33 +298,6 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 			p.Reputations[factionID] += value
 		}
 	}
-}
-
-func (r *RuntimeManager) forceLeaveDungeonOnDeathNoLock(players map[string]*model.Player, playerID string) *engruntime.Settlement {
-	if r.dungeonMgr == nil {
-		return nil
-	}
-	instanceID, ok := r.dungeonMgr.PlayerInstanceIDNoLock(playerID)
-	if !ok {
-		return nil
-	}
-	inst, exists := r.dungeonMgr.DungeonInstanceNoLock(instanceID)
-	if !exists || inst == nil {
-		r.destroyDungeonInstanceNoLock(instanceID)
-		return nil
-	}
-	settlement := r.buildDungeonSettlementNoLock(inst)
-	p, pok := players[playerID]
-	if pok && p != nil {
-		fallback := inst.EntryRoomID
-		if fallback == "" {
-			fallback = "ly_00"
-		}
-		p.RoomID = fallback
-		applyDungeonSettlementReward(p, settlement)
-	}
-	r.destroyDungeonInstanceNoLock(instanceID)
-	return &settlement
 }
 
 func (r *RuntimeManager) processDungeonAggroNoLock(players map[string]*model.Player, result *model.CombatTickResult, updatedRoom map[string]bool) {
@@ -362,6 +356,9 @@ func (r *RuntimeManager) EnterDungeon(playerID, dungeonID string) (map[string]in
 	if tpl, ok := r.dungeonMgr.DungeonTemplateNoLock(dungeonID); ok {
 		if !dungeonUnlockedForPlayer(p, tpl.UnlockConditions) {
 			return nil, errors.New("dungeon_locked")
+		}
+		if locked, hint := r.dungeonLockStateNoLock(p, tpl, r.dungeonTemplatesNoLock()); locked {
+			return nil, errors.New(hint)
 		}
 	}
 

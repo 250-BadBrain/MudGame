@@ -26,7 +26,10 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 		if attacker.State != "COMBAT" || attacker.TargetID == "" || processed[attacker.ID] {
 			continue
 		}
-		if staticTarget, ok := r.staticNPCs[attacker.TargetID]; ok {
+		r.staticNPCsMu.Lock()
+		staticTarget, staticTargetOk := r.staticNPCs[attacker.TargetID]
+		r.staticNPCsMu.Unlock()
+		if staticTargetOk {
 			processed[attacker.ID] = true
 			if staticTarget == nil || !staticTarget.Alive || staticTarget.RoomID != attacker.RoomID {
 				roomID := attacker.RoomID
@@ -78,24 +81,13 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 			combatType = "SPAR"
 		}
 
-		strikeAToB := r.resolveCombatStrike(attacker, target, combatType)
-		strikeBToA := r.resolveCombatStrike(target, attacker, combatType)
+		attackerAttrs := effectiveAttributesForPlayerNoLock(attacker)
+		targetAttrs := effectiveAttributesForPlayerNoLock(target)
+		strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, attackerAttrs, target.CharacterName, targetAttrs, combatType)
+		strikeBToA := r.resolveCombatStrikeEntity(target.CharacterName, targetAttrs, attacker.CharacterName, attackerAttrs, combatType)
+		attackerFirst := attackerAttrs.Initiative >= targetAttrs.Initiative
 
-		target.Attributes.Resources.HP -= strikeAToB.Damage
-		if target.Attributes.Resources.HP < 0 {
-			target.Attributes.Resources.HP = 0
-		}
-		attacker.Attributes.Resources.HP -= strikeBToA.Damage
-		if attacker.Attributes.Resources.HP < 0 {
-			attacker.Attributes.Resources.HP = 0
-		}
-
-		if strikeAToB.Message != "" {
-			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeAToB.Message})
-		}
-		if strikeBToA.Message != "" {
-			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeBToA.Message})
-		}
+		applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, attackerFirst, combatType == "KILL", roomID, &result.Messages)
 		updatedRoom[roomID] = true
 
 		if combatType == "KILL" {
@@ -141,23 +133,11 @@ func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Playe
 	if combatType == "KILL" || target.Aggressive {
 		counterType = "KILL"
 	}
-	strikeBToA := r.resolveCombatStrikeEntity(target.Name, model.BuildEffectiveAttributes(target.Attributes), attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), counterType)
+	playerAttrs := effectiveAttributesForPlayerNoLock(attacker)
+	npcAttrs := model.BuildEffectiveAttributes(target.Attributes)
+	strikeBToA := r.resolveCombatStrikeEntity(target.Name, npcAttrs, attacker.CharacterName, playerAttrs, counterType)
 
-	target.Attributes.Resources.HP -= strikeAToB.Damage
-	if target.Attributes.Resources.HP < 0 {
-		target.Attributes.Resources.HP = 0
-	}
-	attacker.Attributes.Resources.HP -= strikeBToA.Damage
-	if attacker.Attributes.Resources.HP < 0 {
-		attacker.Attributes.Resources.HP = 0
-	}
-
-	if strikeAToB.Message != "" {
-		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeAToB.Message})
-	}
-	if strikeBToA.Message != "" {
-		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeBToA.Message})
-	}
+	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages)
 	updatedRoom[roomID] = true
 
 	if combatType == "KILL" {
@@ -205,23 +185,11 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 	}
 
 	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), combatType)
-	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), "KILL")
+	playerAttrs := effectiveAttributesForPlayerNoLock(attacker)
+	npcAttrs := model.BuildEffectiveAttributes(dungeonTarget.Attributes)
+	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, npcAttrs, attacker.CharacterName, playerAttrs, "KILL")
 
-	dungeonTarget.Attributes.Resources.HP -= strikeAToB.Damage
-	if dungeonTarget.Attributes.Resources.HP < 0 {
-		dungeonTarget.Attributes.Resources.HP = 0
-	}
-	attacker.Attributes.Resources.HP -= strikeBToA.Damage
-	if attacker.Attributes.Resources.HP < 0 {
-		attacker.Attributes.Resources.HP = 0
-	}
-
-	if strikeAToB.Message != "" {
-		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeAToB.Message})
-	}
-	if strikeBToA.Message != "" {
-		result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: strikeBToA.Message})
-	}
+	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &dungeonTarget.Attributes.Resources.HP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages)
 	updatedRoom[roomID] = true
 
 	if dungeonTarget.Attributes.Resources.HP == 0 {
@@ -361,8 +329,29 @@ type combatStrikeResult struct {
 	Message string
 }
 
-func (r *RuntimeManager) resolveCombatStrike(attacker, defender *model.Player, combatType string) combatStrikeResult {
-	return r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), defender.CharacterName, effectiveAttributesForPlayerNoLock(defender), combatType)
+// applyPairedStrikesNoLock 按先攻值决定双方出手顺序：先攻高者先出手。
+// killRound（生死战）中已倒下的一方不再出手；切磋（SPAR）双方各自打完一轮再判定点到为止。
+// strikeA 为 A 方打向 B 方的一击，strikeB 为 B 方打向 A 方的一击。
+func applyPairedStrikesNoLock(aHP, bHP *int, strikeA, strikeB combatStrikeResult, aFirst bool, killRound bool, roomID string, messages *[]model.RoomMessage) {
+	swing := func(strikerHP, victimHP *int, strike combatStrikeResult) {
+		if killRound && *strikerHP <= 0 {
+			return
+		}
+		*victimHP -= strike.Damage
+		if *victimHP < 0 {
+			*victimHP = 0
+		}
+		if strike.Message != "" {
+			*messages = append(*messages, model.RoomMessage{RoomID: roomID, Message: strike.Message})
+		}
+	}
+	if aFirst {
+		swing(aHP, bHP, strikeA)
+		swing(bHP, aHP, strikeB)
+		return
+	}
+	swing(bHP, aHP, strikeB)
+	swing(aHP, bHP, strikeA)
 }
 
 func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attackerAttrs model.EffectiveAttributes, defenderName string, defenderAttrs model.EffectiveAttributes, combatType string) combatStrikeResult {

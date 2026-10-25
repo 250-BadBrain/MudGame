@@ -2,9 +2,10 @@ package manager
 
 import (
 	"errors"
+	"math/rand"
 	"sort"
 	"strconv"
-	"strings"
+	"time"
 
 	engruntime "mudgame/server/internal/engine/runtime"
 	"mudgame/server/internal/exception"
@@ -12,7 +13,10 @@ import (
 )
 
 const (
-	stateSettlementSeconds = 10
+	stateSettlementSeconds  = 10
+	weaknessDurationSeconds = 300
+	gatheringSeconds        = 30
+	workingSeconds          = 60
 )
 
 func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{}, error) {
@@ -50,6 +54,8 @@ func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{},
 		"fame":               eff.Fame, "notoriety": eff.Notoriety, "authority": eff.Authority, "credit": eff.Credit,
 		"base": a.Base, "growth": a.Growth, "resources": a.Resources,
 		"derived": a.Derived, "social": a.Social, "resistances": a.Resistances,
+		// 虚弱剩余秒数（0 = 无虚弱），前端据此展示虚弱状态
+		"weakRemainingSeconds": p.WeakRemainingSeconds(time.Now().Unix()),
 	}, nil
 }
 
@@ -248,7 +254,6 @@ func (r *RuntimeManager) Move(playerID, direction string) (map[string]interface{
 	r.applyEnterRoomDungeonObjectiveNoLock(p.RoomID)
 	if r.dungeonMgr != nil {
 		r.dungeonMgr.UpdateCheckpointNoLock(p.RoomID)
-		r.dungeonMgr.AdvanceStealthNoLock(p.RoomID)
 	}
 	if err := r.savePlayers(players); err != nil {
 		return nil, err
@@ -292,12 +297,6 @@ func (r *RuntimeManager) checkExitRequirementNoLock(p *model.Player, room model.
 					}
 					return errors.New("眼前的机关尚未解开。")
 				}
-			}
-			if requirement.MaxAlert > 0 && inst.AlertLevel > requirement.MaxAlert {
-				if requirement.Message != "" {
-					return errors.New(requirement.Message)
-				}
-				return errors.New("附近戒备森严，此刻无法通过。")
 			}
 		}
 	}
@@ -370,9 +369,13 @@ func (r *RuntimeManager) GetShop(playerID, npcID string) ([]map[string]interface
 		if !ok || !npc.IsShop {
 			return nil, "", "", "", errors.New("npc_not_shop")
 		}
-		npcName = npc.Name
-		npcTitle = npc.Title
-		for itemID, limit := range npc.ShopInventory {
+		state, ok := r.staticNPCStateNoLock(npcID, room.ID)
+		if !ok || state == nil {
+			return nil, "", "", "", errors.New("npc_not_shop")
+		}
+		npcName = state.Name
+		npcTitle = state.Title
+		for itemID, limit := range state.ShopInventory {
 			shopInventory[itemID] = limit
 		}
 	}
@@ -456,7 +459,12 @@ func (r *RuntimeManager) Buy(playerID, npcID, itemID string, amount int) (int, i
 		if !ok || !npc.IsShop {
 			return 0, 0, errors.New("shop_not_found")
 		}
-		shopInventory = npc.ShopInventory
+		// 静态商店使用运行时隔离库存，扣减不得污染全局 NPC 模板
+		state, ok := r.staticNPCStateNoLock(npcID, room.ID)
+		if !ok || state == nil {
+			return 0, 0, errors.New("shop_not_found")
+		}
+		shopInventory = state.ShopInventory
 	}
 	limit, ok := shopInventory[itemID]
 	if !ok {
@@ -716,6 +724,10 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	if !ok {
 		return errors.New("skill_not_taught")
 	}
+	// 进阶武学（隐秘传承）必须先通过残页参悟入门，老师只负责传授深造
+	if skillDef.Type == "ADVANCED" && p.Skills[skillID] < 1 {
+		return errors.New("你尚未参悟" + skillDef.Name + "的传承残页，无从学起。")
+	}
 	if p.Skills[skillID] >= teacherSkillLevel {
 		return errors.New("你的" + skillDef.Name + "已经不输你师傅了")
 	}
@@ -734,41 +746,6 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	p.LearningTeacherID = npcID
 	p.LearningTeacherLevel = teacherSkillLevel
 	return r.savePlayers(players)
-}
-
-func (r *RuntimeManager) Mine(playerID string) (int, int, string, error) {
-	r.mu.Lock()
-	defer r.mu.Unlock()
-
-	players, err := r.loadPlayers()
-	if err != nil {
-		return 0, 0, "", err
-	}
-	p, ok := players[playerID]
-	if !ok {
-		return 0, 0, "", exception.ErrPlayerNotFound
-	}
-	if p.State == "DEAD" {
-		return 0, 0, "", errors.New("dead_state")
-	}
-	if p.State != "IDLE" {
-		return 0, 0, "", errors.New("busy")
-	}
-	if p.RoomID != "ly_mine" {
-		return 0, 0, "", errors.New("wrong_location")
-	}
-	if p.Backpack == nil {
-		p.Backpack = map[string]int{}
-	}
-	if p.Equipment["WEAPON"] != "iron_pickaxe" {
-		return 0, 0, "", errors.New("no_pickaxe")
-	}
-	p.State = "MINING"
-	p.StateTickCountdown = stateSettlementSeconds
-	if err := r.savePlayers(players); err != nil {
-		return 0, 0, "", err
-	}
-	return p.Attributes.Experience, p.Attributes.Potential, "", nil
 }
 
 func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]interface{}, error) {
@@ -816,21 +793,14 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 	result := map[string]interface{}{"action": action}
 	switch action {
 	case "gather":
-		expGain := 8
-		potGain := 12
-		p.Attributes.Experience += expGain
-		p.Attributes.Potential += potGain
-		result["message"] = "你在附近搜寻一番，找到些可用杂物，也增长了几分江湖经验。"
-		result["experience"] = p.Attributes.Experience
-		result["potential"] = p.Attributes.Potential
+		// 采集/帮工是世界的专门资源点：进入忙碌状态，倒计时结束由状态 tick 一次结算收益
+		p.State = "GATHERING"
+		p.StateTickCountdown = gatheringSeconds
+		result["message"] = "你开始在附近采集可用之物……"
 	case "work":
-		moneyGain := 30
-		potGain := 5
-		p.Money += moneyGain
-		p.Attributes.Potential += potGain
-		result["message"] = "你接了些零散差事，换得几枚铜钱，也磨练了耐性。"
-		result["money"] = p.Money
-		result["potential"] = p.Attributes.Potential
+		p.State = "WORKING"
+		p.StateTickCountdown = workingSeconds
+		result["message"] = "你接了份零散差事，埋头干了起来……"
 	case "listen_rumor":
 		result["message"] = roomRumor(room.ID)
 	case "search":
@@ -879,7 +849,6 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			"message":      message,
 			"puzzleId":     action.PuzzleID,
 			"puzzleState":  currentState,
-			"alertLevel":   inst.AlertLevel,
 			"actionStatus": "repeat",
 		}
 		if len(inst.PendingChoices) > 0 {
@@ -942,7 +911,6 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			"puzzleId":       action.PuzzleID,
 			"puzzleState":    currentState,
 			"puzzleAttempts": inst.PuzzleAttempts[action.PuzzleID],
-			"alertLevel":     inst.AlertLevel,
 			"actionStatus":   "blocked",
 		}
 		if inst.PendingChoices[actionID] {
@@ -990,10 +958,6 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			r.dungeonMgr.UpdateCheckpointNoLock(targetRoomID)
 		}
 	}
-	inst.AlertLevel += action.AlertDelta
-	if inst.AlertLevel < 0 {
-		inst.AlertLevel = 0
-	}
 	message := action.Message
 	if message == "" {
 		message = "你完成了眼前的操作。"
@@ -1002,7 +966,6 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 		"message":      message,
 		"puzzleId":     action.PuzzleID,
 		"puzzleState":  currentState,
-		"alertLevel":   inst.AlertLevel,
 		"actionStatus": "success",
 		"moved":        moved,
 	}
@@ -1040,15 +1003,6 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
 	}
-	if room.WorldID == "dungeon_xunqin_ch01_bronze_gate" && strings.HasSuffix(room.ID, "_bronze_02") {
-		if p.Flags["xunqin_ch01_found_bronze_fragment"] {
-			return "你又仔细搜了一遍机关暗格，只见铜匣纹路暗淡下来，再无新的发现。", nil
-		}
-		p.Backpack["bronze_fragment"] += 1
-		p.Flags["xunqin_ch01_found_bronze_fragment"] = true
-		r.applyCollectDungeonObjectiveNoLock(p.ID, "bronze_fragment")
-		return "你在机关暗格中摸到一枚古铜残片。残片入手微凉，铜匣随即开启，洛阳夜色被一线铜光割开。", nil
-	}
 	return "你仔细搜索四周，没有发现值得带走的东西。", nil
 }
 
@@ -1057,7 +1011,7 @@ func roomRumor(roomID string) string {
 	case "ly_00":
 		return "你听见桥边有人低声谈起扬州来的两个少年，说他们身上似乎牵着一场大风波。"
 	case "ly_west_market":
-		return "西市掮客说，最近有人在暗中收购战国铜器拓片，出价高得反常。"
+		return "西市掮客神秘兮兮地说，惊雁宫重见天日的消息已经传开，有人正重金打探《战神图录》的下落。"
 	case "ly_inn":
 		return "说书人醒木一拍，正讲到一只来历不明的战国铜匣，满堂酒客都屏住了呼吸。"
 	default:
@@ -1089,9 +1043,6 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 	if p.State == "MEDITATING" {
 		return "", errors.New("meditating_state")
 	}
-	if p.State == "MINING" {
-		return "", errors.New("mining_state")
-	}
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
 	}
@@ -1113,6 +1064,86 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 		return "", err
 	}
 	return "你开始运功疗伤。", nil
+}
+
+// insightSkillPageNoLock 参悟传承残页：消耗残页，对应进阶武学升至 1 级（入门）
+func (r *RuntimeManager) insightSkillPageNoLock(players map[string]*model.Player, p *model.Player, itemID, skillID string) (string, error) {
+	skillDef, ok := fileSkills[skillID]
+	if !ok {
+		return "", errors.New("skill_not_found")
+	}
+	if p.Skills[skillID] > 0 {
+		return "", errors.New("你已参悟过" + skillDef.Name + "，无需重复参悟。")
+	}
+	p.Backpack[itemID] -= 1
+	if p.Backpack[itemID] <= 0 {
+		delete(p.Backpack, itemID)
+	}
+	if p.Skills == nil {
+		p.Skills = map[string]int{}
+	}
+	p.Skills[skillID] = 1
+	if err := r.savePlayers(players); err != nil {
+		return "", err
+	}
+	return "你屏息凝神，逐字参悟残页上的传承，初步领悟了" + skillDef.Name + "。", nil
+}
+
+func (r *RuntimeManager) UseItem(playerID, itemID string) (string, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	if itemID == "" {
+		return "", errors.New("missing_item_id")
+	}
+	players, err := r.loadPlayers()
+	if err != nil {
+		return "", err
+	}
+	p, ok := players[playerID]
+	if !ok {
+		return "", exception.ErrPlayerNotFound
+	}
+	// 战斗中允许使用药品：金创药等是副本战斗的核心消耗品（见收益与经济设计文档）
+	if p.State == "DEAD" {
+		return "", errors.New("dead_state")
+	}
+	if p.Backpack[itemID] <= 0 {
+		return "", errors.New("item_not_in_inventory")
+	}
+	def, ok := fileItems[itemID]
+	if !ok || !def.Usable {
+		return "", errors.New("item_not_usable")
+	}
+	// 传承残页：参悟进阶武学入门（见收益与经济设计文档 1.3.1）
+	if learnSkillID, ok := def.Effects["learnSkill"].(string); ok && learnSkillID != "" {
+		return r.insightSkillPageNoLock(players, p, itemID, learnSkillID)
+	}
+	recoverHp := 0
+	if value, ok := def.Effects["recoverHp"].(float64); ok && value > 0 {
+		recoverHp = int(value)
+	}
+	if recoverHp <= 0 {
+		return "", errors.New("item_not_usable_now")
+	}
+	effectiveMaxHP := effectiveAttributesForPlayerNoLock(p).MaxHP
+	if p.Attributes.Resources.HP >= effectiveMaxHP {
+		return "", errors.New("hp_full")
+	}
+	p.Backpack[itemID] -= 1
+	if p.Backpack[itemID] <= 0 {
+		delete(p.Backpack, itemID)
+	}
+	beforeHP := p.Attributes.Resources.HP
+	p.Attributes.Resources.HP += recoverHp
+	if p.Attributes.Resources.HP > effectiveMaxHP {
+		p.Attributes.Resources.HP = effectiveMaxHP
+	}
+	recovered := p.Attributes.Resources.HP - beforeHP
+	if err := r.savePlayers(players); err != nil {
+		return "", err
+	}
+	return "你服下" + def.Name + "，恢复了" + strconv.Itoa(recovered) + "点气血。", nil
 }
 
 func (r *RuntimeManager) Meditate(playerID string) (string, error) {
@@ -1138,9 +1169,6 @@ func (r *RuntimeManager) Meditate(playerID string) (string, error) {
 	}
 	if p.State == "MEDITATING" {
 		return "", errors.New("meditating_state")
-	}
-	if p.State == "MINING" {
-		return "", errors.New("mining_state")
 	}
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
@@ -1181,14 +1209,16 @@ func (r *RuntimeManager) Stop(playerID string) string {
 			p.CombatType = ""
 			_ = r.savePlayers(players)
 			switch oldState {
-			case "MINING":
-				return "你收起铁镐，停止了挖矿。"
 			case "HEALING":
 				return "你停止了运功疗伤。"
 			case "MEDITATING":
 				return "你停止了打坐。"
 			case "LEARNING":
 				return "你停止了学习。"
+			case "GATHERING":
+				return "你放弃了采集，拍拍身上的尘土。"
+			case "WORKING":
+				return "你放下了手头的活计。"
 			}
 		}
 	}
@@ -1313,6 +1343,9 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		if !dnpc.Alive {
 			return "", errors.New("target_is_dead")
 		}
+		if dnpc.NonCombat {
+			return "", errors.New(dnpc.Name + "并无战意，你无从下手。")
+		}
 		if dnpc.RoomID != p.RoomID {
 			return "", errors.New("target_not_in_room")
 		}
@@ -1342,6 +1375,9 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		npc, ok := r.staticNPCInRoomNoLock(room, targetID)
 		if !ok {
 			return "", errors.New("target_not_in_room")
+		}
+		if npc.NonCombat {
+			return "", errors.New(npc.Name + "并无战意，你无从下手。")
 		}
 		p.State = "COMBAT"
 		p.TargetID = npc.ID
@@ -1416,8 +1452,11 @@ func (r *RuntimeManager) Relive(playerID string) (string, error) {
 	p.State = "IDLE"
 	p.TargetID = ""
 	p.CombatType = ""
-	p.Attributes.Resources.HP = effectiveAttributesForPlayerNoLock(p).MaxHP
-	p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
+	eff := effectiveAttributesForPlayerNoLock(p)
+	// 复活仅恢复半血半内力，并附带 5 分钟虚弱（战斗属性减半，见收益与经济设计文档）
+	p.Attributes.Resources.HP = eff.MaxHP / 2
+	p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP / 2
+	p.WeakUntil = time.Now().Unix() + weaknessDurationSeconds
 	if r.dungeonMgr != nil {
 		if inst, exists := r.dungeonMgr.PlayerInstanceNoLock(playerID); exists && inst.CheckpointRoomID != "" {
 			p.RoomID = inst.CheckpointRoomID
@@ -1430,7 +1469,42 @@ func (r *RuntimeManager) Relive(playerID string) (string, error) {
 	if err := r.savePlayers(players); err != nil {
 		return "", err
 	}
-	return "你苏醒了过来。", nil
+	return "你苏醒了过来，但一阵虚弱感涌上全身（战斗属性减半，持续5分钟）。", nil
+}
+
+// settleWorldLaborNoLock 结算采集/帮工的一次性收益（世界专门资源点，数值见收益与经济设计文档）
+func (r *RuntimeManager) settleWorldLaborNoLock(p *model.Player, result *model.CombatTickResult, updatedRoom map[string]bool) {
+	state := p.State
+	p.State = "IDLE"
+	p.StateTickCountdown = 0
+	roomID := p.RoomID
+
+	if state == "GATHERING" {
+		p.Attributes.Experience += 4
+		p.Attributes.Potential += 6
+		itemID := "dry_ration"
+		itemName := "干粮"
+		if rand.Intn(100) < 60 {
+			itemID = "bronze_fragment"
+			itemName = "古铜残片"
+		}
+		if p.Backpack == nil {
+			p.Backpack = map[string]int{}
+		}
+		p.Backpack[itemID]++
+		result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{
+			PlayerID: p.ID,
+			Message:  "你采集完毕，获得" + itemName + "×1，增长了4点经验、6点潜能。",
+		})
+	} else {
+		p.Money += 20
+		p.Attributes.Potential += 2
+		result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{
+			PlayerID: p.ID,
+			Message:  "你干完了活计，赚得20两银子，也磨炼出2点潜能。",
+		})
+	}
+	updatedRoom[roomID] = true
 }
 
 func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
@@ -1447,7 +1521,18 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 
 	for _, p := range players {
 		roomID := p.RoomID
-		if p.State == "HEALING" || p.State == "MEDITATING" || p.State == "MINING" || p.State == "LEARNING" {
+		// 采集/帮工：逐秒倒数，归零时一次性结算收益（见收益与经济设计文档 1.1）
+		if p.State == "GATHERING" || p.State == "WORKING" {
+			if p.StateTickCountdown > 0 {
+				p.StateTickCountdown--
+			}
+			if p.StateTickCountdown > 0 {
+				continue
+			}
+			r.settleWorldLaborNoLock(p, &result, updatedRoom)
+			continue
+		}
+		if p.State == "HEALING" || p.State == "MEDITATING" || p.State == "LEARNING" {
 			if p.StateTickCountdown <= 0 {
 				p.StateTickCountdown = stateSettlementSeconds
 			}
@@ -1482,7 +1567,9 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			effectiveMaxMP := effectiveAttributesForPlayerNoLock(p).MaxMP
 			if p.Attributes.Resources.MP < p.Attributes.Resources.TrainedMaxMP {
 				beforeMP := p.Attributes.Resources.MP
-				p.Attributes.Resources.MP += 20
+				// 打坐回复量与基本内功等级挂钩（见公式文档 1.4）
+				recovery := 15 + p.Skills["basic_neigong"]/2
+				p.Attributes.Resources.MP += recovery
 				if p.Attributes.Resources.MP > p.Attributes.Resources.TrainedMaxMP {
 					p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
 				}
@@ -1510,30 +1597,6 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			if increased > 0 {
 				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你增加了" + strconv.Itoa(increased) + "点最大内力。"})
 			}
-			updatedRoom[roomID] = true
-		case "MINING":
-			if p.Equipment["WEAPON"] != "iron_pickaxe" {
-				p.State = "IDLE"
-				p.StateTickCountdown = 0
-				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "收起铁镐，停止了挖矿。"})
-				updatedRoom[roomID] = true
-				continue
-			}
-			expGain := 20
-			potGain := 40
-			p.Attributes.Experience += expGain
-			p.Attributes.Potential += potGain
-			gemID := "cracked_red_gem"
-			if _, ok := fileItems[gemID]; !ok {
-				gemID = "gem_red"
-			}
-			if _, ok := fileItems[gemID]; ok {
-				if p.Backpack == nil {
-					p.Backpack = map[string]int{}
-				}
-				p.Backpack[gemID] += 1
-			}
-			result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你获得了" + strconv.Itoa(expGain) + "点经验，" + strconv.Itoa(potGain) + "点潜能。"})
 			updatedRoom[roomID] = true
 		case "LEARNING":
 			skillID := p.LearningSkillID

@@ -83,5 +83,35 @@
     "bonuses": {
       "intelligence_check_per_10_levels": 1
     }
+  },
+  "csj_changshengjue": {
+    "name": "长生诀",
+    "description": "道门无上心法残卷所载的内功法门，讲究长生久视、以气养身。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "neigong",
+    "school": "hidden",
+    "bonuses": {
+      "max_mp_per_level": 15,
+      "trained_mp_to_max_hp_percent": 0.5
+    },
+    "requirements": {
+      "item": "csj_changshengjue_page"
+    }
+  },
+  "jyg_zhanshentu_dao": {
+    "name": "战神图录·刀法",
+    "description": "摹自战神图录的刀意，一往无前，势不可挡。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "blade",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 3,
+      "crit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "jyg_zhanshentu_rubbing"
+    }
   }
 }

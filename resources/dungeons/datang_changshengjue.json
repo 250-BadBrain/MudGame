@@ -1,0 +1,205 @@
+{
+  "id": "datang_changshengjue",
+  "name": "扬子江惊变",
+  "description": "《长生诀》现世，宇文阀的人马沿扬子江封渡追杀。江心芦苇之间，刀光比晨雾散得更晚。",
+  "order": 2,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 1,
+  "spawnRoomId": "river_00",
+  "puzzleInitialStates": {
+    "briefing": "new",
+    "wreck": "untouched",
+    "farewell": "pending"
+  },
+  "puzzleActions": {
+    "salvage_iron_box": {
+      "label": "打捞铁匣",
+      "puzzleId": "wreck",
+      "rooms": [
+        "river_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "searched",
+      "message": "你潜入冰冷的江水，从沉船残骸中拖出一只铁匣。匣中一页泛黄绢帛隐隐透出图纹——正是《长生诀》残页。",
+      "repeatMessage": "沉船早已被你翻遍，江底再无别物。",
+      "giveItems": {
+        "csj_changshengjue_page": 1
+      }
+    },
+    "listen_boatman": {
+      "label": "听老船夫说明处境",
+      "puzzleId": "briefing",
+      "rooms": [
+        "river_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "csj_boatman",
+      "message": "老船夫说完了渡口被围的始末。",
+      "repeatMessage": "老船夫朝北岸扬了扬下巴，示意你速去。"
+    },
+    "fu_farewell": {
+      "label": "向傅君婥复命",
+      "puzzleId": "farewell",
+      "rooms": [
+        "river_04"
+      ],
+      "fromStates": [],
+      "requiredDefeatNpcs": [
+        "csj_yuwen_huaji"
+      ],
+      "dialogueNpcId": "csj_fu_junzhuo",
+      "failureMessage": "傅君婥气息紊乱，正自调息抗衡体内异种真气，无暇他顾。",
+      "message": "傅君婥向你郑重一礼。",
+      "repeatMessage": "柳林深处已再无追兵踪影。"
+    }
+  },
+  "rooms": {
+    "river_00": {
+      "name": "扬子渡口",
+      "description": "渡船被凿沉在浅水里，老船夫缩在缆桩后。北岸芦苇荡间隐约有铁甲反光。",
+      "exits": {
+        "north": "river_01"
+      },
+      "actions": [
+        "listen_boatman"
+      ],
+      "npcs": [
+        "csj_boatman"
+      ]
+    },
+    "river_01": {
+      "name": "芦苇荡",
+      "description": "齐人高的芦苇被踩出一条泥道，两名宇文阀武士持刀守在道口，见了生人便喝杀上前。",
+      "exits": {
+        "south": "river_00",
+        "north": "river_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "csj_yuwen_soldier"
+          ],
+          "message": "宇文阀武士守住泥道，刀锋拦住了去路。"
+        }
+      },
+      "npcs": [
+        "csj_yuwen_soldier",
+        "csj_yuwen_soldier"
+      ]
+    },
+    "river_02": {
+      "name": "沉船浅滩",
+      "description": "半截漕船斜插在滩涂上，船底缠着水草。一名巡江刀手正在船上翻检财物。",
+      "exits": {
+        "south": "river_01",
+        "north": "river_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "csj_yuwen_scout"
+          ],
+          "message": "巡江刀手占着滩头，退无可退，拔刀便战。"
+        }
+      },
+      "actions": [
+        "salvage_iron_box"
+      ],
+      "npcs": [
+        "csj_yuwen_soldier",
+        "csj_yuwen_scout"
+      ]
+    },
+    "river_03": {
+      "name": "江心洲",
+      "description": "江心洲上芦花飞白，宇文阀先锋按刀立于洲头，身后沙洲被马蹄踏出一圈圈乱痕。",
+      "exits": {
+        "south": "river_02",
+        "north": "river_04"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "csj_yuwen_vanguard"
+          ],
+          "message": "宇文阀先锋横马立于洲头，不放任何人过江。"
+        }
+      },
+      "npcs": [
+        "csj_yuwen_soldier",
+        "csj_yuwen_vanguard"
+      ]
+    },
+    "river_04": {
+      "name": "北岸柳林",
+      "description": "柳林深处，一名白衣女子倚树调息，气息紊乱。宇文化及按剑立于林前，身后再无一人——他的武士都留在江对岸了。",
+      "exits": {
+        "south": "river_03"
+      },
+      "actions": [
+        "fu_farewell"
+      ],
+      "npcs": [
+        "csj_fu_junzhuo",
+        "csj_yuwen_huaji"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_soldiers",
+      "type": "kill",
+      "targetId": "csj_yuwen_soldier",
+      "required": 4,
+      "weight": 30,
+      "description": "击杀宇文阀武士。"
+    },
+    {
+      "id": "kill_scout",
+      "type": "kill",
+      "targetId": "csj_yuwen_scout",
+      "required": 1,
+      "weight": 10,
+      "description": "击杀巡江刀手。"
+    },
+    {
+      "id": "kill_vanguard",
+      "type": "kill",
+      "targetId": "csj_yuwen_vanguard",
+      "required": 1,
+      "weight": 20,
+      "description": "击杀宇文阀先锋。"
+    },
+    {
+      "id": "kill_huaji",
+      "type": "kill",
+      "targetId": "csj_yuwen_huaji",
+      "required": 1,
+      "weight": 40,
+      "description": "斩杀宇文化及，护傅君婥周全。"
+    },
+    {
+      "id": "salvage_page",
+      "type": "collect",
+      "targetId": "csj_changshengjue_page",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "从沉船中打捞《长生诀》残页。"
+    }
+  ],
+  "rewards": {
+    "experience": 260,
+    "potential": 180,
+    "money": 80,
+    "items": {
+      "csj_changshengjue_page": 1
+    }
+  }
+}

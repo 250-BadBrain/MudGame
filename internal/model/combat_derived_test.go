@@ -32,3 +32,40 @@ func TestNormalizeAttributesPreservesZeroHPForDeadCharacter(t *testing.T) {
 		t.Fatalf("dead character hp should remain zero, got %d", normalized.Resources.HP)
 	}
 }
+
+func TestNormalizeAttributesKeepsDepletedMPAndSpirit(t *testing.T) {
+	attrs := NewPlayerAttributes(16, 16, 16, 16, 16)
+	attrs.Resources.MP = 0
+	attrs.Resources.Spirit = 0
+
+	normalized := NormalizeAttributes(attrs)
+	if normalized.Resources.MP != 0 {
+		t.Fatalf("depleted mp should remain zero, got %d", normalized.Resources.MP)
+	}
+	if normalized.Resources.Spirit != 0 {
+		t.Fatalf("depleted spirit should remain zero, got %d", normalized.Resources.Spirit)
+	}
+}
+
+func TestNormalizeAttributesFillsResourcesForLegacySave(t *testing.T) {
+	// 旧存档缺少 TrainedMaxMP/MaxSpirit 字段时应回满，避免出现 0 上限
+	attrs := NewPlayerAttributes(16, 16, 16, 16, 16)
+	attrs.Resources.TrainedMaxMP = 0
+	attrs.Resources.MaxSpirit = 0
+	attrs.Resources.MP = 0
+	attrs.Resources.Spirit = 0
+
+	normalized := NormalizeAttributes(attrs)
+	if normalized.Resources.TrainedMaxMP <= 0 {
+		t.Fatalf("legacy save should get trained max mp, got %d", normalized.Resources.TrainedMaxMP)
+	}
+	if normalized.Resources.MP != normalized.Resources.TrainedMaxMP {
+		t.Fatalf("legacy save mp should refill to trained max, got %d", normalized.Resources.MP)
+	}
+	if normalized.Resources.MaxSpirit <= 0 {
+		t.Fatalf("legacy save should get max spirit, got %d", normalized.Resources.MaxSpirit)
+	}
+	if normalized.Resources.Spirit != normalized.Resources.MaxSpirit {
+		t.Fatalf("legacy save spirit should refill to max, got %d", normalized.Resources.Spirit)
+	}
+}

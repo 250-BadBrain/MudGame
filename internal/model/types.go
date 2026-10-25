@@ -100,6 +100,25 @@ type Player struct {
 	DialogueHistory       map[string]bool
 	Reputations           map[string]int
 	Online                bool
+	// WeakUntil 为死亡复活后虚弱的到期时间（Unix 秒），0 表示无虚弱
+	WeakUntil int64
+}
+
+// IsWeak 报告在给定的 Unix 秒时刻玩家是否处于虚弱期。
+func (p *Player) IsWeak(now int64) bool {
+	return p != nil && p.WeakUntil > now
+}
+
+// WeakRemainingSeconds 返回虚弱剩余秒数（不足 1 秒按 1 秒计），无虚弱返回 0。
+func (p *Player) WeakRemainingSeconds(now int64) int {
+	if !p.IsWeak(now) {
+		return 0
+	}
+	remaining := p.WeakUntil - now
+	if remaining < 1 {
+		remaining = 1
+	}
+	return int(remaining)
 }
 
 type QuestState struct {
@@ -153,6 +172,7 @@ type NPC struct {
 	InstanceOnly      bool
 	SpawnRule         string
 	Aggressive        bool
+	NonCombat         bool
 	IsShop            bool
 	ShopInventory     map[string]int
 	Skills            map[string]int
@@ -240,7 +260,6 @@ type ExitRequirement struct {
 	RequiredAmount       int
 	ConsumeItem          bool
 	RequiredPuzzleStates map[string]string
-	MaxAlert             int
 	Message              string
 }
 
@@ -253,7 +272,6 @@ type Room struct {
 	Area             string
 	Tags             []string
 	SafeZone         bool
-	StealthSafe      bool
 	Noise            int
 	Function         string
 	Actions          []string

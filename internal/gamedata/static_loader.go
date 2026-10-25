@@ -68,6 +68,7 @@ type rawNPC struct {
 	DialogueID        string           `json:"dialogueId"`
 	QuestIDs          []string         `json:"questIds"`
 	InstanceOnly      bool             `json:"instanceOnly"`
+	NonCombat         bool             `json:"nonCombat"`
 	SpawnRule         string           `json:"spawnRule"`
 	Aggressive        bool             `json:"aggressive"`
 	Attributes        model.Attributes `json:"attributes"`
@@ -360,6 +361,7 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 			DialogueID:        raw.DialogueID,
 			QuestIDs:          append([]string{}, raw.QuestIDs...),
 			InstanceOnly:      raw.InstanceOnly,
+			NonCombat:         raw.NonCombat,
 			SpawnRule:         raw.SpawnRule,
 			Aggressive:        raw.Aggressive,
 			IsShop:            len(shopInventory) > 0,
@@ -544,7 +546,37 @@ func loadWorlds(worldDir string) ([]string, map[string]model.World, map[string]m
 	}
 
 	worldOrder := buildWorldOrder(worldIDs, worlds)
+	if err := validateRooms(worlds, rooms); err != nil {
+		return nil, nil, nil, err
+	}
 	return worldOrder, worlds, rooms, nil
+}
+
+// validateRooms 在加载期校验房间图完整性：跨世界重复的房间 ID 会被静默覆盖，
+// 悬空出口会让玩家移动后被持久化进不存在的房间。这两类资源错误必须启动即报。
+func validateRooms(worlds map[string]model.World, rooms map[string]model.Room) error {
+	roomWorld := map[string]string{}
+	for roomID, room := range rooms {
+		if prevWorld, exists := roomWorld[roomID]; exists {
+			return fmt.Errorf("room %s duplicated in worlds %s and %s", roomID, prevWorld, room.WorldID)
+		}
+		roomWorld[roomID] = room.WorldID
+	}
+	for worldID, world := range worlds {
+		if world.SpawnRoomID != "" {
+			if _, ok := rooms[world.SpawnRoomID]; !ok {
+				return fmt.Errorf("world %s spawn room %s not found", worldID, world.SpawnRoomID)
+			}
+		}
+	}
+	for roomID, room := range rooms {
+		for dir, exit := range room.Exits {
+			if _, ok := rooms[exit.TargetRoomID]; !ok {
+				return fmt.Errorf("room %s exit %s points to missing room %s", roomID, dir, exit.TargetRoomID)
+			}
+		}
+	}
+	return nil
 }
 
 func detectSpawnRoomID(roomIDs []string) string {

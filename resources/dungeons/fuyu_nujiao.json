@@ -1,0 +1,172 @@
+{
+  "id": "fuyu_nujiao",
+  "name": "怒蛟帮夜战",
+  "description": "魔师宫少主方夜羽亲率高手，趁夜摸进怒蛟帮水寨。火起三处，帮中好手各据要道死战不退。",
+  "order": 3,
+  "chainId": "fuyu_fan_yun",
+  "chainName": "覆雨翻云",
+  "chapter": 1,
+  "spawnRoomId": "dock_00",
+  "puzzleInitialStates": {
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_sentinel": {
+      "label": "听哨兵通报敌情",
+      "puzzleId": "briefing",
+      "rooms": [
+        "dock_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "nj_sentinel",
+      "message": "哨兵把水寨的布防与敌情交待清楚。",
+      "repeatMessage": "哨兵抱拳：\"少侠快去，聚义厅怕是撑不住了。\""
+    }
+  },
+  "rooms": {
+    "dock_00": {
+      "name": "水寨栈桥",
+      "description": "栈桥上火把倒映在湖水之中，帮中哨兵带伤倚着木桩，远处聚义厅方向火光冲天。",
+      "exits": {
+        "east": "dock_01"
+      },
+      "actions": [
+        "listen_sentinel"
+      ],
+      "npcs": [
+        "nj_sentinel"
+      ]
+    },
+    "dock_01": {
+      "name": "前寨栅门",
+      "description": "栅门被利刃剖开，两名魔师宫刀手正跨过栅栏闯入，刀身映着火光。",
+      "exits": {
+        "west": "dock_00",
+        "east": "dock_02"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": [
+            "nj_daoshou"
+          ],
+          "message": "魔师宫刀手堵住栅门缺口，一时半刻冲不过去。"
+        }
+      },
+      "npcs": [
+        "nj_daoshou",
+        "nj_daoshou"
+      ]
+    },
+    "dock_02": {
+      "name": "演武场",
+      "description": "演武场上兵器架倾倒在地。两名枪卫结阵而守，一名细作伏在暗处伺机放火。",
+      "exits": {
+        "west": "dock_01",
+        "east": "dock_03"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": [
+            "nj_spy"
+          ],
+          "message": "那细作身法极快，绕在暗处不停偷袭，不除掉他休想过去。"
+        }
+      },
+      "npcs": [
+        "nj_daoshou",
+        "nj_qiangwei",
+        "nj_qiangwei",
+        "nj_spy"
+      ]
+    },
+    "dock_03": {
+      "name": "聚义庭",
+      "description": "庭中石阶溅满血迹，两名刀手守住通向聚义厅的月门，廊下躺着一名奄奄一息的帮众。",
+      "exits": {
+        "west": "dock_02",
+        "east": "dock_04"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": [
+            "nj_daoshou"
+          ],
+          "message": "两名刀手死守月门，刀势愈发的悍不畏死。"
+        }
+      },
+      "npcs": [
+        "nj_daoshou",
+        "nj_daoshou",
+        "nj_wounded"
+      ]
+    },
+    "dock_04": {
+      "name": "聚义厅",
+      "description": "帮主上官鹰被两名双剑卫缠住，方夜羽负手立于厅心，白衣胜雪：\"怒蛟帮的气数，今夜到头了。\"",
+      "exits": {
+        "west": "dock_03"
+      },
+      "npcs": [
+        "nj_fang_yeyu",
+        "nj_shuangjian",
+        "nj_shuangjian"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_daoshou",
+      "type": "kill",
+      "targetId": "nj_daoshou",
+      "required": 6,
+      "weight": 30,
+      "description": "击杀魔师宫刀手。"
+    },
+    {
+      "id": "kill_qiangwei",
+      "type": "kill",
+      "targetId": "nj_qiangwei",
+      "required": 2,
+      "weight": 15,
+      "description": "击杀魔师宫枪卫。"
+    },
+    {
+      "id": "kill_spy",
+      "type": "kill",
+      "targetId": "nj_spy",
+      "required": 1,
+      "weight": 15,
+      "description": "揪出并击杀魔师宫细作。"
+    },
+    {
+      "id": "kill_shuangjian",
+      "type": "kill",
+      "targetId": "nj_shuangjian",
+      "required": 2,
+      "weight": 10,
+      "description": "击杀魔师宫双剑卫。"
+    },
+    {
+      "id": "repel_fang_yeyu",
+      "type": "kill",
+      "targetId": "nj_fang_yeyu",
+      "required": 1,
+      "weight": 30,
+      "description": "击退方夜羽，保住怒蛟帮总舵。"
+    }
+  ],
+  "rewards": {
+    "experience": 340,
+    "potential": 230,
+    "money": 100,
+    "flags": {
+      "fuyu_nujiao_completed": true
+    },
+    "items": {
+      "nujiao_saber": 1
+    }
+  }
+}

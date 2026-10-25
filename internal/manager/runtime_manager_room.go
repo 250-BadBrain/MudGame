@@ -91,19 +91,20 @@ func (r *RuntimeManager) GetRoomPayloadByID(roomID string) (map[string]interface
 	return roomPayload, err
 }
 
-func (r *RuntimeManager) GetRoomUpdate(roomID string) ([]map[string]interface{}, []map[string]interface{}, error) {
+func (r *RuntimeManager) GetRoomUpdate(roomID string) ([]map[string]interface{}, []map[string]interface{}, map[string]interface{}, error) {
 	r.mu.RLock()
 	defer r.mu.RUnlock()
 
 	players, err := r.loadPlayers()
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
 	playersInRoom, npcs, err := r.buildRoomEntities(roomID, players)
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
-	return playersInRoom, npcs, nil
+	dungeon, _ := r.dungeonPayloadByRoomIDNoLock(roomID)
+	return playersInRoom, npcs, dungeon, nil
 }
 
 func (r *RuntimeManager) IsPlayerInRoom(playerID, roomID string) bool {
@@ -274,6 +275,12 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 		} else {
 			continue
 		}
+		skillNames := map[string]string{}
+		for skillID := range skills {
+			if def, ok := fileSkills[skillID]; ok {
+				skillNames[skillID] = def.Name
+			}
+		}
 		capabilities := make([]string, 0, 2)
 		if npcState != "DEAD" {
 			if npcIsShop {
@@ -311,6 +318,7 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			"questIds":     questIDs,
 			"capabilities": capabilities,
 			"skills":       skills,
+			"skillNames":   skillNames,
 			"state":        npcState,
 			"combatMode":   combatMode,
 		})

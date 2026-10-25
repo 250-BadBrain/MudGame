@@ -3,18 +3,21 @@ package model
 import "testing"
 
 func TestSkillLevelCapForExperience(t *testing.T) {
+	// 曲线: 所需经验 = 40 × root³；上限 = 20 + 10×root
 	tests := []struct {
 		experience int
 		want       int
 	}{
 		{0, 20},
-		{249, 20},
-		{250, 30},
-		{1999, 30},
-		{2000, 40},
-		{128000, 100},
-		{5488000, 300},
-		{13718000, 400},
+		{39, 20},
+		{40, 30},
+		{319, 30},
+		{320, 40},
+		{2560, 60},
+		{2720, 60},     // 主线七副本通关一遍的经验总量
+		{20480, 100},   // 40×8³
+		{878080, 300},  // 40×28³
+		{2195200, 400}, // 40×38³
 	}
 	for _, tt := range tests {
 		if got := SkillLevelCapForExperience(tt.experience); got != tt.want {

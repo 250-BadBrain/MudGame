@@ -5,7 +5,9 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -63,6 +65,7 @@ type diskPlayer struct {
 	LearningTeacherLevel  int                         `json:"learningTeacherLevel"`
 	SkillLearningProgress map[string]int              `json:"skillLearningProgress"`
 	CombatType            string                      `json:"combatType"`
+	WeakUntil             int64                       `json:"weakUntil,omitempty"`
 }
 
 func NewFileStore(baseDir string) *FileStore {
@@ -87,7 +90,7 @@ func (s *FileStore) LoadUsers() (map[string]*model.User, error) {
 			continue
 		}
 		var du diskUser
-		if err := readJSONFile(filepath.Join(s.usersDir(), entry.Name()), &du); err != nil {
+		if err := readJSONFileTolerant(filepath.Join(s.usersDir(), entry.Name()), &du); err != nil {
 			return nil, err
 		}
 		if du.Username == "" {
@@ -111,9 +114,7 @@ func (s *FileStore) SaveUsers(users map[string]*model.User) error {
 	if err := s.ensureBaseDir(); err != nil {
 		return err
 	}
-	if err := removeAllJSONFiles(s.usersDir()); err != nil {
-		return err
-	}
+	keep := map[string]bool{}
 	for _, u := range users {
 		if u == nil || u.Username == "" {
 			continue
@@ -125,11 +126,13 @@ func (s *FileStore) SaveUsers(users map[string]*model.User) error {
 			ReconnectToken: "",
 			ReconnectHash:  u.ReconnectTokenHash,
 		}
-		if err := writeJSONFile(filepath.Join(s.usersDir(), u.Username+".json"), d); err != nil {
+		name := u.Username + ".json"
+		keep[name] = true
+		if err := writeJSONFile(filepath.Join(s.usersDir(), name), d); err != nil {
 			return err
 		}
 	}
-	return nil
+	return removeJSONFilesNotIn(s.usersDir(), keep)
 }
 
 func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
@@ -146,7 +149,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			continue
 		}
 		var dp diskPlayer
-		if err := readJSONFile(filepath.Join(s.playersDir(), entry.Name()), &dp); err != nil {
+		if err := readJSONFileTolerant(filepath.Join(s.playersDir(), entry.Name()), &dp); err != nil {
 			return nil, err
 		}
 		if dp.ID == "" {
@@ -190,6 +193,11 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			learningSkillID = v
 		}
 		attrs := model.NormalizeAttributes(dp.Attributes)
+		// 副本内死亡的角色落盘时会重置为 ly_00/IDLE 但保留 HP=0，
+		// 加载时恢复气血，避免出现"活着但零血"的异常状态
+		if state != "DEAD" && attrs.Resources.HP <= 0 {
+			attrs.Resources.HP = attrs.Resources.MaxHP
+		}
 		players[dp.ID] = &model.Player{
 			ID:                    dp.ID,
 			UserID:                dp.UserID,
@@ -213,6 +221,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			DialogueHistory:       dp.DialogueHistory,
 			Reputations:           dp.Reputations,
 			Online:                false,
+			WeakUntil:             dp.WeakUntil,
 		}
 	}
 	return players, nil
@@ -222,9 +231,7 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 	if err := s.ensureBaseDir(); err != nil {
 		return err
 	}
-	if err := removeAllJSONFiles(s.playersDir()); err != nil {
-		return err
-	}
+	keep := map[string]bool{}
 	for _, p := range players {
 		if p == nil || p.ID == "" {
 			continue
@@ -269,12 +276,15 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 			LearningTeacherLevel:  learningTeacherLevel,
 			SkillLearningProgress: p.SkillLearningProgress,
 			CombatType:            combatType,
+			WeakUntil:             p.WeakUntil,
 		}
-		if err := writeJSONFile(filepath.Join(s.playersDir(), p.ID+".json"), d); err != nil {
+		name := p.ID + ".json"
+		keep[name] = true
+		if err := writeJSONFile(filepath.Join(s.playersDir(), name), d); err != nil {
 			return err
 		}
 	}
-	return nil
+	return removeJSONFilesNotIn(s.playersDir(), keep)
 }
 
 func (s *FileStore) LoadDynamicRooms() (map[string]RoomDynamic, error) {
@@ -295,7 +305,7 @@ func (s *FileStore) LoadDynamicRooms() (map[string]RoomDynamic, error) {
 			continue
 		}
 		var dr RoomDynamic
-		if err := readJSONFile(filepath.Join(s.roomsDir(), entry.Name()), &dr); err != nil {
+		if err := readJSONFileTolerant(filepath.Join(s.roomsDir(), entry.Name()), &dr); err != nil {
 			return nil, err
 		}
 		if dr.NPCs == nil {
@@ -313,18 +323,18 @@ func (s *FileStore) SaveDynamicRooms(dynamic map[string]RoomDynamic) error {
 	if err := s.ensureBaseDir(); err != nil {
 		return err
 	}
-	if err := removeAllJSONFiles(s.roomsDir()); err != nil {
-		return err
-	}
+	keep := map[string]bool{}
 	for roomID, d := range dynamic {
 		if strings.HasPrefix(roomID, "dg_") {
 			continue
 		}
-		if err := writeJSONFile(filepath.Join(s.roomsDir(), roomID+".json"), d); err != nil {
+		name := roomID + ".json"
+		keep[name] = true
+		if err := writeJSONFile(filepath.Join(s.roomsDir(), name), d); err != nil {
 			return err
 		}
 	}
-	return nil
+	return removeJSONFilesNotIn(s.roomsDir(), keep)
 }
 
 func (s *FileStore) usersDir() string {
@@ -352,17 +362,25 @@ func (s *FileStore) ensureBaseDir() error {
 	return nil
 }
 
-func removeAllJSONFiles(dir string) error {
+// removeJSONFilesNotIn 删除目录中不再需要的 .json 与 .tmp 文件。
+// 写入采用 tmp+rename 原子替换，因此先写后清理：即使中途崩溃也只留下旧文件或完整新文件。
+func removeJSONFilesNotIn(dir string, keep map[string]bool) error {
 	entries, err := os.ReadDir(dir)
 	if err != nil {
 		return err
 	}
 	for _, entry := range entries {
-		if entry.IsDir() || filepath.Ext(entry.Name()) != ".json" {
+		if entry.IsDir() {
 			continue
 		}
-		if err := os.Remove(filepath.Join(dir, entry.Name())); err != nil {
-			return err
+		name := entry.Name()
+		if keep[name] {
+			continue
+		}
+		if filepath.Ext(name) == ".json" || strings.HasSuffix(name, ".tmp") {
+			if err := os.Remove(filepath.Join(dir, name)); err != nil {
+				return err
+			}
 		}
 	}
 	return nil
@@ -377,9 +395,37 @@ func readJSONFile(path string, out interface{}) error {
 		return err
 	}
 	if len(data) == 0 {
+		return errEmptyFile
+	}
+	if err := json.Unmarshal(data, out); err != nil {
+		return fmt.Errorf("%w: %v", errUnparsableFile, err)
+	}
+	return nil
+}
+
+var errEmptyFile = errors.New("empty data file")
+
+var errUnparsableFile = errors.New("unparsable data file")
+
+// readJSONFileTolerant 读取数据文件；文件损坏（空文件/非法 JSON）时将其重命名为
+// <name>.corrupt 隔离并记日志，跳过该文件继续加载，而不是让整个服务无法启动，
+// 也避免后续 removeJSONFilesNotIn 把坏文件当作冗余直接删除。
+func readJSONFileTolerant(path string, out interface{}) error {
+	err := readJSONFile(path, out)
+	if err == nil {
 		return nil
 	}
-	return json.Unmarshal(data, out)
+	if !errors.Is(err, errEmptyFile) && !errors.Is(err, errUnparsableFile) {
+		return err
+	}
+	corruptPath := path + ".corrupt"
+	if renameErr := os.Rename(path, corruptPath); renameErr != nil {
+		// 重命名失败（如被占用）则保留原文件并跳过，绝不能让坏文件阻断启动
+		log.Printf("[storage] %v, 隔离失败(%v)，跳过该文件: %s", err, renameErr, path)
+		return nil
+	}
+	log.Printf("[storage] %v, 已隔离为 %s", err, corruptPath)
+	return nil
 }
 
 func writeJSONFile(path string, v interface{}) error {
@@ -387,7 +433,11 @@ func writeJSONFile(path string, v interface{}) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(path, b, 0o644)
+	tmpPath := path + ".tmp"
+	if err := os.WriteFile(tmpPath, b, 0o644); err != nil {
+		return err
+	}
+	return os.Rename(tmpPath, path)
 }
 
 func hashLegacyReconnectToken(token string) string {

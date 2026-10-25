@@ -23,14 +23,6 @@ type StateActionResult struct {
 	NeedRoomUpdate bool
 }
 
-type MineActionResult struct {
-	Experience     int
-	Potential      int
-	Logs           []string
-	RoomMessage    string
-	NeedRoomUpdate bool
-}
-
 type CombatActionResult struct {
 	Message         string
 	NeedRoomUpdate  bool
@@ -80,6 +72,7 @@ type BackpackResult struct {
 type RoomUpdateResult struct {
 	Players []map[string]interface{}
 	NPCs    []map[string]interface{}
+	Dungeon map[string]interface{}
 }
 
 type DialogueResult struct {
@@ -127,7 +120,7 @@ type RuntimeRepository interface {
 	EquipItem(playerID, itemID string) error
 	UnequipItem(playerID, slot string) error
 	LearnSkill(playerID, npcID, skillID string) error
-	Mine(playerID string) (int, int, string, error)
+	UseItem(playerID, itemID string) (string, error)
 	DoRoomAction(playerID, action string) (map[string]interface{}, error)
 	Talk(playerID, npcID string) (map[string]interface{}, error)
 	ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, map[string]interface{}, error)
@@ -142,7 +135,7 @@ type RuntimeRepository interface {
 	GetPlayerRoom(playerID string) (string, string, error)
 	GetPlayerStatus(playerID string) (map[string]interface{}, error)
 	GetRoomPayloadByID(roomID string) (map[string]interface{}, error)
-	GetRoomUpdate(roomID string) ([]map[string]interface{}, []map[string]interface{}, error)
+	GetRoomUpdate(roomID string) ([]map[string]interface{}, []map[string]interface{}, map[string]interface{}, error)
 	IsPlayerInRoom(playerID, roomID string) bool
 	ProcessCombatTick() (model.CombatTickResult, error)
 	ProcessStatusTick() (model.CombatTickResult, error)
