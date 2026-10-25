@@ -2867,5 +2867,23 @@
       "learnSkill": "manual_r204_14",
       "dodge": 1
     }
+  },
+  "shuanglong_bei": {
+    "name": "双龙会信杯",
+    "description": "双龙会的信物——一对玉杯中的一只。杯底刻着'龙行天下，不胜不归'。持有此杯者，江湖无人敢拦。",
+    "type": "equipment",
+    "subtype": "cup",
+    "stackable": false,
+    "sellable": true,
+    "value": 4000,
+    "rarity": 5,
+    "unit": "只",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 6,
+      "critRate": 3,
+      "hitRate": 3
+    },
+    "source": "双龙会"
   }
 }

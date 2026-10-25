@@ -92,6 +92,7 @@ func TestHuangyiChapterTemplatesMatchDesign(t *testing.T) {
 		"datang_wr2":	{4, "datang_double_dragon", "大唐双龙传", 16},
 		"fuyu_yg2":	{4, "fuyu_fan_yun", "覆雨翻云", 16},
 		"posui_tx3":	{4, "posui_xukong", "破碎虚空", 16},
+		"shuanglong_hui":	{4, "fuyu_fan_yun", "覆雨翻云", 8},
 	}
 	loaded := map[string]bool{}
 	for _, id := range m.DungeonTemplateIDsNoLock() {

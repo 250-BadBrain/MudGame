@@ -20291,5 +20291,151 @@
         "seal": 0
       }
     }
+  },
+  "sl_gate_boss": {
+    "name": "铁面判官",
+    "title": "双龙会·守门人",
+    "description": "双龙会的守门人，铁面覆脸，双掌如铁——他不说话，只用手势告诉你：过了他这一关，才见真龙。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 58,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 58,
+        "constitution": 56,
+        "agility": 53,
+        "perception": 29,
+        "willpower": 29,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1100,
+        "maxHp": 1100,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 58,
+        "defense": 29,
+        "hitRate": 178,
+        "dodge": 64,
+        "parry": 62,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 58,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "shuanglong_pozhen",
+    "weaknessModifiers": {
+      "attack": -12,
+      "hitRate": -14,
+      "defense": -8
+    }
+  },
+  "sl_main_boss": {
+    "name": "金枪无双·赵无极",
+    "title": "双龙会·会主",
+    "description": "双龙会会主赵无极，金枪天下第一——他一生只败过一次，败给一个后来消失的剑客。他等了二十年，等一个能让他再败一次的人。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 62,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 62,
+        "constitution": 60,
+        "agility": 57,
+        "perception": 31,
+        "willpower": 31,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1250,
+        "maxHp": 1250,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 62,
+        "defense": 31,
+        "hitRate": 182,
+        "dodge": 68,
+        "parry": 66,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 62,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "shuanglong_pozhen",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -18,
+      "defense": -10
+    }
   }
 }

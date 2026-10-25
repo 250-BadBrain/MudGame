@@ -1,0 +1,105 @@
+{
+  "id": "shuanglong_hui",
+  "name": "双龙会",
+  "description": "江湖最大的地下比武大会——双龙会。规矩只有一条：过守门人，见会主。赵无极的金枪等了二十年，等一个能让他再败一次的人。",
+  "order": 41,
+  "chainId": "fuyu_fan_yun",
+  "chainName": "覆雨翻云",
+  "chapter": 8,
+  "spawnRoomId": "sl_00",
+  "puzzleInitialStates": {
+    "gate_sl": "closed",
+    "briefing_sl": "new"
+  },
+  "puzzleActions": {
+    "listen_brief_sl": {
+      "label": "听取双龙会规矩",
+      "puzzleId": "briefing_sl",
+      "rooms": [
+        "sl_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "双龙会的规矩很简单：过守门人，见会主。没有第三条路。",
+      "repeatMessage": "规矩你已经知道了。"
+    }
+  },
+  "rooms": {
+    "sl_00": {
+      "name": "会前广场",
+      "description": "地下比武场的入口广场，四面石壁，火把通明。各路豪杰在此等待入场——但大多数人，只是来看别人出丑的。",
+      "exits": {
+        "north": "sl_01"
+      },
+      "npcs": [],
+      "actions": [
+        "listen_brief_sl"
+      ]
+    },
+    "sl_01": {
+      "name": "铁面关",
+      "description": "铁面判官立在关前，双掌交叠——他不说话，但空气里全是掌风。",
+      "exits": {
+        "south": "sl_00",
+        "north": "sl_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "sl_gate_boss"
+          ],
+          "message": "铁面判官双掌如山，你过不去。"
+        }
+      },
+      "npcs": [
+        "sl_gate_boss"
+      ]
+    },
+    "sl_02": {
+      "name": "龙行道",
+      "description": "通过铁面关后的长廊，两侧挂着历代双龙会优胜者的名牌——大多数名字，你从未听过。",
+      "exits": {
+        "south": "sl_01",
+        "north": "sl_03"
+      }
+    },
+    "sl_03": {
+      "name": "无双金枪殿",
+      "description": "赵无极金枪拄地，白衣胜雪。他看见你，眼睛里终于有了一点光：\"二十年了……终于有人走过铁面关。\"",
+      "exits": {
+        "south": "sl_02"
+      },
+      "npcs": [
+        "sl_main_boss"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "defeat_gate",
+      "type": "kill",
+      "targetId": "sl_gate_boss",
+      "required": 1,
+      "weight": 35,
+      "description": "击败铁面判官"
+    },
+    {
+      "id": "defeat_main",
+      "type": "kill",
+      "targetId": "sl_main_boss",
+      "required": 1,
+      "weight": 65,
+      "description": "击败赵无极"
+    }
+  ],
+  "rewards": {
+    "experience": 2800,
+    "potential": 1400,
+    "money": 1000,
+    "items": {
+      "shuanglong_bei": 1
+    }
+  }
+}
