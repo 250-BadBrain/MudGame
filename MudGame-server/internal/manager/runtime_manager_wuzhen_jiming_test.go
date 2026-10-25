@@ -357,3 +357,69 @@ func TestShudaoFullFlow(t *testing.T) {
 		t.Fatal("expected rewards")
 	}
 }
+
+// 蜀道栈桥全流程：余党 → 断藤破招 → 擒小猿王 → 铁蒺藜+任务旗标结算
+func TestZhandaoFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "datang_zhandao")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_tang"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	cliff := room("zd2_01")
+	moveDungeonTestPlayer(t, r, playerID, cliff)
+	defeatAll(cliff, "zd2_ape_rouge", 2)
+	ladder := room("zd2_02")
+	moveDungeonTestPlayer(t, r, playerID, ladder)
+	if _, err := r.DoRoomAction(playerID, "cut_vinerope"); err != nil {
+		t.Fatalf("cut vinerope failed: %v", err)
+	}
+	nest := room("zd2_03")
+	moveDungeonTestPlayer(t, r, playerID, nest)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, nest, "zd2_ape_king")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage ape king failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected cut vines to weaken ape king")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat ape king failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d", inst.Progress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["tangmen_tili"] != 1 || !p.Flags["dungeon_cleared_datang_zhandao"] || !p.Flags["zhandao_case_done"] {
+		t.Fatalf("expected rewards, got tili=%d flags=%v", p.Backpack["tangmen_tili"], p.Flags)
+	}
+}

@@ -1,0 +1,147 @@
+{
+  "id": "datang_zhandao",
+  "name": "蜀道栈桥",
+  "description": "猿叟虽伏诛，其关门弟子小猿王率余党盘踞栈道深处，连唐门的药箱都敢劫。你带着唐门管事的暗器囊再上栈道：断藤索、擒猴王，替蜀地讨一个太平。",
+  "order": 28,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 12,
+  "spawnRoomId": "zd2_00",
+  "puzzleInitialStates": {
+    "vinerope": "woven",
+    "briefing_zd2": "new"
+  },
+  "puzzleActions": {
+    "listen_tang": {
+      "label": "听唐门管事交代",
+      "puzzleId": "briefing_zd2",
+      "rooms": [
+        "zd2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "bs_tang_steward",
+      "message": "唐门管事把余党的底细与藤索的门道讲了一遍。",
+      "repeatMessage": "唐门管事抱拳相送。"
+    },
+    "cut_vinerope": {
+      "label": "斩断藤索",
+      "puzzleId": "vinerope",
+      "rooms": [
+        "zd2_02"
+      ],
+      "fromStates": [
+        "woven"
+      ],
+      "nextState": "cut",
+      "setFlags": {
+        "tengsuo_duan": true
+      },
+      "message": "唐门暗器连珠而出，藤索应声而断——小猿王的空中走廊塌了半边。猴子再灵，离了藤就是猎物。",
+      "repeatMessage": "断藤还悬在崖边晃。"
+    }
+  },
+  "rooms": {
+    "zd2_00": {
+      "name": "栈道驿亭",
+      "description": "栈道驿亭里堆着唐家的药箱，箱上贴着唐字封条——这是第三批，前两批都没能过剑阁。唐门管事在此相候。",
+      "exits": {
+        "north": "zd2_01"
+      },
+      "npcs": [
+        "bs_tang_steward"
+      ],
+      "actions": [
+        "listen_tang"
+      ]
+    },
+    "zd2_01": {
+      "name": "断崖栈道",
+      "description": "栈道在断崖上折了三折，余党的口哨在崖壁间来回荡——他们在等药箱，也是在等猎物。",
+      "exits": {
+        "south": "zd2_00",
+        "north": "zd2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "zd2_ape_rouge"
+          ],
+          "message": "栈道余党的连珠哨封住去路。"
+        }
+      },
+      "npcs": [
+        "zd2_ape_rouge",
+        "zd2_ape_rouge"
+      ]
+    },
+    "zd2_02": {
+      "name": "藤索天梯",
+      "description": "藤索在崖间织成一张天梯，小猿王的手下在网上荡来荡去——主索就系在崖壁的老藤桩上。",
+      "exits": {
+        "south": "zd2_01",
+        "north": "zd2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "vinerope": "cut"
+          },
+          "message": "藤索未断，网上处处是埋伏。"
+        }
+      },
+      "actions": [
+        "cut_vinerope"
+      ]
+    },
+    "zd2_03": {
+      "name": "崖顶猴巢",
+      "description": "崖顶的猴巢里堆满历年劫来的货箱。小猿王倒挂在巢顶的横梁上，脚尖勾着藤，手里的骨爪闪着幽光。",
+      "exits": {
+        "south": "zd2_02"
+      },
+      "npcs": [
+        "zd2_ape_king"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_rouges",
+      "type": "kill",
+      "targetId": "zd2_ape_rouge",
+      "required": 2,
+      "weight": 20,
+      "description": "破栈道余党"
+    },
+    {
+      "id": "cut_vinerope",
+      "type": "puzzle",
+      "targetId": "vinerope:cut",
+      "required": 1,
+      "weight": 15,
+      "description": "斩断藤索断退路"
+    },
+    {
+      "id": "repel_ape_king",
+      "type": "kill",
+      "targetId": "zd2_ape_king",
+      "required": 1,
+      "weight": 65,
+      "description": "崖顶擒小猿王"
+    }
+  ],
+  "rewards": {
+    "experience": 2020,
+    "potential": 1000,
+    "money": 680,
+    "items": {
+      "tangmen_tili": 1
+    },
+    "flags": {
+      "zhandao_case_done": true
+    }
+  }
+}

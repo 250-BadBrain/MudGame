@@ -692,5 +692,19 @@
     "title": "衙门书办",
     "opening": "书办翻着账本，眼皮不抬：\"漕银失窃，上头催得紧。本官只提醒一句——水上的事，去水边查。\"",
     "options": []
+  },
+  "dlg_bs_tang": {
+    "id": "dlg_bs_tang",
+    "npcId": "bs_tang_steward",
+    "title": "唐门规矩",
+    "opening": "唐门管事拱手还礼，手却始终没离开腰间：\"客官远来是客。只是唐家坳的规矩——暗器不外借，恩怨不外传。\"",
+    "options": []
+  },
+  "dlg_bs_jiange": {
+    "id": "dlg_bs_jiange",
+    "npcId": "bs_jiange_clerk",
+    "title": "栈道余患",
+    "opening": "驿丞指着栈道深处：\"猿叟是死了，可他的徒子徒孙还在栈道上收'过路钱'。唐家坳的药箱被劫了三回——唐门发话了：谁替他们把场子找回来，蜀地任行。\"",
+    "options": []
   }
 }

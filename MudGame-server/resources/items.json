@@ -825,5 +825,22 @@
     "rarity": 1,
     "unit": "株",
     "source": "扬州苇荡采集"
+  },
+  "tangmen_tili": {
+    "name": "唐门铁蒺藜",
+    "description": "唐门秘制的铁蒺藜，淬着见血封喉的药——巴蜀的暗器，天下第一。",
+    "type": "equipment",
+    "subtype": "hidden_weapon",
+    "stackable": false,
+    "sellable": true,
+    "value": 2400,
+    "rarity": 4,
+    "unit": "把",
+    "equipmentSlot": "HIDDEN_WEAPON",
+    "effects": {
+      "attack": 10,
+      "critRate": 2
+    },
+    "source": "蜀道栈桥"
   }
 }

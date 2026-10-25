@@ -145,5 +145,32 @@
       }
     },
     "repeatable": false
+  },
+  "zhandao_case": {
+    "id": "zhandao_case",
+    "name": "蜀道劫案",
+    "description": "猿叟虽伏诛，余党犹在栈道劫掠唐门药箱。助唐门管事清剿余党、擒下小猿王，蜀地任行。",
+    "giverNpcId": "bs_jiange_clerk",
+    "turnInNpcId": "bs_jiange_clerk",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "zhandao_case_done",
+        "description": "在蜀道栈桥擒下小猿王。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 160,
+      "potential": 120,
+      "money": 220,
+      "flags": {
+        "zhandao_case_completed": true
+      },
+      "reputations": {
+        "salt_gang": 5
+      }
+    },
+    "repeatable": false
   }
 }

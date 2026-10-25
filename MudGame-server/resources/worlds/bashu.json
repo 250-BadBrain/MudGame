@@ -1,0 +1,108 @@
+{
+  "id": "bashu",
+  "name": "巴蜀",
+  "description": "蜀道难，难于上青天——可巴蜀的锦缎、药材与井盐，让天下的商队还是一茬接一茬地往里钻。青城山色、浣花溪水、唐家坳的暗器与刀，都是蜀中的家底。",
+  "order": 4,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "bs_city_gate",
+  "rooms": {
+    "bs_city_gate": {
+      "name": "锦官城门",
+      "description": "成都锦官城的城门内外挤满盐商与药贩，城墙上\"蜀道千里，通于蜀中\"的刻字被摸得发亮。",
+      "area": "巴蜀",
+      "tags": [
+        "gate",
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "east": "bs_market",
+        "north": "bs_qingcheng"
+      }
+    },
+    "bs_market": {
+      "name": "蜀锦市集",
+      "description": "蜀锦市集天下闻名，一匹上等的蜀锦能换十匹洛绢。市集尽头，一家挂着唐字灯笼的铺子门可罗雀——唐家的铺子，不缺客人。",
+      "area": "巴蜀",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "bs_tang_steward",
+        "bs_herbalist"
+      ],
+      "exits": {
+        "west": "bs_city_gate",
+        "south": "bs_huanhua"
+      }
+    },
+    "bs_huanhua": {
+      "name": "浣花溪",
+      "description": "浣花溪水清见底，浣衣的妇人捣衣声此起彼伏。溪边的药田一畦一畦——巴蜀的药材，一半出自这里。",
+      "area": "巴蜀",
+      "tags": [
+        "gather",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "gather"
+      ],
+      "exits": {
+        "north": "bs_market"
+      }
+    },
+    "bs_qingcheng": {
+      "name": "青城山道",
+      "description": "青城山道幽深寂谧，道观的钟声隔着竹林传下来。道旁的石碑刻着\"青城天下幽\"。",
+      "area": "巴蜀",
+      "tags": [
+        "wild",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "exits": {
+        "south": "bs_city_gate",
+        "west": "bs_tang_village"
+      }
+    },
+    "bs_tang_village": {
+      "name": "唐家坳",
+      "description": "唐家坳的每一户人家都姓唐，每一户人家都会做暗器——村里最不缺的就是机关与规矩。",
+      "area": "巴蜀",
+      "tags": [
+        "faction",
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "east": "bs_qingcheng",
+        "north": "bs_jiange"
+      }
+    },
+    "bs_jiange": {
+      "name": "剑阁栈道口",
+      "description": "剑阁栈道口的石壁上插着断掉的箭——猿叟虽伏诛，余党的口哨还在栈道深处响。",
+      "area": "巴蜀",
+      "tags": [
+        "wild",
+        "unsafe",
+        "quest"
+      ],
+      "safeZone": false,
+      "npcs": [
+        "bs_jiange_clerk"
+      ],
+      "exits": {
+        "south": "bs_tang_village"
+      }
+    }
+  }
+}
