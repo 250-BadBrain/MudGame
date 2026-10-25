@@ -24,6 +24,7 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	eff.LearningInvestBonus = 0
 	applySkillBonusesNoLock(&eff, p.Skills, p.EquippedSkills)
 	applyEquipmentEffectsNoLock(&eff, p.Equipment)
+	applyEnhancementNoLock(&eff, p)
 	directAttack := eff.Attack
 	directDefense := eff.Defense
 	directHitRate := eff.HitRate

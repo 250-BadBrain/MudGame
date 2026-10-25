@@ -95,6 +95,8 @@ type Player struct {
 	Skills                map[string]int
 	// EquippedSkills 秘籍装备槽：键=前置基本武功 ID，值=装备中的秘籍 ID；仅装备中的 ADVANCED 技能参与属性加成
 	EquippedSkills        map[string]string
+	// EnhancedItems 装备强化等级：键=装备物品 ID，值=强化等级（0-5）；每级 +2 主属性
+	EnhancedItems         map[string]int
 	Backpack              map[string]int
 	Equipment             map[string]string
 	QuestStates           map[string]QuestState
