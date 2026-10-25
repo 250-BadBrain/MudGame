@@ -747,5 +747,21 @@
       "critRate": 2
     },
     "source": "怒蛟水战"
+  },
+  "poxu_page": {
+    "name": "破虚指残页",
+    "description": "夹在战神图录后卷里的指法残页，纸薄如蝉翼，指痕却力透纸背。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "poxu_zhi"
+    }
   }
 }

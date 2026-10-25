@@ -3001,7 +3001,8 @@
       "xiulou_daofa": 120,
       "taiyi_jianfa": 120,
       "dongting_xinf": 120,
-      "lingxu_bu": 120
+      "lingxu_bu": 120,
+      "poxu_zhi": 120
     },
     "attributes": {
       "level": 30,
@@ -8619,6 +8620,279 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
+    }
+  },
+  "jm2_mongol_prince_guard": {
+    "name": "金帐武士",
+    "title": "小王子亲卫",
+    "description": "蒙古小王子的亲卫武士，狼头金盔在雪地里晃眼——他们护送的不是王子，是图录后卷。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 36,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 37,
+        "constitution": 35,
+        "agility": 30,
+        "perception": 18,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 510,
+        "maxHp": 510,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 75,
+        "defense": 35,
+        "hitRate": 150,
+        "dodge": 106,
+        "parry": 116,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 102,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jm2_saman_elder": {
+    "name": "萨满长老",
+    "title": "汗庭秘祝",
+    "description": "汗庭的萨满长老，鼓声里裹着摄魂的咒——他要把图录后卷连同传鹰的传说一起送回北方。",
+    "faction": "mongol_khan",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 38,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 39,
+        "constitution": 37,
+        "agility": 30,
+        "perception": 18,
+        "willpower": 17,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 540,
+        "maxHp": 540,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 78,
+        "defense": 36,
+        "hitRate": 152,
+        "dodge": 108,
+        "parry": 118,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 104,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jm2_yelv_xuan": {
+    "name": "耶律玄",
+    "title": "新任蒙古国师",
+    "description": "思汉飞拜服之后，耶律玄接过了国师的金冠。他修的不是天妖气，是把《战神图录》倒背如流的执念——他要证明，图录该归大汗。",
+    "faction": "mongol_khan",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 48,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 52,
+        "constitution": 49,
+        "agility": 44,
+        "perception": 28,
+        "willpower": 27,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 960,
+        "maxHp": 960,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 74,
+        "defense": 37,
+        "hitRate": 158,
+        "dodge": 126,
+        "parry": 122,
+        "critRate": 13,
+        "attackSpeed": 4,
+        "initiative": 120,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "tulu_houjuan",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -18,
+      "defense": -10
+    }
+  },
+  "jm2_old_monk": {
+    "name": "守图老僧",
+    "title": "雪山寺僧",
+    "description": "雪山小寺里唯一的老僧，守着图录后卷的抄本抄了三十年。他不挡路，只指路。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_jm2_guide",
+    "attributes": {
+      "level": 20,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 14,
+        "agility": 13,
+        "perception": 17,
+        "willpower": 18,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 11,
+        "defense": 11,
+        "hitRate": 84,
+        "dodge": 60,
+        "parry": 60,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 54,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   }
 }

@@ -448,5 +448,24 @@
         "level": 20
       }
     }
+  },
+  "poxu_zhi": {
+    "name": "破虚指",
+    "description": "传鹰留在战神图录后卷里的指法，一指点出，虚实颠倒。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "unarmed",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "crit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "poxu_page",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 40
+      }
+    }
   }
 }

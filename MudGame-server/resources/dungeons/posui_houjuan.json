@@ -1,0 +1,155 @@
+{
+  "id": "posui_houjuan",
+  "name": "图录·后卷",
+  "description": "传鹰破空而去，战神图录的后卷却在蒙古小王子的贡品车队里。守图老僧一句点拨，你踏雪追上车队：从后卷里悟出破虚指，让执念最深的耶律玄输给他自己。",
+  "order": 23,
+  "chainId": "posui_xukong",
+  "chainName": "破碎虚空",
+  "chapter": 4,
+  "spawnRoomId": "jm2_00",
+  "puzzleInitialStates": {
+    "scroll_jm2": "unread",
+    "briefing_jm2": "new"
+  },
+  "puzzleActions": {
+    "listen_monk": {
+      "label": "听老僧指路",
+      "puzzleId": "briefing_jm2",
+      "rooms": [
+        "jm2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "jm2_old_monk",
+      "message": "老僧把车队与后卷的来历讲了一遍。",
+      "repeatMessage": "老僧合十不语，只指了指北方。"
+    },
+    "read_scroll": {
+      "label": "参悟后卷",
+      "puzzleId": "scroll_jm2",
+      "rooms": [
+        "jm2_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "enlightened",
+      "setFlags": {
+        "tulu_houjuan": true
+      },
+      "message": "后卷的最后一页只有一行指痕——你依着指痕点出，指尖竟穿了纸背。虚实颠倒，破虚指成了。",
+      "repeatMessage": "后卷的指痕你已烂熟于心。",
+      "giveItems": {
+        "poxu_page": 1
+      }
+    }
+  },
+  "rooms": {
+    "jm2_00": {
+      "name": "雪山小寺",
+      "description": "山道旁的小寺挤在风雪里，殿前的积雪被马蹄踏烂——车队刚过不久。守图老僧在寺门口扫雪。",
+      "exits": {
+        "north": "jm2_01"
+      },
+      "npcs": [
+        "jm2_old_monk"
+      ],
+      "actions": [
+        "listen_monk"
+      ]
+    },
+    "jm2_01": {
+      "name": "雪道营盘",
+      "description": "小王子的车队在雪道旁扎营，金帐武士往来巡弋——贡品车驾停在营心，戒备森严。",
+      "exits": {
+        "south": "jm2_00",
+        "north": "jm2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jm2_mongol_prince_guard"
+          ],
+          "message": "金帐武士的长刀封住营盘缺口。"
+        }
+      },
+      "npcs": [
+        "jm2_mongol_prince_guard",
+        "jm2_mongol_prince_guard"
+      ]
+    },
+    "jm2_02": {
+      "name": "贡品车驾",
+      "description": "贡品车驾锦缎层叠，图录后卷供在正中。萨满长老的长鼓已经擂响——他在用车驾前的雪地做法。",
+      "exits": {
+        "south": "jm2_01",
+        "north": "jm2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jm2_saman_elder"
+          ],
+          "message": "萨满长老的鼓声摄人心魄，先破了他的法。"
+        }
+      },
+      "npcs": [
+        "jm2_saman_elder"
+      ],
+      "actions": [
+        "read_scroll"
+      ]
+    },
+    "jm2_03": {
+      "name": "断崖道口",
+      "description": "雪道在断崖前分岔。耶律玄抱着图录后卷立在崖边，身后是万丈云海——他把整条退路都当成了一场赌注。",
+      "exits": {
+        "south": "jm2_02"
+      },
+      "npcs": [
+        "jm2_yelv_xuan"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_guards",
+      "type": "kill",
+      "targetId": "jm2_mongol_prince_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "破金帐武士"
+    },
+    {
+      "id": "kill_saman",
+      "type": "kill",
+      "targetId": "jm2_saman_elder",
+      "required": 1,
+      "weight": 20,
+      "description": "破萨满长老秘法"
+    },
+    {
+      "id": "read_scroll",
+      "type": "puzzle",
+      "targetId": "scroll_jm2:enlightened",
+      "required": 1,
+      "weight": 15,
+      "description": "参悟图录后卷"
+    },
+    {
+      "id": "repel_yelv",
+      "type": "kill",
+      "targetId": "jm2_yelv_xuan",
+      "required": 1,
+      "weight": 45,
+      "description": "断崖前挫耶律玄执念"
+    }
+  ],
+  "rewards": {
+    "experience": 1780,
+    "potential": 920,
+    "money": 600
+  }
+}

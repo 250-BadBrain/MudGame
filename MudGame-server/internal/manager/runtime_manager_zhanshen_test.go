@@ -434,3 +434,70 @@ func TestShuizhanFullFlow(t *testing.T) {
 		t.Fatalf("expected rewards, got ci=%d flag=%v", p.Backpack["fenshui_ci"], p.Flags["dungeon_cleared_fuyu_shuizhan"])
 	}
 }
+
+// 图录·后卷全流程：武士/萨满 → 参悟后卷 → 挫耶律玄 → 残页结算
+func TestHoujuanFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "posui_houjuan")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_monk"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	camp := room("jm2_01")
+	moveDungeonTestPlayer(t, r, playerID, camp)
+	defeatAll(camp, "jm2_mongol_prince_guard", 2)
+	convoy := room("jm2_02")
+	moveDungeonTestPlayer(t, r, playerID, convoy)
+	defeatAll(convoy, "jm2_saman_elder", 1)
+	if _, err := r.DoRoomAction(playerID, "read_scroll"); err != nil {
+		t.Fatalf("read scroll failed: %v", err)
+	}
+	cliff := room("jm2_03")
+	moveDungeonTestPlayer(t, r, playerID, cliff)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, cliff, "jm2_yelv_xuan")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage yelv failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected scroll insight to weaken yelv xuan")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat yelv failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["poxu_page"] != 1 || !p.Flags["dungeon_cleared_posui_houjuan"] {
+		t.Fatalf("expected rewards, got page=%d flag=%v", p.Backpack["poxu_page"], p.Flags["dungeon_cleared_posui_houjuan"])
+	}
+}
