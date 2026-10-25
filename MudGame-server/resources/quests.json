@@ -274,5 +274,113 @@
       }
     },
     "repeatable": false
+  },
+  "luoyang_bounty": {
+    "id": "luoyang_bounty",
+    "name": "粮道悬赏",
+    "description": "洛阳粮道瓦岗余党肆虐，官府悬赏三百两缉拿旗号头目。",
+    "giverNpcId": "ld_courier_chief",
+    "turnInNpcId": "ld_courier_chief",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datang_liangdao",
+        "description": "在洛阳粮道挫败瓦岗偏师。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 200,
+      "potential": 120,
+      "money": 300,
+      "flags": {
+        "luoyang_bounty_completed": true
+      },
+      "reputations": {
+        "luoyang_office": 10
+      }
+    },
+    "repeatable": false
+  },
+  "changan_letter": {
+    "id": "changan_letter",
+    "name": "慈航托信",
+    "description": "慈航别院的师妃暄有一封信要送到洛阳旧坊暗巷——收信人是那位灰袍传承人。",
+    "giverNpcId": "ca2_monk",
+    "turnInNpcId": "ancient_scroll_keeper",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datang_changan",
+        "description": "在长安风云中与师妃暄并肩。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 210,
+      "potential": 130,
+      "money": 250,
+      "items": {
+        "dahuandan": 1
+      },
+      "flags": {
+        "changan_letter_completed": true
+      }
+    },
+    "repeatable": false
+  },
+  "yangzhou_bounty": {
+    "id": "yangzhou_bounty",
+    "name": "苇荡缉盗",
+    "description": "扬州苇荡中仍有水匪残党，盐运司悬赏缉拿。",
+    "giverNpcId": "yz_yamen_clerk",
+    "turnInNpcId": "yz_yamen_clerk",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_luoshui_kujing",
+        "description": "在枯井之下清剿阴癸派暗桩。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 220,
+      "potential": 140,
+      "money": 280,
+      "flags": {
+        "yangzhou_bounty_completed": true
+      },
+      "reputations": {
+        "luoyang_office": 10
+      }
+    },
+    "repeatable": false
+  },
+  "bashu_thanks": {
+    "id": "bashu_thanks",
+    "name": "唐门谢礼",
+    "description": "唐家坳对你在蜀道栈桥的表现非常满意——管事说要给你一份唐门的谢礼。",
+    "giverNpcId": "bs_tang_steward",
+    "turnInNpcId": "bs_tang_steward",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "dungeon_cleared_datang_zhandao",
+        "description": "在蜀道栈桥擒下小猿王。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 230,
+      "potential": 150,
+      "money": 300,
+      "items": {
+        "dahuandan": 1
+      },
+      "flags": {
+        "bashu_thanks_completed": true
+      }
+    },
+    "repeatable": false
   }
 }

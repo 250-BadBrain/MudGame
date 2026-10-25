@@ -776,5 +776,33 @@
     "title": "守阁之言",
     "opening": "青铜面具后的声音苍老如潮：\"沧溟宫的主人走了三百年，玉简在我手里守了三百年。你来，就是玉简认的人。\"",
     "options": []
+  },
+  "dlg_ld_bounty": {
+    "id": "dlg_ld_bounty",
+    "npcId": "ld_courier_chief",
+    "title": "粮道悬赏",
+    "opening": "郑镖头展开一张悬赏令：\"瓦岗余党在粮道上出没——谁斩了他们的旗号，官府赏银三百两。\"",
+    "options": []
+  },
+  "dlg_ca2_letter": {
+    "id": "dlg_ca2_letter",
+    "npcId": "ca2_monk",
+    "title": "别院托信",
+    "opening": "知客僧合十：\"仙子有一封信要送到洛阳旧坊暗巷——收信人不具名，只说灰衣。客人若肯代劳，功德无量。\"",
+    "options": []
+  },
+  "dlg_yz_bounty": {
+    "id": "dlg_yz_bounty",
+    "npcId": "yz_yamen_clerk",
+    "title": "苇荡缉盗",
+    "opening": "书办终于抬了眼皮：\"漕银的案子虽然结了，但苇荡里还有残余水匪——去清剿干净，本官记你一功。\"",
+    "options": []
+  },
+  "dlg_bs_thanks": {
+    "id": "dlg_bs_thanks",
+    "npcId": "bs_tang_steward",
+    "title": "唐门谢礼",
+    "opening": "唐门管事难得露出笑容：\"栈道的场子找回来了，唐家坳上下都很感激。这份谢礼——唐家的暗器囊，收好。\"",
+    "options": []
   }
 }
