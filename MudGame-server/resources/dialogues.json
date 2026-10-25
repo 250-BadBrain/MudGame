@@ -622,5 +622,12 @@
     "title": "夜泊引路",
     "opening": "渔娘把橹一横：\"水寨浮桥九曲十八弯，烧了桥，楼船就是一堆漂着的木头。——你要真敢去，我送你到芦洲。\"",
     "options": []
+  },
+  "dlg_sh_informant": {
+    "id": "dlg_sh_informant",
+    "npcId": "sh_informant",
+    "title": "弦外之音",
+    "opening": "琵琶娘子拨了个错音：\"客人听出来了么？这曲子里全是杀气——散花楼的地下，压着半座洛阳的冤魂。\"",
+    "options": []
   }
 }

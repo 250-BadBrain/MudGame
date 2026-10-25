@@ -228,3 +228,76 @@ func TestBalingFullFlow(t *testing.T) {
 		t.Fatal("expected cleared flag")
 	}
 }
+
+// 散花楼全流程：暗桩 → 护楼使 → 识破师承 → 挫花弄影 → 玉镯+锦盒结算
+func TestSanhuaFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "datang_sanhua")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_informant"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	hall := room("sh_01")
+	moveDungeonTestPlayer(t, r, playerID, hall)
+	defeatAll(hall, "sh_yinkui_maid", 2)
+	attic := room("sh_02")
+	moveDungeonTestPlayer(t, r, playerID, attic)
+	defeatAll(attic, "sh_guard_captain", 1)
+	if _, err := r.DoRoomAction(playerID, "see_lodge_truth"); err != nil {
+		t.Fatalf("see truth failed: %v", err)
+	}
+	top := room("sh_03")
+	moveDungeonTestPlayer(t, r, playerID, top)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, top, "sh_hua_wuying")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage hua failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected lodge truth to weaken hua wuying")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat hua failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
+	}
+	if _, err := r.DoRoomAction(playerID, "open_box_sh"); err != nil {
+		t.Fatalf("open box failed: %v", err)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["sanhua_yuzhuo"] != 1 || p.Backpack["lingxu_page"] != 1 {
+		t.Fatalf("expected rewards, got yuzhuo=%d page=%d", p.Backpack["sanhua_yuzhuo"], p.Backpack["lingxu_page"])
+	}
+	if !p.Flags["dungeon_cleared_datang_sanhua"] {
+		t.Fatal("expected cleared flag")
+	}
+}

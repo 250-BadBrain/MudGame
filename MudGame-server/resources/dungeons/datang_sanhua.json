@@ -1,0 +1,188 @@
+{
+  "id": "datang_sanhua",
+  "name": "散花楼",
+  "description": "洛阳城最有名的销金窟散花楼，实为阴癸派堂主花弄影的据点。你受琵琶娘子之托夜探高楼：穿过侍女的暗桩，先看穿主人的师承来路，再上顶楼赴这一场花约。",
+  "order": 20,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 10,
+  "spawnRoomId": "sh_00",
+  "puzzleInitialStates": {
+    "lodge": "unseen",
+    "briefing_sh": "new",
+    "box_sh": "hidden"
+  },
+  "puzzleActions": {
+    "listen_informant": {
+      "label": "听琵琶娘子的弦外之音",
+      "puzzleId": "briefing_sh",
+      "rooms": [
+        "sh_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "sh_informant",
+      "message": "琵琶娘子把散花楼的底细交代了个七七八八。",
+      "repeatMessage": "琵琶娘子拨了个欢快的调子，催你上路。"
+    },
+    "see_lodge_truth": {
+      "label": "识破师承来路",
+      "puzzleId": "lodge",
+      "rooms": [
+        "sh_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "seen",
+      "setFlags": {
+        "xianlou_zhenxiang": true
+      },
+      "message": "你在楼中密阁的牌位前停住——阴癸派天魔策第四卷的师承图谱赫然在列。花弄影的来路，你看穿了。",
+      "repeatMessage": "师承图谱你早已记熟。"
+    },
+    "open_box_sh": {
+      "label": "打开暗格锦盒",
+      "puzzleId": "box_sh",
+      "rooms": [
+        "sh_03"
+      ],
+      "fromStates": [
+        "hidden"
+      ],
+      "nextState": "opened",
+      "requiredDefeatNpcs": [
+        "sh_hua_wuying"
+      ],
+      "failureMessage": "花弄影还在楼上，暗格机关谁也不敢碰。",
+      "message": "暗格里除了一页录着身法要诀的残页，竟还有半阙没写完的词——散花楼主人的心事，比她的刀更深。",
+      "repeatMessage": "锦盒已被你收起。",
+      "giveItems": {
+        "lingxu_page": 1
+      }
+    }
+  },
+  "rooms": {
+    "sh_00": {
+      "name": "楼前画舫",
+      "description": "画舫泊在洛水岸边，丝竹声从楼上传来。琵琶娘子抱着琴倚在舷边，朝你递了个眼色。",
+      "exits": {
+        "north": "sh_01"
+      },
+      "npcs": [
+        "sh_informant"
+      ],
+      "actions": [
+        "listen_informant"
+      ]
+    },
+    "sh_01": {
+      "name": "一楼回廊",
+      "description": "回廊九曲，纱帐低垂。捧着香盘的侍女穿行其间，每一双眼睛都在扫你的腰间与手。",
+      "exits": {
+        "south": "sh_00",
+        "north": "sh_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "sh_yinkui_maid"
+          ],
+          "message": "侍女们的短刃围成了一圈，进不得楼梯。"
+        }
+      },
+      "npcs": [
+        "sh_yinkui_maid",
+        "sh_yinkui_maid"
+      ]
+    },
+    "sh_02": {
+      "name": "二楼密阁",
+      "description": "密阁里供着一排牌位，香炉里的灰还是温的。护楼使横身挡在通往顶楼的梯口。",
+      "exits": {
+        "south": "sh_01",
+        "north": "sh_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "sh_guard_captain"
+          ],
+          "message": "护楼使一掌拍碎了栏杆：\"再进一步，休怪掌下无情。\""
+        }
+      },
+      "npcs": [
+        "sh_guard_captain"
+      ],
+      "actions": [
+        "see_lodge_truth"
+      ]
+    },
+    "sh_03": {
+      "name": "顶楼花厅",
+      "description": "顶楼花厅落花成阵，花弄影斜倚在贵妃榻上，指尖绕着一缕天魔气——\"来了？妾身等你好久了。\"",
+      "exits": {
+        "south": "sh_02"
+      },
+      "npcs": [
+        "sh_hua_wuying"
+      ],
+      "actions": [
+        "open_box_sh"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_maids",
+      "type": "kill",
+      "targetId": "sh_yinkui_maid",
+      "required": 2,
+      "weight": 20,
+      "description": "破一楼回廊暗桩"
+    },
+    {
+      "id": "kill_captain",
+      "type": "kill",
+      "targetId": "sh_guard_captain",
+      "required": 1,
+      "weight": 20,
+      "description": "击败二楼护楼使"
+    },
+    {
+      "id": "see_lodge_truth",
+      "type": "puzzle",
+      "targetId": "lodge:seen",
+      "required": 1,
+      "weight": 15,
+      "description": "识破花弄影师承来路"
+    },
+    {
+      "id": "repel_hua",
+      "type": "kill",
+      "targetId": "sh_hua_wuying",
+      "required": 1,
+      "weight": 45,
+      "description": "顶楼赴约挫花弄影"
+    },
+    {
+      "id": "open_box_sh",
+      "type": "puzzle",
+      "targetId": "box_sh:opened",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "打开暗格锦盒寻得身法残页"
+    }
+  ],
+  "rewards": {
+    "experience": 1600,
+    "potential": 860,
+    "money": 540,
+    "items": {
+      "sanhua_yuzhuo": 1
+    }
+  }
+}

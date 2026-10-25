@@ -429,5 +429,24 @@
         "level": 20
       }
     }
+  },
+  "lingxu_bu": {
+    "name": "凌虚步",
+    "description": "魔门身法的旁支，凌虚而渡，敌未至身先至。",
+    "rarity": 3,
+    "type": "ADVANCED",
+    "category": "movement",
+    "school": "hidden",
+    "bonuses": {
+      "dodge_per_10_levels": 1,
+      "initiative_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "lingxu_page",
+      "prerequisite": {
+        "skill": "basic_qinggong",
+        "level": 20
+      }
+    }
   }
 }

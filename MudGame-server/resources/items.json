@@ -681,5 +681,38 @@
     "effects": {
       "learnSkill": "dongting_xinf"
     }
+  },
+  "sanhua_yuzhuo": {
+    "name": "散花玉镯",
+    "description": "散花楼主人的玉镯，镯身刻着细如发丝的天魔纹——戴上它，出手总比旁人快半分。",
+    "type": "equipment",
+    "subtype": "bracelet",
+    "stackable": false,
+    "sellable": true,
+    "value": 1700,
+    "rarity": 3,
+    "unit": "只",
+    "equipmentSlot": "RING",
+    "effects": {
+      "critRate": 2,
+      "dodge": 2
+    },
+    "source": "散花楼"
+  },
+  "lingxu_page": {
+    "name": "凌虚步残页",
+    "description": "录有凌虚步身法要诀的残页，步罡踏斗，飘忽若仙。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 3,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "lingxu_bu"
+    }
   }
 }
