@@ -28,5 +28,35 @@
       }
     },
     "repeatable": false
+  },
+  "salt_smuggling_case": {
+    "id": "salt_smuggling_case",
+    "name": "漕运疑云",
+    "description": "盐帮香主雷万钧怀疑有人打着盐帮旗号私卖官盐，请你去盐仓渡口搜查取证。",
+    "giverNpcId": "salt_hall_master",
+    "turnInNpcId": "salt_hall_master",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "found_smuggling_evidence",
+        "description": "在盐仓渡口搜索水匪私盐的凭据。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 120,
+      "potential": 80,
+      "money": 180,
+      "items": {
+        "smoke_powder": 1
+      },
+      "flags": {
+        "salt_smuggling_case_completed": true
+      },
+      "reputations": {
+        "salt_gang": 15
+      }
+    },
+    "repeatable": false
   }
 }

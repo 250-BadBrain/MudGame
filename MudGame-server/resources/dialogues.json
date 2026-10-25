@@ -201,5 +201,60 @@
     "title": "三关之约",
     "opening": "宋阀管事拱手：刀堂三关，木人试其功，石壁试其悟，心镜试其胆。过了三关，阀主亲自接你三刀。",
     "options": []
+  },
+  "dlg_salt_hall": {
+    "id": "dlg_salt_hall",
+    "npcId": "salt_hall_master",
+    "title": "盐帮香主",
+    "opening": "雷万钧把漕棍往货架上一顿：\"朋友面生，却是肯往南岸走的——盐帮喜欢这样的人。\"",
+    "options": [
+      {
+        "id": "ask_smuggling",
+        "text": "听说盐仓渡口夜里不太平？",
+        "response": "雷万钧冷笑：\"官盐私卖，走的还是盐帮的旗号——这口气咽不下去。你去盐仓渡口搜一遭，拿到凭据回来，盐帮记你一功。\"",
+        "startQuestId": "salt_smuggling_case",
+        "requires": {
+          "questId": "salt_smuggling_case",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "remind_smuggling",
+        "text": "渡口的凭据要怎么找？",
+        "response": "\"白日别硬闯。装作等船的客商，在盐垛间细细搜——鹞子帮的记号瞒不过有心人的眼睛。\"",
+        "requires": {
+          "questId": "salt_smuggling_case",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "turn_in_smuggling",
+        "text": "私盐的凭据我拿到了。",
+        "response": "雷万钧一掌拍在案上：\"好！船号记下，鹞子帮跑不了。这一包烟尘粉你收下——江湖路远，防身要紧。\"",
+        "completeQuestId": "salt_smuggling_case",
+        "requires": {
+          "questId": "salt_smuggling_case",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "ask_staff",
+        "text": "香主的棍法可能指点一二？",
+        "response": "\"水上讨生活的棍，劈要沉、拦要快。想学就站过来——盐帮的棍，不传外人，但你已经是半个自己人了。\"（请教即可开始学习）"
+      }
+    ]
+  },
+  "dlg_dock_foreman": {
+    "id": "dlg_dock_foreman",
+    "npcId": "dock_foreman",
+    "title": "码头把头",
+    "opening": "鲁大个上下打量你：\"肩宽手稳——能干活。码头上一趟活计六十息，工钱现结，干不干？\"",
+    "options": [
+      {
+        "id": "ask_dock",
+        "text": "码头上都运些什么？",
+        "response": "\"盐、粮、绢，南来北往什么都有。就是最近夜里总丢盐——把头我只管白天的事，剩下的你去问盐帮。\""
+      }
+    ]
   }
 }

@@ -235,7 +235,8 @@
       "exits": {
         "north": "ly_00",
         "south": "ly_outskirts",
-        "west": "ly_inn"
+        "west": "ly_inn",
+        "east": "ly_nan_market"
       }
     },
     "ly_outskirts": {
@@ -272,6 +273,124 @@
       "function": "dungeon_entry",
       "exits": {
         "north": "ly_outskirts"
+      }
+    },
+    "ly_nan_market": {
+      "name": "南市",
+      "description": "洛水南岸最热闹的集市，盐商绢贾比肩而列。新凿的码头石阶还带着白灰味，南来的漕船桅杆密得像一片旱林。",
+      "area": "南市",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "nan_market_peddler"
+      ],
+      "exits": {
+        "west": "ly_south_gate",
+        "south": "ly_dock",
+        "east": "ly_reed_marsh"
+      }
+    },
+    "ly_dock": {
+      "name": "漕运码头",
+      "description": "半里长的码头堆满盐包与粮袋，把头吆喝声压过号子。纤夫们赤着背拉拽漕船，缆绳在青石上磨出一道道深沟。",
+      "area": "洛水南岸",
+      "tags": [
+        "trade",
+        "work",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "work"
+      ],
+      "npcs": [
+        "dock_foreman"
+      ],
+      "exits": {
+        "north": "ly_nan_market",
+        "east": "ly_salt_wharf"
+      }
+    },
+    "ly_reed_marsh": {
+      "name": "芦苇滩",
+      "description": "洛水在此拐出一大片浅滩，芦苇长得比人高。滩涂里散着药农踩出的小径，偶有水鸟扑棱棱惊起——也可能不是水鸟。",
+      "area": "洛水南岸",
+      "tags": [
+        "wild",
+        "gather",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "actions": [
+        "gather"
+      ],
+      "npcs": [],
+      "exits": {
+        "west": "ly_nan_market",
+        "south": "ly_luonan_trail"
+      }
+    },
+    "ly_salt_wharf": {
+      "name": "盐仓渡口",
+      "description": "官家盐仓背河而立，仓墙高耸。夜里有黑影在盐垛间搬运，白日里却只有几个打盹的仓卒——和涨潮时才靠岸的无籍小船。",
+      "area": "洛水南岸",
+      "tags": [
+        "wild",
+        "unsafe",
+        "quest"
+      ],
+      "safeZone": false,
+      "actions": [
+        "search"
+      ],
+      "npcs": [
+        "luoshui_bandit",
+        "luoshui_bandit"
+      ],
+      "exits": {
+        "west": "ly_dock",
+        "south": "ly_salt_hall"
+      }
+    },
+    "ly_salt_hall": {
+      "name": "盐帮分舵",
+      "description": "临水的三进大院，门口泊着几条快船。盐帮的规矩：进院不问来路，出手便是朋友——但账，从来算得比谁都清。",
+      "area": "洛水南岸",
+      "tags": [
+        "faction",
+        "training",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "salt_hall_master",
+        "salt_disciple"
+      ],
+      "exits": {
+        "north": "ly_salt_wharf"
+      }
+    },
+    "ly_luonan_trail": {
+      "name": "洛南林道",
+      "description": "通往伊阙的古道穿林而过，道旁残碑上刻着前朝的功德文。林深处的鸟鸣忽然停了——这条路，最近不太平。",
+      "area": "洛水南岸",
+      "tags": [
+        "wild",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "npcs": [
+        "road_bandit"
+      ],
+      "exits": {
+        "north": "ly_reed_marsh"
       }
     }
   }

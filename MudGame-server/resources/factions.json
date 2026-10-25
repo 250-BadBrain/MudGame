@@ -130,5 +130,13 @@
     "category": "merchant",
     "visible": false,
     "order": 1001
+  },
+  "salt_gang": {
+    "id": "salt_gang",
+    "name": "盐帮",
+    "description": "把持漕运与盐路的江南大帮，讲规矩、记恩仇，棍法在水上称雄。",
+    "category": "local",
+    "visible": true,
+    "order": 1002
   }
 }

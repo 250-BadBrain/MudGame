@@ -325,5 +325,17 @@
     "effects": {
       "learnSkill": "tiandao_blade"
     }
+  },
+  "herb": {
+    "name": "止血草",
+    "description": "洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。",
+    "type": "material",
+    "subtype": "herb",
+    "stackable": true,
+    "sellable": true,
+    "value": 15,
+    "rarity": 1,
+    "unit": "株",
+    "source": "芦苇滩采集"
   }
 }

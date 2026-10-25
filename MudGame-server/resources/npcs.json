@@ -752,6 +752,9 @@
         "charm": 0,
         "seal": 0
       }
+    },
+    "skills": {
+      "basic_hidden_weapon": 240
     }
   },
   "black_market_broker": {
@@ -4053,6 +4056,343 @@
       "attack": -12,
       "hitRate": -18,
       "defense": -6
+    }
+  },
+  "salt_hall_master": {
+    "name": "雷万钧",
+    "title": "盐帮香主",
+    "description": "盐帮洛阳分舵的香主，掌舵出身的粗壮汉子，一双铁掌磨满了缆绳勒出的旧茧，棍法在漕帮里排得进前三。",
+    "faction": "salt_gang",
+    "role": "teacher",
+    "importance": "local",
+    "dialogueId": "dlg_salt_hall",
+    "skills": {
+      "basic_staff": 240,
+      "basic_parry": 180
+    },
+    "attributes": {
+      "level": 18,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 22,
+        "agility": 18,
+        "perception": 14,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 260,
+        "maxHp": 260,
+        "mp": 80,
+        "trainedMaxMp": 80,
+        "maxMp": 80,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 34,
+        "defense": 20,
+        "hitRate": 104,
+        "dodge": 82,
+        "parry": 88,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 78,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "salt_disciple": {
+    "name": "盐帮弟子",
+    "title": "分舵伙计",
+    "description": "赤脚短打的盐帮弟子，正把一捆捆漕棍码上货架，见人进门便抱拳。",
+    "faction": "salt_gang",
+    "role": "guard",
+    "importance": "common",
+    "nonCombat": true,
+    "attributes": {
+      "level": 8,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 12,
+        "agility": 12,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 80,
+        "maxHp": 80,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 10,
+        "hitRate": 70,
+        "dodge": 50,
+        "parry": 55,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 55,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "dock_foreman": {
+    "name": "鲁大个",
+    "title": "码头把头",
+    "description": "漕运码头的把头，嗓门能压过号子声，手里的点货签敲得竹签乱跳。肯出力气就有你的饭。",
+    "faction": "heluo_merchant_guild",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_dock_foreman",
+    "attributes": {
+      "level": 12,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 16,
+        "agility": 12,
+        "perception": 10,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 50,
+        "trainedMaxMp": 50,
+        "maxMp": 50,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 16,
+        "defense": 12,
+        "hitRate": 78,
+        "dodge": 55,
+        "parry": 60,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 55,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "luoshui_bandit": {
+    "name": "洛水水匪",
+    "title": "鹞子帮",
+    "description": "船帮上刻着鹞子记号的水匪，白日装作脚夫，夜里劫漕船。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "attributes": {
+      "level": 11,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 16,
+        "constitution": 15,
+        "agility": 15,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 150,
+        "maxHp": 150,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 26,
+        "defense": 13,
+        "hitRate": 96,
+        "dodge": 70,
+        "parry": 66,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 66,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "nan_market_peddler": {
+    "name": "陈货郎",
+    "title": "南市杂货",
+    "description": "挑着担子走南闯北的货郎，担子里针头线脑、跌打药、烟尘粉应有尽有。",
+    "faction": "west_market",
+    "role": "shopkeeper",
+    "importance": "common",
+    "shopItems": [
+      "dry_ration",
+      "simple_medicine",
+      "smoke_powder"
+    ],
+    "attributes": {
+      "level": 6,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 10,
+        "constitution": 10,
+        "agility": 12,
+        "perception": 12,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 70,
+        "maxHp": 70,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 8,
+        "defense": 8,
+        "hitRate": 60,
+        "dodge": 45,
+        "parry": 40,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
     }
   }
 }

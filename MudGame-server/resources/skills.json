@@ -128,5 +128,31 @@
     "requirements": {
       "item": "tiandao_page"
     }
+  },
+  "basic_staff": {
+    "id": "basic_staff",
+    "name": "基本棍法",
+    "description": "劈、扫、拦、拿的基本棍路，攻守兼备，盐帮漕工在水上讨生活练出来的功夫。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "attack_per_10_levels": 1,
+      "parry_per_10_levels": 1
+    }
+  },
+  "basic_hidden_weapon": {
+    "id": "basic_hidden_weapon",
+    "name": "基本暗器",
+    "description": "掷镖发箭的准头与巧劲，密探与刺客吃饭的本事。",
+    "rarity": 1,
+    "type": "BASIC",
+    "category": "weapon",
+    "school": "common",
+    "bonuses": {
+      "hit_rate_per_10_levels": 1,
+      "crit_rate_per_10_levels": 1
+    }
   }
 }

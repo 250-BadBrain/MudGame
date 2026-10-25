@@ -1003,6 +1003,11 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
 	}
+	// 剧情调查点：按房间脚本化（一次性旗标，供任务目标使用）
+	if room.ID == "ly_salt_wharf" && !p.Flags["found_smuggling_evidence"] {
+		p.Flags["found_smuggling_evidence"] = true
+		return "你伏在盐垛后看了半晌：几条黑影正把官盐搬上无籍小船，船帮上刻着一只歪歪扭扭的鹞子——是水匪的记号。你默默记下了船号。", nil
+	}
 	return "你仔细搜索四周，没有发现值得带走的东西。", nil
 }
 
@@ -1014,6 +1019,10 @@ func roomRumor(roomID string) string {
 		return "西市掮客神秘兮兮地说，惊雁宫重见天日的消息已经传开，有人正重金打探《战神图录》的下落。"
 	case "ly_inn":
 		return "说书人醒木一拍，正讲到一只来历不明的战国铜匣，满堂酒客都屏住了呼吸。"
+	case "ly_nan_market":
+		return "南市布庄的伙计压低嗓子：前几日有位白衣女子来买素帕，付账的银子边缘竟微微发乌——账房先生收了银子，转头就点了三炷香。"
+	case "ly_dock":
+		return "码头脚夫们都在议论江淮战事——听说竟陵城头一架大弩，一箭钉穿了敌将的将旗。"
 	default:
 		return "你驻足听了一阵，只听见市井喧嚣里夹着几句真假难辨的江湖传闻。"
 	}
@@ -1484,9 +1493,18 @@ func (r *RuntimeManager) settleWorldLaborNoLock(p *model.Player, result *model.C
 		p.Attributes.Potential += 6
 		itemID := "dry_ration"
 		itemName := "干粮"
-		if rand.Intn(100) < 60 {
-			itemID = "bronze_fragment"
-			itemName = "古铜残片"
+		// 采集收益按房间区分（见收益与经济设计 1.1）：默认城郊=古铜残片，芦苇滩=止血草
+		switch roomID {
+		case "ly_reed_marsh":
+			if rand.Intn(100) < 60 {
+				itemID = "herb"
+				itemName = "止血草"
+			}
+		default:
+			if rand.Intn(100) < 60 {
+				itemID = "bronze_fragment"
+				itemName = "古铜残片"
+			}
 		}
 		if p.Backpack == nil {
 			p.Backpack = map[string]int{}
