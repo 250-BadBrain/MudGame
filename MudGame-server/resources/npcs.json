@@ -4394,5 +4394,332 @@
         "seal": 0
       }
     }
+  },
+  "west_gate_guard": {
+    "name": "西门城卒",
+    "title": "瓮城当值",
+    "description": "倚着长戟打盹的城卒，路引盖戳的手法却快得像本能。",
+    "faction": "luoyang_office",
+    "role": "guard",
+    "importance": "common",
+    "attributes": {
+      "level": 8,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 13,
+        "constitution": 13,
+        "agility": 11,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 85,
+        "maxHp": 85,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 12,
+        "defense": 11,
+        "hitRate": 72,
+        "dodge": 50,
+        "parry": 55,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 52,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "road_raider": {
+    "name": "官道劫匪",
+    "title": "崤函马贼",
+    "description": "盘踞函谷古道的马贼，专挑落单的行商下手，得手便钻进崖畔的荒径。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "attributes": {
+      "level": 13,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 17,
+        "constitution": 16,
+        "agility": 16,
+        "perception": 11,
+        "willpower": 11,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 170,
+        "maxHp": 170,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 28,
+        "defense": 14,
+        "hitRate": 99,
+        "dodge": 74,
+        "parry": 68,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 68,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "station_master_luo": {
+    "name": "老骆",
+    "title": "桃林驿丞",
+    "description": "在桃林驿站熬了三十年茶的老驿丞，谁的卦都算不准，谁的消息都记得住。",
+    "faction": "luoyang_office",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_station_luo",
+    "attributes": {
+      "level": 10,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 11,
+        "constitution": 12,
+        "agility": 11,
+        "perception": 14,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 95,
+        "maxHp": 95,
+        "mp": 45,
+        "trainedMaxMp": 45,
+        "maxMp": 45,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 65,
+        "dodge": 48,
+        "parry": 45,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "beacon_deserter": {
+    "name": "掉队的戍卒",
+    "title": "禁沟残兵",
+    "description": "甲胄残破的戍卒躲在烽燧阴影里，眼神像受惊的野兽——他既不敢点燧，也不敢回关。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 17,
+        "agility": 14,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 190,
+        "maxHp": 190,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 30,
+        "defense": 15,
+        "hitRate": 98,
+        "dodge": 66,
+        "parry": 72,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 64,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "tongguan_officer": {
+    "name": "赵关山",
+    "title": "潼关校尉",
+    "description": "潼关守口的校尉，半边脸上有道旧箭疤。他核路引时只看你一眼：\"西边来的？那正好，有件事问你。\"",
+    "faction": "luoyang_military",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_tongguan_officer",
+    "attributes": {
+      "level": 20,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 24,
+        "constitution": 23,
+        "agility": 19,
+        "perception": 14,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 280,
+        "maxHp": 280,
+        "mp": 90,
+        "trainedMaxMp": 90,
+        "maxMp": 90,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 36,
+        "defense": 20,
+        "hitRate": 106,
+        "dodge": 80,
+        "parry": 88,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
   }
 }

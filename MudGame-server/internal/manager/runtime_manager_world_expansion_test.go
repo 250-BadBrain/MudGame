@@ -83,3 +83,32 @@ func TestSaltWharfSearchSetsEvidenceFlag(t *testing.T) {
 		t.Fatal("repeat search should not replay the evidence event")
 	}
 }
+
+// 禁沟烽燧搜索：一次性断讯凭据旗标（烽燧疑警任务目标）
+func TestBeaconSearchSetsSignalFlag(t *testing.T) {
+	r := NewRuntimeManager(t.TempDir())
+	t.Cleanup(func() { _ = r.Close() })
+	if err := r.Register("scout", "pass123"); err != nil {
+		t.Fatalf("register failed: %v", err)
+	}
+	playerID, err := r.CreateCharacter("scout", "斥候客", 16, 16, 16, 16, 16)
+	if err != nil {
+		t.Fatalf("create character failed: %v", err)
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].RoomID = "tg_jingou_beacon"
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+
+	if _, err := r.DoRoomAction(playerID, "search"); err != nil {
+		t.Fatalf("search failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	if !after[playerID].Flags["found_beacon_signal"] {
+		t.Fatal("expected found_beacon_signal flag")
+	}
+}

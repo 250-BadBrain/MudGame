@@ -191,7 +191,8 @@
       "exits": {
         "east": "ly_00",
         "north": "ly_old_alley",
-        "south": "ly_inn"
+        "south": "ly_inn",
+        "west": "ly_west_gate"
       }
     },
     "ly_inn": {
@@ -391,6 +392,100 @@
       ],
       "exits": {
         "north": "ly_reed_marsh"
+      }
+    },
+    "ly_west_gate": {
+      "name": "洛阳西门",
+      "description": "西门瓮城比南门更深，出城的官道笔直向西，尽头隐在崤山褶皱里。城卒核过路引，抬了抬下巴：\"函谷道窄，结伴而行。\"",
+      "area": "西城",
+      "tags": [
+        "gate",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "west_gate_guard"
+      ],
+      "exits": {
+        "east": "ly_west_market",
+        "west": "tg_guandao"
+      }
+    },
+    "tg_guandao": {
+      "name": "函谷古道",
+      "description": "崤函古道在绝壁间挤出一线，车辙深得能卧进一条狗。头顶崖畔的荒草里，偶尔有秃鹫盘旋——它们等的从来不是好东西。",
+      "area": "西行官道",
+      "tags": [
+        "wild",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "npcs": [
+        "road_raider",
+        "road_raider"
+      ],
+      "exits": {
+        "east": "ly_west_gate",
+        "west": "tg_taolin_station"
+      }
+    },
+    "tg_taolin_station": {
+      "name": "桃林驿站",
+      "description": "官道旁的老驿站，桃树老得皮都裂了，茶却熬得酽。南来北往的消息在这里换马，也换价钱。",
+      "area": "西行官道",
+      "tags": [
+        "inn",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "station_master_luo"
+      ],
+      "exits": {
+        "east": "tg_guandao",
+        "north": "tg_jingou_beacon",
+        "west": "tg_tongguan_foot"
+      }
+    },
+    "tg_jingou_beacon": {
+      "name": "禁沟烽燧",
+      "description": "深沟旁的残烽燧，夯土塌了半边。按军制这里该夜夜举火报平安，可燧上的黑烟已经断了好些天。",
+      "area": "西行官道",
+      "tags": [
+        "wild",
+        "unsafe",
+        "quest"
+      ],
+      "safeZone": false,
+      "actions": [
+        "search"
+      ],
+      "npcs": [
+        "beacon_deserter"
+      ],
+      "exits": {
+        "south": "tg_taolin_station"
+      }
+    },
+    "tg_tongguan_foot": {
+      "name": "潼关城下",
+      "description": "雄关压着黄河与南山之间的窄口，关墙高得遮住半边天。关门只开一线，出入的商旅排成长蛇——关楼上的旗，比洛阳城里任何一面都旧，也比任何一面都硬。",
+      "area": "潼关",
+      "tags": [
+        "military",
+        "quest",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "tongguan_officer"
+      ],
+      "exits": {
+        "east": "tg_taolin_station"
       }
     }
   }

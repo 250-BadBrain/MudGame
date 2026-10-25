@@ -58,5 +58,35 @@
       }
     },
     "repeatable": false
+  },
+  "beacon_signal_case": {
+    "id": "beacon_signal_case",
+    "name": "烽燧疑警",
+    "description": "潼关校尉赵关山不信禁沟烽燧断讯是戍卒怠惰，请你去燧上查清缘由。",
+    "giverNpcId": "tongguan_officer",
+    "turnInNpcId": "tongguan_officer",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "found_beacon_signal",
+        "description": "在禁沟烽燧搜索断讯的凭据。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 150,
+      "potential": 100,
+      "money": 200,
+      "items": {
+        "simple_medicine": 2
+      },
+      "flags": {
+        "beacon_signal_case_completed": true
+      },
+      "reputations": {
+        "luoyang_military": 15
+      }
+    },
+    "repeatable": false
   }
 }

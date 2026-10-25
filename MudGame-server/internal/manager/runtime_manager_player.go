@@ -1008,6 +1008,10 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 		p.Flags["found_smuggling_evidence"] = true
 		return "你伏在盐垛后看了半晌：几条黑影正把官盐搬上无籍小船，船帮上刻着一只歪歪扭扭的鹞子——是水匪的记号。你默默记下了船号。", nil
 	}
+	if room.ID == "tg_jingou_beacon" && !p.Flags["found_beacon_signal"] {
+		p.Flags["found_beacon_signal"] = true
+		return "你攀上残破的烽燧：燧台积灰下压着半燃的火薪，柴堆摆得整整齐齐却始终没有点起——不是断讯，是有人不许点。你在灰里捡到一枚扯掉的号牌。", nil
+	}
 	return "你仔细搜索四周，没有发现值得带走的东西。", nil
 }
 
@@ -1023,6 +1027,8 @@ func roomRumor(roomID string) string {
 		return "南市布庄的伙计压低嗓子：前几日有位白衣女子来买素帕，付账的银子边缘竟微微发乌——账房先生收了银子，转头就点了三炷香。"
 	case "ly_dock":
 		return "码头脚夫们都在议论江淮战事——听说竟陵城头一架大弩，一箭钉穿了敌将的将旗。"
+	case "tg_taolin_station":
+		return "驿丞给往来的客商斟茶：长安来的邸报说，唐国公府最近车马进出得勤——改元也好、变天也罢，咱们小驿站只管把火把备足。"
 	default:
 		return "你驻足听了一阵，只听见市井喧嚣里夹着几句真假难辨的江湖传闻。"
 	}

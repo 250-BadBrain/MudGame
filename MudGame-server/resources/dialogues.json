@@ -256,5 +256,60 @@
         "response": "\"盐、粮、绢，南来北往什么都有。就是最近夜里总丢盐——把头我只管白天的事，剩下的你去问盐帮。\""
       }
     ]
+  },
+  "dlg_station_luo": {
+    "id": "dlg_station_luo",
+    "npcId": "station_master_luo",
+    "title": "桃林驿丞",
+    "opening": "老骆把茶碗推过来：\"客官打西边来还是往西边去？往西的话，听老头子一句——别走夜路，尤其别在禁沟那片绕。\"",
+    "options": [
+      {
+        "id": "ask_beacon",
+        "text": "禁沟的烽燧怎么了？",
+        "response": "\"按军制，那燧该夜夜举火。断了这些天，关上居然没派人查——茶是热的，事是怪的，客官自己掂量。\""
+      },
+      {
+        "id": "ask_west",
+        "text": "过了潼关是什么光景？",
+        "response": "\"关中大户的门墙一个比一个高，长安的邸报一天一个说法。咱们做驿站的，只认马和火把，别的不敢多嘴。\""
+      }
+    ]
+  },
+  "dlg_tongguan_officer": {
+    "id": "dlg_tongguan_officer",
+    "npcId": "tongguan_officer",
+    "title": "潼关校尉",
+    "opening": "赵关山按着刀柄扫你一眼：\"路引干净，人像个人。会走路的人，我这里正缺一个。\"",
+    "options": [
+      {
+        "id": "ask_beacon_task",
+        "text": "校尉说的可是禁沟烽燧？",
+        "response": "赵关山压低声音：\"禁沟的燧断了小半月，上头只当是戍卒怠惰——我不信。你去燧上搜一遭，把断讯的缘由带回来，军府记你一功。\"",
+        "startQuestId": "beacon_signal_case",
+        "requires": {
+          "questId": "beacon_signal_case",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "remind_beacon_task",
+        "text": "燧上要查些什么？",
+        "response": "\"火薪、号牌、脚印——凡是该在而不在、不该在而在的，都算数。北边驿道岔口进去就是。\"",
+        "requires": {
+          "questId": "beacon_signal_case",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "turn_in_beacon_task",
+        "text": "断讯的缘由我查到了。",
+        "response": "赵关山捏着那枚号牌看了半晌，冷笑一声：\"扯自己人的号牌，压自己人的火——好啊。这份情军府记下，两瓶金创药拿着，西道走勤些。\"",
+        "completeQuestId": "beacon_signal_case",
+        "requires": {
+          "questId": "beacon_signal_case",
+          "questStatus": "active"
+        }
+      }
+    ]
   }
 }
