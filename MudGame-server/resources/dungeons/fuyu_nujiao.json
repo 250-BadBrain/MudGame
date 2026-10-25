@@ -8,7 +8,8 @@
   "chapter": 1,
   "spawnRoomId": "dock_00",
   "puzzleInitialStates": {
-    "briefing": "new"
+    "briefing": "new",
+    "arsenal": "untouched"
   },
   "puzzleActions": {
     "listen_sentinel": {
@@ -24,6 +25,22 @@
       "dialogueNpcId": "nj_sentinel",
       "message": "哨兵把水寨的布防与敌情交待清楚。",
       "repeatMessage": "哨兵抱拳：\"少侠快去，聚义厅怕是撑不住了。\""
+    },
+    "search_arsenal": {
+      "label": "搜检武库",
+      "puzzleId": "arsenal",
+      "rooms": [
+        "dock_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "聚义庭武库的暗格里压着一页发黄功谱——怒蛟帮先辈抄录的守御法门《铁壁功》。",
+      "repeatMessage": "武库已被你翻遍，暗格空空。",
+      "giveItems": {
+        "tiebi_page": 1
+      }
     }
   },
   "rooms": {
@@ -101,6 +118,9 @@
         "nj_daoshou",
         "nj_daoshou",
         "nj_wounded"
+      ],
+      "actions": [
+        "search_arsenal"
       ]
     },
     "dock_04": {
@@ -156,6 +176,15 @@
       "required": 1,
       "weight": 30,
       "description": "击退方夜羽，保住怒蛟帮总舵。"
+    },
+    {
+      "id": "search_arsenal",
+      "type": "puzzle",
+      "targetId": "arsenal:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜检武库，寻得守御功法"
     }
   ],
   "rewards": {

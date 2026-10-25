@@ -296,5 +296,62 @@
         "level": 30
       }
     }
+  },
+  "talang_jue": {
+    "name": "踏浪诀",
+    "description": "前朝游侠传下的轻身功法，讲究踏浪不惊、起身先至。",
+    "rarity": 3,
+    "type": "ADVANCED",
+    "category": "movement",
+    "school": "hidden",
+    "bonuses": {
+      "dodge_per_10_levels": 1,
+      "initiative_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "talang_page",
+      "prerequisite": {
+        "skill": "basic_qinggong",
+        "level": 20
+      }
+    }
+  },
+  "fuhu_jin": {
+    "name": "伏虎劲",
+    "description": "拳罡如伏虎踞涧，出手沉雄，气血随劲鼓荡。",
+    "rarity": 3,
+    "type": "ADVANCED",
+    "category": "unarmed",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 1,
+      "max_hp_per_level": 6
+    },
+    "requirements": {
+      "item": "fuhu_page",
+      "prerequisite": {
+        "skill": "basic_unarmed",
+        "level": 20
+      }
+    }
+  },
+  "tiebi_gong": {
+    "name": "铁壁功",
+    "description": "怒蛟帮镇帮守御之功，格挡如铁壁，守中带削。",
+    "rarity": 3,
+    "type": "ADVANCED",
+    "category": "defense",
+    "school": "hidden",
+    "bonuses": {
+      "parry_per_10_levels": 2,
+      "defense_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "tiebi_page",
+      "prerequisite": {
+        "skill": "basic_parry",
+        "level": 20
+      }
+    }
   }
 }

@@ -487,5 +487,19 @@
     "title": "马师求援",
     "opening": "老马师抖着嘴唇：\"天马厩的马全惊了！没有哨声压不住，可刺客就在马厩外转悠——壮士行行好……\"",
     "options": []
+  },
+  "dlg_ca_tea": {
+    "id": "dlg_ca_tea",
+    "npcId": "ca_tea_master",
+    "title": "西市茶闻",
+    "opening": "茶博士压着嗓子：\"客官面上有风尘气——和春亭那位仙子今夜见客，指名要见江湖上敢管闲事的年轻人。\"",
+    "options": []
+  },
+  "dlg_ca_shi": {
+    "id": "dlg_ca_shi",
+    "npcId": "ca_shi_feixuan",
+    "title": "仙子问禅",
+    "opening": "师妃暄微微颔首：\"施主远来。今夜长安的月亮，怕是不会太平了。\"",
+    "options": []
   }
 }

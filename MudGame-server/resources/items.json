@@ -404,5 +404,69 @@
     "effects": {
       "learnSkill": "tianmo_ce"
     }
+  },
+  "talang_page": {
+    "name": "踏浪诀残页",
+    "description": "录有踏浪诀轻身篇的残页，边角被江水浸得发皱。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 3,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "talang_jue"
+    }
+  },
+  "fuhu_page": {
+    "name": "伏虎劲残页",
+    "description": "蒙面刺客贴身收藏的拳劲法门，纸页染着旧血。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 3,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "fuhu_jin"
+    }
+  },
+  "tiebi_page": {
+    "name": "铁壁功残页",
+    "description": "怒蛟帮武库封存的守御功法残页。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 3,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "tiebi_gong"
+    }
+  },
+  "xiaohuandan": {
+    "name": "小还丹",
+    "description": "慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。",
+    "type": "medicine",
+    "subtype": "pill",
+    "stackable": true,
+    "sellable": true,
+    "value": 500,
+    "rarity": 3,
+    "unit": "粒",
+    "source": "长安风云",
+    "usable": true,
+    "effects": {
+      "recoverHp": 100
+    }
   }
 }

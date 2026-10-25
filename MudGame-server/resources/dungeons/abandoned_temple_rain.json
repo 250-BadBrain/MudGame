@@ -31,6 +31,15 @@
       "required": 1,
       "weight": 35,
       "description": "击败蒙面刺客，夺回染血密信。"
+    },
+    {
+      "id": "search_body",
+      "type": "puzzle",
+      "targetId": "relic_hm:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "翻检刺客遗物，寻得拳劲法门"
     }
   ],
   "rewards": {
@@ -54,11 +63,15 @@
       },
       "exitRequirements": {
         "north": {
-          "defeatNpcs": ["temple_bandit"],
+          "defeatNpcs": [
+            "temple_bandit"
+          ],
           "message": "流寇堵住大殿入口，挥刀将你逼回雨中。"
         }
       },
-      "npcs": ["temple_bandit"]
+      "npcs": [
+        "temple_bandit"
+      ]
     },
     "temple_01": {
       "name": "无相殿",
@@ -69,11 +82,16 @@
       },
       "exitRequirements": {
         "north": {
-          "defeatNpcs": ["temple_bandit"],
+          "defeatNpcs": [
+            "temple_bandit"
+          ],
           "message": "两名流寇死守通往后院的窄门。"
         }
       },
-      "npcs": ["temple_bandit", "temple_bandit"]
+      "npcs": [
+        "temple_bandit",
+        "temple_bandit"
+      ]
     },
     "temple_02": {
       "name": "后院雨廊",
@@ -81,7 +99,33 @@
       "exits": {
         "south": "temple_01"
       },
-      "npcs": ["temple_assassin"]
+      "npcs": [
+        "temple_assassin"
+      ],
+      "actions": [
+        "search_body"
+      ]
+    }
+  },
+  "puzzleInitialStates": {
+    "relic_hm": "untouched"
+  },
+  "puzzleActions": {
+    "search_body": {
+      "label": "翻检刺客遗物",
+      "puzzleId": "relic_hm",
+      "rooms": [
+        "temple_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你细看蒙面刺客的遗物：贴胸藏着一页染血功谱，伏虎门的拳劲法门《伏虎劲》——他原是伏虎门中人。",
+      "repeatMessage": "刺客的遗物已被你翻检一空。",
+      "giveItems": {
+        "fuhu_page": 1
+      }
     }
   }
 }

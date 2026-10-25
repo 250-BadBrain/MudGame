@@ -1,0 +1,189 @@
+{
+  "id": "datang_changan",
+  "name": "长安风云",
+  "description": "和氏璧入京，长安城暗流涌动。阴癸派元老边不负携天魔功入城夺璧，慈航静斋师妃暄广邀江湖同道。你受茶博士引荐，穿过死士的封锁线，在禅音中助仙子逐走这位笑面元老。",
+  "order": 12,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 6,
+  "spawnRoomId": "ca_00",
+  "puzzleInitialStates": {
+    "chan": "unheard",
+    "gift": "unoffered"
+  },
+  "puzzleActions": {
+    "listen_tea": {
+      "label": "听茶博士递话",
+      "puzzleId": "chan",
+      "rooms": [
+        "ca_00"
+      ],
+      "fromStates": [
+        "unheard"
+      ],
+      "nextState": "invited",
+      "message": "茶博士把和春亭的邀约递到了你耳中。",
+      "repeatMessage": "茶博士朝东指了指：和春亭。",
+      "dialogueNpcId": "ca_tea_master"
+    },
+    "hear_chan": {
+      "label": "凝神听禅",
+      "puzzleId": "chan",
+      "rooms": [
+        "ca_03"
+      ],
+      "fromStates": [
+        "invited"
+      ],
+      "nextState": "purified",
+      "setFlags": {
+        "chan_purified": true
+      },
+      "message": "师妃暄的禅音不疾不徐，你心湖澄明。她说：边不负的天魔功最忌心魔——今夜他的杀招越重，破绽越多。",
+      "repeatMessage": "禅音仍在你耳畔回响。",
+      "dialogueNpcId": "ca_shi_feixuan"
+    },
+    "accept_gift": {
+      "label": "受仙子赠丹",
+      "puzzleId": "gift",
+      "rooms": [
+        "ca_04"
+      ],
+      "fromStates": [
+        "unoffered"
+      ],
+      "nextState": "accepted",
+      "requiredDefeatNpcs": [
+        "ca_bian_bufu"
+      ],
+      "failureMessage": "师妃暄正与边不负对峙，无暇他顾——先逐走此人再说。",
+      "message": "师妃暄双手奉上玉瓶：\"小还丹两粒，谢施主今夜仗义。他日江湖相见，愿施主此心不改。\"",
+      "repeatMessage": "玉瓶已在你怀中。",
+      "giveItems": {
+        "xiaohuandan": 2
+      }
+    }
+  },
+  "rooms": {
+    "ca_00": {
+      "name": "长安西市",
+      "description": "夜市灯火通明，人声却比往日稀落。茶博士的茶棚里坐着几个不敢回家的行商——满城都在等今夜。",
+      "exits": {
+        "east": "ca_01"
+      },
+      "npcs": [
+        "ca_tea_master"
+      ],
+      "actions": [
+        "listen_tea"
+      ]
+    },
+    "ca_01": {
+      "name": "天街",
+      "description": "朱雀天街宽可并行九驾马车，此刻街心只有几道鬼魅般的黑影——服过秘药的死士，眼珠红得像灯芯。",
+      "exits": {
+        "west": "ca_00",
+        "east": "ca_02"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": [
+            "ca_yinkui_guard"
+          ],
+          "message": "阴葵死士锁死天街，红瞳在暗处死死盯人。"
+        }
+      },
+      "npcs": [
+        "ca_yinkui_guard",
+        "ca_yinkui_guard"
+      ]
+    },
+    "ca_02": {
+      "name": "东市坊巷",
+      "description": "坊巷九曲，灯笼在风里乱晃。死士们的脚步声在巷子里回荡，像是在守什么，又像是在等什么。",
+      "exits": {
+        "west": "ca_01",
+        "east": "ca_03"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": [
+            "ca_yinkui_guard"
+          ],
+          "message": "坊巷死士尚未清空，闯过去就是送死。"
+        }
+      },
+      "npcs": [
+        "ca_yinkui_guard",
+        "ca_yinkui_guard"
+      ]
+    },
+    "ca_03": {
+      "name": "和春亭",
+      "description": "曲江池畔的和春亭四面垂帘，帘内一盏青灯——素白道袍的仙子端坐灯下，剑横于膝，殿外风声都放轻了。",
+      "exits": {
+        "west": "ca_02",
+        "east": "ca_04"
+      },
+      "npcs": [
+        "ca_shi_feixuan"
+      ],
+      "actions": [
+        "hear_chan"
+      ]
+    },
+    "ca_04": {
+      "name": "慈航别院",
+      "description": "别院月门洞开，边不负一袭紫袍立于庭中，笑面如佛，掌下阴风阵阵——和氏璧匣就在他身后的案上。",
+      "exits": {
+        "west": "ca_03"
+      },
+      "npcs": [
+        "ca_bian_bufu"
+      ],
+      "actions": [
+        "accept_gift"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_guards",
+      "type": "kill",
+      "targetId": "ca_yinkui_guard",
+      "required": 4,
+      "weight": 30,
+      "description": "清除天街与坊巷死士"
+    },
+    {
+      "id": "hear_chan",
+      "type": "puzzle",
+      "targetId": "chan:purified",
+      "required": 1,
+      "weight": 15,
+      "description": "听师妃暄诵净心禅音"
+    },
+    {
+      "id": "repel_bian",
+      "type": "kill",
+      "targetId": "ca_bian_bufu",
+      "required": 1,
+      "weight": 55,
+      "description": "助仙子逐走边不负"
+    },
+    {
+      "id": "accept_gift",
+      "type": "puzzle",
+      "targetId": "gift:accepted",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "受仙子赠丹为谢"
+    }
+  ],
+  "rewards": {
+    "experience": 1180,
+    "potential": 720,
+    "money": 420
+  }
+}

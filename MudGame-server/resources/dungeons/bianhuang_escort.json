@@ -8,77 +8,182 @@
   "chapter": 1,
   "spawnRoomId": "wild_00",
   "puzzleInitialStates": {
-    "briefing": "new"
+    "briefing": "new",
+    "relic_bh": "untouched"
   },
   "puzzleActions": {
     "listen_qianqian": {
       "label": "听纪千千交托行程",
       "puzzleId": "briefing",
-      "rooms": ["wild_00"],
-      "fromStates": ["new"],
+      "rooms": [
+        "wild_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
       "nextState": "told",
       "dialogueNpcId": "bh_ji_qianqian",
       "message": "纪千千把南下的行程与燕军的布防一一说明。",
       "repeatMessage": "纪千千轻声道：\"前路凶险，一切拜托了。\""
+    },
+    "search_rooms": {
+      "label": "搜厢房寻书",
+      "puzzleId": "relic_bh",
+      "rooms": [
+        "wild_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "破败驿站的厢房里积灰三寸，炕洞中藏着一卷油布包——前朝游侠留下的轻身功法《踏浪诀》。",
+      "repeatMessage": "厢房已被你搜遍，再无他物。",
+      "giveItems": {
+        "talang_page": 1
+      }
     }
   },
   "rooms": {
     "wild_00": {
       "name": "边荒集北门",
       "description": "北门吊桥刚落，纪千千一袭素衣立在车门旁，几名荒集剑手正在检查刀兵。北方官道尽头隐见烟尘。",
-      "exits": {"north": "wild_01"},
-      "actions": ["listen_qianqian"],
-      "npcs": ["bh_ji_qianqian", "bh_swordsman"]
+      "exits": {
+        "north": "wild_01"
+      },
+      "actions": [
+        "listen_qianqian"
+      ],
+      "npcs": [
+        "bh_ji_qianqian",
+        "bh_swordsman"
+      ]
     },
     "wild_01": {
       "name": "官道荒林",
       "description": "官道穿林而过，林中惊鸟四散。两名燕军游骑放马截住去路，弯刀在月下泛着冷光。",
-      "exits": {"south": "wild_00", "north": "wild_02"},
+      "exits": {
+        "south": "wild_00",
+        "north": "wild_02"
+      },
       "exitRequirements": {
         "north": {
-          "defeatNpcs": ["bh_rider"],
+          "defeatNpcs": [
+            "bh_rider"
+          ],
           "message": "燕军游骑往来驰突，封住了官道。"
         }
       },
-      "npcs": ["bh_rider", "bh_rider"]
+      "npcs": [
+        "bh_rider",
+        "bh_rider"
+      ]
     },
     "wild_02": {
       "name": "破败驿站",
       "description": "驿站早已烧成断壁，三名燕军弓手据着残墙，箭簇直指官道来路。",
-      "exits": {"south": "wild_01", "north": "wild_03"},
+      "exits": {
+        "south": "wild_01",
+        "north": "wild_03"
+      },
       "exitRequirements": {
         "north": {
-          "defeatNpcs": ["bh_archer"],
+          "defeatNpcs": [
+            "bh_archer"
+          ],
           "message": "残墙后箭如飞蝗，弓手不除，谁也过不去。"
         }
       },
-      "npcs": ["bh_archer", "bh_archer", "bh_archer"]
+      "npcs": [
+        "bh_archer",
+        "bh_archer",
+        "bh_archer"
+      ],
+      "actions": [
+        "search_rooms"
+      ]
     },
     "wild_03": {
       "name": "断魂石桥",
       "description": "石桥横跨深涧，燕军骑督勒马桥心，身后两名游骑往来巡弋，桥面血迹未干。",
-      "exits": {"south": "wild_02", "north": "wild_04"},
+      "exits": {
+        "south": "wild_02",
+        "north": "wild_04"
+      },
       "exitRequirements": {
         "north": {
-          "defeatNpcs": ["bh_captain"],
+          "defeatNpcs": [
+            "bh_captain"
+          ],
           "message": "燕军骑督横马桥头，长矛遥指，寸步不让。"
         }
       },
-      "npcs": ["bh_captain", "bh_rider", "bh_rider"]
+      "npcs": [
+        "bh_captain",
+        "bh_rider",
+        "bh_rider"
+      ]
     },
     "wild_04": {
       "name": "荒野渡口",
       "description": "渡口泊着最后一艘快船。燕军前锋督将率亲兵拦在船前，铁甲映着北天将晓的寒光——他说，纪千千必须留下。",
-      "exits": {"south": "wild_03"},
-      "npcs": ["bh_general"]
+      "exits": {
+        "south": "wild_03"
+      },
+      "npcs": [
+        "bh_general"
+      ]
     }
   },
   "objectives": [
-    {"id": "kill_riders", "type": "kill", "targetId": "bh_rider", "required": 4, "weight": 25, "description": "击杀燕军游骑。"},
-    {"id": "kill_archers", "type": "kill", "targetId": "bh_archer", "required": 3, "weight": 20, "description": "击杀燕军弓手。"},
-    {"id": "kill_captain", "type": "kill", "targetId": "bh_captain", "required": 1, "weight": 15, "description": "击杀燕军骑督。"},
-    {"id": "kill_general", "type": "kill", "targetId": "bh_general", "required": 1, "weight": 30, "description": "斩杀燕军前锋督将。"},
-    {"id": "reach_ferry", "type": "enter_room", "targetId": "wild_04", "required": 1, "weight": 10, "description": "护送纪千千抵达荒野渡口。"}
+    {
+      "id": "kill_riders",
+      "type": "kill",
+      "targetId": "bh_rider",
+      "required": 4,
+      "weight": 25,
+      "description": "击杀燕军游骑。"
+    },
+    {
+      "id": "kill_archers",
+      "type": "kill",
+      "targetId": "bh_archer",
+      "required": 3,
+      "weight": 20,
+      "description": "击杀燕军弓手。"
+    },
+    {
+      "id": "kill_captain",
+      "type": "kill",
+      "targetId": "bh_captain",
+      "required": 1,
+      "weight": 15,
+      "description": "击杀燕军骑督。"
+    },
+    {
+      "id": "kill_general",
+      "type": "kill",
+      "targetId": "bh_general",
+      "required": 1,
+      "weight": 30,
+      "description": "斩杀燕军前锋督将。"
+    },
+    {
+      "id": "reach_ferry",
+      "type": "enter_room",
+      "targetId": "wild_04",
+      "required": 1,
+      "weight": 10,
+      "description": "护送纪千千抵达荒野渡口。"
+    },
+    {
+      "id": "search_rooms",
+      "type": "puzzle",
+      "targetId": "relic_bh:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜驿站厢房，寻得轻身功法"
+    }
   ],
   "rewards": {
     "experience": 400,

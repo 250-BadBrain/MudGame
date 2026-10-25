@@ -122,6 +122,8 @@ func applyLeveledBonus(eff *model.EffectiveAttributes, key string, value float64
 	switch key {
 	case "meditate_recovery_per_10_levels":
 		eff.MeditateRecoveryBonus += int(value) * (level / 10)
+	case "initiative_per_10_levels":
+		eff.Initiative += int(value) * (level / 10)
 	case "post_strength_per_10_levels":
 		eff.Strength += int(value) * (level / 10)
 	case "post_constitution_per_10_levels":

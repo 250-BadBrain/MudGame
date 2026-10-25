@@ -2993,7 +2993,10 @@
       "tiandao_blade": 120,
       "cihang_jiandian": 120,
       "hunyuan_neigong": 120,
-      "tianmo_ce": 120
+      "tianmo_ce": 120,
+      "talang_jue": 120,
+      "fuhu_jin": 120,
+      "tiebi_gong": 120
     },
     "attributes": {
       "level": 30,
@@ -5536,6 +5539,281 @@
         "charm": 0,
         "seal": 0
       }
+    }
+  },
+  "ca_tea_master": {
+    "name": "茶博士",
+    "title": "西市说书人",
+    "description": "长安西市的茶博士，一张嘴把满城风闻编排得比说书还热闹，也是各方消息的中转站。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "common",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_ca_tea",
+    "attributes": {
+      "level": 9,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 10,
+        "constitution": 11,
+        "agility": 11,
+        "perception": 14,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 90,
+        "maxHp": 90,
+        "mp": 45,
+        "trainedMaxMp": 45,
+        "maxMp": 45,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 9,
+        "defense": 9,
+        "hitRate": 62,
+        "dodge": 46,
+        "parry": 42,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 48,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ca_shi_feixuan": {
+    "name": "师妃暄",
+    "title": "慈航静斋·仙子",
+    "description": "一身素白道袍的年轻仙子，眉目如画却不带一丝烟火气。她奉师命携和氏璧入长安，慈航剑典在她手中轻若无物，重若千钧。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_ca_shi",
+    "attributes": {
+      "level": 24,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 16,
+        "constitution": 18,
+        "agility": 26,
+        "perception": 24,
+        "willpower": 26,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 320,
+        "maxHp": 320,
+        "mp": 150,
+        "trainedMaxMp": 150,
+        "maxMp": 150,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 14,
+        "defense": 16,
+        "hitRate": 128,
+        "dodge": 118,
+        "parry": 92,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 112,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ca_yinkui_guard": {
+    "name": "阴葵死士",
+    "title": "魔门敢死",
+    "description": "服过秘药的阴癸派死士，双目泛着不正常的红，只认任务不认生死。",
+    "faction": "yinkui_sect",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 20,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 24,
+        "constitution": 22,
+        "agility": 22,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 290,
+        "maxHp": 290,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 43,
+        "defense": 20,
+        "hitRate": 118,
+        "dodge": 96,
+        "parry": 86,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 86,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ca_bian_bufu": {
+    "name": "边不负",
+    "title": "阴癸派元老",
+    "description": "阴癸派硕果仅存的元老高手，笑面慈悲，一双手却沾满百年血腥。和氏璧的传闻把他从终南山引了出来。",
+    "faction": "yinkui_sect",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 32,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 36,
+        "constitution": 36,
+        "agility": 30,
+        "perception": 22,
+        "willpower": 24,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 700,
+        "maxHp": 700,
+        "mp": 150,
+        "trainedMaxMp": 150,
+        "maxMp": 150,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 56,
+        "defense": 28,
+        "hitRate": 130,
+        "dodge": 104,
+        "parry": 100,
+        "critRate": 10,
+        "attackSpeed": 4,
+        "initiative": 108,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "chan_purified",
+    "weaknessModifiers": {
+      "attack": -12,
+      "hitRate": -16,
+      "defense": -8
     }
   }
 }
