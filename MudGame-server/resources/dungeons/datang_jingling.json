@@ -12,7 +12,8 @@
     "city_briefing": "new",
     "twins": "new",
     "workshop": "new",
-    "refugees": "new"
+    "refugees": "new",
+    "scripture_jl": "untouched"
   },
   "puzzleActions": {
     "load_ballista": {
@@ -145,6 +146,22 @@
       "dialogueNpcId": "jl_refugee_leader",
       "message": "民夫头领应下了，只等你清开渠中伏兵。",
       "repeatMessage": "民夫们屏息等着路清。"
+    },
+    "search_scripture": {
+      "label": "搜府库武经",
+      "puzzleId": "scripture_jl",
+      "rooms": [
+        "jl_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "府库兵器架后有一只上了封漆的书匣——鲁妙子收藏的道门剑谱《太乙剑法》残页静静躺在其中。",
+      "repeatMessage": "书匣已被你收好。",
+      "giveItems": {
+        "taiyi_page": 1
+      }
     }
   },
   "rooms": {
@@ -247,7 +264,8 @@
         "listen_lu",
         "load_ballista",
         "aim_ballista",
-        "loose_ballista"
+        "loose_ballista",
+        "search_scripture"
       ]
     },
     "jl_04": {
@@ -362,6 +380,15 @@
       "required": 1,
       "weight": 25,
       "description": "斩杀江淮军先锋都督"
+    },
+    {
+      "id": "search_scripture",
+      "type": "puzzle",
+      "targetId": "scripture_jl:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜府库武经，寻得道门剑谱"
     }
   ],
   "rewards": {

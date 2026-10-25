@@ -372,5 +372,43 @@
         "level": 20
       }
     }
+  },
+  "xiulou_daofa": {
+    "name": "修罗刀法",
+    "description": "魔师宫秘传的刀路，刀势如修罗临阵——不闪不避，以攻代守。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "blade",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "dodge_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "xiulou_page",
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 40
+      }
+    }
+  },
+  "taiyi_jianfa": {
+    "name": "太乙剑法",
+    "description": "道门正传的剑法，剑走青冥——看似绵软，落点却精妙得叫人牙酸。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "sword",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 1,
+      "hit_rate_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "taiyi_page",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 40
+      }
+    }
   }
 }

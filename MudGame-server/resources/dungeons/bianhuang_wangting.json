@@ -9,7 +9,8 @@
   "spawnRoomId": "wt_00",
   "puzzleInitialStates": {
     "granary": "intact",
-    "briefing_wt": "new"
+    "briefing_wt": "new",
+    "vault_wt": "untouched"
   },
   "puzzleActions": {
     "listen_scout": {
@@ -41,6 +42,22 @@
       },
       "message": "火折子掷进粮垛，烈焰腾空——王庭的狼嚎第一次带上了慌乱。赫连霸的刀再快，也架不住弟兄们饿肚子。",
       "repeatMessage": "粮垛只剩焦黑的余烬。"
+    },
+    "search_vault": {
+      "label": "搜王帐私库",
+      "puzzleId": "vault_wt",
+      "rooms": [
+        "wt_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "金帐后的私库铁箱里，竟压着一册魔门刀谱——赫连霸抢遍商路，连修罗刀法的残页都没放过。",
+      "repeatMessage": "私库已被你翻遍。",
+      "giveItems": {
+        "xiulou_page": 1
+      }
     }
   },
   "rooms": {
@@ -108,6 +125,9 @@
       },
       "npcs": [
         "wt_helian_ba"
+      ],
+      "actions": [
+        "search_vault"
       ]
     }
   },
@@ -143,6 +163,15 @@
       "required": 1,
       "weight": 45,
       "description": "逐走马贼王赫连霸"
+    },
+    {
+      "id": "search_vault",
+      "type": "puzzle",
+      "targetId": "vault_wt:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜王帐私库，寻得魔门刀谱"
     }
   ],
   "rewards": {

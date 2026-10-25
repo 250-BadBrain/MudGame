@@ -601,5 +601,37 @@
       "defense": 4
     },
     "source": "铁匠铺合成"
+  },
+  "xiulou_page": {
+    "name": "修罗刀法残页",
+    "description": "赫连霸从某个倒霉的魔门客卿身上抢来的刀谱残页，边角还带着狼牙印。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "xiulou_daofa"
+    }
+  },
+  "taiyi_page": {
+    "name": "太乙剑法残页",
+    "description": "竟陵武库深处压箱底的道门剑谱残页。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "taiyi_jianfa"
+    }
   }
 }
