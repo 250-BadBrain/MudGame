@@ -1292,5 +1292,73 @@
       "dodge": 2
     },
     "source": "狼山口"
+  },
+  "hanxue_dao": {
+    "name": "寒雪刀",
+    "description": "塞北铁匠以百炼精钢锻造的弯刀——雪原上的刀，出鞘即带寒气。",
+    "type": "equipment",
+    "subtype": "blade",
+    "stackable": false,
+    "sellable": true,
+    "value": 2400,
+    "rarity": 4,
+    "unit": "把",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 12,
+      "initiative": 3
+    },
+    "source": "雪原猎狼"
+  },
+  "zhumei_luopan": {
+    "name": "竹梅罗盘",
+    "description": "江南匠人以百年竹根与寒铁打造的罗盘——指的方向，永远是你心里想去的那个地方。",
+    "type": "equipment",
+    "subtype": "compass",
+    "stackable": false,
+    "sellable": true,
+    "value": 2400,
+    "rarity": 4,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "hitRate": 4,
+      "dodge": 3
+    },
+    "source": "竹海迷踪"
+  },
+  "caoyun_lingpai": {
+    "name": "漕运令牌",
+    "description": "东都漕运司的鎏金令牌——持此牌者，运河九省通行无阻。",
+    "type": "equipment",
+    "subtype": "token",
+    "stackable": false,
+    "sellable": true,
+    "value": 2500,
+    "rarity": 4,
+    "unit": "枚",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "defense": 6,
+      "hitRate": 4
+    },
+    "source": "漕渠暗战"
+  },
+  "shenhai_zhenzhu": {
+    "name": "深海寒珠",
+    "description": "东溟海底万丈深处的寒珠，珠心封着一滴鲛人泪——夜战时，它会发出微光。",
+    "type": "equipment",
+    "subtype": "pearl",
+    "stackable": false,
+    "sellable": true,
+    "value": 2600,
+    "rarity": 4,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 5,
+      "defense": 5
+    },
+    "source": "沉船探秘"
   }
 }

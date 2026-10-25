@@ -1,0 +1,138 @@
+{
+  "id": "jiangnan_zhuhai",
+  "name": "竹海迷踪",
+  "description": "盗剑人的同伙仍在竹海深处活动——他们要找的不止是名剑，还有剑池的泉眼秘图。你深入竹海，截断他们的耳目。",
+  "order": 34,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 6,
+  "spawnRoomId": "zh_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_zither2": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "zh_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "话已说完，去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "zh_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "zhuhai_midi": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "zh_00": {
+      "name": "竹海入口",
+      "description": "竹海入口立着一块褪色的木牌：入林者迷，出林者仙。",
+      "exits": {
+        "north": "zh_01"
+      },
+      "npcs": [
+        "jn_zither_player"
+      ],
+      "actions": [
+        "listen_zither2"
+      ]
+    },
+    "zh_01": {
+      "name": "竹径迷津",
+      "description": "竹径七拐八绕，地上的落叶盖住了盗剑人留下的脚印。",
+      "exits": {
+        "north": "zh_02",
+        "south": "zh_00"
+      },
+      "npcs": [
+        "zh_thief_scout",
+        "zh_thief_scout"
+      ]
+    },
+    "zh_02": {
+      "name": "泉眼支渠",
+      "description": "竹海深处的泉眼支渠连着剑池——水声潺潺，暗藏杀机。",
+      "exits": {
+        "north": "zh_03",
+        "south": "zh_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "npcs": [
+        "zh_thief_scout",
+        "zh_thief_scout"
+      ],
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "zh_03": {
+      "name": "竹间密营",
+      "description": "竹丛深处藏着盗剑人的密营——桌上摊开的是一张泉眼布防图。",
+      "exits": {},
+      "npcs": [
+        "zh_thief_leader"
+      ],
+      "actions": []
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "zh_thief_scout",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿沿途敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "zh_thief_leader",
+      "required": 1,
+      "weight": 65,
+      "description": "挫盗剑头目之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2540,
+    "potential": 1100,
+    "money": 780,
+    "items": {
+      "zhumei_luopan": 1
+    }
+  }
+}

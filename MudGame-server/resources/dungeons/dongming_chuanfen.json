@@ -1,0 +1,138 @@
+{
+  "id": "dongming_chuanfen",
+  "name": "沉船探秘",
+  "description": "暗礁群的船坟深处沉着一艘三百年前的古船——船上有沧溟宫主人留下的另一件遗物。你潜入沉船，替它找到新的主人。",
+  "order": 36,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 8,
+  "spawnRoomId": "cf_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_captain": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "cf_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "话已说完，去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "cf_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "chuanfen_tanmi": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "cf_00": {
+      "name": "沉船外围",
+      "description": "沉船的龙骨从沙底探出，像一头巨兽的脊背。鲛人的歌声在远处隐约可闻。",
+      "exits": {
+        "north": "cf_01"
+      },
+      "npcs": [
+        "dm_old_captain"
+      ],
+      "actions": [
+        "listen_captain"
+      ]
+    },
+    "cf_01": {
+      "name": "船骸走廊",
+      "description": "沉船内部的走廊已经与珊瑚长成了一体——每一步都踩在几百年的时光上。",
+      "exits": {
+        "north": "cf_02",
+        "south": "cf_00"
+      },
+      "npcs": [
+        "cf_reef_guardian",
+        "cf_reef_guardian"
+      ]
+    },
+    "cf_02": {
+      "name": "货舱",
+      "description": "货舱里的货物早已朽烂，但角落里一只铁盒被海藻包裹着——那就是你要找的。",
+      "exits": {
+        "north": "cf_03",
+        "south": "cf_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "npcs": [
+        "cf_reef_guardian",
+        "cf_reef_guardian"
+      ],
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "cf_03": {
+      "name": "船长室",
+      "description": "船长室的大门被珊瑚封死了——门后是三百年来从未被人打扰的空间。",
+      "exits": {},
+      "npcs": [
+        "cf_ghost_captain"
+      ],
+      "actions": []
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "cf_reef_guardian",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿沿途敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "cf_ghost_captain",
+      "required": 1,
+      "weight": 65,
+      "description": "挫幽灵船长之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2560,
+    "potential": 1100,
+    "money": 780,
+    "items": {
+      "shenhai_zhenzhu": 1
+    }
+  }
+}

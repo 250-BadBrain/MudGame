@@ -1,0 +1,138 @@
+{
+  "id": "dongdu_caoyu",
+  "name": "漕渠暗战",
+  "description": "前朝账册引出的暗渠不止天津桥一处——东都漕运司的暗渠里，有人正在销毁证据。你潜入漕渠暗战。",
+  "order": 35,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 7,
+  "spawnRoomId": "cy_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_poet2": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "cy_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "话已说完，去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "cy_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "caoyu_anzhan": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "cy_00": {
+      "name": "漕渠入口",
+      "description": "漕渠入口的水门半开半合，门上铁锁已被撬开。",
+      "exits": {
+        "north": "cy_01"
+      },
+      "npcs": [
+        "dd2_pool_poet"
+      ],
+      "actions": [
+        "listen_poet2"
+      ]
+    },
+    "cy_01": {
+      "name": "水道窄廊",
+      "description": "水道窄廊里只能容一人侧身通过——墙壁上的抓痕密密麻麻。",
+      "exits": {
+        "north": "cy_02",
+        "south": "cy_00"
+      },
+      "npcs": [
+        "cy_eraser",
+        "cy_eraser"
+      ]
+    },
+    "cy_02": {
+      "name": "销账石室",
+      "description": "石室里火盆正旺，几人正往火里投掷账册——你来得正是时候。",
+      "exits": {
+        "north": "cy_03",
+        "south": "cy_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "npcs": [
+        "cy_eraser",
+        "cy_eraser"
+      ],
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "cy_03": {
+      "name": "暗渠深处",
+      "description": "暗渠最深处堆满了前朝的漕运密档——一箱一箱，全是见不得光的东西。",
+      "exits": {},
+      "npcs": [
+        "cy_ledger_master"
+      ],
+      "actions": []
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "cy_eraser",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿沿途敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "cy_ledger_master",
+      "required": 1,
+      "weight": 65,
+      "description": "挫销账总管之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2550,
+    "potential": 1100,
+    "money": 780,
+    "items": {
+      "caoyun_lingpai": 1
+    }
+  }
+}

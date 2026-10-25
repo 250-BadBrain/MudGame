@@ -1,0 +1,138 @@
+{
+  "id": "saibei_xueyuan",
+  "name": "雪原猎狼",
+  "description": "白狼主虽退，但狼山口的白狼死士残部仍在雪原上游荡。你随边军猎狼队深入雪原，清剿残狼。",
+  "order": 33,
+  "chainId": "bianhuang_legend",
+  "chainName": "边荒传说",
+  "chapter": 5,
+  "spawnRoomId": "xy_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_hunt": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "xy_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "话已说完，去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "xy_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "xueyuan_langqun": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "xy_00": {
+      "name": "雪原营地",
+      "description": "边军猎狼队的临时营地，篝火上烤着冻硬的干粮。",
+      "exits": {
+        "north": "xy_01"
+      },
+      "npcs": [
+        "sb_centurion"
+      ],
+      "actions": [
+        "listen_hunt"
+      ]
+    },
+    "xy_01": {
+      "name": "白骨坡",
+      "description": "坡道上白骨累累——狼群和狼主都留下了痕迹。",
+      "exits": {
+        "north": "xy_02",
+        "south": "xy_00"
+      },
+      "npcs": [
+        "xy_wolf_remnant",
+        "xy_wolf_remnant"
+      ]
+    },
+    "xy_02": {
+      "name": "冰湖",
+      "description": "冰封的湖面下隐约可见白影游动——残狼们藏身冰下。",
+      "exits": {
+        "north": "xy_03",
+        "south": "xy_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "npcs": [
+        "xy_wolf_remnant",
+        "xy_wolf_remnant"
+      ],
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "xy_03": {
+      "name": "狼王旧帐",
+      "description": "白狼主的旧帐被拆了一半，帐中堆着历年抢来的银两和兵器。",
+      "exits": {},
+      "npcs": [
+        "xy_bai_lang2"
+      ],
+      "actions": []
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "xy_wolf_remnant",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿沿途敌人"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "xy_bai_lang2",
+      "required": 1,
+      "weight": 65,
+      "description": "挫白狼头领之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2530,
+    "potential": 1100,
+    "money": 780,
+    "items": {
+      "hanxue_dao": 1
+    }
+  }
+}
