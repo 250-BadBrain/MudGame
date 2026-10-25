@@ -6908,5 +6908,278 @@
       "hitRate": -16,
       "defense": -8
     }
+  },
+  "wg_defender": {
+    "name": "守城校尉",
+    "title": "东都留守",
+    "description": "东都留守府的校尉，甲胄上全是修补的痕迹。他递来的军令上只有八个字：开仓安民，阵前挫锋。",
+    "faction": "luoyang_office",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_wg_defender",
+    "attributes": {
+      "level": 18,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 16,
+        "constitution": 16,
+        "agility": 14,
+        "perception": 14,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 70,
+        "trainedMaxMp": 70,
+        "maxMp": 70,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 15,
+        "defense": 14,
+        "hitRate": 88,
+        "dodge": 62,
+        "parry": 66,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 58,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "wg_elite": {
+    "name": "瓦岗锐士",
+    "title": "前营骁兵",
+    "description": "瓦岗军的前营锐士，长槊如林——他们只听军令，不知变通。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 29,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 30,
+        "constitution": 29,
+        "agility": 25,
+        "perception": 16,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 420,
+        "maxHp": 420,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 63,
+        "defense": 30,
+        "hitRate": 138,
+        "dodge": 100,
+        "parry": 108,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 96,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "wg_quartermaster": {
+    "name": "辎重卫",
+    "title": "连营护卫",
+    "description": "看守连营辎重的瓦岗老兵，护粮如护命——他们的粮车边躺着冻毙的流民。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 31,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 32,
+        "constitution": 30,
+        "agility": 25,
+        "perception": 16,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 450,
+        "maxHp": 450,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 66,
+        "defense": 31,
+        "hitRate": 140,
+        "dodge": 98,
+        "parry": 110,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 92,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "wg_luo_shixin": {
+    "name": "罗士信",
+    "title": "瓦岗骁将",
+    "description": "瓦岗第一骁将罗士信，少年成名，一杆铁枪挑遍东都无对手。他勒马立于大纛之下，眼中战意灼灼——但他身后，是同样灼热的连营炊烟与城头饿殍的目光。",
+    "faction": "neutral",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 42,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 46,
+        "constitution": 44,
+        "agility": 40,
+        "perception": 26,
+        "willpower": 28,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 900,
+        "maxHp": 900,
+        "mp": 190,
+        "trainedMaxMp": 190,
+        "maxMp": 190,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 68,
+        "defense": 34,
+        "hitRate": 150,
+        "dodge": 118,
+        "parry": 118,
+        "critRate": 12,
+        "attackSpeed": 4,
+        "initiative": 120,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "minxin_suoxiang",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -8
+    }
   }
 }

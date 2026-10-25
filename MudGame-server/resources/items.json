@@ -534,5 +534,21 @@
       "hitRate": 3
     },
     "source": "魔师宫索战"
+  },
+  "wagang_tiejia": {
+    "name": "瓦岗铁甲",
+    "description": "瓦岗军的制式重甲改良而来，甲片层叠如鳞，刀砍上去只留一道白痕。",
+    "type": "equipment",
+    "subtype": "armor",
+    "stackable": false,
+    "sellable": true,
+    "value": 2000,
+    "rarity": 3,
+    "unit": "领",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 10
+    },
+    "source": "瓦岗惊变"
   }
 }

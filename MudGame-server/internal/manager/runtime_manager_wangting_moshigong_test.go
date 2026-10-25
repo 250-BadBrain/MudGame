@@ -161,3 +161,82 @@ func TestMoshigongFullFlow(t *testing.T) {
 		t.Fatal("expected cleared flag")
 	}
 }
+
+// 瓦岗惊变全流程：锐士/辎重卫 → 开仓放粮破招 → 逐走罗士信 → 铁甲结算
+func TestWagangFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "datang_wagang")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+
+	if _, err := r.DoRoomAction(playerID, "listen_defender"); err != nil {
+		t.Fatalf("listen defender failed: %v", err)
+	}
+	camp := room("wg_01")
+	moveDungeonTestPlayer(t, r, playerID, camp)
+	defeatAll(camp, "wg_elite", 2)
+	depot := room("wg_02")
+	moveDungeonTestPlayer(t, r, playerID, depot)
+	defeatAll(depot, "wg_quartermaster", 2)
+	if _, err := r.DoRoomAction(playerID, "open_granary"); err != nil {
+		t.Fatalf("open granary failed: %v", err)
+	}
+	if inst.PuzzleStates["granary_wg"] != "opened" {
+		t.Fatalf("expected granary opened, got %s", inst.PuzzleStates["granary_wg"])
+	}
+
+	banner := room("wg_03")
+	moveDungeonTestPlayer(t, r, playerID, banner)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, banner, "wg_luo_shixin")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage luo failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied {
+		t.Fatal("expected minxin to weaken luo shixin")
+	}
+	if got := inst.NPCs[bossID].Attributes.Derived.Attack; got != baseAttack-14 {
+		t.Fatalf("expected attack weakened by 14, got %d (base %d)", got, baseAttack)
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat luo failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
+	}
+
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave dungeon failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["wagang_tiejia"] != 1 {
+		t.Fatalf("expected wagang tiejia, got %d", p.Backpack["wagang_tiejia"])
+	}
+	if !p.Flags["dungeon_cleared_datang_wagang"] {
+		t.Fatal("expected cleared flag")
+	}
+}

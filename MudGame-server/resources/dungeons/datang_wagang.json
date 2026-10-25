@@ -1,0 +1,156 @@
+{
+  "id": "datang_wagang",
+  "name": "瓦岗惊变",
+  "description": "瓦岗军围东都，骁将罗士信陈兵洛北，围而不攻——他要等城中自乱。你带着守城校尉的仓钥潜出城去：开仓放粮安民，再阵前挫那杆铁枪的锋芒，为东都换一线生机。",
+  "order": 17,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 7,
+  "spawnRoomId": "wg_00",
+  "puzzleInitialStates": {
+    "granary_wg": "locked",
+    "briefing_wg2": "new"
+  },
+  "puzzleActions": {
+    "listen_defender": {
+      "label": "听校尉授计",
+      "puzzleId": "briefing_wg2",
+      "rooms": [
+        "wg_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "wg_defender",
+      "message": "校尉把\"开仓安民、阵前挫锋\"的方略交代分明。",
+      "repeatMessage": "校尉按剑望着城外连营，一言不发。"
+    },
+    "open_granary": {
+      "label": "开仓放粮",
+      "puzzleId": "granary_wg",
+      "rooms": [
+        "wg_02"
+      ],
+      "fromStates": [
+        "locked"
+      ],
+      "nextState": "opened",
+      "setFlags": {
+        "minxin_suoxiang": true
+      },
+      "message": "仓门洞开，流民蜂拥而至。炊烟起处，瓦岗阵中已有兵卒偷偷回望——替天行道的旗，卷了边。",
+      "repeatMessage": "粮仓已空，流民还在道旁叩谢。"
+    }
+  },
+  "rooms": {
+    "wg_00": {
+      "name": "洛北官道",
+      "description": "官道两旁挤满逃难的流民，东都城墙在身后像一道灰色的疤。守城校尉提灯立在路边。",
+      "exits": {
+        "north": "wg_01"
+      },
+      "npcs": [
+        "wg_defender"
+      ],
+      "actions": [
+        "listen_defender"
+      ]
+    },
+    "wg_01": {
+      "name": "瓦岗前营",
+      "description": "瓦岗前营连绵数里，鹿角与拒马层层叠叠。巡夜的锐士长槊一横：\"闲杂人等，退。\"",
+      "exits": {
+        "south": "wg_00",
+        "north": "wg_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "wg_elite"
+          ],
+          "message": "前营锐士槊锋如林，冲不过去。"
+        }
+      },
+      "npcs": [
+        "wg_elite",
+        "wg_elite"
+      ]
+    },
+    "wg_02": {
+      "name": "连营辎重",
+      "description": "连营深处的辎重粮仓灯火通明，粮垛高过人头顶——铁锁锁着的仓门边，流民的目光比刀更亮。",
+      "exits": {
+        "south": "wg_01",
+        "north": "wg_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "wg_quartermaster"
+          ],
+          "message": "辎重卫把粮仓守得铁桶一般。"
+        }
+      },
+      "npcs": [
+        "wg_quartermaster",
+        "wg_quartermaster"
+      ],
+      "actions": [
+        "open_granary"
+      ]
+    },
+    "wg_03": {
+      "name": "中军大纛",
+      "description": "中军大纛之下，罗士信横枪立马，甲叶在月下泛着冷光。他身后，炊烟与饿殍的目光一同灼烧着他的军旗。",
+      "exits": {
+        "south": "wg_02"
+      },
+      "npcs": [
+        "wg_luo_shixin"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_elite",
+      "type": "kill",
+      "targetId": "wg_elite",
+      "required": 2,
+      "weight": 20,
+      "description": "破瓦岗前营锐士"
+    },
+    {
+      "id": "kill_quarter",
+      "type": "kill",
+      "targetId": "wg_quartermaster",
+      "required": 2,
+      "weight": 20,
+      "description": "破连营辎重卫"
+    },
+    {
+      "id": "open_granary",
+      "type": "puzzle",
+      "targetId": "granary_wg:opened",
+      "required": 1,
+      "weight": 15,
+      "description": "开仓放粮，赈济流民"
+    },
+    {
+      "id": "repel_luo",
+      "type": "kill",
+      "targetId": "wg_luo_shixin",
+      "required": 1,
+      "weight": 45,
+      "description": "阵前挫罗士信之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 1420,
+    "potential": 800,
+    "money": 480,
+    "items": {
+      "wagang_tiejia": 1
+    }
+  }
+}
