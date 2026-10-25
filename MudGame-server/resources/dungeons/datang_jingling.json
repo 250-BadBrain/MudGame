@@ -1,0 +1,375 @@
+{
+  "id": "datang_jingling",
+  "name": "竟陵之围",
+  "description": "杜伏威的江淮军围攻竟陵，方泽流死守孤城，鲁妙子以守城器械助防。你步入这段历史残响：外城将破，先稳三段城防，校准守城弩机，再从东门或水门择路突围，于城外芦荡会一会江淮军的先锋都督。",
+  "order": 8,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 3,
+  "spawnRoomId": "jl_00",
+  "puzzleInitialStates": {
+    "ballista": "uncalibrated",
+    "city_briefing": "new",
+    "twins": "new",
+    "workshop": "new",
+    "refugees": "new"
+  },
+  "puzzleActions": {
+    "load_ballista": {
+      "label": "装填巨矢",
+      "puzzleId": "ballista",
+      "rooms": [
+        "jl_03"
+      ],
+      "fromStates": [
+        "uncalibrated"
+      ],
+      "nextState": "loaded",
+      "message": "你与鲁妙子合力绞开盘弦，将一支巨矢推上弩槽。",
+      "repeatMessage": "弩槽里已经躺着一支巨矢。"
+    },
+    "aim_ballista": {
+      "label": "迎风校尺",
+      "puzzleId": "ballista",
+      "rooms": [
+        "jl_03"
+      ],
+      "fromStates": [
+        "loaded"
+      ],
+      "nextState": "aiming",
+      "message": "你贴着矢槽望向芦荡。鲁妙子眯起眼：\"芦荡的风打东边来，吹得偏——标尺得让一让。\"",
+      "repeatMessage": "标尺已在手，只差修正扣发。"
+    },
+    "loose_ballista": {
+      "label": "修正扣发",
+      "puzzleId": "ballista",
+      "rooms": [
+        "jl_03"
+      ],
+      "fromStates": [
+        "aiming"
+      ],
+      "nextState": "choosing",
+      "message": "标尺可左右修正。鲁妙子盯着远处将旗：\"想好了再松手。\"",
+      "choices": [
+        {
+          "id": "correct_east",
+          "label": "顺风向东修正"
+        },
+        {
+          "id": "wrong_west",
+          "label": "逆风向西修正"
+        }
+      ]
+    },
+    "correct_east": {
+      "label": "顺风向东修正",
+      "puzzleId": "ballista",
+      "rooms": [
+        "jl_03"
+      ],
+      "fromStates": [
+        "choosing"
+      ],
+      "nextState": "locked",
+      "setFlags": {
+        "ballista_locked": true
+      },
+      "message": "你向东修正半寸，松弦——巨矢撕开风声，远远钉进芦荡中军的将旗之下！鲁妙子抚掌大笑：\"好箭！都督的旗门乱了！\""
+    },
+    "wrong_west": {
+      "label": "逆风向西修正",
+      "puzzleId": "ballista",
+      "rooms": [
+        "jl_03"
+      ],
+      "fromStates": [
+        "choosing"
+      ],
+      "nextState": "loaded",
+      "message": "你向西修正，松弦——巨矢歪歪斜斜扎进芦苇深处。鲁妙子摇头：\"风向不对，重新校过。\""
+    },
+    "listen_fang": {
+      "label": "听方泽流说明军情",
+      "puzzleId": "city_briefing",
+      "rooms": [
+        "jl_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "jl_fang_zeliu",
+      "message": "方泽流说完了围城的形势。",
+      "repeatMessage": "方泽流盯着城下，没有再看你。"
+    },
+    "rally_twins": {
+      "label": "与城头双龙并肩",
+      "puzzleId": "twins",
+      "rooms": [
+        "jl_01"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "met",
+      "dialogueNpcId": "jl_kou_zhong",
+      "message": "双龙与你以刀棍作揖，算是认识了。",
+      "repeatMessage": "双龙忙着应付云梯，朝你点了点头。"
+    },
+    "listen_lu": {
+      "label": "请教鲁妙子",
+      "puzzleId": "workshop",
+      "rooms": [
+        "jl_03"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "jl_lu_miaozi",
+      "message": "鲁妙子把弩机的门道讲了一遍。",
+      "repeatMessage": "鲁妙子摆摆手，让你自己上手。"
+    },
+    "guide_refugees": {
+      "label": "安抚水门民夫",
+      "puzzleId": "refugees",
+      "rooms": [
+        "jl_05"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "guided",
+      "dialogueNpcId": "jl_refugee_leader",
+      "message": "民夫头领应下了，只等你清开渠中伏兵。",
+      "repeatMessage": "民夫们屏息等着路清。"
+    }
+  },
+  "rooms": {
+    "jl_00": {
+      "name": "竟陵南门",
+      "description": "竟陵南门在撞木下吱呀作响，城头火把映着方泽流铁青的脸。江淮军的长矛手已经翻过壕沟，城门洞里满是刀兵之气。",
+      "exits": {
+        "north": "jl_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jl_spearman"
+          ],
+          "message": "江淮军长矛手封住门洞，长矛如林，冲不过去。"
+        }
+      },
+      "npcs": [
+        "jl_spearman",
+        "jl_spearman",
+        "jl_spearman",
+        "jl_fang_zeliu"
+      ],
+      "actions": [
+        "listen_fang"
+      ]
+    },
+    "jl_01": {
+      "name": "城头箭楼",
+      "description": "箭楼之上，云梯一架接一架搭上来。寇仲与徐子陵背靠背守在垛口，刀光棍影里都是少年人的狠劲。",
+      "exits": {
+        "south": "jl_00",
+        "north": "jl_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jl_ladder_trooper"
+          ],
+          "message": "云梯锐士仍在城头缠斗，北面楼梯冲不上去。"
+        }
+      },
+      "npcs": [
+        "jl_ladder_trooper",
+        "jl_ladder_trooper",
+        "jl_ladder_trooper",
+        "jl_kou_zhong",
+        "jl_xu_ziling"
+      ],
+      "actions": [
+        "rally_twins"
+      ]
+    },
+    "jl_02": {
+      "name": "内城街巷",
+      "description": "街巷深处火光乱窜，溃兵的哭喊与兵刃声混作一团。几条黑影混在人流里，专拣守军的背心下手。",
+      "exits": {
+        "south": "jl_01",
+        "north": "jl_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jl_infiltrator"
+          ],
+          "message": "细作在暗处游走，街口的守军自顾不暇，府库方向去不得。"
+        }
+      },
+      "npcs": [
+        "jl_infiltrator",
+        "jl_infiltrator"
+      ]
+    },
+    "jl_03": {
+      "name": "府库机枢房",
+      "description": "府库深处，鲁妙子守着一台巨大的守城弩机，图纸铺了一地。\"弩是好弩，就差一双校得准风的手。\"",
+      "exits": {
+        "south": "jl_02",
+        "east": "jl_04",
+        "west": "jl_05"
+      },
+      "exitRequirements": {
+        "east": {
+          "requiredPuzzleStates": {
+            "ballista": "locked"
+          },
+          "message": "鲁妙子拦住你：\"弩未校准，谁也不许出城。等这一箭钉住将旗，突围才有胜算。\""
+        },
+        "west": {
+          "requiredPuzzleStates": {
+            "ballista": "locked"
+          },
+          "message": "鲁妙子拦住你：\"弩未校准，谁也不许出城。等这一箭钉住将旗，突围才有胜算。\""
+        }
+      },
+      "npcs": [
+        "jl_lu_miaozi"
+      ],
+      "actions": [
+        "listen_lu",
+        "load_ballista",
+        "aim_ballista",
+        "loose_ballista"
+      ]
+    },
+    "jl_04": {
+      "name": "东门瓮城",
+      "description": "东门瓮城早已洞开，江淮铁骑的铁蹄声像闷雷滚过来。要从这里走，就得从骑阵里撞出一条血路。",
+      "exits": {
+        "west": "jl_03",
+        "north": "jl_06"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jl_iron_cavalry"
+          ],
+          "message": "江淮铁骑来回冲杀，把出城的道路封得死死的。"
+        }
+      },
+      "npcs": [
+        "jl_iron_cavalry",
+        "jl_iron_cavalry",
+        "jl_iron_cavalry"
+      ]
+    },
+    "jl_05": {
+      "name": "水门暗渠",
+      "description": "水门下的暗渠又低又窄，渠水没过脚踝。逃难的民夫扶老携幼挤在渠口，伏兵的刀就藏在黑暗里。",
+      "exits": {
+        "east": "jl_03",
+        "north": "jl_06"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jl_canal_ambusher"
+          ],
+          "message": "渠中伏兵未清，民夫不敢下水，你也不能弃他们而去。"
+        }
+      },
+      "npcs": [
+        "jl_canal_ambusher",
+        "jl_canal_ambusher",
+        "jl_refugee_leader"
+      ],
+      "actions": [
+        "guide_refugees"
+      ]
+    },
+    "jl_06": {
+      "name": "城外芦荡",
+      "description": "城外芦荡连天，江淮军大营的灯火在远处铺开。先锋都督的将旗立在土丘上——旗下甲胄森然，正等着城里杀出来的人。",
+      "exits": {},
+      "npcs": [
+        "jl_vanguard_commander"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_spearmen",
+      "type": "kill",
+      "targetId": "jl_spearman",
+      "required": 3,
+      "weight": 15,
+      "description": "击退南门长矛手"
+    },
+    {
+      "id": "kill_ladder_troops",
+      "type": "kill",
+      "targetId": "jl_ladder_trooper",
+      "required": 3,
+      "weight": 15,
+      "description": "杀退城头云梯锐士"
+    },
+    {
+      "id": "kill_infiltrators",
+      "type": "kill",
+      "targetId": "jl_infiltrator",
+      "required": 2,
+      "weight": 10,
+      "description": "揪出街巷细作"
+    },
+    {
+      "id": "lock_ballista",
+      "type": "puzzle",
+      "targetId": "ballista:locked",
+      "weight": 10,
+      "description": "校准守城弩机",
+      "required": 1
+    },
+    {
+      "id": "breakout_east",
+      "type": "kill",
+      "targetId": "jl_iron_cavalry",
+      "required": 3,
+      "weight": 25,
+      "exclusiveGroup": "breakout",
+      "description": "东线：击溃瓮城铁骑"
+    },
+    {
+      "id": "breakout_water",
+      "type": "kill",
+      "targetId": "jl_canal_ambusher",
+      "required": 2,
+      "weight": 25,
+      "exclusiveGroup": "breakout",
+      "description": "水线：清除渠畔伏兵"
+    },
+    {
+      "id": "kill_commander",
+      "type": "kill",
+      "targetId": "jl_vanguard_commander",
+      "required": 1,
+      "weight": 25,
+      "description": "斩杀江淮军先锋都督"
+    }
+  ],
+  "rewards": {
+    "experience": 820,
+    "potential": 520,
+    "money": 340,
+    "items": {
+      "bronze_fragment": 3
+    }
+  }
+}

@@ -3039,5 +3039,746 @@
         "seal": 0
       }
     }
+  },
+  "jl_spearman": {
+    "name": "江淮军长矛手",
+    "title": "围城先锋",
+    "description": "江淮军的前排矛手，长矛如林，专破城门缺口。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 17,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 22,
+        "constitution": 22,
+        "agility": 16,
+        "perception": 12,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 240,
+        "maxHp": 240,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 36,
+        "defense": 18,
+        "hitRate": 108,
+        "dodge": 84,
+        "parry": 78,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 70,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jl_ladder_trooper": {
+    "name": "云梯锐士",
+    "title": "攀城死士",
+    "description": "肩扛云梯的江淮死士，弃了甲换轻，专为登城而生。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 18,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 23,
+        "constitution": 23,
+        "agility": 17,
+        "perception": 13,
+        "willpower": 13,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 255,
+        "maxHp": 255,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 38,
+        "defense": 19,
+        "hitRate": 110,
+        "dodge": 86,
+        "parry": 80,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 72,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jl_infiltrator": {
+    "name": "江淮细作",
+    "title": "混城暗子",
+    "description": "混在溃兵人流里的细作，短刃专拣守军背心下手。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 18,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 19,
+        "agility": 22,
+        "perception": 16,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 235,
+        "maxHp": 235,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 37,
+        "defense": 17,
+        "hitRate": 112,
+        "dodge": 95,
+        "parry": 76,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 80,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jl_iron_cavalry": {
+    "name": "江淮铁骑",
+    "title": "东门骑阵",
+    "description": "人马俱甲的江淮铁骑，冲阵时如一道铁墙碾过。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 19,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 25,
+        "constitution": 25,
+        "agility": 18,
+        "perception": 12,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 270,
+        "maxHp": 270,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 41,
+        "defense": 21,
+        "hitRate": 110,
+        "dodge": 82,
+        "parry": 82,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 85,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jl_canal_ambusher": {
+    "name": "渠畔伏兵",
+    "title": "水门杀手",
+    "description": "埋伏在暗渠水影里的刀手，等的就是逃难的人流。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 17,
+      "realm": "elite",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 21,
+        "constitution": 20,
+        "agility": 20,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 230,
+        "maxHp": 230,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 35,
+        "defense": 16,
+        "hitRate": 108,
+        "dodge": 90,
+        "parry": 74,
+        "critRate": 4,
+        "attackSpeed": 4,
+        "initiative": 76,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jl_vanguard_commander": {
+    "name": "江淮军先锋都督",
+    "title": "围城军锋",
+    "description": "杜伏威麾下的先锋都督，一身铁甲立在将旗之下，掌中长槊挑翻过无数守将。城里的耗子敢出来，正省了他爬墙。",
+    "faction": "jianghuai_army",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 28,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 36,
+        "constitution": 36,
+        "agility": 30,
+        "perception": 20,
+        "willpower": 20,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 520,
+        "maxHp": 520,
+        "mp": 120,
+        "trainedMaxMp": 120,
+        "maxMp": 120,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 52,
+        "defense": 26,
+        "hitRate": 128,
+        "dodge": 100,
+        "parry": 95,
+        "critRate": 10,
+        "attackSpeed": 4,
+        "initiative": 105,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "ballista_locked",
+    "weaknessModifiers": {
+      "attack": -10,
+      "hitRate": -16,
+      "defense": -8
+    }
+  },
+  "jl_fang_zeliu": {
+    "name": "方泽流",
+    "title": "竟陵城主",
+    "description": "竟陵城主方泽流，铁甲未卸，眼中满是血丝，仍死死盯着城下的军阵。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "attributes": {
+      "level": 12,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 14,
+        "agility": 12,
+        "perception": 12,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 110,
+        "maxHp": 110,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 60,
+        "dodge": 40,
+        "parry": 40,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "dialogueId": "dlg_jl_fang"
+  },
+  "jl_lu_miaozi": {
+    "name": "鲁妙子",
+    "title": "机关隐士",
+    "description": "白须老者伏在守城弩机的图纸间，正是留下杨公宝库的机关大家鲁妙子。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "attributes": {
+      "level": 15,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 12,
+        "agility": 12,
+        "perception": 18,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 60,
+        "dodge": 40,
+        "parry": 40,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "dialogueId": "dlg_jl_lu"
+  },
+  "jl_kou_zhong": {
+    "name": "寇仲",
+    "title": "城头少年",
+    "description": "咧着嘴守垛口的少年，刀名井中月，正是日后的天刀传人寇仲。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "attributes": {
+      "level": 16,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 20,
+        "constitution": 18,
+        "agility": 18,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 60,
+        "dodge": 40,
+        "parry": 40,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "dialogueId": "dlg_jl_twins"
+  },
+  "jl_xu_ziling": {
+    "name": "徐子陵",
+    "title": "城头少年",
+    "description": "与寇仲背靠背而立的沉静少年，掌法飘逸，正是徐子陵。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "attributes": {
+      "level": 16,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 18,
+        "agility": 20,
+        "perception": 15,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 60,
+        "dodge": 40,
+        "parry": 40,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jl_refugee_leader": {
+    "name": "民夫头领",
+    "title": "水门逃难者",
+    "description": "背着老母的汉子，领着一队民夫挤在水门渠口，等一条活路。",
+    "faction": "jianghuai_army",
+    "role": "enemy",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "attributes": {
+      "level": 6,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 12,
+        "agility": 10,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 70,
+        "maxHp": 70,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 10,
+        "defense": 10,
+        "hitRate": 60,
+        "dodge": 40,
+        "parry": 40,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 50,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "dialogueId": "dlg_jl_refugees"
   }
 }

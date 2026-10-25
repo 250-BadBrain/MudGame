@@ -269,6 +269,13 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 	if p == nil {
 		return
 	}
+	// 章节链通关旗标：100% 结算时写入，驱动 order N+1 解锁（见 economy_design.md 1.3）
+	if settlement.Progress >= 100 {
+		if p.Flags == nil {
+			p.Flags = map[string]bool{}
+		}
+		p.Flags["dungeon_cleared_"+settlement.DungeonID] = true
+	}
 	p.Attributes.Experience += settlement.RewardExperience
 	p.Attributes.Potential += settlement.RewardPotential
 	p.Money += settlement.RewardMoney

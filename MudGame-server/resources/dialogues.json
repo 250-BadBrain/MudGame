@@ -166,5 +166,33 @@
     "title": "船翁讲古",
     "opening": "老船翁眯眼望着江心：那一战之后，再没人见过浪翻云。台上的影子等了很久啦。",
     "options": []
+  },
+  "dlg_jl_fang": {
+    "id": "dlg_jl_fang",
+    "npcId": "jl_fang_zeliu",
+    "title": "竟陵军情",
+    "opening": "方泽流按着城砖，声音沙哑：江淮军三万围城，竟陵的粮撑不过五日。",
+    "options": []
+  },
+  "dlg_jl_twins": {
+    "id": "dlg_jl_twins",
+    "npcId": "jl_kou_zhong",
+    "title": "城头少年",
+    "opening": "寇仲咧嘴一笑：朋友来得正好，城头借你一半！",
+    "options": []
+  },
+  "dlg_jl_lu": {
+    "id": "dlg_jl_lu",
+    "npcId": "jl_lu_miaozi",
+    "title": "弩机门道",
+    "opening": "鲁妙子头也不抬：装矢、校尺、看旗修风向，三步走对，一箭钉旗。",
+    "options": []
+  },
+  "dlg_jl_refugees": {
+    "id": "dlg_jl_refugees",
+    "npcId": "jl_refugee_leader",
+    "title": "水门民情",
+    "opening": "民夫头领攥着你的衣角：渠里伏兵不清，老的小的都不敢下水。",
+    "options": []
   }
 }

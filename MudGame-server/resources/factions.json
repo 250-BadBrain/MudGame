@@ -114,5 +114,13 @@
     "category": "sect",
     "visible": false,
     "order": 23
+  },
+  "jianghuai_army": {
+    "id": "jianghuai_army",
+    "name": "江淮军",
+    "description": "杜伏威麾下的江淮劲旅，纵横淮南，兵锋直指竟陵。",
+    "category": "military",
+    "visible": false,
+    "order": 1000
   }
 }
