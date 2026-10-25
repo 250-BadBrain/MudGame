@@ -198,6 +198,12 @@ func (r *RuntimeManager) EnterWorld(playerID, worldID string) (map[string]interf
 		roomPayload, _, err := r.buildRoomPayload(p.RoomID, players)
 		return roomPayload, err
 	}
+	// 马车费：跨城移动消耗银两（同城/同房间不收费）
+	carriageFee := 100
+	if p.Money < carriageFee {
+		return nil, errors.New("马车费不足——跨城需要" + strconv.Itoa(carriageFee) + "两，请找马车行付账。")
+	}
+	p.Money -= carriageFee
 	p.RoomID = w.SpawnRoomID
 	if err := r.savePlayers(players); err != nil {
 		return nil, err

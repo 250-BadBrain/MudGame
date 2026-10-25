@@ -193,3 +193,49 @@ func TestRefugeeRumorQuest(t *testing.T) {
 		t.Fatalf("expected smoke powder reward, got %d", p.Backpack["smoke_powder"])
 	}
 }
+
+// R259 马车费：跨城需 100 两
+func TestEnterWorldCarriageFee(t *testing.T) {
+	r := NewRuntimeManager(t.TempDir())
+	t.Cleanup(func() { _ = r.Close() })
+	if err := r.Register("carriage", "pass123"); err != nil {
+		t.Fatalf("register failed: %v", err)
+	}
+	playerID, err := r.CreateCharacter("carriage", "马车客", 16, 16, 16, 16, 16)
+	if err != nil {
+		t.Fatalf("create character failed: %v", err)
+	}
+
+	// 银两不足 → 拒绝
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].Money = 50
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if _, err := r.EnterWorld(playerID, "changan"); err == nil {
+		t.Fatal("enter world with insufficient silver must fail")
+	}
+
+	// 银两充足 → 成功 + 扣费
+	r.mu.Lock()
+	players, _ = r.loadPlayers()
+	players[playerID].Money = 200
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if _, err := r.EnterWorld(playerID, "changan"); err != nil {
+		t.Fatalf("enter world with sufficient silver must pass: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	if after[playerID].Money != 100 {
+		t.Fatalf("expected money 200-100=100, got %d", after[playerID].Money)
+	}
+	if after[playerID].RoomID != "ca2_west_market" {
+		t.Fatalf("expected changan spawn, got %s", after[playerID].RoomID)
+	}
+}
