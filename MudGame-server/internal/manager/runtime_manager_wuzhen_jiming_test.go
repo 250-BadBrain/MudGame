@@ -162,3 +162,198 @@ func TestJimingshanFullFlow(t *testing.T) {
 		t.Fatal("expected dungeon_cleared_posui_jiming flag")
 	}
 }
+
+// 边荒集夺旗全流程
+func TestDuoqiFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "bianhuang_duoqi")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_caravan"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	defeatAll(room("bd_01"), "bd_flag_guard", 2)
+	yuanmen := room("bd_02")
+	moveDungeonTestPlayer(t, r, playerID, yuanmen)
+	defeatAll(yuanmen, "bd_flag_vanguard", 1)
+	banner := room("bd_03")
+	moveDungeonTestPlayer(t, r, playerID, banner)
+	if _, err := r.DoRoomAction(playerID, "seize_flag"); err != nil {
+		t.Fatalf("seize flag failed: %v", err)
+	}
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, banner, "bd_tuoba_gu")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage tuoba failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected flag seizure to weaken tuoba gu")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat tuoba failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d", inst.Progress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	if after[playerID].Backpack["bianhuang_xue"] != 1 || !after[playerID].Flags["dungeon_cleared_bianhuang_duoqi"] {
+		t.Fatal("expected rewards")
+	}
+}
+
+// 枯井之下全流程
+func TestKujingFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "luoshui_kujing")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_rope"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	defeatAll(room("kj_01"), "kj_yinkui_guard", 2)
+	depth := room("kj_02")
+	moveDungeonTestPlayer(t, r, playerID, depth)
+	defeatAll(depth, "kj_yinkui_adept", 1)
+	if _, err := r.DoRoomAction(playerID, "descend_well"); err != nil {
+		t.Fatalf("descend failed: %v", err)
+	}
+	cellar := room("kj_03")
+	moveDungeonTestPlayer(t, r, playerID, cellar)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, cellar, "kj_kujing_weng")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage kujing failed: %v", err)
+	}
+	if _, err := r.DoRoomAction(playerID, "descend_well"); err == nil {
+		t.Fatal("descend should not repeat")
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected well descent to weaken kujing weng")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat kujing failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d", inst.Progress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	if after[playerID].Backpack["zhenshui_huan"] != 1 || !after[playerID].Flags["dungeon_cleared_luoshui_kujing"] {
+		t.Fatal("expected rewards")
+	}
+}
+
+// 蜀道护镖全流程
+func TestShudaoFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "datang_shudao")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_escort"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	defeatAll(room("sd_01"), "sd_ape_scout", 2)
+	net := room("sd_02")
+	moveDungeonTestPlayer(t, r, playerID, net)
+	defeatAll(net, "sd_ape_rouge", 1)
+	if _, err := r.DoRoomAction(playerID, "cut_ropenet"); err != nil {
+		t.Fatalf("cut ropenet failed: %v", err)
+	}
+	end := room("sd_03")
+	moveDungeonTestPlayer(t, r, playerID, end)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, end, "sd_yuan_sou")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage yuan sou failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected ropenet cut to weaken yuan sou")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat yuan sou failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d", inst.Progress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	if after[playerID].Backpack["shujin_pifeng"] != 1 || !after[playerID].Flags["dungeon_cleared_datang_shudao"] {
+		t.Fatal("expected rewards")
+	}
+}

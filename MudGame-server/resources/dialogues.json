@@ -650,5 +650,26 @@
     "title": "雪寺托付",
     "opening": "老僧合十：\"小王子把图录后卷当成了贡品。可惜图录认人——它只认悟过'破'字的人。\"",
     "options": []
+  },
+  "dlg_bd_caravan": {
+    "id": "dlg_bd_caravan",
+    "npcId": "bd_caravan_head",
+    "title": "夺旗悬赏",
+    "opening": "络腮胡把一袋银子拍在你手上：\"燕军的帅旗插在集北。旗倒，散在集里的燕军就成了无头苍蝇——这是边荒集最后的机会。\"",
+    "options": []
+  },
+  "dlg_kj_rope": {
+    "id": "dlg_kj_rope",
+    "npcId": "kj_ropemaker",
+    "title": "井台旧事",
+    "opening": "老妇头也不抬：\"井十年前就枯了。枯了以后，夜里有人挑水进去——你说是人渴了，还是井底的东西渴了？\"",
+    "options": []
+  },
+  "dlg_sd_escort": {
+    "id": "dlg_sd_escort",
+    "npcId": "sd_escort_head",
+    "title": "蜀道之约",
+    "opening": "女镖头扬鞭指向栈道：\"猿叟占了剑阁十年，官府剿了三次都没剿动。这趟蜀锦是巴蜀百家凑的货——丢在他手里，巴蜀的门就彻底关上了。\"",
+    "options": []
   }
 }

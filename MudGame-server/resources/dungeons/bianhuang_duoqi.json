@@ -1,0 +1,155 @@
+{
+  "id": "bianhuang_duoqi",
+  "name": "边荒集夺旗",
+  "description": "燕军屯兵边荒集北，帅旗插在营心——旗在，散在集里的燕军就有主心骨。你受商队之托夜夺帅旗：拔旗震胆，让燕军自己退回大漠。",
+  "order": 24,
+  "chainId": "bianhuang_legend",
+  "chainName": "边荒传说",
+  "chapter": 3,
+  "spawnRoomId": "bd_00",
+  "puzzleInitialStates": {
+    "flag_bd": "standing",
+    "briefing_bd": "new"
+  },
+  "puzzleActions": {
+    "listen_caravan": {
+      "label": "听护卫头领的夺旗方略",
+      "puzzleId": "briefing_bd",
+      "rooms": [
+        "bd_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "bd_caravan_head",
+      "message": "护卫头领把夺旗的门道讲了一遍。",
+      "repeatMessage": "护卫头领把酒囊塞给你：\"壮胆用。\""
+    },
+    "seize_flag": {
+      "label": "拔其帅旗",
+      "puzzleId": "flag_bd",
+      "rooms": [
+        "bd_03"
+      ],
+      "fromStates": [
+        "standing"
+      ],
+      "nextState": "seized",
+      "setFlags": {
+        "duoqi_zhendan": true
+      },
+      "message": "你攀上旗杆，帅旗应手而落——满营的号角声戛然而止。旗倒了，燕军的心气也倒了。",
+      "repeatMessage": "帅旗已在你手中。"
+    }
+  },
+  "rooms": {
+    "bd_00": {
+      "name": "边荒集北门",
+      "description": "边荒集的北门钉满了各家的旗子，唯独北面远处的燕军帅旗最扎眼。护卫头领在门洞里等你。",
+      "exits": {
+        "north": "bd_01"
+      },
+      "npcs": [
+        "bd_caravan_head"
+      ],
+      "actions": [
+        "listen_caravan"
+      ]
+    },
+    "bd_01": {
+      "name": "燕军辎重营",
+      "description": "燕军的辎重营火光冲天，旗卫往来巡弋——烧辎重还是抢旗，边荒人从来全都要。",
+      "exits": {
+        "south": "bd_00",
+        "north": "bd_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "bd_flag_guard"
+          ],
+          "message": "旗卫的长枪把营盘锁死。"
+        }
+      },
+      "npcs": [
+        "bd_flag_guard",
+        "bd_flag_guard"
+      ]
+    },
+    "bd_02": {
+      "name": "中军辕门",
+      "description": "中军辕门前先锋列阵，刀牌相击之声不歇——旗杆就立在辕门之后。",
+      "exits": {
+        "south": "bd_01",
+        "north": "bd_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "bd_flag_vanguard"
+          ],
+          "message": "先锋营的刀牌阵冲不破。"
+        }
+      },
+      "npcs": [
+        "bd_flag_vanguard"
+      ]
+    },
+    "bd_03": {
+      "name": "帅旗之下",
+      "description": "帅旗猎猎，旗杆粗过碗口。拓跋孤按刀立于旗下，身后是空荡的王帐——旗在人在，旗倒人散。",
+      "exits": {
+        "south": "bd_02"
+      },
+      "npcs": [
+        "bd_tuoba_gu"
+      ],
+      "actions": [
+        "seize_flag"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_flag_guards",
+      "type": "kill",
+      "targetId": "bd_flag_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "破辎重营旗卫"
+    },
+    {
+      "id": "kill_vanguard",
+      "type": "kill",
+      "targetId": "bd_flag_vanguard",
+      "required": 1,
+      "weight": 20,
+      "description": "破中军先锋"
+    },
+    {
+      "id": "seize_flag",
+      "type": "puzzle",
+      "targetId": "flag_bd:seized",
+      "required": 1,
+      "weight": 15,
+      "description": "拔其帅旗震敌胆"
+    },
+    {
+      "id": "repel_tuoba",
+      "type": "kill",
+      "targetId": "bd_tuoba_gu",
+      "required": 1,
+      "weight": 45,
+      "description": "逐走燕军千夫长拓跋孤"
+    }
+  ],
+  "rewards": {
+    "experience": 1840,
+    "potential": 940,
+    "money": 620,
+    "items": {
+      "bianhuang_xue": 1
+    }
+  }
+}

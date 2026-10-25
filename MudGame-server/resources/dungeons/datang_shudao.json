@@ -1,0 +1,155 @@
+{
+  "id": "datang_shudao",
+  "name": "蜀道护镖",
+  "description": "蜀锦商队要在剑阁栈道过，劫首猿叟盘踞十年。你随女镖头护镖入蜀：断绳网、破劫匪，在栈道尽头与那位荡藤如飞的劫首讲一讲道理。",
+  "order": 26,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 11,
+  "spawnRoomId": "sd_00",
+  "puzzleInitialStates": {
+    "ropenet": "woven",
+    "briefing_sd": "new"
+  },
+  "puzzleActions": {
+    "listen_escort": {
+      "label": "听女镖头讲蜀道",
+      "puzzleId": "briefing_sd",
+      "rooms": [
+        "sd_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "sd_escort_head",
+      "message": "女镖头把栈道的凶险讲了一遍。",
+      "repeatMessage": "女镖头把鞭梢甩得啪啪响。"
+    },
+    "cut_ropenet": {
+      "label": "砍断绳网",
+      "puzzleId": "ropenet",
+      "rooms": [
+        "sd_02"
+      ],
+      "fromStates": [
+        "woven"
+      ],
+      "nextState": "cut",
+      "setFlags": {
+        "zhandao_duanwei": true
+      },
+      "message": "你一刀斩断绳网主索——整条栈道的传讯绳网哗啦啦垮进深涧。猿叟的耳目断了，他的脚再快，也快不过瞎子。",
+      "repeatMessage": "绳网的断索还在深涧上晃。"
+    }
+  },
+  "rooms": {
+    "sd_00": {
+      "name": "剑阁驿",
+      "description": "剑阁驿的茶棚里坐满不敢上路的商旅，女镖头的商队正在装货——蜀锦的箱子比棺材还沉。",
+      "exits": {
+        "north": "sd_01"
+      },
+      "npcs": [
+        "sd_escort_head"
+      ],
+      "actions": [
+        "listen_escort"
+      ]
+    },
+    "sd_01": {
+      "name": "栈道前哨",
+      "description": "栈道贴着绝壁伸向云里，前哨的劫匪口哨一声接一声——他们在喊人。",
+      "exits": {
+        "south": "sd_00",
+        "north": "sd_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "sd_ape_scout"
+          ],
+          "message": "猿叟的哨探封住栈道口。"
+        }
+      },
+      "npcs": [
+        "sd_ape_scout",
+        "sd_ape_scout"
+      ]
+    },
+    "sd_02": {
+      "name": "绳网天梯",
+      "description": "栈道中段悬着一张巨大的绳网——那是猿叟的耳目与退路。劫匪在网上来去如飞。",
+      "exits": {
+        "south": "sd_01",
+        "north": "sd_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "sd_ape_rouge"
+          ],
+          "message": "劫匪在绳网上腾挪如猿，近身不得。"
+        }
+      },
+      "npcs": [
+        "sd_ape_rouge"
+      ],
+      "actions": [
+        "cut_ropenet"
+      ]
+    },
+    "sd_03": {
+      "name": "栈道尽头",
+      "description": "栈道尽头只剩一根荡索。猿叟倒挂在索上看着你——十年了，头一回有人走到这里。",
+      "exits": {
+        "south": "sd_02"
+      },
+      "npcs": [
+        "sd_yuan_sou"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_scouts",
+      "type": "kill",
+      "targetId": "sd_ape_scout",
+      "required": 2,
+      "weight": 20,
+      "description": "清栈道前哨"
+    },
+    {
+      "id": "kill_rouge",
+      "type": "kill",
+      "targetId": "sd_ape_rouge",
+      "required": 1,
+      "weight": 20,
+      "description": "破绳网劫匪"
+    },
+    {
+      "id": "cut_ropenet",
+      "type": "puzzle",
+      "targetId": "ropenet:cut",
+      "required": 1,
+      "weight": 15,
+      "description": "砍断绳网断耳目"
+    },
+    {
+      "id": "repel_yuan",
+      "type": "kill",
+      "targetId": "sd_yuan_sou",
+      "required": 1,
+      "weight": 45,
+      "description": "栈道尽头挫猿叟"
+    }
+  ],
+  "rewards": {
+    "experience": 1960,
+    "potential": 980,
+    "money": 660,
+    "items": {
+      "shujin_pifeng": 1
+    }
+  }
+}

@@ -763,5 +763,55 @@
     "effects": {
       "learnSkill": "poxu_zhi"
     }
+  },
+  "bianhuang_xue": {
+    "name": "边荒战靴",
+    "description": "边荒集佣兵头子们凑钱打造的战靴，鞋底钉着狼牙钉——荒漠里跑起来，风都追不上。",
+    "type": "equipment",
+    "subtype": "boots",
+    "stackable": false,
+    "sellable": true,
+    "value": 1900,
+    "rarity": 3,
+    "unit": "双",
+    "equipmentSlot": "FEET",
+    "effects": {
+      "dodge": 3,
+      "defense": 6
+    },
+    "source": "边荒集夺旗"
+  },
+  "zhenshui_huan": {
+    "name": "镇水环",
+    "description": "枯井翁镇了一辈子水的铜环，环身刻满镇字——如今它换了主人，水患换了方向。",
+    "type": "equipment",
+    "subtype": "ring",
+    "stackable": false,
+    "sellable": true,
+    "value": 2000,
+    "rarity": 3,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "hitRate": 4,
+      "defense": 4
+    },
+    "source": "枯井之下"
+  },
+  "shujin_pifeng": {
+    "name": "蜀锦披风",
+    "description": "蜀中织造的锦缎披风，内衬软甲——锦上绣的是巴山夜雨，衬里织的是刀枪不入。",
+    "type": "equipment",
+    "subtype": "cloak",
+    "stackable": false,
+    "sellable": true,
+    "value": 2200,
+    "rarity": 3,
+    "unit": "领",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 13
+    },
+    "source": "蜀道护镖"
   }
 }

@@ -1,0 +1,155 @@
+{
+  "id": "luoshui_kujing",
+  "name": "枯井之下",
+  "description": "哑婆的画谜指向洛水上游的镇水枯井——阴癸派在井底修了地窖，守着什么'种子'。你顺着搓绳老妇的绳下井：井底的黑暗里，有人等了二十年。",
+  "order": 25,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 2,
+  "spawnRoomId": "kj_00",
+  "puzzleInitialStates": {
+    "well": "covered",
+    "briefing_kj": "new"
+  },
+  "puzzleActions": {
+    "listen_rope": {
+      "label": "听搓绳老妇讲井台旧事",
+      "puzzleId": "briefing_kj",
+      "rooms": [
+        "kj_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "kj_ropemaker",
+      "message": "老妇把井台十年的怪事讲了一遍。",
+      "repeatMessage": "老妇的绳子搓个不停，像在数日子。"
+    },
+    "descend_well": {
+      "label": "缒绳下井",
+      "puzzleId": "well",
+      "rooms": [
+        "kj_02"
+      ],
+      "fromStates": [
+        "covered"
+      ],
+      "nextState": "open",
+      "message": "井绳绷紧，你坠入井底——黑暗里居然有灯。地窖的石门上刻着一个'种'字，笔画里全是阴癸派的手段。",
+      "repeatMessage": "井绳还在，井底的灯还亮着。",
+      "setFlags": {
+        "jingdi_xunhen": true
+      }
+    }
+  },
+  "rooms": {
+    "kj_00": {
+      "name": "镇水井台",
+      "description": "洛水上游的镇水井台荒草齐腰，井口用青石板盖着，石板上压着的香灰还是新的。搓绳老妇坐在井沿。",
+      "exits": {
+        "down": "kj_01"
+      },
+      "npcs": [
+        "kj_ropemaker"
+      ],
+      "actions": [
+        "listen_rope"
+      ]
+    },
+    "kj_01": {
+      "name": "井口暗渠",
+      "description": "井口的暗渠里潮气逼人，扮作乞丐的暗哨从阴影里站起身——他们守着井，守了十年。",
+      "exits": {
+        "up": "kj_00",
+        "down": "kj_02"
+      },
+      "exitRequirements": {
+        "down": {
+          "defeatNpcs": [
+            "kj_yinkui_guard"
+          ],
+          "message": "井口暗哨的柳叶刀封住井道。"
+        }
+      },
+      "npcs": [
+        "kj_yinkui_guard",
+        "kj_yinkui_guard"
+      ]
+    },
+    "kj_02": {
+      "name": "井绳深处",
+      "description": "井绳尽头，暗渠豁然开阔——地窖的石门虚掩，门缝里漏出幽绿的灯火。缒绳下井，才有机会推门。",
+      "exits": {
+        "up": "kj_01",
+        "down": "kj_03"
+      },
+      "exitRequirements": {
+        "down": {
+          "requiredPuzzleStates": {
+            "well": "open"
+          },
+          "message": "井绳未放，下不得井底。"
+        }
+      },
+      "npcs": [
+        "kj_yinkui_adept"
+      ],
+      "actions": [
+        "descend_well"
+      ]
+    },
+    "kj_03": {
+      "name": "井底地窖",
+      "description": "地窖中央的陶瓮里泡着什么，绿光就从瓮口渗出来。枯井翁拄着一根铜杖守在瓮边——等了二十年的人，眼里的光比瓮还绿。",
+      "exits": {
+        "up": "kj_02"
+      },
+      "npcs": [
+        "kj_kujing_weng"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_sentries",
+      "type": "kill",
+      "targetId": "kj_yinkui_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清除井口暗哨"
+    },
+    {
+      "id": "kill_adept",
+      "type": "kill",
+      "targetId": "kj_yinkui_adept",
+      "required": 1,
+      "weight": 20,
+      "description": "破井底伏修"
+    },
+    {
+      "id": "descend_well",
+      "type": "puzzle",
+      "targetId": "well:open",
+      "required": 1,
+      "weight": 15,
+      "description": "缒绳下井探地窖"
+    },
+    {
+      "id": "repel_kujing",
+      "type": "kill",
+      "targetId": "kj_kujing_weng",
+      "required": 1,
+      "weight": 45,
+      "description": "逐走枯井翁"
+    }
+  ],
+  "rewards": {
+    "experience": 1900,
+    "potential": 960,
+    "money": 640,
+    "items": {
+      "zhenshui_huan": 1
+    }
+  }
+}

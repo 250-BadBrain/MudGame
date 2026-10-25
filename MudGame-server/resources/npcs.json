@@ -8894,5 +8894,824 @@
         "seal": 0
       }
     }
+  },
+  "bd_flag_guard": {
+    "name": "燕军旗卫",
+    "title": "夺旗死敌",
+    "description": "燕军的旗卫，把帅旗看得比命重——旗倒，军心就倒。",
+    "faction": "yan_army",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 37,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 37,
+        "constitution": 35,
+        "agility": 32,
+        "perception": 18,
+        "willpower": 18,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 520,
+        "maxHp": 520,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 77,
+        "defense": 36,
+        "hitRate": 152,
+        "dodge": 108,
+        "parry": 118,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 100,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "bd_flag_vanguard": {
+    "name": "燕军先锋",
+    "title": "夺旗先锋",
+    "description": "燕军先锋营的百战老兵，一手刀牌配合滴水不漏。",
+    "faction": "yan_army",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 39,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 39,
+        "constitution": 37,
+        "agility": 34,
+        "perception": 19,
+        "willpower": 19,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 560,
+        "maxHp": 560,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 81,
+        "defense": 38,
+        "hitRate": 156,
+        "dodge": 108,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 104,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "bd_tuoba_gu": {
+    "name": "拓跋孤",
+    "title": "燕军千夫长",
+    "description": "燕军千夫长拓跋孤，帅旗立在他帐前——旗在，边荒集就翻不了天。",
+    "faction": "yan_army",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 49,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 52,
+        "constitution": 50,
+        "agility": 45,
+        "perception": 24,
+        "willpower": 24,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 950,
+        "maxHp": 950,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 76,
+        "defense": 38,
+        "hitRate": 160,
+        "dodge": 126,
+        "parry": 122,
+        "critRate": 13,
+        "attackSpeed": 4,
+        "initiative": 120,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "duoqi_zhendan",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -10
+    }
+  },
+  "bd_caravan_head": {
+    "name": "商队护卫头领",
+    "title": "夺旗主事",
+    "description": "边荒集商队凑钱请来的护卫头领，一脸络腮胡，说话像刀劈斧凿：夺回帅旗，边荒集还是边荒人的。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_bd_caravan",
+    "attributes": {
+      "level": 18,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 15,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 13,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 60,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 54,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "kj_yinkui_adept": {
+    "name": "井底伏修",
+    "title": "阴葵暗桩",
+    "description": "守在枯井暗渠里的阴癸派伏修，多年不见天日的脸白得像纸。",
+    "faction": "yinkui_sect",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 40,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 40,
+        "constitution": 38,
+        "agility": 35,
+        "perception": 20,
+        "willpower": 20,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 540,
+        "maxHp": 540,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 79,
+        "defense": 37,
+        "hitRate": 154,
+        "dodge": 110,
+        "parry": 118,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 100,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "kj_yinkui_guard": {
+    "name": "井口暗哨",
+    "title": "阴癸眼线",
+    "description": "扮作乞丐的井口暗哨，破碗底下压着淬毒的柳叶刀。",
+    "faction": "yinkui_sect",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 42,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 42,
+        "constitution": 40,
+        "agility": 37,
+        "perception": 21,
+        "willpower": 21,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 580,
+        "maxHp": 580,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 83,
+        "defense": 39,
+        "hitRate": 158,
+        "dodge": 110,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 102,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "kj_kujing_weng": {
+    "name": "枯井翁",
+    "title": "阴癸派护法",
+    "description": "阴癸派护法枯井翁，在洛水上游的枯井底住了二十年——他在等'种子'破土的那一天。",
+    "faction": "yinkui_sect",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 50,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 53,
+        "constitution": 51,
+        "agility": 46,
+        "perception": 25,
+        "willpower": 25,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 980,
+        "maxHp": 980,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 78,
+        "defense": 39,
+        "hitRate": 162,
+        "dodge": 128,
+        "parry": 124,
+        "critRate": 13,
+        "attackSpeed": 4,
+        "initiative": 116,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "jingdi_xunhen",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -18,
+      "defense": -10
+    }
+  },
+  "kj_ropemaker": {
+    "name": "搓绳老妇",
+    "title": "井台旧邻",
+    "description": "枯井台边搓麻绳的老妇，她的儿子十年前掉进井里没再上来——她搓的绳，一捆捆全是等。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_kj_rope",
+    "attributes": {
+      "level": 18,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 15,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 13,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 60,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 54,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sd_ape_rouge": {
+    "name": "剑阁劫匪",
+    "title": "栈道剪径",
+    "description": "剑阁栈道上的劫匪，攀岩走壁如履平地——他们的头儿自称猿叟。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 41,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 41,
+        "constitution": 39,
+        "agility": 36,
+        "perception": 20,
+        "willpower": 20,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 560,
+        "maxHp": 560,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 81,
+        "defense": 38,
+        "hitRate": 156,
+        "dodge": 112,
+        "parry": 118,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 104,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sd_ape_scout": {
+    "name": "猿叟哨探",
+    "title": "栈道眼线",
+    "description": "猿叟手下的哨探，口哨一响，整条栈道的绳网都会收起来。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 43,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 43,
+        "constitution": 41,
+        "agility": 38,
+        "perception": 21,
+        "willpower": 21,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 600,
+        "maxHp": 600,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 85,
+        "defense": 40,
+        "hitRate": 158,
+        "dodge": 114,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 106,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "sd_yuan_sou": {
+    "name": "猿叟",
+    "title": "剑阁劫首",
+    "description": "剑阁劫首猿叟，据说能荡着藤蔓追上奔马——他占着蜀道咽喉十年，官府的镖船全得看他脸色。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 51,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 54,
+        "constitution": 52,
+        "agility": 47,
+        "perception": 25,
+        "willpower": 25,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1000,
+        "maxHp": 1000,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 80,
+        "defense": 40,
+        "hitRate": 164,
+        "dodge": 130,
+        "parry": 124,
+        "critRate": 13,
+        "attackSpeed": 4,
+        "initiative": 118,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "zhandao_duanwei",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -8
+    }
+  },
+  "sd_escort_head": {
+    "name": "蜀锦商队主",
+    "title": "入蜀镖头",
+    "description": "蜀锦商队的女镖头，一手软鞭使得出神入化——她的商队要在猿叟的地盘上过，就得找一个敢跟他讲道理的人。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_sd_escort",
+    "attributes": {
+      "level": 18,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 15,
+        "agility": 13,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 160,
+        "maxHp": 160,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 13,
+        "defense": 12,
+        "hitRate": 82,
+        "dodge": 60,
+        "parry": 60,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 54,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
   }
 }
