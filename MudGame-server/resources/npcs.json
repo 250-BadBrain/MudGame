@@ -20861,5 +20861,273 @@
         "seal": 0
       }
     }
+  },
+  "hc_caravan_leader": {
+    "name": "商队首领",
+    "title": "丝绸之路",
+    "description": "丝绸之路上的老商人，他护送的不是货物，是三十年攒下的一封信——收信人在玉门关外。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "attributes": {
+      "level": 15,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 15,
+        "constitution": 13,
+        "agility": 10,
+        "perception": 7,
+        "willpower": 7,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 120,
+        "maxHp": 120,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 15,
+        "defense": 7,
+        "hitRate": 135,
+        "dodge": 21,
+        "parry": 19,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 15,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "hc_bandit_1": {
+    "name": "丝路劫匪",
+    "title": "丝路劫道",
+    "description": "丝路劫匪。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "combatMode": "",
+    "attributes": {
+      "level": 40,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 40,
+        "constitution": 38,
+        "agility": 35,
+        "perception": 20,
+        "willpower": 20,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 500,
+        "maxHp": 500,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 40,
+        "defense": 20,
+        "hitRate": 160,
+        "dodge": 46,
+        "parry": 44,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 40,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "hc_bandit_2": {
+    "name": "丝路刀客",
+    "title": "丝路劫道",
+    "description": "丝路刀客。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "combatMode": "",
+    "attributes": {
+      "level": 44,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 44,
+        "constitution": 42,
+        "agility": 39,
+        "perception": 22,
+        "willpower": 22,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 550,
+        "maxHp": 550,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 44,
+        "defense": 22,
+        "hitRate": 164,
+        "dodge": 50,
+        "parry": 48,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 44,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "hc_bandit_boss": {
+    "name": "丝路劫首",
+    "title": "丝路劫道",
+    "description": "丝路劫首。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 58,
+      "realm": "grandmaster",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 58,
+        "constitution": 56,
+        "agility": 53,
+        "perception": 29,
+        "willpower": 29,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1100,
+        "maxHp": 1100,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 58,
+        "defense": 29,
+        "hitRate": 178,
+        "dodge": 64,
+        "parry": 62,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 58,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
   }
 }

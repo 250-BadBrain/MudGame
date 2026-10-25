@@ -1,0 +1,136 @@
+{
+  "id": "silk_road_hugong",
+  "name": "护送商队",
+  "description": "丝绸之路上的老商人要送一封信到玉门关外——路上有三拨劫匪。你的任务：护送他安全到达终点。",
+  "order": 44,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 20,
+  "spawnRoomId": "hc_00",
+  "puzzleInitialStates": {
+    "briefing_hc": "new"
+  },
+  "puzzleActions": {
+    "listen_hc": {
+      "label": "听商队首领说明路线",
+      "puzzleId": "briefing_hc",
+      "rooms": [
+        "hc_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "商队首领展开路线图：\"从这儿到玉门关，三段路。每段路上都有人等着抢我们——你的刀，就是我们的路引。\"",
+      "repeatMessage": "路线图你已记住。"
+    }
+  },
+  "rooms": {
+    "hc_00": {
+      "name": "丝路起点",
+      "description": "丝绸之路的起点驿站，商队首领的马车已经备好——三十年的信就藏在车座下面。",
+      "exits": {
+        "west": "hc_01"
+      },
+      "npcs": [
+        "hc_caravan_leader"
+      ],
+      "actions": [
+        "listen_hc"
+      ]
+    },
+    "hc_01": {
+      "name": "第一段·黄沙道",
+      "description": "黄沙漫天的官道，两侧是望不到边的荒漠。劫匪的马蹄声从沙丘后面传来。",
+      "exits": {
+        "east": "hc_00",
+        "west": "hc_02"
+      },
+      "exitRequirements": {
+        "west": {
+          "defeatNpcs": [
+            "hc_bandit_1"
+          ],
+          "message": "丝路劫匪封住黄沙道，马车冲不过去。"
+        }
+      },
+      "npcs": [
+        "hc_bandit_1",
+        "hc_caravan_leader"
+      ]
+    },
+    "hc_02": {
+      "name": "第二段·烽燧残垣",
+      "description": "废弃的烽燧台残垣断壁，这里是劫匪最常出没的地方——因为从这里开始，官道变成了一条窄路。",
+      "exits": {
+        "east": "hc_01",
+        "west": "hc_03"
+      },
+      "exitRequirements": {
+        "west": {
+          "defeatNpcs": [
+            "hc_bandit_2"
+          ],
+          "message": "丝路刀客守在窄路口，商队过不去。"
+        }
+      },
+      "npcs": [
+        "hc_bandit_2",
+        "hc_caravan_leader"
+      ]
+    },
+    "hc_03": {
+      "name": "第三段·玉门关",
+      "description": "玉门关的城楼在夕阳下金光闪闪——但劫首拦在关前，他要的不是货，是商队首领的命。",
+      "exits": {
+        "east": "hc_02"
+      },
+      "npcs": [
+        "hc_bandit_boss",
+        "hc_caravan_leader"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_bandit1",
+      "type": "kill",
+      "targetId": "hc_bandit_1",
+      "required": 1,
+      "weight": 20,
+      "description": "击退黄沙道劫匪"
+    },
+    {
+      "id": "kill_bandit2",
+      "type": "kill",
+      "targetId": "hc_bandit_2",
+      "required": 1,
+      "weight": 20,
+      "description": "击退烽燧刀客"
+    },
+    {
+      "id": "kill_boss",
+      "type": "kill",
+      "targetId": "hc_bandit_boss",
+      "required": 1,
+      "weight": 35,
+      "description": "击败丝路劫首"
+    },
+    {
+      "id": "reach_yumen",
+      "type": "enter_room",
+      "targetId": "hc_03",
+      "required": 1,
+      "weight": 25,
+      "description": "护送商队抵达玉门关"
+    }
+  ],
+  "rewards": {
+    "experience": 2900,
+    "potential": 1440,
+    "money": 1050,
+    "items": {
+      "silk_road_map": 1
+    }
+  }
+}

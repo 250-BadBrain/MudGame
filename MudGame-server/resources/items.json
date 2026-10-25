@@ -2955,5 +2955,23 @@
       "maxMp": 25
     },
     "source": "天罡北斗阵"
+  },
+  "silk_road_map": {
+    "name": "丝绸之路全图",
+    "description": "商队首领三十年积累的丝绸之路全图——从长安到玉门关，每一条水路每一条小道都标得分毫不差。",
+    "type": "equipment",
+    "subtype": "map",
+    "stackable": false,
+    "sellable": true,
+    "value": 3500,
+    "rarity": 5,
+    "unit": "卷",
+    "equipmentSlot": "RING",
+    "effects": {
+      "hitRate": 5,
+      "initiative": 4,
+      "maxMp": 15
+    },
+    "source": "护送商队"
   }
 }
