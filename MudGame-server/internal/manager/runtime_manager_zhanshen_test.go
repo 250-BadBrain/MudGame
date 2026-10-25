@@ -301,3 +301,69 @@ func TestSanhuaFullFlow(t *testing.T) {
 		t.Fatal("expected cleared flag")
 	}
 }
+
+// 方夜羽复仇全流程：好手 → 设伏破招 → 再挫方夜羽 → 双刀结算
+func TestFangfuchouFullFlow(t *testing.T) {
+	r, playerID, inst := createDungeonTestPlayer(t, "fuyu_fangfuchou")
+	room := func(id string) string { return r.dungeonMgr.InstanceRoomIDNoLock(inst, id) }
+	defeatAll := func(roomID, template string, count int) {
+		t.Helper()
+		for i := 0; i < count; i++ {
+			npcID := livingDungeonNPCByTemplateInRoom(t, inst, roomID, template)
+			r.mu.Lock()
+			_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(npcID)
+			r.mu.Unlock()
+			if !ok {
+				t.Fatalf("defeat %s #%d failed", template, i+1)
+			}
+		}
+	}
+	if _, err := r.DoRoomAction(playerID, "listen_helmsman"); err != nil {
+		t.Fatalf("listen failed: %v", err)
+	}
+	gate := room("fy2_01")
+	moveDungeonTestPlayer(t, r, playerID, gate)
+	defeatAll(gate, "fy2_moshi_elite", 2)
+	hall := room("fy2_02")
+	moveDungeonTestPlayer(t, r, playerID, hall)
+	if _, err := r.DoRoomAction(playerID, "set_ambush"); err != nil {
+		t.Fatalf("set ambush failed: %v", err)
+	}
+	inner := room("fy2_03")
+	moveDungeonTestPlayer(t, r, playerID, inner)
+	bossID := dungeonNPCIDByTemplateInRoom(t, inst, inner, "fy2_fang_yeyu")
+	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	if _, err := r.Kill(playerID, bossID); err != nil {
+		t.Fatalf("engage fang failed: %v", err)
+	}
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+		t.Fatal("expected ambush to weaken fang yeyu")
+	}
+	r.mu.Lock()
+	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	r.mu.Unlock()
+	if !ok {
+		t.Fatal("defeat fang failed")
+	}
+	r.mu.Lock()
+	players, _ := r.loadPlayers()
+	players[playerID].State = "IDLE"
+	players[playerID].TargetID = ""
+	players[playerID].CombatType = ""
+	if err := r.savePlayers(players); err != nil {
+		r.mu.Unlock()
+		t.Fatalf("save failed: %v", err)
+	}
+	r.mu.Unlock()
+	if inst.Progress != 100 {
+		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
+	}
+	if _, err := r.LeaveDungeon(playerID); err != nil {
+		t.Fatalf("leave failed: %v", err)
+	}
+	after, _ := r.loadPlayers()
+	p := after[playerID]
+	if p.Backpack["yulie_shuangdao"] != 1 || !p.Flags["dungeon_cleared_fuyu_fangfuchou"] {
+		t.Fatalf("expected rewards, got dao=%d flag=%v", p.Backpack["yulie_shuangdao"], p.Flags["dungeon_cleared_fuyu_fangfuchou"])
+	}
+}

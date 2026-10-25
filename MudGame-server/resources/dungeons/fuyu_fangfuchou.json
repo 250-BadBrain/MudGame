@@ -1,0 +1,144 @@
+{
+  "id": "fuyu_fangfuchou",
+  "name": "方夜羽复仇",
+  "description": "上回败走怒蛟帮的方夜羽回来了——练了一百天刀，带着魔师宫的好手卷土重来。这一次，怒蛟帮不再硬扛：你随老舵工布下口袋阵，在他最熟悉的水门，等他再跌一次。",
+  "order": 21,
+  "chainId": "fuyu_fan_yun",
+  "chainName": "覆雨翻云",
+  "chapter": 4,
+  "spawnRoomId": "fy2_00",
+  "puzzleInitialStates": {
+    "ambush": "unset",
+    "briefing_fy2": "new"
+  },
+  "puzzleActions": {
+    "listen_helmsman": {
+      "label": "听老舵工布阵",
+      "puzzleId": "briefing_fy2",
+      "rooms": [
+        "fy2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "fy2_steward",
+      "message": "老舵工把口袋阵的布法讲了个透。",
+      "repeatMessage": "老舵工攥着橹，手心全是汗。"
+    },
+    "set_ambush": {
+      "label": "聚义庭设伏",
+      "puzzleId": "ambush",
+      "rooms": [
+        "fy2_02"
+      ],
+      "fromStates": [
+        "unset"
+      ],
+      "nextState": "ready",
+      "setFlags": {
+        "gudi_shefu": true
+      },
+      "message": "帮众藏进梁上帐后，灯火尽数熄灭——聚义庭回到方夜羽最熟悉的样子，熟悉得像个陷阱。",
+      "repeatMessage": "口袋阵已布好，只等鱼入网。"
+    }
+  },
+  "rooms": {
+    "fy2_00": {
+      "name": "水寨暗处",
+      "description": "水寨灯火尽熄，只余老舵工的小船拢在暗处。江面上，一队黑船正逆流而上。",
+      "exits": {
+        "north": "fy2_01"
+      },
+      "npcs": [
+        "fy2_steward"
+      ],
+      "actions": [
+        "listen_helmsman"
+      ]
+    },
+    "fy2_01": {
+      "name": "水门故道",
+      "description": "方夜羽上回败走的水门故道——这次他自己撞了回来。魔师宫好手抢先登岸开路。",
+      "exits": {
+        "south": "fy2_00",
+        "north": "fy2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "fy2_moshi_elite"
+          ],
+          "message": "魔师宫好手把水门故道堵得死死的。"
+        }
+      },
+      "npcs": [
+        "fy2_moshi_elite",
+        "fy2_moshi_elite"
+      ]
+    },
+    "fy2_02": {
+      "name": "聚义庭",
+      "description": "聚义庭灯火俱灭，梁上帐后藏满了刀。这里躺过方夜羽上次的败绩——也将躺下一次。",
+      "exits": {
+        "south": "fy2_01",
+        "north": "fy2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "ambush": "ready"
+          },
+          "message": "伏未设好，硬碰硬是下策——先布阵。"
+        }
+      },
+      "actions": [
+        "set_ambush"
+      ]
+    },
+    "fy2_03": {
+      "name": "聚义厅",
+      "description": "聚义厅烛火重燃。方夜羽立在厅中，双刀垂在身侧——他看见了梁上的人影，却拔刀如常：\"这次，不会了。\"",
+      "exits": {
+        "south": "fy2_02"
+      },
+      "npcs": [
+        "fy2_fang_yeyu"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_elites",
+      "type": "kill",
+      "targetId": "fy2_moshi_elite",
+      "required": 2,
+      "weight": 20,
+      "description": "破水门魔师宫好手"
+    },
+    {
+      "id": "set_ambush",
+      "type": "puzzle",
+      "targetId": "ambush:ready",
+      "required": 1,
+      "weight": 15,
+      "description": "聚义庭布下口袋阵"
+    },
+    {
+      "id": "repel_fang",
+      "type": "kill",
+      "targetId": "fy2_fang_yeyu",
+      "required": 1,
+      "weight": 65,
+      "description": "再挫方夜羽复仇之刃"
+    }
+  ],
+  "rewards": {
+    "experience": 1660,
+    "potential": 880,
+    "money": 560,
+    "items": {
+      "yulie_shuangdao": 1
+    }
+  }
+}

@@ -714,5 +714,21 @@
     "effects": {
       "learnSkill": "lingxu_bu"
     }
+  },
+  "yulie_shuangdao": {
+    "name": "羽裂双刀",
+    "description": "方夜羽的新刀——上次败给你之后，他重铸了刀，也重铸了自己的刀路。刃口薄得像一声叹息。",
+    "type": "equipment",
+    "subtype": "blade",
+    "stackable": false,
+    "sellable": true,
+    "value": 2200,
+    "rarity": 3,
+    "unit": "对",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 12
+    },
+    "source": "方夜羽复仇"
   }
 }
