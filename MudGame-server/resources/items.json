@@ -584,5 +584,22 @@
       "hitRate": 4
     },
     "source": "鸡鸣山之约"
+  },
+  "xuantie_zhanzhi": {
+    "name": "玄铁战指",
+    "description": "五枚古铜残片回炉重锻的战指，玄铁的凉意渗进指骨——出刀时会稳上几分。",
+    "type": "equipment",
+    "subtype": "ring",
+    "stackable": false,
+    "sellable": true,
+    "value": 1200,
+    "rarity": 3,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 2,
+      "defense": 4
+    },
+    "source": "铁匠铺合成"
   }
 }

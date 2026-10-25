@@ -355,6 +355,25 @@
         }
       },
       {
+        "id": "brew_dahuandan",
+        "text": "炼一炉大还丹（止血草×8 + 古铜残片×2 + 150两）",
+        "response": "孙回春罕见地搓了搓手：\"八株草提药、两片铜引火、一百五十两工钱——大还丹！丹成之日，半条命都能给你捞回来。\"",
+        "requires": {
+          "items": {
+            "herb": 8,
+            "bronze_fragment": 2
+          }
+        },
+        "takeItems": {
+          "herb": 8,
+          "bronze_fragment": 2
+        },
+        "takeMoney": 150,
+        "giveItems": {
+          "dahuandan": 1
+        }
+      },
+      {
         "id": "consult_fee",
         "text": "付诊金抓现成的金创药（100两）",
         "response": "孙回春收了银子，从百子柜里取出一瓶：\"拿好。比东市便宜二十文，老夫赚个跑腿钱。\"",
@@ -440,6 +459,23 @@
         "takeMoney": 500,
         "giveItems": {
           "steel_blade": 1
+        }
+      },
+      {
+        "id": "forge_ring",
+        "text": "熔铸玄铁战指（古铜残片×5 + 200两）",
+        "response": "钟铁衣掂了掂那把古铜残片：\"成色杂，但火候到了就是玄铁。——手伸出来，别抖。\"——战指套上指骨，凉意直透心口。",
+        "requires": {
+          "items": {
+            "bronze_fragment": 5
+          }
+        },
+        "takeItems": {
+          "bronze_fragment": 5
+        },
+        "takeMoney": 200,
+        "giveItems": {
+          "xuantie_zhanzhi": 1
         }
       },
       {
