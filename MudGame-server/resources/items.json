@@ -550,5 +550,39 @@
       "defense": 10
     },
     "source": "瓦岗惊变"
+  },
+  "tianma_ling": {
+    "name": "天马银铃",
+    "description": "飞马牧场名驹颈间的银铃，铃心坠着一粒墨玉。步履之间铃音清越——恶徒夜里摸进牧场前，总能先听见它响。",
+    "type": "equipment",
+    "subtype": "necklace",
+    "stackable": false,
+    "sellable": true,
+    "value": 1500,
+    "rarity": 3,
+    "unit": "枚",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "defense": 4,
+      "dodge": 2
+    },
+    "source": "飞马牧场"
+  },
+  "posui_huan": {
+    "name": "破碎指环",
+    "description": "以战神殿中一块图录碎玉磨成的指环——凝神时，指环里仿佛有雷声滚动。",
+    "type": "equipment",
+    "subtype": "ring",
+    "stackable": false,
+    "sellable": true,
+    "value": 1800,
+    "rarity": 3,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "critRate": 2,
+      "hitRate": 4
+    },
+    "source": "鸡鸣山之约"
   }
 }

@@ -208,6 +208,9 @@
   "rewards": {
     "experience": 1060,
     "potential": 660,
-    "money": 380
+    "money": 380,
+    "items": {
+      "tianma_ling": 1
+    }
   }
 }

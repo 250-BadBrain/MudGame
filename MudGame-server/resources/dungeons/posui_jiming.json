@@ -204,6 +204,9 @@
   "rewards": {
     "experience": 1160,
     "potential": 700,
-    "money": 400
+    "money": 400,
+    "items": {
+      "posui_huan": 1
+    }
   }
 }
