@@ -500,5 +500,22 @@
     "effects": {
       "recoverHp": 150
     }
+  },
+  "langwang_dao": {
+    "name": "狼王刀",
+    "description": "马贼王赫连霸的佩刀，刀背宽厚，刃口却薄得能吹断头发——边荒十年的风霜都在刀身上。",
+    "type": "equipment",
+    "subtype": "blade",
+    "stackable": false,
+    "sellable": true,
+    "value": 1800,
+    "rarity": 3,
+    "unit": "把",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 10,
+      "hitRate": 2
+    },
+    "source": "马贼王庭"
   }
 }

@@ -6362,5 +6362,278 @@
       "hitRate": -16,
       "defense": -10
     }
+  },
+  "wt_scout": {
+    "name": "边荒游侠",
+    "title": "商路眼线",
+    "description": "在边荒讨生活的老游侠，替商队盯马贼王的动向——盯了十年，头一回看到有人真敢去捣巢。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_wt_scout",
+    "attributes": {
+      "level": 15,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 14,
+        "constitution": 14,
+        "agility": 16,
+        "perception": 14,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 140,
+        "maxHp": 140,
+        "mp": 70,
+        "trainedMaxMp": 70,
+        "maxMp": 70,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 14,
+        "defense": 13,
+        "hitRate": 84,
+        "dodge": 66,
+        "parry": 60,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 66,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "wt_archer": {
+    "name": "哨塔弓手",
+    "title": "王庭眼线",
+    "description": "守在哨塔上的马贼弓手，箭无虚发——边荒的箭比刀更不讲情面。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 25,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 26,
+        "constitution": 25,
+        "agility": 24,
+        "perception": 16,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 350,
+        "maxHp": 350,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 53,
+        "defense": 26,
+        "hitRate": 128,
+        "dodge": 98,
+        "parry": 100,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 90,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "wt_chief": {
+    "name": "马贼头目",
+    "title": "金帐护卫",
+    "description": "赫连霸麾下的头目，一人一狼一柄厚背刀，把金帐前守得铁桶一般。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 27,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 28,
+        "constitution": 27,
+        "agility": 24,
+        "perception": 16,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 380,
+        "maxHp": 380,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 57,
+        "defense": 28,
+        "hitRate": 132,
+        "dodge": 100,
+        "parry": 104,
+        "critRate": 5,
+        "attackSpeed": 4,
+        "initiative": 94,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "wt_helian_ba": {
+    "name": "赫连霸",
+    "title": "马贼王",
+    "description": "雄踞边荒十年的马贼王，狼皮大氅下全是旧伤疤。他的规矩很简单：刀快的人活着，刀慢的人的货归他。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 38,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 42,
+        "constitution": 40,
+        "agility": 36,
+        "perception": 24,
+        "willpower": 26,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 820,
+        "maxHp": 820,
+        "mp": 170,
+        "trainedMaxMp": 170,
+        "maxMp": 170,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 62,
+        "defense": 32,
+        "hitRate": 142,
+        "dodge": 112,
+        "parry": 110,
+        "critRate": 12,
+        "attackSpeed": 4,
+        "initiative": 114,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "duanliang_kun",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -8
+    }
   }
 }

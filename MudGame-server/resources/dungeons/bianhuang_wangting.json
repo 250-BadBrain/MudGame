@@ -1,0 +1,156 @@
+{
+  "id": "bianhuang_wangting",
+  "name": "马贼王庭",
+  "description": "边荒商路被马贼王赫连霸掐了三年，商队联合悬赏捣巢。你从外围一路杀进金帐，一把火断了狼群的粮——边荒的规矩：刀快的人说话，粮尽的人闭嘴。",
+  "order": 15,
+  "chainId": "bianhuang_legend",
+  "chainName": "边荒传说",
+  "chapter": 2,
+  "spawnRoomId": "wt_00",
+  "puzzleInitialStates": {
+    "granary": "intact",
+    "briefing_wt": "new"
+  },
+  "puzzleActions": {
+    "listen_scout": {
+      "label": "听游侠指点巢穴",
+      "puzzleId": "briefing_wt",
+      "rooms": [
+        "wt_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "wt_scout",
+      "message": "老游侠把王庭的布防讲了个透。",
+      "repeatMessage": "老游侠已没入荒草，只剩一句\"小心弓手\"。"
+    },
+    "burn_granary": {
+      "label": "焚其粮草",
+      "puzzleId": "granary",
+      "rooms": [
+        "wt_02"
+      ],
+      "fromStates": [
+        "intact"
+      ],
+      "nextState": "burned",
+      "setFlags": {
+        "duanliang_kun": true
+      },
+      "message": "火折子掷进粮垛，烈焰腾空——王庭的狼嚎第一次带上了慌乱。赫连霸的刀再快，也架不住弟兄们饿肚子。",
+      "repeatMessage": "粮垛只剩焦黑的余烬。"
+    }
+  },
+  "rooms": {
+    "wt_00": {
+      "name": "王庭外围",
+      "description": "荒草没膝的戈壁上插着森森狼牙旗，远处金帐的尖顶在暮色里若隐若现。老游侠蹲在石堆后朝你打手势。",
+      "exits": {
+        "north": "wt_01"
+      },
+      "npcs": [
+        "wt_scout"
+      ],
+      "actions": [
+        "listen_scout"
+      ]
+    },
+    "wt_01": {
+      "name": "哨塔",
+      "description": "三座哨塔鼎足而立，塔上的弓手已经发现了你——箭雨贴着头皮飞过，退路和去路都在射程之内。",
+      "exits": {
+        "south": "wt_00",
+        "north": "wt_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "wt_archer"
+          ],
+          "message": "哨塔弓手封死去路，箭雨密不透风。"
+        }
+      },
+      "npcs": [
+        "wt_archer",
+        "wt_archer"
+      ]
+    },
+    "wt_02": {
+      "name": "王帐前",
+      "description": "王帐前的空地上堆着小山似的粮垛——马贼王的底气。头目们提刀拦在帐前，粮垛就在他们身后。",
+      "exits": {
+        "south": "wt_01",
+        "north": "wt_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "wt_chief"
+          ],
+          "message": "马贼头目把金帐门前的空地守得水泄不通。"
+        }
+      },
+      "npcs": [
+        "wt_chief",
+        "wt_chief"
+      ],
+      "actions": [
+        "burn_granary"
+      ]
+    },
+    "wt_03": {
+      "name": "金帐",
+      "description": "金帐之内狼皮铺地，赫连霸横刀立于王座之前，身后就是那把传了三代的狼王刀。",
+      "exits": {
+        "south": "wt_02"
+      },
+      "npcs": [
+        "wt_helian_ba"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_archers",
+      "type": "kill",
+      "targetId": "wt_archer",
+      "required": 2,
+      "weight": 20,
+      "description": "拔除哨塔弓手"
+    },
+    {
+      "id": "kill_chiefs",
+      "type": "kill",
+      "targetId": "wt_chief",
+      "required": 2,
+      "weight": 20,
+      "description": "击破王帐头目"
+    },
+    {
+      "id": "burn_granary",
+      "type": "puzzle",
+      "targetId": "granary:burned",
+      "required": 1,
+      "weight": 15,
+      "description": "焚其粮草，乱其军心"
+    },
+    {
+      "id": "repel_helian",
+      "type": "kill",
+      "targetId": "wt_helian_ba",
+      "required": 1,
+      "weight": 45,
+      "description": "逐走马贼王赫连霸"
+    }
+  ],
+  "rewards": {
+    "experience": 1300,
+    "potential": 760,
+    "money": 440,
+    "items": {
+      "langwang_dao": 1
+    }
+  }
+}
