@@ -6635,5 +6635,278 @@
       "hitRate": -16,
       "defense": -8
     }
+  },
+  "mg_steward": {
+    "name": "怒蛟执事",
+    "title": "帮舵管事",
+    "description": "怒蛟帮的老执事，胳膊上还缠着上回方夜羽夜袭留下的绷带，腰杆却挺得笔直。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_mg_steward",
+    "attributes": {
+      "level": 16,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 15,
+        "constitution": 15,
+        "agility": 14,
+        "perception": 13,
+        "willpower": 14,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 150,
+        "maxHp": 150,
+        "mp": 70,
+        "trainedMaxMp": 70,
+        "maxMp": 70,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 14,
+        "defense": 13,
+        "hitRate": 86,
+        "dodge": 66,
+        "parry": 62,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 62,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "mg_disciple": {
+    "name": "魔师宫弟子",
+    "title": "索战先锋",
+    "description": "黑袍束发的魔师宫弟子，剑走轻灵却杀意森然——索战索的就是名气。",
+    "faction": "moshi_palace",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 27,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 28,
+        "constitution": 26,
+        "agility": 25,
+        "perception": 16,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 380,
+        "maxHp": 380,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 57,
+        "defense": 27,
+        "hitRate": 132,
+        "dodge": 102,
+        "parry": 104,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 94,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "mg_adept": {
+    "name": "魔师宫好手",
+    "title": "大尊者亲随",
+    "description": "厉工座下的亲随好手，一双手稳得像铁铸的——他们随大尊者征战半生，败绩屈指可数。",
+    "faction": "moshi_palace",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 29,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 30,
+        "constitution": 28,
+        "agility": 26,
+        "perception": 17,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 410,
+        "maxHp": 410,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 61,
+        "defense": 29,
+        "hitRate": 136,
+        "dodge": 104,
+        "parry": 108,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 98,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "mg_li_gong": {
+    "name": "厉工",
+    "title": "魔师宫大尊者",
+    "description": "魔师宫大尊者厉工，白发白袍，笑容和煦——他杀人之前总是先笑，笑得越深，出刀越重。",
+    "faction": "moshi_palace",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 40,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 44,
+        "constitution": 42,
+        "agility": 38,
+        "perception": 26,
+        "willpower": 26,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 840,
+        "maxHp": 840,
+        "mp": 180,
+        "trainedMaxMp": 180,
+        "maxMp": 180,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 64,
+        "defense": 33,
+        "hitRate": 146,
+        "dodge": 116,
+        "parry": 114,
+        "critRate": 12,
+        "attackSpeed": 4,
+        "initiative": 118,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "tangtang_zhizhen",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -16,
+      "defense": -8
+    }
   }
 }

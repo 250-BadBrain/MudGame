@@ -517,5 +517,22 @@
       "hitRate": 2
     },
     "source": "马贼王庭"
+  },
+  "tianmo_pei": {
+    "name": "天魔佩",
+    "description": "厉工退走时遗落的魔门古玉，触手冰凉——佩之能凝神索敌，魔门的旧物未必只属于魔。",
+    "type": "equipment",
+    "subtype": "ring",
+    "stackable": false,
+    "sellable": true,
+    "value": 1600,
+    "rarity": 3,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "critRate": 3,
+      "hitRate": 3
+    },
+    "source": "魔师宫索战"
   }
 }

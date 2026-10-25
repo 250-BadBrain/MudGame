@@ -1,0 +1,156 @@
+{
+  "id": "fuyu_moshigong",
+  "name": "魔师宫索战",
+  "description": "方夜羽败走之后，魔师宫大尊者厉工亲率好手溯江而上，为魔门索回\"场面\"。怒蛟帮帮主重伤、帮众凋零——你受托协防帮舵：击鼓聚将，以堂堂之阵拒魔门之锋。",
+  "order": 16,
+  "chainId": "fuyu_fan_yun",
+  "chainName": "覆雨翻云",
+  "chapter": 3,
+  "spawnRoomId": "mg_00",
+  "puzzleInitialStates": {
+    "drum": "silent",
+    "briefing_mg": "new"
+  },
+  "puzzleActions": {
+    "listen_steward": {
+      "label": "听执事交代敌情",
+      "puzzleId": "briefing_mg",
+      "rooms": [
+        "mg_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "mg_steward",
+      "message": "老执事把魔师宫的来势讲得分明。",
+      "repeatMessage": "老执事望着江面，眉头不展。"
+    },
+    "beat_drum": {
+      "label": "击鼓聚将",
+      "puzzleId": "drum",
+      "rooms": [
+        "mg_02"
+      ],
+      "fromStates": [
+        "silent"
+      ],
+      "nextState": "thundering",
+      "setFlags": {
+        "tangtang_zhizhen": true
+      },
+      "message": "鼓槌落下，镇帮大鼓声震四野——四面八方火把亮起，怒蛟帮众提刀奔出。魔门功法最忌堂堂之阵，厉工的笑意第一次淡了。",
+      "repeatMessage": "鼓声未歇，帮众已聚。"
+    }
+  },
+  "rooms": {
+    "mg_00": {
+      "name": "帮门外海",
+      "description": "怒蛟帮水寨的外海停着一艘漆黑大船，魔师宫的旗在夜风里猎猎作响。老执事提灯立在栈道口。",
+      "exits": {
+        "north": "mg_01"
+      },
+      "npcs": [
+        "mg_steward"
+      ],
+      "actions": [
+        "listen_steward"
+      ]
+    },
+    "mg_01": {
+      "name": "栈桥",
+      "description": "通往帮舵的栈桥在浪里起伏，魔师宫弟子按剑而立，桥下浪头一个比一个高。",
+      "exits": {
+        "south": "mg_00",
+        "north": "mg_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "mg_disciple"
+          ],
+          "message": "魔师宫弟子锁死栈桥，剑光如匹练。"
+        }
+      },
+      "npcs": [
+        "mg_disciple",
+        "mg_disciple"
+      ]
+    },
+    "mg_02": {
+      "name": "演武场",
+      "description": "怒蛟帮的演武场火把通明，好手们背对大鼓列阵——鼓就在他们身后的鼓架上。",
+      "exits": {
+        "south": "mg_01",
+        "north": "mg_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "mg_adept"
+          ],
+          "message": "魔师宫好手据住演武场，进不得聚义厅。"
+        }
+      },
+      "npcs": [
+        "mg_adept",
+        "mg_adept"
+      ],
+      "actions": [
+        "beat_drum"
+      ]
+    },
+    "mg_03": {
+      "name": "聚义厅",
+      "description": "聚义厅前，厉工负手而立，白发在夜风里像一面降不下去的旗——他要的场面，就差最后一步。",
+      "exits": {
+        "south": "mg_02"
+      },
+      "npcs": [
+        "mg_li_gong"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_disciples",
+      "type": "kill",
+      "targetId": "mg_disciple",
+      "required": 2,
+      "weight": 20,
+      "description": "破栈桥魔师宫弟子"
+    },
+    {
+      "id": "kill_adepts",
+      "type": "kill",
+      "targetId": "mg_adept",
+      "required": 2,
+      "weight": 20,
+      "description": "破演武场好手"
+    },
+    {
+      "id": "beat_drum",
+      "type": "puzzle",
+      "targetId": "drum:thundering",
+      "required": 1,
+      "weight": 15,
+      "description": "击鼓聚将，重燃士气"
+    },
+    {
+      "id": "repel_li",
+      "type": "kill",
+      "targetId": "mg_li_gong",
+      "required": 1,
+      "weight": 45,
+      "description": "逐走魔师宫大尊者厉工"
+    }
+  ],
+  "rewards": {
+    "experience": 1360,
+    "potential": 780,
+    "money": 460,
+    "items": {
+      "tianmo_pei": 1
+    }
+  }
+}
