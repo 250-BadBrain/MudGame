@@ -149,7 +149,8 @@
     "potential": 1020,
     "money": 700,
     "items": {
-      "langya_chui": 1
+      "langya_chui": 1,
+      "saibei_wolftooth": 1
     },
     "flags": {
       "langshan_case_done": true

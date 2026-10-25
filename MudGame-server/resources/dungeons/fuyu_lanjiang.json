@@ -134,7 +134,8 @@
     "potential": 450,
     "money": 300,
     "items": {
-      "lanjiang_vest": 1
+      "lanjiang_vest": 1,
+      "changjiang_tidecrystal": 1
     }
   }
 }

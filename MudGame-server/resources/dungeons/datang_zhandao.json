@@ -167,7 +167,8 @@
     "potential": 1000,
     "money": 680,
     "items": {
-      "tangmen_tili": 1
+      "tangmen_tili": 1,
+      "tangmei_gauntlet": 1
     },
     "flags": {
       "zhandao_case_done": true

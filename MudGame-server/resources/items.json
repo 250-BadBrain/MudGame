@@ -1156,5 +1156,141 @@
     "effects": {
       "recoverHp": 300
     }
+  },
+  "nujiao_belt": {
+    "name": "怒蛟腰带",
+    "description": "怒蛟帮帮众的制式腰带，扣面是一头昂首的蛟——水战的荣光系于腰间。",
+    "type": "equipment",
+    "subtype": "belt",
+    "stackable": false,
+    "sellable": true,
+    "value": 1400,
+    "rarity": 3,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 5,
+      "dodge": 2
+    },
+    "source": "怒蛟帮夜战"
+  },
+  "jingyan_longscale": {
+    "name": "惊雁龙鳞甲",
+    "description": "以图录长阶石卫残甲熔铸的龙鳞甲，甲片如龙覆——刀砍上去留不下印。",
+    "type": "equipment",
+    "subtype": "armor",
+    "stackable": false,
+    "sellable": true,
+    "value": 2000,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 9,
+      "parry": 3
+    },
+    "source": "惊雁宫夺图"
+  },
+  "bianhuang_wolfpelt": {
+    "name": "边荒狼皮氅",
+    "description": "白狼主帐前的白狼皮做成的氅衣——穿上它，塞外的风就认得你了。",
+    "type": "equipment",
+    "subtype": "cloak",
+    "stackable": false,
+    "sellable": true,
+    "value": 1800,
+    "rarity": 3,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 6,
+      "dodge": 3
+    },
+    "source": "边荒集夺旗"
+  },
+  "tangmei_gauntlet": {
+    "name": "唐门护手",
+    "description": "唐门秘制的护手，机关暗扣暗藏其间——握手成拳时，指尖弹出三枚毒针。",
+    "type": "equipment",
+    "subtype": "gauntlet",
+    "stackable": false,
+    "sellable": true,
+    "value": 2000,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 3,
+      "critRate": 2
+    },
+    "source": "蜀道栈桥"
+  },
+  "sanhua_flowerpin": {
+    "name": "散花玉簪",
+    "description": "散花楼主人遗落的玉簪，簪头雕着一朵牡丹——花会谢，玉不会。",
+    "type": "equipment",
+    "subtype": "hairpin",
+    "stackable": false,
+    "sellable": true,
+    "value": 1600,
+    "rarity": 3,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "hitRate": 3,
+      "charm": 2
+    },
+    "source": "散花楼"
+  },
+  "yinkui_lotus": {
+    "name": "阴葵莲环",
+    "description": "阴癸派的莲形铜环，环心嵌着一粒黑色珍珠——碰触时，耳边会响起经文。",
+    "type": "equipment",
+    "subtype": "ring",
+    "stackable": false,
+    "sellable": true,
+    "value": 1800,
+    "rarity": 3,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "attack": 4,
+      "defense": 3
+    },
+    "source": "枯井之下"
+  },
+  "changjiang_tidecrystal": {
+    "name": "江潮晶石",
+    "description": "从拦江战台江底捞出的潮汐结晶——握在手里，能听见长江的心跳。",
+    "type": "equipment",
+    "subtype": "charm",
+    "stackable": false,
+    "sellable": true,
+    "value": 2000,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "maxMp": 20,
+      "hitRate": 3
+    },
+    "source": "拦江一战·残影"
+  },
+  "saibei_wolftooth": {
+    "name": "狼牙项链",
+    "description": "以白狼王的獠牙磨成的项链——塞外人说，它能让主人听懂狼的语言。",
+    "type": "equipment",
+    "subtype": "necklace",
+    "stackable": false,
+    "sellable": true,
+    "value": 1800,
+    "rarity": 3,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 3,
+      "dodge": 2
+    },
+    "source": "狼山口"
   }
 }
