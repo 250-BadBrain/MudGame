@@ -1,0 +1,199 @@
+{
+  "id": "youming_guishi",
+  "name": "幽冥鬼市",
+  "description": "洛阳地下的幽冥鬼市，只有子夜才开门。鬼市有三条路：商路通财富，侯路通权力，武路通力量。你只能走一条——选择了，就不回头。",
+  "order": 42,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 14,
+  "spawnRoomId": "yg_00",
+  "puzzleInitialStates": {
+    "gate_yg": "closed",
+    "briefing_yg": "new",
+    "reward_merchant": "untouched",
+    "reward_noble": "untouched",
+    "reward_guardian": "untouched"
+  },
+  "puzzleActions": {
+    "listen_brief_yg": {
+      "label": "听鬼市引路人说明规矩",
+      "puzzleId": "briefing_yg",
+      "rooms": [
+        "yg_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "引路人竖起三根手指：\"商路、侯路、武路。三选一。选了就不回头——鬼市没有回头的客人。\"",
+      "repeatMessage": "三根手指竖在你面前。"
+    },
+    "defeat_merchant": {
+      "label": "取走鬼市账本",
+      "puzzleId": "reward_merchant",
+      "rooms": [
+        "yg_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "taken",
+      "requiredDefeatNpcs": [
+        "yg_merchant_ghost"
+      ],
+      "failureMessage": "鬼市商人还在——你拿不到他的账本。",
+      "message": "你从账桌抽屉里取出鬼市账本——三百年来的每一笔交易，都记在里面。",
+      "repeatMessage": "账本已在你手中。",
+      "giveItems": {
+        "guishi_ledger": 1
+      }
+    },
+    "defeat_noble": {
+      "label": "取走鬼市玉玺",
+      "puzzleId": "reward_noble",
+      "rooms": [
+        "yg_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "taken",
+      "requiredDefeatNpcs": [
+        "yg_noble_ghost"
+      ],
+      "failureMessage": "鬼市侯爷还在——你拿不到他的玉玺。",
+      "message": "你从侯爷的太师椅下取出玉玺——上面刻着一个早已消失的年号。",
+      "repeatMessage": "玉玺已在你手中。",
+      "giveItems": {
+        "guishi_jade": 1
+      }
+    },
+    "defeat_guardian": {
+      "label": "取走鬼市冥刀",
+      "puzzleId": "reward_guardian",
+      "rooms": [
+        "yg_04"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "taken",
+      "requiredDefeatNpcs": [
+        "yg_guardian_ghost"
+      ],
+      "failureMessage": "鬼市守卫长还在——你拿不到他的刀。",
+      "message": "你从校场地面拔出冥刀——刀身漆黑，寒意刺骨。这是力量的代价。",
+      "repeatMessage": "冥刀已在你手中。",
+      "giveItems": {
+        "guishi_blade": 1
+      }
+    }
+  },
+  "rooms": {
+    "yg_00": {
+      "name": "鬼市入口",
+      "description": "子夜的洛阳地下，一扇石门缓缓打开。引路人站在门边，竖起三根手指。",
+      "exits": {
+        "north": "yg_01"
+      },
+      "npcs": [],
+      "actions": [
+        "listen_brief_yg"
+      ]
+    },
+    "yg_01": {
+      "name": "三岔路口",
+      "description": "三条路在鬼市中央分岔：东边挂着灯笼（商路），西边铺着红毯（侯路），北边插着刀旗（武路）。",
+      "exits": {
+        "east": "yg_02",
+        "west": "yg_03",
+        "north": "yg_04"
+      },
+      "npcs": [
+        "yg_00_guard",
+        "yg_00_guard"
+      ]
+    },
+    "yg_02": {
+      "name": "商路·账房",
+      "description": "账房里堆满金银珠宝，鬼市商人坐在账桌后——他的笔在纸上沙沙作响，写的是三百年前的账。",
+      "exits": {
+        "west": "yg_01"
+      },
+      "npcs": [
+        "yg_merchant_ghost"
+      ],
+      "actions": [
+        "defeat_merchant"
+      ]
+    },
+    "yg_03": {
+      "name": "侯路·府邸",
+      "description": "府邸铺着红毯，侯爷坐在太师椅上——他的周围站着几十个看不见的仆人。",
+      "exits": {
+        "east": "yg_01"
+      },
+      "npcs": [
+        "yg_noble_ghost"
+      ],
+      "actions": [
+        "defeat_noble"
+      ]
+    },
+    "yg_04": {
+      "name": "武路·校场",
+      "description": "校场中央一把插在地上的刀，守卫长站在刀旁——他的目光落在你身上时，你感到一阵寒意。",
+      "exits": {
+        "south": "yg_01"
+      },
+      "npcs": [
+        "yg_guardian_ghost"
+      ],
+      "actions": [
+        "defeat_guardian"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_gate_guards",
+      "type": "kill",
+      "targetId": "yg_00_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清除鬼市入口守卫"
+    },
+    {
+      "id": "route_merchant",
+      "type": "kill",
+      "targetId": "yg_merchant_ghost",
+      "required": 1,
+      "weight": 80,
+      "exclusiveGroup": "route",
+      "description": "商路：挫鬼市商人"
+    },
+    {
+      "id": "route_noble",
+      "type": "kill",
+      "targetId": "yg_noble_ghost",
+      "required": 1,
+      "weight": 80,
+      "exclusiveGroup": "route",
+      "description": "侯路：挫鬼市侯爷"
+    },
+    {
+      "id": "route_guardian",
+      "type": "kill",
+      "targetId": "yg_guardian_ghost",
+      "required": 1,
+      "weight": 80,
+      "exclusiveGroup": "route",
+      "description": "武路：挫鬼市守卫长"
+    }
+  ],
+  "rewards": {
+    "experience": 2600,
+    "potential": 1300,
+    "money": 900
+  }
+}

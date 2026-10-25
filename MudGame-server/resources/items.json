@@ -2885,5 +2885,56 @@
       "hitRate": 3
     },
     "source": "双龙会"
+  },
+  "guishi_ledger": {
+    "name": "鬼市账本",
+    "description": "鬼市商人的账本——三百年来的每一笔交易都记在里面。这是财富。",
+    "type": "equipment",
+    "subtype": "book",
+    "stackable": false,
+    "sellable": true,
+    "value": 3000,
+    "rarity": 4,
+    "unit": "册",
+    "equipmentSlot": "RING",
+    "effects": {
+      "hitRate": 5,
+      "maxMp": 15
+    },
+    "source": "幽冥鬼市"
+  },
+  "guishi_jade": {
+    "name": "鬼市玉玺",
+    "description": "鬼市侯爷的玉玺——上面刻着一个早已消失的年号。这是权力。",
+    "type": "equipment",
+    "subtype": "seal",
+    "stackable": false,
+    "sellable": true,
+    "value": 3000,
+    "rarity": 4,
+    "unit": "枚",
+    "equipmentSlot": "RING",
+    "effects": {
+      "defense": 5,
+      "parry": 3
+    },
+    "source": "幽冥鬼市"
+  },
+  "guishi_blade": {
+    "name": "鬼市冥刀",
+    "description": "鬼市守卫长的冥刀——刀身漆黑，不见反光。这是力量。",
+    "type": "equipment",
+    "subtype": "blade",
+    "stackable": false,
+    "sellable": true,
+    "value": 3200,
+    "rarity": 4,
+    "unit": "柄",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 14,
+      "critRate": 2
+    },
+    "source": "幽冥鬼市"
   }
 }
