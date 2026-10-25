@@ -1,0 +1,32 @@
+{
+  "escort_rumor_run": {
+    "id": "escort_rumor_run",
+    "name": "洛水传闻",
+    "description": "南门镖局的段老镖头请你去洛水酒楼听一段传闻，再回镖局禀报。",
+    "giverNpcId": "escort_bureau_chief",
+    "turnInNpcId": "escort_bureau_chief",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "heard_storyteller_rumor",
+        "description": "在洛水酒楼向说书人打听近日传闻。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 30,
+      "potential": 25,
+      "money": 120,
+      "items": {
+        "dry_ration": 1
+      },
+      "flags": {
+        "escort_rumor_run_completed": true
+      },
+      "reputations": {
+        "luoyang_escort": 10
+      }
+    },
+    "repeatable": false
+  }
+}

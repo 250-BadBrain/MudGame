@@ -1,0 +1,170 @@
+{
+  "storyteller_intro": {
+    "id": "storyteller_intro",
+    "npcId": "storyteller",
+    "title": "洛水酒楼说书人",
+    "opening": "许说书人把醒木轻轻一敲，压低声音道：“洛阳城的风，今日是从扬州吹来的。”",
+    "options": [
+      {
+        "id": "ask_rumor",
+        "text": "请先生讲讲近日传闻。",
+        "response": "许说书人笑道：“双龙尚未入洛，已有各路人马先闻风而动。若有人问起，你只说洛水边的醒木响过三声。”",
+        "setFlags": {
+          "heard_storyteller_rumor": true
+        }
+      },
+      {
+        "id": "ask_legend_tales",
+        "text": "问问近日江湖上有什么传说",
+        "response": "说书人醒木轻拍：近来江湖可热闹了——扬子江上有人为《长生诀》杀得血染芦苇荡；怒蛟帮水寨一夜火起；惊雁宫重见天日；边荒集外燕军夜截纪千千。诸位少侠若是手痒，城郊荒庙那点动静也值得一探。",
+        "setFlags": {
+          "heard_legend_tales": true
+        }
+      }
+    ]
+  },
+  "escort_intro": {
+    "id": "escort_intro",
+    "npcId": "escort_bureau_chief",
+    "title": "南门镖局管事",
+    "opening": "段老镖头捻着胡须打量你：“眼下洛阳鱼龙混杂，肯替人跑腿听消息的年轻人，倒也难得。”",
+    "options": [
+      {
+        "id": "ask_work",
+        "text": "镖局可有我能做的事？",
+        "response": "段老镖头道：“去洛水酒楼听许说书人的一段传闻，再回来告诉我。路不远，考的是耳朵和记性。”",
+        "startQuestId": "escort_rumor_run",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "remind_work",
+        "text": "我该去哪里打听消息？",
+        "response": "“西市南边的洛水酒楼，找那个醒木拍得最响的许说书人。”",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "turn_in_rumor",
+        "text": "我听到了洛水酒楼的传闻。",
+        "response": "段老镖头点头道：“好，能听出这句话的分量，说明你不是只会看热闹的人。拿着，往后镖局还有事会找你。”",
+        "completeQuestId": "escort_rumor_run",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "active",
+          "flag": "heard_storyteller_rumor"
+        }
+      },
+      {
+        "id": "after_done",
+        "text": "镖局还有别的差事吗？",
+        "response": "“先把城中路数摸熟。等商路一开，我再给你派更远的活。”",
+        "requires": {
+          "questId": "escort_rumor_run",
+          "questStatus": "completed"
+        }
+      },
+      {
+        "id": "trusted_runner",
+        "text": "段老觉得我办事还稳妥吗？",
+        "response": "段老镖头笑了笑：“肯听、肯记、肯回来交代清楚，这就是走镖最要紧的底子。往后镖局认得你这个人。”",
+        "requires": {
+          "reputationId": "luoyang_escort",
+          "reputationMin": 10
+        }
+      }
+    ]
+  },
+  "office_clerk_intro": {
+    "id": "office_clerk_intro",
+    "npcId": "office_clerk",
+    "title": "官署录事",
+    "opening": "韩录事抬眼看了看你：“官署案牍繁多，若要查告示，先看墙上新贴的榜文。”",
+    "options": [
+      {
+        "id": "ask_notice",
+        "text": "近日官署有什么告示？",
+        "response": "“南北商旅渐多，盗匪也随之生事。若有本事，可去军府或镖局问问差事。”"
+      }
+    ]
+  },
+  "merchant_guild_intro": {
+    "id": "merchant_guild_intro",
+    "npcId": "guild_steward",
+    "title": "河洛商会管事",
+    "opening": "沈七合上账册，笑道：“商路讲究信用，也讲究消息。你若肯跑腿，日后总有用得着你的地方。”",
+    "options": [
+      {
+        "id": "ask_trade",
+        "text": "商会近来缺什么？",
+        "response": "“缺太平，缺准信，也缺能在乱世里把货送到的人。”"
+      }
+    ]
+  },
+  "qingyi_intro": {
+    "id": "qingyi_intro",
+    "npcId": "qingyi_spy",
+    "title": "青衣密探",
+    "opening": "秦三娘倚在暗巷墙边，似笑非笑：“你走得太直，在洛阳城里容易被人看穿。”",
+    "options": [
+      {
+        "id": "ask_shadow",
+        "text": "你在等什么人？",
+        "response": "“等一个知道自己为什么来洛阳的人。现在看来，还不是你。”"
+      }
+    ]
+  },
+  "dlg_csj_boatman": {
+    "id": "dlg_csj_boatman",
+    "npcId": "csj_boatman",
+    "title": "渡口闲话",
+    "opening": "老船夫压低声音说道：客官也是听说了长生诀的事吧？宇文阀的人马天不亮就封了渡口，连船都给凿沉了。",
+    "options": []
+  },
+  "dlg_csj_fu_junzhuo": {
+    "id": "dlg_csj_fu_junzhuo",
+    "npcId": "csj_fu_junzhuo",
+    "title": "柳林谢礼",
+    "opening": "傅君婥抱剑还礼：仗义的少侠，请了。",
+    "options": []
+  },
+  "dlg_nj_sentinel": {
+    "id": "dlg_nj_sentinel",
+    "npcId": "nj_sentinel",
+    "title": "敌情急报",
+    "opening": "哨兵咬牙说道：魔师宫的人是踩着水路摸进来的，帮主还在聚义厅！",
+    "options": []
+  },
+  "dlg_nj_wounded": {
+    "id": "dlg_nj_wounded",
+    "npcId": "nj_wounded",
+    "title": "月门遗言",
+    "opening": "伤兵抓住你的衣角：兄弟……月门后头，就是聚义厅……",
+    "options": []
+  },
+  "dlg_bh_ji_qianqian": {
+    "id": "dlg_bh_ji_qianqian",
+    "npcId": "bh_ji_qianqian",
+    "title": "北门托付",
+    "opening": "纪千千敛衽一礼：此去渡口一路凶险，委实劳烦诸位了。",
+    "options": []
+  },
+  "dlg_bh_swordsman": {
+    "id": "dlg_bh_swordsman",
+    "npcId": "bh_swordsman",
+    "title": "剑手请战",
+    "opening": "荒集剑手缓缓拔刀：燕军的游骑就在前头，随时可以动身。",
+    "options": []
+  },
+  "dlg_lj_old_boatman": {
+    "id": "dlg_lj_old_boatman",
+    "npcId": "lj_old_boatman",
+    "title": "船翁讲古",
+    "opening": "老船翁眯眼望着江心：那一战之后，再没人见过浪翻云。台上的影子等了很久啦。",
+    "options": []
+  }
+}

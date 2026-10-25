@@ -1,0 +1,312 @@
+{
+  "common_clothes": {
+    "name": "粗布衣",
+    "description": "一件耐磨的粗布衣，洛阳城中最常见的行装。",
+    "type": "equipment",
+    "subtype": "clothing",
+    "stackable": false,
+    "sellable": true,
+    "value": 80,
+    "rarity": 1,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "limit": -1,
+    "source": "东市"
+  },
+  "common_shoes": {
+    "name": "布鞋",
+    "description": "一双普通布鞋，走城中石板路还算合脚。",
+    "type": "equipment",
+    "subtype": "shoes",
+    "stackable": false,
+    "sellable": true,
+    "value": 60,
+    "rarity": 1,
+    "unit": "双",
+    "equipmentSlot": "FEET",
+    "limit": -1,
+    "source": "东市"
+  },
+  "iron_sword": {
+    "name": "铁剑",
+    "description": "河洛铁匠打制的铁剑，剑身朴实无华。",
+    "type": "equipment",
+    "subtype": "sword",
+    "stackable": false,
+    "sellable": true,
+    "value": 400,
+    "rarity": 1,
+    "unit": "把",
+    "equipmentSlot": "WEAPON",
+    "limit": -1,
+    "effects": {
+      "attack": 6
+    },
+    "source": "河洛铁匠"
+  },
+  "steel_blade": {
+    "name": "钢刀",
+    "description": "刀背厚重，适合劈斩，是军府和镖局常用的兵器。",
+    "type": "equipment",
+    "subtype": "blade",
+    "stackable": false,
+    "sellable": true,
+    "value": 400,
+    "rarity": 1,
+    "unit": "柄",
+    "equipmentSlot": "WEAPON",
+    "limit": -1,
+    "effects": {
+      "attack": 7
+    },
+    "source": "河洛铁匠"
+  },
+  "iron_staff": {
+    "name": "铁棍",
+    "description": "一根沉重铁棍，招式简单，胜在结实。",
+    "type": "equipment",
+    "subtype": "staff",
+    "stackable": false,
+    "sellable": true,
+    "value": 350,
+    "rarity": 1,
+    "unit": "根",
+    "equipmentSlot": "WEAPON",
+    "limit": -1,
+    "effects": {
+      "attack": 5,
+      "parry": 2
+    },
+    "source": "河洛铁匠"
+  },
+  "darts": {
+    "name": "飞镖",
+    "description": "西市常见的暗器，薄而锋利。",
+    "type": "equipment",
+    "subtype": "hidden_weapon",
+    "stackable": false,
+    "sellable": true,
+    "value": 250,
+    "rarity": 1,
+    "unit": "枚",
+    "equipmentSlot": "HIDDEN_WEAPON",
+    "limit": -1,
+    "effects": {
+      "critRate": 1
+    },
+    "source": "河洛铁匠"
+  },
+  "iron_pickaxe": {
+    "name": "铁镐",
+    "description": "一把结实铁镐，能用于采石、开箱和清理塌方。",
+    "type": "tool",
+    "subtype": "gathering",
+    "stackable": false,
+    "sellable": true,
+    "value": 600,
+    "rarity": 1,
+    "unit": "把",
+    "equipmentSlot": "WEAPON",
+    "limit": -1,
+    "source": "河洛铁匠"
+  },
+  "dry_ration": {
+    "name": "干粮",
+    "description": "商旅常备的粗粮饼，味道普通，却能充饥。",
+    "type": "consumable",
+    "subtype": "food",
+    "stackable": true,
+    "sellable": true,
+    "usable": true,
+    "value": 20,
+    "rarity": 1,
+    "unit": "份",
+    "limit": -1,
+    "effects": {
+      "recoverHp": 5
+    },
+    "source": "东市"
+  },
+  "simple_medicine": {
+    "name": "金创药",
+    "description": "普通外伤药，行走江湖的人多少会备上一些。",
+    "type": "consumable",
+    "subtype": "medicine",
+    "stackable": true,
+    "sellable": true,
+    "usable": true,
+    "value": 120,
+    "rarity": 1,
+    "unit": "瓶",
+    "limit": -1,
+    "effects": {
+      "recoverHp": 25
+    },
+    "source": "东市"
+  },
+  "smoke_powder": {
+    "name": "烟尘粉",
+    "description": "一包灰白粉末，撒出后能扰乱视线。西市掮客说它只适合逃命。",
+    "type": "consumable",
+    "subtype": "tool",
+    "stackable": true,
+    "sellable": true,
+    "usable": true,
+    "value": 300,
+    "rarity": 2,
+    "unit": "包",
+    "limit": 5,
+    "source": "西市"
+  },
+  "old_map_fragment": {
+    "name": "旧商路残图",
+    "description": "一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。",
+    "type": "material",
+    "subtype": "map",
+    "stackable": true,
+    "sellable": true,
+    "value": 500,
+    "rarity": 2,
+    "unit": "张",
+    "limit": 3,
+    "source": "西市"
+  },
+  "bronze_box_rubbing": {
+    "name": "铜匣拓片",
+    "description": "拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。",
+    "type": "quest",
+    "subtype": "xunqin_clue",
+    "stackable": true,
+    "sellable": true,
+    "questItem": true,
+    "value": 800,
+    "rarity": 3,
+    "unit": "张",
+    "limit": 1,
+    "source": "西市"
+  },
+  "sealed_letter": {
+    "name": "染血密信",
+    "description": "信封被雨水浸湿，火漆已碎，仍能看出上面曾有一枚陌生印记。",
+    "type": "quest",
+    "subtype": "letter",
+    "stackable": false,
+    "sellable": false,
+    "questItem": true,
+    "value": 0,
+    "rarity": 2,
+    "unit": "封",
+    "source": "荒庙夜雨"
+  },
+  "bronze_fragment": {
+    "name": "古铜残片",
+    "description": "一枚带有古怪纹路的铜片，似乎来自某个机关铜匣。",
+    "type": "material",
+    "subtype": "secret_realm",
+    "stackable": true,
+    "sellable": true,
+    "value": 1000,
+    "rarity": 3,
+    "unit": "枚",
+    "source": "秘境异闻"
+  },
+  "csj_changshengjue_page": {
+    "name": "长生诀残页",
+    "description": "记载长生诀片段的残页。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 500,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "source": "扬子江惊变",
+    "usable": true,
+    "effects": {
+      "learnSkill": "csj_changshengjue"
+    }
+  },
+  "jyg_zhanshentu_rubbing": {
+    "name": "战神图录摹本",
+    "description": "战神图录刀意的摹本。使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "卷",
+    "questItem": true,
+    "source": "惊雁宫夺图",
+    "usable": true,
+    "effects": {
+      "learnSkill": "jyg_zhanshentu_dao"
+    }
+  },
+  "yg_baoku_pearl": {
+    "name": "宝库金珠",
+    "description": "杨公宝库中的大如龙眼的金珠，鲁妙子的手笔，成色远胜市面珠玉。",
+    "type": "treasure",
+    "subtype": "gem",
+    "stackable": false,
+    "sellable": true,
+    "value": 800,
+    "rarity": 3,
+    "unit": "颗",
+    "source": "杨公宝库"
+  },
+  "nujiao_saber": {
+    "name": "怒蛟刀",
+    "description": "怒蛟帮帮众的制式快刀，刀势凶悍。",
+    "type": "equipment",
+    "subtype": "blade",
+    "stackable": false,
+    "sellable": true,
+    "value": 900,
+    "rarity": 2,
+    "unit": "把",
+    "equipmentSlot": "WEAPON",
+    "limit": -1,
+    "effects": {
+      "attack": 9
+    },
+    "source": "怒蛟帮夜战"
+  },
+  "yanggong_sword": {
+    "name": "杨公宝剑",
+    "description": "出自杨公宝库的古剑，剑气内敛，锋锐无匹。",
+    "type": "equipment",
+    "subtype": "sword",
+    "stackable": false,
+    "sellable": true,
+    "value": 1600,
+    "rarity": 3,
+    "unit": "把",
+    "equipmentSlot": "WEAPON",
+    "limit": -1,
+    "effects": {
+      "attack": 12,
+      "hitRate": 4
+    },
+    "source": "杨公宝库"
+  },
+  "lanjiang_vest": {
+    "name": "拦江劲衣",
+    "description": "以拦江一战中流传的贴身劲衣，柔韧贴身，避锋藏锐。",
+    "type": "equipment",
+    "subtype": "clothes",
+    "stackable": false,
+    "sellable": true,
+    "value": 1800,
+    "rarity": 3,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "limit": -1,
+    "effects": {
+      "defense": 8,
+      "dodge": 3
+    },
+    "source": "拦江一战"
+  }
+}

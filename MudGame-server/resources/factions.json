@@ -1,0 +1,118 @@
+{
+  "luoyang_office": {
+    "id": "luoyang_office",
+    "name": "洛阳官署",
+    "description": "维持洛阳城中秩序的官府力量，掌管告示、缉捕、城防和案牍。",
+    "category": "government",
+    "visible": true,
+    "order": 10
+  },
+  "luoyang_escort": {
+    "id": "luoyang_escort",
+    "name": "南门镖局",
+    "description": "依托洛阳南门商路而生的镖局，重信用，也重能把事情办妥的人。",
+    "category": "local",
+    "visible": true,
+    "order": 20
+  },
+  "heluo_merchant_guild": {
+    "id": "heluo_merchant_guild",
+    "name": "河洛商会",
+    "description": "东市商贾结成的商会，消息和账册同样值钱。",
+    "category": "merchant",
+    "visible": true,
+    "order": 30
+  },
+  "qingyi_spies": {
+    "id": "qingyi_spies",
+    "name": "青衣密探",
+    "description": "游走于暗巷、酒楼和官署边缘的情报网络，行踪隐秘。",
+    "category": "shadow",
+    "visible": true,
+    "order": 40
+  },
+  "heluo_academy": {
+    "id": "heluo_academy",
+    "name": "河洛书院",
+    "description": "洛阳城中的书院与士人圈子，保存兵书、医案和古卷传闻。",
+    "category": "academy",
+    "visible": false,
+    "order": 50
+  },
+  "luoyang_common_training": {
+    "id": "luoyang_common_training",
+    "name": "河洛武馆",
+    "description": "面向江湖新人的公共武学训练场。",
+    "category": "training",
+    "visible": false,
+    "order": 60
+  },
+  "luoyang_military": {
+    "id": "luoyang_military",
+    "name": "洛阳军府",
+    "description": "负责洛阳军务、操练与城防的军府体系。",
+    "category": "military",
+    "visible": false,
+    "order": 70
+  },
+  "west_market": {
+    "id": "west_market",
+    "name": "西市暗流",
+    "description": "西市掮客、黑市买卖和地下消息混成的灰色网络。",
+    "category": "shadow",
+    "visible": false,
+    "order": 80
+  },
+  "bandits": {
+    "id": "bandits",
+    "name": "城郊流寇",
+    "description": "洛阳城外拦路劫掠的流寇散伙。",
+    "category": "hostile",
+    "visible": false,
+    "order": 90
+  },
+  "unknown_assassins": {
+    "id": "unknown_assassins",
+    "name": "无名刺客",
+    "description": "来历不明的刺客与杀手线索。",
+    "category": "hostile",
+    "visible": false,
+    "order": 100
+  },
+  "neutral": {
+    "id": "neutral",
+    "name": "江湖散人",
+    "description": "暂无明确归属的江湖人物。",
+    "category": "neutral",
+    "visible": false,
+    "order": 999
+  },
+  "moshi_palace": {
+    "name": "魔师宫",
+    "description": "魔师庞斑座下的势力，江湖人闻之色变。",
+    "category": "sect",
+    "visible": false,
+    "order": 20
+  },
+  "yan_army": {
+    "name": "燕军",
+    "description": "慕容垂麾下的南征大军，兵锋直指边荒。",
+    "category": "military",
+    "visible": false,
+    "order": 21
+  },
+  "turkic_khan": {
+    "name": "突厥",
+    "description": "草原狼主帐下的高手与武士。",
+    "category": "foreign",
+    "visible": false,
+    "order": 22
+  },
+  "yinkui_sect": {
+    "name": "阴癸派",
+    "description": "魔门大派，行事诡秘妖异。",
+    "category": "sect",
+    "visible": false,
+    "order": 23
+  }
+}

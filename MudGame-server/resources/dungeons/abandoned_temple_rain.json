@@ -1,0 +1,87 @@
+{
+  "id": "abandoned_temple_rain",
+  "name": "荒庙夜雨",
+  "description": "洛阳城外夜雨如注，荒庙深处血迹未干，一封密信似乎藏着不为人知的秘密。",
+  "order": 1,
+  "chainId": "luoyang_rain_temple",
+  "chainName": "洛阳轶事",
+  "chapter": 1,
+  "spawnRoomId": "temple_00",
+  "objectives": [
+    {
+      "id": "clear_front_court",
+      "type": "kill",
+      "targetId": "temple_bandit",
+      "required": 3,
+      "weight": 50,
+      "description": "击退荒庙内搜捕信使的流寇。"
+    },
+    {
+      "id": "reach_back_hall",
+      "type": "enter_room",
+      "targetId": "temple_02",
+      "required": 1,
+      "weight": 15,
+      "description": "追至后院雨廊，查明真正的灭口者。"
+    },
+    {
+      "id": "defeat_assassin",
+      "type": "kill",
+      "targetId": "temple_assassin",
+      "required": 1,
+      "weight": 35,
+      "description": "击败蒙面刺客，夺回染血密信。"
+    }
+  ],
+  "rewards": {
+    "experience": 180,
+    "potential": 120,
+    "money": 60,
+    "items": {
+      "sealed_letter": 1
+    }
+  },
+  "progressOnKill": {
+    "temple_bandit": 25,
+    "temple_assassin": 50
+  },
+  "rooms": {
+    "temple_00": {
+      "name": "庙门",
+      "description": "雨水从破瓦间滴落，庭中积着浑浊泥水。地上有几道凌乱脚印，一直通向大殿。",
+      "exits": {
+        "north": "temple_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["temple_bandit"],
+          "message": "流寇堵住大殿入口，挥刀将你逼回雨中。"
+        }
+      },
+      "npcs": ["temple_bandit"]
+    },
+    "temple_01": {
+      "name": "无相殿",
+      "description": "残破佛像半边脸隐在黑暗里，香案后似乎有人急促喘息。两名流寇正翻找什么。",
+      "exits": {
+        "south": "temple_00",
+        "north": "temple_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": ["temple_bandit"],
+          "message": "两名流寇死守通往后院的窄门。"
+        }
+      },
+      "npcs": ["temple_bandit", "temple_bandit"]
+    },
+    "temple_02": {
+      "name": "后院雨廊",
+      "description": "雨廊尽头立着一名蒙面刺客，袖中短刃映出冷光。那人显然不打算留下活口。",
+      "exits": {
+        "south": "temple_01"
+      },
+      "npcs": ["temple_assassin"]
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "id": "datang_yanggong",
+  "name": "杨公宝库",
+  "description": "鲁妙子留下的机关宝库重见天日，库门甫开，受魔门之托的突厥第一高手康鞘利已抢先入内。机关、棋局、石人卫，处处都是亡命之路。",
+  "order": 6,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 2,
+  "spawnRoomId": "vault_00",
+  "puzzleInitialStates": {
+    "mechanism": "locked",
+    "chess": "unsolved"
+  },
+  "puzzleActions": {
+    "turn_mechanism": {
+      "label": "转动机关盘",
+      "puzzleId": "mechanism",
+      "rooms": [
+        "vault_01"
+      ],
+      "fromStates": [
+        "locked"
+      ],
+      "nextState": "open",
+      "message": "你依着鲁妙子留下的刻痕转动机关盘，铜轮咬合之声层层传来，殿北石门缓缓升起。",
+      "repeatMessage": "机关盘已经停当，石门敞开着。"
+    },
+    "solve_chess": {
+      "label": "落子破局",
+      "puzzleId": "chess",
+      "rooms": [
+        "vault_03"
+      ],
+      "fromStates": [
+        "unsolved"
+      ],
+      "nextState": "solved",
+      "message": "枰上黑白之势看似必死，你忽然省起鲁妙子批注的八个字：\"弃子争先，以拙破巧。\"一子落枰，满枰石机倒转，北门应声而开。",
+      "repeatMessage": "棋局已破，枰上残子再无变化。"
+    }
+  },
+  "rooms": {
+    "vault_00": {
+      "name": "库门甬道",
+      "description": "甬道两侧灯龛尽灭，两名突厥武士按刀守在库门之内，显然是随康鞘利一同闯进来的前锋。",
+      "exits": {
+        "north": "vault_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "yg_turkic_soldier"
+          ],
+          "message": "突厥武士守住甬道，弯刀不容任何人越过。"
+        }
+      },
+      "npcs": [
+        "yg_turkic_soldier",
+        "yg_turkic_soldier"
+      ]
+    },
+    "vault_01": {
+      "name": "机关厅",
+      "description": "厅中一座丈许高的铜制机关盘嵌在壁间，盘上刻痕密布。殿北石门紧闭，门上凿着\"顺时而转，逆势而止\"八字。",
+      "exits": {
+        "south": "vault_00",
+        "north": "vault_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "mechanism": "open"
+          },
+          "message": "机关盘纹丝不动，北面石门全无开启的迹象。"
+        }
+      },
+      "actions": [
+        "turn_mechanism"
+      ],
+      "npcs": []
+    },
+    "vault_02": {
+      "name": "千机廊",
+      "description": "长廊悬满机关簧匣，两名阴癸派妖女倚廊而立，见人便笑，笑意里全是杀机。",
+      "exits": {
+        "south": "vault_01",
+        "north": "vault_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "yg_yinkui_witch"
+          ],
+          "message": "阴癸妖女天魔舞步飘忽如影，缠得你近不了北门。"
+        }
+      },
+      "npcs": [
+        "yg_yinkui_witch",
+        "yg_yinkui_witch"
+      ]
+    },
+    "vault_03": {
+      "name": "天地棋枰",
+      "description": "地面上凿出一方丈许棋枰，黑白石子皆有儿臂粗细。北门紧闭，门楣刻着鲁妙子手书的批注。",
+      "exits": {
+        "south": "vault_02",
+        "north": "vault_04"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "chess": "solved"
+          },
+          "message": "枰上死局未解，北门石机纹丝不动。"
+        }
+      },
+      "actions": [
+        "solve_chess"
+      ],
+      "npcs": []
+    },
+    "vault_04": {
+      "name": "藏兵库",
+      "description": "库中兵甲如山，三尊石人卫自甲胄堆中站起，铁拳带着沉重的风声砸来。",
+      "exits": {
+        "south": "vault_03",
+        "north": "vault_05"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "yg_stone_golem"
+          ],
+          "message": "石人卫守住最后一道库门，拳风如雨。"
+        }
+      },
+      "npcs": [
+        "yg_stone_golem",
+        "yg_stone_golem",
+        "yg_stone_golem"
+      ]
+    },
+    "vault_05": {
+      "name": "宝库大殿",
+      "description": "大殿金珠堆案，宝气盈庭。康鞘利负手立于宝堆之前，缓缓转身：\"中原的宝贝，合该由识货的人带走。\"",
+      "exits": {
+        "south": "vault_04"
+      },
+      "npcs": [
+        "yg_kang_xiaoli"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_turkic_soldiers",
+      "type": "kill",
+      "targetId": "yg_turkic_soldier",
+      "required": 2,
+      "weight": 10,
+      "description": "击杀突厥武士。"
+    },
+    {
+      "id": "open_mechanism",
+      "type": "puzzle",
+      "targetId": "mechanism:open",
+      "required": 1,
+      "weight": 10,
+      "description": "解开机关厅的机关盘。"
+    },
+    {
+      "id": "kill_witches",
+      "type": "kill",
+      "targetId": "yg_yinkui_witch",
+      "required": 2,
+      "weight": 15,
+      "description": "击杀阴癸派妖女。"
+    },
+    {
+      "id": "solve_chess",
+      "type": "puzzle",
+      "targetId": "chess:solved",
+      "required": 1,
+      "weight": 10,
+      "description": "破解天地棋枰的死局。"
+    },
+    {
+      "id": "kill_golems",
+      "type": "kill",
+      "targetId": "yg_stone_golem",
+      "required": 3,
+      "weight": 15,
+      "description": "击碎藏兵库石人卫。"
+    },
+    {
+      "id": "kill_kang_xiaoli",
+      "type": "kill",
+      "targetId": "yg_kang_xiaoli",
+      "required": 1,
+      "weight": 40,
+      "description": "斩杀突厥第一高手康鞘利。"
+    }
+  ],
+  "rewards": {
+    "experience": 460,
+    "potential": 300,
+    "money": 150,
+    "items": {
+      "yg_baoku_pearl": 1,
+      "yanggong_sword": 1
+    }
+  }
+}

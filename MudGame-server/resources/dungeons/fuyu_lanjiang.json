@@ -1,0 +1,140 @@
+{
+  "id": "fuyu_lanjiang",
+  "name": "拦江一战·残影",
+  "description": "浪翻云与庞斑拦江一战已成绝响。今夜有秘术之士在江心设下战台，以百年江气凝出魔师庞斑的残影——敢登台者，可与传说宗师一战。",
+  "order": 7,
+  "chainId": "fuyu_fan_yun",
+  "chainName": "覆雨翻云",
+  "chapter": 2,
+  "spawnRoomId": "lj_00",
+  "unlockConditions": [
+    {
+      "type": "flag",
+      "targetId": "fuyu_nujiao_completed",
+      "value": "true"
+    },
+    {
+      "type": "flag",
+      "targetId": "posui_jingyan_completed",
+      "value": "true"
+    }
+  ],
+  "puzzleInitialStates": {
+    "tale": "new",
+    "tide": "unseen"
+  },
+  "puzzleActions": {
+    "listen_boatman_tale": {
+      "label": "听老船翁讲古",
+      "puzzleId": "tale",
+      "rooms": [
+        "lj_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "lj_old_boatman",
+      "message": "老船翁讲完了当年拦江一战。",
+      "repeatMessage": "老船翁摇着橹：\"后生，看破或看不破，都只在你自己。\""
+    },
+    "observe_tide": {
+      "label": "静观江涛",
+      "puzzleId": "tide",
+      "rooms": [
+        "lj_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "seen",
+      "setFlags": {
+        "saw_through_pang_ban": true
+      },
+      "message": "你在船头静立良久，看尽江涛三叠起落。魔师残影借的是江潮之势——潮有起落，势有间隙。你已看破他的气机。",
+      "repeatMessage": "江涛依旧三叠，你心中的间隙不会消失。"
+    }
+  },
+  "rooms": {
+    "lj_00": {
+      "name": "大江渡头",
+      "description": "夜雾锁江，一位老船翁独守渡头。他望着江心隐约的战台，缓缓说起当年那一战。",
+      "exits": {
+        "east": "lj_01"
+      },
+      "actions": [
+        "listen_boatman_tale"
+      ],
+      "npcs": [
+        "lj_old_boatman"
+      ]
+    },
+    "lj_01": {
+      "name": "江心舟阵",
+      "description": "十几艘空船以铁索相连，船面结着薄霜。两道由江雾凝成的幻兵持戟而立，戟上水声如潮。",
+      "exits": {
+        "west": "lj_00",
+        "east": "lj_02"
+      },
+      "exitRequirements": {
+        "east": {
+          "defeatNpcs": [
+            "lj_phantom_soldier"
+          ],
+          "message": "江雾幻兵戟阵不散，雾气缠得战台遥不可及。"
+        }
+      },
+      "actions": [
+        "observe_tide"
+      ],
+      "npcs": [
+        "lj_phantom_soldier",
+        "lj_phantom_soldier"
+      ]
+    },
+    "lj_02": {
+      "name": "拦江战台",
+      "description": "战台悬于江心，四面皆水。一道人影负手立于台心，衣袂无风自动——虽只是残影，那股渊渟岳峙的气机已压得江水倒卷。",
+      "exits": {
+        "west": "lj_01"
+      },
+      "npcs": [
+        "lj_pang_ban"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_phantom_soldiers",
+      "type": "kill",
+      "targetId": "lj_phantom_soldier",
+      "required": 2,
+      "weight": 20,
+      "description": "击散江雾幻兵。"
+    },
+    {
+      "id": "observe_tide",
+      "type": "puzzle",
+      "targetId": "tide:seen",
+      "required": 1,
+      "weight": 10,
+      "description": "静观江涛，看破残影借势的轨迹。"
+    },
+    {
+      "id": "defeat_pang_ban",
+      "type": "kill",
+      "targetId": "lj_pang_ban",
+      "required": 1,
+      "weight": 70,
+      "description": "击败魔师庞斑残影。"
+    }
+  ],
+  "rewards": {
+    "experience": 700,
+    "potential": 450,
+    "money": 300,
+    "items": {
+      "lanjiang_vest": 1
+    }
+  }
+}

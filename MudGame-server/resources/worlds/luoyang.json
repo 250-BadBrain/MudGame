@@ -1,0 +1,278 @@
+{
+  "id": "luoyang",
+  "name": "洛阳",
+  "description": "洛阳雄踞中原，洛水穿城而过，东市商贾云集，西市暗流潜伏。隋唐乱世将起，朝堂、门阀、江湖与异闻都在此交汇。",
+  "order": 1,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "ly_00",
+  "rooms": {
+    "ly_00": {
+      "name": "天津桥",
+      "description": "天津桥横跨洛水，桥上行人如织。北望皇城，南接坊市，酒楼的喧声与马蹄声混在一起，像一张缓缓收紧的江湖网。",
+      "area": "洛水",
+      "tags": [
+        "center",
+        "safe",
+        "rumor"
+      ],
+      "safeZone": true,
+      "function": "city_center",
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "luoyang_guard"
+      ],
+      "exits": {
+        "north": "ly_north_office",
+        "east": "ly_east_market",
+        "south": "ly_south_gate",
+        "west": "ly_west_market"
+      }
+    },
+    "ly_north_office": {
+      "name": "北城官署",
+      "description": "官署门前兵甲森严，告示墙上贴满通缉、征发和军报。来往小吏脚步匆匆，没人敢在这里高声喧哗。",
+      "area": "北城",
+      "tags": [
+        "government",
+        "safe",
+        "quest"
+      ],
+      "safeZone": true,
+      "function": "government",
+      "npcs": [
+        "luoyang_guard",
+        "office_clerk"
+      ],
+      "exits": {
+        "north": "ly_military_office",
+        "south": "ly_00",
+        "east": "ly_academy",
+        "west": "ly_old_alley"
+      }
+    },
+    "ly_military_office": {
+      "name": "洛阳军府",
+      "description": "军府校场上枪戟如林，军士操练声震得瓦檐微颤。这里收录军功，也发布剿匪、护粮和城防差遣。",
+      "area": "北城",
+      "tags": [
+        "military",
+        "training",
+        "quest"
+      ],
+      "safeZone": true,
+      "function": "military",
+      "npcs": [
+        "military_instructor"
+      ],
+      "exits": {
+        "south": "ly_north_office"
+      }
+    },
+    "ly_academy": {
+      "name": "河洛书院",
+      "description": "书院深处传来朗朗读书声，墙上挂着河洛形势图和残旧兵书。几名士子正围着一卷古简低声争论。",
+      "area": "北城",
+      "tags": [
+        "academy",
+        "training",
+        "safe"
+      ],
+      "safeZone": true,
+      "function": "academy",
+      "npcs": [
+        "academy_teacher"
+      ],
+      "exits": {
+        "west": "ly_north_office"
+      }
+    },
+    "ly_old_alley": {
+      "name": "旧坊暗巷",
+      "description": "旧坊墙影斑驳，窄巷里常有陌生人擦肩而过。这里离官署不远，却像被阳光遗忘的另一座洛阳。",
+      "area": "旧坊",
+      "tags": [
+        "spy",
+        "black",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "function": "spy_hub",
+      "npcs": [
+        "qingyi_spy",
+        "ancient_scroll_keeper"
+      ],
+      "exits": {
+        "east": "ly_north_office",
+        "south": "ly_west_market"
+      }
+    },
+    "ly_east_market": {
+      "name": "东市",
+      "description": "东市铺面鳞次栉比，绸缎、茶酒、铁器和药材沿街铺开。商会伙计高声招呼客人，铜钱声此起彼伏。",
+      "area": "东市",
+      "tags": [
+        "shop",
+        "trade",
+        "safe"
+      ],
+      "safeZone": true,
+      "function": "shop_hub",
+      "npcs": [
+        "east_market_keeper",
+        "heluo_blacksmith"
+      ],
+      "exits": {
+        "west": "ly_00",
+        "east": "ly_merchant_guild",
+        "south": "ly_weapon_school"
+      },
+      "actions": [
+        "work"
+      ],
+      "actionLabels": {
+        "work": "帮工"
+      }
+    },
+    "ly_merchant_guild": {
+      "name": "河洛商会",
+      "description": "商会厅内堆着账册、货样和各地路引。墙上一幅商路图标着潼关、江淮、巴蜀与塞外。",
+      "area": "东市",
+      "tags": [
+        "merchant",
+        "quest",
+        "safe"
+      ],
+      "safeZone": true,
+      "function": "merchant_guild",
+      "npcs": [
+        "guild_steward"
+      ],
+      "exits": {
+        "west": "ly_east_market"
+      }
+    },
+    "ly_weapon_school": {
+      "name": "河洛武馆",
+      "description": "武馆院中立着木人和兵器架，刀剑棍棒俱全。教头坐在檐下，目光扫过每个进门的人。",
+      "area": "东市",
+      "tags": [
+        "training",
+        "safe"
+      ],
+      "safeZone": true,
+      "function": "training",
+      "npcs": [
+        "weapon_school_master"
+      ],
+      "exits": {
+        "north": "ly_east_market"
+      }
+    },
+    "ly_west_market": {
+      "name": "西市",
+      "description": "西市比东市更杂乱，胡商、游侠、掮客和赌徒混在一处。明面上卖的是旧货，暗地里流通的却是消息。",
+      "area": "西市",
+      "tags": [
+        "black_market",
+        "rumor",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "function": "black_market",
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "black_market_broker"
+      ],
+      "exits": {
+        "east": "ly_00",
+        "north": "ly_old_alley",
+        "south": "ly_inn"
+      }
+    },
+    "ly_inn": {
+      "name": "洛水酒楼",
+      "description": "酒楼临水而建，说书人一拍醒木，满堂立刻安静了几分。有人谈扬州双龙，有人谈战国铜匣，也有人只低头喝酒。",
+      "area": "洛水",
+      "tags": [
+        "inn",
+        "rumor",
+        "dungeon_entry",
+        "safe"
+      ],
+      "safeZone": true,
+      "function": "rumor_hub",
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "storyteller"
+      ],
+      "exits": {
+        "north": "ly_west_market",
+        "east": "ly_south_gate"
+      }
+    },
+    "ly_south_gate": {
+      "name": "南门",
+      "description": "南门外车马不断，镖旗、商队和流民挤在城门前。再往南便是城郊，太平与乱世只隔这一道门。",
+      "area": "南门",
+      "tags": [
+        "gate",
+        "escort",
+        "safe"
+      ],
+      "safeZone": true,
+      "function": "travel",
+      "npcs": [
+        "escort_bureau_chief",
+        "luoyang_guard"
+      ],
+      "exits": {
+        "north": "ly_00",
+        "south": "ly_outskirts",
+        "west": "ly_inn"
+      }
+    },
+    "ly_outskirts": {
+      "name": "洛阳城郊",
+      "description": "城郊荒草没膝，远处有破庙露出半截屋脊。商旅经过这里时，总会下意识按住腰间钱袋。",
+      "area": "城郊",
+      "tags": [
+        "wild",
+        "dungeon_entry",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "function": "dungeon_entry",
+      "actions": [
+        "gather"
+      ],
+      "npcs": [
+        "road_bandit"
+      ],
+      "exits": {
+        "north": "ly_south_gate",
+        "south": "ly_abandoned_temple"
+      }
+    },
+    "ly_abandoned_temple": {
+      "name": "荒庙外",
+      "description": "荒庙门楣坍塌，檐角挂着一串破铃。风从殿内穿出，带着潮湿香灰和铁锈般的血腥味。",
+      "area": "城郊",
+      "tags": [
+        "dungeon_entry",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "function": "dungeon_entry",
+      "exits": {
+        "north": "ly_outskirts"
+      }
+    }
+  }
+}

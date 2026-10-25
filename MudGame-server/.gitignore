@@ -1,0 +1,27 @@
+# Go build outputs
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+mud
+
+# Test binaries and coverage
+*.test
+*.out
+coverage.out
+
+# Module/workspace artifacts
+vendor/
+
+# Local runtime data and scratch folders
+tmp_*/
+server/
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
