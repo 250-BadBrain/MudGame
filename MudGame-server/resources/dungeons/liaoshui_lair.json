@@ -1,0 +1,132 @@
+{
+  "id": "liaoshui_lair",
+  "name": "洛水风浪",
+  "description": "漕运疑云里记下的船号有了下落：鹞子帮的水寨就扎在洛水下游的芦荡深处。你受盐帮之托清剿匪巢，救出被掳的漕工，斩了那冒名行劫的独眼头目。",
+  "order": 10,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 1,
+  "spawnRoomId": "ls_00",
+  "puzzleInitialStates": {
+    "captives": "locked"
+  },
+  "puzzleActions": {
+    "listen_captive": {
+      "label": "探问船舱情形",
+      "puzzleId": "captives",
+      "rooms": [
+        "ls_02"
+      ],
+      "fromStates": [
+        "locked"
+      ],
+      "nextState": "heard",
+      "dialogueNpcId": "ls_captive",
+      "message": "被掳的船工把匪巢情形说了一遍。",
+      "repeatMessage": "船工朝前舱努了努嘴：头目就在那儿。"
+    },
+    "free_captives": {
+      "label": "打开船舱救人",
+      "puzzleId": "captives",
+      "rooms": [
+        "ls_02"
+      ],
+      "fromStates": [
+        "heard"
+      ],
+      "nextState": "freed",
+      "message": "你劈开船舱的闩，被掳的漕工连滚带爬涌出舱门，回头给你磕了三个响头。",
+      "repeatMessage": "船舱已经空了，船工们躲在船舷后不肯再回去。"
+    }
+  },
+  "rooms": {
+    "ls_00": {
+      "name": "水寨外围",
+      "description": "芦苇荡里插着一圈削尖的木桩，桩上挂着风干的鱼和不知名的东西。寨子的哨位散布在苇丛里。",
+      "exits": {
+        "north": "ls_01"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "ls_pirate"
+          ],
+          "message": "外围的水匪还没清干净，哨子一响全寨都要惊。"
+        }
+      },
+      "npcs": [
+        "ls_pirate",
+        "ls_pirate"
+      ]
+    },
+    "ls_01": {
+      "name": "芦荡栅门",
+      "description": "水寨的木栅门歪歪斜斜拦在芦苇间，门后是泊满快船的内水。两个守门的水匪抱着桨在打盹。",
+      "exits": {
+        "south": "ls_00",
+        "north": "ls_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "ls_pirate"
+          ],
+          "message": "栅门的守卫还醒着，硬闯要吃全寨的箭。"
+        }
+      },
+      "npcs": [
+        "ls_pirate",
+        "ls_pirate"
+      ]
+    },
+    "ls_02": {
+      "name": "中军快船",
+      "description": "寨中最大的一条快船，船头漆着歪脖鹞子。舱里隐约有哭声，独眼头目正盘坐在船尾数着抢来的银子。",
+      "exits": {
+        "south": "ls_01"
+      },
+      "npcs": [
+        "ls_captive",
+        "ls_chief"
+      ],
+      "actions": [
+        "listen_captive",
+        "free_captives"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_pirates",
+      "type": "kill",
+      "targetId": "ls_pirate",
+      "required": 4,
+      "weight": 30,
+      "description": "清剿水寨外围水匪"
+    },
+    {
+      "id": "free_captives",
+      "type": "puzzle",
+      "targetId": "captives:freed",
+      "required": 1,
+      "weight": 20,
+      "description": "救出被掳漕工"
+    },
+    {
+      "id": "kill_chief",
+      "type": "kill",
+      "targetId": "ls_chief",
+      "required": 1,
+      "weight": 50,
+      "description": "斩杀鹞子帮头目"
+    }
+  ],
+  "rewards": {
+    "experience": 760,
+    "potential": 480,
+    "money": 250,
+    "reputations": {
+      "salt_gang": 20
+    }
+  }
+}

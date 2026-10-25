@@ -199,6 +199,8 @@ type DialogueOption struct {
 	SetFlags        map[string]bool `json:"setFlags,omitempty"`
 	GiveItems       map[string]int  `json:"giveItems,omitempty"`
 	TakeItems       map[string]int  `json:"takeItems,omitempty"`
+	TakeMoney       int             `json:"takeMoney,omitempty"`
+	GiveMoney       int             `json:"giveMoney,omitempty"`
 	Requires        DialogueRequire `json:"requires,omitempty"`
 }
 

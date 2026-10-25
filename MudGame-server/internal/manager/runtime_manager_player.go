@@ -1029,6 +1029,10 @@ func roomRumor(roomID string) string {
 		return "码头脚夫们都在议论江淮战事——听说竟陵城头一架大弩，一箭钉穿了敌将的将旗。"
 	case "tg_taolin_station":
 		return "驿丞给往来的客商斟茶：长安来的邸报说，唐国公府最近车马进出得勤——改元也好、变天也罢，咱们小驿站只管把火把备足。"
+	case "ly_north_market":
+		return "估衣摊的贩子跟人咬耳朵：洛水上下最近不太平，好好的漕船说没就没——南边码头的把头们都愁白了头。"
+	case "ly_refugee_camp":
+		return "营里传来孩子的童谣：白衣娘娘摸一摸，夜里梦见亲娘哭。大人们听着都把火往旺里拨——没人肯接这个话头。"
 	default:
 		return "你驻足听了一阵，只听见市井喧嚣里夹着几句真假难辨的江湖传闻。"
 	}

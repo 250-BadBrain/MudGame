@@ -271,7 +271,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "dialogueId": "dlg_heluo_blacksmith"
   },
   "weapon_school_master": {
     "name": "赵横江",
@@ -4766,6 +4767,407 @@
         "hitRate": 62,
         "dodge": 46,
         "parry": 42,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 48,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "north_market_broker": {
+    "name": "牛金牙",
+    "title": "北市牙人",
+    "description": "北市最大的掮客，金牙一露三分利。杂货估衣旧兵刃没有他不倒手的。",
+    "faction": "heluo_merchant_guild",
+    "role": "shopkeeper",
+    "importance": "common",
+    "shopItems": [
+      "darts",
+      "common_clothes",
+      "common_shoes"
+    ],
+    "attributes": {
+      "level": 9,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 12,
+        "agility": 13,
+        "perception": 13,
+        "willpower": 11,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 90,
+        "maxHp": 90,
+        "mp": 45,
+        "trainedMaxMp": 45,
+        "maxMp": 45,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 11,
+        "defense": 10,
+        "hitRate": 66,
+        "dodge": 50,
+        "parry": 45,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 52,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "north_alley_thug": {
+    "name": "北里地痞",
+    "title": "巷中恶徒",
+    "description": "盘踞北里暗巷的地痞，专敲过路客的竹杠，不给就动刀。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "attributes": {
+      "level": 10,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 15,
+        "constitution": 14,
+        "agility": 14,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 140,
+        "maxHp": 140,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 24,
+        "defense": 12,
+        "hitRate": 92,
+        "dodge": 66,
+        "parry": 62,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 62,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "old_refugee": {
+    "name": "老瘸子",
+    "title": "流民营孤老",
+    "description": "流民营里最老的人，腿是早年替人挡刀废的。见多识广，只是没人肯听他说话。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_old_refugee",
+    "attributes": {
+      "level": 7,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 8,
+        "constitution": 10,
+        "agility": 8,
+        "perception": 14,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 70,
+        "maxHp": 70,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 6,
+        "defense": 8,
+        "hitRate": 58,
+        "dodge": 40,
+        "parry": 38,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 45,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ls_pirate": {
+    "name": "鹞子帮水匪",
+    "title": "洛水劫道",
+    "description": "船帮上刻鹞子的水匪，借着漕运空虚四处劫掠，白日扮渔夫，夜里做刀客。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 14,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 18,
+        "constitution": 17,
+        "agility": 15,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 30,
+        "defense": 15,
+        "hitRate": 100,
+        "dodge": 70,
+        "parry": 70,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 66,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ls_chief": {
+    "name": "鹞子帮头目",
+    "title": "水寨之主",
+    "description": "鹞子帮的大当家，独眼挎双刀，官盐私盐一肩挑。盐帮的船号被他学了个十成十，就栽在这一点上。",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 26,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 32,
+        "constitution": 32,
+        "agility": 26,
+        "perception": 18,
+        "willpower": 18,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 560,
+        "maxHp": 560,
+        "mp": 110,
+        "trainedMaxMp": 110,
+        "maxMp": 110,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 50,
+        "defense": 25,
+        "hitRate": 124,
+        "dodge": 96,
+        "parry": 92,
+        "critRate": 8,
+        "attackSpeed": 4,
+        "initiative": 100,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "ls_captive": {
+    "name": "被掳船工",
+    "title": "漕运苦力",
+    "description": "被绑在船舱里的漕工，见了刀光先当是水匪内讧，看清你的脸才敢哭出声。",
+    "faction": "neutral",
+    "role": "enemy",
+    "importance": "local",
+    "instanceOnly": true,
+    "combatMode": "protected",
+    "dialogueId": "dlg_ls_captive",
+    "attributes": {
+      "level": 6,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 11,
+        "constitution": 11,
+        "agility": 10,
+        "perception": 10,
+        "willpower": 10,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 70,
+        "maxHp": 70,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 8,
+        "defense": 8,
+        "hitRate": 60,
+        "dodge": 42,
+        "parry": 40,
         "critRate": 1,
         "attackSpeed": 4,
         "initiative": 48,

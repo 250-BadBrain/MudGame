@@ -86,7 +86,8 @@
         "academy_teacher"
       ],
       "exits": {
-        "west": "ly_north_office"
+        "west": "ly_north_office",
+        "north": "ly_north_market"
       }
     },
     "ly_old_alley": {
@@ -504,6 +505,63 @@
       "exits": {
         "west": "ly_west_market",
         "east": "ly_south_gate"
+      }
+    },
+    "ly_north_market": {
+      "name": "北市",
+      "description": "北城根下的市集，比东市嘈杂、比西市直白。南北杂货、旧兵刃、走马估衣摊挨着排开，讨价还价声能吵到书院的窗根底下。",
+      "area": "北城",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "north_market_broker"
+      ],
+      "exits": {
+        "south": "ly_academy",
+        "west": "ly_beili_alley",
+        "north": "ly_refugee_camp"
+      }
+    },
+    "ly_beili_alley": {
+      "name": "北里暗巷",
+      "description": "北市背后的窄巷，积水映着一线天光。墙根下蹲着的几条人影，看行头不像歇脚的。",
+      "area": "北城",
+      "tags": [
+        "unsafe"
+      ],
+      "safeZone": false,
+      "npcs": [
+        "north_alley_thug",
+        "north_alley_thug"
+      ],
+      "exits": {
+        "east": "ly_north_market"
+      }
+    },
+    "ly_refugee_camp": {
+      "name": "流民营",
+      "description": "官府圈给北来流民的窝棚区，破席子上晒着补丁摞补丁的衣裳。孩子们追着人讨铜板，老人们眼神里全是戒备。",
+      "area": "北城",
+      "tags": [
+        "rumor",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "old_refugee"
+      ],
+      "exits": {
+        "south": "ly_north_market"
       }
     }
   }

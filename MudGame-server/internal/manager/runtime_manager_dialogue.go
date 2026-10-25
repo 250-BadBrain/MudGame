@@ -178,7 +178,7 @@ func (r *RuntimeManager) advanceStaticDialogueNoLock(p *model.Player, npc model.
 	for i := range dialogue.Options {
 		option := dialogue.Options[i]
 		key := npc.ID + "|" + option.ID
-		if history[key] || !r.dialogueRequirementMetNoLock(p, option.Requires) {
+		if history[key] || !r.dialogueRequirementMetNoLock(p, option.Requires) || option.TakeMoney > p.Money {
 			continue
 		}
 		logs, err := r.applyDialogueOptionEffectsNoLock(p, &option, npc.ID)
@@ -240,6 +240,12 @@ func (r *RuntimeManager) applyDialogueOptionEffectsNoLock(p *model.Player, selec
 		}
 		p.Backpack[itemID] += amount
 		r.applyCollectDungeonObjectiveNoLock(p.ID, itemID)
+	}
+	if selected.TakeMoney > 0 {
+		p.Money -= selected.TakeMoney
+	}
+	if selected.GiveMoney > 0 {
+		p.Money += selected.GiveMoney
 	}
 	for flag, value := range selected.SetFlags {
 		p.Flags[flag] = value
@@ -317,7 +323,7 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	var selected *model.DialogueOption
 	for i := range dialogue.Options {
 		opt := dialogue.Options[i]
-		if opt.ID == optionID && r.dialogueRequirementMetNoLock(p, opt.Requires) {
+		if opt.ID == optionID && r.dialogueRequirementMetNoLock(p, opt.Requires) && opt.TakeMoney <= p.Money {
 			selected = &opt
 			break
 		}

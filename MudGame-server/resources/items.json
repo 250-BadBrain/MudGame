@@ -337,5 +337,21 @@
     "rarity": 1,
     "unit": "株",
     "source": "芦苇滩采集"
+  },
+  "herb_pill": {
+    "name": "回春丹",
+    "description": "回春堂秘制的伤药，以止血草合古铜药引炼成，一粒下去血止伤愈。",
+    "type": "medicine",
+    "subtype": "pill",
+    "stackable": true,
+    "sellable": true,
+    "value": 300,
+    "rarity": 2,
+    "unit": "粒",
+    "source": "回春堂炼丹",
+    "usable": true,
+    "effects": {
+      "recoverHp": 60
+    }
   }
 }
