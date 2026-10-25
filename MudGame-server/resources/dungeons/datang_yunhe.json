@@ -1,0 +1,137 @@
+{
+  "id": "datang_yunhe",
+  "name": "运河追击",
+  "description": "宫变的余波沿运河南下——叛党的残余势力劫了一艘漕运粮船，你在运河上追了三天三夜。",
+  "order": 38,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 18,
+  "spawnRoomId": "dat_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "dat_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "yunhe_zhuiji": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "dat_00": {
+      "name": "入口",
+      "description": "运河追击的入口。",
+      "exits": {
+        "north": "dat_01"
+      }
+    },
+    "dat_01": {
+      "name": "通道",
+      "description": "运河追击的通道。",
+      "exits": {
+        "south": "dat_00",
+        "north": "dat_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "yh_pian_soldier"
+          ],
+          "message": "敌人堵住了去路。"
+        }
+      },
+      "npcs": [
+        "yh_pian_soldier",
+        "yh_pian_soldier"
+      ]
+    },
+    "dat_02": {
+      "name": "关隘",
+      "description": "运河追击的关隘。",
+      "exits": {
+        "south": "dat_01",
+        "north": "dat_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "dat_03": {
+      "name": "Boss之间",
+      "description": "运河追击的最终战场。",
+      "exits": {
+        "south": "dat_02"
+      },
+      "npcs": [
+        "yh_pian_jiang"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "yh_pian_soldier",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿叛军水手"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "yh_pian_jiang",
+      "required": 1,
+      "weight": 65,
+      "description": "挫叛军偏将之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2460,
+    "potential": 1240,
+    "money": 870,
+    "items": {
+      "yunhe_pao": 1
+    }
+  }
+}

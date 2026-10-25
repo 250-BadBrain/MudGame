@@ -1,0 +1,137 @@
+{
+  "id": "yangzhou_neiluan",
+  "name": "盐帮内乱",
+  "description": "盐帮内乱——大当家与二当家争夺漕运的控制权，扬州城分为两派。你受托调停，却在调停中发现了更大的阴谋。",
+  "order": 43,
+  "chainId": "yangzhou_caoyun",
+  "chainName": "运河风云",
+  "chapter": 2,
+  "spawnRoomId": "yan_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "yan_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "yan_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "yanbang_tiaoting": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "yan_00": {
+      "name": "入口",
+      "description": "盐帮内乱的入口。",
+      "exits": {
+        "north": "yan_01"
+      }
+    },
+    "yan_01": {
+      "name": "通道",
+      "description": "盐帮内乱的通道。",
+      "exits": {
+        "south": "yan_00",
+        "north": "yan_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "yz_rebel_gang"
+          ],
+          "message": "敌人堵住了去路。"
+        }
+      },
+      "npcs": [
+        "yz_rebel_gang",
+        "yz_rebel_gang"
+      ]
+    },
+    "yan_02": {
+      "name": "关隘",
+      "description": "盐帮内乱的关隘。",
+      "exits": {
+        "south": "yan_01",
+        "north": "yan_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "yan_03": {
+      "name": "Boss之间",
+      "description": "盐帮内乱的最终战场。",
+      "exits": {
+        "south": "yan_02"
+      },
+      "npcs": [
+        "yz_second_chief"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "yz_rebel_gang",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿叛帮弟子"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "yz_second_chief",
+      "required": 1,
+      "weight": 65,
+      "description": "挫盐帮二当家之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2760,
+    "potential": 1340,
+    "money": 970,
+    "items": {
+      "yanbang_yupei": 1
+    }
+  }
+}

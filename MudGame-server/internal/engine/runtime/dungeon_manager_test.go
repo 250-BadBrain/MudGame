@@ -57,6 +57,16 @@ func TestHuangyiChapterTemplatesMatchDesign(t *testing.T) {
 		"tiandao_trial_hall":    {3, "datang_double_dragon", "大唐双龙传", 14},
 		"feima_trial_hall":      {3, "datang_double_dragon", "大唐双龙传", 15},
 		"changan_trial_hall":    {3, "datang_double_dragon", "大唐双龙传", 16},
+		"datang_gongbian":       {4, "datang_double_dragon", "大唐双龙传", 17},
+		"datang_yunhe":          {4, "datang_double_dragon", "大唐双龙传", 18},
+		"fuyu_mishi":            {4, "fuyu_fan_yun", "覆雨翻云", 6},
+		"posui_zhongjuan":       {4, "posui_xukong", "破碎虚空", 5},
+		"bianhuang_chuanqi":     {4, "bianhuang_legend", "边荒传说", 6},
+		"luoshui_longyin":       {4, "luoshui_raiders", "洛水风浪", 9},
+		"yangzhou_neiluan":      {4, "yangzhou_caoyun", "运河风云", 2},
+		"bashu_tangmen_trial":   {4, "yangzhou_caoyun", "运河风云", 3},
+		"saibei_langyan":        {4, "bianhuang_legend", "边荒传说", 7},
+		"jiangnan_jianshou":     {4, "luoshui_raiders", "洛水风浪", 10},
 	}
 	loaded := map[string]bool{}
 	for _, id := range m.DungeonTemplateIDsNoLock() {

@@ -1432,5 +1432,176 @@
       "maxMp": 10
     },
     "source": "长安试炼殿"
+  },
+  "gongbian_jian": {
+    "name": "宫变密剑",
+    "description": "宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 2800,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 5,
+      "critRate": 3
+    },
+    "source": "东都宫变"
+  },
+  "yunhe_pao": {
+    "name": "运河披风",
+    "description": "运河船工的桐油披风，防雨防刀，水性好的人离不开它。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 2800,
+    "rarity": 4,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 10,
+      "dodge": 3
+    },
+    "source": "运河追击"
+  },
+  "moshi_lingzhu": {
+    "name": "魔师宫主令珠",
+    "description": "魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "critRate": 4,
+      "maxMp": 20
+    },
+    "source": "魔师宫秘道"
+  },
+  "zhongjuan_wu": {
+    "name": "破碎虚空·悟",
+    "description": "终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "attack": 3,
+      "defense": 3,
+      "maxMp": 20
+    },
+    "source": "战神图录·终卷"
+  },
+  "bianhuang_law": {
+    "name": "边荒法典",
+    "description": "边荒集新立的法典——三百年的无序，终于有了第一页规矩。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3000,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "BODY",
+    "effects": {
+      "defense": 8,
+      "parry": 3
+    },
+    "source": "边荒传奇"
+  },
+  "longyin_zhu": {
+    "name": "龙吟珠",
+    "description": "洛水底的龙吟珠——珠内封着前朝最后一个秘密。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "maxMp": 25,
+      "hitRate": 4
+    },
+    "source": "洛水龙吟"
+  },
+  "yanbang_yupei": {
+    "name": "盐帮玉佩",
+    "description": "盐帮大当家的玉佩——佩上刻着漕运的水路图。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3200,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "defense": 6,
+      "hitRate": 5
+    },
+    "source": "盐帮内乱"
+  },
+  "tangmen_baojian": {
+    "name": "唐门宝鉴",
+    "description": "唐门历代暗器谱的总纲——管事说这是唐家坳给外人最高的荣誉。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3400,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "RING",
+    "effects": {
+      "critRate": 5,
+      "attack": 3
+    },
+    "source": "唐门试炼"
+  },
+  "langyan_ling": {
+    "name": "狼烟令",
+    "description": "边军的狼烟令——持此令者，九边烽燧为你而燃。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3400,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 6,
+      "initiative": 3
+    },
+    "source": "狼烟再起"
+  },
+  "jianshou_jian": {
+    "name": "江南剑首佩剑",
+    "description": "二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。",
+    "type": "equipment",
+    "subtype": "relic",
+    "stackable": false,
+    "sellable": true,
+    "value": 3600,
+    "rarity": 5,
+    "unit": "件",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 8,
+      "hitRate": 5
+    },
+    "source": "剑首之争"
   }
 }

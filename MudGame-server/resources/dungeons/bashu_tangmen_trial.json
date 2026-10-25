@@ -1,0 +1,137 @@
+{
+  "id": "bashu_tangmen_trial",
+  "name": "唐门试炼",
+  "description": "唐家坳百年一度的暗器试炼——唐门管事破例允许外人参加。试炼分三关：暗器关、身法关、心法关。",
+  "order": 44,
+  "chainId": "yangzhou_caoyun",
+  "chainName": "运河风云",
+  "chapter": 3,
+  "spawnRoomId": "bas_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "bas_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "bas_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "tangmen_shilian": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "bas_00": {
+      "name": "入口",
+      "description": "唐门试炼的入口。",
+      "exits": {
+        "north": "bas_01"
+      }
+    },
+    "bas_01": {
+      "name": "通道",
+      "description": "唐门试炼的通道。",
+      "exits": {
+        "south": "bas_00",
+        "north": "bas_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "tm_trial_guard"
+          ],
+          "message": "敌人堵住了去路。"
+        }
+      },
+      "npcs": [
+        "tm_trial_guard",
+        "tm_trial_guard"
+      ]
+    },
+    "bas_02": {
+      "name": "关隘",
+      "description": "唐门试炼的关隘。",
+      "exits": {
+        "south": "bas_01",
+        "north": "bas_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "bas_03": {
+      "name": "Boss之间",
+      "description": "唐门试炼的最终战场。",
+      "exits": {
+        "south": "bas_02"
+      },
+      "npcs": [
+        "tm_trial_master"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "tm_trial_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿试炼傀儡"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "tm_trial_master",
+      "required": 1,
+      "weight": 65,
+      "description": "挫唐门试炼使之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2820,
+    "potential": 1360,
+    "money": 990,
+    "items": {
+      "tangmen_baojian": 1
+    }
+  }
+}

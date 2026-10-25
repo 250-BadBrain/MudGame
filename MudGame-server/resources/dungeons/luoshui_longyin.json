@@ -1,0 +1,137 @@
+{
+  "id": "luoshui_longyin",
+  "name": "洛水龙吟",
+  "description": "洛水底传来龙吟之声——前朝的密藏在洛水最深处。你带着哑婆的绳和诗人的墨，潜入洛水最深处。",
+  "order": 42,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 9,
+  "spawnRoomId": "luo_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "luo_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "luo_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "longyin_zhengming": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "luo_00": {
+      "name": "入口",
+      "description": "洛水龙吟的入口。",
+      "exits": {
+        "north": "luo_01"
+      }
+    },
+    "luo_01": {
+      "name": "通道",
+      "description": "洛水龙吟的通道。",
+      "exits": {
+        "south": "luo_00",
+        "north": "luo_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "ls_water_spirit"
+          ],
+          "message": "敌人堵住了去路。"
+        }
+      },
+      "npcs": [
+        "ls_water_spirit",
+        "ls_water_spirit"
+      ]
+    },
+    "luo_02": {
+      "name": "关隘",
+      "description": "洛水龙吟的关隘。",
+      "exits": {
+        "south": "luo_01",
+        "north": "luo_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "luo_03": {
+      "name": "Boss之间",
+      "description": "洛水龙吟的最终战场。",
+      "exits": {
+        "south": "luo_02"
+      },
+      "npcs": [
+        "ls_dragon_guard"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "ls_water_spirit",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿洛水精灵"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "ls_dragon_guard",
+      "required": 1,
+      "weight": 65,
+      "description": "挫洛水守灵之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2700,
+    "potential": 1320,
+    "money": 950,
+    "items": {
+      "longyin_zhu": 1
+    }
+  }
+}

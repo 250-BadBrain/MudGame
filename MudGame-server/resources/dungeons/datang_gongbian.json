@@ -1,0 +1,137 @@
+{
+  "id": "datang_gongbian",
+  "name": "东都宫变",
+  "description": "宫变之夜，杨广的仪仗在宫门广场被截——你受金吾卫旧部之托，护送一位神秘人物从密道出宫。",
+  "order": 37,
+  "chainId": "datang_double_dragon",
+  "chainName": "大唐双龙传",
+  "chapter": 17,
+  "spawnRoomId": "dat_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "dat_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "gongbian_mimi": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "dat_00": {
+      "name": "入口",
+      "description": "东都宫变的入口。",
+      "exits": {
+        "north": "dat_01"
+      }
+    },
+    "dat_01": {
+      "name": "通道",
+      "description": "东都宫变的通道。",
+      "exits": {
+        "south": "dat_00",
+        "north": "dat_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "gb_yuwen_guard"
+          ],
+          "message": "敌人堵住了去路。"
+        }
+      },
+      "npcs": [
+        "gb_yuwen_guard",
+        "gb_yuwen_guard"
+      ]
+    },
+    "dat_02": {
+      "name": "关隘",
+      "description": "东都宫变的关隘。",
+      "exits": {
+        "south": "dat_01",
+        "north": "dat_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "dat_03": {
+      "name": "Boss之间",
+      "description": "东都宫变的最终战场。",
+      "exits": {
+        "south": "dat_02"
+      },
+      "npcs": [
+        "gb_yuwen_jun"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "gb_yuwen_guard",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿宇文残兵"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "gb_yuwen_jun",
+      "required": 1,
+      "weight": 65,
+      "description": "挫宇文残部统领之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2400,
+    "potential": 1220,
+    "money": 850,
+    "items": {
+      "gongbian_jian": 1
+    }
+  }
+}

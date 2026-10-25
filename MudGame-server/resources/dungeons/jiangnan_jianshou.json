@@ -1,0 +1,137 @@
+{
+  "id": "jiangnan_jianshou",
+  "name": "剑首之争",
+  "description": "江南剑首之争——听雨楼的琴师终于露出了真面目。她是二十年前江南剑首的女儿，来剑池是为父雪耻。",
+  "order": 46,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 10,
+  "spawnRoomId": "jia_00",
+  "puzzleInitialStates": {
+    "gate": "closed",
+    "briefing": "new"
+  },
+  "puzzleActions": {
+    "listen_brief": {
+      "label": "听取任务简报",
+      "puzzleId": "briefing",
+      "rooms": [
+        "jia_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "message": "任务的要点交代完毕。",
+      "repeatMessage": "去吧。"
+    },
+    "open_gate": {
+      "label": "开启通道",
+      "puzzleId": "gate",
+      "rooms": [
+        "jia_02"
+      ],
+      "fromStates": [
+        "closed"
+      ],
+      "nextState": "open",
+      "setFlags": {
+        "jianshou_zhengduan": true
+      },
+      "message": "你找到了机关，通道缓缓打开。",
+      "repeatMessage": "通道已开。"
+    }
+  },
+  "rooms": {
+    "jia_00": {
+      "name": "入口",
+      "description": "剑首之争的入口。",
+      "exits": {
+        "north": "jia_01"
+      }
+    },
+    "jia_01": {
+      "name": "通道",
+      "description": "剑首之争的通道。",
+      "exits": {
+        "south": "jia_00",
+        "north": "jia_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jn_sword_apprentice"
+          ],
+          "message": "敌人堵住了去路。"
+        }
+      },
+      "npcs": [
+        "jn_sword_apprentice",
+        "jn_sword_apprentice"
+      ]
+    },
+    "jia_02": {
+      "name": "关隘",
+      "description": "剑首之争的关隘。",
+      "exits": {
+        "south": "jia_01",
+        "north": "jia_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "gate": "open"
+          },
+          "message": "通道未开。"
+        }
+      },
+      "actions": [
+        "open_gate"
+      ]
+    },
+    "jia_03": {
+      "name": "Boss之间",
+      "description": "剑首之争的最终战场。",
+      "exits": {
+        "south": "jia_02"
+      },
+      "npcs": [
+        "jn_sword_daozi"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_enemies",
+      "type": "kill",
+      "targetId": "jn_sword_apprentice",
+      "required": 2,
+      "weight": 20,
+      "description": "清剿剑道弟子"
+    },
+    {
+      "id": "open_gate",
+      "type": "puzzle",
+      "targetId": "gate:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启通道"
+    },
+    {
+      "id": "repel_boss",
+      "type": "kill",
+      "targetId": "jn_sword_daozi",
+      "required": 1,
+      "weight": 65,
+      "description": "挫琴剑道子之锋"
+    }
+  ],
+  "rewards": {
+    "experience": 2940,
+    "potential": 1400,
+    "money": 1030,
+    "items": {
+      "jianshou_jian": 1
+    }
+  }
+}
