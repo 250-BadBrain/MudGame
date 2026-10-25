@@ -1,0 +1,147 @@
+{
+  "id": "jiangnan_jianchi",
+  "name": "剑池",
+  "description": "剑池泉底沉着历代名剑，如今少了两把。你循着哑叔的木牌与琴师的剑意潜入泉眼深处——盗剑的人，已经在池底等了很久。",
+  "order": 30,
+  "chainId": "luoshui_raiders",
+  "chainName": "洛水风浪",
+  "chapter": 3,
+  "spawnRoomId": "jn2_00",
+  "puzzleInitialStates": {
+    "spring": "sealed",
+    "briefing_jn2": "new"
+  },
+  "puzzleActions": {
+    "listen_zither": {
+      "label": "听琴师说明缘由",
+      "puzzleId": "briefing_jn2",
+      "rooms": [
+        "jn2_00"
+      ],
+      "fromStates": [
+        "new"
+      ],
+      "nextState": "told",
+      "dialogueNpcId": "jn_pool_keeper",
+      "message": "哑叔用木牌把琴师的话转述了一遍。",
+      "repeatMessage": "哑叔的木牌上写着：去吧。"
+    },
+    "open_spring": {
+      "label": "开启泉眼石门",
+      "puzzleId": "spring",
+      "rooms": [
+        "jn2_02"
+      ],
+      "fromStates": [
+        "sealed"
+      ],
+      "nextState": "open",
+      "message": "你转动池底机关，泉眼石门缓缓开启——一串气泡浮上水面，池底的通道通了。",
+      "repeatMessage": "石门已开，通道里的水声清晰可闻。",
+      "setFlags": {
+        "quanxin_kai": true
+      }
+    }
+  },
+  "rooms": {
+    "jn2_00": {
+      "name": "剑池畔",
+      "description": "剑池的水面平静得反常。哑叔立在池边，木牌上写着：泉眼开了。",
+      "exits": {
+        "north": "jn2_01"
+      },
+      "npcs": [
+        "jn_pool_keeper"
+      ],
+      "actions": [
+        "listen_zither"
+      ]
+    },
+    "jn2_01": {
+      "name": "池底石阶",
+      "description": "池底的石阶通向泉眼深处，水压从四面八方挤来——盗剑的人能在这样的水里待这么久，绝非寻常。",
+      "exits": {
+        "south": "jn2_00",
+        "north": "jn2_02"
+      },
+      "exitRequirements": {
+        "north": {
+          "defeatNpcs": [
+            "jn2_pool_frog"
+          ],
+          "message": "守池的蛙人堵住石阶，鱼叉连刺。"
+        }
+      },
+      "npcs": [
+        "jn2_pool_frog",
+        "jn2_pool_frog"
+      ]
+    },
+    "jn2_02": {
+      "name": "泉眼石门",
+      "description": "泉眼被一块千斤石门封住，门上机关锈迹斑斑——但锁孔是新的。",
+      "exits": {
+        "south": "jn2_01",
+        "north": "jn2_03"
+      },
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "spring": "open"
+          },
+          "message": "石门未开，通道在水下封死。"
+        }
+      },
+      "actions": [
+        "open_spring"
+      ]
+    },
+    "jn2_03": {
+      "name": "泉底暗窟",
+      "description": "暗窟里灯火通明——池底竟然别有洞天。两把名剑摆在石台上，守剑的人背对你而立，手里转着一柄没出鞘的剑。",
+      "exits": {
+        "south": "jn2_02"
+      },
+      "npcs": [
+        "jn2_sword_thief"
+      ]
+    }
+  },
+  "objectives": [
+    {
+      "id": "kill_frogs",
+      "type": "kill",
+      "targetId": "jn2_pool_frog",
+      "required": 2,
+      "weight": 20,
+      "description": "破池底蛙人"
+    },
+    {
+      "id": "open_spring",
+      "type": "puzzle",
+      "targetId": "spring:open",
+      "required": 1,
+      "weight": 15,
+      "description": "开启泉眼石门"
+    },
+    {
+      "id": "repel_thief",
+      "type": "kill",
+      "targetId": "jn2_sword_thief",
+      "required": 1,
+      "weight": 65,
+      "description": "泉底夺回名剑"
+    }
+  ],
+  "rewards": {
+    "experience": 2140,
+    "potential": 1040,
+    "money": 720,
+    "items": {
+      "jianchi_jian": 1
+    },
+    "flags": {
+      "jianchi_case_done": true
+    }
+  }
+}

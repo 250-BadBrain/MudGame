@@ -1,0 +1,92 @@
+{
+  "id": "jiangnan",
+  "name": "江南",
+  "description": "烟雨楼台，小桥流水——江南的富庶养出了诗酒风流，也养出了天下最好的剑客。剑池的水、兰亭的帖、听雨楼的曲，都是江南的名片。",
+  "order": 6,
+  "category": "main_world",
+  "visible": true,
+  "spawnRoomId": "jn_jianchi_town",
+  "rooms": {
+    "jn_jianchi_town": {
+      "name": "剑池镇",
+      "description": "剑池镇的每一户人家都会打铁淬剑——镇口的石碑上刻着\"天下剑，出剑池\"。",
+      "area": "江南",
+      "tags": [
+        "safe"
+      ],
+      "safeZone": true,
+      "exits": {
+        "north": "jn_tingyu",
+        "west": "jn_lanting"
+      }
+    },
+    "jn_tingyu": {
+      "name": "听雨楼",
+      "description": "听雨楼是江南文人聚集的地方，楼上的曲、楼下的酒、墙上的字，都是江南的名帖。",
+      "area": "江南",
+      "tags": [
+        "market",
+        "rumor",
+        "safe"
+      ],
+      "safeZone": true,
+      "actions": [
+        "listen_rumor"
+      ],
+      "npcs": [
+        "jn_zither_player"
+      ],
+      "exits": {
+        "south": "jn_jianchi_town"
+      }
+    },
+    "jn_lanting": {
+      "name": "兰亭遗址",
+      "description": "兰亭遗址的曲水流觞还在，石碑上的字迹却被拓得发亮——兰亭帖的摹本，在江南比真迹还多。",
+      "area": "江南",
+      "tags": [
+        "quest",
+        "safe"
+      ],
+      "safeZone": true,
+      "npcs": [
+        "jn_calligrapher"
+      ],
+      "exits": {
+        "east": "jn_jianchi_town",
+        "south": "jn_bamboo"
+      }
+    },
+    "jn_bamboo": {
+      "name": "竹海小径",
+      "description": "竹海一眼望不到头，风一过，竹叶的沙沙声像海浪——传闻竹海深处藏着剑池的源头。",
+      "area": "江南",
+      "tags": [
+        "wild",
+        "unsafe"
+      ],
+      "safeZone": false,
+      "exits": {
+        "north": "jn_lanting",
+        "west": "jn_sword_pool"
+      }
+    },
+    "jn_sword_pool": {
+      "name": "剑池",
+      "description": "剑池的水绿得发黑，池底沉着历代剑客淬废的剑——据说池水通着地下泉眼，好剑要在这里泡上三年。",
+      "area": "江南",
+      "tags": [
+        "wild",
+        "unsafe",
+        "quest"
+      ],
+      "safeZone": false,
+      "npcs": [
+        "jn_pool_keeper"
+      ],
+      "exits": {
+        "east": "jn_bamboo"
+      }
+    }
+  }
+}

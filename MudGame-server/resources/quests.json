@@ -199,5 +199,32 @@
       }
     },
     "repeatable": false
+  },
+  "lanting_tie": {
+    "id": "lanting_tie",
+    "name": "兰亭帖",
+    "description": "听雨楼的琴师似有难言之隐，兰亭的老翁守着不卖的帖，剑池的哑叔在木牌上写：池底的剑少了两把。三件事，一条线。",
+    "giverNpcId": "jn_zither_player",
+    "turnInNpcId": "jn_zither_player",
+    "objectives": [
+      {
+        "type": "flag",
+        "targetId": "jianchi_case_done",
+        "description": "查明剑池盗剑案的真相（《剑池》副本）。",
+        "required": 1
+      }
+    ],
+    "rewards": {
+      "experience": 180,
+      "potential": 140,
+      "money": 260,
+      "items": {
+        "dahuandan": 1
+      },
+      "flags": {
+        "lanting_tie_completed": true
+      }
+    },
+    "repeatable": false
   }
 }

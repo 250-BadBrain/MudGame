@@ -10729,5 +10729,342 @@
       "hitRate": -16,
       "defense": -10
     }
+  },
+  "jn_zither_player": {
+    "name": "抚琴女子",
+    "title": "听雨楼琴师",
+    "description": "听雨楼的琴师，琴音里总有一丝剑意——有人猜她是隐世的剑客，她只说琴是琴，剑是剑。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_jn_zither",
+    "attributes": {
+      "level": 20,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 15,
+        "constitution": 15,
+        "agility": 17,
+        "perception": 17,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 180,
+        "maxHp": 180,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 15,
+        "defense": 15,
+        "hitRate": 98,
+        "dodge": 76,
+        "parry": 70,
+        "critRate": 3,
+        "attackSpeed": 4,
+        "initiative": 78,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jn_calligrapher": {
+    "name": "临帖老翁",
+    "title": "兰亭守碑人",
+    "description": "在兰亭临了一辈子帖的老翁，他临的《兰亭帖》能以假乱真——但他从不卖，只送有缘人。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_jn_calligrapher",
+    "attributes": {
+      "level": 16,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 12,
+        "constitution": 13,
+        "agility": 13,
+        "perception": 17,
+        "willpower": 16,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 130,
+        "maxHp": 130,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 11,
+        "defense": 11,
+        "hitRate": 80,
+        "dodge": 60,
+        "parry": 58,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 52,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jn_pool_keeper": {
+    "name": "守池人",
+    "title": "剑池看泉",
+    "description": "守剑池的哑叔，用一块木牌写字与人交谈。他在池边守了三十年，池水涨落全记在心里。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_jn_keeper",
+    "attributes": {
+      "level": 24,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 17,
+        "constitution": 17,
+        "agility": 15,
+        "perception": 14,
+        "willpower": 15,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 190,
+        "maxHp": 190,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 16,
+        "defense": 15,
+        "hitRate": 96,
+        "dodge": 70,
+        "parry": 72,
+        "critRate": 2,
+        "attackSpeed": 4,
+        "initiative": 60,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jn2_pool_frog": {
+    "name": "池底蛙人",
+    "title": "水路守卫",
+    "description": "守泉眼的蛙人，鱼叉与水性好得惊人——他们是盗剑人从水路养出来的眼线。",
+    "faction": "bandits",
+    "role": "enemy",
+    "importance": "common",
+    "instanceOnly": true,
+    "attributes": {
+      "level": 42,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 42,
+        "constitution": 40,
+        "agility": 33,
+        "perception": 18,
+        "willpower": 17,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 540,
+        "maxHp": 540,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 81,
+        "defense": 38,
+        "hitRate": 156,
+        "dodge": 112,
+        "parry": 120,
+        "critRate": 6,
+        "attackSpeed": 4,
+        "initiative": 104,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    }
+  },
+  "jn2_sword_thief": {
+    "name": "青衣剑客",
+    "title": "盗剑人",
+    "description": "盗剑的青衣剑客转过头来，唇边一丝笑意：\"名剑配我，委屈了池水。——你的剑，也不见得比我的快。\"",
+    "faction": "bandits",
+    "role": "boss",
+    "importance": "boss",
+    "instanceOnly": true,
+    "combatMode": "defeat",
+    "attributes": {
+      "level": 55,
+      "realm": "master",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 58,
+        "constitution": 55,
+        "agility": 48,
+        "perception": 29,
+        "willpower": 28,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 1080,
+        "maxHp": 1080,
+        "mp": 60,
+        "trainedMaxMp": 60,
+        "maxMp": 60,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 86,
+        "defense": 42,
+        "hitRate": 170,
+        "dodge": 132,
+        "parry": 128,
+        "critRate": 14,
+        "attackSpeed": 4,
+        "initiative": 124,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "weaknessFlag": "quanxin_kai",
+    "weaknessModifiers": {
+      "attack": -14,
+      "hitRate": -18,
+      "defense": -10
+    }
   }
 }

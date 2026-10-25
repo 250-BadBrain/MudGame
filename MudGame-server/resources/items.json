@@ -858,5 +858,22 @@
       "attack": 13
     },
     "source": "狼山口"
+  },
+  "jianchi_jian": {
+    "name": "淬泉剑",
+    "description": "剑池泉底淬了三年的长剑，剑身幽蓝——江南剑客说，好剑是水养出来的。",
+    "type": "equipment",
+    "subtype": "sword",
+    "stackable": false,
+    "sellable": true,
+    "value": 2800,
+    "rarity": 4,
+    "unit": "柄",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 12,
+      "hitRate": 3
+    },
+    "source": "剑池"
   }
 }

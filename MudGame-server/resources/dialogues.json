@@ -720,5 +720,26 @@
     "title": "戍卒闲话",
     "opening": "年轻戍卒搓着手：\"客人从南边来？南边好啊……南边的月亮，应该比这儿的圆。\"",
     "options": []
+  },
+  "dlg_jn_zither": {
+    "id": "dlg_jn_zither",
+    "npcId": "jn_zither_player",
+    "title": "琴剑之音",
+    "opening": "抚琴女子指下不停：\"客人听出这曲子里的剑意了么？——江南的剑客，先学琴，再学剑。\"",
+    "options": []
+  },
+  "dlg_jn_calligrapher": {
+    "id": "dlg_jn_calligrapher",
+    "npcId": "jn_calligrapher",
+    "title": "兰亭帖缘",
+    "opening": "老翁头也不抬：\"兰亭帖的真迹早就没了，可'永'字的笔意还在。年轻人，你写一个'永'字我看看？\"",
+    "options": []
+  },
+  "dlg_jn_keeper": {
+    "id": "dlg_jn_keeper",
+    "npcId": "jn_pool_keeper",
+    "title": "木牌问询",
+    "opening": "哑叔举起木牌：【池水最近涨了三寸。池底的剑，少了两把。】",
+    "options": []
   }
 }
