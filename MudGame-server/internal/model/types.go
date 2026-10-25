@@ -93,6 +93,8 @@ type Player struct {
 	Money                 int
 	Attributes            Attributes
 	Skills                map[string]int
+	// EquippedSkills 秘籍装备槽：键=前置基本武功 ID，值=装备中的秘籍 ID；仅装备中的 ADVANCED 技能参与属性加成
+	EquippedSkills        map[string]string
 	Backpack              map[string]int
 	Equipment             map[string]string
 	QuestStates           map[string]QuestState

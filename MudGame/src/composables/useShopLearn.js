@@ -97,6 +97,12 @@ export function useShopLearn({ sendGameCommand, getPlayerId, checkCanAct, closeI
     showLearnPanel.value = false
   }
 
+  const equipSkill = (skill) => {
+    if (!checkCanAct('equip_skill')) return
+    if (!skill || skill.type !== 'ADVANCED') return
+    sendGameCommand("command", "equip_skill", getPlayerId(), { skillId: skill.id })
+  }
+
   const selectShopItem = (item) => {
     if (item.limit === 0) return
     selectedShopItem.value = selectedShopItem.value?.id === item.id ? null : item
@@ -131,6 +137,7 @@ export function useShopLearn({ sendGameCommand, getPlayerId, checkCanAct, closeI
     closeLearn,
     selectLearnSkill,
     startLearning,
+    equipSkill,
     selectShopItem,
     buyItem
   }

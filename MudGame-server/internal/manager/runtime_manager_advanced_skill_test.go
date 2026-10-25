@@ -24,6 +24,8 @@ func setupAdvancedSkillPlayer(t *testing.T) (*RuntimeManager, string) {
 	p := players[playerID]
 	p.RoomID = "ly_old_alley"
 	p.Attributes.Potential = 500
+	// 秘籍前置门槛：长生诀需基本内功达到 20 级
+	p.Skills["basic_neigong"] = 20
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
 	}

@@ -114,6 +114,7 @@
               @changeSkillTab="(tab) => skillTab = tab"
               @selectSkill="selectSkill"
               @viewSkill="viewSkill"
+              @equipSkill="equipSkill"
               @selectEquipSlot="selectEquipmentSlot"
               @unequipSlot="unequipItem"
               @selectWorld="selectWorld"
@@ -308,6 +309,7 @@ const {
   closeLearn,
   selectLearnSkill,
   startLearning,
+  equipSkill,
   selectShopItem,
   buyItem
 } = useShopLearn({ sendGameCommand, getPlayerId, checkCanAct, closeInfoPanel })

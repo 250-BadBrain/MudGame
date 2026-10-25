@@ -53,6 +53,7 @@ type diskPlayer struct {
 	Items                 map[string]int              `json:"items"`
 	Equipment             map[string]string           `json:"equipment"`
 	Skills                map[string]int              `json:"skills"`
+	EquippedSkills        map[string]string           `json:"equippedSkills,omitempty"`
 	QuestStates           map[string]model.QuestState `json:"questStates"`
 	Flags                 map[string]bool             `json:"flags"`
 	DialogueHistory       map[string]bool             `json:"dialogueHistory"`
@@ -214,6 +215,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			Money:                 dp.Money,
 			Attributes:            attrs,
 			Skills:                dp.Skills,
+			EquippedSkills:        dp.EquippedSkills,
 			Backpack:              dp.Items,
 			Equipment:             dp.Equipment,
 			QuestStates:           dp.QuestStates,
@@ -264,6 +266,7 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 			Items:                 p.Backpack,
 			Equipment:             p.Equipment,
 			Skills:                p.Skills,
+			EquippedSkills:        p.EquippedSkills,
 			QuestStates:           p.QuestStates,
 			Flags:                 p.Flags,
 			DialogueHistory:       p.DialogueHistory,

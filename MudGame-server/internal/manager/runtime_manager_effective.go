@@ -20,7 +20,7 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	eff.HitRate = 0
 	eff.Dodge = 0
 	eff.Parry = 0
-	applySkillBonusesNoLock(&eff, p.Skills)
+	applySkillBonusesNoLock(&eff, p.Skills, p.EquippedSkills)
 	applyEquipmentEffectsNoLock(&eff, p.Equipment)
 	directAttack := eff.Attack
 	directDefense := eff.Defense
@@ -50,7 +50,7 @@ func applyWeaknessNoLock(eff *model.EffectiveAttributes, p *model.Player) {
 	eff.Initiative /= 2
 }
 
-func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]int) {
+func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]int, equipped map[string]string) {
 	if eff == nil {
 		return
 	}
@@ -61,6 +61,10 @@ func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]i
 		}
 		def, ok := fileSkills[skillID]
 		if !ok {
+			continue
+		}
+		// 秘籍装备规则：ADVANCED 技能只有装备到前置基本武功槽位才参与加成（见 formulas.md 3.3）
+		if def.Type == "ADVANCED" && equipped[skillPrerequisiteID(def)] != skillID {
 			continue
 		}
 		for key, value := range def.Bonuses {
@@ -75,6 +79,26 @@ func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]i
 		eff.MaxHP += int(math.Ceil(float64(eff.TrainedMaxMP) * trainedMPToHPPercent))
 	}
 	clampEffectiveResources(eff)
+}
+
+// skillPrerequisiteID 返回技能声明的前置基本武功 ID（装备槽位），无声明返回空串。
+func skillPrerequisiteID(def model.SkillDef) string {
+	prereq, ok := def.Requirements["prerequisite"].(map[string]interface{})
+	if !ok {
+		return ""
+	}
+	id, _ := prereq["skill"].(string)
+	return id
+}
+
+// skillPrerequisiteLevel 返回技能声明的前置基本武功最低等级，未声明返回 0。
+func skillPrerequisiteLevel(def model.SkillDef) int {
+	prereq, ok := def.Requirements["prerequisite"].(map[string]interface{})
+	if !ok {
+		return 0
+	}
+	lv, _ := prereq["level"].(float64)
+	return int(lv)
 }
 
 func applyEquipmentEffectsNoLock(eff *model.EffectiveAttributes, equipment map[string]string) {

@@ -227,6 +227,10 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for sk, sv := range v.Skills {
 			skills[sk] = sv
 		}
+		equippedSkills := map[string]string{}
+		for ek, ev := range v.EquippedSkills {
+			equippedSkills[ek] = ev
+		}
 		learningProgress := map[string]int{}
 		for sk, sv := range v.SkillLearningProgress {
 			learningProgress[sk] = sv
@@ -247,7 +251,7 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for rk, rv := range v.Reputations {
 			reputations[rk] = rv
 		}
-		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online, WeakUntil: v.WeakUntil}
+		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, EquippedSkills: equippedSkills, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online, WeakUntil: v.WeakUntil}
 	}
 	return out
 }

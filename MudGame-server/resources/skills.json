@@ -96,7 +96,11 @@
       "trained_mp_to_max_hp_percent": 0.5
     },
     "requirements": {
-      "item": "csj_changshengjue_page"
+      "item": "csj_changshengjue_page",
+      "prerequisite": {
+        "skill": "basic_neigong",
+        "level": 20
+      }
     }
   },
   "jyg_zhanshentu_dao": {
@@ -111,7 +115,11 @@
       "crit_rate_per_10_levels": 1
     },
     "requirements": {
-      "item": "jyg_zhanshentu_rubbing"
+      "item": "jyg_zhanshentu_rubbing",
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 20
+      }
     }
   },
   "tiandao_blade": {
@@ -126,7 +134,11 @@
       "hit_rate_per_10_levels": 2
     },
     "requirements": {
-      "item": "tiandao_page"
+      "item": "tiandao_page",
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 40
+      }
     }
   },
   "basic_staff": {
@@ -240,7 +252,11 @@
       "dodge_per_10_levels": 1
     },
     "requirements": {
-      "item": "cihang_page"
+      "item": "cihang_page",
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 20
+      }
     }
   }
 }

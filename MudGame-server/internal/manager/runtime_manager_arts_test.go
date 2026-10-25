@@ -18,6 +18,7 @@ func TestCihangInsightAndTeaching(t *testing.T) {
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
 	players[playerID].RoomID = "ly_old_alley"
+	players[playerID].Skills["basic_sword"] = 20 // 慈航剑典前置门槛
 	players[playerID].Backpack["cihang_page"] = 1
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
@@ -62,9 +63,10 @@ func TestSongQueGrandmasterTeaching(t *testing.T) {
 		t.Fatal("song que should remain after defeat")
 	}
 
-	// 先给残页参悟（宗师亲传也要先有传承根基）
+	// 先给残页参悟（宗师亲传也要先有传承根基）；天刀八诀前置：基本刀法 40 级
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
+	players[playerID].Skills["basic_blade"] = 40
 	players[playerID].Backpack["tiandao_page"] = 1
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()

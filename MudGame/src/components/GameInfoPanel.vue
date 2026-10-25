@@ -81,12 +81,14 @@
               @click="$emit('selectSkill', skill)">
               <div class="item-row">
                 <div class="item-row-content">
-                  <span class="item-name" :style="{ color: getItemColor(skill.rarity) }">{{ skill.name }}</span>
+                  <span class="item-name" :style="{ color: getItemColor(skill.rarity) }">{{ skill.name }}<span v-if="skill.equipped" class="equipped-badge">已装备</span></span>
                   <span class="item-count">Lv.{{ skill.level }}/{{ skill.levelCap }}</span>
                 </div>
               </div>
               <div v-if="selectedSkill && selectedSkill.id === skill.id" class="item-actions">
                 <button @click.stop="$emit('viewSkill', skill)" class="action-btn">查看</button>
+                <button v-if="skill.type === 'ADVANCED' && skill.level >= 1 && !skill.equipped"
+                  @click.stop="$emit('equipSkill', skill)" class="action-btn">装备</button>
               </div>
             </li>
           </ul>
@@ -311,7 +313,7 @@ const fullRewardPotential = computed(() => Number(props.selectedDungeon?.rewards
 defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'useItem', 'sellItem',
   'changeDiscardAmount', 'confirmDiscard', 'cancelDiscard',
   'changeSellAmount', 'confirmSell', 'cancelSell',
-  'changeSkillTab', 'selectSkill', 'viewSkill',
+  'changeSkillTab', 'selectSkill', 'viewSkill', 'equipSkill',
   'selectEquipSlot', 'unequipSlot',
   'selectWorld', 'enterWorld',
   'selectDungeon', 'enterDungeon'])
@@ -374,6 +376,7 @@ const getSkillBonusText = (skill) => {
 .collapsible-detail { cursor: pointer; user-select: none; }
 .skill-progress-info { color: #b8c5b8; font-size: 11px; margin-top: 6px; }
 .learning-indicator { color: #2ecc71; margin-left: 8px; font-weight: bold; }
+.equipped-badge { color: #f39c12; margin-left: 6px; font-size: 12px; font-weight: bold; }
 .detail-header { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
 .detail-name { font-weight: bold; font-size: 13px; overflow-wrap: anywhere; }
 .detail-sell-price { color: #f1c40f; font-size: 12px; }

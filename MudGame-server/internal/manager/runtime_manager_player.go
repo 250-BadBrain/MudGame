@@ -120,6 +120,7 @@ func (r *RuntimeManager) GetSkills(playerID string) ([]map[string]interface{}, e
 			"bonuses": def.Bonuses, "bonusText": skillBonusText(def.Bonuses, level), "requirements": def.Requirements,
 			"levelCap": levelCap, "nextLevelPotential": nextLevelPotential, "learningProgress": learningProgress,
 			"isLearning": p.State == "LEARNING" && p.LearningSkillID == id,
+			"equipped":   def.Type == "ADVANCED" && skillPrerequisiteID(def) != "" && p.EquippedSkills[skillPrerequisiteID(def)] == id,
 		})
 	}
 	sort.Slice(out, func(i, j int) bool { return out[i]["id"].(string) < out[j]["id"].(string) })
@@ -728,6 +729,15 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	if skillDef.Type == "ADVANCED" && p.Skills[skillID] < 1 {
 		return errors.New("你尚未参悟" + skillDef.Name + "的传承残页，无从学起。")
 	}
+	// 秘籍学习的前置门槛：对应基本武功必须达到指定等级（见 docs/design/martial_arts_curriculum.md 段位模型）
+	if reqSkill := skillPrerequisiteID(skillDef); reqSkill != "" {
+		if reqLevel := skillPrerequisiteLevel(skillDef); p.Skills[reqSkill] < reqLevel {
+			if base, ok := fileSkills[reqSkill]; ok {
+				return errors.New("你的" + base.Name + "尚未练到" + strconv.Itoa(reqLevel) + "级，无从修习" + skillDef.Name + "。")
+			}
+			return errors.New("skill_prerequisite_not_met")
+		}
+	}
 	if p.Skills[skillID] >= teacherSkillLevel {
 		return errors.New("你的" + skillDef.Name + "已经不输你师傅了")
 	}
@@ -750,6 +760,45 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	p.LearningTeacherID = npcID
 	p.LearningTeacherLevel = teacherSkillLevel
 	return r.savePlayers(players)
+}
+
+// EquipSkill 将已参悟的秘籍装备到其前置基本武功槽位：同槽择一，仅装备中的秘籍参与属性加成
+// （装备规则见 docs/design/formulas.md 3.3 与 docs/design/martial_arts_curriculum.md 段位模型）。
+func (r *RuntimeManager) EquipSkill(playerID, skillID string) (string, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	players, err := r.loadPlayers()
+	if err != nil {
+		return "", err
+	}
+	p, ok := players[playerID]
+	if !ok {
+		return "", exception.ErrPlayerNotFound
+	}
+	def, ok := fileSkills[skillID]
+	if !ok {
+		return "", errors.New("skill_not_found")
+	}
+	if def.Type != "ADVANCED" {
+		return "", errors.New(def.Name + "是基本武功，无需装备。")
+	}
+	if p.Skills[skillID] < 1 {
+		return "", errors.New("你尚未学会" + def.Name + "，无从装备。")
+	}
+	slot := skillPrerequisiteID(def)
+	if slot == "" {
+		return "", errors.New(def.Name + "没有对应的基本武功槽位。")
+	}
+	base := fileSkills[slot]
+	if p.EquippedSkills == nil {
+		p.EquippedSkills = map[string]string{}
+	}
+	p.EquippedSkills[slot] = skillID
+	if err := r.savePlayers(players); err != nil {
+		return "", err
+	}
+	return "你将" + def.Name + "融汇于" + base.Name + "之中。", nil
 }
 
 func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]interface{}, error) {

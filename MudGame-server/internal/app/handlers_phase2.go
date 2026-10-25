@@ -312,6 +312,16 @@ func (s *Server) handleGameLearn(conn *websocket.Conn, cmd protocol.CommandMessa
 	}
 }
 
+func (s *Server) handleGameEquipSkill(conn *websocket.Conn, cmd protocol.CommandMessage) {
+	playerID, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	skillID := toString(cmd.Args["skillId"])
+	message, err := s.repo.EquipSkill(playerID, skillID)
+	s.replyCommand(conn, "equip_skill", err, map[string]interface{}{"message": message}, nil)
+}
+
 func (s *Server) handleGameUseItem(conn *websocket.Conn, cmd protocol.CommandMessage) {
 	playerID, ok := s.requireSelectedPlayer(conn)
 	if !ok {

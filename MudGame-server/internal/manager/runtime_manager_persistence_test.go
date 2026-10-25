@@ -24,6 +24,7 @@ func newFullyPopulatedPlayer(id string) *model.Player {
 		Money:                 1234,
 		Attributes:            model.NormalizeAttributes(model.Attributes{}),
 		Skills:                map[string]int{"basic_unarmed": 2, "basic_parry": 1},
+		EquippedSkills:        map[string]string{"basic_blade": "tiandao_blade"},
 		Backpack:              map[string]int{"dry_ration": 2, "iron_sword": 1},
 		Equipment:             map[string]string{"WEAPON": "iron_sword"},
 		QuestStates:           map[string]model.QuestState{"escort_rumor_run": {ID: "escort_rumor_run", Status: "active", Progress: 1}},
@@ -66,7 +67,7 @@ func TestClonePlayersMapPreservesAllFields(t *testing.T) {
 	structType := origValue.Type()
 	// 手工克隆清单与 model.Player 字段必须同步维护：
 	// 给 model.Player 新增字段时，clonePlayersMap 与本测试都要同步更新，否则存档会静默丢字段。
-	if structType.NumField() != 23 {
+	if structType.NumField() != 24 {
 		t.Fatalf("model.Player field count changed to %d: update clonePlayersMap, newFullyPopulatedPlayer and this guard", structType.NumField())
 	}
 	for i := 0; i < structType.NumField(); i++ {
