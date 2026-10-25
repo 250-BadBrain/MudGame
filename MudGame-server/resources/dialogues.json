@@ -633,7 +633,13 @@
     "npcId": "ld_courier_chief",
     "title": "粮道告急",
     "opening": "郑镖头苦笑：\"瓦岗大军走了，偏师留下了。粮车十辆烧了六辆——这趟粮要是进不了城，城里就要易子而食。\"",
-    "options": []
+    "options": [
+      {
+        "id": "ask_rumor",
+        "text": "粮道最近如何？",
+        "response": "郑镖头搓着手：\"比上回好了些——你把那个神箭手打退之后，粮道太平了不少。\""
+      }
+    ]
   },
   "dlg_db_boatwoman": {
     "id": "dlg_db_boatwoman",
@@ -703,7 +709,13 @@
     "npcId": "yz_boat_girl",
     "title": "湖上旧曲",
     "opening": "船娘摇着橹笑：\"客官坐稳——二十四桥的月亮，瘦西湖的水，都在这支曲子里。\"",
-    "options": []
+    "options": [
+      {
+        "id": "ask_water",
+        "text": "瘦西湖的水路有什么讲究？",
+        "response": "船娘笑而不答，只是把橹一摇——船头转向了苇荡深处。\"有些路，坐船的人才看得见。\""
+      }
+    ]
   },
   "dlg_yz_clerk": {
     "id": "dlg_yz_clerk",
@@ -717,7 +729,13 @@
     "npcId": "bs_tang_steward",
     "title": "唐门规矩",
     "opening": "唐门管事拱手还礼，手却始终没离开腰间：\"客官远来是客。只是唐家坳的规矩——暗器不外借，恩怨不外传。\"",
-    "options": []
+    "options": [
+      {
+        "id": "ask_tangmen",
+        "text": "唐门的暗器为什么不出蜀？",
+        "response": "管事叹了口气：\"暗器太利，人心太软——出了蜀地，唐家管不住它落在谁手里。\""
+      }
+    ]
   },
   "dlg_bs_jiange": {
     "id": "dlg_bs_jiange",
