@@ -467,5 +467,119 @@
         "level": 40
       }
     }
+  },
+  "bawang_qiang": {
+    "name": "霸王枪",
+    "description": "军中枪法之绝，一往无前，宁折不弯。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "hit_rate_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "bawang_page",
+      "prerequisite": {
+        "skill": "basic_spear",
+        "level": 40
+      }
+    }
+  },
+  "youlong_bian": {
+    "name": "游龙鞭",
+    "description": "软鞭如游龙，缠、卷、抽、带，变幻莫测。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "dodge_per_10_levels": 1,
+      "attack_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "youlong_page",
+      "prerequisite": {
+        "skill": "basic_whip",
+        "level": 40
+      }
+    }
+  },
+  "lieshi_jian": {
+    "name": "裂石锏",
+    "description": "重锏裂石，不闪不避——一击必碎的坚定。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 1,
+      "parry_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "lieshi_page",
+      "prerequisite": {
+        "skill": "basic_mace",
+        "level": 40
+      }
+    }
+  },
+  "suolang_gou": {
+    "name": "锁浪钩",
+    "description": "钩法锁浪，水战之王——怒蛟帮的镇帮绝学。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 1
+    },
+    "requirements": {
+      "item": "suolang_page",
+      "prerequisite": {
+        "skill": "basic_hook",
+        "level": 40
+      }
+    }
+  },
+  "mantian_huayu": {
+    "name": "漫天花雨",
+    "description": "暗器之绝——漫天花雨，无处不在，无处不至。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "hit_rate_per_10_levels": 2,
+      "crit_rate_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "huayu_page",
+      "prerequisite": {
+        "skill": "basic_hidden_weapon",
+        "level": 40
+      }
+    }
+  },
+  "fengmo_gun": {
+    "name": "疯魔棍",
+    "description": "棍法疯魔，大开大合——越战越勇，不死不休。",
+    "rarity": 4,
+    "type": "ADVANCED",
+    "category": "weapon",
+    "school": "hidden",
+    "bonuses": {
+      "attack_per_10_levels": 2,
+      "defense_per_10_levels": 2
+    },
+    "requirements": {
+      "item": "fengmo_page",
+      "prerequisite": {
+        "skill": "basic_staff",
+        "level": 40
+      }
+    }
   }
 }

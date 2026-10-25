@@ -9,7 +9,8 @@
   "spawnRoomId": "ld_00",
   "puzzleInitialStates": {
     "bridge": "intact",
-    "briefing_ld": "new"
+    "briefing_ld": "new",
+    "tent_ld": "untouched"
   },
   "puzzleActions": {
     "listen_courier": {
@@ -41,6 +42,22 @@
       },
       "message": "你撬断桥索，木桥轰然塌进涧底——马队被隔在对岸嘶鸣。王伯当的箭再准，也罩不住断了桥的战场。",
       "repeatMessage": "断桥残木还在涧底冒烟。"
+    },
+    "search_tent": {
+      "label": "翻检军帐",
+      "puzzleId": "tent_ld",
+      "rooms": [
+        "ld_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
+      "repeatMessage": "已被你翻遍，再无他物。",
+      "giveItems": {
+        "bawang_page": 1
+      }
     }
   },
   "rooms": {
@@ -104,6 +121,9 @@
       },
       "npcs": [
         "ld_wang_bodang"
+      ],
+      "actions": [
+        "search_tent"
       ]
     }
   },
@@ -131,6 +151,15 @@
       "required": 1,
       "weight": 65,
       "description": "箭雨中挫瓦岗神箭之锋"
+    },
+    {
+      "id": "search_tent",
+      "type": "puzzle",
+      "targetId": "tent_ld:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "翻检军帐残卷，寻得枪法法门"
     }
   ],
   "rewards": {

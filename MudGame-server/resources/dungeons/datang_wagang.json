@@ -9,7 +9,8 @@
   "spawnRoomId": "wg_00",
   "puzzleInitialStates": {
     "granary_wg": "locked",
-    "briefing_wg2": "new"
+    "briefing_wg2": "new",
+    "armory_wg": "untouched"
   },
   "puzzleActions": {
     "listen_defender": {
@@ -41,6 +42,22 @@
       },
       "message": "仓门洞开，流民蜂拥而至。炊烟起处，瓦岗阵中已有兵卒偷偷回望——替天行道的旗，卷了边。",
       "repeatMessage": "粮仓已空，流民还在道旁叩谢。"
+    },
+    "search_armory": {
+      "label": "搜检武库",
+      "puzzleId": "armory_wg",
+      "rooms": [
+        "wg_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
+      "repeatMessage": "已被你翻遍，再无他物。",
+      "giveItems": {
+        "lieshi_page": 1
+      }
     }
   },
   "rooms": {
@@ -97,7 +114,8 @@
         "wg_quartermaster"
       ],
       "actions": [
-        "open_granary"
+        "open_granary",
+        "search_armory"
       ]
     },
     "wg_03": {
@@ -143,6 +161,15 @@
       "required": 1,
       "weight": 45,
       "description": "阵前挫罗士信之锋"
+    },
+    {
+      "id": "search_armory",
+      "type": "puzzle",
+      "targetId": "armory_wg:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜检武库，寻得锏法法门"
     }
   ],
   "rewards": {

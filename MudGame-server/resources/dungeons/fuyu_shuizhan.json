@@ -9,7 +9,8 @@
   "spawnRoomId": "hy2_00",
   "puzzleInitialStates": {
     "sunken": "afloat",
-    "briefing_hy2": "new"
+    "briefing_hy2": "new",
+    "cabin_hy2": "untouched"
   },
   "puzzleActions": {
     "listen_scout": {
@@ -41,6 +42,22 @@
       },
       "message": "你凿穿了封江的旧船，反手把它们拖进江口最窄处——楼船进退不得，江面成了瓮。赤老温的令旗挥得再急，也调不回一条困住的楼船。",
       "repeatMessage": "沉船锁着江口，江水打着旋。"
+    },
+    "search_cabin": {
+      "label": "搜检船舱",
+      "puzzleId": "cabin_hy2",
+      "rooms": [
+        "hy2_02"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
+      "repeatMessage": "已被你翻遍，再无他物。",
+      "giveItems": {
+        "suolang_page": 1
+      }
     }
   },
   "rooms": {
@@ -97,7 +114,8 @@
         "hy2_yuan_captain"
       ],
       "actions": [
-        "sink_ships"
+        "sink_ships",
+        "search_cabin"
       ]
     },
     "hy2_03": {
@@ -143,6 +161,15 @@
       "required": 1,
       "weight": 45,
       "description": "困兽之斗挫赤老温"
+    },
+    {
+      "id": "search_cabin",
+      "type": "puzzle",
+      "targetId": "cabin_hy2:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜检船舱，寻得钩法法门"
     }
   ],
   "rewards": {

@@ -9,7 +9,8 @@
   "spawnRoomId": "zd2_00",
   "puzzleInitialStates": {
     "vinerope": "woven",
-    "briefing_zd2": "new"
+    "briefing_zd2": "new",
+    "nest_zd2": "untouched"
   },
   "puzzleActions": {
     "listen_tang": {
@@ -41,6 +42,22 @@
       },
       "message": "唐门暗器连珠而出，藤索应声而断——小猿王的空中走廊塌了半边。猴子再灵，离了藤就是猎物。",
       "repeatMessage": "断藤还悬在崖边晃。"
+    },
+    "search_nest": {
+      "label": "搜查猴巢",
+      "puzzleId": "nest_zd2",
+      "rooms": [
+        "zd2_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
+      "repeatMessage": "已被你翻遍，再无他物。",
+      "giveItems": {
+        "huayu_page": 1
+      }
     }
   },
   "rooms": {
@@ -104,6 +121,9 @@
       },
       "npcs": [
         "zd2_ape_king"
+      ],
+      "actions": [
+        "search_nest"
       ]
     }
   },
@@ -131,6 +151,15 @@
       "required": 1,
       "weight": 65,
       "description": "崖顶擒小猿王"
+    },
+    {
+      "id": "search_nest",
+      "type": "puzzle",
+      "targetId": "nest_zd2:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查猴巢，寻得暗器谱"
     }
   ],
   "rewards": {

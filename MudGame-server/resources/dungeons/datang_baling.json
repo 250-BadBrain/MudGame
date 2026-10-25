@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "bridge_baling": "intact",
     "briefing_db": "new",
-    "floatbox": "sunk"
+    "floatbox": "sunk",
+    "ship_db": "untouched"
   },
   "puzzleActions": {
     "listen_boatwoman": {
@@ -57,6 +58,22 @@
       "repeatMessage": "沉箱已被你捞空。",
       "giveItems": {
         "dongting_page": 1
+      }
+    },
+    "search_ship": {
+      "label": "搜检楼船",
+      "puzzleId": "ship_db",
+      "rooms": [
+        "db_03"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
+      "repeatMessage": "已被你翻遍，再无他物。",
+      "giveItems": {
+        "fengmo_page": 1
       }
     }
   },
@@ -128,6 +145,9 @@
       },
       "npcs": [
         "db_zhang_xiu"
+      ],
+      "actions": [
+        "search_ship"
       ]
     }
   },
@@ -172,6 +192,15 @@
       "weight": 10,
       "optional": true,
       "description": "打捞沉箱寻得内功残篇"
+    },
+    {
+      "id": "search_ship",
+      "type": "puzzle",
+      "targetId": "ship_db:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜检楼船，寻得棍法法门"
     }
   ],
   "rewards": {

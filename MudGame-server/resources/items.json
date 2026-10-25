@@ -908,5 +908,101 @@
       "maxMp": 30
     },
     "source": "海市"
+  },
+  "bawang_page": {
+    "name": "霸王枪残页",
+    "description": "霸王的枪谱残页，笔势如山——使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "bawang_qiang"
+    }
+  },
+  "youlong_page": {
+    "name": "游龙鞭残页",
+    "description": "游龙鞭法残页，纸上鞭痕如龙蛇飞舞——使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "youlong_bian"
+    }
+  },
+  "lieshi_page": {
+    "name": "裂石锏残页",
+    "description": "裂石锏法残页，字迹如凿痕——使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "lieshi_jian"
+    }
+  },
+  "suolang_page": {
+    "name": "锁浪钩残页",
+    "description": "锁浪钩法残页，盐渍浸透纸背——使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "suolang_gou"
+    }
+  },
+  "huayu_page": {
+    "name": "漫天花雨残页",
+    "description": "漫天花雨暗器谱残页，密密麻麻全是出手点——使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "mantian_huayu"
+    }
+  },
+  "fengmo_page": {
+    "name": "疯魔棍残页",
+    "description": "疯魔棍法残页，字迹狂放不羁——使用后可参悟入门，再寻隐秘传承人深造。",
+    "type": "quest",
+    "subtype": "scroll",
+    "stackable": false,
+    "sellable": false,
+    "value": 600,
+    "rarity": 4,
+    "unit": "页",
+    "questItem": true,
+    "usable": true,
+    "effects": {
+      "learnSkill": "fengmo_gun"
+    }
   }
 }

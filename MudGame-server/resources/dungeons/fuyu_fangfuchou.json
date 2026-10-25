@@ -9,7 +9,8 @@
   "spawnRoomId": "fy2_00",
   "puzzleInitialStates": {
     "ambush": "unset",
-    "briefing_fy2": "new"
+    "briefing_fy2": "new",
+    "boat_fy2": "untouched"
   },
   "puzzleActions": {
     "listen_helmsman": {
@@ -41,6 +42,22 @@
       },
       "message": "帮众藏进梁上帐后，灯火尽数熄灭——聚义庭回到方夜羽最熟悉的样子，熟悉得像个陷阱。",
       "repeatMessage": "口袋阵已布好，只等鱼入网。"
+    },
+    "search_boat": {
+      "label": "搜查残舟",
+      "puzzleId": "boat_fy2",
+      "rooms": [
+        "fy2_01"
+      ],
+      "fromStates": [
+        "untouched"
+      ],
+      "nextState": "done",
+      "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
+      "repeatMessage": "已被你翻遍，再无他物。",
+      "giveItems": {
+        "youlong_page": 1
+      }
     }
   },
   "rooms": {
@@ -75,6 +92,9 @@
       "npcs": [
         "fy2_moshi_elite",
         "fy2_moshi_elite"
+      ],
+      "actions": [
+        "search_boat"
       ]
     },
     "fy2_02": {
@@ -131,6 +151,15 @@
       "required": 1,
       "weight": 65,
       "description": "再挫方夜羽复仇之刃"
+    },
+    {
+      "id": "search_boat",
+      "type": "puzzle",
+      "targetId": "boat_fy2:done",
+      "required": 1,
+      "weight": 10,
+      "optional": true,
+      "description": "搜查残舟，寻得鞭法法门"
     }
   ],
   "rewards": {
