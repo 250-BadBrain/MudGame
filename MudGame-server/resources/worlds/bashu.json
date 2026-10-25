@@ -71,7 +71,10 @@
       "exits": {
         "south": "bs_city_gate",
         "west": "bs_tang_village"
-      }
+      },
+      "rumors": [
+        "青城山道旁的老道童说：山上那位真人，已经闭关七年了——听说是在参悟一卷从洛阳带来的残页。"
+      ]
     },
     "bs_tang_village": {
       "name": "唐家坳",

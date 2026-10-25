@@ -22,7 +22,10 @@
       "exits": {
         "east": "dm_market",
         "north": "dm_reef"
-      }
+      },
+      "rumors": [
+        "归墟港的水手们低声说：海市虽开过了，但沧溟宫的宝藏远不止一枚玉简—— deep 深海里还有更多。"
+      ]
     },
     "dm_market": {
       "name": "鲛人市",

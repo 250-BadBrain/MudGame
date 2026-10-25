@@ -40,7 +40,10 @@
       "exits": {
         "west": "sb_mayi",
         "north": "sb_beacon"
-      }
+      },
+      "rumors": [
+        "马市上有人议论：白狼主虽然退了，但草原上还有三十七个马贼王——这才是第一个。"
+      ]
     },
     "sb_beacon": {
       "name": "烽燧台",

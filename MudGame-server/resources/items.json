@@ -152,7 +152,7 @@
     "stackable": true,
     "sellable": true,
     "usable": true,
-    "value": 300,
+    "value": 250,
     "rarity": 2,
     "unit": "包",
     "limit": 5,
@@ -514,7 +514,7 @@
     "equipmentSlot": "WEAPON",
     "effects": {
       "attack": 10,
-      "hitRate": 2
+      "hitRate": 3
     },
     "source": "马贼王庭"
   },
@@ -547,7 +547,8 @@
     "unit": "领",
     "equipmentSlot": "BODY",
     "effects": {
-      "defense": 10
+      "defense": 10,
+      "maxHp": 50
     },
     "source": "瓦岗惊变"
   },
@@ -564,7 +565,8 @@
     "equipmentSlot": "NECKLACE",
     "effects": {
       "defense": 4,
-      "dodge": 2
+      "dodge": 2,
+      "initiative": 3
     },
     "source": "飞马牧场"
   },
@@ -581,7 +583,8 @@
     "equipmentSlot": "RING",
     "effects": {
       "critRate": 2,
-      "hitRate": 4
+      "hitRate": 4,
+      "dodge": 3
     },
     "source": "鸡鸣山之约"
   },
@@ -646,7 +649,8 @@
     "unit": "把",
     "equipmentSlot": "WEAPON",
     "effects": {
-      "attack": 11
+      "attack": 11,
+      "hitRate": 2
     },
     "source": "洛阳粮道"
   },
@@ -810,7 +814,8 @@
     "unit": "领",
     "equipmentSlot": "BODY",
     "effects": {
-      "defense": 13
+      "defense": 13,
+      "dodge": 2
     },
     "source": "蜀道护镖"
   },
@@ -839,7 +844,7 @@
     "equipmentSlot": "HIDDEN_WEAPON",
     "effects": {
       "attack": 10,
-      "critRate": 2
+      "critRate": 1
     },
     "source": "蜀道栈桥"
   },
@@ -872,7 +877,8 @@
     "equipmentSlot": "WEAPON",
     "effects": {
       "attack": 12,
-      "hitRate": 3
+      "hitRate": 3,
+      "dodge": 2
     },
     "source": "剑池"
   },
@@ -889,7 +895,8 @@
     "equipmentSlot": "NECKLACE",
     "effects": {
       "hitRate": 5,
-      "dodge": 2
+      "dodge": 2,
+      "attack": 2
     },
     "source": "天津晓月"
   },
@@ -905,7 +912,8 @@
     "unit": "枚",
     "equipmentSlot": "NECKLACE",
     "effects": {
-      "maxMp": 30
+      "maxMp": 30,
+      "maxHp": 30
     },
     "source": "海市"
   },
