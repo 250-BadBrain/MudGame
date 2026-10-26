@@ -37,7 +37,14 @@ go run ./cmd/mudserver
 
 默认动态数据目录为 `../data/servers/server1`，可通过 MUD_DATA_DIR 覆盖。
 静态资源默认从 `resources/` 加载，可通过 MUD_RESOURCES_DIR 覆盖。
+称号配置 `titles.json` 使用相同的资源目录解析，不依赖编译机器上的源码路径，支持 `-trimpath` 和跨机器部署。
 **测试时请使用临时数据目录与独立端口**，避免污染正式数据。
+
+## 部署
+
+从仓库根目录运行 `deploy.bat`：先执行后端测试与静态检查，再从当前源码编译 Linux amd64 程序，上传完整校验包后停服、备份和切换。保留远端存档；启动或健康检查失败时回滚程序和资源。
+
+`deploy.bat -BuildOnly` 仅在本地生成发布包；`deploy.bat -StageOnly` 增加远端校验，仍不停服。默认配置、依赖、参数、备份和故障恢复规则见 [统一开发指导文档](../docs/DEVELOPMENT.md#后端部署windows--linux)。
 
 ## 测试
 

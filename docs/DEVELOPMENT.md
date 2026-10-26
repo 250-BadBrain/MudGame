@@ -34,6 +34,29 @@ npm run dev        # vite 开发服务器，默认 5173，默认连接本机 400
 - 生产部署（Cloudflare Pages + Tunnel）见 `MudGame/README.md`；远程部署用根目录 `deploy.bat`。
 - **测试时不要污染正式数据目录**：用临时目录起独立服务，例如 `MUD_DATA_DIR=$(mktemp -d) PORT=14009 go run ./cmd/mudserver`。
 
+### 后端部署（Windows → Linux）
+
+根目录 `deploy.bat` 启动 PowerShell 7 的 `scripts/deploy.ps1`，默认连接 `oracle`，部署到 `/home/ubuntu/MudGame`，操作 systemd 的 `mud` 服务和 4009 端口。需要 PowerShell 7、Go、Git、OpenSSH、tar；远端需要 Python 3.10+、systemd，以及当前 SSH 用户可通过 `sudo -n` 停启该服务。
+
+```powershell
+.\deploy.bat -BuildOnly  # 本地测试、静态检查、交叉编译和打包，不连接服务器
+.\deploy.bat -StageOnly  # 同上，并上传、校验资源和服务配置；不停服，清理远端校验包
+.\deploy.bat             # 上传校验后，备份并切换；失败自动回滚程序和资源
+```
+
+- 每次从当前源码重新构建 Linux amd64 程序，不读取旧的 `MudGame-server/mud`；`GOOS` 等构建环境变量在结束时恢复。
+- 本地发布包保存在 `artifacts/backend/<release-id>/`（Git 忽略），`release.json` 记录 Git revision、工作区是否有修改、构建时间及所有程序/资源文件的 SHA-256。发布包**只含程序、资源和清单，不含本地存档**。
+- 上传完成、包校验和 systemd 配置预检通过后才停服。确认旧进程退出并落盘后，在 `.deploy/backups/<release-id>/` 保留原程序目录和当前存档快照，再切换新程序目录、启动并检查 `/health` 与实际运行的二进制。
+- 正式存档始终保留原路径，默认 `data/servers/server1/`。服务自定义 `MUD_DATA_DIR` 时备份实际目录；存档不得放在待切换的 `MudGame-server/` 或 `.deploy/` 内。服务若自定义资源路径，必须仍指向该后端目录的 `resources/`。
+- 切换失败时先停止新进程，再恢复旧程序目录、启动并检查健康状态。**回滚不会自动恢复存档快照**，避免覆盖期间产生的玩家进度；确需恢复时，由维护者停服后按备份目录的 `backup.json` 人工确认。
+- 失败的新程序保存在 `.deploy/failed/<release-id>/`，备份不自动删除。备份失败同样会重新启动旧服务；如果回滚也失败，脚本以失败状态退出并输出备份位置。
+- `.deploy/deploy.lock` 防止并发部署。SSH 异常中断可能留下锁；只有确认无部署进程运行后才可手动删除该锁。
+- 可传 `-SshHost`、`-RemoteRoot`、`-ServiceName`、`-ExeName`、`-HealthPort`、`-OutputDirectory` 覆盖默认值。此脚本更新已有的运行中服务，不负责首次安装 systemd 单元。
+
+部署脚本回归测试：`python -m unittest discover -s scripts/tests -v`。修改部署事务时，须覆盖成功切换、存档保留、包校验失败不停服和新服务失败后回滚；Linux 冒烟须用隔离网络或独立端口、临时存档，不能在正式服务上故意制造故障。
+
+Linux 构建冒烟可运行 `python3 scripts/tests/smoke_backend.py --binary /path/to/mud --resources /path/to/resources`：自动选择独立端口和临时存档，通过真实 WebSocket 注册、登录、创角、选角、查询状态，停服后只为该测试角色写入通关旗标，再重启检查称号和存档重载。不要传入正式存档目录；该脚本不提供这种参数。
+
 ## 3. 后端各部分功能（MudGame-server）
 
 请求链路：**WebSocket → app（网络层）→ engine（业务编排）→ manager（运行时状态）→ storage（落盘）**。静态资源由 gamedata 一次性加载。

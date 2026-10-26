@@ -153,6 +153,7 @@ items.json：`usable` + `effects`（`recoverHp` 回血 / `learnSkill` 参悟）�
 全内存运行；30s 自动落盘 + 退出 flush；tmp+rename 原子写；损坏存档隔离为 `.corrupt` 并兜底；加载时 IDLE 且 HP≤0 的玩家恢复。动态数据在 `data/servers/server1/`（.gitignore 忽略）。
 
 - **注意**：新增玩家字段必须同时改 storage 的 diskPlayer 序列化（读写两侧）与 `TestClonePlayersMapPreservesAllFields` 的字段数断言；**测试一律用临时 MUD_DATA_DIR + 独立端口**。
+- **部署保留存档**：`deploy.bat` 每次构建最新程序，上传校验后再停服备份并切换；失败回滚程序和资源，存档保持原位。具体命令和备份位置见 [DEVELOPMENT.md](DEVELOPMENT.md#后端部署windows--linux)。称号 `titles.json` 与其他静态资源共用运行时目录解析，支持 `MUD_RESOURCES_DIR` 和跨平台构建。
 
 ---
 

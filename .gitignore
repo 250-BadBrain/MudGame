@@ -3,3 +3,8 @@ data/
 
 # IDE
 .vscode/
+
+# Local backend release packages and Python test caches
+/artifacts/
+__pycache__/
+*.pyc

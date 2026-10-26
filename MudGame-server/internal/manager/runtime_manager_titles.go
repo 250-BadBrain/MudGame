@@ -2,12 +2,13 @@ package manager
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
-	"runtime"
 	"sync"
 
+	"mudgame/server/internal/gamedata"
 	"mudgame/server/internal/model"
 )
 
@@ -17,27 +18,34 @@ var (
 	fileTitlesOnce sync.Once
 )
 
-func titlesPath() string {
-	_, filename, _, _ := runtime.Caller(0)
-	return filepath.Join(filepath.Dir(filename), "..", "..", "resources", "titles.json")
+func loadTitleDefinitions() (map[string]string, error) {
+	dir, err := gamedata.ResolveResourceDir()
+	if err != nil {
+		return nil, err
+	}
+	path := filepath.Join(dir, "titles.json")
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return nil, fmt.Errorf("read titles %s: %w", path, err)
+	}
+	var raw struct {
+		Titles map[string]string `json:"titles"`
+	}
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return nil, fmt.Errorf("parse titles %s: %w", path, err)
+	}
+	return raw.Titles, nil
 }
 
 func loadTitles() {
 	fileTitlesOnce.Do(func() {
-		fileTitles = map[string]string{}
-		data, err := os.ReadFile(titlesPath())
+		titles, err := loadTitleDefinitions()
 		if err != nil {
-			log.Printf("[titles] titles.json not found at %s, titles disabled", titlesPath())
+			fileTitles = map[string]string{}
+			log.Printf("[titles] %v; titles disabled", err)
 			return
 		}
-		var raw struct {
-			Titles map[string]string `json:"titles"`
-		}
-		if err := json.Unmarshal(data, &raw); err != nil {
-			log.Printf("[titles] failed to parse titles.json: %v", err)
-			return
-		}
-		fileTitles = raw.Titles
+		fileTitles = titles
 		log.Printf("[titles] loaded %d titles", len(fileTitles))
 	})
 }
@@ -59,4 +67,3 @@ func getPlayerTitles(p *model.Player) []string {
 	}
 	return titles
 }
-

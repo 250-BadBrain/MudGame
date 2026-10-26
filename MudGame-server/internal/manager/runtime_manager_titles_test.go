@@ -1,8 +1,47 @@
 package manager
 
 import (
+	"os"
+	"path/filepath"
 	"testing"
 )
+
+func TestTitleDefinitionsUseRuntimeResourceDirectory(t *testing.T) {
+	dir := t.TempDir()
+	for _, name := range []string{"items.json", "skills.json", "npcs.json"} {
+		if err := os.WriteFile(filepath.Join(dir, name), []byte("{}"), 0600); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if err := os.Mkdir(filepath.Join(dir, "worlds"), 0700); err != nil {
+		t.Fatal(err)
+	}
+	t.Setenv("MUD_RESOURCES_DIR", dir)
+	t.Chdir(t.TempDir())
+	path := filepath.Join(dir, "titles.json")
+	if err := os.WriteFile(path, []byte(`{"titles":{"runtime_flag":"运行时称号"}}`), 0600); err != nil {
+		t.Fatal(err)
+	}
+	titles, err := loadTitleDefinitions()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(titles) != 1 || titles["runtime_flag"] != "运行时称号" {
+		t.Fatalf("expected runtime resource titles, got %v", titles)
+	}
+	if err := os.WriteFile(path, []byte("invalid json"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := loadTitleDefinitions(); err == nil {
+		t.Fatal("expected malformed titles to return an error")
+	}
+	if err := os.Remove(path); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := loadTitleDefinitions(); err == nil {
+		t.Fatal("expected missing titles to return an error")
+	}
+}
 
 // 称号系统：通关副本后，GetAttributes 返回对应称号
 func TestTitleAwardedOnDungeonClear(t *testing.T) {
