@@ -20,6 +20,7 @@
 ## 设计
 
 - **[武功体系 V2 完整提案](design/martial_arts_v2_proposal.md)**（待确认、未实施：一功一名，38门五档目录、获取与修炼、全量旧技能映射和存档迁移）
+- [武功 V2 数值与机制审计](design/martial_arts_v2_balance_review.md)（首版38门可继续扩展；兵器缺口、修炼效率、流派差距、内力、招架、用药及经济复核）
 - [黄易世界格局设计](design/world_design_huangyi.md)
 - [玩家与 NPC 属性系统设计](design/attribute_system_design.md)（已实施，背景依据）
 - [技能学习成长设计](design/skill_learning_progression_design.md)（流程规则）
