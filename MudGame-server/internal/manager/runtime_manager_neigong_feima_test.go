@@ -19,8 +19,8 @@ func TestHunyuanMeditationBonus(t *testing.T) {
 	// 基本内功 20 与混元功 10 在首次基准前就位（未装备时不计入），仅考察装备前后的差值
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
-	players[playerID].Skills["basic_neigong"] = 20
-	players[playerID].Skills["hunyuan_neigong"] = 10
+	players[playerID].Skills["basic_neigong"] = 100
+	grantArt(players[playerID], "hunyuan_neigong", 100)
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)
@@ -48,6 +48,9 @@ func TestHunyuanMeditationBonus(t *testing.T) {
 	}
 
 	before := baselineMP()
+	players, _ = r.loadPlayers()
+	players[playerID].State = "IDLE"
+	_ = r.savePlayers(players)
 
 	// 装备混元功（10 级 → 打坐恢复 +3）
 	if _, err := r.EquipSkill(playerID, "hunyuan_neigong"); err != nil {
@@ -55,7 +58,7 @@ func TestHunyuanMeditationBonus(t *testing.T) {
 	}
 
 	after := baselineMP()
-	if after != before+3 {
+	if after != before+10 {
 		t.Fatalf("expected meditation recovery +3 with hunyuan equipped, got %d -> %d", before, after)
 	}
 }
@@ -120,8 +123,8 @@ func TestFeimaRanchFullFlow(t *testing.T) {
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["tianmo_page"] != 1 {
-		t.Fatalf("expected tianmo page, got %d", p.Backpack["tianmo_page"])
+	if p.Backpack["xiaohuandan"] != 1 {
+		t.Fatalf("expected tianmo page, got %d", p.Backpack["xiaohuandan"])
 	}
 	if !p.Flags["dungeon_cleared_datang_feima"] {
 		t.Fatal("expected dungeon_cleared_datang_feima flag")

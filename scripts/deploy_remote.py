@@ -3,6 +3,7 @@
 import argparse
 import contextlib
 import hashlib
+import importlib.util
 import json
 import os
 import platform
@@ -205,7 +206,28 @@ def stage(config):
     binary.chmod(0o755)
 
 
-def deploy(config, service=None, health=check_health, stage_only=False):
+def prepare_martial_migration(config, data):
+    path = config.staging / "resources/migrations/migrate_martial_v2.py"
+    if not path.is_file(): return None, None
+    spec = importlib.util.spec_from_file_location("release_martial_migration", path)
+    module = importlib.util.module_from_spec(spec)
+    exec(compile(path.read_bytes(), str(path), "exec"), module.__dict__)
+    report = module.run(data, config.staging / "resources")
+    return module, report
+
+
+def restore_martial_snapshot(config, data):
+    # Preserve every failed-version write in a sibling directory on the same filesystem.
+    data = data.resolve()
+    failed = data.with_name(data.name + ".failed-martial-" + config.release_id)
+    if data == data.parent or failed.exists():
+        raise DeployError("unsafe or occupied migration recovery target")
+    data.rename(failed)
+    shutil.copytree(config.backup / "data-snapshot", data, symlinks=True)
+    return failed
+
+
+def deploy(config, service=None, health=check_health, stage_only=False, migrate_martial=False):
     config.validate()
     service = service or SystemdService(config)
     with deployment_lock(config):
@@ -215,6 +237,13 @@ def deploy(config, service=None, health=check_health, stage_only=False):
             raise DeployError("save snapshot destination is inside the save directory")
         if not config.server.is_dir() or not (config.server / config.executable).is_file():
             raise DeployError("existing backend executable is missing")
+        migration, preview = prepare_martial_migration(config, data)
+        needs_migration = bool(preview and preview["changed"])
+        if needs_migration:
+            report_path = config.workspace / (config.release_id + "-martial-preview.json")
+            report_path.write_text(json.dumps(preview, ensure_ascii=False, indent=2), encoding="utf-8")
+            if not stage_only and not migrate_martial:
+                raise DeployError(f"legacy players need explicit -MigrateMartialArts; preview: {report_path}; service was not stopped")
         if stage_only:
             shutil.rmtree(config.staging)
             config.package.unlink()
@@ -224,6 +253,7 @@ def deploy(config, service=None, health=check_health, stage_only=False):
         old_server = config.backup / "MudGame-server"
         stopped = False
         installed = False
+        migration_attempted = False
         try:
             print("Stopping service and backing up flushed saves...", flush=True)
             # Set before calling stop: even a failed stop can leave an inactive service.
@@ -235,6 +265,11 @@ def deploy(config, service=None, health=check_health, stage_only=False):
             (config.backup / "backup.json").write_text(
                 json.dumps({"dataDirectory": str(data), "release": config.release_id}), encoding="utf-8"
             )
+            if needs_migration:
+                migration_attempted = True
+                migration.run(data, config.staging / "resources", apply=True, server_stopped=True,
+                              backup_dir=config.backup / "martial-v2")
+                print("Martial V2 migration complete; per-player report is in the backup directory.", flush=True)
             config.server.rename(old_server)
             config.staging.rename(config.server)
             installed = True
@@ -253,6 +288,9 @@ def deploy(config, service=None, health=check_health, stage_only=False):
                     config.server.rename(config.failed)
                 if old_server.exists():
                     old_server.rename(config.server)
+                if migration_attempted:
+                    failed_data = restore_martial_snapshot(config, data)
+                    print(f"Pre-migration saves restored; failed-version saves preserved: {failed_data}", flush=True)
                 if stopped:
                     service.start()
                     health(config)
@@ -276,10 +314,11 @@ def main():
     parser.add_argument("--port", type=int, default=4009)
     parser.add_argument("--sha256", required=True)
     parser.add_argument("--stage-only", action="store_true")
+    parser.add_argument("--migrate-martial", action="store_true")
     args = parser.parse_args()
     config = Config(args.root, args.release, args.service, args.executable, args.port, args.sha256)
     try:
-        deploy(config, stage_only=args.stage_only)
+        deploy(config, stage_only=args.stage_only, migrate_martial=args.migrate_martial)
     except Exception as exc:
         parser.exit(1, f"Deployment error: {exc}\n")
 

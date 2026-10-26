@@ -20,12 +20,12 @@ func TestFoundationManualsEquipEffects(t *testing.T) {
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
 	p := players[playerID]
-	p.Skills["basic_qinggong"] = 20
-	p.Skills["basic_unarmed"] = 20
-	p.Skills["basic_parry"] = 20
-	p.Skills["talang_jue"] = 10
-	p.Skills["fuhu_jin"] = 10
-	p.Skills["tiebi_gong"] = 10
+	p.Skills["basic_qinggong"] = 100
+	p.Skills["basic_unarmed"] = 100
+	p.Skills["basic_parry"] = 100
+	grantArt(p, "talang_jue", 100)
+	grantArt(p, "fuhu_jin", 100)
+	grantArt(p, "tiebi_gong", 100)
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)
@@ -46,7 +46,7 @@ func TestFoundationManualsEquipEffects(t *testing.T) {
 		t.Fatalf("equip talang failed: %v", err)
 	}
 	d1, i1, _, _, _, _ := effOf()
-	if d1 != d0+1 || i1 != i0+2 {
+	if d1 != d0+14 || i1 != i0+6 {
 		t.Fatalf("talang expected dodge+1 initiative+2, got dodge %d->%d initiative %d->%d", d0, d1, i0, i1)
 	}
 
@@ -55,7 +55,7 @@ func TestFoundationManualsEquipEffects(t *testing.T) {
 		t.Fatalf("equip fuhu failed: %v", err)
 	}
 	_, _, a1, hp1, _, _ := effOf()
-	if a1 != a0+1 || hp1 != hp0+60 {
+	if a1 != a0+20 || hp1 != hp0+80 {
 		t.Fatalf("fuhu expected attack+1 maxHP+60, got attack %d->%d maxHP %d->%d", a0, a1, hp0, hp1)
 	}
 
@@ -64,7 +64,7 @@ func TestFoundationManualsEquipEffects(t *testing.T) {
 		t.Fatalf("equip tiebi failed: %v", err)
 	}
 	_, _, _, _, p1, def1 := effOf()
-	if p1 != p0+2 || def1 != def0+1 {
+	if p1 != p0+12 || def1 != def0+8 {
 		t.Fatalf("tiebi expected parry+2 defense+1, got parry %d->%d defense %d->%d", p0, p1, def0, def1)
 	}
 }

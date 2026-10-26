@@ -1,6 +1,6 @@
 {
   "id": "posui_houjuan",
-  "name": "图录·后卷",
+  "name": "惊雁遗刻",
   "description": "传鹰破空而去，战神图录的后卷却在蒙古小王子的贡品车队里。守图老僧一句点拨，你踏雪追上车队：从后卷里悟出破虚指，让执念最深的耶律玄输给他自己。",
   "order": 23,
   "chainId": "posui_xukong",
@@ -41,9 +41,8 @@
       },
       "message": "后卷的最后一页只有一行指痕——你依着指痕点出，指尖竟穿了纸背。虚实颠倒，破虚指成了。",
       "repeatMessage": "后卷的指痕你已烂熟于心。",
-      "giveItems": {
-        "poxu_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 300
     }
   },
   "rooms": {
@@ -150,6 +149,9 @@
   "rewards": {
     "experience": 1780,
     "potential": 920,
-    "money": 600
+    "money": 600,
+    "items": {
+      "manual_poxu_zhi": 1
+    }
   }
 }

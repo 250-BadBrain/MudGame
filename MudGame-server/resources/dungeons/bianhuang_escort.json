@@ -38,9 +38,8 @@
       "nextState": "done",
       "message": "破败驿站的厢房里积灰三寸，炕洞中藏着一卷油布包——前朝游侠留下的轻身功法《踏浪诀》。",
       "repeatMessage": "厢房已被你搜遍，再无他物。",
-      "giveItems": {
-        "talang_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 250
     }
   },
   "rooms": {

@@ -52,7 +52,8 @@
       "message": "你潜入芦荡深水，从淤泥里拖出一只铁皮沉箱——箱底夹层里，一页泛黄绢帛隐隐透出剑纹。",
       "repeatMessage": "沉箱已被你翻遍，江底再无别物。",
       "giveItems": {
-        "cihang_page": 1
+        "simple_medicine": 3,
+        "dry_ration": 2
       }
     }
   },

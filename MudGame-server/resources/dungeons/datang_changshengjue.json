@@ -26,7 +26,8 @@
       "message": "你潜入冰冷的江水，从沉船残骸中拖出一只铁匣。匣中一页泛黄绢帛隐隐透出图纹——正是《长生诀》残页。",
       "repeatMessage": "沉船早已被你翻遍，江底再无别物。",
       "giveItems": {
-        "csj_changshengjue_page": 1
+        "herb": 4,
+        "dry_ration": 2
       }
     },
     "listen_boatman": {
@@ -187,11 +188,11 @@
     {
       "id": "salvage_page",
       "type": "collect",
-      "targetId": "csj_changshengjue_page",
+      "targetId": "herb",
       "required": 1,
       "weight": 10,
       "optional": true,
-      "description": "从沉船中打捞《长生诀》残页。"
+      "description": "打捞沉船中的止血药草"
     }
   ],
   "rewards": {
@@ -199,7 +200,8 @@
     "potential": 180,
     "money": 80,
     "items": {
-      "csj_changshengjue_page": 1
+      "simple_medicine": 2,
+      "dry_ration": 1
     }
   }
 }

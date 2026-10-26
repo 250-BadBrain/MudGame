@@ -56,9 +56,8 @@
       "nextState": "raised",
       "message": "芦洲浅水里沉着一只桐油木箱——箱中一页以油纸包裹的心法残篇，写着\"以水养气\"四字。",
       "repeatMessage": "沉箱已被你捞空。",
-      "giveItems": {
-        "dongting_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 250
     },
     "search_ship": {
       "label": "搜检楼船",
@@ -72,9 +71,8 @@
       "nextState": "done",
       "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
       "repeatMessage": "已被你翻遍，再无他物。",
-      "giveItems": {
-        "fengmo_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 300
     }
   },
   "rooms": {
@@ -208,7 +206,10 @@
     "potential": 840,
     "money": 520,
     "items": {
-      "dongting_ruanjia": 1
+      "dongting_ruanjia": 1,
+      "jinggang_staff": 1,
+      "manual_dongting_xinf": 1,
+      "manual_fengmo_gun": 1
     }
   }
 }

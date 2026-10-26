@@ -1,6 +1,6 @@
 {
   "id": "posui_zhongjuan",
-  "name": "战神图录·终卷",
+  "name": "战神遗境",
   "description": "战神图录的终卷终于现世——传说里面记载着破碎虚空的最后一道门。你与蒙古汗庭、慈航静斋三方争夺，只为一窥究竟。",
   "order": 40,
   "chainId": "posui_xukong",
@@ -45,14 +45,14 @@
   "rooms": {
     "pos_00": {
       "name": "入口",
-      "description": "战神图录·终卷的入口。",
+      "description": "战神遗境的入口。",
       "exits": {
         "north": "pos_01"
       }
     },
     "pos_01": {
       "name": "通道",
-      "description": "战神图录·终卷的通道。",
+      "description": "战神遗境的通道。",
       "exits": {
         "south": "pos_00",
         "north": "pos_02"
@@ -72,7 +72,7 @@
     },
     "pos_02": {
       "name": "关隘",
-      "description": "战神图录·终卷的关隘。",
+      "description": "战神遗境的关隘。",
       "exits": {
         "south": "pos_01",
         "north": "pos_03"
@@ -91,7 +91,7 @@
     },
     "pos_03": {
       "name": "Boss之间",
-      "description": "战神图录·终卷的最终战场。",
+      "description": "战神遗境的最终战场。",
       "exits": {
         "south": "pos_02"
       },
@@ -131,7 +131,8 @@
     "potential": 1280,
     "money": 910,
     "items": {
-      "zhongjuan_wu": 1
+      "zhongjuan_wu": 1,
+      "manual_jyg_zhanshentu_dao": 1
     }
   }
 }

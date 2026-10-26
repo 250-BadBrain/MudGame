@@ -95,11 +95,17 @@ func (r *RuntimeManager) dungeonLockStateNoLock(player *model.Player, tpl engrun
 	if order <= 1 {
 		return false, ""
 	}
+	previousOrder := 0
+	for _, other := range templates {
+		if other.Order < order && other.Order > previousOrder {
+			previousOrder = other.Order
+		}
+	}
 	prevOrderExists := false
 	prevCleared := false
 	firstPendingName := ""
 	for _, other := range templates {
-		if other.Order != order-1 {
+		if other.Order != previousOrder {
 			continue
 		}
 		prevOrderExists = true
@@ -265,9 +271,9 @@ func (r *RuntimeManager) applyCollectDungeonObjectiveNoLock(playerID, itemID str
 	return r.dungeonMgr.ApplyCollectObjectiveNoLock(playerID, itemID)
 }
 
-func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlement) {
+func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlement) engruntime.Settlement {
 	if p == nil {
-		return
+		return settlement
 	}
 	// 章节链通关旗标：100% 结算时写入，驱动 order N+1 解锁（见 economy_design.md 1.3）
 	if settlement.Progress >= 100 {
@@ -283,11 +289,30 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 		if p.Backpack == nil {
 			p.Backpack = map[string]int{}
 		}
+		received := map[string]int{}
 		for itemID, amount := range settlement.RewardItems {
+			def := fileItems[itemID]
+			if sid, ok := def.Effects["learnSkill"].(string); ok && (p.Skills[sid] > 0 || p.Backpack[itemID] > 0) {
+				continue
+			}
+			if def.FirstClaim {
+				if p.Flags == nil {
+					p.Flags = map[string]bool{}
+				}
+				if p.Flags["item_claimed_"+itemID] {
+					continue
+				}
+				p.Flags["item_claimed_"+itemID] = true
+			}
+			if amount > 0 {
+				received[itemID] = amount
+			}
+
 			if amount > 0 {
 				p.Backpack[itemID] += amount
 			}
 		}
+		settlement.RewardItems = received
 	}
 	if len(settlement.RewardFlags) > 0 {
 		if p.Flags == nil {
@@ -305,6 +330,7 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 			p.Reputations[factionID] += value
 		}
 	}
+	return settlement
 }
 
 func (r *RuntimeManager) processDungeonAggroNoLock(players map[string]*model.Player, result *model.CombatTickResult, updatedRoom map[string]bool) {
@@ -421,7 +447,7 @@ func (r *RuntimeManager) LeaveDungeon(playerID string) (map[string]interface{}, 
 	if inst != nil {
 		s := r.buildDungeonSettlementNoLock(inst)
 		settlement = &s
-		applyDungeonSettlementReward(p, s)
+		s = applyDungeonSettlementReward(p, s)
 		for _, itemID := range inst.TemporaryItems {
 			delete(p.Backpack, itemID)
 		}

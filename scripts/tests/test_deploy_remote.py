@@ -55,7 +55,7 @@ class DeployTests(unittest.TestCase):
         (data / "player.json").write_text("original-save")
         self.package()
 
-    def package(self, extra=None, corrupt_hash=False):
+    def package(self, extra=None, corrupt_hash=False, resource_files=None):
         elf = bytearray(64)
         elf[:6] = b"\x7fELF\x02\x01"
         elf[18] = 62
@@ -63,6 +63,7 @@ class DeployTests(unittest.TestCase):
         for name in ("items", "skills", "npcs", "titles"):
             files[f"resources/{name}.json"] = b"{}"
         files["resources/worlds/test.json"] = b"{}"
+        files.update(resource_files or {})
         manifest = {
             "releaseId": self.release,
             "target": "linux/amd64",
@@ -92,6 +93,50 @@ class DeployTests(unittest.TestCase):
         self.assertEqual((self.config.server / "mud").read_bytes()[:4], b"\x7fELF")
         self.assertFalse(self.config.package.exists())
         self.assertFalse((self.root / ".deploy" / "deploy.lock").exists())
+
+    def prepare_martial_release(self):
+        resources = Path(__file__).resolve().parents[2] / 'MudGame-server/resources'
+        names = ['skills.json', 'items.json', 'migrations/martial_v1.json', 'migrations/migrate_martial_v2.py']
+        self.package(resource_files={'resources/' + name: (resources / name).read_bytes() for name in names})
+        directory = self.root / 'data/servers/server1/players'
+        directory.mkdir()
+        player = {'id': 'legacy', 'characterName': '旧角色', 'money': 5000, 'state': 'IDLE',
+                  'attributes': {'potential': 500, 'experience': 0,
+                                 'base': {'constitution': 16, 'perception': 16, 'willpower': 16},
+                                 'resources': {'hp': 80, 'mp': 40, 'trainedMaxMp': 80, 'maxMp': 200}},
+                  'skills': {'basic_unarmed': 1}, 'items': {}, 'equipment': {}, 'flags': {}}
+        path = directory / 'legacy.json'
+        path.write_text(json.dumps(player), encoding='utf-8')
+        return path
+
+    def test_martial_migration_requires_explicit_flag_before_stopping(self):
+        path = self.prepare_martial_release()
+        before = path.read_bytes(); service = FakeService(self.config)
+        with self.assertRaisesRegex(DeployError, 'MigrateMartialArts'):
+            deploy(self.config, service, lambda _: None)
+        self.assertEqual(service.events, [])
+        self.assertEqual(path.read_bytes(), before)
+
+    def test_martial_migration_is_applied_after_backup(self):
+        path = self.prepare_martial_release()
+        before = path.read_bytes(); service = FakeService(self.config)
+        deploy(self.config, service, lambda _: None, migrate_martial=True)
+        self.assertEqual(json.loads(path.read_text(encoding='utf-8'))['martialVersion'], 2)
+        self.assertEqual((self.config.backup / 'data-snapshot/players/legacy.json').read_bytes(), before)
+        self.assertTrue((self.config.backup / 'martial-v2/report.json').is_file())
+
+    def test_unhealthy_migrated_release_restores_matching_old_saves(self):
+        path = self.prepare_martial_release()
+        before = path.read_bytes(); service = FakeService(self.config)
+        def health(_):
+            if (self.config.server / 'mud').read_bytes() != b'old-program':
+                raise DeployError('injected unhealthy migrated release')
+        with self.assertRaisesRegex(DeployError, 'rolled back'):
+            deploy(self.config, service, health, migrate_martial=True)
+        self.assertEqual(path.read_bytes(), before)
+        failed_data = path.parents[1].with_name('server1.failed-martial-' + self.release)
+        self.assertEqual(json.loads((failed_data / 'players/legacy.json').read_text(encoding='utf-8'))['martialVersion'], 2)
+        self.assertTrue(service.active)
 
     def test_stage_only_does_not_stop_service_or_change_program(self):
         service = FakeService(self.config)

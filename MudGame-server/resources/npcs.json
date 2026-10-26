@@ -213,7 +213,16 @@
       "steel_blade",
       "iron_staff",
       "darts",
-      "iron_pickaxe"
+      "iron_pickaxe",
+      "training_spear",
+      "training_whip",
+      "training_mace",
+      "training_hook",
+      "liangdao_spear",
+      "youlong_whip",
+      "lieshi_mace",
+      "suolang_hook",
+      "jinggang_staff"
     ],
     "attributes": {
       "level": 1,
@@ -287,7 +296,9 @@
       "basic_blade": 220,
       "basic_sword": 220,
       "basic_qinggong": 180,
-      "basic_mace": 160
+      "basic_mace": 160,
+      "talang_jue": 1,
+      "fuhu_jin": 1
     },
     "attributes": {
       "level": 20,
@@ -356,7 +367,9 @@
     "importance": "local",
     "skills": {
       "basic_neigong": 260,
-      "basic_literacy": 200
+      "basic_literacy": 200,
+      "hunyuan_neigong": 1,
+      "wuzhen_pian": 1
     },
     "attributes": {
       "level": 20,
@@ -428,8 +441,8 @@
       "basic_parry": 240,
       "basic_qinggong": 160,
       "basic_spear": 180,
-      "thunder_sword": 200,
-      "bloody_blade": 200
+      "thunder_sword": 1,
+      "bloody_blade": 1
     },
     "attributes": {
       "level": 20,
@@ -2984,78 +2997,10 @@
   "ancient_scroll_keeper": {
     "name": "灰袍老者",
     "title": "残卷守护者",
-    "description": "常年蛰居暗巷的神秘老人，身前摊着几卷发黄残页。传说只有参悟过传承残页的人，才入得了他的眼。",
+    "description": "翻阅旧闻的灰袍老者，愿意谈江湖掌故；真正的武学传承仍须亲历。",
     "role": "teacher",
     "importance": "local",
-    "skills": {
-      "csj_changshengjue": 120,
-      "jyg_zhanshentu_dao": 120,
-      "tiandao_blade": 120,
-      "cihang_jiandian": 120,
-      "hunyuan_neigong": 120,
-      "tianmo_ce": 120,
-      "talang_jue": 120,
-      "fuhu_jin": 120,
-      "tiebi_gong": 120,
-      "wuzhen_pian": 120,
-      "xiulou_daofa": 120,
-      "taiyi_jianfa": 120,
-      "dongting_xinf": 120,
-      "lingxu_bu": 120,
-      "poxu_zhi": 120,
-      "bawang_qiang": 120,
-      "youlong_bian": 120,
-      "lieshi_jian": 120,
-      "suolang_gou": 120,
-      "mantian_huayu": 120,
-      "fengmo_gun": 120,
-      "taiyi_xiajuan": 120,
-      "changsheng_xiajuan": 120,
-      "taxue_wuhen": 120,
-      "jingang_buhuai": 120,
-      "tianmo_xiajuan": 120,
-      "xiulou_pojia": 120,
-      "taiyi_tianming": 120,
-      "wugou_jianfa": 120,
-      "hanshui_neigong": 120,
-      "bengshan_quan": 120,
-      "wuying_shenfa": 120,
-      "liangyi_zhengang": 120,
-      "posui_zhizun": 120,
-      "wujin_bian": 120,
-      "leiting_qiangfa": 120,
-      "yaotong_suoli": 120,
-      "jinhuan_goufa": 120,
-      "shanshan_gunfa": 120,
-      "lieshi_zhijue": 120,
-      "hanshui_zhijue": 120,
-      "wugou_zhijue": 120,
-      "bengshan_zhijue": 120,
-      "posui_zz": 120,
-      "leiting_qf": 120,
-      "yaotong_sl": 120,
-      "jinhuan_gf": 120,
-      "shanshan_gf": 120,
-      "lieshi_zj": 120,
-      "hanshui_zj": 120,
-      "wugou_zj": 120,
-      "bengshan_zj": 120,
-      "manual_r204_0": 120,
-      "manual_r204_1": 120,
-      "manual_r204_2": 120,
-      "manual_r204_3": 120,
-      "manual_r204_4": 120,
-      "manual_r204_5": 120,
-      "manual_r204_6": 120,
-      "manual_r204_7": 120,
-      "manual_r204_8": 120,
-      "manual_r204_9": 120,
-      "manual_r204_10": 120,
-      "manual_r204_11": 120,
-      "manual_r204_12": 120,
-      "manual_r204_13": 120,
-      "manual_r204_14": 120
-    },
+    "skills": {},
     "attributes": {
       "level": 30,
       "realm": "elite",
@@ -4127,10 +4072,7 @@
       "hitRate": -18,
       "defense": -6
     },
-    "skills": {
-      "tiandao_blade": 320,
-      "tiandao_pojun": 320
-    },
+    "skills": {},
     "dialogueId": ""
   },
   "salt_hall_master": {
@@ -4144,7 +4086,8 @@
     "skills": {
       "basic_staff": 240,
       "basic_parry": 180,
-      "basic_hook": 160
+      "basic_hook": 160,
+      "tiebi_gong": 1
     },
     "attributes": {
       "level": 18,
@@ -7917,8 +7860,8 @@
     },
     "weaknessFlag": "huoshao_fuqiao",
     "weaknessModifiers": {
-      "attack": -14,
-      "hitRate": -16,
+      "attack": -24,
+      "hitRate": -26,
       "defense": -8
     }
   },
@@ -13137,7 +13080,7 @@
   "zj_mongol_elite": {
     "name": "汗庭精锐",
     "title": "汗庭精锐",
-    "description": "战神图录·终卷中的普通敌人。",
+    "description": "战神遗境中的普通敌人。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13203,7 +13146,7 @@
   "zj_mongol_champion": {
     "name": "汗庭第一勇士",
     "title": "草原之巅",
-    "description": "战神图录·终卷的最终Boss。",
+    "description": "战神遗境的最终Boss。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",

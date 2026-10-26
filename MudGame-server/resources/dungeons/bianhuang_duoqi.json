@@ -55,9 +55,8 @@
       "nextState": "done",
       "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
       "repeatMessage": "已被你搜遍。",
-      "giveItems": {
-        "xiulou_pojia_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 400
     }
   },
   "rooms": {

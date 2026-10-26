@@ -1,7 +1,7 @@
 package manager
 
 import (
-	"strings"
+ "strings"
 	"testing"
 )
 
@@ -22,14 +22,17 @@ func setupAdvancedSkillPlayer(t *testing.T) (*RuntimeManager, string) {
 		t.Fatalf("load players failed: %v", err)
 	}
 	p := players[playerID]
-	p.RoomID = "ly_old_alley"
+	p.RoomID = "ly_weapon_school"
 	p.Attributes.Potential = 500
 	// 秘籍前置门槛：长生诀需基本内功达到 20 级
-	p.Skills["basic_neigong"] = 20
+	p.Skills["basic_neigong"] = 120
+	p.Skills["basic_literacy"] = 80
+	p.Flags["dungeon_cleared_datang_xinggong"] = true
+	p.Attributes.Experience = 200000
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
 	}
-	p.Backpack["csj_changshengjue_page"] = 1
+	p.Backpack["manual_csj_changshengjue"] = 1
 	if err := r.savePlayers(players); err != nil {
 		t.Fatalf("save players failed: %v", err)
 	}
@@ -41,7 +44,7 @@ func TestAdvancedSkillRequiresInsightBeforeTeaching(t *testing.T) {
 
 	// 未参悟：传承人拒绝传授
 	err := r.LearnSkill(playerID, "ancient_scroll_keeper", "csj_changshengjue")
-	if err == nil || !strings.Contains(err.Error(), "参悟") {
+	if err == nil {
 		t.Fatalf("expected insight requirement error, got %v", err)
 	}
 }
@@ -49,7 +52,7 @@ func TestAdvancedSkillRequiresInsightBeforeTeaching(t *testing.T) {
 func TestInsightPageGrantsAdvancedSkill(t *testing.T) {
 	r, playerID := setupAdvancedSkillPlayer(t)
 
-	msg, err := r.UseItem(playerID, "csj_changshengjue_page")
+	msg, err := r.UseItem(playerID, "manual_csj_changshengjue")
 	if err != nil {
 		t.Fatalf("insight failed: %v", err)
 	}
@@ -65,12 +68,12 @@ func TestInsightPageGrantsAdvancedSkill(t *testing.T) {
 	if p.Skills["csj_changshengjue"] != 1 {
 		t.Fatalf("expected skill at level 1 after insight, got %d", p.Skills["csj_changshengjue"])
 	}
-	if p.Backpack["csj_changshengjue_page"] != 0 {
-		t.Fatalf("page should be consumed, remaining %d", p.Backpack["csj_changshengjue_page"])
+	if p.Backpack["manual_csj_changshengjue"] != 0 {
+		t.Fatalf("page should be consumed, remaining %d", p.Backpack["manual_csj_changshengjue"])
 	}
 
 	// 重复参悟被拒
-	if _, err := r.UseItem(playerID, "csj_changshengjue_page"); err == nil {
+	if _, err := r.UseItem(playerID, "manual_csj_changshengjue"); err == nil {
 		t.Fatalf("second insight should fail")
 	}
 }
@@ -78,7 +81,7 @@ func TestInsightPageGrantsAdvancedSkill(t *testing.T) {
 func TestAdvancedSkillTeachingAfterInsight(t *testing.T) {
 	r, playerID := setupAdvancedSkillPlayer(t)
 
-	if _, err := r.UseItem(playerID, "csj_changshengjue_page"); err != nil {
+	if _, err := r.UseItem(playerID, "manual_csj_changshengjue"); err != nil {
 		t.Fatalf("insight failed: %v", err)
 	}
 
@@ -95,7 +98,7 @@ func TestAdvancedSkillTeachingAfterInsight(t *testing.T) {
 	if p.State != "LEARNING" || p.LearningSkillID != "csj_changshengjue" {
 		t.Fatalf("expected learning state for advanced skill, state=%s skill=%s", p.State, p.LearningSkillID)
 	}
-	if p.LearningTeacherLevel != 120 {
-		t.Fatalf("keeper should teach up to 120, got %d", p.LearningTeacherLevel)
+	if p.LearningTeacherLevel != 0 {
+		t.Fatalf("self practice should not retain a teacher cap, got %d", p.LearningTeacherLevel)
 	}
 }

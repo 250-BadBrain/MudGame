@@ -20,9 +20,12 @@ func TestManualEquipSlotSemantics(t *testing.T) {
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
 	p := players[playerID]
-	p.Skills["basic_blade"] = 40
-	p.Skills["jyg_zhanshentu_dao"] = 10 // 攻+3/10 → 10级 +3
-	p.Skills["tiandao_blade"] = 10      // 攻+2/10 → 10级 +2
+	p.Skills["basic_blade"] = 120
+	p.Skills["basic_literacy"] = 80
+	p.Equipment["WEAPON"] = "steel_blade"
+	p.Flags["dungeon_cleared_tiandao_trial_hall"] = true
+	grantArt(p, "xiulou_daofa", 100)  // // 攻+3/10 → 10级 +3
+	grantArt(p, "tiandao_blade", 100) //      // 攻+2/10 → 10级 +2
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)
@@ -39,12 +42,12 @@ func TestManualEquipSlotSemantics(t *testing.T) {
 	attackNone := basicAttack()
 
 	// 装备战神图录 → 攻击 +3
-	if _, err := r.EquipSkill(playerID, "jyg_zhanshentu_dao"); err != nil {
+	if _, err := r.EquipSkill(playerID, "xiulou_daofa"); err != nil {
 		t.Fatalf("equip zhanshentu failed: %v", err)
 	}
 	attackZS := basicAttack()
-	if attackZS != attackNone+3 {
-		t.Fatalf("expected zhanshentu to add 3 attack, got %d -> %d", attackNone, attackZS)
+	if attackZS != attackNone+28 {
+		t.Fatalf("expected xiuluo to add 28 attack, got %d -> %d", attackNone, attackZS)
 	}
 
 	// 换装天刀八诀（同槽择一）→ 攻击 +2，战神图录加成消失
@@ -52,14 +55,14 @@ func TestManualEquipSlotSemantics(t *testing.T) {
 		t.Fatalf("equip tiandao failed: %v", err)
 	}
 	attackTD := basicAttack()
-	if attackTD != attackNone+2 {
-		t.Fatalf("expected tiandao to add 2 attack (zhanshentu unequipped), got %d -> %d", attackNone, attackTD)
+	if attackTD != attackNone+34 {
+		t.Fatalf("expected tiandao to add 34 attack (xiuluo unequipped), got %d -> %d", attackNone, attackTD)
 	}
 
 	// 装备状态与持久化
 	after, _ := r.loadPlayers()
-	if after[playerID].EquippedSkills["basic_blade"] != "tiandao_blade" {
-		t.Fatalf("expected tiandao equipped on basic_blade, got %+v", after[playerID].EquippedSkills)
+	if after[playerID].ActiveArts["combat"] != "tiandao_blade" {
+		t.Fatalf("expected tiandao equipped on basic_blade, got %+v", after[playerID].ActiveArts)
 	}
 }
 
@@ -76,8 +79,11 @@ func TestManualPrerequisiteGate(t *testing.T) {
 	}
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
-	players[playerID].RoomID = "ly_old_alley"
-	players[playerID].Skills["basic_blade"] = 39 // 天刀八诀要求 40
+	players[playerID].RoomID = "ly_weapon_school"
+	players[playerID].Skills["basic_blade"] = 119
+	players[playerID].Skills["basic_literacy"] = 80
+	players[playerID].Flags["dungeon_cleared_tiandao_trial_hall"] = true
+	players[playerID].Attributes.Experience = 200000 // 天刀八诀要求 40
 	players[playerID].Skills["tiandao_blade"] = 1
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
@@ -91,7 +97,7 @@ func TestManualPrerequisiteGate(t *testing.T) {
 
 	r.mu.Lock()
 	players, _ = r.loadPlayers()
-	players[playerID].Skills["basic_blade"] = 40
+	players[playerID].Skills["basic_blade"] = 120
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)

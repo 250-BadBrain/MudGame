@@ -77,19 +77,14 @@ func TestTiandaoTrialFullFlow(t *testing.T) {
 	}
 	players, _ := r.loadPlayers()
 	p := players[playerID]
-	if p.Backpack["tiandao_page"] != 1 {
-		t.Fatalf("expected 1 tiandao page, got %d", p.Backpack["tiandao_page"])
+	if p.Backpack["xiaohuandan"] != 1 {
+		t.Fatalf("expected 1 tiandao page, got %d", p.Backpack["xiaohuandan"])
 	}
 	if !p.Flags["dungeon_cleared_datang_tiandao"] {
 		t.Fatal("expected dungeon_cleared_datang_tiandao flag")
 	}
 
-	// 残页参悟 → 天刀八诀 1 级；老者可传授
-	if _, err := r.UseItem(playerID, "tiandao_page"); err != nil {
-		t.Fatalf("insight tiandao page failed: %v", err)
-	}
-	after, _ := r.loadPlayers()
-	if after[playerID].Skills["tiandao_blade"] != 1 {
-		t.Fatalf("expected tiandao_blade at level 1, got %d", after[playerID].Skills["tiandao_blade"])
+	if p.Skills["tiandao_blade"] != 0 || p.Backpack["manual_tiandao_blade"] != 0 {
+		t.Fatal("early trial still grants absolute art")
 	}
 }

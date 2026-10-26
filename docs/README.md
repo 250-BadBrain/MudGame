@@ -16,10 +16,11 @@
 - **[游戏系统总览与开发指引](SYSTEMS.md)**（副本/战斗/学习/商店/状态机等全部系统的机制、代码位置、扩展方法与注意事项；接手必读）
 - [后端安全部署修复计划](superpowers/plans/2026-10-26-safe-backend-deployment.md)（构建最新版本、存档保留、备份回滚与跨平台称号加载）
 - [玩家手册整理计划](superpowers/plans/2026-10-26-player-guide.md)（资源核对、七卷剧情、任务状态与全量覆盖检查）
+- [武功 V2 实施与验收](design/martial_arts_v2_implementation.md)（实现范围、测试证据、首次发布及迁移方法）
 
 ## 设计
 
-- **[武功体系 V2 完整提案](design/martial_arts_v2_proposal.md)**（待确认、未实施：一功一名，38门五档目录、获取与修炼、全量旧技能映射和存档迁移）
+- **[武功体系 V2 完整提案](design/martial_arts_v2_proposal.md)**（已实现、未部署：一功一名，38门五档目录、获取与修炼、全量旧技能映射和存档迁移）
 - [武功 V2 数值与机制审计](design/martial_arts_v2_balance_review.md)（首版38门可继续扩展；兵器缺口、修炼效率、流派差距、内力、招架、用药及经济复核）
 - [黄易世界格局设计](design/world_design_huangyi.md)
 - [玩家与 NPC 属性系统设计](design/attribute_system_design.md)（已实施，背景依据）

@@ -52,8 +52,9 @@ func TestWuzhenLearningInvestBonus(t *testing.T) {
 	// 装备悟真篇 10 级：注入上限 11
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
-	players[playerID].Skills["basic_literacy"] = 20
-	players[playerID].Skills["wuzhen_pian"] = 10
+	players[playerID].State = "IDLE"
+	players[playerID].Skills["basic_literacy"] = 50
+	grantArt(players[playerID], "wuzhen_pian", 50)
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)

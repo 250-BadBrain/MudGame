@@ -60,9 +60,8 @@
       "failureMessage": "花弄影还在楼上，暗格机关谁也不敢碰。",
       "message": "暗格里除了一页录着身法要诀的残页，竟还有半阙没写完的词——散花楼主人的心事，比她的刀更深。",
       "repeatMessage": "锦盒已被你收起。",
-      "giveItems": {
-        "lingxu_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 250
     },
     "search_attic": {
       "label": "搜查阁楼",
@@ -76,9 +75,8 @@
       "nextState": "done",
       "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
       "repeatMessage": "已被你搜遍。",
-      "giveItems": {
-        "tianmo_xiajuan_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 400
     }
   },
   "rooms": {
@@ -210,7 +208,8 @@
     "money": 540,
     "items": {
       "sanhua_yuzhuo": 1,
-      "sanhua_flowerpin": 1
+      "sanhua_flowerpin": 1,
+      "manual_lingxu_bu": 1
     }
   }
 }

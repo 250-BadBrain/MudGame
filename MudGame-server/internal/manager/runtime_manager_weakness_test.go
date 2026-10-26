@@ -116,11 +116,12 @@ func TestWeakUntilPersistsAcrossSaveLoad(t *testing.T) {
 	r := NewRuntimeManager(dir)
 	players := map[string]*model.Player{
 		"weak-p": {
-			ID:         "weak-p",
-			UserID:     "u1",
-			State:      "IDLE",
-			Attributes: model.NewPlayerAttributes(16, 16, 16, 16, 16),
-			WeakUntil:  1893456000,
+			ID:             "weak-p",
+			MartialVersion: model.MartialVersion,
+			UserID:         "u1",
+			State:          "IDLE",
+			Attributes:     model.NewPlayerAttributes(16, 16, 16, 16, 16),
+			WeakUntil:      1893456000,
 		},
 	}
 	if err := r.savePlayers(players); err != nil {

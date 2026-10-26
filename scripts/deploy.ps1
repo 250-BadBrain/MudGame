@@ -12,7 +12,8 @@ param(
     [int]$HealthPort = 4009,
     [string]$OutputDirectory,
     [switch]$BuildOnly,
-    [switch]$StageOnly
+    [switch]$StageOnly,
+    [switch]$MigrateMartialArts
 )
 
 Set-StrictMode -Version Latest
@@ -83,7 +84,15 @@ finally {
     }
 }
 
-Copy-Item -LiteralPath (Join-Path $serverRoot 'resources') -Destination (Join-Path $payloadDir 'resources') -Recurse
+$resourceRoot = Join-Path $serverRoot 'resources'
+foreach ($resourceFile in (Get-ChildItem -LiteralPath $resourceRoot -File -Recurse | Where-Object {
+    $_.FullName -notmatch '[\\/]__pycache__[\\/]' -and $_.Extension -notin @('.pyc', '.pyo')
+})) {
+    $relativeResource = [IO.Path]::GetRelativePath($resourceRoot, $resourceFile.FullName)
+    $resourceTarget = Join-Path (Join-Path $payloadDir 'resources') $relativeResource
+    New-Item -ItemType Directory -Path (Split-Path -Parent $resourceTarget) -Force | Out-Null
+    Copy-Item -LiteralPath $resourceFile.FullName -Destination $resourceTarget
+}
 $revision = (& $git -C $repoRoot rev-parse HEAD).Trim()
 if ($LASTEXITCODE -ne 0) { throw 'Cannot determine Git revision.' }
 $status = & $git -C $repoRoot status --porcelain
@@ -123,6 +132,7 @@ Invoke-CheckedNative $scp @('-q', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=1
 $remoteArguments = @('python3', '-', '--root', $RemoteRoot, '--release', $releaseId, '--service', $ServiceName,
     '--executable', $ExeName, '--port', "$HealthPort", '--sha256', $archiveHash)
 if ($StageOnly) { $remoteArguments += '--stage-only' }
+if ($MigrateMartialArts) { $remoteArguments += '--migrate-martial' }
 Get-Content -LiteralPath (Join-Path $PSScriptRoot 'deploy_remote.py') -Raw -Encoding utf8 |
     & $ssh @sshOptions $SshHost @remoteArguments
 if ($LASTEXITCODE -ne 0) {

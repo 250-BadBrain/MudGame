@@ -131,7 +131,8 @@
     "potential": 1220,
     "money": 850,
     "items": {
-      "xinggong_jian": 1
+      "xinggong_jian": 1,
+      "manual_csj_changshengjue": 1
     }
   }
 }

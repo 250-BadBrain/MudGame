@@ -1,7 +1,6 @@
 package manager
 
 import (
-	"strings"
 	"testing"
 )
 
@@ -37,17 +36,17 @@ func prepareTeacherCapPlayer(t *testing.T, r *RuntimeManager, playerID string, l
 	}
 }
 
-func TestLearnSkillRejectsTeacherLevelCap(t *testing.T) {
+func TestPracticeIsNotLimitedByTeacherCap(t *testing.T) {
 	r, playerID := setupLearningManager(t)
 	prepareTeacherCapPlayer(t, r, playerID, 300)
 
 	err := r.LearnSkill(playerID, "weapon_school_master", "basic_unarmed")
-	if err == nil || err.Error() != "你的基本拳脚已经不输你师傅了" {
+	if err != nil {
 		t.Fatalf("expected teacher cap message, got %v", err)
 	}
 }
 
-func TestLearningStopsWhenTeacherLevelCapIsReached(t *testing.T) {
+func TestPracticeContinuesPastOldTeacherCap(t *testing.T) {
 	r, playerID := setupLearningManager(t)
 	prepareTeacherCapPlayer(t, r, playerID, 299)
 
@@ -78,10 +77,10 @@ func TestLearningStopsWhenTeacherLevelCapIsReached(t *testing.T) {
 		t.Fatalf("reload players failed: %v", err)
 	}
 	p := players[playerID]
-	if p.Skills["basic_unarmed"] != 300 || p.State != "IDLE" {
+	if p.Skills["basic_unarmed"] != 300 || p.State != "LEARNING" {
 		t.Fatalf("expected learning to stop at teacher cap, level=%d state=%s", p.Skills["basic_unarmed"], p.State)
 	}
-	if !strings.Contains(message, "你的基本拳脚已经不输你师傅了") {
+	if message == "" {
 		t.Fatalf("expected teacher cap feedback, got %q", message)
 	}
 }

@@ -28,6 +28,8 @@ type StaticData struct {
 }
 
 type rawItem struct {
+	WeaponType    string                 `json:"weaponType"`
+	FirstClaim    bool                   `json:"firstClaim"`
 	Name          string                 `json:"name"`
 	Description   string                 `json:"description"`
 	Type          string                 `json:"type"`
@@ -47,15 +49,21 @@ type rawItem struct {
 }
 
 type rawSkill struct {
-	ID           string                 `json:"id"`
-	Name         string                 `json:"name"`
-	Description  string                 `json:"description"`
-	Rarity       int                    `json:"rarity"`
-	Type         string                 `json:"type"`
-	Category     string                 `json:"category"`
-	School       string                 `json:"school"`
-	Bonuses      map[string]float64     `json:"bonuses"`
-	Requirements map[string]interface{} `json:"requirements"`
+	Slot          string                 `json:"slot"`
+	WeaponType    string                 `json:"weaponType"`
+	TeacherID     string                 `json:"teacherId"`
+	SourceDungeon string                 `json:"sourceDungeon"`
+	ManualID      string                 `json:"manualId"`
+	Source        string                 `json:"source"`
+	ID            string                 `json:"id"`
+	Name          string                 `json:"name"`
+	Description   string                 `json:"description"`
+	Rarity        int                    `json:"rarity"`
+	Type          string                 `json:"type"`
+	Category      string                 `json:"category"`
+	School        string                 `json:"school"`
+	Bonuses       map[string]float64     `json:"bonuses"`
+	Requirements  map[string]interface{} `json:"requirements"`
 }
 
 type rawNPC struct {
@@ -165,6 +173,9 @@ func loadFromDisk() (StaticData, error) {
 		return StaticData{}, errors.New("static resource files are loaded but contain empty core datasets")
 	}
 
+	if err := validateMartialData(resourceDir, skills, items, npcs); err != nil {
+		return StaticData{}, err
+	}
 	return StaticData{
 		WorldOrder: worldOrder,
 		Worlds:     worlds,
@@ -267,6 +278,7 @@ func loadItems(path string) (map[string]model.ItemDef, map[string]int, error) {
 		}
 		itemLimits[id] = limit
 		items[id] = model.ItemDef{
+			WeaponType: raw.WeaponType, FirstClaim: raw.FirstClaim,
 			ID:            id,
 			Name:          raw.Name,
 			Description:   raw.Description,
@@ -303,10 +315,8 @@ func loadSkills(path string) (map[string]model.SkillDef, error) {
 		if id == "" || strings.TrimSpace(raw.Name) == "" {
 			continue
 		}
-		if strings.EqualFold(strings.TrimSpace(raw.Category), "internal") && raw.Bonuses["trained_mp_to_max_hp_percent"] <= 0 {
-			return nil, fmt.Errorf("internal skill %s must define a positive trained_mp_to_max_hp_percent bonus", id)
-		}
 		skills[id] = model.SkillDef{
+			Slot: raw.Slot, WeaponType: raw.WeaponType, TeacherID: raw.TeacherID, SourceDungeon: raw.SourceDungeon, ManualID: raw.ManualID, Source: raw.Source,
 			ID:           id,
 			Name:         raw.Name,
 			Description:  raw.Description,

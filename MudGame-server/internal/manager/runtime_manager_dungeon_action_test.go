@@ -98,9 +98,9 @@ func TestDatangChangshengjueBlocksAndSalvage(t *testing.T) {
 		t.Fatalf("salvage failed: result=%+v err=%v", result, err)
 	}
 	r.mu.RLock()
-	pageCount := r.playersCache[playerID].Backpack["csj_changshengjue_page"]
+	pageCount := r.playersCache[playerID].Backpack["herb"]
 	r.mu.RUnlock()
-	if pageCount != 1 {
+	if pageCount != 4 {
 		t.Fatalf("expected changshengjue page in backpack, got %d", pageCount)
 	}
 	result, err = r.DoRoomAction(playerID, "salvage_iron_box")

@@ -55,9 +55,8 @@
       "nextState": "done",
       "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
       "repeatMessage": "已被你搜遍。",
-      "giveItems": {
-        "taxue_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 400
     }
   },
   "rooms": {
@@ -167,7 +166,8 @@
     "potential": 1040,
     "money": 720,
     "items": {
-      "jianchi_jian": 1
+      "jianchi_jian": 1,
+      "manual_taxue_wuhen": 1
     },
     "flags": {
       "jianchi_case_done": true

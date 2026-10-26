@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue'
 
 // 信息面板（属性/背包/技能/装备/世界/副本/任务/势力）的开关与切换、
-// 各 tab 的数据列表与选中项，以及"内部刷新不弹面板"的静默计数。
+// 各 tab 的数据列表与选中项，以及按指令区分的面板打开意图。
 export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct }) {
   const showInfoPanel = ref(false)
   const currentPanel = ref('') // 'backpack', 'skills', etc.
@@ -18,12 +18,29 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
   const viewingSkill = ref(null)
   const skillTab = ref('basic') // 'basic' or 'special'
 
-  // 内部数据刷新（交谈/用物品/装备等流程附带刷新）时递增，
-  // 对应的 get_* 响应只更新数据，不强制打开或切换信息面板
-  const silentRefreshCount = ref(0)
-  const sendSilentRefresh = (subtype) => {
-    silentRefreshCount.value++
+  // 不同 get_* 的响应可能交错，不能共用一个计数。
+  const panelRequests = new Map()
+  const sendPanelRequest = (subtype, silent = false) => {
+    const pending = panelRequests.get(subtype) || []
+    pending.push(silent)
+    panelRequests.set(subtype, pending)
     sendGameCommand("command", subtype, getPlayerId(), {})
+  }
+  const sendSilentRefresh = (subtype) => sendPanelRequest(subtype, true)
+  const consumeSilentRefresh = (subtype) => {
+    const pending = panelRequests.get(subtype)
+    if (!pending?.length) return true
+    const silent = pending.shift()
+    if (!pending.length) panelRequests.delete(subtype)
+    return silent
+  }
+  const resetPanelRequests = () => {
+    // 断开的连接可能丢掉旧刷新响应；保留等待连接恢复的主动查看意图。
+    for (const [subtype, pending] of panelRequests) {
+      const explicit = pending.filter(silent => !silent)
+      if (explicit.length) panelRequests.set(subtype, explicit)
+      else panelRequests.delete(subtype)
+    }
   }
 
   const filteredSkills = computed(() => {
@@ -74,7 +91,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'backpack') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_backpack", getPlayerId(), {})
+      sendPanelRequest("get_backpack")
     }
   }
 
@@ -82,7 +99,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'skills') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_skills", getPlayerId(), {})
+      sendPanelRequest("get_skills")
     }
   }
 
@@ -90,7 +107,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'equipment') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_equipment", getPlayerId(), {})
+      sendPanelRequest("get_equipment")
     }
   }
 
@@ -98,7 +115,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'status') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_attributes", getPlayerId(), {})
+      sendPanelRequest("get_attributes")
     }
   }
 
@@ -106,7 +123,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'maps') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_worlds", getPlayerId(), {})
+      sendPanelRequest("get_worlds")
 
       // 按房间所属世界选中；副本等非世界房间回退到第一个可用世界
       const currentWorldId = room.value?.worldId
@@ -122,7 +139,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'dungeons') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_dungeons", getPlayerId(), {})
+      sendPanelRequest("get_dungeons")
     }
   }
 
@@ -130,7 +147,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'quests') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_quests", getPlayerId(), {})
+      sendPanelRequest("get_quests")
     }
   }
 
@@ -138,7 +155,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     if (showInfoPanel.value && currentPanel.value === 'factions') {
       closeInfoPanel()
     } else {
-      sendGameCommand("command", "get_factions", getPlayerId(), {})
+      sendPanelRequest("get_factions")
     }
   }
 
@@ -179,7 +196,8 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     selectedSkill,
     viewingSkill,
     skillTab,
-    silentRefreshCount,
+    consumeSilentRefresh,
+    resetPanelRequests,
     sendSilentRefresh,
     filteredSkills,
     selectSkill,

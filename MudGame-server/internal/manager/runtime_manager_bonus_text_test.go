@@ -1,19 +1,17 @@
 package manager
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
-func TestInternalSkillConversionBonusIsFirstAndFixed(t *testing.T) {
-	bonuses := map[string]float64{
-		"max_mp_per_level":             10,
-		"trained_mp_to_max_hp_percent": 0.3,
+func TestInternalSkillConversionIsFixedAndAbsoluteConversionGrows(t *testing.T) {
+	base := fileSkills["basic_neigong"]
+	if !strings.Contains(strings.Join(skillBonusText(base.Bonuses, 1), " "), "30个百分点") || !strings.Contains(strings.Join(skillBonusText(base.Bonuses, 100), " "), "30个百分点") {
+		t.Fatal("base conversion should remain fixed")
 	}
-
-	levelOne := skillBonusText(bonuses, 1)
-	levelHundred := skillBonusText(bonuses, 100)
-	if len(levelOne) < 2 || len(levelHundred) < 2 {
-		t.Fatalf("expected conversion and level bonuses, got level1=%+v level100=%+v", levelOne, levelHundred)
-	}
-	if levelOne[0] != "转血 +30%" || levelHundred[0] != "转血 +30%" {
-		t.Fatalf("conversion bonus must remain first and fixed, got level1=%+v level100=%+v", levelOne, levelHundred)
+	art := fileSkills["csj_changshengjue"]
+	if !strings.Contains(strings.Join(skillBonusText(art.Bonuses, 1), " "), "0.15个百分点") || !strings.Contains(strings.Join(skillBonusText(art.Bonuses, 100), " "), "15个百分点") {
+		t.Fatal("absolute conversion must grow with its own level")
 	}
 }

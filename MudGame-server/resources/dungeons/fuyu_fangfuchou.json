@@ -55,9 +55,8 @@
       "nextState": "done",
       "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
       "repeatMessage": "已被你翻遍，再无他物。",
-      "giveItems": {
-        "youlong_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 300
     }
   },
   "rooms": {
@@ -167,7 +166,9 @@
     "potential": 880,
     "money": 560,
     "items": {
-      "yulie_shuangdao": 1
+      "yulie_shuangdao": 1,
+      "youlong_whip": 1,
+      "manual_youlong_bian": 1
     }
   }
 }

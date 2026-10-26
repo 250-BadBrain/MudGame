@@ -67,7 +67,8 @@
       "message": "婠婠退走时遗下一只白玉小匣，匣中残页魔气森然——正是阴癸派至高心法《天魔策》的残篇。收或不收，只在你一念。",
       "repeatMessage": "玉匣已被你收起，檐上空空如也。",
       "giveItems": {
-        "tianmo_page": 1
+        "xiaohuandan": 1,
+        "herb": 10
       }
     }
   },

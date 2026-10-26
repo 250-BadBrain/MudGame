@@ -57,6 +57,27 @@ npm run dev        # vite 开发服务器，默认 5173，默认连接本机 400
 - `.deploy/deploy.lock` 防止并发部署。SSH 异常中断可能留下锁；只有确认无部署进程运行后才可手动删除该锁。
 - 可传 `-SshHost`、`-RemoteRoot`、`-ServiceName`、`-ExeName`、`-HealthPort`、`-OutputDirectory` 覆盖默认值。此脚本更新已有的运行中服务，不负责首次安装 systemd 单元。
 
+### 武学 V2 首次发布与迁移
+
+V2新角色直接写martialVersion=2；未迁旧角色会阻止后端启动，不能仅替换程序后跳过迁移。先打包校验，再显式部署：
+
+```powershell
+.\deploy.bat -BuildOnly
+.\deploy.bat -StageOnly
+.\deploy.bat -MigrateMartialArts
+```
+
+StageOnly只校验并在远端`.deploy/<release>-martial-preview.json`输出逐角色预览，不停服不改存档。缺少迁移选项而存在旧档时，正式部署在停服前拒绝。带选项部署先停服落盘，完整备份，再迁移、启动与健康检查。迁移/新服务失败会恢复匹配的旧程序及迁移前存档；失败期间的数据另存为原数据目录旁的`<目录名>.failed-martial-<release>`，不直接删除。
+
+独立离线预览/应用（服务已停且落盘后才使用apply）：
+
+```powershell
+python MudGame-server/resources/migrations/migrate_martial_v2.py --data-dir '<明确的测试或维护存档路径>'
+python MudGame-server/resources/migrations/migrate_martial_v2.py --data-dir '<明确的维护存档路径>' --apply --server-stopped
+```
+
+迁移不读取仓库中的正式目录作为默认值，应用先验证全部角色；异常进度/未知技能阻止写入。完成记录和martialVersion确保幂等。保留迁移报告、备份及V1映射快照；不要通过手改版本号绕过迁移。普通后续部署无迁移变化时仍保留原有“只回滚程序/资源”的政策。
+
 部署脚本回归测试：`python -m unittest discover -s scripts/tests -v`。修改部署事务时，须覆盖成功切换、存档保留、包校验失败不停服和新服务失败后回滚；Linux 冒烟须用隔离网络或独立端口、临时存档，不能在正式服务上故意制造故障。
 
 Linux 构建冒烟可运行 `python3 scripts/tests/smoke_backend.py --binary /path/to/mud --resources /path/to/resources`：自动选择独立端口和临时存档，通过真实 WebSocket 注册、登录、创角、选角、查询状态，停服后只为该测试角色写入通关旗标，再重启检查称号和存档重载。不要传入正式存档目录；该脚本不提供这种参数。
@@ -149,7 +170,7 @@ Linux 构建冒烟可运行 `python3 scripts/tests/smoke_backend.py --binary /pa
 
 | 任务 | 典型改动文件 |
 |---|---|
-| 新副本 | `resources/dungeons/<id>.json`（新文件）；`npcs.json` 加 instanceOnly NPC（ID 前缀按副本）；`items.json` 加掉落/残页；`dungeon_dialogues.json` 加剧情动作对话；（进阶武学）`skills.json` + 老师 NPC + 残页 learnSkill 效果 |
+| 新副本 | `resources/dungeons/<id>.json`（新文件）；`npcs.json` 加 instanceOnly NPC（ID 前缀按副本）；`items.json` 加掉落/完整秘本；`dungeon_dialogues.json` 加剧情动作对话；（进阶武学）`skills.json` + 指定入门来源 + 完整秘本 learnSkill 效果 |
 | 新物品 | `items.json`；来源：副本 `rewards.items` 或商店 NPC 配置 |
 | 数值公式 | 按 formulas 文末对照表定位 `model/` 或 `manager/`；公式因子常量在 `model/skill_progression.go` 等 |
 | 新指令 | `protocol`（如需）→ `app/command_registry.go` + handler → `engine/workflow*.go` → `manager` 新方法 → 前端 `messageText.js`、composable、GameView 装配 |

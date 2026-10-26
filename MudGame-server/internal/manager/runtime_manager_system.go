@@ -135,6 +135,7 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, p
 
 	id := uuid.NewString()
 	players[id] = &model.Player{
+		MartialVersion: model.MartialVersion, ActiveArts: map[string]string{},
 		ID:                    id,
 		UserID:                username,
 		CharacterName:         name,
@@ -247,6 +248,9 @@ func (r *RuntimeManager) SetPlayerOnline(playerID string, online bool) {
 	}
 	if p, ok := players[playerID]; ok {
 		p.Online = online
+		if !online && p.State == "LEARNING" {
+			stopLearningNoLock(p)
+		}
 		_ = r.savePlayers(players)
 	}
 }

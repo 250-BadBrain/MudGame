@@ -56,9 +56,8 @@
       "nextState": "done",
       "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
       "repeatMessage": "已被你翻遍，再无他物。",
-      "giveItems": {
-        "suolang_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 300
     },
     "search_deck": {
       "label": "搜查甲板",
@@ -72,9 +71,8 @@
       "nextState": "done",
       "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
       "repeatMessage": "已被你搜遍。",
-      "giveItems": {
-        "jingang_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 400
     }
   },
   "rooms": {
@@ -206,7 +204,9 @@
     "potential": 900,
     "money": 580,
     "items": {
-      "fenshui_ci": 1
+      "fenshui_ci": 1,
+      "suolang_hook": 1,
+      "manual_suolang_gou": 1
     }
   }
 }

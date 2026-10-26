@@ -10,8 +10,7 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
     "FEET": "鞋子",
     "NECKLACE": "项链",
     "RING": "戒指",
-    "ACCESSORY": "配饰",
-    "HIDDEN_WEAPON": "暗器"
+    "ACCESSORY": "配饰"
   }
 
   const equipment = ref({})

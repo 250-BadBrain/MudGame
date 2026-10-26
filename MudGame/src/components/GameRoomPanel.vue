@@ -64,7 +64,7 @@ const stateNames = {
   HEALING: '疗伤',
   MEDITATING: '打坐',
   COMBAT: '战斗',
-  LEARNING: '学习',
+  LEARNING: '修炼',
   DEAD: '死亡'
 }
 

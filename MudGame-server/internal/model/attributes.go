@@ -3,48 +3,48 @@ package model
 const DefaultRealm = "ordinary"
 
 type EffectiveAttributes struct {
-	Level           int
-	Realm           string
-	Experience      int
-	Potential       int
-	HP              int
-	MaxHP           int
-	MP              int
-	TrainedMaxMP    int
-	MaxMP           int
-	// MeditateRecoveryBonus 打坐内力恢复加成（仅秘籍装备规则下的 meditate_recovery_per_10_levels 来源）
+	Level        int
+	Realm        string
+	Experience   int
+	Potential    int
+	HP           int
+	MaxHP        int
+	MP           int
+	TrainedMaxMP int
+	MaxMP        int
+	// MeditateRecoveryBonus 当前生效内功的打坐恢复加成。
 	MeditateRecoveryBonus int
-	// LearningInvestBonus 学习结算注入上限加成（仅秘籍装备规则下的 learning_invest_bonus_per_10_levels 来源）
+	// LearningInvestBonus 当前生效武学提供的修炼预算加成。
 	LearningInvestBonus int
-	Spirit                int
-	MaxSpirit             int
-	Strength        int
-	Constitution    int
-	Agility         int
-	Perception      int
-	Willpower       int
-	Charm           int
-	Luck            int
-	Attack          int
-	Defense         int
-	HitRate         int
-	Dodge           int
-	Parry           int
-	CritRate        int
-	AttackSpeed     int
-	Initiative      int
-	GuardBreak      int
-	DamageReduction int
-	Fame            int
-	Notoriety       int
-	Authority       int
-	Credit          int
-	PoisonResist    int
-	BleedResist     int
-	StunResist      int
-	FearResist      int
-	CharmResist     int
-	SealResist      int
+	Spirit              int
+	MaxSpirit           int
+	Strength            int
+	Constitution        int
+	Agility             int
+	Perception          int
+	Willpower           int
+	Charm               int
+	Luck                int
+	Attack              int
+	Defense             int
+	HitRate             int
+	Dodge               int
+	Parry               int
+	CritRate            float64
+	AttackSpeed         int
+	Initiative          int
+	GuardBreak          int
+	DamageReduction     int
+	Fame                int
+	Notoriety           int
+	Authority           int
+	Credit              int
+	PoisonResist        int
+	BleedResist         int
+	StunResist          int
+	FearResist          int
+	CharmResist         int
+	SealResist          int
 }
 
 func NewPlayerAttributes(strength, constitution, agility, perception, willpower int) Attributes {
@@ -183,7 +183,7 @@ func BuildEffectiveAttributes(a Attributes) EffectiveAttributes {
 		HitRate:         a.Derived.HitRate,
 		Dodge:           a.Derived.Dodge,
 		Parry:           a.Derived.Parry,
-		CritRate:        a.Derived.CritRate,
+		CritRate:        float64(a.Derived.CritRate),
 		AttackSpeed:     a.Derived.AttackSpeed,
 		Initiative:      a.Derived.Initiative,
 		GuardBreak:      a.Derived.GuardBreak,

@@ -99,7 +99,8 @@
     "potential": 1200,
     "money": 800,
     "items": {
-      "bianbuou_wisdom": 1
+      "bianbuou_wisdom": 1,
+      "manual_cihang_jiandian": 1
     }
   }
 }

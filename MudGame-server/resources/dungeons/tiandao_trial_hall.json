@@ -99,7 +99,8 @@
     "potential": 1200,
     "money": 800,
     "items": {
-      "songque_testament": 1
+      "songque_testament": 1,
+      "manual_tiandao_blade": 1
     }
   }
 }

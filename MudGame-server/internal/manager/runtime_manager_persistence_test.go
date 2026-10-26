@@ -9,6 +9,7 @@ import (
 
 func newFullyPopulatedPlayer(id string) *model.Player {
 	player := &model.Player{
+		MartialVersion: model.MartialVersion, ActiveArts: map[string]string{"combat": "tiandao_blade"}, RecoveryItemReadyAt: 2000000000000,
 		ID:                    id,
 		UserID:                id + "-user",
 		CharacterName:         "clone_hero",
@@ -68,7 +69,7 @@ func TestClonePlayersMapPreservesAllFields(t *testing.T) {
 	structType := origValue.Type()
 	// 手工克隆清单与 model.Player 字段必须同步维护：
 	// 给 model.Player 新增字段时，clonePlayersMap 与本测试都要同步更新，否则存档会静默丢字段。
-	if structType.NumField() != 25 {
+	if structType.NumField() != 28 {
 		t.Fatalf("model.Player field count changed to %d: update clonePlayersMap, newFullyPopulatedPlayer and this guard", structType.NumField())
 	}
 	for i := 0; i < structType.NumField(); i++ {
@@ -80,6 +81,10 @@ func TestClonePlayersMapPreservesAllFields(t *testing.T) {
 	}
 
 	// 克隆必须是深拷贝：修改克隆方的 map 不得影响源数据
+	clone.ActiveArts["combat"] = "other"
+	if orig.ActiveArts["combat"] != "tiandao_blade" {
+		t.Fatal("active arts are not deep copied")
+	}
 	clone.Backpack["dry_ration"] = 99
 	clone.Flags["heard_storyteller_rumor"] = false
 	if orig.Backpack["dry_ration"] != 2 || !orig.Flags["heard_storyteller_rumor"] {

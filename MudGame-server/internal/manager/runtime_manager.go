@@ -1,6 +1,9 @@
 package manager
 
 import (
+	"math/rand"
+	"os"
+	"path/filepath"
 	"sync"
 	"time"
 
@@ -11,8 +14,9 @@ import (
 )
 
 type RuntimeManager struct {
-	store storage.DynamicStore
-	mu    sync.RWMutex
+	combatRandom *rand.Rand
+	store        storage.DynamicStore
+	mu           sync.RWMutex
 
 	usersCache    map[string]*model.User
 	playersCache  map[string]*model.Player
@@ -49,8 +53,12 @@ var (
 )
 
 func NewRuntimeManager(baseDir string) *RuntimeManager {
+	if _, err := os.Stat(filepath.Join(baseDir, ".martial-migration.lock")); err == nil {
+		panic("武学迁移尚未结束，拒绝启动")
+	}
 	r := &RuntimeManager{
 		store:         storage.NewFileStore(baseDir),
+		combatRandom:  rand.New(rand.NewSource(time.Now().UnixNano())),
 		usersCache:    map[string]*model.User{},
 		playersCache:  map[string]*model.Player{},
 		dynamicRooms:  map[string]diskRoomDynamic{},

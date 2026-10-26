@@ -159,9 +159,8 @@
       "nextState": "done",
       "message": "府库兵器架后有一只上了封漆的书匣——鲁妙子收藏的道门剑谱《太乙剑法》残页静静躺在其中。",
       "repeatMessage": "书匣已被你收好。",
-      "giveItems": {
-        "taiyi_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 300
     }
   },
   "rooms": {
@@ -396,7 +395,8 @@
     "potential": 520,
     "money": 340,
     "items": {
-      "bronze_fragment": 3
+      "bronze_fragment": 3,
+      "manual_taiyi_jianfa": 1
     }
   }
 }

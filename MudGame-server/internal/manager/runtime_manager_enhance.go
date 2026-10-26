@@ -44,7 +44,7 @@ func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 
 	nextLevel := currentLevel + 1
 	costSilver := nextLevel * 200
-costBronze := nextLevel
+	costBronze := nextLevel
 
 	if p.Money < costSilver {
 		return "", errors.New("银两不足——强化到" + strconv.Itoa(nextLevel) + "级需要" + strconv.Itoa(costSilver) + "两。")
@@ -85,7 +85,11 @@ func applyEnhancementNoLock(eff *model.EffectiveAttributes, p *model.Player) {
 	if p == nil || len(p.EnhancedItems) == 0 {
 		return
 	}
-	for itemID, level := range p.EnhancedItems {
+	for slot, itemID := range p.Equipment {
+		if fileItems[itemID].EquipmentSlot != slot {
+			continue
+		}
+		level := p.EnhancedItems[itemID]
 		if level <= 0 {
 			continue
 		}
@@ -95,4 +99,3 @@ func applyEnhancementNoLock(eff *model.EffectiveAttributes, p *model.Player) {
 		}
 	}
 }
-

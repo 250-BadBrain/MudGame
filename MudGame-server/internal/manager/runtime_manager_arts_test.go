@@ -17,9 +17,12 @@ func TestCihangInsightAndTeaching(t *testing.T) {
 	}
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
-	players[playerID].RoomID = "ly_old_alley"
-	players[playerID].Skills["basic_sword"] = 20 // 慈航剑典前置门槛
-	players[playerID].Backpack["cihang_page"] = 1
+	players[playerID].RoomID = "ly_weapon_school"
+	players[playerID].Skills["basic_sword"] = 120
+	players[playerID].Skills["basic_literacy"] = 80
+	players[playerID].Flags["dungeon_cleared_changan_trial_hall"] = true
+	players[playerID].Attributes.Experience = 200000 // 慈航剑典前置门槛
+	players[playerID].Backpack["manual_cihang_jiandian"] = 1
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)
@@ -31,7 +34,7 @@ func TestCihangInsightAndTeaching(t *testing.T) {
 		t.Fatal("learning cihang without insight must fail")
 	}
 	// 参悟残页 → 1 级
-	if _, err := r.UseItem(playerID, "cihang_page"); err != nil {
+	if _, err := r.UseItem(playerID, "manual_cihang_jiandian"); err != nil {
 		t.Fatalf("insight cihang page failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
@@ -49,7 +52,7 @@ func TestCihangInsightAndTeaching(t *testing.T) {
 }
 
 // 宋缺宗师亲传：defeat 模式 Boss 败而不死，玩家在其房内可请教天刀八诀（上限 320）
-func TestSongQueGrandmasterTeaching(t *testing.T) {
+func TestEarlySongQueCannotBypassLateTransmission(t *testing.T) {
 	r, playerID, inst := createDungeonTestPlayer(t, "datang_tiandao")
 	arenaRoom := r.dungeonMgr.InstanceRoomIDNoLock(inst, "td_04")
 	moveDungeonTestPlayer(t, r, playerID, arenaRoom)
@@ -63,26 +66,12 @@ func TestSongQueGrandmasterTeaching(t *testing.T) {
 		t.Fatal("song que should remain after defeat")
 	}
 
-	// 先给残页参悟（宗师亲传也要先有传承根基）；天刀八诀前置：基本刀法 40 级
-	r.mu.Lock()
-	players, _ := r.loadPlayers()
-	players[playerID].Skills["basic_blade"] = 40
-	players[playerID].Backpack["tiandao_page"] = 1
-	if err := r.savePlayers(players); err != nil {
-		r.mu.Unlock()
-		t.Fatalf("save failed: %v", err)
-	}
-	r.mu.Unlock()
-	if _, err := r.UseItem(playerID, "tiandao_page"); err != nil {
-		t.Fatalf("insight tiandao page failed: %v", err)
-	}
-
-	// 向宋缺本人请教——副本 NPC 教学 + 320 上限
-	if err := r.LearnSkill(playerID, songID, "tiandao_blade"); err != nil {
-		t.Fatalf("learn from song que failed: %v", err)
+	// Early Song Que remains a valid story encounter but is not the late transmission.
+	if err := r.LearnSkill(playerID, songID, "tiandao_blade"); err == nil {
+		t.Fatal("early encounter bypassed late transmission")
 	}
 	after, _ := r.loadPlayers()
-	if after[playerID].State != "LEARNING" || after[playerID].LearningSkillID != "tiandao_blade" {
-		t.Fatalf("expected LEARNING tiandao from song que, got %s/%s", after[playerID].State, after[playerID].LearningSkillID)
+	if after[playerID].Skills["tiandao_blade"] != 0 {
+		t.Fatal("early encounter granted tiandao")
 	}
 }

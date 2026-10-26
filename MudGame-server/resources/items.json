@@ -42,7 +42,8 @@
     "effects": {
       "attack": 6
     },
-    "source": "河洛铁匠"
+    "source": "河洛铁匠",
+    "weaponType": "sword"
   },
   "steel_blade": {
     "name": "钢刀",
@@ -59,7 +60,8 @@
     "effects": {
       "attack": 7
     },
-    "source": "河洛铁匠"
+    "source": "河洛铁匠",
+    "weaponType": "blade"
   },
   "iron_staff": {
     "name": "铁棍",
@@ -77,7 +79,8 @@
       "attack": 5,
       "parry": 2
     },
-    "source": "河洛铁匠"
+    "source": "河洛铁匠",
+    "weaponType": "staff"
   },
   "darts": {
     "name": "飞镖",
@@ -89,12 +92,14 @@
     "value": 250,
     "rarity": 1,
     "unit": "枚",
-    "equipmentSlot": "HIDDEN_WEAPON",
+    "equipmentSlot": "WEAPON",
     "limit": -1,
     "effects": {
-      "critRate": 1
+      "critRate": 1,
+      "attack": 6
     },
-    "source": "河洛铁匠"
+    "source": "河洛铁匠",
+    "weaponType": "hidden_weapon"
   },
   "iron_pickaxe": {
     "name": "铁镐",
@@ -106,7 +111,6 @@
     "value": 600,
     "rarity": 1,
     "unit": "把",
-    "equipmentSlot": "WEAPON",
     "limit": -1,
     "source": "河洛铁匠"
   },
@@ -210,40 +214,6 @@
     "unit": "枚",
     "source": "秘境异闻"
   },
-  "csj_changshengjue_page": {
-    "name": "长生诀残页",
-    "description": "记载长生诀片段的残页。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "source": "扬子江惊变",
-    "usable": true,
-    "effects": {
-      "learnSkill": "csj_changshengjue"
-    }
-  },
-  "jyg_zhanshentu_rubbing": {
-    "name": "战神图录摹本",
-    "description": "战神图录刀意的摹本。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "卷",
-    "questItem": true,
-    "source": "惊雁宫夺图",
-    "usable": true,
-    "effects": {
-      "learnSkill": "jyg_zhanshentu_dao"
-    }
-  },
   "yg_baoku_pearl": {
     "name": "宝库金珠",
     "description": "杨公宝库中的大如龙眼的金珠，鲁妙子的手笔，成色远胜市面珠玉。",
@@ -271,7 +241,8 @@
     "effects": {
       "attack": 9
     },
-    "source": "怒蛟帮夜战"
+    "source": "怒蛟帮夜战",
+    "weaponType": "blade"
   },
   "yanggong_sword": {
     "name": "杨公宝剑",
@@ -289,7 +260,8 @@
       "attack": 12,
       "hitRate": 4
     },
-    "source": "杨公宝库"
+    "source": "杨公宝库",
+    "weaponType": "sword"
   },
   "lanjiang_vest": {
     "name": "拦江劲衣",
@@ -308,23 +280,6 @@
       "dodge": 3
     },
     "source": "拦江一战"
-  },
-  "tiandao_page": {
-    "name": "天刀残页",
-    "description": "录有天刀八诀片段的残页。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "source": "天刀试炼",
-    "usable": true,
-    "effects": {
-      "learnSkill": "tiandao_blade"
-    }
   },
   "herb": {
     "name": "止血草",
@@ -354,105 +309,6 @@
       "recoverHp": 60
     }
   },
-  "cihang_page": {
-    "name": "慈航剑典残页",
-    "description": "录有慈航剑典片段的残页，随江底沉箱漂了不知多少年。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "source": "洛水风浪",
-    "usable": true,
-    "effects": {
-      "learnSkill": "cihang_jiandian"
-    }
-  },
-  "hunyuan_page": {
-    "name": "混元功残页",
-    "description": "录有混元功养气篇的残页，纸墨间隐有松风之意。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 3,
-    "unit": "页",
-    "questItem": true,
-    "source": "天刀试炼",
-    "usable": true,
-    "effects": {
-      "learnSkill": "hunyuan_neigong"
-    }
-  },
-  "tianmo_page": {
-    "name": "天魔策残页",
-    "description": "自婠婠遗落的玉匣中取得的残页，魔气森然。使用后可参悟入门——但魔门心法，修前请三思。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "source": "飞马牧场",
-    "usable": true,
-    "effects": {
-      "learnSkill": "tianmo_ce"
-    }
-  },
-  "talang_page": {
-    "name": "踏浪诀残页",
-    "description": "录有踏浪诀轻身篇的残页，边角被江水浸得发皱。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 3,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "talang_jue"
-    }
-  },
-  "fuhu_page": {
-    "name": "伏虎劲残页",
-    "description": "蒙面刺客贴身收藏的拳劲法门，纸页染着旧血。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 3,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "fuhu_jin"
-    }
-  },
-  "tiebi_page": {
-    "name": "铁壁功残页",
-    "description": "怒蛟帮武库封存的守御功法残页。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 3,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "tiebi_gong"
-    }
-  },
   "xiaohuandan": {
     "name": "小还丹",
     "description": "慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。",
@@ -467,22 +323,6 @@
     "usable": true,
     "effects": {
       "recoverHp": 100
-    }
-  },
-  "wuzhen_page": {
-    "name": "悟真篇残页",
-    "description": "鲁妙子手书的读书法门残页，笔走龙蛇间尽是机枢至理。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 3,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "wuzhen_pian"
     }
   },
   "dahuandan": {
@@ -516,7 +356,8 @@
       "attack": 10,
       "hitRate": 3
     },
-    "source": "马贼王庭"
+    "source": "马贼王庭",
+    "weaponType": "blade"
   },
   "tianmo_pei": {
     "name": "天魔佩",
@@ -605,38 +446,6 @@
     },
     "source": "铁匠铺合成"
   },
-  "xiulou_page": {
-    "name": "修罗刀法残页",
-    "description": "赫连霸从某个倒霉的魔门客卿身上抢来的刀谱残页，边角还带着狼牙印。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "xiulou_daofa"
-    }
-  },
-  "taiyi_page": {
-    "name": "太乙剑法残页",
-    "description": "竟陵武库深处压箱底的道门剑谱残页。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "taiyi_jianfa"
-    }
-  },
   "zhanma_dao": {
     "name": "斩马刀",
     "description": "瓦岗阵前斩马用的厚背长刀，刀身上一道深豁——那是砍在铁骑甲上的印记。",
@@ -652,7 +461,8 @@
       "attack": 11,
       "hitRate": 2
     },
-    "source": "洛阳粮道"
+    "source": "洛阳粮道",
+    "weaponType": "blade"
   },
   "dongting_ruanjia": {
     "name": "洞庭软甲",
@@ -669,22 +479,6 @@
       "defense": 12
     },
     "source": "巴陵夜泊"
-  },
-  "dongting_page": {
-    "name": "洞庭心法残页",
-    "description": "洞庭渔隐一脉的内功残篇，讲究以水养气。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 3,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "dongting_xinf"
-    }
   },
   "sanhua_yuzhuo": {
     "name": "散花玉镯",
@@ -703,22 +497,6 @@
     },
     "source": "散花楼"
   },
-  "lingxu_page": {
-    "name": "凌虚步残页",
-    "description": "录有凌虚步身法要诀的残页，步罡踏斗，飘忽若仙。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 500,
-    "rarity": 3,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "lingxu_bu"
-    }
-  },
   "yulie_shuangdao": {
     "name": "羽裂双刀",
     "description": "方夜羽的新刀——上次败给你之后，他重铸了刀，也重铸了自己的刀路。刃口薄得像一声叹息。",
@@ -733,7 +511,8 @@
     "effects": {
       "attack": 12
     },
-    "source": "方夜羽复仇"
+    "source": "方夜羽复仇",
+    "weaponType": "blade"
   },
   "fenshui_ci": {
     "name": "分水刺",
@@ -745,28 +524,13 @@
     "value": 2000,
     "rarity": 3,
     "unit": "对",
-    "equipmentSlot": "HIDDEN_WEAPON",
+    "equipmentSlot": "WEAPON",
     "effects": {
       "attack": 9,
       "critRate": 2
     },
-    "source": "怒蛟水战"
-  },
-  "poxu_page": {
-    "name": "破虚指残页",
-    "description": "夹在战神图录后卷里的指法残页，纸薄如蝉翼，指痕却力透纸背。使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "poxu_zhi"
-    }
+    "source": "怒蛟水战",
+    "weaponType": "hidden_weapon"
   },
   "bianhuang_xue": {
     "name": "边荒战靴",
@@ -841,16 +605,17 @@
     "value": 2400,
     "rarity": 4,
     "unit": "把",
-    "equipmentSlot": "HIDDEN_WEAPON",
+    "equipmentSlot": "WEAPON",
     "effects": {
       "attack": 10,
       "critRate": 1
     },
-    "source": "蜀道栈桥"
+    "source": "蜀道栈桥",
+    "weaponType": "hidden_weapon"
   },
   "langya_chui": {
-    "name": "狼牙巨锤",
-    "description": "白狼主的狼牙巨锤，锤头拔自狼王颅骨——塞外的规矩：谁的锤重，谁说话。",
+    "name": "狼牙重锏",
+    "description": "一柄沉重铁锏，适合锏法流派。",
     "type": "equipment",
     "subtype": "mace",
     "stackable": false,
@@ -862,7 +627,8 @@
     "effects": {
       "attack": 13
     },
-    "source": "狼山口"
+    "source": "狼山口",
+    "weaponType": "mace"
   },
   "jianchi_jian": {
     "name": "淬泉剑",
@@ -880,7 +646,8 @@
       "hitRate": 3,
       "dodge": 2
     },
-    "source": "剑池"
+    "source": "剑池",
+    "weaponType": "sword"
   },
   "tianjin_yuepei": {
     "name": "天津晓月佩",
@@ -916,230 +683,6 @@
       "maxHp": 30
     },
     "source": "海市"
-  },
-  "bawang_page": {
-    "name": "霸王枪残页",
-    "description": "霸王的枪谱残页，笔势如山——使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "bawang_qiang"
-    }
-  },
-  "youlong_page": {
-    "name": "游龙鞭残页",
-    "description": "游龙鞭法残页，纸上鞭痕如龙蛇飞舞——使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "youlong_bian"
-    }
-  },
-  "lieshi_page": {
-    "name": "裂石锏残页",
-    "description": "裂石锏法残页，字迹如凿痕——使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "lieshi_jian"
-    }
-  },
-  "suolang_page": {
-    "name": "锁浪钩残页",
-    "description": "锁浪钩法残页，盐渍浸透纸背——使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "suolang_gou"
-    }
-  },
-  "huayu_page": {
-    "name": "漫天花雨残页",
-    "description": "漫天花雨暗器谱残页，密密麻麻全是出手点——使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "mantian_huayu"
-    }
-  },
-  "fengmo_page": {
-    "name": "疯魔棍残页",
-    "description": "疯魔棍法残页，字迹狂放不羁——使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "fengmo_gun"
-    }
-  },
-  "tiandao_pojun_page": {
-    "name": "天刀·破军残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "tiandao_pojun"
-    }
-  },
-  "taiyi_xiajuan_page": {
-    "name": "太乙剑法·下卷残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "taiyi_xiajuan"
-    }
-  },
-  "changsheng_xiajuan_page": {
-    "name": "长生诀·下卷残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "changsheng_xiajuan"
-    }
-  },
-  "taxue_page": {
-    "name": "踏雪无痕残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "taxue_wuhen"
-    }
-  },
-  "jingang_page": {
-    "name": "金刚不坏残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "jingang_buhuai"
-    }
-  },
-  "tianmo_xiajuan_page": {
-    "name": "天魔策·下卷残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "tianmo_xiajuan"
-    }
-  },
-  "xiulou_pojia_page": {
-    "name": "修罗刀法·破甲残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "xiulou_pojia"
-    }
-  },
-  "taiyi_tianming_page": {
-    "name": "太乙剑法·天命残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "taiyi_tianming"
-    }
   },
   "tezhong_dahuandan": {
     "name": "特级大还丹",
@@ -1308,7 +851,8 @@
       "attack": 12,
       "initiative": 3
     },
-    "source": "雪原猎狼"
+    "source": "雪原猎狼",
+    "weaponType": "blade"
   },
   "zhumei_luopan": {
     "name": "竹梅罗盘",
@@ -1437,7 +981,7 @@
     "name": "宫变密剑",
     "description": "宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。",
     "type": "equipment",
-    "subtype": "relic",
+    "subtype": "sword",
     "stackable": false,
     "sellable": true,
     "value": 2800,
@@ -1450,7 +994,8 @@
       "initiative": 3,
       "dodge": 2
     },
-    "source": "东都宫变"
+    "source": "东都宫变",
+    "weaponType": "sword"
   },
   "yunhe_pao": {
     "name": "运河披风",
@@ -1595,10 +1140,9 @@
     "value": 3400,
     "rarity": 5,
     "unit": "件",
-    "equipmentSlot": "WEAPON",
+    "equipmentSlot": "RING",
     "effects": {
-      "attack": 6,
-      "initiative": 3,
+      "maxHp": 20,
       "defense": 3,
       "hitRate": 2
     },
@@ -1608,7 +1152,7 @@
     "name": "江南剑首佩剑",
     "description": "二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。",
     "type": "equipment",
-    "subtype": "relic",
+    "subtype": "sword",
     "stackable": false,
     "sellable": true,
     "value": 3600,
@@ -1621,93 +1165,14 @@
       "critRate": 2,
       "dodge": 2
     },
-    "source": "剑首之争"
-  },
-  "wugou_page": {
-    "name": "无钩剑法残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "wugou_jianfa"
-    }
-  },
-  "hanshui_page": {
-    "name": "寒水内功残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "hanshui_neigong"
-    }
-  },
-  "bengshan_page": {
-    "name": "崩山拳残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "bengshan_quan"
-    }
-  },
-  "wuying_page": {
-    "name": "无影身法残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "wuying_shenfa"
-    }
-  },
-  "liangyi_page": {
-    "name": "两仪真罡残页",
-    "description": "使用后可参悟入门，再寻隐秘传承人深造。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 600,
-    "rarity": 4,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "liangyi_zhengang"
-    }
+    "source": "剑首之争",
+    "weaponType": "sword"
   },
   "xinggong_jian": {
     "name": "行宫密剑",
     "description": "行宫惊变奖励。",
     "type": "equipment",
-    "subtype": "relic",
+    "subtype": "sword",
     "stackable": false,
     "sellable": true,
     "value": 3600,
@@ -1718,7 +1183,8 @@
       "attack": 9,
       "critRate": 3
     },
-    "source": "行宫惊变"
+    "source": "行宫惊变",
+    "weaponType": "sword"
   },
   "langfan_jian": {
     "name": "浪翻云剑穗",
@@ -1792,7 +1258,7 @@
     "name": "漕运钢刀",
     "description": "运河夜战的奖励装备。",
     "type": "equipment",
-    "subtype": "relic",
+    "subtype": "blade",
     "stackable": false,
     "sellable": true,
     "value": 4000,
@@ -1803,7 +1269,8 @@
       "attack": 10,
       "defense": 3
     },
-    "source": "运河夜战"
+    "source": "运河夜战",
+    "weaponType": "blade"
   },
   "tangmen_zhenzhu": {
     "name": "唐门毒珠",
@@ -1843,7 +1310,7 @@
     "name": "剑池名剑",
     "description": "剑池深处的奖励装备。",
     "type": "equipment",
-    "subtype": "relic",
+    "subtype": "sword",
     "stackable": false,
     "sellable": true,
     "value": 4400,
@@ -1854,7 +1321,8 @@
       "attack": 11,
       "hitRate": 4
     },
-    "source": "剑池深处"
+    "source": "剑池深处",
+    "weaponType": "sword"
   },
   "shengong_qi": {
     "name": "神工遗器",
@@ -1873,166 +1341,6 @@
       "maxMp": 20
     },
     "source": "神工秘殿"
-  },
-  "posui_zz_page": {
-    "name": "破碎至尊残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "posui_zhizun"
-    }
-  },
-  "wujin_bian_page": {
-    "name": "无尽鞭残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "wujin_bian"
-    }
-  },
-  "leiting_page": {
-    "name": "雷霆枪法残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "leiting_qiangfa"
-    }
-  },
-  "yaotong_page": {
-    "name": "妖瞳锁灵残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "yaotong_suoli"
-    }
-  },
-  "jinhuan_page": {
-    "name": "金环钩法残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "jinhuan_goufa"
-    }
-  },
-  "shanshan_page": {
-    "name": "闪闪棍法残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "shanshan_gunfa"
-    }
-  },
-  "lieshi_zz_page": {
-    "name": "裂石之锏残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "lieshi_zhijue"
-    }
-  },
-  "hanshui_zz_page": {
-    "name": "寒水之诀残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "hanshui_zhijue"
-    }
-  },
-  "wugou_zz_page": {
-    "name": "无钩之诀残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "wugou_zhijue"
-    }
-  },
-  "bengshan_zz_page": {
-    "name": "崩山之诀残页",
-    "description": "使用后可参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "bengshan_zhijue"
-    }
   },
   "langfan_j": {
     "name": "浪翻云剑穗",
@@ -2106,7 +1414,7 @@
     "name": "漕运钢刀",
     "description": "运河夜战奖励。",
     "type": "equipment",
-    "subtype": "relic",
+    "subtype": "blade",
     "stackable": false,
     "sellable": true,
     "value": 4000,
@@ -2117,7 +1425,8 @@
       "attack": 10,
       "defense": 3
     },
-    "source": "运河夜战"
+    "source": "运河夜战",
+    "weaponType": "blade"
   },
   "tangmen_z": {
     "name": "唐门毒珠",
@@ -2157,7 +1466,7 @@
     "name": "剑池名剑",
     "description": "剑池深处奖励。",
     "type": "equipment",
-    "subtype": "relic",
+    "subtype": "sword",
     "stackable": false,
     "sellable": true,
     "value": 4400,
@@ -2168,7 +1477,8 @@
       "attack": 11,
       "hitRate": 4
     },
-    "source": "剑池深处"
+    "source": "剑池深处",
+    "weaponType": "sword"
   },
   "shengong_q": {
     "name": "神工遗器",
@@ -2188,166 +1498,6 @@
     },
     "source": "神工秘殿"
   },
-  "posui_zz_pg": {
-    "name": "破碎至尊残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "posui_zz"
-    }
-  },
-  "wujin_pg": {
-    "name": "无尽鞭残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "wujin_bian"
-    }
-  },
-  "leiting_pg": {
-    "name": "雷霆枪法残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "leiting_qf"
-    }
-  },
-  "yaotong_pg": {
-    "name": "妖瞳锁灵残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "yaotong_sl"
-    }
-  },
-  "jinhuan_pg": {
-    "name": "金环钩法残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "jinhuan_gf"
-    }
-  },
-  "shanshan_pg": {
-    "name": "闪闪棍法残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "shanshan_gf"
-    }
-  },
-  "lieshi_zz_pg": {
-    "name": "裂石之锏残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "lieshi_zj"
-    }
-  },
-  "hanshui_zz_pg": {
-    "name": "寒水之诀残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "hanshui_zj"
-    }
-  },
-  "wugou_zz_pg": {
-    "name": "无钩之诀残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "wugou_zj"
-    }
-  },
-  "bengshan_zz_pg": {
-    "name": "崩山之诀残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "bengshan_zj"
-    }
-  },
   "xb2_relic": {
     "name": "绝壁悬栈遗物",
     "description": "绝壁悬栈遗物。",
@@ -2358,7 +1508,7 @@
     "value": 4000,
     "rarity": 5,
     "unit": "件",
-    "equipmentSlot": "WEAPON",
+    "equipmentSlot": "NECKLACE",
     "effects": {
       "attack": 3,
       "defense": 2,
@@ -2430,7 +1580,7 @@
     "value": 4400,
     "rarity": 5,
     "unit": "件",
-    "equipmentSlot": "WEAPON",
+    "equipmentSlot": "NECKLACE",
     "effects": {
       "attack": 4,
       "defense": 3,
@@ -2502,7 +1652,7 @@
     "value": 4800,
     "rarity": 5,
     "unit": "件",
-    "equipmentSlot": "WEAPON",
+    "equipmentSlot": "NECKLACE",
     "effects": {
       "attack": 5,
       "defense": 4,
@@ -2574,7 +1724,7 @@
     "value": 5200,
     "rarity": 5,
     "unit": "件",
-    "equipmentSlot": "WEAPON",
+    "equipmentSlot": "NECKLACE",
     "effects": {
       "attack": 7,
       "defense": 5,
@@ -2617,256 +1767,6 @@
       "maxMp": 33
     },
     "source": "太虚幻境"
-  },
-  "page_r204_0": {
-    "name": "无双枪残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_0"
-    }
-  },
-  "page_r204_1": {
-    "name": "游丝鞭残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_1"
-    }
-  },
-  "page_r204_2": {
-    "name": "碎玉锏残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_2"
-    }
-  },
-  "page_r204_3": {
-    "name": "寒泉钩残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_3"
-    }
-  },
-  "page_r204_4": {
-    "name": "流星雨残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_4"
-    }
-  },
-  "page_r204_5": {
-    "name": "疯魔棍二式残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_5",
-      "dodge": 1
-    }
-  },
-  "page_r204_6": {
-    "name": "修罗刀·终残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_6",
-      "dodge": 1
-    }
-  },
-  "page_r204_7": {
-    "name": "太乙剑·终残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_7",
-      "dodge": 1
-    }
-  },
-  "page_r204_8": {
-    "name": "长生诀·终残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_8",
-      "dodge": 1
-    }
-  },
-  "page_r204_9": {
-    "name": "凌波微步残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_9",
-      "dodge": 1
-    }
-  },
-  "page_r204_10": {
-    "name": "金刚罡残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_10",
-      "dodge": 1
-    }
-  },
-  "page_r204_11": {
-    "name": "伏虎拳·终残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_11",
-      "dodge": 1
-    }
-  },
-  "page_r204_12": {
-    "name": "裂天刀残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_12",
-      "dodge": 1
-    }
-  },
-  "page_r204_13": {
-    "name": "穿云剑残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_13",
-      "dodge": 1
-    }
-  },
-  "page_r204_14": {
-    "name": "混元一气残页",
-    "description": "参悟入门。",
-    "type": "quest",
-    "subtype": "scroll",
-    "stackable": false,
-    "sellable": false,
-    "value": 800,
-    "rarity": 5,
-    "unit": "页",
-    "questItem": true,
-    "usable": true,
-    "effects": {
-      "learnSkill": "manual_r204_14",
-      "dodge": 1
-    }
   },
   "shuanglong_bei": {
     "name": "双龙会信杯",
@@ -2935,7 +1835,8 @@
       "attack": 14,
       "critRate": 2
     },
-    "source": "幽冥鬼市"
+    "source": "幽冥鬼市",
+    "weaponType": "blade"
   },
   "beidou_xingpan": {
     "name": "北斗星盘",
@@ -2973,5 +1874,627 @@
       "maxMp": 15
     },
     "source": "护送商队"
+  },
+  "manual_csj_changshengjue": {
+    "name": "长生诀秘本",
+    "description": "序47《行宫惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 5,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "csj_changshengjue"
+    },
+    "source": "序47《行宫惊变》满通关结算"
+  },
+  "manual_jyg_zhanshentu_dao": {
+    "name": "战神图录秘本",
+    "description": "序40《战神遗境》（原《战神图录·终卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 5,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "jyg_zhanshentu_dao"
+    },
+    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算"
+  },
+  "manual_tiandao_blade": {
+    "name": "天刀八诀秘本",
+    "description": "序38《天刀试炼殿》满通关，由宋缺授予完整传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 5,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "tiandao_blade"
+    },
+    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承"
+  },
+  "manual_thunder_sword": {
+    "name": "奔雷剑法秘本",
+    "description": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 2,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "thunder_sword"
+    },
+    "source": "旧版迁移保留；新入门由指定老师传授。"
+  },
+  "manual_bloody_blade": {
+    "name": "血战刀法秘本",
+    "description": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 2,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "bloody_blade"
+    },
+    "source": "旧版迁移保留；新入门由指定老师传授。"
+  },
+  "manual_cihang_jiandian": {
+    "name": "慈航剑典秘本",
+    "description": "序40《长安试炼殿》满通关，由师妃暄见证传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 5,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "cihang_jiandian"
+    },
+    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承"
+  },
+  "manual_hunyuan_neigong": {
+    "name": "混元功秘本",
+    "description": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 2,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "hunyuan_neigong"
+    },
+    "source": "旧版迁移保留；新入门由指定老师传授。"
+  },
+  "manual_tianmo_ce": {
+    "name": "天魔策秘本",
+    "description": "序39《魔师宫秘道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 5,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "tianmo_ce"
+    },
+    "source": "序39《魔师宫秘道》满通关结算"
+  },
+  "manual_talang_jue": {
+    "name": "踏浪诀秘本",
+    "description": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 2,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "talang_jue"
+    },
+    "source": "旧版迁移保留；新入门由指定老师传授。"
+  },
+  "manual_fuhu_jin": {
+    "name": "伏虎劲秘本",
+    "description": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 2,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "fuhu_jin"
+    },
+    "source": "旧版迁移保留；新入门由指定老师传授。"
+  },
+  "manual_tiebi_gong": {
+    "name": "铁壁功秘本",
+    "description": "盐帮分舵·雷万钧的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 2,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "tiebi_gong"
+    },
+    "source": "旧版迁移保留；新入门由指定老师传授。"
+  },
+  "manual_wuzhen_pian": {
+    "name": "悟真篇秘本",
+    "description": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 2,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "wuzhen_pian"
+    },
+    "source": "旧版迁移保留；新入门由指定老师传授。"
+  },
+  "manual_xiulou_daofa": {
+    "name": "修罗刀法秘本",
+    "description": "序15《马贼王庭》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "xiulou_daofa"
+    },
+    "source": "序15《马贼王庭》满通关结算"
+  },
+  "manual_taiyi_jianfa": {
+    "name": "太乙剑法秘本",
+    "description": "序8《竟陵之围》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "taiyi_jianfa"
+    },
+    "source": "序8《竟陵之围》满通关结算"
+  },
+  "manual_dongting_xinf": {
+    "name": "洞庭心法秘本",
+    "description": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "dongting_xinf"
+    },
+    "source": "序19《巴陵夜泊》满通关结算"
+  },
+  "manual_lingxu_bu": {
+    "name": "凌虚步秘本",
+    "description": "序20《散花楼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "lingxu_bu"
+    },
+    "source": "序20《散花楼》满通关结算"
+  },
+  "manual_poxu_zhi": {
+    "name": "破虚指秘本",
+    "description": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 4,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "poxu_zhi"
+    },
+    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算"
+  },
+  "manual_bawang_qiang": {
+    "name": "霸王枪秘本",
+    "description": "序18《洛阳粮道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "bawang_qiang"
+    },
+    "source": "序18《洛阳粮道》满通关结算"
+  },
+  "manual_youlong_bian": {
+    "name": "游龙鞭秘本",
+    "description": "序21《方夜羽复仇》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "youlong_bian"
+    },
+    "source": "序21《方夜羽复仇》满通关结算"
+  },
+  "manual_lieshi_jian": {
+    "name": "裂石锏秘本",
+    "description": "序17《瓦岗惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "lieshi_jian"
+    },
+    "source": "序17《瓦岗惊变》满通关结算"
+  },
+  "manual_suolang_gou": {
+    "name": "锁浪钩秘本",
+    "description": "序22《怒蛟水战》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "suolang_gou"
+    },
+    "source": "序22《怒蛟水战》满通关结算"
+  },
+  "manual_mantian_huayu": {
+    "name": "漫天花雨秘本",
+    "description": "序44《唐门试炼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 4,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "mantian_huayu"
+    },
+    "source": "序44《唐门试炼》满通关结算"
+  },
+  "manual_fengmo_gun": {
+    "name": "疯魔棍秘本",
+    "description": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 3,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "fengmo_gun"
+    },
+    "source": "序19《巴陵夜泊》满通关结算"
+  },
+  "manual_taxue_wuhen": {
+    "name": "踏雪无痕秘本",
+    "description": "序30《剑池》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 4,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "taxue_wuhen"
+    },
+    "source": "序30《剑池》满通关结算"
+  },
+  "manual_jingang_buhuai": {
+    "name": "金刚不坏秘本",
+    "description": "序37《竟陵试炼殿》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "type": "consumable",
+    "subtype": "manual",
+    "stackable": false,
+    "sellable": false,
+    "usable": true,
+    "bind": "character",
+    "value": 0,
+    "rarity": 4,
+    "unit": "册",
+    "limit": 1,
+    "effects": {
+      "learnSkill": "jingang_buhuai"
+    },
+    "source": "序37《竟陵试炼殿》满通关结算"
+  },
+  "training_spear": {
+    "name": "练习长枪",
+    "description": "练习长枪，适合spear流派修炼。",
+    "type": "equipment",
+    "subtype": "spear",
+    "weaponType": "spear",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 6
+    },
+    "value": 400,
+    "rarity": 1,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "河洛铁匠钟铁衣常驻出售"
+  },
+  "training_whip": {
+    "name": "练习软鞭",
+    "description": "练习软鞭，适合whip流派修炼。",
+    "type": "equipment",
+    "subtype": "whip",
+    "weaponType": "whip",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 6
+    },
+    "value": 400,
+    "rarity": 1,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "同上"
+  },
+  "training_mace": {
+    "name": "练习铁锏",
+    "description": "练习铁锏，适合mace流派修炼。",
+    "type": "equipment",
+    "subtype": "mace",
+    "weaponType": "mace",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 6
+    },
+    "value": 400,
+    "rarity": 1,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "同上"
+  },
+  "training_hook": {
+    "name": "练习双钩",
+    "description": "练习双钩，适合hook流派修炼。",
+    "type": "equipment",
+    "subtype": "hook",
+    "weaponType": "hook",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 6
+    },
+    "value": 400,
+    "rarity": 1,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "同上"
+  },
+  "liangdao_spear": {
+    "name": "粮道长枪",
+    "description": "粮道长枪，适合spear流派修炼。",
+    "type": "equipment",
+    "subtype": "spear",
+    "weaponType": "spear",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11,
+      "hitRate": 2
+    },
+    "value": 1600,
+    "rarity": 3,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "序18《洛阳粮道》首次满通关",
+    "firstClaim": true
+  },
+  "youlong_whip": {
+    "name": "游龙长鞭",
+    "description": "游龙长鞭，适合whip流派修炼。",
+    "type": "equipment",
+    "subtype": "whip",
+    "weaponType": "whip",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11,
+      "dodge": 2
+    },
+    "value": 1600,
+    "rarity": 3,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "序21《方夜羽复仇》首次满通关",
+    "firstClaim": true
+  },
+  "lieshi_mace": {
+    "name": "裂石铁锏",
+    "description": "裂石铁锏，适合mace流派修炼。",
+    "type": "equipment",
+    "subtype": "mace",
+    "weaponType": "mace",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11,
+      "parry": 2
+    },
+    "value": 1600,
+    "rarity": 3,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "序17《瓦岗惊变》首次满通关",
+    "firstClaim": true
+  },
+  "suolang_hook": {
+    "name": "锁浪双钩",
+    "description": "锁浪双钩，适合hook流派修炼。",
+    "type": "equipment",
+    "subtype": "hook",
+    "weaponType": "hook",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11,
+      "hitRate": 2
+    },
+    "value": 1600,
+    "rarity": 3,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "序22《怒蛟水战》首次满通关",
+    "firstClaim": true
+  },
+  "jinggang_staff": {
+    "name": "精钢长棍",
+    "description": "精钢长棍，适合staff流派修炼。",
+    "type": "equipment",
+    "subtype": "staff",
+    "weaponType": "staff",
+    "equipmentSlot": "WEAPON",
+    "effects": {
+      "attack": 11,
+      "parry": 2
+    },
+    "value": 1600,
+    "rarity": 3,
+    "stackable": false,
+    "sellable": true,
+    "limit": -1,
+    "unit": "件",
+    "source": "序19《巴陵夜泊》首次满通关",
+    "firstClaim": true
   }
 }

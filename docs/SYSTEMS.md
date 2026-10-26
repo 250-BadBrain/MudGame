@@ -12,7 +12,7 @@
 |---|---|---|
 | 账号与角色 | `app/handlers_system_game.go` | storage: users/players |
 | 秘籍装备 | `manager/runtime_manager_player.go`（EquipSkill） | skills.json requirements.prerequisite |
-| 装备强化 | `manager/runtime_manager_enhance.go`（EnhanceItem） | Player.EnhancedItems（0-5级，费用递增） |
+| 装备强化 | `manager/runtime_manager_enhance.go`（EnhanceItem） | Player.EnhancedItems（0-5级，费用递增，仅当前合法装备生效） |
 | 称号系统 | `manager/runtime_manager_titles.go`（getPlayerTitles） | titles.json（33个旗标→称号映射） |
 | 马车跨城 | `manager/runtime_manager_player.go`（EnterWorld 收费100两） | worlds/*.json（8座城市） |
 | 多世界 | `manager/runtime_manager_player.go`（EnterWorld） | worlds/*.json |
@@ -21,7 +21,7 @@
 | 战斗 | `manager/runtime_manager_combat.go` | — |
 | 属性 | `model/attributes.go` + `manager/runtime_manager_effective.go` | — |
 | 秘籍装备 | `manager/runtime_manager_player.go`（EquipSkill）+ `runtime_manager_effective.go`（装备过滤） | skills.json requirements.prerequisite |
-| 技能与学习 | `manager/runtime_manager_player.go`（ProcessStatusTick） | `resources/skills.json` |
+| 技能与学习 | `manager/runtime_manager_player.go`（ProcessStatusTick） | `resources/skills.json`（38门首版，可扩展） |
 | 物品与背包 | `manager/runtime_manager_player.go`（UseItem/Buy/SellItem） | `resources/items.json` |
 | 商店 | 同上 + `manager/runtime_manager_static_npc.go` | NPC 模板 `shopItems` 字段 |
 | 状态与恢复 | `manager/runtime_manager_player.go`（ProcessStatusTick/Stop） | worlds 房间 `actions` |
@@ -62,7 +62,7 @@
 
 ### 3.2 章节链解锁
 
-order 1 永久开放；order N 需任一 order N-1 副本 100% 通关（读 `dungeon_cleared_*` 旗标，稀疏 order 自动跳号）。额外条件用显式 `unlockConditions`（type: flag，AND 语义，如拦江需两面旗）。锁定态由 `dungeonLockStateNoLock` 计算，前端展示 🔒 + lockHint。
+第一组开放；目标序号需最近存在的前一组任意副本100%结算（读 `dungeon_cleared_*`），缺号不自动开放。例如28需26；显式unlockConditions另行检查。额外条件用显式 `unlockConditions`（type: flag，AND 语义，如拦江需两面旗）。锁定态由 `dungeonLockStateNoLock` 计算，前端展示 🔒 + lockHint。
 
 ### 3.3 机关（puzzleActions）
 
@@ -98,21 +98,21 @@ Kill（决斗，至死）/ Spar（切磋，单次伤害上限 MaxHP/5，不可�
 **两层公式，实际生效的是第二层**：`NormalizeAttributes`（存档兜底）≠ `effectiveAttributesForPlayerNoLock`（真实：四维→衍生重组 + 技能加成 + 装备加成 + 虚弱减半）。NPC 不走此链路（模板直读）。
 
 - **改数值**：先改 formulas.md（含代码对照表定位），再动 `model/attributes.go` / `runtime_manager_effective.go` / `model/skill_progression.go`。
-- **注意**：技能加成字段固定集合（`*_per_10_levels` / `max_mp_per_level` / `meditate_recovery_per_10_levels` / `learning_invest_bonus_per_10_levels` / `initiative_per_10_levels` 等，见 applyLeveledBonus）；秘籍（ADVANCED）需 `requirements.prerequisite`（前置基本武功+门槛）且**装备后生效**（指令 equip_skill）——设计新技能加成前先确认字段被支持，否则加成静默无效。
+- **注意**：武学加成统一使用`*_per_100_levels`（见`applyLeveledBonus`）；ADVANCED需`requirements.prerequisite`与固定位置，满足资格并装备后才生效。新增字段须同步结算、文案和静态校验；未知字段会阻止资源加载。
 
 ## 6. 技能与学习系统
 
-基础技能（武馆/军府等世界 NPC 教）+ 进阶武学（type ADVANCED）。学习为会话式：进入 LEARNING 状态后**每 10 秒注入 10 潜能**，实际学习上限 = min(经验共享上限, 老师等级)。升级必然成功、无随机。
+基础技能（世界NPC免费教入门）+命名武学（type ADVANCED）。自主修炼进入LEARNING状态，每10秒投入最多10潜能，悟真篇可增加预算；同次预算可连续升级。基本功受经验上限约束，命名武学上限为min(经验上限, 当前根基等级)。升级必然成功、无随机，无老师永久等级上限。
 
-- **加基础技能**：skills.json + 老师 NPC 的 `skills` 映射。**武学总谱（流派/段位/老师/秘籍来源）见 [martial_arts_curriculum.md](../design/martial_arts_curriculum.md)**——新增任何武学前先对谱，避免破坏段位覆盖设计。
-- **加进阶武学（完整链路）**：① skills.json（type ADVANCED + bonuses + requirements.item=残页）；② items.json 加残页（usable + effects.learnSkill）；③ 来源副本 rewards.items 掉落；④ `ancient_scroll_keeper`（灰袍老者）skills 加传授上限 120。未参悟残页时 LearnSkill 被拒。
-- **宗师亲传机制零代码**：LearnSkill 原生支持副本 NPC 教学（defeat 模式 Boss 败而不死留在房内，teachSkills 配高上限即可，参考宋缺教天刀八诀 320）。
-- **秘籍装备规则**：秘籍（ADVANCED）必须装备到前置基本武功槽才生效（`Player.EquippedSkills`，槽位=prerequisite 技能 ID，同槽择一）；学习秘籍需前置基本武功达到门槛等级。指令 `equip_skill {skillId}`；属性计算 `applySkillBonusesNoLock` 过滤未装备的 ADVANCED。
+- **加基础技能**：skills.json + 老师 NPC 的 `skills` 映射。**武学总谱（流派/段位/老师/秘籍来源）见 [martial_arts_curriculum.md](design/martial_arts_curriculum.md)**——新增任何武学前先对谱，避免破坏段位覆盖设计。
+- **新增武学**：skills.json声明type/固定rarity/slot/weaponType、根基、teacherId或sourceDungeon、manualId；完整秘本绑定不可售，来源副本满结算投放。统一资格覆盖初学/修炼/装备/属性，静态校验引用闭环，数量不锁死38。
+- **传承与自修**：老师免费入门，后续PracticeSkill在安全公共房间每10秒按预算修炼，无老师永久上限。完整秘本失败不扣；五位置互斥，战斗须匹配主武器。
+- **武学装备规则**：`Player.ActiveArts`为internal/movement/guard/combat/study五个互斥位置，每处择一。指令`equip_skill {skillId}`、`unequip_skill {slot}`；基本功自动参与结算，combat位置的基本功及命名武学均须匹配当前主武器。换装不回复气血或内力。
 - **注意**：经验曲线因子与潜能档位是全局常量（`model/skill_progression.go`），改动即影响所有技能成长，必须先过 formulas.md §3。
 
 ## 7. 物品与背包
 
-items.json：`usable` + `effects`（`recoverHp` 回血 / `learnSkill` 参悟）、`equipmentSlot`（实际在用：WEAPON/BODY/FEET/HIDDEN_WEAPON；前端另预留 HEAD/NECKLACE/RING）、`bonuses`（装备加成）、`sellable`/`questItem`/`value`。UseItem：DEAD 拒绝、COMBAT 允许。
+items.json：usable/effects（recoverHp回复、learnSkill参悟）、equipmentSlot、weaponType、firstClaim、sellable/bind/value。暗器并入WEAPON，工具回背包；实际加成字段为effects。恢复品战斗可用并共享10秒冷却；秘本须空闲。
 
 - **注意**：删除物品前先全库搜索引用（副本 rewards、商店 shopItems、技能 requirements、剧情 giveItems）——孤儿物品由 gamedata 测试拦截；任务物品不可出售。
 

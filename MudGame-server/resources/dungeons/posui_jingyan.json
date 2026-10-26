@@ -219,8 +219,9 @@
     "potential": 260,
     "money": 100,
     "items": {
-      "jyg_zhanshentu_rubbing": 1,
-      "jingyan_longscale": 1
+      "jingyan_longscale": 1,
+      "simple_medicine": 2,
+      "dry_ration": 3
     },
     "flags": {
       "posui_jingyan_completed": true

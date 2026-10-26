@@ -80,7 +80,7 @@ export function useEntityActions({ room, currentPlayer, addLog, sendGameCommand,
     'HEALING': '疗伤',
     'MEDITATING': '打坐',
     'COMBAT': '战斗',
-    'LEARNING': '学习',
+    'LEARNING': '修炼',
     'GATHERING': '采集',
     'WORKING': '帮工'
   }
@@ -91,6 +91,7 @@ export function useEntityActions({ room, currentPlayer, addLog, sendGameCommand,
     if (actionType === 'stop' || actionType === 'leave_dungeon') return true
 
     const state = currentPlayer.value.state
+    if (actionType === 'use_item' && state === 'COMBAT') return true
 
     // 如果是死亡状态，仅允许复活（或其他特定逻辑，这里暂不处理，由后端或getMessage处理）
     if (state === 'DEAD') {

@@ -14,7 +14,7 @@
             <span class="item-name" :style="{ color: getItemColor(item.rarity) }">{{ item.name }}</span>
           </div>
           <div v-if="teachingMode" class="shop-item-price-row">
-            <span class="teacher-skill-level">等级：{{ item.level }}</span>
+            <span class="teacher-skill-level">免费入门，后续自主修炼</span>
           </div>
           <div v-else class="shop-item-price-row">
             <span class="item-price">{{ formatPrice(item.value) }}</span>
@@ -27,7 +27,7 @@
       <div class="buy-controls" v-if="selectedItem">
         <div class="selected-item-info">
           <span class="selected-item-name" :style="{ color: getItemColor(selectedItem.rarity) }">{{ selectedItem.name }}</span>
-          <span v-if="teachingMode" class="teacher-skill-level">等级：{{ selectedItem.level }}</span>
+          <span v-if="teachingMode" class="teacher-skill-level">已学武学可直接自主修炼</span>
           <span v-else class="selected-item-price">{{ formatPrice(selectedItem.value) }}</span>
         </div>
         <div class="amount-selector" v-if="selectedItem.stackable">

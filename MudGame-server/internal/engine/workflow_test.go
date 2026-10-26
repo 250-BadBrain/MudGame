@@ -611,8 +611,8 @@ func TestEffectiveAttributesUseSkillAndEquipmentBonuses(t *testing.T) {
 		if skill["id"] == "basic_neigong" {
 			if bonusText, ok := skill["bonusText"].([]string); ok {
 				for _, text := range bonusText {
-					hasMaxMPBonus = hasMaxMPBonus || strings.Contains(text, "内力上限 +40")
-					hasHPConversion = hasHPConversion || text == "转血 +30%"
+					hasMaxMPBonus = hasMaxMPBonus || strings.Contains(text, "内力上限 +200")
+					hasHPConversion = hasHPConversion || text == "已修内力转气血 +30个百分点"
 				}
 			}
 		}
@@ -680,11 +680,11 @@ func TestLearningContinuouslyConsumesPotentialAndRaisesSkill(t *testing.T) {
 	if err != nil {
 		t.Fatalf("process first learning settlement failed: %v", err)
 	}
-	if len(firstTick.PlayerMessages) != 1 || !strings.Contains(firstTick.PlayerMessages[0].Message, "等级提升了") {
+	if len(firstTick.PlayerMessages) != 1 || !strings.Contains(firstTick.PlayerMessages[0].Message, "修炼至") {
 		t.Fatalf("expected deterministic level-up feedback, got %+v", firstTick.PlayerMessages)
 	}
 	attrsAfterFirst, _ := GetAttributesView(h.repo, h.playerID)
-	if attrsAfterFirst["potential"].(int) != attrsBefore["potential"].(int)-1 {
+	if attrsAfterFirst["potential"].(int) != attrsBefore["potential"].(int)-10 {
 		t.Fatalf("expected one potential consumed, before=%v after=%v", attrsBefore["potential"], attrsAfterFirst["potential"])
 	}
 
@@ -699,14 +699,14 @@ func TestLearningContinuouslyConsumesPotentialAndRaisesSkill(t *testing.T) {
 			levelAfter = skill["level"].(int)
 		}
 	}
-	if levelAfter != levelBefore+3 {
+	if levelAfter != 20 || levelAfter <= levelBefore {
 		t.Fatalf("expected low-level skill to rise at every settlement, before=%d after=%d", levelBefore, levelAfter)
 	}
 	status, err := GetPlayerStatusView(h.repo, h.playerID)
 	if err != nil {
 		t.Fatalf("get learning status failed: %v", err)
 	}
-	if status["state"] != "LEARNING" {
+	if status["state"] != "IDLE" {
 		t.Fatalf("expected learning to continue after level up, got %+v", status)
 	}
 }

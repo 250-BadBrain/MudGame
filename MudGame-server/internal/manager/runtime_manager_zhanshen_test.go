@@ -191,10 +191,11 @@ func TestBalingFullFlow(t *testing.T) {
 	moveDungeonTestPlayer(t, r, playerID, ship)
 	bossID := dungeonNPCIDByTemplateInRoom(t, inst, ship, "db_zhang_xiu")
 	baseAttack := inst.NPCs[bossID].Attributes.Derived.Attack
+	baseHit := inst.NPCs[bossID].Attributes.Derived.HitRate
 	if _, err := r.Kill(playerID, bossID); err != nil {
 		t.Fatalf("engage zhang failed: %v", err)
 	}
-	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-14 {
+	if !inst.NPCs[bossID].WeaknessApplied || inst.NPCs[bossID].Attributes.Derived.Attack != baseAttack-24 || inst.NPCs[bossID].Attributes.Derived.HitRate != baseHit-26 {
 		t.Fatal("expected bridge fire to weaken zhang xiu")
 	}
 	r.mu.Lock()
@@ -221,8 +222,8 @@ func TestBalingFullFlow(t *testing.T) {
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["dongting_ruanjia"] != 1 || p.Backpack["dongting_page"] != 1 {
-		t.Fatalf("expected rewards, got ruanjia=%d page=%d", p.Backpack["dongting_ruanjia"], p.Backpack["dongting_page"])
+	if p.Backpack["dongting_ruanjia"] != 1 || p.Backpack["manual_dongting_xinf"] != 1 {
+		t.Fatalf("expected rewards, got ruanjia=%d page=%d", p.Backpack["dongting_ruanjia"], p.Backpack["manual_dongting_xinf"])
 	}
 	if !p.Flags["dungeon_cleared_datang_baling"] {
 		t.Fatal("expected cleared flag")
@@ -294,8 +295,8 @@ func TestSanhuaFullFlow(t *testing.T) {
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["sanhua_yuzhuo"] != 1 || p.Backpack["lingxu_page"] != 1 {
-		t.Fatalf("expected rewards, got yuzhuo=%d page=%d", p.Backpack["sanhua_yuzhuo"], p.Backpack["lingxu_page"])
+	if p.Backpack["sanhua_yuzhuo"] != 1 || p.Backpack["manual_lingxu_bu"] != 1 {
+		t.Fatalf("expected rewards, got yuzhuo=%d page=%d", p.Backpack["sanhua_yuzhuo"], p.Backpack["manual_lingxu_bu"])
 	}
 	if !p.Flags["dungeon_cleared_datang_sanhua"] {
 		t.Fatal("expected cleared flag")
@@ -497,7 +498,7 @@ func TestHoujuanFullFlow(t *testing.T) {
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["poxu_page"] != 1 || !p.Flags["dungeon_cleared_posui_houjuan"] {
-		t.Fatalf("expected rewards, got page=%d flag=%v", p.Backpack["poxu_page"], p.Flags["dungeon_cleared_posui_houjuan"])
+	if p.Backpack["manual_poxu_zhi"] != 1 || !p.Flags["dungeon_cleared_posui_houjuan"] {
+		t.Fatalf("expected rewards, got page=%d flag=%v", p.Backpack["manual_poxu_zhi"], p.Flags["dungeon_cleared_posui_houjuan"])
 	}
 }

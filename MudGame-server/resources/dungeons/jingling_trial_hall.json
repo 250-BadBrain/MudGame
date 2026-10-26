@@ -99,7 +99,8 @@
     "potential": 1200,
     "money": 800,
     "items": {
-      "kangshi_remnant": 1
+      "kangshi_remnant": 1,
+      "manual_jingang_buhuai": 1
     }
   }
 }

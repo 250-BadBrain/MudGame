@@ -56,9 +56,8 @@
       "nextState": "done",
       "message": "金帐后的私库铁箱里，竟压着一册魔门刀谱——赫连霸抢遍商路，连修罗刀法的残页都没放过。",
       "repeatMessage": "私库已被你翻遍。",
-      "giveItems": {
-        "xiulou_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 300
     },
     "search_warehouse": {
       "label": "搜查旧库",
@@ -72,9 +71,8 @@
       "nextState": "done",
       "message": "你仔细搜查了此处，从暗格里翻出一卷锦缎包裹的残页。",
       "repeatMessage": "已被你搜遍。",
-      "giveItems": {
-        "taiyi_xiajuan_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 400
     }
   },
   "rooms": {
@@ -206,7 +204,8 @@
     "potential": 760,
     "money": 440,
     "items": {
-      "langwang_dao": 1
+      "langwang_dao": 1,
+      "manual_xiulou_daofa": 1
     }
   }
 }

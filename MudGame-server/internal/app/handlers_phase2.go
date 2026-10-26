@@ -429,3 +429,26 @@ func (s *Server) handleChatPublic(conn *websocket.Conn, cmd protocol.CommandMess
 	payload := protocol.NewResult(protocol.TypeChat, "public", true, map[string]interface{}{"senderName": sender, "message": message, "roomId": res.Room["id"]}, nil)
 	s.broadcastToRoom(toString(res.Room["id"]), payload, "")
 }
+
+func (s *Server) handleGamePractice(conn *websocket.Conn, cmd protocol.CommandMessage) {
+	id, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	err := s.repo.PracticeSkill(id, toString(cmd.Args["skillId"]))
+	s.replyCommand(conn, "practice", err, map[string]interface{}{"message": "你开始自主修炼。"}, nil)
+	if err == nil {
+		s.emitRoomUpdateByPlayer(id)
+	}
+}
+func (s *Server) handleGameUnequipSkill(conn *websocket.Conn, cmd protocol.CommandMessage) {
+	id, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	message, err := s.repo.UnequipSkill(id, toString(cmd.Args["slot"]))
+	s.replyCommand(conn, "unequip_skill", err, map[string]interface{}{"message": message}, nil)
+	if err == nil {
+		s.emitRoomUpdateByPlayer(id)
+	}
+}

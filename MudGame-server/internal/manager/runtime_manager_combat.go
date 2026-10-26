@@ -189,10 +189,16 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 	npcAttrs := model.BuildEffectiveAttributes(dungeonTarget.Attributes)
 	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, npcAttrs, attacker.CharacterName, playerAttrs, "KILL")
 
-	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &dungeonTarget.Attributes.Resources.HP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages)
+	yieldAt := 0
+	if dungeonTarget.CombatMode == "defeat" && combatType == "KILL" {
+		yieldAt = max(1, dungeonTarget.Attributes.Resources.MaxHP/4)
+	}
+	combatHP := max(0, dungeonTarget.Attributes.Resources.HP-yieldAt)
+	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &combatHP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages)
+	dungeonTarget.Attributes.Resources.HP = combatHP + yieldAt
 	updatedRoom[roomID] = true
 
-	if dungeonTarget.Attributes.Resources.HP == 0 {
+	if combatHP == 0 {
 		defeatedName := dungeonTarget.Name
 		defeatOnly := dungeonTarget.CombatMode == "defeat"
 		progress := 0
@@ -355,8 +361,12 @@ func applyPairedStrikesNoLock(aHP, bHP *int, strikeA, strikeB combatStrikeResult
 }
 
 func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attackerAttrs model.EffectiveAttributes, defenderName string, defenderAttrs model.EffectiveAttributes, combatType string) combatStrikeResult {
+	floatRoll, intRoll := rand.Float64, rand.Intn
+	if r.combatRandom != nil {
+		floatRoll, intRoll = r.combatRandom.Float64, r.combatRandom.Intn
+	}
 	hitChance := boundedChance(attackerAttrs.HitRate, defenderAttrs.Dodge)
-	if rand.Float64() > hitChance {
+	if floatRoll() > hitChance {
 		return combatStrikeResult{Damage: 0, Message: attackerName + "发起攻击，但被" + defenderName + "躲开了！"}
 	}
 
@@ -370,16 +380,16 @@ func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attacker
 		base = 2
 	}
 
-	fluctuation := 90 + rand.Intn(21)
+	fluctuation := 90 + intRoll(21)
 	damage := base * fluctuation / 100
 
-	crit := rand.Intn(100) < attackerAttrs.CritRate
+	crit := floatRoll() < min(25, max(0, attackerAttrs.CritRate))/100
 	if crit {
 		damage *= 2
 	}
 
-	parryChance := boundedChance(defenderAttrs.Parry, attackerAttrs.HitRate)
-	parried := rand.Float64() < parryChance
+	parryChance := boundedParryChance(defenderAttrs.Parry, attackerAttrs.HitRate)
+	parried := floatRoll() < parryChance
 	if parried {
 		damage /= 2
 	}
@@ -402,11 +412,18 @@ func boundedChance(attackerStat, defenderStat int) float64 {
 		return 0.7
 	}
 	raw := float64(attackerStat) / float64(den)
-	if raw < 0.45 {
-		return 0.45
+	if raw < 0.15 {
+		return 0.15
 	}
 	if raw > 0.95 {
 		return 0.95
 	}
 	return raw
+}
+
+func boundedParryChance(parry, hit int) float64 {
+	if parry <= 0 {
+		return 0
+	}
+	return min(.60, max(0, float64(parry)/float64(parry+max(0, hit))))
 }

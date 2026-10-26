@@ -54,9 +54,11 @@ func (r *RuntimeManager) GetAttributes(playerID string) (map[string]interface{},
 		"fame":               eff.Fame, "notoriety": eff.Notoriety, "authority": eff.Authority, "credit": eff.Credit,
 		"base": a.Base, "growth": a.Growth, "resources": a.Resources,
 		"derived": a.Derived, "social": a.Social, "resistances": a.Resistances,
-		"titles":  getPlayerTitles(p),
+		"titles": getPlayerTitles(p),
 		// 虚弱剩余秒数（0 = 无虚弱），前端据此展示虚弱状态
 		"weakRemainingSeconds": p.WeakRemainingSeconds(time.Now().Unix()),
+		"recoveryItemReadyAt":  p.RecoveryItemReadyAt,
+		"serverTime":           time.Now().UnixMilli(),
 	}, nil
 }
 
@@ -84,6 +86,7 @@ func (r *RuntimeManager) GetBackpack(playerID string) ([]map[string]interface{},
 			"unit": def.Unit, "count": count, "equipmentSlot": def.EquipmentSlot, "sellable": def.Sellable,
 			"type": def.Type, "subtype": def.Subtype, "bind": def.Bind, "questItem": def.QuestItem,
 			"usable": def.Usable, "effects": def.Effects, "source": def.Source,
+			"recoveryItemReadyAt": p.RecoveryItemReadyAt, "serverTime": time.Now().UnixMilli(),
 		})
 	}
 	sort.Slice(items, func(i, j int) bool { return items[i]["name"].(string) < items[j]["name"].(string) })
@@ -102,13 +105,10 @@ func (r *RuntimeManager) GetSkills(playerID string) ([]map[string]interface{}, e
 	if !ok {
 		return nil, exception.ErrPlayerNotFound
 	}
-	out := make([]map[string]interface{}, 0, len(p.Skills))
-	levelCap := model.SkillLevelCapForExperience(p.Attributes.Experience)
-	for id, level := range p.Skills {
-		def, ok := fileSkills[id]
-		if !ok {
-			continue
-		}
+	out := make([]map[string]interface{}, 0, len(fileSkills))
+	for id, def := range fileSkills {
+		level := p.Skills[id]
+		levelCap := skillTrainingCap(p, def)
 		targetLevel := level + 1
 		nextLevelPotential := model.SkillPotentialForTargetLevel(targetLevel)
 		learningProgress := p.SkillLearningProgress[id]
@@ -121,10 +121,19 @@ func (r *RuntimeManager) GetSkills(playerID string) ([]map[string]interface{}, e
 			"bonuses": def.Bonuses, "bonusText": skillBonusText(def.Bonuses, level), "requirements": def.Requirements,
 			"levelCap": levelCap, "nextLevelPotential": nextLevelPotential, "learningProgress": learningProgress,
 			"isLearning": p.State == "LEARNING" && p.LearningSkillID == id,
-			"equipped":   def.Type == "ADVANCED" && skillPrerequisiteID(def) != "" && p.EquippedSkills[skillPrerequisiteID(def)] == id,
+			"equipped":   def.Type == "ADVANCED" && p.ActiveArts[def.Slot] == id,
+			"slot":       def.Slot, "weaponType": def.WeaponType, "source": def.Source, "active": skillActiveReason(p, def) == "", "activeReason": skillActiveReason(p, def), "requirementHint": requirementHint(p, def), "requirementText": skillRequirementText(def), "referenceBonusText": skillBonusText(def.Bonuses, 100),
 		})
 	}
-	sort.Slice(out, func(i, j int) bool { return out[i]["id"].(string) < out[j]["id"].(string) })
+	sort.Slice(out, func(i, j int) bool {
+		if out[i]["rarity"] != out[j]["rarity"] {
+			return out[i]["rarity"].(int) < out[j]["rarity"].(int)
+		}
+		if (out[i]["level"].(int) > 0) != (out[j]["level"].(int) > 0) {
+			return out[i]["level"].(int) > 0
+		}
+		return out[i]["id"].(string) < out[j]["id"].(string)
+	})
 	return out, nil
 }
 
@@ -635,6 +644,7 @@ func (r *RuntimeManager) EquipItem(playerID, itemID string) error {
 		delete(p.Backpack, itemID)
 	}
 	p.Equipment[slot] = itemID
+	clampPlayerCurrentResources(p)
 	return r.savePlayers(players)
 }
 
@@ -668,18 +678,14 @@ func (r *RuntimeManager) UnequipItem(playerID, slot string) error {
 	}
 	p.Backpack[itemID] += 1
 	delete(p.Equipment, slot)
+	clampPlayerCurrentResources(p)
 	return r.savePlayers(players)
 }
 
 func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-
 	players, err := r.loadPlayers()
-	if err != nil {
-		return err
-	}
-	staticRooms, err := r.loadRooms()
 	if err != nil {
 		return err
 	}
@@ -688,84 +694,47 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 		return exception.ErrPlayerNotFound
 	}
 	if p.State != "IDLE" {
-		return errors.New("busy_state")
+		return errors.New("busy")
 	}
-	if npcID == "" || skillID == "" {
-		return errors.New("missing_params")
+	def, exists := fileSkills[skillID]
+	if !exists {
+		return errors.New("skill_not_found")
 	}
-	if p.Attributes.Potential <= 0 {
-		return errors.New("no_potential")
+	if p.Skills[skillID] > 0 {
+		if err := startPracticeNoLock(p, skillID); err != nil {
+			return err
+		}
+		return r.savePlayers(players)
 	}
-	room, ok := r.roomByIDNoLock(p.RoomID, staticRooms)
-	if !ok {
+	rooms, err := r.loadRooms()
+	if err != nil {
+		return err
+	}
+	room, exists := r.roomByIDNoLock(p.RoomID, rooms)
+	if !exists {
 		return exception.ErrRoomNotFound
 	}
-	npcInRoom := false
-	for _, id := range room.NPCIDs {
-		if id == npcID {
-			npcInRoom = true
-			break
-		}
-	}
-	if !npcInRoom {
-		return errors.New("npc_not_found")
-	}
-	teacherSkillLevel := 0
-	if dnpc, _, ok := r.dungeonNPCInRoomNoLock(room.ID, npcID); ok {
-		var taught bool
-		teacherSkillLevel, taught = dnpc.Skills[skillID]
-		if !taught || teacherSkillLevel <= 0 {
-			return errors.New("skill_not_taught")
-		}
-	} else {
-		npc, ok := fileNpcs[npcID]
-		if !ok {
-			return errors.New("npc_not_found")
-		}
-		var taught bool
-		teacherSkillLevel, taught = npc.Skills[skillID]
-		if !taught || teacherSkillLevel <= 0 {
-			return errors.New("skill_not_taught")
-		}
-	}
-	skillDef, ok := fileSkills[skillID]
-	if !ok {
+	teacher, exists := r.staticNPCInRoomNoLock(room, npcID)
+	if !exists || teacher.Skills[skillID] < 1 {
 		return errors.New("skill_not_taught")
 	}
-	// 进阶武学（隐秘传承）必须先通过残页参悟入门，老师只负责传授深造
-	if skillDef.Type == "ADVANCED" && p.Skills[skillID] < 1 {
-		return errors.New("你尚未参悟" + skillDef.Name + "的传承残页，无从学起。")
+	if def.Type == "ADVANCED" && def.TeacherID != npcID {
+		return errors.New("须取得完整秘本后参悟入门")
 	}
-	// 秘籍学习的前置门槛：对应基本武功必须达到指定等级（见 docs/design/martial_arts_curriculum.md 段位模型）
-	if reqSkill := skillPrerequisiteID(skillDef); reqSkill != "" {
-		if reqLevel := skillPrerequisiteLevel(skillDef); p.Skills[reqSkill] < reqLevel {
-			if base, ok := fileSkills[reqSkill]; ok {
-				return errors.New("你的" + base.Name + "尚未练到" + strconv.Itoa(reqLevel) + "级，无从修习" + skillDef.Name + "。")
-			}
-			return errors.New("skill_prerequisite_not_met")
-		}
+	if p.Flags == nil {
+		p.Flags = map[string]bool{}
 	}
-	if p.Skills[skillID] >= teacherSkillLevel {
-		return errors.New("你的" + skillDef.Name + "已经不输你师傅了")
+	// Mark only on the cloned transaction; failed prerequisites are never saved.
+	if def.TeacherID != "" {
+		p.Flags["martial_taught_"+skillID] = true
 	}
-	if p.Skills[skillID] >= model.SkillLevelCapForExperience(p.Attributes.Experience) {
-		return errors.New("skill_level_capped")
+	if err := skillRequirementError(p, def); err != nil {
+		return err
 	}
 	if p.Skills == nil {
 		p.Skills = map[string]int{}
 	}
-	if p.SkillLearningProgress == nil {
-		p.SkillLearningProgress = map[string]int{}
-	}
-	// 新学技能立即注册 0 级条目，学习期间面板可见（首次 10 秒结算后升 1 级）
-	if _, exists := p.Skills[skillID]; !exists {
-		p.Skills[skillID] = 0
-	}
-	p.State = "LEARNING"
-	p.StateTickCountdown = stateSettlementSeconds
-	p.LearningSkillID = skillID
-	p.LearningTeacherID = npcID
-	p.LearningTeacherLevel = teacherSkillLevel
+	p.Skills[skillID] = 1
 	return r.savePlayers(players)
 }
 
@@ -774,7 +743,6 @@ func (r *RuntimeManager) LearnSkill(playerID, npcID, skillID string) error {
 func (r *RuntimeManager) EquipSkill(playerID, skillID string) (string, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-
 	players, err := r.loadPlayers()
 	if err != nil {
 		return "", err
@@ -783,29 +751,29 @@ func (r *RuntimeManager) EquipSkill(playerID, skillID string) (string, error) {
 	if !ok {
 		return "", exception.ErrPlayerNotFound
 	}
-	def, ok := fileSkills[skillID]
-	if !ok {
-		return "", errors.New("skill_not_found")
+	if p.State != "IDLE" {
+		return "", errors.New("busy")
 	}
-	if def.Type != "ADVANCED" {
-		return "", errors.New(def.Name + "是基本武功，无需装备。")
+	def, exists := fileSkills[skillID]
+	if !exists || def.Type != "ADVANCED" {
+		return "", errors.New("请选择已学的命名武学")
 	}
 	if p.Skills[skillID] < 1 {
-		return "", errors.New("你尚未学会" + def.Name + "，无从装备。")
+		return "", errors.New("尚未学会这门武功")
 	}
-	slot := skillPrerequisiteID(def)
-	if slot == "" {
-		return "", errors.New(def.Name + "没有对应的基本武功槽位。")
-	}
-	base := fileSkills[slot]
-	if p.EquippedSkills == nil {
-		p.EquippedSkills = map[string]string{}
-	}
-	p.EquippedSkills[slot] = skillID
-	if err := r.savePlayers(players); err != nil {
+	if err := skillRequirementError(p, def); err != nil {
 		return "", err
 	}
-	return "你将" + def.Name + "融汇于" + base.Name + "之中。", nil
+	if p.ActiveArts == nil {
+		p.ActiveArts = map[string]string{}
+	}
+	p.ActiveArts[def.Slot] = skillID
+	clampPlayerCurrentResources(p)
+	message := "你装备了" + def.Name + "。"
+	if reason := skillActiveReason(p, def); reason != "" {
+		message += reason + "，暂未生效。"
+	}
+	return message, r.savePlayers(players)
 }
 
 func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]interface{}, error) {
@@ -992,6 +960,7 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 			delete(p.Backpack, itemID)
 		}
 	}
+	p.Money += action.GiveMoney
 	for itemID, amount := range action.GiveItems {
 		if amount <= 0 {
 			continue
@@ -1157,12 +1126,18 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 
 // insightSkillPageNoLock 参悟传承残页：消耗残页，对应进阶武学升至 1 级（入门）
 func (r *RuntimeManager) insightSkillPageNoLock(players map[string]*model.Player, p *model.Player, itemID, skillID string) (string, error) {
+	if p.State != "IDLE" {
+		return "", errors.New("busy")
+	}
 	skillDef, ok := fileSkills[skillID]
 	if !ok {
 		return "", errors.New("skill_not_found")
 	}
 	if p.Skills[skillID] > 0 {
 		return "", errors.New("你已参悟过" + skillDef.Name + "，无需重复参悟。")
+	}
+	if err := skillRequirementError(p, skillDef); err != nil {
+		return "", err
 	}
 	p.Backpack[itemID] -= 1
 	if p.Backpack[itemID] <= 0 {
@@ -1175,7 +1150,7 @@ func (r *RuntimeManager) insightSkillPageNoLock(players map[string]*model.Player
 	if err := r.savePlayers(players); err != nil {
 		return "", err
 	}
-	return "你屏息凝神，逐字参悟残页上的传承，初步领悟了" + skillDef.Name + "。", nil
+	return "你屏息凝神，逐字参悟完整秘本上的传承，初步领悟了" + skillDef.Name + "。", nil
 }
 
 func (r *RuntimeManager) UseItem(playerID, itemID string) (string, error) {
@@ -1219,6 +1194,11 @@ func (r *RuntimeManager) UseItem(playerID, itemID string) (string, error) {
 	if p.Attributes.Resources.HP >= effectiveMaxHP {
 		return "", errors.New("hp_full")
 	}
+	now := time.Now().UnixMilli()
+	if p.RecoveryItemReadyAt > now {
+		return "", errors.New("恢复品尚在冷却中，请稍候")
+	}
+	p.RecoveryItemReadyAt = now + 10000
 	p.Backpack[itemID] -= 1
 	if p.Backpack[itemID] <= 0 {
 		delete(p.Backpack, itemID)
@@ -1587,8 +1567,8 @@ func (r *RuntimeManager) settleWorldLaborNoLock(p *model.Player, result *model.C
 			}
 		default:
 			if rand.Intn(100) < 60 {
-				itemID = "bronze_fragment"
-				itemName = "古铜残片"
+				itemID = "herb"
+				itemName = "止血草"
 			}
 		}
 		if p.Backpack == nil {
@@ -1669,13 +1649,13 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 		case "MEDITATING":
 			effTick := effectiveAttributesForPlayerNoLock(p)
 			effectiveMaxMP := effTick.MaxMP
-			if p.Attributes.Resources.MP < p.Attributes.Resources.TrainedMaxMP {
+			if p.Attributes.Resources.MP < effTick.TrainedMaxMP {
 				beforeMP := p.Attributes.Resources.MP
 				// 打坐回复量与基本内功等级挂钩，秘籍（如混元功）装备后追加恢复（见公式文档 1.4 / 3.3）
 				recovery := 15 + p.Skills["basic_neigong"]/2 + effTick.MeditateRecoveryBonus
 				p.Attributes.Resources.MP += recovery
-				if p.Attributes.Resources.MP > p.Attributes.Resources.TrainedMaxMP {
-					p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
+				if p.Attributes.Resources.MP > effTick.TrainedMaxMP {
+					p.Attributes.Resources.MP = effTick.TrainedMaxMP
 				}
 				recovered := p.Attributes.Resources.MP - beforeMP
 				if recovered > 0 {
@@ -1692,7 +1672,7 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 				continue
 			}
 			beforeMaxMP := p.Attributes.Resources.TrainedMaxMP
-			p.Attributes.Resources.TrainedMaxMP += 1
+			p.Attributes.Resources.TrainedMaxMP += max(1, (p.Skills["basic_neigong"]+9)/10)
 			if p.Attributes.Resources.TrainedMaxMP > effectiveMaxMP {
 				p.Attributes.Resources.TrainedMaxMP = effectiveMaxMP
 			}
@@ -1703,85 +1683,10 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 			}
 			updatedRoom[roomID] = true
 		case "LEARNING":
-			skillID := p.LearningSkillID
-			skillDef, ok := fileSkills[skillID]
-			if !ok || skillID == "" {
-				stopLearningNoLock(p)
-				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你失去了学习的头绪，只得停了下来。"})
-				updatedRoom[roomID] = true
-				continue
-			}
-			if p.LearningTeacherLevel <= 0 {
-				if teacher, exists := fileNpcs[p.LearningTeacherID]; exists {
-					p.LearningTeacherLevel = teacher.Skills[skillID]
-				} else if teacher, exists := r.dungeonNPCByIDNoLock(p.LearningTeacherID); exists {
-					p.LearningTeacherLevel = teacher.Skills[skillID]
-				}
-			}
-			if p.LearningTeacherLevel <= 0 {
-				stopLearningNoLock(p)
-				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你已无法继续向这位老师学习" + skillDef.Name + "。"})
-				updatedRoom[roomID] = true
-				continue
-			}
-			levelCap := model.SkillLevelCapForExperience(p.Attributes.Experience)
-			if p.Skills[skillID] >= p.LearningTeacherLevel {
-				stopLearningNoLock(p)
-				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你的" + skillDef.Name + "已经不输你师傅了"})
-				updatedRoom[roomID] = true
-				continue
-			}
-			if p.Skills[skillID] >= levelCap {
-				stopLearningNoLock(p)
-				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你的经验尚不足以继续领悟" + skillDef.Name + "，停止了学习。"})
-				updatedRoom[roomID] = true
-				continue
-			}
-			if p.Attributes.Potential <= 0 {
-				stopLearningNoLock(p)
-				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: "你的潜能已经耗尽，无法继续学习" + skillDef.Name + "。"})
-				updatedRoom[roomID] = true
-				continue
-			}
-			if p.SkillLearningProgress == nil {
-				p.SkillLearningProgress = map[string]int{}
-			}
-			targetLevel := p.Skills[skillID] + 1
-			requiredPotential := model.SkillPotentialForTargetLevel(targetLevel)
-			remainingPotential := requiredPotential - p.SkillLearningProgress[skillID]
-			if remainingPotential <= 0 {
-				remainingPotential = requiredPotential
-				p.SkillLearningProgress[skillID] = 0
-			}
-			// 学习注入上限可被读书秘籍（如悟真篇）按装备规则提升（见公式文档 3.3 学习效率加成）
-			investCap := model.LearningPotentialPerTick + effectiveAttributesForPlayerNoLock(p).LearningInvestBonus
-			spentPotential := min(investCap, p.Attributes.Potential, remainingPotential)
-			p.Attributes.Potential -= spentPotential
-			p.SkillLearningProgress[skillID] += spentPotential
-			if p.SkillLearningProgress[skillID] >= requiredPotential {
-				p.SkillLearningProgress[skillID] = 0
-				p.Skills[skillID]++
-				message := "你的" + skillDef.Name + "等级提升了，现在是" + strconv.Itoa(p.Skills[skillID]) + "级。"
-				if p.Skills[skillID] >= p.LearningTeacherLevel {
-					stopLearningNoLock(p)
-					message += "你的" + skillDef.Name + "已经不输你师傅了"
-				} else if p.Skills[skillID] >= levelCap {
-					stopLearningNoLock(p)
-					message += "你已达到当前经验所能领悟的上限。"
-				} else if p.Attributes.Potential <= 0 {
-					stopLearningNoLock(p)
-					message += "你的潜能已经耗尽。"
-				}
-				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: message})
-			} else {
-				message := "你对" + skillDef.Name + "略有所悟。"
-				if p.Attributes.Potential <= 0 {
-					stopLearningNoLock(p)
-					message += "你的潜能已经耗尽，停止了学习。"
-				}
-				result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: message})
-			}
+			message := settlePracticeNoLock(p)
+			result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{PlayerID: p.ID, Message: message})
 			updatedRoom[roomID] = true
+
 		}
 	}
 

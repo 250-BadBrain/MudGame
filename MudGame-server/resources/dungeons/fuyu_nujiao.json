@@ -38,9 +38,8 @@
       "nextState": "done",
       "message": "聚义庭武库的暗格里压着一页发黄功谱——怒蛟帮先辈抄录的守御法门《铁壁功》。",
       "repeatMessage": "武库已被你翻遍，暗格空空。",
-      "giveItems": {
-        "tiebi_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 250
     }
   },
   "rooms": {

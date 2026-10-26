@@ -120,6 +120,8 @@ type RuntimeRepository interface {
 	EquipItem(playerID, itemID string) error
 	UnequipItem(playerID, slot string) error
 	LearnSkill(playerID, npcID, skillID string) error
+	PracticeSkill(playerID, skillID string) error
+	UnequipSkill(playerID, slot string) (string, error)
 	EquipSkill(playerID, skillID string) (string, error)
 	EnhanceItem(playerID, itemID string) (string, error)
 	UseItem(playerID, itemID string) (string, error)

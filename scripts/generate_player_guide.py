@@ -27,8 +27,8 @@ CHAIN_INTROS = {
     "yangzhou_caoyun": "盐帮、唐门与运河支线被归入这一目录。当前六章主要是四房战斗与开门机关；并不自动接取世界任务。",
 }
 NOTES = {
-    "abandoned_temple_rain": "翻检刺客遗物是可选动作，现场给《伏虎劲》残页；只杀完必需目标可到 100%，但会错过这页传承。",
-    "datang_changshengjue": "当前有两处配置《长生诀》残页：沉船浅滩打捞现场给 1 页，100% 离开结算再给 1 页。不打捞也能取得结算残页；想看完整支线可先打捞。",
+    "abandoned_temple_rain": "翻检刺客遗物为可选心得与钱币奖励；伏虎劲改由河洛武馆赵横江传授，不再从此处取残页。",
+    "datang_changshengjue": "打捞给止血草4、干粮2；满结算给金创药2、干粮1。此处不再给长生诀，完整传承位于序47《行宫惊变》。",
     "posui_jingyan": "初次按「观察穹顶星图 → 对照殿壁星官壁画 → 转动石门星盘 → 向左转动星盘」完成机关。选右会弹回先前状态，需要再对照壁画后重选；开门的同时获得削弱战神幻影的旗标。",
     "datang_jingling": "东门强攻和水门护民的目标属于同一独占组，完成任一条即可计满该组；无需把两条路都杀一遍。",
     "datang_tiandao": "「以刚为纲」「以灵为要」都能完成悟刀并得到破招旗标。「接三刀」是剧情称呼；战斗仍由普通战斗 tick 推进至宋缺认负。",
@@ -190,20 +190,22 @@ class Guide:
         names = {"post_strength": "后天臂力", "post_constitution": "后天根骨", "post_agility": "后天身法", "post_perception": "后天悟性", "post_willpower": "后天心志", "hit_rate": "命中", "crit_rate": "暴击率", "max_mp": "内力绝对上限", "max_hp": "气血上限", "meditate_recovery": "打坐回复", "learning_invest_bonus": "学习结算投入上限", "intelligence_check": "悟性检定"}
         values = []
         for key, value in bonuses.items():
-            base = key.replace("_per_10_levels", "").replace("_per_level", "")
+            base = key.replace("_per_100_levels", "").replace("_per_10_levels", "").replace("_per_level", "")
             label = names.get(base, ATTRIBUTES.get(base, base))
-            if key.endswith("_per_10_levels"):
+            if key.endswith("_per_100_levels"):
+                values.append("100级基线 " + label + "+" + str(value))
+            elif key.endswith("_per_10_levels"):
                 values.append("每 10 级 " + label + "+" + str(value))
             elif key.endswith("_per_level"):
                 values.append("每级 " + label + "+" + str(value))
             elif key == "trained_mp_to_max_hp_percent":
-                values.append("已修内力上限的 " + str(round(value * 100)) + "% 转为气血上限")
+                values.append(("固定转血" if value >= .3 else "100级额外转血封顶") + str(round(value * 100)) + "个百分点")
             else:
                 values.append(key + "=" + str(value))
         return "；".join(values) or "未配置额外加成"
 
     def rewards(self, rewards):
-        parts = [label + " " + str(rewards.get(key, 0)) for key, label in (("experience", "经验"), ("potential", "潜能"), ("money", "银两"))]
+        parts = [label + " " + str(rewards.get(key, 0)) for key, label in (("experience", "经验"), ("potential", "潜能"), ("money", "钱币"))]
         if rewards.get("items"):
             parts.append(self.items_text(rewards["items"]))
         if rewards.get("reputations"):
@@ -212,13 +214,14 @@ class Guide:
         return "；".join(parts)
 
     def unlock(self, dungeon, current):
-        previous = [d for d in self.dungeons if d["order"] == dungeon["order"] - 1]
+        previous_order = max((d["order"] for d in self.dungeons if d["order"] < dungeon["order"]), default=0)
+        previous = [d for d in self.dungeons if d["order"] == previous_order]
         if dungeon["order"] <= 1:
             result = "初始开放，无前置副本。"
         elif previous:
             result = "先将 " + " 或 ".join(self.dungeon_link(d, current) for d in previous) + " 任一副本 100% 完成并离开结算。"
         else:
-            result = "当前实际无上一序号前置：不存在序号 " + str(dungeon["order"] - 1) + "，代码不会自动回看更早章节。"
+            result = "初始组无前置；前一组序号为 " + str(dungeon["order"] - 1) + "。"
         for condition in dungeon.get("unlockConditions", []):
             if condition["type"] == "flag":
                 sources = self.flags.get(condition["targetId"], [])
@@ -371,6 +374,8 @@ class Guide:
             lines.append("")
         lines += ["### 剧情全文与分支结果（剧透）", "", "<details>", "<summary>展开本副本当前已写出的台词与机关结果</summary>", ""]
         for aid, action in dungeon.get("puzzleActions", {}).items():
+            if action.get("giveMoney"):
+                lines += ["成功操作的钱币奖励：" + str(action["giveMoney"]), ""]
             lines += ["**" + action.get("label", aid) + "**" + ("（当前未接入口）" if aid in unbound else ""), ""]
             script = self.scripts.get(did, {}).get(aid, {})
             for text in script.get("lines", []) or [action.get("message", "")]:
@@ -389,7 +394,7 @@ class Guide:
             did_static = self.npcs[npc].get("dialogueId")
             if did_static in self.dialogues and npc not in bound_npcs:
                 lines += ["**" + self.npc_name(npc) + "的额外交谈**", ""] + self.dialogue_lines(did_static, current, anchor=False)
-        lines += ["</details>", "", "**结束方式**：确认必需目标全满、现场残页已取，再点击「离开副本」结算。只有 100% 结算才记录通关、发结算物品并解锁下一序号。", "", "---", ""]
+        lines += ["</details>", "", "**结束方式**：确认必需目标全满、现场可选奖励已取，再点击「离开副本」结算。只有 100% 结算才记录通关、发结算物品并解锁下一序号。", "", "---", ""]
         return lines
 
     def story_pages(self):
@@ -441,8 +446,8 @@ class Guide:
     def world_page(self):
         current = "worlds.md"
         lines = ["# 八城探索、生活点与全部常驻交谈", "", "[返回玩家入口](README.md) · [任务攻略](quests.md) · [武学与收藏](collections.md)", "",
-                 "通过右侧「图」选择城市进入，跨城消耗 100 两；同城不收费。以下方向都从该城出生点计算，可以返回出生点重新按路线走。公共世界不靠杀 NPC 产出经验和掉落，剧情人物、商人和老师应优先交谈、请教或交易。", "",
-                 '<a id="labor"></a>', "", "## 不打副本时能做什么", "", "- 「帮工」持续 60 秒，完成给 20 两、2 潜能。", "- 「采集」持续 30 秒，完成给 4 经验、6 潜能，再给材料或干粮。扬州城郊苇荡 60% 芦根、洛阳芦苇滩 60% 止血草，其余地点当前默认 60% 古铜残片；各处另外 40% 为干粮。巴蜀药田的文字虽写药田，实际也走默认古铜残片分支。", "- 停止会放弃本次劳作收益；学习、打坐、疗伤等忙碌状态先停止再做其他事。", "- 与老师「请教」修行，与商人「交易」，携带材料后反复交谈可触发已有合成。", ""]
+                 "通过右侧「图」选择城市进入，跨城消耗100钱币（1两银）；同城不收费。以下方向都从该城出生点计算，可以返回出生点重新按路线走。公共世界不靠杀 NPC 产出经验和掉落，剧情人物、商人和老师应优先交谈、请教或交易。", "",
+                 '<a id="labor"></a>', "", "## 不打副本时能做什么", "", "- 「帮工」持续 60 秒，完成给20钱币、2潜能。", "- 「采集」持续 30 秒，完成给 4 经验、6 潜能，再给材料或干粮。扬州苇荡60%芦根，其余地点默认60%止血草；各处另外40%干粮。普通采集不再给古铜残片。", "- 停止会放弃本次劳作收益；学习、打坐、疗伤等忙碌状态先停止再做其他事。", "- 与老师「请教」入门，已学武功从「技」自主修炼；与商人「交易」，携带材料后反复交谈可触发已有合成。", ""]
         shown_dialogues = set()
         for world in self.worlds:
             lines += [f'<a id="world-{world["id"]}"></a>', "", "## " + world["name"], "", world.get("description", ""), "", "出生点：**" + world["rooms"][world["spawnRoomId"]]["name"] + "**。", ""]
@@ -466,7 +471,7 @@ class Guide:
                     definition = self.npcs[npc]
                     lines += ["**" + self.npc_name(npc) + "**" + ("（" + definition["title"] + "）" if definition.get("title") else ""), "", definition.get("description", ""), ""]
                     if definition.get("skills"):
-                        lines += ["可请教：" + "、".join(self.skills[s]["name"] + "（老师上限 " + str(level) + "）" for s, level in definition["skills"].items()) + "。", ""]
+                        lines += ["可请教：" + "、".join(self.skills[s]["name"] + "（入门指导）" for s, level in definition["skills"].items()) + "。", ""]
                     if definition.get("shopItems"):
                         lines += [self.link("查看该 NPC 商店货单", "collections.md", current, "shop-" + npc), ""]
                     did = definition.get("dialogueId")
@@ -485,23 +490,26 @@ class Guide:
     def collection_page(self):
         current = "collections.md"
         lines = ["# 修行、商店、传承与收藏目录", "", "[返回玩家入口](README.md) · [八城路线](worlds.md)", "",
-                 "## 修行怎么形成长期目标", "", "经验决定技能上限，潜能投入具体技能，老师限制本次可学到的等级。新角色已有 500 潜能和 5000 两；基础技能上限起步 20。每 10 秒学习结算一次，基础最多投入 10 潜能，部分已装备秘籍能加速。读书、拳脚、轻功、招架和内功可作为长期公共根基。", "",
-                 "进阶武学通常先在背包使用残页解锁，再达到前置基本武功等级后找老师深造。学会后还要在「技」的特殊武学中装备到对应基础武功槽；同槽只能装备一本。下表按实际掉落/动作/商店引用找来源，不把物品的说明文字当作已经接通的来源。", "",
-                 "## 全部武学", "", "| 武学 | 类别与前置 | 风格与加成 | 入门来源 | 可达老师与上限 |", "|---|---|---|---|---|"]
+                 "## 修行怎么形成长期目标", "", "经验决定技能上限，潜能投入技能，老师仅负责免费入门。新角色有500潜能、5000钱币（50两银），经验上限起步20。每10秒投入10潜能，已装备悟真篇可加速；一次可升多级，未满一级保留进度。断线停止修炼，不送离线收益。", "",
+                 "首版38门、五档品阶，一门一条等级线。江湖武学向指定老师入门，名家以上从指定副本100%结算取得完整秘本，满足根基和读书要求后参悟；失败不扣书。内功/身法/护体/战斗/学识各装备一门，战斗须匹配当前主武器；暗器也是主武器。老师不再限制后续修为。", "",
+                 "恢复药与干粮共享10秒冷却，战斗中可以使用，换药或重连不能清除冷却。完整秘本绑定、不可售，已学或已有书不重复结算。钱币数值以100=1两银折算。", "",
+                 "## 全部武学", "", "| 武学 | 品阶与前置 | 风格与100级基线 | 入门来源 | 入门老师与修炼 |", "|---|---|---|---|---|"]
         for sid, skill in self.skills.items():
             req = skill.get("requirements", {})
             prereq = req.get("prerequisite", {})
-            category = "进阶" if skill.get("type") == "ADVANCED" else "基础/直接教学"
+            category = {1:"基础",2:"江湖",3:"名家",4:"上乘",5:"绝学"}[skill["rarity"]]
             if prereq:
                 category += "；" + self.skills[prereq["skill"]]["name"] + " ≥" + str(prereq["level"])
-            item = req.get("item")
+            if req.get("literacy"):
+                category += "；读书识文 ≥" + str(req["literacy"])
+            item = skill.get("manualId") if not skill.get("teacherId") else None
             source = self.items[item]["name"] + "：" + self.sources(self.item_sources.get(item, []), current) if item else "向老师请教"
             teachers = []
             for npc, definition in self.npcs.items():
                 if sid in definition.get("skills", {}) and self.locations.get(npc):
-                    teachers.append(self.npc_name(npc) + "（" + str(definition["skills"][sid]) + "）：" + self.location(npc, current))
+                    teachers.append(self.npc_name(npc) + "（入门）：" + self.location(npc, current))
             style = safe(skill.get("description", "")) + "<br>" + safe(self.skill_bonuses(skill.get("bonuses", {})))
-            lines.append("| " + safe(skill["name"]) + "<br>`" + sid + "` | " + safe(category) + " | " + style + " | " + source + " | " + ("；".join(teachers) or "没有已放置的授课老师") + " |")
+            lines.append("| " + safe(skill["name"]) + "<br>`" + sid + "` | " + safe(category) + " | " + style + " | " + source + " | " + ("；".join(teachers) or "参悟后自主修炼，无老师上限") + " |")
         lines += ["", "## 炼药、熔铸与材料交换", "", "带齐材料与银两，与对应 NPC 反复交谈，按当前符合条件的对话顺序触发。当前普通交谈会记住已读选项：同一角色已做过的配方不会再次自动触发；后端另有选项接口，但网页尚未提供通用重复选择菜单。", "", "| 操作 | 人物与位置 | 实际消耗 | 获得 |", "|---|---|---|---|"]
         for did, dialogue in self.dialogues.items():
             if did not in self.live_dialogues:
@@ -515,12 +523,12 @@ class Guide:
         for npc, definition in self.npcs.items():
             if not definition.get("shopItems") or not self.locations.get(npc):
                 continue
-            lines += [f'<a id="shop-{npc}"></a>', "", "### " + self.npc_name(npc), "", self.location(npc, current), "", "| 商品 | 单价（两） | 用途 |", "|---|---:|---|"]
+            lines += [f'<a id="shop-{npc}"></a>', "", "### " + self.npc_name(npc), "", self.location(npc, current), "", "| 商品 | 单价（钱币） | 用途 |", "|---|---:|---|"]
             for item in definition["shopItems"]:
                 value = self.items[item]
                 lines.append("| " + safe(value["name"]) + " | " + str(value.get("value", 0)) + " | " + safe(value.get("description", "")) + " |")
             lines.append("")
-        lines += ["## 全部物品与实际获取入口", "", "同名条目可能有不同 ID；本表分开列，避免把掉落的残页与另一份同名配置混在一起。没有可达入口的条目不能作为当前收集目标。", "", "| 物品 / ID | 类型与用途 | 当前来源 |", "|---|---|---|"]
+        lines += ["## 全部物品与实际获取入口", "", "同名装备可能有历史别名；武学已归并为一门一名。7种江湖秘本仅供旧档迁移保留，新角色直接向指定老师入门。没有可达入口的条目不能作为当前收集目标。", "", "| 物品 / ID | 类型与用途 | 当前来源 |", "|---|---|---|"]
         for iid, item in self.items.items():
             use = SLOTS.get(item.get("equipmentSlot"), item.get("type", "物品"))
             effects = item.get("effects", {})
@@ -551,11 +559,11 @@ class Guide:
                  f"| 任务 | {len(self.quests)} | {len(self.wired_quests)} 条已接通，{len(self.quests)-len(self.wired_quests)} 条缺少接取/交付 |",
                  f"| 技能 / 物品 / 称号 | {len(self.skills)} / {len(self.items)} / {len(self.titles)} | 老师、前置、获取入口与条件 |",
                  f"| 普通对话档案 | {len(self.dialogues)} | 常驻人物或附录逐份保留原文；未绑定的明确标记 |", "",
-                 "## 解锁与叙事差异", "", "- 当前没有序号 27；序号 28《蜀道栈桥》因代码只检查紧邻上一序号，初始即可进入。它不是新手难度关，推荐仍按成长顺序挑战。", "- 同一全局序号的不同副本是并行替代入口：任一满通关结算可解下一序号，卷内 chapter 不是解锁条件。", "- 序号 42《幽冥鬼市》是三路地图，当前没有「选一锁死」机制；序号 62 的同名关是另一个四房战斗模板。", "- 序号 43《天罡北斗阵》有七步机关，但未实现文案所称的错误重置；序号 61 的同名关只有通用开门流程。", "- 《护送商队》用进入终点计目标，没有独立跟随 AI 和护送失败血条。", "- 后期部分副本的剧情只有「要点已明」「通道开启」等短句。攻略保留这些实际文字，不据副本名称编造一段完整原著故事。", "",
+                 "## 解锁与叙事差异", "", "- 当前序27空缺；序28《蜀道栈桥》仍需序26完成，服务端按最近存在的前序组检查，不会提前开放。", "- 同一全局序号的不同副本是并行替代入口：任一满通关结算可解下一序号，卷内 chapter 不是解锁条件。", "- 序号 42《幽冥鬼市》是三路地图，当前没有「选一锁死」机制；序号 62 的同名关是另一个四房战斗模板。", "- 序号 43《天罡北斗阵》有七步机关，但未实现文案所称的错误重置；序号 61 的同名关只有通用开门流程。", "- 《护送商队》用进入终点计目标，没有独立跟随 AI 和护送失败血条。", "- 后期部分副本的剧情只有「要点已明」「通道开启」等短句。攻略保留这些实际文字，不据副本名称编造一段完整原著故事。", "",
                  "## 未绑定的副本动作", "", "这些动作有定义，但没有被房间 actions、可用对话或分支入口引用。一般是未接入的「听取任务」，主战斗路线仍可看各关攻略。", "", "| 副本 | 当前不能触发的动作 |", "|---|---|"]
         for dungeon, aid in self.unbound:
             lines.append("| " + self.dungeon_link(dungeon, current) + " | " + safe(dungeon["puzzleActions"][aid].get("label", aid)) + "（`" + aid + "`） |")
-        lines += ["", "## 其他实际入口差异", "", "- 世界任务只有四条接好了 startQuestId / completeQuestId；NPC 的 questIds 或一句「有赏」不会自动建立任务状态。其余 37 条见任务页。", "- 后十条任务的目标如 `dungeon_cleared_datangdoubledragonxb2` 使用不存在的副本 ID，即使补上接交对话，还需要修正目标。", "- 巴蜀药田当前产出默认采集材料古铜残片，止血草的实际稳定采集点是洛阳芦苇滩。", "- 世界 JSON 的补充 rumors 尚未由 listen_rumor 读取；新城某些听传闻按钮目前只回泛用台词。", "- 强化已有后端接口，没有网页按钮。底部输入框是公开聊天，不能执行后端指令。", "- 没有查到可达来源的残页、物品或老师，在收藏表中单列；资源总量不直接代表可收集总量。", "",
+        lines += ["", "## 其他实际入口差异", "", "- 世界任务只有四条接好了 startQuestId / completeQuestId；NPC 的 questIds 或一句「有赏」不会自动建立任务状态。其余 37 条见任务页。", "- 后十条任务的目标如 `dungeon_cleared_datangdoubledragonxb2` 使用不存在的副本 ID，即使补上接交对话，还需要修正目标。", "- 巴蜀药田与洛阳普通采集默认产止血草；扬州芦根单独保留。", "- 世界 JSON 的补充 rumors 尚未由 listen_rumor 读取；新城某些听传闻按钮目前只回泛用台词。", "- 强化已有后端接口，没有网页按钮。底部输入框是公开聊天，不能执行后端指令。", "- 没有查到可达来源的物品或老师，在收藏表中单列；资源总量不直接代表可收集总量。", "",
                  "- 普通交谈会记录已读选项，炼药、熔铸等配方用此入口各自动触发一次；不能据此承诺网页支持无限重复炼药。", "- 烟尘粉只有用途描述，没有接入可用物品效果；当前不能用它脱战。", "",
                  "## 维护与校对", "", "玩家入口和推荐路线是手写内容；本页、七卷故事、世界、任务与收藏事实页由 `python scripts/generate_player_guide.py` 从资源生成，`--check` 检查漂移和本手册的内部链接。行为规则已对照 manager 的副本解锁、交谈/任务、房间动作、学习/使用物品代码以及前端按钮核对；没有逐关实机通关或验证数值难度。", ""]
         return "\n".join(lines)
@@ -564,7 +572,7 @@ class Guide:
         result = self.story_pages()
         result.update({"worlds.md": self.world_page(), "quests.md": self.quest_page(), "collections.md": self.collection_page(), "content_status.md": self.status_page()})
         current = "unlock_order.md"
-        index = ["# 全部副本的全局解锁顺序", "", "[返回玩家入口](README.md)", "", "同序号的关卡任一 100% 离开结算即可解锁下一序号；它们不是必须全部完成的连续章节。卷内章号不参与判断。当前序号 27 空缺，28 不检查更早序号。", "", "| 全局序号 | 副本与卷 | 实际前置 |", "|---:|---|---|"]
+        index = ["# 全部副本的全局解锁顺序", "", "[返回玩家入口](README.md)", "", "同序号的关卡任一 100% 离开结算即可解锁下一序号；它们不是必须全部完成的连续章节。卷内章号不参与判断。当前序号27空缺，28仍检查最近存在的序26。", "", "| 全局序号 | 副本与卷 | 实际前置 |", "|---:|---|---|"]
         for dungeon in self.dungeons:
             index.append("| " + str(dungeon["order"]) + " | " + self.dungeon_link(dungeon, current) + " · " + dungeon["chainName"] + " | " + self.unlock(dungeon, current) + " |")
         result[current] = "\n".join(index)
@@ -573,7 +581,7 @@ class Guide:
             hashes.update(path.relative_to(RESOURCES).as_posix().encode())
             hashes.update(json.dumps(read(path), ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8"))
         marker = "<!-- 资源校验指纹：" + hashes.hexdigest() + "；由 scripts/generate_player_guide.py 生成。 -->\n\n"
-        return {path: marker + text.rstrip() + "\n" for path, text in result.items()}
+        return {path: marker + text.split("\n",1)[0] + "\n\n> 本手册对应武学V2源码；服务器需配套部署与旧档迁移后生效。\n" + text.split("\n",1)[1].rstrip() + "\n" for path, text in result.items()}
 
 
 def validate_links(pages):

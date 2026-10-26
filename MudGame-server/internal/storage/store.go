@@ -42,6 +42,9 @@ type diskUser struct {
 }
 
 type diskPlayer struct {
+	MartialVersion        int                         `json:"martialVersion"`
+	ActiveArts            map[string]string           `json:"activeArts,omitempty"`
+	RecoveryItemReadyAt   int64                       `json:"recoveryItemReadyAt,omitempty"`
 	ID                    string                      `json:"id"`
 	CharacterName         string                      `json:"characterName"`
 	UserID                string                      `json:"userId"`
@@ -201,6 +204,7 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			attrs.Resources.HP = attrs.Resources.MaxHP
 		}
 		players[dp.ID] = &model.Player{
+			MartialVersion: dp.MartialVersion, ActiveArts: dp.ActiveArts, RecoveryItemReadyAt: dp.RecoveryItemReadyAt,
 			ID:                    dp.ID,
 			UserID:                dp.UserID,
 			CharacterName:         dp.CharacterName,
@@ -257,6 +261,7 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 			learningTeacherLevel = 0
 		}
 		d := diskPlayer{
+			MartialVersion: p.MartialVersion, ActiveArts: p.ActiveArts, RecoveryItemReadyAt: p.RecoveryItemReadyAt,
 			ID:                    p.ID,
 			CharacterName:         p.CharacterName,
 			UserID:                p.UserID,

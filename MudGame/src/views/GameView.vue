@@ -30,7 +30,7 @@
           :selectedItem="selectedLearnSkill"
           :showMoney="false"
           teachingMode
-          buyButtonText="开始学习"
+          buyButtonText="请教入门 / 修炼"
           @close="closeLearn"
           @selectItem="selectLearnSkill"
           @buy="startLearning" />
@@ -115,6 +115,8 @@
               @selectSkill="selectSkill"
               @viewSkill="viewSkill"
               @equipSkill="equipSkill"
+              @practiceSkill="practiceSkill"
+              @unequipSkill="unequipSkill"
               @selectEquipSlot="selectEquipmentSlot"
               @unequipSlot="unequipItem"
               @selectWorld="selectWorld"
@@ -250,7 +252,8 @@ const {
   selectedSkill,
   viewingSkill,
   skillTab,
-  silentRefreshCount,
+  consumeSilentRefresh,
+  resetPanelRequests,
   sendSilentRefresh,
   filteredSkills,
   selectSkill,
@@ -310,6 +313,8 @@ const {
   selectLearnSkill,
   startLearning,
   equipSkill,
+  practiceSkill,
+  unequipSkill,
   selectShopItem,
   buyItem
 } = useShopLearn({ sendGameCommand, getPlayerId, checkCanAct, closeInfoPanel })
@@ -426,6 +431,7 @@ onUnmounted(() => {
 // ------------------- WebSocket 消息处理 -------------------
 
 const handleMessage = (msg) => {
+  const silentRefresh = msg.type === 'command' ? consumeSilentRefresh(msg.subtype) : true;
   // 优先使用前端生成的消息
   const generatedMsg = getMessage(msg);
   if (generatedMsg) {
@@ -480,61 +486,49 @@ const handleMessage = (msg) => {
           backpackItems.value = msg.results.items || [];
           playerMoney.value = msg.results.money || 0; // Update money
           // 用户主动查看时才打开/切换到背包，内部刷新不弹面板
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'backpack') {
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'backpack')) {
               showInfoPanel.value = true;
               currentPanel.value = 'backpack';
               panelTitle.value = '背包';
           }
       } else {
-          if (silentRefreshCount.value > 0) silentRefreshCount.value--;
           addLog(describeCommandError(msg.results.error, '你一时无法查看背包。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_skills') {
       // 处理技能信息
       if (msg.flag) {
           skillsList.value = msg.results.skills || [];
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'skills') {
+          if (selectedSkill.value) selectedSkill.value = skillsList.value.find(s => s.id === selectedSkill.value.id) || null;
+          if (viewingSkill.value) viewingSkill.value = skillsList.value.find(s => s.id === viewingSkill.value.id) || null;
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'skills')) {
               showInfoPanel.value = true;
               currentPanel.value = 'skills';
               panelTitle.value = '技能';
           }
       } else {
-          if (silentRefreshCount.value > 0) silentRefreshCount.value--;
           addLog(describeCommandError(msg.results.error, '你一时无法查看所学武功。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_attributes') {
       // 处理属性信息
       if (msg.flag) {
           statusAttributes.value = msg.results.attributes || {};
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'status') {
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'status')) {
               showInfoPanel.value = true;
               currentPanel.value = 'status';
               panelTitle.value = '属性';
           }
       } else {
-          if (silentRefreshCount.value > 0) silentRefreshCount.value--;
           addLog(describeCommandError(msg.results.error, '你一时无法察看自身状态。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_equipment') {
       if (msg.flag) {
           equipment.value = msg.results.equipment || {};
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'equipment') {
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'equipment')) {
               showInfoPanel.value = true;
               currentPanel.value = 'equipment';
               panelTitle.value = '装备';
           }
       } else {
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          }
           addLog(describeCommandError(msg.results.error, '你一时无法查看随身装备。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'equip') {
@@ -581,29 +575,23 @@ const handleMessage = (msg) => {
       // 处理世界列表
       if (msg.flag) {
           worldsList.value = msg.results.worlds || [];
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'maps') {
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'maps')) {
               showInfoPanel.value = true;
               currentPanel.value = 'maps';
               panelTitle.value = '世界';
           }
       } else {
-          if (silentRefreshCount.value > 0) silentRefreshCount.value--;
           addLog(describeCommandError(msg.results.error, '你一时无法查阅地图。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_dungeons') {
       if (msg.flag) {
           dungeonsList.value = msg.results.dungeons || [];
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'dungeons') {
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'dungeons')) {
               showInfoPanel.value = true;
               currentPanel.value = 'dungeons';
               panelTitle.value = '副本';
           }
       } else {
-          if (silentRefreshCount.value > 0) silentRefreshCount.value--;
           addLog(describeCommandError(msg.results.error, '你一时无法探查附近秘境。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'enter_world') {
@@ -767,29 +755,23 @@ const handleMessage = (msg) => {
   } else if (msg.type === 'command' && msg.subtype === 'get_quests') {
       if (msg.flag) {
           questsList.value = msg.results.quests || [];
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'quests') {
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'quests')) {
               showInfoPanel.value = true;
               currentPanel.value = 'quests';
               panelTitle.value = '任务';
           }
       } else {
-          if (silentRefreshCount.value > 0) silentRefreshCount.value--;
           addLog(describeCommandError(msg.results.error, '你一时无法理清身上的事务。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'get_factions') {
       if (msg.flag) {
           factionsList.value = msg.results.factions || [];
-          if (silentRefreshCount.value > 0) {
-              silentRefreshCount.value--;
-          } else if (!showInfoPanel.value || currentPanel.value !== 'factions') {
+          if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'factions')) {
               showInfoPanel.value = true;
               currentPanel.value = 'factions';
               panelTitle.value = '势力';
           }
       } else {
-          if (silentRefreshCount.value > 0) silentRefreshCount.value--;
           addLog(describeCommandError(msg.results.error, '你一时无法查明江湖势力。'));
       }
   } else if (msg.type === 'chat') {
@@ -813,6 +795,7 @@ const handleMessage = (msg) => {
             if (msg.results?.playerId) {
                 playerStore.setPlayerId(msg.results.playerId)
             }
+            resetPanelRequests()
             requestCoreGameState()
             refreshOpenPanels()
         } else {
@@ -916,6 +899,14 @@ const handleMessage = (msg) => {
           }
       } else {
           addLog(describeCommandError(msg.results.error, '你现在无法做出这个动作。'));
+      }
+  } else if (msg.type === 'command' && ['practice', 'equip_skill', 'unequip_skill', 'learn', 'stop'].includes(msg.subtype)) {
+      if (msg.flag) {
+          if (msg.results?.message) addLog(msg.results.message);
+          sendSilentRefresh('get_skills');
+          sendSilentRefresh('get_attributes');
+      } else {
+          addLog(describeCommandError(msg.results.error, '当前无法修炼或调整武学。'));
       }
   } else if (msg.type === 'command' && msg.subtype === 'use_item') {
       if (msg.flag) {

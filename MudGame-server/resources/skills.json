@@ -2,1500 +2,820 @@
   "basic_unarmed": {
     "id": "basic_unarmed",
     "name": "基本拳脚",
-    "description": "拳掌腿肘的入门功夫，是近身搏杀的根基。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "unarmed",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "post_strength_per_10_levels": 1
-    }
+      "attack_per_100_levels": 30
+    },
+    "slot": "combat",
+    "weaponType": "unarmed",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_parry": {
     "id": "basic_parry",
     "name": "基本招架",
-    "description": "以身法、兵器或拳掌卸开来势，保住性命的基本功。",
+    "description": "通用根基，可自主修炼。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "defense",
+    "category": "guard",
     "school": "common",
     "bonuses": {
-      "parry_per_10_levels": 1
-    }
+      "parry_per_100_levels": 10
+    },
+    "slot": "guard",
+    "weaponType": "",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_neigong": {
     "id": "basic_neigong",
     "name": "基本内功",
-    "description": "吐纳导引的入门法门，可稳固气血，积蓄内力。",
+    "description": "通用根基，可自主修炼。",
     "rarity": 1,
     "type": "BASIC",
     "category": "internal",
     "school": "common",
     "bonuses": {
-      "max_mp_per_level": 10,
+      "max_mp_per_100_levels": 1000,
       "trained_mp_to_max_hp_percent": 0.3
-    }
+    },
+    "slot": "internal",
+    "weaponType": "",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_qinggong": {
     "id": "basic_qinggong",
     "name": "基本轻功",
-    "description": "奔行、腾挪、闪避的基础训练。",
+    "description": "通用根基，可自主修炼。",
     "rarity": 1,
     "type": "BASIC",
     "category": "movement",
     "school": "common",
     "bonuses": {
-      "post_agility_per_10_levels": 1
-    }
+      "post_agility_per_100_levels": 10
+    },
+    "slot": "movement",
+    "weaponType": "",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_blade": {
     "id": "basic_blade",
     "name": "基本刀法",
-    "description": "劈、斩、撩、格的基本刀路，军府和江湖都常见。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "blade",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_sword": {
     "id": "basic_sword",
     "name": "基本剑法",
-    "description": "刺、削、点、挑的基本剑式，是日后悟入剑意的起点。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "hit_rate_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "sword",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_literacy": {
     "id": "basic_literacy",
     "name": "读书识文",
-    "description": "识字、读图、辨认文书与古卷的基础能力。",
+    "description": "通用根基，可自主修炼。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "knowledge",
+    "category": "study",
     "school": "academy",
     "bonuses": {
-      "intelligence_check_per_10_levels": 1
-    }
+      "post_perception_per_100_levels": 10
+    },
+    "slot": "study",
+    "weaponType": "",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "csj_changshengjue": {
     "name": "长生诀",
-    "description": "道门无上心法残卷所载的内功法门，讲究长生久视、以气养身。",
-    "rarity": 4,
+    "description": "养生内功绝学。序47《行宫惊变》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 5,
     "type": "ADVANCED",
-    "category": "neigong",
+    "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_level": 15,
-      "trained_mp_to_max_hp_percent": 0.5
+      "max_mp_per_100_levels": 600,
+      "trained_mp_to_max_hp_percent": 0.15
     },
     "requirements": {
-      "item": "csj_changshengjue_page",
       "prerequisite": {
         "skill": "basic_neigong",
-        "level": 20
-      }
-    }
+        "level": 120
+      },
+      "literacy": 80
+    },
+    "slot": "internal",
+    "weaponType": "",
+    "teacherId": "",
+    "sourceDungeon": "datang_xinggong",
+    "manualId": "manual_csj_changshengjue",
+    "source": "序47《行宫惊变》满通关结算"
   },
   "jyg_zhanshentu_dao": {
-    "name": "战神图录·刀法",
-    "description": "摹自战神图录的刀意，一往无前，势不可挡。",
-    "rarity": 4,
+    "name": "战神图录",
+    "description": "均衡内功绝学。序40《战神遗境》（原《战神图录·终卷》）满通关结算，获得完整传承后自主修炼。",
+    "rarity": 5,
     "type": "ADVANCED",
-    "category": "blade",
+    "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 3,
-      "crit_rate_per_10_levels": 1
+      "attack_per_100_levels": 14,
+      "defense_per_100_levels": 22,
+      "max_mp_per_100_levels": 400
     },
     "requirements": {
-      "item": "jyg_zhanshentu_rubbing",
       "prerequisite": {
-        "skill": "basic_blade",
-        "level": 20
-      }
-    }
+        "skill": "basic_neigong",
+        "level": 120
+      },
+      "literacy": 80
+    },
+    "slot": "internal",
+    "weaponType": "",
+    "teacherId": "",
+    "sourceDungeon": "posui_zhongjuan",
+    "manualId": "manual_jyg_zhanshentu_dao",
+    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算"
   },
   "tiandao_blade": {
     "name": "天刀八诀",
-    "description": "宋缺天刀刀意之传，快而准，后发先至。",
-    "rarity": 4,
+    "description": "刀道绝学。序38《天刀试炼殿》满通关，由宋缺授予完整传承，获得完整传承后自主修炼。",
+    "rarity": 5,
     "type": "ADVANCED",
-    "category": "blade",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 2,
-      "hit_rate_per_10_levels": 2
+      "attack_per_100_levels": 34,
+      "hit_rate_per_100_levels": 22
     },
     "requirements": {
-      "item": "tiandao_page",
       "prerequisite": {
         "skill": "basic_blade",
-        "level": 40
-      }
-    }
+        "level": 120
+      },
+      "literacy": 80
+    },
+    "slot": "combat",
+    "weaponType": "blade",
+    "teacherId": "",
+    "sourceDungeon": "tiandao_trial_hall",
+    "manualId": "manual_tiandao_blade",
+    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承"
   },
   "basic_staff": {
     "id": "basic_staff",
     "name": "基本棍法",
-    "description": "劈、扫、拦、拿的基本棍路，攻守兼备，盐帮漕工在水上讨生活练出来的功夫。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_10_levels": 1,
-      "parry_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "staff",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_hidden_weapon": {
     "id": "basic_hidden_weapon",
     "name": "基本暗器",
-    "description": "掷镖发箭的准头与巧劲，密探与刺客吃饭的本事。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "hit_rate_per_10_levels": 1,
-      "crit_rate_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "hidden_weapon",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "thunder_sword": {
     "id": "thunder_sword",
     "name": "奔雷剑法",
-    "description": "军中剑客把直刺练到极致的产物，出手如奔雷贯耳，又快又正。",
+    "description": "快剑入门。洛阳军府·秦校尉，获得完整传承后自主修炼。",
     "rarity": 2,
-    "type": "BASIC",
-    "category": "weapon",
+    "type": "ADVANCED",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_10_levels": 1,
-      "hit_rate_per_10_levels": 1
+      "attack_per_100_levels": 14,
+      "hit_rate_per_100_levels": 12
+    },
+    "slot": "combat",
+    "weaponType": "sword",
+    "teacherId": "military_instructor",
+    "sourceDungeon": "",
+    "manualId": "manual_thunder_sword",
+    "source": "洛阳军府·秦校尉",
+    "requirements": {
+      "prerequisite": {
+        "skill": "basic_sword",
+        "level": 20
+      }
     }
   },
   "bloody_blade": {
     "id": "bloody_blade",
     "name": "血战刀法",
-    "description": "沙场滚出来的刀法，没有花巧，每一刀都奔着收人性命去。",
+    "description": "直接杀伤。洛阳军府·秦校尉，获得完整传承后自主修炼。",
     "rarity": 2,
-    "type": "BASIC",
-    "category": "weapon",
+    "type": "ADVANCED",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_10_levels": 2
+      "attack_per_100_levels": 20,
+      "hit_rate_per_100_levels": 6
+    },
+    "slot": "combat",
+    "weaponType": "blade",
+    "teacherId": "military_instructor",
+    "sourceDungeon": "",
+    "manualId": "manual_bloody_blade",
+    "source": "洛阳军府·秦校尉",
+    "requirements": {
+      "prerequisite": {
+        "skill": "basic_blade",
+        "level": 20
+      }
     }
   },
   "basic_spear": {
     "id": "basic_spear",
     "name": "基本枪法",
-    "description": "拦、拿、扎的基本枪路，大路兵器，军府营中人人先学这一门。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "spear",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_whip": {
     "id": "basic_whip",
     "name": "基本鞭法",
-    "description": "软鞭长于游斗，甩、缠、抽、放，讲究一个让敌人摸不着衣角。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "dodge_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "whip",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_mace": {
     "id": "basic_mace",
     "name": "基本锏法",
-    "description": "重锏无刃，靠的是格挡与砸落，一步一稳，最宜守住门户。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "parry_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "mace",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_hook": {
     "id": "basic_hook",
     "name": "基本钩法",
-    "description": "船工挠钩演变来的奇门兵器，钩、拉、锁、带，刁钻难防。",
+    "description": "各流派根基；只在对应流派下生效。",
     "rarity": 1,
     "type": "BASIC",
-    "category": "weapon",
+    "category": "combat",
     "school": "common",
     "bonuses": {
-      "hit_rate_per_10_levels": 1
-    }
+      "attack_per_100_levels": 20
+    },
+    "slot": "combat",
+    "weaponType": "hook",
+    "requirements": {},
+    "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "cihang_jiandian": {
     "name": "慈航剑典",
-    "description": "传自静斋的佛门剑典，剑走中正，守心为先，后发而先至。",
-    "rarity": 4,
+    "description": "剑道绝学。序40《长安试炼殿》满通关，由师妃暄见证传承，获得完整传承后自主修炼。",
+    "rarity": 5,
     "type": "ADVANCED",
-    "category": "sword",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "hit_rate_per_10_levels": 2,
-      "dodge_per_10_levels": 1
+      "attack_per_100_levels": 28,
+      "hit_rate_per_100_levels": 24,
+      "parry_per_100_levels": 8
     },
     "requirements": {
-      "item": "cihang_page",
       "prerequisite": {
         "skill": "basic_sword",
-        "level": 20
-      }
-    }
+        "level": 120
+      },
+      "literacy": 80
+    },
+    "slot": "combat",
+    "weaponType": "sword",
+    "teacherId": "",
+    "sourceDungeon": "changan_trial_hall",
+    "manualId": "manual_cihang_jiandian",
+    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承"
   },
   "hunyuan_neigong": {
     "name": "混元功",
-    "description": "道家正宗养气功法，行功如百川归海，打坐时内力滋生格外绵长。",
-    "rarity": 3,
+    "description": "养气与打坐。河洛书院·柳先生，获得完整传承后自主修炼。",
+    "rarity": 2,
     "type": "ADVANCED",
-    "category": "neigong",
+    "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_level": 8,
-      "meditate_recovery_per_10_levels": 3
+      "max_mp_per_100_levels": 200,
+      "meditate_recovery_per_100_levels": 10
     },
     "requirements": {
-      "item": "hunyuan_page",
       "prerequisite": {
         "skill": "basic_neigong",
         "level": 20
       }
-    }
+    },
+    "slot": "internal",
+    "weaponType": "",
+    "teacherId": "academy_teacher",
+    "sourceDungeon": "",
+    "manualId": "manual_hunyuan_neigong",
+    "source": "河洛书院·柳先生"
   },
   "tianmo_ce": {
     "name": "天魔策",
-    "description": "阴癸派至高心法之残篇，真气诡谲凌厉，于杀伐中滋养魔气。",
-    "rarity": 4,
+    "description": "杀伐内功绝学。序39《魔师宫秘道》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 5,
     "type": "ADVANCED",
-    "category": "neigong",
+    "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_level": 12,
-      "crit_rate_per_10_levels": 1
+      "attack_per_100_levels": 22,
+      "max_mp_per_100_levels": 450,
+      "crit_rate_per_100_levels": 3
     },
     "requirements": {
-      "item": "tianmo_page",
       "prerequisite": {
         "skill": "basic_neigong",
-        "level": 30
-      }
-    }
+        "level": 120
+      },
+      "literacy": 80
+    },
+    "slot": "internal",
+    "weaponType": "",
+    "teacherId": "",
+    "sourceDungeon": "fuyu_mishi",
+    "manualId": "manual_tianmo_ce",
+    "source": "序39《魔师宫秘道》满通关结算"
   },
   "talang_jue": {
     "name": "踏浪诀",
-    "description": "前朝游侠传下的轻身功法，讲究踏浪不惊、起身先至。",
-    "rarity": 3,
+    "description": "闪避与先手。河洛武馆·赵横江，获得完整传承后自主修炼。",
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_10_levels": 1,
-      "initiative_per_10_levels": 2
+      "dodge_per_100_levels": 14,
+      "initiative_per_100_levels": 6
     },
     "requirements": {
-      "item": "talang_page",
       "prerequisite": {
         "skill": "basic_qinggong",
         "level": 20
       }
-    }
+    },
+    "slot": "movement",
+    "weaponType": "",
+    "teacherId": "weapon_school_master",
+    "sourceDungeon": "",
+    "manualId": "manual_talang_jue",
+    "source": "河洛武馆·赵横江"
   },
   "fuhu_jin": {
     "name": "伏虎劲",
-    "description": "拳罡如伏虎踞涧，出手沉雄，气血随劲鼓荡。",
-    "rarity": 3,
+    "description": "拳劲与气血。河洛武馆·赵横江，获得完整传承后自主修炼。",
+    "rarity": 2,
     "type": "ADVANCED",
-    "category": "unarmed",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 1,
-      "max_hp_per_level": 6
+      "attack_per_100_levels": 20,
+      "max_hp_per_100_levels": 80
     },
     "requirements": {
-      "item": "fuhu_page",
       "prerequisite": {
         "skill": "basic_unarmed",
         "level": 20
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "unarmed",
+    "teacherId": "weapon_school_master",
+    "sourceDungeon": "",
+    "manualId": "manual_fuhu_jin",
+    "source": "河洛武馆·赵横江"
   },
   "tiebi_gong": {
     "name": "铁壁功",
-    "description": "怒蛟帮镇帮守御之功，格挡如铁壁，守中带削。",
-    "rarity": 3,
+    "description": "卸力防守。盐帮分舵·雷万钧，获得完整传承后自主修炼。",
+    "rarity": 2,
     "type": "ADVANCED",
-    "category": "defense",
+    "category": "guard",
     "school": "hidden",
     "bonuses": {
-      "parry_per_10_levels": 2,
-      "defense_per_10_levels": 1
+      "defense_per_100_levels": 8,
+      "parry_per_100_levels": 12
     },
     "requirements": {
-      "item": "tiebi_page",
       "prerequisite": {
         "skill": "basic_parry",
         "level": 20
       }
-    }
+    },
+    "slot": "guard",
+    "weaponType": "",
+    "teacherId": "salt_hall_master",
+    "sourceDungeon": "",
+    "manualId": "manual_tiebi_gong",
+    "source": "盐帮分舵·雷万钧"
   },
   "wuzhen_pian": {
     "name": "悟真篇",
-    "description": "鲁妙子毕所学批注参悟的读书法门——书读进去了，潜能便如活水涌来。",
-    "rarity": 3,
+    "description": "辅助修行。河洛书院·柳先生，获得完整传承后自主修炼。",
+    "rarity": 2,
     "type": "ADVANCED",
-    "category": "knowledge",
+    "category": "study",
     "school": "hidden",
     "bonuses": {
-      "learning_invest_bonus_per_10_levels": 1,
-      "intelligence_check_per_10_levels": 1
+      "learning_invest_bonus_per_100_levels": 2
     },
     "requirements": {
-      "item": "wuzhen_page",
       "prerequisite": {
         "skill": "basic_literacy",
         "level": 20
       }
-    }
+    },
+    "slot": "study",
+    "weaponType": "",
+    "teacherId": "academy_teacher",
+    "sourceDungeon": "",
+    "manualId": "manual_wuzhen_pian",
+    "source": "河洛书院·柳先生"
   },
   "xiulou_daofa": {
     "name": "修罗刀法",
-    "description": "魔师宫秘传的刀路，刀势如修罗临阵——不闪不避，以攻代守。",
-    "rarity": 4,
+    "description": "进攻刀路。序15《马贼王庭》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 3,
     "type": "ADVANCED",
-    "category": "blade",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 2,
-      "dodge_per_10_levels": 1
+      "attack_per_100_levels": 28,
+      "hit_rate_per_100_levels": 12
     },
     "requirements": {
-      "item": "xiulou_page",
       "prerequisite": {
         "skill": "basic_blade",
         "level": 40
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "blade",
+    "teacherId": "",
+    "sourceDungeon": "bianhuang_wangting",
+    "manualId": "manual_xiulou_daofa",
+    "source": "序15《马贼王庭》满通关结算"
   },
   "taiyi_jianfa": {
     "name": "太乙剑法",
-    "description": "道门正传的剑法，剑走青冥——看似绵软，落点却精妙得叫人牙酸。",
-    "rarity": 4,
+    "description": "稳准剑路。序8《竟陵之围》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 3,
     "type": "ADVANCED",
-    "category": "sword",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 1,
-      "hit_rate_per_10_levels": 2
+      "attack_per_100_levels": 26,
+      "hit_rate_per_100_levels": 18
     },
     "requirements": {
-      "item": "taiyi_page",
       "prerequisite": {
         "skill": "basic_sword",
         "level": 40
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "sword",
+    "teacherId": "",
+    "sourceDungeon": "datang_jingling",
+    "manualId": "manual_taiyi_jianfa",
+    "source": "序8《竟陵之围》满通关结算"
   },
   "dongting_xinf": {
     "name": "洞庭心法",
-    "description": "洞庭渔隐一脉的内功，以水养气，绵长不绝。",
+    "description": "气脉与耐力。序19《巴陵夜泊》满通关结算，获得完整传承后自主修炼。",
     "rarity": 3,
     "type": "ADVANCED",
-    "category": "neigong",
+    "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_level": 10,
-      "trained_mp_to_max_hp_percent": 0.35
+      "max_hp_per_100_levels": 60,
+      "max_mp_per_100_levels": 350
     },
     "requirements": {
-      "item": "dongting_page",
       "prerequisite": {
         "skill": "basic_neigong",
-        "level": 20
+        "level": 40
       }
-    }
+    },
+    "slot": "internal",
+    "weaponType": "",
+    "teacherId": "",
+    "sourceDungeon": "datang_baling",
+    "manualId": "manual_dongting_xinf",
+    "source": "序19《巴陵夜泊》满通关结算"
   },
   "lingxu_bu": {
     "name": "凌虚步",
-    "description": "魔门身法的旁支，凌虚而渡，敌未至身先至。",
+    "description": "轻灵先机。序20《散花楼》满通关结算，获得完整传承后自主修炼。",
     "rarity": 3,
     "type": "ADVANCED",
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_10_levels": 1,
-      "initiative_per_10_levels": 1
+      "dodge_per_100_levels": 20,
+      "initiative_per_100_levels": 10
     },
     "requirements": {
-      "item": "lingxu_page",
       "prerequisite": {
         "skill": "basic_qinggong",
-        "level": 20
+        "level": 40
       }
-    }
+    },
+    "slot": "movement",
+    "weaponType": "",
+    "teacherId": "",
+    "sourceDungeon": "datang_sanhua",
+    "manualId": "manual_lingxu_bu",
+    "source": "序20《散花楼》满通关结算"
   },
   "poxu_zhi": {
     "name": "破虚指",
-    "description": "传鹰留在战神图录后卷里的指法，一指点出，虚实颠倒。",
+    "description": "空手精修。序23《惊雁遗刻》（原《图录·后卷》）满通关结算，获得完整传承后自主修炼。",
     "rarity": 4,
     "type": "ADVANCED",
-    "category": "unarmed",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 2,
-      "crit_rate_per_10_levels": 1
+      "attack_per_100_levels": 32,
+      "hit_rate_per_100_levels": 14
     },
     "requirements": {
-      "item": "poxu_page",
       "prerequisite": {
         "skill": "basic_unarmed",
-        "level": 40
+        "level": 80
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "unarmed",
+    "teacherId": "",
+    "sourceDungeon": "posui_houjuan",
+    "manualId": "manual_poxu_zhi",
+    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算"
   },
   "bawang_qiang": {
     "name": "霸王枪",
-    "description": "军中枪法之绝，一往无前，宁折不弯。",
-    "rarity": 4,
+    "description": "正面冲阵。序18《洛阳粮道》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 3,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 2,
-      "hit_rate_per_10_levels": 1
+      "attack_per_100_levels": 32,
+      "hit_rate_per_100_levels": 12
     },
     "requirements": {
-      "item": "bawang_page",
       "prerequisite": {
         "skill": "basic_spear",
         "level": 40
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "spear",
+    "teacherId": "",
+    "sourceDungeon": "datang_liangdao",
+    "manualId": "manual_bawang_qiang",
+    "source": "序18《洛阳粮道》满通关结算"
   },
   "youlong_bian": {
     "name": "游龙鞭",
-    "description": "软鞭如游龙，缠、卷、抽、带，变幻莫测。",
-    "rarity": 4,
+    "description": "游斗。序21《方夜羽复仇》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 3,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_10_levels": 1,
-      "attack_per_10_levels": 1
+      "attack_per_100_levels": 28,
+      "dodge_per_100_levels": 24
     },
     "requirements": {
-      "item": "youlong_page",
       "prerequisite": {
         "skill": "basic_whip",
         "level": 40
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "whip",
+    "teacherId": "",
+    "sourceDungeon": "fuyu_fangfuchou",
+    "manualId": "manual_youlong_bian",
+    "source": "序21《方夜羽复仇》满通关结算"
   },
   "lieshi_jian": {
     "name": "裂石锏",
-    "description": "重锏裂石，不闪不避——一击必碎的坚定。",
-    "rarity": 4,
+    "description": "攻守兼备。序17《瓦岗惊变》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 3,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 1,
-      "parry_per_10_levels": 2
+      "attack_per_100_levels": 28,
+      "parry_per_100_levels": 26
     },
     "requirements": {
-      "item": "lieshi_page",
       "prerequisite": {
         "skill": "basic_mace",
         "level": 40
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "mace",
+    "teacherId": "",
+    "sourceDungeon": "datang_wagang",
+    "manualId": "manual_lieshi_jian",
+    "source": "序17《瓦岗惊变》满通关结算"
   },
   "suolang_gou": {
     "name": "锁浪钩",
-    "description": "钩法锁浪，水战之王——怒蛟帮的镇帮绝学。",
-    "rarity": 4,
+    "description": "准确牵制。序22《怒蛟水战》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 3,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 1
+      "attack_per_100_levels": 28,
+      "hit_rate_per_100_levels": 24
     },
     "requirements": {
-      "item": "suolang_page",
       "prerequisite": {
         "skill": "basic_hook",
         "level": 40
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "hook",
+    "teacherId": "",
+    "sourceDungeon": "fuyu_shuizhan",
+    "manualId": "manual_suolang_gou",
+    "source": "序22《怒蛟水战》满通关结算"
   },
   "mantian_huayu": {
     "name": "漫天花雨",
-    "description": "暗器之绝——漫天花雨，无处不在，无处不至。",
+    "description": "唐门暗器专精。序44《唐门试炼》满通关结算，获得完整传承后自主修炼。",
     "rarity": 4,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "hit_rate_per_10_levels": 2,
-      "crit_rate_per_10_levels": 2
+      "attack_per_100_levels": 32,
+      "hit_rate_per_100_levels": 20,
+      "crit_rate_per_100_levels": 1
     },
     "requirements": {
-      "item": "huayu_page",
       "prerequisite": {
         "skill": "basic_hidden_weapon",
-        "level": 40
+        "level": 80
       }
-    }
+    },
+    "slot": "combat",
+    "weaponType": "hidden_weapon",
+    "teacherId": "",
+    "sourceDungeon": "bashu_tangmen_trial",
+    "manualId": "manual_mantian_huayu",
+    "source": "序44《唐门试炼》满通关结算"
   },
   "fengmo_gun": {
     "name": "疯魔棍",
-    "description": "棍法疯魔，大开大合——越战越勇，不死不休。",
-    "rarity": 4,
+    "description": "棍路攻守。序19《巴陵夜泊》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 3,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 2
+      "attack_per_100_levels": 28,
+      "parry_per_100_levels": 22
     },
     "requirements": {
-      "item": "fengmo_page",
       "prerequisite": {
         "skill": "basic_staff",
         "level": 40
       }
-    }
-  },
-  "tiandao_pojun": {
-    "name": "天刀·破军",
-    "description": "宋缺亲传的天刀后半段——破军之势，一往无前。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "crit_rate_per_10_levels": 1,
-      "hit_rate_per_10_levels": 1
     },
-    "requirements": {
-      "item": "tiandao_pojun_page",
-      "prerequisite": {
-        "skill": "basic_blade",
-        "level": 60
-      }
-    }
-  },
-  "taiyi_xiajuan": {
-    "name": "太乙剑法·下卷",
-    "description": "太乙剑法的下卷，剑走青冥，后发先至。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "hit_rate_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "taiyi_xiajuan_page",
-      "prerequisite": {
-        "skill": "basic_sword",
-        "level": 60
-      }
-    }
-  },
-  "changsheng_xiajuan": {
-    "name": "长生诀·下卷",
-    "description": "长生诀的下卷，内功精纯如水。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "max_mp_per_level": 20,
-      "trained_mp_to_max_hp_percent": 0.6
-    },
-    "requirements": {
-      "item": "changsheng_xiajuan_page",
-      "prerequisite": {
-        "skill": "basic_neigong",
-        "level": 60
-      }
-    }
+    "slot": "combat",
+    "weaponType": "staff",
+    "teacherId": "",
+    "sourceDungeon": "datang_baling",
+    "manualId": "manual_fengmo_gun",
+    "source": "序19《巴陵夜泊》满通关结算"
   },
   "taxue_wuhen": {
     "name": "踏雪无痕",
-    "description": "轻功之绝——踏雪不留痕。",
-    "rarity": 5,
+    "description": "身法专精。序30《剑池》满通关结算，获得完整传承后自主修炼。",
+    "rarity": 4,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_10_levels": 2,
-      "initiative_per_10_levels": 3
+      "dodge_per_100_levels": 28,
+      "initiative_per_100_levels": 14
     },
     "requirements": {
-      "item": "taxue_page",
       "prerequisite": {
         "skill": "basic_qinggong",
-        "level": 60
+        "level": 80
       }
-    }
+    },
+    "slot": "movement",
+    "weaponType": "",
+    "teacherId": "",
+    "sourceDungeon": "jiangnan_jianchi",
+    "manualId": "manual_taxue_wuhen",
+    "source": "序30《剑池》满通关结算"
   },
   "jingang_buhuai": {
     "name": "金刚不坏",
-    "description": "守御之绝——金刚不坏，刀枪不入。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "parry_per_10_levels": 2,
-      "defense_per_10_levels": 3
-    },
-    "requirements": {
-      "item": "jingang_page",
-      "prerequisite": {
-        "skill": "basic_parry",
-        "level": 60
-      }
-    }
-  },
-  "tianmo_xiajuan": {
-    "name": "天魔策·下卷",
-    "description": "天魔策的下卷，魔气如潮。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "max_mp_per_level": 15,
-      "crit_rate_per_10_levels": 2,
-      "attack_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "tianmo_xiajuan_page",
-      "prerequisite": {
-        "skill": "basic_neigong",
-        "level": 80
-      }
-    }
-  },
-  "xiulou_pojia": {
-    "name": "修罗刀法·破甲",
-    "description": "修罗刀法的破甲篇。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "xiulou_pojia_page",
-      "prerequisite": {
-        "skill": "basic_blade",
-        "level": 80
-      }
-    }
-  },
-  "taiyi_tianming": {
-    "name": "太乙剑法·天命",
-    "description": "太乙剑法的天命篇。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "crit_rate_per_10_levels": 1,
-      "dodge_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "taiyi_tianming_page",
-      "prerequisite": {
-        "skill": "basic_sword",
-        "level": 80
-      }
-    }
-  },
-  "wugou_jianfa": {
-    "name": "无钩剑法",
-    "description": "无钩而有钩——剑意的最高境界是不依赖兵刃。",
+    "description": "守御专精。序37《竟陵试炼殿》满通关结算，获得完整传承后自主修炼。",
     "rarity": 4,
     "type": "ADVANCED",
-    "category": "weapon",
+    "category": "guard",
     "school": "hidden",
     "bonuses": {
-      "hit_rate_per_10_levels": 3,
-      "dodge_per_10_levels": 1
+      "defense_per_100_levels": 22,
+      "parry_per_100_levels": 22
     },
     "requirements": {
-      "item": "wugou_page",
-      "prerequisite": {
-        "skill": "basic_sword",
-        "level": 40
-      }
-    }
-  },
-  "hanshui_neigong": {
-    "name": "寒水内功",
-    "description": "北冥寒水之气的内功心法，冰冷刺骨，绵长不绝。",
-    "rarity": 4,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "max_mp_per_level": 12,
-      "trained_mp_to_max_hp_percent": 0.4
-    },
-    "requirements": {
-      "item": "hanshui_page",
-      "prerequisite": {
-        "skill": "basic_neigong",
-        "level": 40
-      }
-    }
-  },
-  "bengshan_quan": {
-    "name": "崩山拳",
-    "description": "拳出如山崩——拳劲刚猛，势不可挡。",
-    "rarity": 4,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "max_hp_per_level": 5
-    },
-    "requirements": {
-      "item": "bengshan_page",
-      "prerequisite": {
-        "skill": "basic_unarmed",
-        "level": 40
-      }
-    }
-  },
-  "wuying_shenfa": {
-    "name": "无影身法",
-    "description": "身法之绝——无影无形，无声无息。",
-    "rarity": 4,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "dodge_per_10_levels": 2,
-      "initiative_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "wuying_page",
-      "prerequisite": {
-        "skill": "basic_qinggong",
-        "level": 40
-      }
-    }
-  },
-  "liangyi_zhengang": {
-    "name": "两仪真罡",
-    "description": "攻守一体的真罡心法——两仪生四象，攻中有守，守中有攻。",
-    "rarity": 4,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 1,
-      "parry_per_10_levels": 2,
-      "defense_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "liangyi_page",
-      "prerequisite": {
-        "skill": "basic_parry",
-        "level": 40
-      }
-    }
-  },
-  "posui_zhizun": {
-    "name": "破碎至尊",
-    "description": "破碎至尊——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "posui_zz_page",
-      "prerequisite": {
-        "skill": "basic_unarmed",
-        "level": 60
-      }
-    }
-  },
-  "wujin_bian": {
-    "name": "无尽鞭",
-    "description": "无尽鞭。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "dodge_per_10_levels": 2,
-      "hit_rate_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "wujin_pg",
-      "prerequisite": {
-        "skill": "basic_whip",
-        "level": 60
-      }
-    }
-  },
-  "leiting_qiangfa": {
-    "name": "雷霆枪法",
-    "description": "雷霆枪法——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "crit_rate_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "leiting_page",
-      "prerequisite": {
-        "skill": "basic_spear",
-        "level": 60
-      }
-    }
-  },
-  "yaotong_suoli": {
-    "name": "妖瞳锁灵",
-    "description": "妖瞳锁灵——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "hit_rate_per_10_levels": 2,
-      "crit_rate_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "yaotong_page",
-      "prerequisite": {
-        "skill": "basic_hidden_weapon",
-        "level": 60
-      }
-    }
-  },
-  "jinhuan_goufa": {
-    "name": "金环钩法",
-    "description": "金环钩法——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "jinhuan_page",
-      "prerequisite": {
-        "skill": "basic_hook",
-        "level": 60
-      }
-    }
-  },
-  "shanshan_gunfa": {
-    "name": "闪闪棍法",
-    "description": "闪闪棍法——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "parry_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "shanshan_page",
-      "prerequisite": {
-        "skill": "basic_staff",
-        "level": 60
-      }
-    }
-  },
-  "lieshi_zhijue": {
-    "name": "裂石之锏",
-    "description": "裂石之锏——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "lieshi_zz_page",
-      "prerequisite": {
-        "skill": "basic_mace",
-        "level": 60
-      }
-    }
-  },
-  "hanshui_zhijue": {
-    "name": "寒水之诀",
-    "description": "寒水之诀——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "max_mp_per_level": 15,
-      "trained_mp_to_max_hp_percent": 0.5
-    },
-    "requirements": {
-      "item": "hanshui_zz_page",
-      "prerequisite": {
-        "skill": "basic_neigong",
-        "level": 60
-      }
-    }
-  },
-  "wugou_zhijue": {
-    "name": "无钩之诀",
-    "description": "无钩之诀——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "hit_rate_per_10_levels": 2,
-      "dodge_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "wugou_zz_page",
-      "prerequisite": {
-        "skill": "basic_sword",
-        "level": 80
-      }
-    }
-  },
-  "bengshan_zhijue": {
-    "name": "崩山之诀",
-    "description": "崩山之诀——武学之绝。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "max_hp_per_level": 8
-    },
-    "requirements": {
-      "item": "bengshan_zz_page",
-      "prerequisite": {
-        "skill": "basic_unarmed",
-        "level": 80
-      }
-    }
-  },
-  "posui_zz": {
-    "name": "破碎至尊",
-    "description": "破碎至尊。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "posui_zz_pg",
-      "prerequisite": {
-        "skill": "basic_unarmed",
-        "level": 60
-      }
-    }
-  },
-  "leiting_qf": {
-    "name": "雷霆枪法",
-    "description": "雷霆枪法。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "crit_rate_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "leiting_pg",
-      "prerequisite": {
-        "skill": "basic_spear",
-        "level": 60
-      }
-    }
-  },
-  "yaotong_sl": {
-    "name": "妖瞳锁灵",
-    "description": "妖瞳锁灵。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "hit_rate_per_10_levels": 2,
-      "crit_rate_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "yaotong_pg",
-      "prerequisite": {
-        "skill": "basic_hidden_weapon",
-        "level": 60
-      }
-    }
-  },
-  "jinhuan_gf": {
-    "name": "金环钩法",
-    "description": "金环钩法。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "jinhuan_pg",
-      "prerequisite": {
-        "skill": "basic_hook",
-        "level": 60
-      }
-    }
-  },
-  "shanshan_gf": {
-    "name": "闪闪棍法",
-    "description": "闪闪棍法。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "parry_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "shanshan_pg",
-      "prerequisite": {
-        "skill": "basic_staff",
-        "level": 60
-      }
-    }
-  },
-  "lieshi_zj": {
-    "name": "裂石之锏",
-    "description": "裂石之锏。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "lieshi_zz_pg",
-      "prerequisite": {
-        "skill": "basic_mace",
-        "level": 60
-      }
-    }
-  },
-  "hanshui_zj": {
-    "name": "寒水之诀",
-    "description": "寒水之诀。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "max_mp_per_level": 15,
-      "trained_mp_to_max_hp_percent": 0.5
-    },
-    "requirements": {
-      "item": "hanshui_zz_pg",
-      "prerequisite": {
-        "skill": "basic_neigong",
-        "level": 60
-      }
-    }
-  },
-  "wugou_zj": {
-    "name": "无钩之诀",
-    "description": "无钩之诀。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "hit_rate_per_10_levels": 2,
-      "dodge_per_10_levels": 2
-    },
-    "requirements": {
-      "item": "wugou_zz_pg",
-      "prerequisite": {
-        "skill": "basic_sword",
-        "level": 80
-      }
-    }
-  },
-  "bengshan_zj": {
-    "name": "崩山之诀",
-    "description": "崩山之诀。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "max_hp_per_level": 8
-    },
-    "requirements": {
-      "item": "bengshan_zz_pg",
-      "prerequisite": {
-        "skill": "basic_unarmed",
-        "level": 80
-      }
-    }
-  },
-  "manual_r204_0": {
-    "name": "无双枪",
-    "description": "无双枪。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_0",
-      "prerequisite": {
-        "skill": "basic_spear",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_1": {
-    "name": "游丝鞭",
-    "description": "游丝鞭。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_1",
-      "prerequisite": {
-        "skill": "basic_whip",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_2": {
-    "name": "碎玉锏",
-    "description": "碎玉锏。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_2",
-      "prerequisite": {
-        "skill": "basic_mace",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_3": {
-    "name": "寒泉钩",
-    "description": "寒泉钩。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_3",
-      "prerequisite": {
-        "skill": "basic_hook",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_4": {
-    "name": "流星雨",
-    "description": "流星雨。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 2,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_4",
-      "prerequisite": {
-        "skill": "basic_hidden_weapon",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_5": {
-    "name": "疯魔棍二式",
-    "description": "疯魔棍二式。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_5",
-      "prerequisite": {
-        "skill": "basic_staff",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_6": {
-    "name": "修罗刀·终",
-    "description": "修罗刀·终。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_6",
-      "prerequisite": {
-        "skill": "basic_blade",
-        "level": 80
-      }
-    }
-  },
-  "manual_r204_7": {
-    "name": "太乙剑·终",
-    "description": "太乙剑·终。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 1,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_7",
-      "prerequisite": {
-        "skill": "basic_sword",
-        "level": 80
-      }
-    }
-  },
-  "manual_r204_8": {
-    "name": "长生诀·终",
-    "description": "长生诀·终。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_8",
-      "prerequisite": {
-        "skill": "basic_neigong",
-        "level": 80
-      }
-    }
-  },
-  "manual_r204_9": {
-    "name": "凌波微步",
-    "description": "凌波微步。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 3,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_9",
-      "prerequisite": {
-        "skill": "basic_qinggong",
-        "level": 80
-      }
-    }
-  },
-  "manual_r204_10": {
-    "name": "金刚罡",
-    "description": "金刚罡。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 4,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_10",
       "prerequisite": {
         "skill": "basic_parry",
         "level": 80
       }
-    }
-  },
-  "manual_r204_11": {
-    "name": "伏虎拳·终",
-    "description": "伏虎拳·终。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 4,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
     },
-    "requirements": {
-      "item": "page_r204_11",
-      "prerequisite": {
-        "skill": "basic_unarmed",
-        "level": 80
-      }
-    }
-  },
-  "manual_r204_12": {
-    "name": "裂天刀",
-    "description": "裂天刀。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 4,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_12",
-      "prerequisite": {
-        "skill": "basic_blade",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_13": {
-    "name": "穿云剑",
-    "description": "穿云剑。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 4,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_13",
-      "prerequisite": {
-        "skill": "basic_sword",
-        "level": 60
-      }
-    }
-  },
-  "manual_r204_14": {
-    "name": "混元一气",
-    "description": "混元一气。",
-    "rarity": 5,
-    "type": "ADVANCED",
-    "category": "weapon",
-    "school": "hidden",
-    "bonuses": {
-      "attack_per_10_levels": 4,
-      "defense_per_10_levels": 2,
-      "dodge_per_10_levels": 1
-    },
-    "requirements": {
-      "item": "page_r204_14",
-      "prerequisite": {
-        "skill": "basic_neigong",
-        "level": 60
-      }
-    }
+    "slot": "guard",
+    "weaponType": "",
+    "teacherId": "",
+    "sourceDungeon": "jingling_trial_hall",
+    "manualId": "manual_jingang_buhuai",
+    "source": "序37《竟陵试炼殿》满通关结算"
   }
 }

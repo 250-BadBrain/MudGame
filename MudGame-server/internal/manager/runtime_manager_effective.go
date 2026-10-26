@@ -2,6 +2,7 @@ package manager
 
 import (
 	"math"
+	"strings"
 	"time"
 
 	"mudgame/server/internal/model"
@@ -11,31 +12,26 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	if p == nil {
 		return model.EffectiveAttributes{}
 	}
-	attrs := model.NormalizeAttributes(p.Attributes)
-	eff := model.BuildEffectiveAttributes(attrs)
-	// 玩家气血上限 = 60 + 根骨×4（根骨生效），再叠加内功转化与技能/装备加成
-	eff.MaxHP = 60 + eff.Constitution*4
-	eff.Attack = 0
-	eff.Defense = 0
-	eff.HitRate = 0
-	eff.Dodge = 0
-	eff.Parry = 0
-	eff.MeditateRecoveryBonus = 0
-	eff.LearningInvestBonus = 0
-	applySkillBonusesNoLock(&eff, p.Skills, p.EquippedSkills)
+	eff := model.BuildEffectiveAttributes(model.NormalizeAttributes(p.Attributes))
+	eff.MaxHP, eff.MaxMP, eff.MaxSpirit = 0, 0, 0
+	eff.Attack, eff.Defense, eff.HitRate, eff.Dodge, eff.Parry, eff.Initiative = 0, 0, 0, 0, 0, 0
+	eff.CritRate = 1
+	conversion := applyMartialBonusesNoLock(&eff, p)
 	applyEquipmentEffectsNoLock(&eff, p.Equipment)
 	applyEnhancementNoLock(&eff, p)
-	directAttack := eff.Attack
-	directDefense := eff.Defense
-	directHitRate := eff.HitRate
-	directDodge := eff.Dodge
-	directParry := eff.Parry
+	eff.MaxMP += max(50, (eff.Perception+eff.Willpower)*5)
+	eff.TrainedMaxMP = min(eff.TrainedMaxMP, eff.MaxMP)
+	eff.MaxHP += 60 + eff.Constitution*4 + int(math.Ceil(float64(eff.TrainedMaxMP)*conversion))
+	eff.MaxSpirit += max(60, (eff.Perception+eff.Willpower)*3)
 	derived := model.CalculateCombatDerived(eff)
-	eff.Attack = derived.Attack + directAttack
-	eff.Defense = derived.Defense + directDefense
-	eff.HitRate = derived.HitRate + directHitRate
-	eff.Dodge = derived.Dodge + directDodge
-	eff.Parry = derived.Parry + directParry
+	eff.Attack += derived.Attack
+	eff.Defense += derived.Defense
+	eff.HitRate += derived.HitRate
+	eff.Dodge += derived.Dodge
+	eff.Parry += derived.Parry
+	eff.Initiative += 60 + eff.Agility + eff.Perception/2
+	eff.CritRate = min(25, max(0, eff.CritRate))
+	clampEffectiveResources(&eff)
 	applyWeaknessNoLock(&eff, p)
 	return eff
 }
@@ -53,38 +49,29 @@ func applyWeaknessNoLock(eff *model.EffectiveAttributes, p *model.Player) {
 	eff.Initiative /= 2
 }
 
-func applySkillBonusesNoLock(eff *model.EffectiveAttributes, skills map[string]int, equipped map[string]string) {
-	if eff == nil {
-		return
-	}
-	trainedMPToHPPercent := 0.0
-	for skillID, level := range skills {
-		if level <= 0 {
-			continue
-		}
-		def, ok := fileSkills[skillID]
-		if !ok {
-			continue
-		}
-		// 秘籍装备规则：ADVANCED 技能只有装备到前置基本武功槽位才参与加成（见 formulas.md 3.3）
-		if def.Type == "ADVANCED" && equipped[skillPrerequisiteID(def)] != skillID {
+func applyMartialBonusesNoLock(eff *model.EffectiveAttributes, p *model.Player) float64 {
+	conversion := 0.0
+	for id, level := range p.Skills {
+		def, exists := fileSkills[id]
+		if !exists || skillActiveReason(p, def) != "" {
 			continue
 		}
 		for key, value := range def.Bonuses {
 			if key == "trained_mp_to_max_hp_percent" {
-				trainedMPToHPPercent += value
-				continue
+				if def.Type == "BASIC" {
+					conversion += value
+				} else {
+					conversion += value * float64(min(level, 100)) / 100
+				}
+			} else {
+				applyLeveledBonus(eff, key, value, level)
 			}
-			applyLeveledBonus(eff, key, value, level)
 		}
 	}
-	if trainedMPToHPPercent > 0 {
-		eff.MaxHP += int(math.Ceil(float64(eff.TrainedMaxMP) * trainedMPToHPPercent))
-	}
-	clampEffectiveResources(eff)
+	return min(.45, conversion)
 }
 
-// skillPrerequisiteID 返回技能声明的前置基本武功 ID（装备槽位），无声明返回空串。
+// skillPrerequisiteID 返回技能声明的根基 ID，无声明返回空串。
 func skillPrerequisiteID(def model.SkillDef) string {
 	prereq, ok := def.Requirements["prerequisite"].(map[string]interface{})
 	if !ok {
@@ -100,61 +87,57 @@ func skillPrerequisiteLevel(def model.SkillDef) int {
 	if !ok {
 		return 0
 	}
-	lv, _ := prereq["level"].(float64)
-	return int(lv)
+	return toIntEffect(prereq["level"])
 }
 
 func applyEquipmentEffectsNoLock(eff *model.EffectiveAttributes, equipment map[string]string) {
 	if eff == nil {
 		return
 	}
-	for _, itemID := range equipment {
+	for slot, itemID := range equipment {
 		def, ok := fileItems[itemID]
-		if !ok {
+		if !ok || def.EquipmentSlot != slot {
 			continue
 		}
 		for key, value := range def.Effects {
 			applyFlatBonus(eff, key, toIntEffect(value))
 		}
 	}
-	clampEffectiveResources(eff)
 }
 
 func applyLeveledBonus(eff *model.EffectiveAttributes, key string, value float64, level int) {
-	switch key {
-	case "meditate_recovery_per_10_levels":
-		eff.MeditateRecoveryBonus += int(value) * (level / 10)
-	case "learning_invest_bonus_per_10_levels":
-		eff.LearningInvestBonus += int(value) * (level / 10)
-	case "initiative_per_10_levels":
-		eff.Initiative += int(value) * (level / 10)
-	case "post_strength_per_10_levels":
-		eff.Strength += int(value) * (level / 10)
-	case "post_constitution_per_10_levels":
-		eff.Constitution += int(value) * (level / 10)
-	case "post_agility_per_10_levels":
-		eff.Agility += int(value) * (level / 10)
-	case "post_perception_per_10_levels", "intelligence_check_per_10_levels":
-		eff.Perception += int(value) * (level / 10)
-	case "post_willpower_per_10_levels":
-		eff.Willpower += int(value) * (level / 10)
-	case "attack_per_10_levels":
-		eff.Attack += int(value) * (level / 10)
-	case "defense_per_10_levels":
-		eff.Defense += int(value) * (level / 10)
-	case "hit_rate_per_10_levels":
-		eff.HitRate += int(value) * (level / 10)
-	case "dodge_per_10_levels":
-		eff.Dodge += int(value) * (level / 10)
-	case "parry_per_10_levels":
-		eff.Parry += int(value) * (level / 10)
-	case "crit_rate_per_10_levels":
-		eff.CritRate += int(value) * (level / 10)
-	case "max_mp_per_level":
-		eff.MaxMP += int(value) * level
-	case "max_hp_per_level":
-		eff.MaxHP += int(value) * level
-		eff.HP += int(value) * level
+	if strings.HasSuffix(key, "_per_100_levels") {
+		stat := strings.TrimSuffix(key, "_per_100_levels")
+		if stat == "crit_rate" {
+			eff.CritRate += float64(value) * float64(level) / 100
+			return
+		}
+		n := leveledValue(value, level)
+		switch stat {
+		case "post_strength":
+			eff.Strength += n
+		case "post_constitution":
+			eff.Constitution += n
+		case "post_willpower":
+			eff.Willpower += n
+		case "post_agility":
+			eff.Agility += n
+		case "post_perception":
+			eff.Perception += n
+		case "meditate_recovery":
+			eff.MeditateRecoveryBonus += n
+		case "learning_invest_bonus":
+			eff.LearningInvestBonus += n
+		case "initiative":
+			eff.Initiative += n
+		default:
+			alias := map[string]string{"max_mp": "maxMp", "max_hp": "maxHp", "hit_rate": "hitRate"}
+			if key, ok := alias[stat]; ok {
+				stat = key
+			}
+			applyFlatBonus(eff, stat, n)
+		}
+		return
 	}
 }
 
@@ -185,10 +168,9 @@ func applyFlatBonus(eff *model.EffectiveAttributes, key string, value int) {
 	case "parry":
 		eff.Parry += value
 	case "critRate":
-		eff.CritRate += value
+		eff.CritRate += float64(value)
 	case "maxHp":
 		eff.MaxHP += value
-		eff.HP += value
 	case "maxMp":
 		eff.MaxMP += value
 	case "spirit", "maxSpirit":

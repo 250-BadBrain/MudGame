@@ -68,7 +68,9 @@ def named_stats(text):
 
 
 def main():
-    skills = read_json(RESOURCES / 'skills.json')
+    live_skills = read_json(RESOURCES / 'skills.json')
+    legacy = read_json(RESOURCES / 'migrations/martial_v1.json')
+    skills = legacy['skills']
     items = read_json(RESOURCES / 'items.json')
     npcs = read_json(RESOURCES / 'npcs.json')
     text = PROPOSAL.read_text(encoding='utf-8')
@@ -82,6 +84,7 @@ def main():
     mapping_counts = Counter('merged' if row[2] == '合并' else 'retired' if row[2] == '退役' else 'retained' for row in mappings)
     assert mapping_counts == {'retained': 38, 'merged': 15, 'retired': 30}
     retained = {row[0].strip('`') for row in mappings if row[2] != '合并' and row[2] != '退役'}
+    assert retained == set(live_skills), 'catalog differs from implemented resources'
     for row in mappings:
         if row[2] == '合并':
             assert re.search(r'`([^`]+)`', row[3])[1] in retained, row
@@ -91,10 +94,10 @@ def main():
     assert Counter(row[1][0] for row in arts) == {'2': 7, '3': 9, '4': 4, '5': 5}
     new_weapons = [row[0].strip('`') for row in rows_between(text, '### 5.4', '## 6.') if row[0].startswith('`')]
     assert len(new_weapons) == len(set(new_weapons)) == 9
-    assert all(re.fullmatch('[a-z][a-z0-9_]*', key) and key not in items for key in new_weapons)
+    assert all(re.fullmatch('[a-z][a-z0-9_]*', key) and key in items for key in new_weapons)
     book_rows = [row for row in rows_between(text, '### 8.2 旧秘籍物品的完整处理表', '## 9.') if row[0].startswith('`')]
     book_ids = [row[0].strip('`') for row in book_rows]
-    expected_books = {key for key, item in items.items() if item.get('effects', {}).get('learnSkill')}
+    expected_books = set(legacy['books'])
     assert len(book_ids) == len(set(book_ids)) == len(expected_books) == 69
     assert set(book_ids) == expected_books
     assert not re.search(r'(?m)^\|[^\n]*\|\n\n\|', text), 'Broken Markdown table'
@@ -146,7 +149,9 @@ def main():
         for revised in [False, True]:
             actor = {'attack': 56, 'defense': 53, 'hit': 134, 'dodge': 100, 'parry': 88, 'crit': 1}
             actor['attack'] += 0 if name == '破虚指' else 12
-            root = {'attack': 24 if name == '破虚指' else 12} if revised else basic_old[name]
+            art = next(skill for skill in live_skills.values() if skill['name'] == name)
+            root_def = live_skills[art['requirements']['prerequisite']['skill']]
+            root = {'attack': math.floor(root_def['bonuses']['attack_per_100_levels'] * 120 / 100)} if revised else basic_old[name]
             for bonuses in [root, current[name] if revised else original]:
                 for field, value in bonuses.items():
                     actor[field] = actor.get(field, 0) + value
@@ -163,7 +168,7 @@ def main():
     inner_rows = rows_between(text, '| 武功 | 100级额外增益 |', '### 7.2')
     inner_descriptions = {name: description for name, description in inner_rows}
     for name in ['混元功', '洞庭心法', '战神图录', '长生诀', '天魔策']:
-        actor = {'attack': 56 + 12 + 12, 'defense': 53, 'hit': 134, 'dodge': 100, 'parry': 88, 'crit': 1}
+        actor = {'attack': 56 + 12 + 24, 'defense': 53, 'hit': 134, 'dodge': 100, 'parry': 88, 'crit': 1}
         for bonuses in [current['天刀八诀'], current[name]]:
             for field, value in bonuses.items():
                 actor[field] = actor.get(field, 0) + value
@@ -197,9 +202,9 @@ def main():
                              'old_growth_seconds': (mp_cap - 80) * 10,
                              'revised_growth_seconds': meditation_ticks * 10,
                              'excludes_current_mp_recovery_time': True},
-              'gathering': {'live_silver_per_minute': silver * 2,
-                            'proposed_silver_per_minute': round(ordinary_silver * 2, 2),
-                            'labor_silver_per_minute': 20}}
+              'gathering': {'baseline_copper_per_minute': silver * 2,
+                            'proposed_copper_per_minute': round(ordinary_silver * 2, 2),
+                            'labor_copper_per_minute': 20}}
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

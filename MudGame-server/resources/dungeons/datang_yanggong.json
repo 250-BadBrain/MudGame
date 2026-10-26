@@ -51,9 +51,8 @@
       "nextState": "read",
       "message": "你凑近门楣上\"弃子争先，以拙破巧\"的批注，逐字玩味——批注背后竟还藏着一套读书悟道的法门，《悟真篇》残页赫然在目。",
       "repeatMessage": "批注你早已烂熟于心。",
-      "giveItems": {
-        "wuzhen_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 250
     }
   },
   "rooms": {

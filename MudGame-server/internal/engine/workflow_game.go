@@ -268,7 +268,7 @@ func LearnWithEffects(repo RuntimeRepository, playerID, npcID, skillID string) (
 	if err := repo.LearnSkill(playerID, npcID, skillID); err != nil {
 		return StateActionResult{}, err
 	}
-	return StateActionResult{Message: "你开始专心学习。", NeedRoomUpdate: true}, nil
+	return StateActionResult{Message: "你领会了武学指点，可在技能页查看与自主修炼。", NeedRoomUpdate: true}, nil
 }
 
 func GetRoomSnapshotView(repo RuntimeRepository, playerID string) (RoomSnapshotResult, error) {

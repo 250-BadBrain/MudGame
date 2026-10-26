@@ -1,0 +1,1149 @@
+{
+  "version": 1,
+  "skills": {
+    "basic_unarmed": {
+      "name": "基本拳脚",
+      "type": "BASIC",
+      "target": "basic_unarmed"
+    },
+    "basic_parry": {
+      "name": "基本招架",
+      "type": "BASIC",
+      "target": "basic_parry"
+    },
+    "basic_neigong": {
+      "name": "基本内功",
+      "type": "BASIC",
+      "target": "basic_neigong"
+    },
+    "basic_qinggong": {
+      "name": "基本轻功",
+      "type": "BASIC",
+      "target": "basic_qinggong"
+    },
+    "basic_blade": {
+      "name": "基本刀法",
+      "type": "BASIC",
+      "target": "basic_blade"
+    },
+    "basic_sword": {
+      "name": "基本剑法",
+      "type": "BASIC",
+      "target": "basic_sword"
+    },
+    "basic_literacy": {
+      "name": "读书识文",
+      "type": "BASIC",
+      "target": "basic_literacy"
+    },
+    "csj_changshengjue": {
+      "name": "长生诀",
+      "type": "ADVANCED",
+      "target": "csj_changshengjue"
+    },
+    "jyg_zhanshentu_dao": {
+      "name": "战神图录·刀法",
+      "type": "ADVANCED",
+      "target": "jyg_zhanshentu_dao"
+    },
+    "tiandao_blade": {
+      "name": "天刀八诀",
+      "type": "ADVANCED",
+      "target": "tiandao_blade"
+    },
+    "basic_staff": {
+      "name": "基本棍法",
+      "type": "BASIC",
+      "target": "basic_staff"
+    },
+    "basic_hidden_weapon": {
+      "name": "基本暗器",
+      "type": "BASIC",
+      "target": "basic_hidden_weapon"
+    },
+    "thunder_sword": {
+      "name": "奔雷剑法",
+      "type": "BASIC",
+      "target": "thunder_sword"
+    },
+    "bloody_blade": {
+      "name": "血战刀法",
+      "type": "BASIC",
+      "target": "bloody_blade"
+    },
+    "basic_spear": {
+      "name": "基本枪法",
+      "type": "BASIC",
+      "target": "basic_spear"
+    },
+    "basic_whip": {
+      "name": "基本鞭法",
+      "type": "BASIC",
+      "target": "basic_whip"
+    },
+    "basic_mace": {
+      "name": "基本锏法",
+      "type": "BASIC",
+      "target": "basic_mace"
+    },
+    "basic_hook": {
+      "name": "基本钩法",
+      "type": "BASIC",
+      "target": "basic_hook"
+    },
+    "cihang_jiandian": {
+      "name": "慈航剑典",
+      "type": "ADVANCED",
+      "target": "cihang_jiandian"
+    },
+    "hunyuan_neigong": {
+      "name": "混元功",
+      "type": "ADVANCED",
+      "target": "hunyuan_neigong"
+    },
+    "tianmo_ce": {
+      "name": "天魔策",
+      "type": "ADVANCED",
+      "target": "tianmo_ce"
+    },
+    "talang_jue": {
+      "name": "踏浪诀",
+      "type": "ADVANCED",
+      "target": "talang_jue"
+    },
+    "fuhu_jin": {
+      "name": "伏虎劲",
+      "type": "ADVANCED",
+      "target": "fuhu_jin"
+    },
+    "tiebi_gong": {
+      "name": "铁壁功",
+      "type": "ADVANCED",
+      "target": "tiebi_gong"
+    },
+    "wuzhen_pian": {
+      "name": "悟真篇",
+      "type": "ADVANCED",
+      "target": "wuzhen_pian"
+    },
+    "xiulou_daofa": {
+      "name": "修罗刀法",
+      "type": "ADVANCED",
+      "target": "xiulou_daofa"
+    },
+    "taiyi_jianfa": {
+      "name": "太乙剑法",
+      "type": "ADVANCED",
+      "target": "taiyi_jianfa"
+    },
+    "dongting_xinf": {
+      "name": "洞庭心法",
+      "type": "ADVANCED",
+      "target": "dongting_xinf"
+    },
+    "lingxu_bu": {
+      "name": "凌虚步",
+      "type": "ADVANCED",
+      "target": "lingxu_bu"
+    },
+    "poxu_zhi": {
+      "name": "破虚指",
+      "type": "ADVANCED",
+      "target": "poxu_zhi"
+    },
+    "bawang_qiang": {
+      "name": "霸王枪",
+      "type": "ADVANCED",
+      "target": "bawang_qiang"
+    },
+    "youlong_bian": {
+      "name": "游龙鞭",
+      "type": "ADVANCED",
+      "target": "youlong_bian"
+    },
+    "lieshi_jian": {
+      "name": "裂石锏",
+      "type": "ADVANCED",
+      "target": "lieshi_jian"
+    },
+    "suolang_gou": {
+      "name": "锁浪钩",
+      "type": "ADVANCED",
+      "target": "suolang_gou"
+    },
+    "mantian_huayu": {
+      "name": "漫天花雨",
+      "type": "ADVANCED",
+      "target": "mantian_huayu"
+    },
+    "fengmo_gun": {
+      "name": "疯魔棍",
+      "type": "ADVANCED",
+      "target": "fengmo_gun"
+    },
+    "tiandao_pojun": {
+      "name": "天刀·破军",
+      "type": "ADVANCED",
+      "target": "tiandao_blade"
+    },
+    "taiyi_xiajuan": {
+      "name": "太乙剑法·下卷",
+      "type": "ADVANCED",
+      "target": "taiyi_jianfa"
+    },
+    "changsheng_xiajuan": {
+      "name": "长生诀·下卷",
+      "type": "ADVANCED",
+      "target": "csj_changshengjue"
+    },
+    "taxue_wuhen": {
+      "name": "踏雪无痕",
+      "type": "ADVANCED",
+      "target": "taxue_wuhen"
+    },
+    "jingang_buhuai": {
+      "name": "金刚不坏",
+      "type": "ADVANCED",
+      "target": "jingang_buhuai"
+    },
+    "tianmo_xiajuan": {
+      "name": "天魔策·下卷",
+      "type": "ADVANCED",
+      "target": "tianmo_ce"
+    },
+    "xiulou_pojia": {
+      "name": "修罗刀法·破甲",
+      "type": "ADVANCED",
+      "target": "xiulou_daofa"
+    },
+    "taiyi_tianming": {
+      "name": "太乙剑法·天命",
+      "type": "ADVANCED",
+      "target": "taiyi_jianfa"
+    },
+    "wugou_jianfa": {
+      "name": "无钩剑法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "hanshui_neigong": {
+      "name": "寒水内功",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "bengshan_quan": {
+      "name": "崩山拳",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "wuying_shenfa": {
+      "name": "无影身法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "liangyi_zhengang": {
+      "name": "两仪真罡",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "posui_zhizun": {
+      "name": "破碎至尊",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "wujin_bian": {
+      "name": "无尽鞭",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "leiting_qiangfa": {
+      "name": "雷霆枪法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "yaotong_suoli": {
+      "name": "妖瞳锁灵",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "jinhuan_goufa": {
+      "name": "金环钩法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "shanshan_gunfa": {
+      "name": "闪闪棍法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "lieshi_zhijue": {
+      "name": "裂石之锏",
+      "type": "ADVANCED",
+      "target": "lieshi_jian"
+    },
+    "hanshui_zhijue": {
+      "name": "寒水之诀",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "wugou_zhijue": {
+      "name": "无钩之诀",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "bengshan_zhijue": {
+      "name": "崩山之诀",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "posui_zz": {
+      "name": "破碎至尊",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "leiting_qf": {
+      "name": "雷霆枪法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "yaotong_sl": {
+      "name": "妖瞳锁灵",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "jinhuan_gf": {
+      "name": "金环钩法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "shanshan_gf": {
+      "name": "闪闪棍法",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "lieshi_zj": {
+      "name": "裂石之锏",
+      "type": "ADVANCED",
+      "target": "lieshi_jian"
+    },
+    "hanshui_zj": {
+      "name": "寒水之诀",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "wugou_zj": {
+      "name": "无钩之诀",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "bengshan_zj": {
+      "name": "崩山之诀",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_0": {
+      "name": "无双枪",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_1": {
+      "name": "游丝鞭",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_2": {
+      "name": "碎玉锏",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_3": {
+      "name": "寒泉钩",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_4": {
+      "name": "流星雨",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_5": {
+      "name": "疯魔棍二式",
+      "type": "ADVANCED",
+      "target": "fengmo_gun"
+    },
+    "manual_r204_6": {
+      "name": "修罗刀·终",
+      "type": "ADVANCED",
+      "target": "xiulou_daofa"
+    },
+    "manual_r204_7": {
+      "name": "太乙剑·终",
+      "type": "ADVANCED",
+      "target": "taiyi_jianfa"
+    },
+    "manual_r204_8": {
+      "name": "长生诀·终",
+      "type": "ADVANCED",
+      "target": "csj_changshengjue"
+    },
+    "manual_r204_9": {
+      "name": "凌波微步",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_10": {
+      "name": "金刚罡",
+      "type": "ADVANCED",
+      "target": "jingang_buhuai"
+    },
+    "manual_r204_11": {
+      "name": "伏虎拳·终",
+      "type": "ADVANCED",
+      "target": "fuhu_jin"
+    },
+    "manual_r204_12": {
+      "name": "裂天刀",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_13": {
+      "name": "穿云剑",
+      "type": "ADVANCED",
+      "target": null
+    },
+    "manual_r204_14": {
+      "name": "混元一气",
+      "type": "ADVANCED",
+      "target": "hunyuan_neigong"
+    }
+  },
+  "books": {
+    "csj_changshengjue_page": {
+      "skill": "csj_changshengjue",
+      "value": 500,
+      "name": "长生诀残页"
+    },
+    "jyg_zhanshentu_rubbing": {
+      "skill": "jyg_zhanshentu_dao",
+      "value": 600,
+      "name": "战神图录摹本"
+    },
+    "tiandao_page": {
+      "skill": "tiandao_blade",
+      "value": 500,
+      "name": "天刀残页"
+    },
+    "cihang_page": {
+      "skill": "cihang_jiandian",
+      "value": 500,
+      "name": "慈航剑典残页"
+    },
+    "hunyuan_page": {
+      "skill": "hunyuan_neigong",
+      "value": 500,
+      "name": "混元功残页"
+    },
+    "tianmo_page": {
+      "skill": "tianmo_ce",
+      "value": 800,
+      "name": "天魔策残页"
+    },
+    "talang_page": {
+      "skill": "talang_jue",
+      "value": 500,
+      "name": "踏浪诀残页"
+    },
+    "fuhu_page": {
+      "skill": "fuhu_jin",
+      "value": 500,
+      "name": "伏虎劲残页"
+    },
+    "tiebi_page": {
+      "skill": "tiebi_gong",
+      "value": 500,
+      "name": "铁壁功残页"
+    },
+    "wuzhen_page": {
+      "skill": "wuzhen_pian",
+      "value": 500,
+      "name": "悟真篇残页"
+    },
+    "xiulou_page": {
+      "skill": "xiulou_daofa",
+      "value": 600,
+      "name": "修罗刀法残页"
+    },
+    "taiyi_page": {
+      "skill": "taiyi_jianfa",
+      "value": 600,
+      "name": "太乙剑法残页"
+    },
+    "dongting_page": {
+      "skill": "dongting_xinf",
+      "value": 500,
+      "name": "洞庭心法残页"
+    },
+    "lingxu_page": {
+      "skill": "lingxu_bu",
+      "value": 500,
+      "name": "凌虚步残页"
+    },
+    "poxu_page": {
+      "skill": "poxu_zhi",
+      "value": 600,
+      "name": "破虚指残页"
+    },
+    "bawang_page": {
+      "skill": "bawang_qiang",
+      "value": 600,
+      "name": "霸王枪残页"
+    },
+    "youlong_page": {
+      "skill": "youlong_bian",
+      "value": 600,
+      "name": "游龙鞭残页"
+    },
+    "lieshi_page": {
+      "skill": "lieshi_jian",
+      "value": 600,
+      "name": "裂石锏残页"
+    },
+    "suolang_page": {
+      "skill": "suolang_gou",
+      "value": 600,
+      "name": "锁浪钩残页"
+    },
+    "huayu_page": {
+      "skill": "mantian_huayu",
+      "value": 600,
+      "name": "漫天花雨残页"
+    },
+    "fengmo_page": {
+      "skill": "fengmo_gun",
+      "value": 600,
+      "name": "疯魔棍残页"
+    },
+    "tiandao_pojun_page": {
+      "skill": "tiandao_pojun",
+      "value": 800,
+      "name": "天刀·破军残页"
+    },
+    "taiyi_xiajuan_page": {
+      "skill": "taiyi_xiajuan",
+      "value": 800,
+      "name": "太乙剑法·下卷残页"
+    },
+    "changsheng_xiajuan_page": {
+      "skill": "changsheng_xiajuan",
+      "value": 800,
+      "name": "长生诀·下卷残页"
+    },
+    "taxue_page": {
+      "skill": "taxue_wuhen",
+      "value": 800,
+      "name": "踏雪无痕残页"
+    },
+    "jingang_page": {
+      "skill": "jingang_buhuai",
+      "value": 800,
+      "name": "金刚不坏残页"
+    },
+    "tianmo_xiajuan_page": {
+      "skill": "tianmo_xiajuan",
+      "value": 800,
+      "name": "天魔策·下卷残页"
+    },
+    "xiulou_pojia_page": {
+      "skill": "xiulou_pojia",
+      "value": 800,
+      "name": "修罗刀法·破甲残页"
+    },
+    "taiyi_tianming_page": {
+      "skill": "taiyi_tianming",
+      "value": 800,
+      "name": "太乙剑法·天命残页"
+    },
+    "wugou_page": {
+      "skill": "wugou_jianfa",
+      "value": 600,
+      "name": "无钩剑法残页"
+    },
+    "hanshui_page": {
+      "skill": "hanshui_neigong",
+      "value": 600,
+      "name": "寒水内功残页"
+    },
+    "bengshan_page": {
+      "skill": "bengshan_quan",
+      "value": 600,
+      "name": "崩山拳残页"
+    },
+    "wuying_page": {
+      "skill": "wuying_shenfa",
+      "value": 600,
+      "name": "无影身法残页"
+    },
+    "liangyi_page": {
+      "skill": "liangyi_zhengang",
+      "value": 600,
+      "name": "两仪真罡残页"
+    },
+    "posui_zz_page": {
+      "skill": "posui_zhizun",
+      "value": 800,
+      "name": "破碎至尊残页"
+    },
+    "wujin_bian_page": {
+      "skill": "wujin_bian",
+      "value": 800,
+      "name": "无尽鞭残页"
+    },
+    "leiting_page": {
+      "skill": "leiting_qiangfa",
+      "value": 800,
+      "name": "雷霆枪法残页"
+    },
+    "yaotong_page": {
+      "skill": "yaotong_suoli",
+      "value": 800,
+      "name": "妖瞳锁灵残页"
+    },
+    "jinhuan_page": {
+      "skill": "jinhuan_goufa",
+      "value": 800,
+      "name": "金环钩法残页"
+    },
+    "shanshan_page": {
+      "skill": "shanshan_gunfa",
+      "value": 800,
+      "name": "闪闪棍法残页"
+    },
+    "lieshi_zz_page": {
+      "skill": "lieshi_zhijue",
+      "value": 800,
+      "name": "裂石之锏残页"
+    },
+    "hanshui_zz_page": {
+      "skill": "hanshui_zhijue",
+      "value": 800,
+      "name": "寒水之诀残页"
+    },
+    "wugou_zz_page": {
+      "skill": "wugou_zhijue",
+      "value": 800,
+      "name": "无钩之诀残页"
+    },
+    "bengshan_zz_page": {
+      "skill": "bengshan_zhijue",
+      "value": 800,
+      "name": "崩山之诀残页"
+    },
+    "posui_zz_pg": {
+      "skill": "posui_zz",
+      "value": 800,
+      "name": "破碎至尊残页"
+    },
+    "wujin_pg": {
+      "skill": "wujin_bian",
+      "value": 800,
+      "name": "无尽鞭残页"
+    },
+    "leiting_pg": {
+      "skill": "leiting_qf",
+      "value": 800,
+      "name": "雷霆枪法残页"
+    },
+    "yaotong_pg": {
+      "skill": "yaotong_sl",
+      "value": 800,
+      "name": "妖瞳锁灵残页"
+    },
+    "jinhuan_pg": {
+      "skill": "jinhuan_gf",
+      "value": 800,
+      "name": "金环钩法残页"
+    },
+    "shanshan_pg": {
+      "skill": "shanshan_gf",
+      "value": 800,
+      "name": "闪闪棍法残页"
+    },
+    "lieshi_zz_pg": {
+      "skill": "lieshi_zj",
+      "value": 800,
+      "name": "裂石之锏残页"
+    },
+    "hanshui_zz_pg": {
+      "skill": "hanshui_zj",
+      "value": 800,
+      "name": "寒水之诀残页"
+    },
+    "wugou_zz_pg": {
+      "skill": "wugou_zj",
+      "value": 800,
+      "name": "无钩之诀残页"
+    },
+    "bengshan_zz_pg": {
+      "skill": "bengshan_zj",
+      "value": 800,
+      "name": "崩山之诀残页"
+    },
+    "page_r204_0": {
+      "skill": "manual_r204_0",
+      "value": 800,
+      "name": "无双枪残页"
+    },
+    "page_r204_1": {
+      "skill": "manual_r204_1",
+      "value": 800,
+      "name": "游丝鞭残页"
+    },
+    "page_r204_2": {
+      "skill": "manual_r204_2",
+      "value": 800,
+      "name": "碎玉锏残页"
+    },
+    "page_r204_3": {
+      "skill": "manual_r204_3",
+      "value": 800,
+      "name": "寒泉钩残页"
+    },
+    "page_r204_4": {
+      "skill": "manual_r204_4",
+      "value": 800,
+      "name": "流星雨残页"
+    },
+    "page_r204_5": {
+      "skill": "manual_r204_5",
+      "value": 800,
+      "name": "疯魔棍二式残页"
+    },
+    "page_r204_6": {
+      "skill": "manual_r204_6",
+      "value": 800,
+      "name": "修罗刀·终残页"
+    },
+    "page_r204_7": {
+      "skill": "manual_r204_7",
+      "value": 800,
+      "name": "太乙剑·终残页"
+    },
+    "page_r204_8": {
+      "skill": "manual_r204_8",
+      "value": 800,
+      "name": "长生诀·终残页"
+    },
+    "page_r204_9": {
+      "skill": "manual_r204_9",
+      "value": 800,
+      "name": "凌波微步残页"
+    },
+    "page_r204_10": {
+      "skill": "manual_r204_10",
+      "value": 800,
+      "name": "金刚罡残页"
+    },
+    "page_r204_11": {
+      "skill": "manual_r204_11",
+      "value": 800,
+      "name": "伏虎拳·终残页"
+    },
+    "page_r204_12": {
+      "skill": "manual_r204_12",
+      "value": 800,
+      "name": "裂天刀残页"
+    },
+    "page_r204_13": {
+      "skill": "manual_r204_13",
+      "value": 800,
+      "name": "穿云剑残页"
+    },
+    "page_r204_14": {
+      "skill": "manual_r204_14",
+      "value": 800,
+      "name": "混元一气残页"
+    }
+  },
+  "equipment": {
+    "common_clothes": {
+      "slot": "BODY",
+      "name": "粗布衣"
+    },
+    "common_shoes": {
+      "slot": "FEET",
+      "name": "布鞋"
+    },
+    "iron_sword": {
+      "slot": "WEAPON",
+      "name": "铁剑"
+    },
+    "steel_blade": {
+      "slot": "WEAPON",
+      "name": "钢刀"
+    },
+    "iron_staff": {
+      "slot": "WEAPON",
+      "name": "铁棍"
+    },
+    "darts": {
+      "slot": "HIDDEN_WEAPON",
+      "name": "飞镖"
+    },
+    "iron_pickaxe": {
+      "slot": "WEAPON",
+      "name": "铁镐"
+    },
+    "nujiao_saber": {
+      "slot": "WEAPON",
+      "name": "怒蛟刀"
+    },
+    "yanggong_sword": {
+      "slot": "WEAPON",
+      "name": "杨公宝剑"
+    },
+    "lanjiang_vest": {
+      "slot": "BODY",
+      "name": "拦江劲衣"
+    },
+    "langwang_dao": {
+      "slot": "WEAPON",
+      "name": "狼王刀"
+    },
+    "tianmo_pei": {
+      "slot": "RING",
+      "name": "天魔佩"
+    },
+    "wagang_tiejia": {
+      "slot": "BODY",
+      "name": "瓦岗铁甲"
+    },
+    "tianma_ling": {
+      "slot": "NECKLACE",
+      "name": "天马银铃"
+    },
+    "posui_huan": {
+      "slot": "RING",
+      "name": "破碎指环"
+    },
+    "xuantie_zhanzhi": {
+      "slot": "RING",
+      "name": "玄铁战指"
+    },
+    "zhanma_dao": {
+      "slot": "WEAPON",
+      "name": "斩马刀"
+    },
+    "dongting_ruanjia": {
+      "slot": "BODY",
+      "name": "洞庭软甲"
+    },
+    "sanhua_yuzhuo": {
+      "slot": "RING",
+      "name": "散花玉镯"
+    },
+    "yulie_shuangdao": {
+      "slot": "WEAPON",
+      "name": "羽裂双刀"
+    },
+    "fenshui_ci": {
+      "slot": "HIDDEN_WEAPON",
+      "name": "分水刺"
+    },
+    "bianhuang_xue": {
+      "slot": "FEET",
+      "name": "边荒战靴"
+    },
+    "zhenshui_huan": {
+      "slot": "RING",
+      "name": "镇水环"
+    },
+    "shujin_pifeng": {
+      "slot": "BODY",
+      "name": "蜀锦披风"
+    },
+    "tangmen_tili": {
+      "slot": "HIDDEN_WEAPON",
+      "name": "唐门铁蒺藜"
+    },
+    "langya_chui": {
+      "slot": "WEAPON",
+      "name": "狼牙巨锤"
+    },
+    "jianchi_jian": {
+      "slot": "WEAPON",
+      "name": "淬泉剑"
+    },
+    "tianjin_yuepei": {
+      "slot": "NECKLACE",
+      "name": "天津晓月佩"
+    },
+    "cangming_juan": {
+      "slot": "NECKLACE",
+      "name": "沧溟玉简"
+    },
+    "nujiao_belt": {
+      "slot": "BODY",
+      "name": "怒蛟腰带"
+    },
+    "jingyan_longscale": {
+      "slot": "BODY",
+      "name": "惊雁龙鳞甲"
+    },
+    "bianhuang_wolfpelt": {
+      "slot": "BODY",
+      "name": "边荒狼皮氅"
+    },
+    "tangmei_gauntlet": {
+      "slot": "RING",
+      "name": "唐门护手"
+    },
+    "sanhua_flowerpin": {
+      "slot": "NECKLACE",
+      "name": "散花玉簪"
+    },
+    "yinkui_lotus": {
+      "slot": "RING",
+      "name": "阴葵莲环"
+    },
+    "changjiang_tidecrystal": {
+      "slot": "NECKLACE",
+      "name": "江潮晶石"
+    },
+    "saibei_wolftooth": {
+      "slot": "NECKLACE",
+      "name": "狼牙项链"
+    },
+    "hanxue_dao": {
+      "slot": "WEAPON",
+      "name": "寒雪刀"
+    },
+    "zhumei_luopan": {
+      "slot": "RING",
+      "name": "竹梅罗盘"
+    },
+    "caoyun_lingpai": {
+      "slot": "NECKLACE",
+      "name": "漕运令牌"
+    },
+    "shenhai_zhenzhu": {
+      "slot": "RING",
+      "name": "深海寒珠"
+    },
+    "kangshi_remnant": {
+      "slot": "RING",
+      "name": "突厥金刀令"
+    },
+    "songque_testament": {
+      "slot": "NECKLACE",
+      "name": "天刀遗篇"
+    },
+    "wanwan_feather": {
+      "slot": "RING",
+      "name": "天魔羽"
+    },
+    "bianbuou_wisdom": {
+      "slot": "NECKLACE",
+      "name": "边不负的念珠"
+    },
+    "gongbian_jian": {
+      "slot": "WEAPON",
+      "name": "宫变密剑"
+    },
+    "yunhe_pao": {
+      "slot": "BODY",
+      "name": "运河披风"
+    },
+    "moshi_lingzhu": {
+      "slot": "RING",
+      "name": "魔师宫主令珠"
+    },
+    "zhongjuan_wu": {
+      "slot": "NECKLACE",
+      "name": "破碎虚空·悟"
+    },
+    "bianhuang_law": {
+      "slot": "BODY",
+      "name": "边荒法典"
+    },
+    "longyin_zhu": {
+      "slot": "NECKLACE",
+      "name": "龙吟珠"
+    },
+    "yanbang_yupei": {
+      "slot": "NECKLACE",
+      "name": "盐帮玉佩"
+    },
+    "tangmen_baojian": {
+      "slot": "RING",
+      "name": "唐门宝鉴"
+    },
+    "langyan_ling": {
+      "slot": "WEAPON",
+      "name": "狼烟令"
+    },
+    "jianshou_jian": {
+      "slot": "WEAPON",
+      "name": "江南剑首佩剑"
+    },
+    "xinggong_jian": {
+      "slot": "WEAPON",
+      "name": "行宫密剑"
+    },
+    "langfan_jian": {
+      "slot": "NECKLACE",
+      "name": "浪翻云剑穗"
+    },
+    "kongming_zhu": {
+      "slot": "RING",
+      "name": "空明珠"
+    },
+    "jueji_hu": {
+      "slot": "BODY",
+      "name": "绝地护符"
+    },
+    "longgong_zhu": {
+      "slot": "RING",
+      "name": "龙宫宝珠"
+    },
+    "yunhe_gangdao": {
+      "slot": "WEAPON",
+      "name": "漕运钢刀"
+    },
+    "tangmen_zhenzhu": {
+      "slot": "RING",
+      "name": "唐门毒珠"
+    },
+    "xueling_hu": {
+      "slot": "BODY",
+      "name": "雪岭护符"
+    },
+    "jianchi_mingjian": {
+      "slot": "WEAPON",
+      "name": "剑池名剑"
+    },
+    "shengong_qi": {
+      "slot": "RING",
+      "name": "神工遗器"
+    },
+    "langfan_j": {
+      "slot": "NECKLACE",
+      "name": "浪翻云剑穗"
+    },
+    "kongming_z": {
+      "slot": "RING",
+      "name": "空明珠"
+    },
+    "jueji_h": {
+      "slot": "BODY",
+      "name": "绝地护符"
+    },
+    "longgong_z": {
+      "slot": "RING",
+      "name": "龙宫宝珠"
+    },
+    "yunhe_g": {
+      "slot": "WEAPON",
+      "name": "漕运钢刀"
+    },
+    "tangmen_z": {
+      "slot": "RING",
+      "name": "唐门毒珠"
+    },
+    "xueling_h": {
+      "slot": "BODY",
+      "name": "雪岭护符"
+    },
+    "jianchi_m": {
+      "slot": "WEAPON",
+      "name": "剑池名剑"
+    },
+    "shengong_q": {
+      "slot": "RING",
+      "name": "神工遗器"
+    },
+    "xb2_relic": {
+      "slot": "WEAPON",
+      "name": "绝壁悬栈遗物"
+    },
+    "ht2_relic": {
+      "slot": "BODY",
+      "name": "寒潭蛟影遗物"
+    },
+    "sh2_relic": {
+      "slot": "RING",
+      "name": "沙海孤城遗物"
+    },
+    "dz2_relic": {
+      "slot": "NECKLACE",
+      "name": "毒瘴密林遗物"
+    },
+    "tg2_relic": {
+      "slot": "WEAPON",
+      "name": "天罡北斗遗物"
+    },
+    "ym2_relic": {
+      "slot": "BODY",
+      "name": "幽冥鬼市遗物"
+    },
+    "tx2_relic": {
+      "slot": "RING",
+      "name": "铁血雄关遗物"
+    },
+    "yy2_relic": {
+      "slot": "NECKLACE",
+      "name": "烟雨剑冢遗物"
+    },
+    "th2_relic": {
+      "slot": "WEAPON",
+      "name": "天火熔炉遗物"
+    },
+    "bf2_relic": {
+      "slot": "BODY",
+      "name": "冰封王座遗物"
+    },
+    "lm2_relic": {
+      "slot": "RING",
+      "name": "雷鸣峡谷遗物"
+    },
+    "cj2_relic": {
+      "slot": "NECKLACE",
+      "name": "苍穹之眼遗物"
+    },
+    "wr2_relic": {
+      "slot": "WEAPON",
+      "name": "万刃窟遗物"
+    },
+    "yg2_relic": {
+      "slot": "BODY",
+      "name": "幽谷回音遗物"
+    },
+    "tx3_relic": {
+      "slot": "RING",
+      "name": "太虚幻境遗物"
+    },
+    "shuanglong_bei": {
+      "slot": "RING",
+      "name": "双龙会信杯"
+    },
+    "guishi_ledger": {
+      "slot": "RING",
+      "name": "鬼市账本"
+    },
+    "guishi_jade": {
+      "slot": "RING",
+      "name": "鬼市玉玺"
+    },
+    "guishi_blade": {
+      "slot": "WEAPON",
+      "name": "鬼市冥刀"
+    },
+    "beidou_xingpan": {
+      "slot": "RING",
+      "name": "北斗星盘"
+    },
+    "silk_road_map": {
+      "slot": "RING",
+      "name": "丝绸之路全图"
+    }
+  }
+}

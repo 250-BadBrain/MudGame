@@ -1,10 +1,12 @@
-<!-- 资源校验指纹：bb5ad0d37fc1c59838c9abb65fefa3b8a75f89d18ff6b789e4762c0ba0dd0c23；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：bce13a531fcbf47cbc6f52978d776e275f5dca0e854d2601db8f498d41bc40ac；由 scripts/generate_player_guide.py 生成。 -->
 
 # 全部副本的全局解锁顺序
 
+> 本手册对应武学V2源码；服务器需配套部署与旧档迁移后生效。
+
 [返回玩家入口](README.md)
 
-同序号的关卡任一 100% 离开结算即可解锁下一序号；它们不是必须全部完成的连续章节。卷内章号不参与判断。当前序号 27 空缺，28 不检查更早序号。
+同序号的关卡任一 100% 离开结算即可解锁下一序号；它们不是必须全部完成的连续章节。卷内章号不参与判断。当前序号27空缺，28仍检查最近存在的序26。
 
 | 全局序号 | 副本与卷 | 实际前置 |
 |---:|---|---|
@@ -30,11 +32,11 @@
 | 20 | [《散花楼》](stories/datang.md#datang_sanhua) · 大唐双龙传 | 先将 [《巴陵夜泊》](stories/datang.md#datang_baling) 任一副本 100% 完成并离开结算。 |
 | 21 | [《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou) · 覆雨翻云 | 先将 [《散花楼》](stories/datang.md#datang_sanhua) 任一副本 100% 完成并离开结算。 |
 | 22 | [《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan) · 覆雨翻云 | 先将 [《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou) 任一副本 100% 完成并离开结算。 |
-| 23 | [《图录·后卷》](stories/posui.md#posui_houjuan) · 破碎虚空 | 先将 [《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan) 任一副本 100% 完成并离开结算。 |
-| 24 | [《边荒集夺旗》](stories/bianhuang.md#bianhuang_duoqi) · 边荒传说 | 先将 [《图录·后卷》](stories/posui.md#posui_houjuan) 任一副本 100% 完成并离开结算。 |
+| 23 | [《惊雁遗刻》](stories/posui.md#posui_houjuan) · 破碎虚空 | 先将 [《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan) 任一副本 100% 完成并离开结算。 |
+| 24 | [《边荒集夺旗》](stories/bianhuang.md#bianhuang_duoqi) · 边荒传说 | 先将 [《惊雁遗刻》](stories/posui.md#posui_houjuan) 任一副本 100% 完成并离开结算。 |
 | 25 | [《枯井之下》](stories/luoshui.md#luoshui_kujing) · 洛水风浪 | 先将 [《边荒集夺旗》](stories/bianhuang.md#bianhuang_duoqi) 任一副本 100% 完成并离开结算。 |
 | 26 | [《蜀道护镖》](stories/datang.md#datang_shudao) · 大唐双龙传 | 先将 [《枯井之下》](stories/luoshui.md#luoshui_kujing) 任一副本 100% 完成并离开结算。 |
-| 28 | [《蜀道栈桥》](stories/datang.md#datang_zhandao) · 大唐双龙传 | 当前实际无上一序号前置：不存在序号 27，代码不会自动回看更早章节。 |
+| 28 | [《蜀道栈桥》](stories/datang.md#datang_zhandao) · 大唐双龙传 | 先将 [《蜀道护镖》](stories/datang.md#datang_shudao) 任一副本 100% 完成并离开结算。 |
 | 29 | [《狼山口》](stories/bianhuang.md#saibei_langshan) · 边荒传说 | 先将 [《蜀道栈桥》](stories/datang.md#datang_zhandao) 任一副本 100% 完成并离开结算。 |
 | 30 | [《剑池》](stories/luoshui.md#jiangnan_jianchi) · 洛水风浪 | 先将 [《狼山口》](stories/bianhuang.md#saibei_langshan) 任一副本 100% 完成并离开结算。 |
 | 31 | [《天津晓月》](stories/luoshui.md#dongdu_tianjin) · 洛水风浪 | 先将 [《剑池》](stories/luoshui.md#jiangnan_jianchi) 任一副本 100% 完成并离开结算。 |
@@ -50,9 +52,9 @@
 | 39 | [《飞马试炼殿》](stories/datang.md#feima_trial_hall) · 大唐双龙传 | 先将 [《运河追击》](stories/datang.md#datang_yunhe) 或 [《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) 任一副本 100% 完成并离开结算。 |
 | 39 | [《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) · 覆雨翻云 | 先将 [《运河追击》](stories/datang.md#datang_yunhe) 或 [《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) 任一副本 100% 完成并离开结算。 |
 | 40 | [《长安试炼殿》](stories/datang.md#changan_trial_hall) · 大唐双龙传 | 先将 [《飞马试炼殿》](stories/datang.md#feima_trial_hall) 或 [《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) 任一副本 100% 完成并离开结算。 |
-| 40 | [《战神图录·终卷》](stories/posui.md#posui_zhongjuan) · 破碎虚空 | 先将 [《飞马试炼殿》](stories/datang.md#feima_trial_hall) 或 [《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) 任一副本 100% 完成并离开结算。 |
-| 41 | [《边荒传奇》](stories/bianhuang.md#bianhuang_chuanqi) · 边荒传说 | 先将 [《长安试炼殿》](stories/datang.md#changan_trial_hall) 或 [《战神图录·终卷》](stories/posui.md#posui_zhongjuan) 任一副本 100% 完成并离开结算。 |
-| 41 | [《双龙会》](stories/fuyu.md#shuanglong_hui) · 覆雨翻云 | 先将 [《长安试炼殿》](stories/datang.md#changan_trial_hall) 或 [《战神图录·终卷》](stories/posui.md#posui_zhongjuan) 任一副本 100% 完成并离开结算。 |
+| 40 | [《战神遗境》](stories/posui.md#posui_zhongjuan) · 破碎虚空 | 先将 [《飞马试炼殿》](stories/datang.md#feima_trial_hall) 或 [《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) 任一副本 100% 完成并离开结算。 |
+| 41 | [《边荒传奇》](stories/bianhuang.md#bianhuang_chuanqi) · 边荒传说 | 先将 [《长安试炼殿》](stories/datang.md#changan_trial_hall) 或 [《战神遗境》](stories/posui.md#posui_zhongjuan) 任一副本 100% 完成并离开结算。 |
+| 41 | [《双龙会》](stories/fuyu.md#shuanglong_hui) · 覆雨翻云 | 先将 [《长安试炼殿》](stories/datang.md#changan_trial_hall) 或 [《战神遗境》](stories/posui.md#posui_zhongjuan) 任一副本 100% 完成并离开结算。 |
 | 42 | [《洛水龙吟》](stories/luoshui.md#luoshui_longyin) · 洛水风浪 | 先将 [《边荒传奇》](stories/bianhuang.md#bianhuang_chuanqi) 或 [《双龙会》](stories/fuyu.md#shuanglong_hui) 任一副本 100% 完成并离开结算。 |
 | 42 | [《幽冥鬼市》](stories/luoshui.md#youming_guishi) · 洛水风浪 | 先将 [《边荒传奇》](stories/bianhuang.md#bianhuang_chuanqi) 或 [《双龙会》](stories/fuyu.md#shuanglong_hui) 任一副本 100% 完成并离开结算。 |
 | 43 | [《天罡北斗阵》](stories/posui.md#tianbei_beidou) · 破碎虚空 | 先将 [《洛水龙吟》](stories/luoshui.md#luoshui_longyin) 或 [《幽冥鬼市》](stories/luoshui.md#youming_guishi) 任一副本 100% 完成并离开结算。 |

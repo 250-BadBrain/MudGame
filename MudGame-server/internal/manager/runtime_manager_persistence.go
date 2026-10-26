@@ -171,7 +171,19 @@ func (r *RuntimeManager) writeUsersToDiskNoLock(users map[string]*model.User) er
 }
 
 func (r *RuntimeManager) readPlayersFromDiskNoLock() (map[string]*model.Player, error) {
-	return r.store.LoadPlayers()
+	players, err := r.store.LoadPlayers()
+	if err != nil {
+		return nil, err
+	}
+	for _, p := range players {
+		if p.MartialVersion != model.MartialVersion {
+			return nil, fmt.Errorf("角色%s尚未完成武学V2迁移；请停服运行resources/migrations/migrate_martial_v2.py", p.ID)
+		}
+		if p.State == "LEARNING" {
+			stopLearningNoLock(p)
+		}
+	}
+	return players, nil
 }
 
 func (r *RuntimeManager) writePlayersToDiskNoLock(players map[string]*model.Player) error {
@@ -255,7 +267,7 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for rk, rv := range v.Reputations {
 			reputations[rk] = rv
 		}
-		out[k] = &model.Player{ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, EquippedSkills: equippedSkills, EnhancedItems: enhancedItems, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online, WeakUntil: v.WeakUntil}
+		out[k] = &model.Player{MartialVersion: v.MartialVersion, ActiveArts: cloneStringMap(v.ActiveArts), RecoveryItemReadyAt: v.RecoveryItemReadyAt, ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, EquippedSkills: equippedSkills, EnhancedItems: enhancedItems, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online, WeakUntil: v.WeakUntil}
 	}
 	return out
 }

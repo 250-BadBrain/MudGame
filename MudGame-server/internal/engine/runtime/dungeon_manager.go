@@ -29,6 +29,7 @@ type TemplateRoom struct {
 }
 
 type PuzzleAction struct {
+	GiveMoney            int
 	ID                   string
 	Label                string
 	PuzzleID             string
@@ -153,6 +154,7 @@ type exitRequirementFile struct {
 }
 
 type puzzleActionFile struct {
+	GiveMoney            int                `json:"giveMoney"`
 	Label                string             `json:"label"`
 	PuzzleID             string             `json:"puzzleId"`
 	Operation            string             `json:"operation"`
@@ -505,6 +507,7 @@ func loadPuzzleActions(files map[string]puzzleActionFile) map[string]PuzzleActio
 			RequiredPuzzleStates: copyStringMap(action.RequiredPuzzleStates),
 			RequiredDefeatNPCs:   append([]string{}, action.RequiredDefeatNPCs...),
 			GiveItems:            copyIntMap(action.GiveItems),
+			GiveMoney:            action.GiveMoney,
 			TakeItems:            copyIntMap(action.TakeItems),
 			SetFlags:             copyBoolMap(action.SetFlags),
 			Choices:              loadActionChoices(action.Choices),

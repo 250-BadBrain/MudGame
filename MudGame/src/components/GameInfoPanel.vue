@@ -14,13 +14,13 @@
               @click="$emit('selectBackpackItem', item)">
               <div class="item-row">
                 <div class="item-row-content">
-                  <span class="item-name" :style="{ color: getItemColor(item.rarity) }">{{ item.name }}</span>
+                  <span class="item-name" :style="{ color: item.subtype === 'manual' ? getMartialColor(item.rarity) : getItemColor(item.rarity) }">{{ item.name }}</span>
                   <span v-if="item.stackable && item.count > 1" class="item-count">{{ item.count }}{{ item.unit }}</span>
                 </div>
               </div>
               <div v-if="(selectedBackpackItem?.uniqueId || selectedBackpackItem?.id) === (item.uniqueId || item.id)" class="item-actions">
                 <button @click.stop="$emit('viewItem', item)" class="action-btn">查看</button>
-                <button v-if="item.usable" @click.stop="$emit('useItem', item)" class="action-btn use-btn">使用</button>
+                <button v-if="item.usable" :disabled="recoverySeconds(item) > 0" @click.stop="$emit('useItem', item)" class="action-btn use-btn">{{ recoverySeconds(item) > 0 ? `冷却 ${recoverySeconds(item)}秒` : '使用' }}</button>
                 <button @click.stop="$emit('discardItem', item)" class="action-btn discard-btn">丢弃</button>
                 <button v-if="item.equipmentSlot" @click.stop="$emit('equipItem', item)" class="action-btn">装备</button>
                 <button v-if="item.sellable && hasShopNpc" @click.stop="$emit('sellItem', item)" class="action-btn">出售</button>
@@ -32,7 +32,7 @@
         <div v-if="viewingItem || discardingItem || sellingItem" class="backpack-bottom-area">
           <div v-if="viewingItem" class="item-details-view collapsible-detail" @click="$emit('viewItem', viewingItem)">
             <div class="detail-header">
-              <span class="detail-name" :style="{ color: getItemColor(viewingItem.rarity) }">{{ viewingItem.name }}</span>
+              <span class="detail-name" :style="{ color: viewingItem.subtype === 'manual' ? getMartialColor(viewingItem.rarity) : getItemColor(viewingItem.rarity) }">{{ viewingItem.name }}</span>
               <span class="detail-sell-price" v-if="viewingItem.sellable">{{ formatPrice(Math.floor(viewingItem.value / 2)) }}/{{ viewingItem.unit || '个' }}</span>
             </div>
             <div class="detail-desc">{{ viewingItem.description }}</div>
@@ -81,12 +81,14 @@
               @click="$emit('selectSkill', skill)">
               <div class="item-row">
                 <div class="item-row-content">
-                  <span class="item-name" :style="{ color: getItemColor(skill.rarity) }">{{ skill.name }}<span v-if="skill.equipped" class="equipped-badge">已装备</span></span>
-                  <span class="item-count">Lv.{{ skill.level }}/{{ skill.levelCap }}</span>
+                  <span class="item-name" :style="{ color: getMartialColor(skill.rarity) }">{{ skill.name }} <small>{{ gradeNames[skill.rarity] }}</small><span v-if="skill.equipped" class="equipped-badge">已装备</span></span>
+                  <span class="item-count">{{ skill.level > 0 ? `Lv.${skill.level}/${skill.levelCap}` : '未学' }}</span>
                 </div>
               </div>
               <div v-if="selectedSkill && selectedSkill.id === skill.id" class="item-actions">
                 <button @click.stop="$emit('viewSkill', skill)" class="action-btn">查看</button>
+                <button v-if="skill.level >= 1" :disabled="!skill.isLearning && skill.level >= skill.levelCap" @click.stop="$emit('practiceSkill', skill)" class="action-btn">{{ skill.isLearning ? '停止修炼' : '修炼' }}</button>
+                <button v-if="skill.equipped" @click.stop="$emit('unequipSkill', skill)" class="action-btn">卸下</button>
                 <button v-if="skill.type === 'ADVANCED' && skill.level >= 1 && !skill.equipped"
                   @click.stop="$emit('equipSkill', skill)" class="action-btn">装备</button>
               </div>
@@ -97,16 +99,21 @@
         <div class="backpack-bottom-area" v-if="viewingSkill">
           <div class="item-details-view collapsible-detail" @click="$emit('viewSkill', viewingSkill)">
             <div class="detail-header">
-              <span class="detail-name" :style="{ color: getItemColor(viewingSkill.rarity) }">{{ viewingSkill.name }}</span>
-              <span class="detail-sell-price">Lv.{{ viewingSkill.level }}/{{ viewingSkill.levelCap }}</span>
+              <span class="detail-name" :style="{ color: getMartialColor(viewingSkill.rarity) }">{{ viewingSkill.name }}</span>
+              <span class="detail-sell-price">{{ viewingSkill.level > 0 ? `Lv.${viewingSkill.level}/${viewingSkill.levelCap}` : '尚未学会' }}</span>
             </div>
             <div class="detail-desc">{{ viewingSkill.description }}</div>
-            <div class="skill-progress-info">
+            <div class="detail-slot">{{ gradeNames[viewingSkill.rarity] }} · {{ martialSlots[viewingSkill.slot] }}</div>
+            <div class="detail-desc">来源：{{ viewingSkill.source }}</div>
+            <div class="detail-desc">门槛：{{ viewingSkill.requirementText }}</div>
+            <div class="detail-desc">{{ viewingSkill.requirementHint }}</div>
+            <div v-if="viewingSkill.level > 0" class="detail-desc">{{ viewingSkill.active ? '当前生效' : viewingSkill.activeReason }}</div>
+            <div v-if="viewingSkill.level > 0" class="skill-progress-info">
               下一级潜能：{{ viewingSkill.learningProgress || 0 }}/{{ viewingSkill.nextLevelPotential }}
-              <span v-if="viewingSkill.isLearning" class="learning-indicator">学习中</span>
+              <span v-if="viewingSkill.isLearning" class="learning-indicator">修炼中</span>
             </div>
             <div class="detail-bonuses" v-if="getSkillBonusText(viewingSkill).length > 0">
-              <div class="bonus-title">加成效果:</div>
+              <div class="bonus-title">{{ viewingSkill.level > 0 ? '当前等级加成' : '100级参考加成' }}:</div>
               <div v-for="(bonus, index) in getSkillBonusText(viewingSkill)" :key="index" class="bonus-item">{{ bonus }}</div>
             </div>
           </div>
@@ -239,7 +246,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onUnmounted, ref, watch } from 'vue'
 import GameFactionPanel from './GameFactionPanel.vue'
 import GameQuestPanel from './GameQuestPanel.vue'
 
@@ -313,10 +320,24 @@ const fullRewardPotential = computed(() => Number(props.selectedDungeon?.rewards
 defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'useItem', 'sellItem',
   'changeDiscardAmount', 'confirmDiscard', 'cancelDiscard',
   'changeSellAmount', 'confirmSell', 'cancelSell',
-  'changeSkillTab', 'selectSkill', 'viewSkill', 'equipSkill',
+  'changeSkillTab', 'selectSkill', 'viewSkill', 'equipSkill', 'practiceSkill', 'unequipSkill',
   'selectEquipSlot', 'unequipSlot',
   'selectWorld', 'enterWorld',
   'selectDungeon', 'enterDungeon'])
+
+const gradeNames = { 1: '基础', 2: '江湖', 3: '名家', 4: '上乘', 5: '绝学' }
+const martialSlots = { internal: '内功', movement: '身法', guard: '护体', combat: '战斗', study: '学识' }
+const getMartialColor = (grade) => ({ 1: '#aaa', 2: '#2ecc71', 3: '#3498db', 4: '#bb86fc', 5: '#f1c40f' })[grade] || '#aaa'
+const clock = ref(Date.now())
+const serverOffset = ref(0)
+const clockTimer = setInterval(() => { clock.value = Date.now() }, 500)
+onUnmounted(() => clearInterval(clockTimer))
+watch(() => props.backpackItems, (items) => {
+  const time = items.find(item => item.serverTime)?.serverTime
+  if (time) serverOffset.value = time - Date.now()
+}, { immediate: true })
+const recoverySeconds = (item) => item.effects?.recoverHp > 0
+  ? Math.max(0, Math.ceil(((item.recoveryItemReadyAt || 0) - clock.value - serverOffset.value) / 1000)) : 0
 
 const getItemColor = (rarity) => {
   const colors = { 1: '#888', 2: '#2ecc71', 3: '#3498db', 4: '#f1c40f', 5: '#8e44ad', 6: '#e67e22', 7: '#e74c3c' }
@@ -341,6 +362,7 @@ const formatPrice = (value) => {
 }
 
 const getSkillBonusText = (skill) => {
+  if (!skill?.level) return skill?.referenceBonusText || []
   if (Array.isArray(skill?.bonusText)) return skill.bonusText
   if (!skill || !skill.bonuses) return []
   const bonusMap = { 'strength': '臂力', 'constitution': '根骨', 'agility': '身法', 'perception': '悟性', 'willpower': '心志', 'charm': '魅力', 'luck': '福缘', 'attack': '攻击', 'defense': '防御', 'maxHp': '气血上限', 'maxMp': '内力上限', 'spirit': '心神', 'maxSpirit': '心神上限', 'hitRate': '命中', 'dodge': '躲闪', 'parry': '招架', 'critRate': '暴击率', 'trained_mp_to_max_hp_percent': '转血' }

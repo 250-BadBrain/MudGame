@@ -103,6 +103,17 @@ export function useShopLearn({ sendGameCommand, getPlayerId, checkCanAct, closeI
     sendGameCommand("command", "equip_skill", getPlayerId(), { skillId: skill.id })
   }
 
+  const practiceSkill = (skill) => {
+    const action = skill?.isLearning ? 'stop' : 'practice'
+    if (!skill || !checkCanAct(action)) return
+    sendGameCommand('command', action, getPlayerId(), { skillId: skill.id })
+  }
+
+  const unequipSkill = (skill) => {
+    if (!skill || !checkCanAct('unequip_skill')) return
+    sendGameCommand('command', 'unequip_skill', getPlayerId(), { slot: skill.slot })
+  }
+
   const selectShopItem = (item) => {
     if (item.limit === 0) return
     selectedShopItem.value = selectedShopItem.value?.id === item.id ? null : item
@@ -138,6 +149,8 @@ export function useShopLearn({ sendGameCommand, getPlayerId, checkCanAct, closeI
     selectLearnSkill,
     startLearning,
     equipSkill,
+    practiceSkill,
+    unequipSkill,
     selectShopItem,
     buyItem
   }

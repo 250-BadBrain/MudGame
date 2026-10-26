@@ -55,9 +55,8 @@
       "nextState": "done",
       "message": "你仔细搜查了一番，从中找出一页泛黄残页——上面记着一种罕见的武学法门。",
       "repeatMessage": "已被你翻遍，再无他物。",
-      "giveItems": {
-        "huayu_page": 1
-      }
+      "giveItems": {},
+      "giveMoney": 300
     }
   },
   "rooms": {

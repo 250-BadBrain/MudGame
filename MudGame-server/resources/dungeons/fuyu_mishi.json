@@ -131,7 +131,8 @@
     "potential": 1260,
     "money": 890,
     "items": {
-      "moshi_lingzhu": 1
+      "moshi_lingzhu": 1,
+      "manual_tianmo_ce": 1
     }
   }
 }

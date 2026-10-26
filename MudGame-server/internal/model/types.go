@@ -77,7 +77,12 @@ type ResistanceAttributes struct {
 	Seal   int `json:"seal"`
 }
 
+const MartialVersion = 2
+
 type Player struct {
+	MartialVersion        int
+	ActiveArts            map[string]string
+	RecoveryItemReadyAt   int64
 	ID                    string
 	UserID                string
 	CharacterName         string
@@ -94,16 +99,16 @@ type Player struct {
 	Attributes            Attributes
 	Skills                map[string]int
 	// EquippedSkills 秘籍装备槽：键=前置基本武功 ID，值=装备中的秘籍 ID；仅装备中的 ADVANCED 技能参与属性加成
-	EquippedSkills        map[string]string
+	EquippedSkills map[string]string
 	// EnhancedItems 装备强化等级：键=装备物品 ID，值=强化等级（0-5）；每级 +2 主属性
-	EnhancedItems         map[string]int
-	Backpack              map[string]int
-	Equipment             map[string]string
-	QuestStates           map[string]QuestState
-	Flags                 map[string]bool
-	DialogueHistory       map[string]bool
-	Reputations           map[string]int
-	Online                bool
+	EnhancedItems   map[string]int
+	Backpack        map[string]int
+	Equipment       map[string]string
+	QuestStates     map[string]QuestState
+	Flags           map[string]bool
+	DialogueHistory map[string]bool
+	Reputations     map[string]int
+	Online          bool
 	// WeakUntil 为死亡复活后虚弱的到期时间（Unix 秒），0 表示无虚弱
 	WeakUntil int64
 }
@@ -133,6 +138,8 @@ type QuestState struct {
 }
 
 type ItemDef struct {
+	WeaponType    string
+	FirstClaim    bool
 	ID            string
 	Name          string
 	Description   string
@@ -152,15 +159,21 @@ type ItemDef struct {
 }
 
 type SkillDef struct {
-	ID           string
-	Name         string
-	Description  string
-	Rarity       int
-	Type         string
-	Category     string
-	School       string
-	Bonuses      map[string]float64
-	Requirements map[string]interface{}
+	Slot          string
+	WeaponType    string
+	TeacherID     string
+	SourceDungeon string
+	ManualID      string
+	Source        string
+	ID            string
+	Name          string
+	Description   string
+	Rarity        int
+	Type          string
+	Category      string
+	School        string
+	Bonuses       map[string]float64
+	Requirements  map[string]interface{}
 }
 
 type NPC struct {
