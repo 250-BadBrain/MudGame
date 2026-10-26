@@ -4,6 +4,10 @@
 
 **游戏系统逐一说明（副本/战斗/学习/商店/状态机等每个系统的机制、代码位置、扩展方法与注意事项）见 [SYSTEMS.md](SYSTEMS.md)——接手或切换会话时，读完本文再读它即可上手。**
 
+**想了解当前具体能玩什么、每条故事如何触发和走完，先看 [玩家手册](player/README.md)。** 它覆盖全部副本、城市交谈、任务与收藏，并区分实际接通和仅有配置的内容。修改资源后运行 `python scripts/generate_player_guide.py` 更新事实页，再用 `--check` 检查生成一致性与链接；新手推荐路线仍需人工同步，生成器不覆盖入口说明。
+
+解锁、交谈、采集、物品使用等运行时规则变更时，还要人工核对并更新生成逻辑与手写说明；`--check` 验证生成内容与资源、链接的一致性，不代替实机游玩或行为测试。
+
 ## 1. 仓库结构与职责
 
 **单一 Git 仓库（monorepo，240 轮迭代后）**，前后端与文档在同一仓库中一起提交、一起回退：
@@ -109,7 +113,8 @@ Linux 构建冒烟可运行 `python3 scripts/tests/smoke_backend.py --binary /pa
 | [design/formulas.md](design/formulas.md) | 全部数值公式：属性、战斗、恢复、经验曲线、潜能消耗、技能加成、虚弱 |
 | [design/economy_design.md](design/economy_design.md) | 三资源（经验/潜能/银两）来源与消耗：采集/帮工收益、副本收益总表、装备掉落、商店定价、进阶武学链路 |
 | [content/huangyi_dungeon_redesign.md](content/huangyi_dungeon_redesign.md) | 副本设计总纲：设计原则、章节链解锁、逐副本设计 |
-| [content/dungeon_flows.md](content/dungeon_flows.md) | 已实现副本的实际游玩流程记录 |
+| [player/README.md](player/README.md) | 当前玩家内容入口；七卷副本全攻略、城市交谈、任务与收藏，事实页由资源生成 |
+| [content/dungeon_flows.md](content/dungeon_flows.md) | 前九关短版摘要，不作为全部副本清单 |
 | [design/skill_learning_progression_design.md](design/skill_learning_progression_design.md) | 技能学习流程规则（老师上限、10 秒结算、停止条件） |
 | [design/attribute_system_design.md](design/attribute_system_design.md) | 属性分层/字段命名/境界设计的背景依据（已实施） |
 | [design/world_design_huangyi.md](design/world_design_huangyi.md) | 世界观与世界格局设计 |
@@ -122,7 +127,7 @@ Linux 构建冒烟可运行 `python3 scripts/tests/smoke_backend.py --binary /pa
 
 | 任务类型 | 必读 |
 |---|---|
-| 新增副本章节 | 本文档 §3/§5 → dungeon 总纲（redesign）→ economy §1.3 收益表 → dungeon_flows.md → 一个现成副本 JSON（复杂机关参考 `datang_yanggong.json`，多步机关参考 `posui_jingyan.json`） |
+| 新增副本章节 | 本文档 §3/§5 → dungeon 总纲（redesign）→ economy §1.3 收益表 → 玩家手册对应卷攻略 → 一个现成副本 JSON（复杂机关参考 `datang_yanggong.json`，多步机关参考 `posui_jingyan.json`） |
 | 新物品/装备 | economy §2 定价定位 → `items.json` 现有条目 |
 | 新技能/进阶武学 | formulas §3 加成表 → skill_learning 文档 → `skills.json` |
 | 数值公式调整 | formulas 对应小节（含文末代码对照表定位代码） |
@@ -137,7 +142,7 @@ Linux 构建冒烟可运行 `python3 scripts/tests/smoke_backend.py --binary /pa
 动代码之前，把**设计决定写进权威文档**并让文档与将来的实现一致：
 
 - 数值变动 → formulas.md（同步文末代码对照表）或 economy_design.md。
-- 新副本 → 先在 dungeon 总纲表格加行 + dungeon_flows.md 写流程（收益数值过 economy §1.3 总表）。
+- 新副本 → 先在 dungeon 总纲和 economy 收益表明确设计；实现后生成玩家手册对应卷攻略，并人工核对新剧情的入口、操作与结局。`dungeon_flows.md` 仅保留前九关摘要。
 - 新玩法且尚无文档 → 在 `docs/design/` 新建文档并在 README.md 登记，写清规则、数值、边界情况。
 
 ### 第三步：改（任务 → 文件对照）
@@ -179,7 +184,7 @@ node smoke.js   # 注册 → 登录 → 创角 → 进入游戏 → 执行目标
 
 ### 第五步：文档留存与提交
 
-1. **回写文档**：实现与设计如有偏差，以最终实现回写权威文档；新副本补 dungeon_flows.md；新文档在 README.md 索引登记；删除功能时**同步清理引用它的文档**（防止过期文档误导后续开发）。
+1. **回写文档**：实现与设计如有偏差，以最终实现回写权威文档；新副本更新玩家手册事实页并核对推荐入口；新文档在 README.md 索引登记；删除功能时**同步清理引用它的文档**（防止过期文档误导后续开发）。
 2. **提交**（单仓库，一次特性一笔提交，文档与代码天然原子）：
 
 ```sh

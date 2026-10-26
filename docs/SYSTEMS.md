@@ -2,6 +2,8 @@
 
 本文是**全部游戏系统的目录**：每个系统是什么、代码与数据在哪、如何扩展、开发时的注意事项。用于新会话/新 agent 接手时快速定位，配合 [DEVELOPMENT.md](DEVELOPMENT.md)（仓库结构与标准流程）使用。
 
+面向实际游玩的内容、故事触发与剧情全文见 [玩家手册](player/README.md)；本页仍作为系统开发索引。
+
 > **数值不在本文**：所有公式以 [formulas.md](design/formulas.md) 为唯一权威（含公式→代码对照表），资源产出与定价以 [economy_design.md](design/economy_design.md) 为唯一权威。本文只讲机制与开发路径。
 
 ## 系统总目录
@@ -78,7 +80,7 @@ order 1 永久开放；order N 需任一 order N-1 副本 100% 通关（读 `dun
 
 ### 3.6 新增副本 checklist（按序）
 
-1. 文档先行：总纲表格加行 + §三逐章设计 + economy 收益表 + dungeon_flows.md。
+1. 文档先行：总纲表格加行 + §三逐章设计 + economy 收益表；实现后生成玩家手册对应卷事实页并核对入口与剧情。旧 `dungeon_flows.md` 只保留前九关摘要。
 2. npcs.json 加 NPC（前缀、instanceOnly）、factions/skills/items 按需。
 3. 写 `dungeons/<id>.json`（参考：复杂机关 `datang_yanggong.json`、多步+选择 `posui_jingyan.json`、独占分支 `datang_jingling.json`、试炼型 `datang_tiandao.json`）。
 4. **登记引擎测试三处硬编码**：`dungeon_manager_test.go` 的 expected 表（房间数/chain/chapter）、story 对话总数（covered 计数）、其余断言按需。

@@ -2,6 +2,8 @@
 
 MudGame 前端仓库，基于 Vue 3、Vite、Pinia 和 Vue Router。
 
+游戏内容、新手路线、全部副本攻略与剧情见 [玩家手册](../docs/player/README.md)。
+
 统一开发流程（模块职责、标准开发步骤、测试门禁）见根目录 `../docs/DEVELOPMENT.md`。前端两条硬性约定：composables 之间禁止互相 import（由 `GameView.vue` 装配注入）；父组件 scoped CSS 只能命中子组件根元素。
 
 ## 开发

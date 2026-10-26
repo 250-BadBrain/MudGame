@@ -1,10 +1,21 @@
 # 项目文档索引
 
+## 玩家内容与剧情（实际游玩入口）
+
+- **[玩家手册：现在可以玩什么](player/README.md)**（新手路线、界面按钮、按兴趣选内容、卡关处理）
+- [全部 78 个副本的全局解锁表](player/unlock_order.md)
+- 七卷完整流程与剧透：[洛阳轶事](player/stories/luoyang.md) · [大唐双龙传](player/stories/datang.md) · [覆雨翻云](player/stories/fuyu.md) · [破碎虚空](player/stories/posui.md) · [边荒传说](player/stories/bianhuang.md) · [洛水风浪](player/stories/luoshui.md) · [运河风云](player/stories/yunhe.md)
+- [八城路线与全部常驻交谈](player/worlds.md)
+- [世界任务接取、推进与结局](player/quests.md)（4 条接通、37 条未接通的定义分别说明）
+- [修行、商店、武学传承与收藏目录](player/collections.md)
+- [当前内容缺口与文案/实现差异](player/content_status.md)
+
 ## 开发流程
 
 - **[统一开发指导文档](DEVELOPMENT.md)**（仓库结构、各模块功能、标准开发流程：先读什么 → 文档先行 → 改哪些文件 → 如何测试 → 文档留存与提交规范）
 - **[游戏系统总览与开发指引](SYSTEMS.md)**（副本/战斗/学习/商店/状态机等全部系统的机制、代码位置、扩展方法与注意事项；接手必读）
 - [后端安全部署修复计划](superpowers/plans/2026-10-26-safe-backend-deployment.md)（构建最新版本、存档保留、备份回滚与跨平台称号加载）
+- [玩家手册整理计划](superpowers/plans/2026-10-26-player-guide.md)（资源核对、七卷剧情、任务状态与全量覆盖检查）
 
 ## 设计
 
@@ -18,6 +29,6 @@
 ## 内容
 
 - [黄易武侠副本重设计（战斗主导版）](content/huangyi_dungeon_redesign.md)（副本设计总纲）
-- [副本流程记录](content/dungeon_flows.md)（已实现副本的实际游玩流程）
+- [前九关副本流程速览](content/dungeon_flows.md)（早期短版；全部 78 关见上方玩家手册）
 
 后续新增文档应按主题放入对应目录，避免在 `docs` 根目录堆放同类文件。已清理的历史文档：《代码复用与架构评审》《新内容架构实施计划》（围绕已删除的寻秦记内容与潜行系统编写，2026-10 移除）。

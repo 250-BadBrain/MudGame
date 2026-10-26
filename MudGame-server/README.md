@@ -2,6 +2,8 @@
 
 破碎江湖后端服务（Go + WebSocket）。开发流程、任务清单与测试门禁见根目录 `../docs/DEVELOPMENT.md`。
 
+具体玩法、故事触发、全量副本攻略与当前未接内容见 [玩家手册](../docs/player/README.md)。
+
 ## 分层
 
 - `cmd/mudserver`：启动入口
