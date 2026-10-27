@@ -796,7 +796,7 @@
     "name": "空明道真",
     "description": "空明道真",
     "giverNpcId": "dd2_palace_guard",
-    "turnInNpcId": "jm2_old_monk",
+    "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
