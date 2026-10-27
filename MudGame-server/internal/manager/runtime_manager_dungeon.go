@@ -313,13 +313,23 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 				p.Flags["item_claimed_"+itemID] = true
 			}
 
-			// 非首通掉落率：装备类物品在复刷时有概率掉落
-			// 首通必得；复刷时装备 15% 概率，材料/消耗品必得
-			if !isFirstClear && !def.FirstClaim && def.EquipmentSlot != "" {
-				dropChance := 0.15
-				if rand.Float64() >= dropChance {
-					continue
+			// 剧情物品（questItem）和秘籍残页（learnSkill）必得——副本推进必需
+			if def.QuestItem || def.Effects["learnSkill"] != nil {
+				if amount > 0 {
+					received[itemID] = amount
+					p.Backpack[itemID] += amount
 				}
+				continue
+			}
+
+			// 其余所有物品：概率掉落
+			// 首通 40%，复刷 15%——装备和稀有物品需要反复刷取
+			dropChance := 0.15
+			if isFirstClear {
+				dropChance = 0.40
+			}
+			if rand.Float64() >= dropChance {
+				continue
 			}
 
 			if amount > 0 {
