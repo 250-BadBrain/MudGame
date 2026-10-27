@@ -2601,5 +2601,23 @@
     "unit": "件",
     "source": "序19《巴陵夜泊》首次满通关",
     "firstClaim": true
+  },
+  "gongbian_mingzhu": {
+    "name": "宫变夜明珠",
+    "description": "从乾清宫的密道中取得的夜明珠——珠内封着一缕不灭的火光，像是那晚的宫火永远不会熄灭。",
+    "type": "equipment",
+    "subtype": "pearl",
+    "stackable": false,
+    "sellable": true,
+    "value": 3500,
+    "rarity": 5,
+    "unit": "枚",
+    "equipmentSlot": "NECKLACE",
+    "effects": {
+      "hitRate": 5,
+      "maxMp": 25,
+      "initiative": 3
+    },
+    "source": "东都宫变"
   }
 }

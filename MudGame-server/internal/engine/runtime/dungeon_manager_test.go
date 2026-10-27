@@ -57,7 +57,7 @@ func TestHuangyiChapterTemplatesMatchDesign(t *testing.T) {
 		"tiandao_trial_hall":    {3, "datang_double_dragon", "大唐双龙传", 14},
 		"feima_trial_hall":      {3, "datang_double_dragon", "大唐双龙传", 15},
 		"changan_trial_hall":    {3, "datang_double_dragon", "大唐双龙传", 16},
-		"datang_gongbian":       {4, "datang_double_dragon", "大唐双龙传", 17},
+		"datang_gongbian":       {6, "datang_double_dragon", "大唐双龙传", 17},
 		"datang_yunhe":          {4, "datang_double_dragon", "大唐双龙传", 18},
 		"fuyu_mishi":            {4, "fuyu_fan_yun", "覆雨翻云", 6},
 		"posui_zhongjuan":       {4, "posui_xukong", "破碎虚空", 5},

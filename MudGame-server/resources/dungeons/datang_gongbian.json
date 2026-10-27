@@ -1,140 +1,200 @@
 {
   "id": "datang_gongbian",
   "name": "东都宫变",
-  "description": "宫变之夜，杨广的仪仗在宫门广场被截——你受金吾卫旧部之托，护送一位神秘人物从密道出宫。",
+  "description": "宫变之夜，杨广的仪仗在乾清宫广场被截。一名自称金吾卫旧部的宫女冒死送出密信——乾清宫的密道里藏着能让这场政变翻盘的名册。你潜入火光冲天的宫城，在叛军的刀锋与忠卒的血泊之间，护送那个足以改写天下的人走出这座吃人的皇城。",
   "order": 37,
   "chainId": "datang_double_dragon",
   "chainName": "大唐双龙传",
   "chapter": 17,
-  "spawnRoomId": "dat_00",
+  "spawnRoomId": "gb_00",
   "puzzleInitialStates": {
-    "gate": "closed",
-    "briefing": "new"
+    "contact": "waiting",
+    "rockery": "intact",
+    "ledgers": "hidden"
   },
   "puzzleActions": {
-    "listen_brief": {
-      "label": "听取任务简报",
-      "puzzleId": "briefing",
+    "find_contact": {
+      "label": "寻找宫女云雀",
+      "puzzleId": "contact",
       "rooms": [
-        "dat_00"
+        "gb_00"
       ],
       "fromStates": [
-        "new"
+        "waiting"
       ],
-      "nextState": "told",
-      "message": "任务的要点交代完毕。",
-      "repeatMessage": "去吧。"
+      "nextState": "found",
+      "message": "你在倾倒的仪仗后找到一名瑟缩的宫女。她抬起头，眼里映着火光——不是恐惧，是决绝。\"跟我来。走东华门。\""
     },
-    "open_gate": {
-      "label": "开启通道",
-      "puzzleId": "gate",
+    "examine_rockery": {
+      "label": "检查假山暗格",
+      "puzzleId": "rockery",
       "rooms": [
-        "dat_02"
+        "gb_03"
       ],
       "fromStates": [
-        "closed"
+        "intact"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "gongbian_mimi": true
-      },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "nextState": "examined",
+      "message": "云雀说的没错——假山的第三块太湖石后面有一条缝。你扣住石缝轻轻一拉，整面石壁向内转开。密道口涌出一股陈年的冷气。",
+      "repeatMessage": "密道已经打开了。"
+    },
+    "take_ledgers": {
+      "label": "取走密账名册",
+      "puzzleId": "ledgers",
+      "rooms": [
+        "gb_05"
+      ],
+      "fromStates": [
+        "hidden"
+      ],
+      "nextState": "taken",
+      "message": "你在暗格深处摸到一叠油布包裹的册子——每一页都记着与叛军勾结的官员名字。这些东西比黄金更重，也更烫手。"
+    },
+    "open_ledgers": {
+      "label": "展开名册细看",
+      "puzzleId": "ledgers",
+      "rooms": [
+        "gb_05"
+      ],
+      "fromStates": [
+        "taken"
+      ],
+      "nextState": "read",
+      "message": "你借着火把翻开名册。第一页的名字让你倒吸一口凉气——那不是一个官员，是你在洛阳见过的每一个人。",
+      "repeatMessage": "名册上的名字你已记在心里。"
     }
   },
   "rooms": {
-    "dat_00": {
-      "name": "入口",
-      "description": "入口。隋末乱世——你踏入此处，前方的路在阴影中延伸。",
+    "gb_00": {
+      "name": "宫门火光",
+      "description": "宫变之夜。乾清宫广场上烈焰冲天，倒伏的仪仗和碎裂的丹墀之间，溃散的守军与叛军的喊杀声交织。你从倒塌的宫墙缺口翻入——脚下踩到一具尸体时，才发现自己握刀的手在抖。",
       "exits": {
-        "north": "dat_01"
+        "north": "gb_01"
       },
+      "npcs": [],
       "actions": [
-        "listen_brief"
+        "find_contact"
       ]
     },
-    "dat_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+    "gb_01": {
+      "name": "东华门甬道",
+      "description": "东华门的甬道窄得只容两人并行。叛军的火把从两头照过来，你的影子被拉得老长。甬道两侧的铜钉大门紧闭，门缝里渗出血腥味。",
       "exits": {
-        "south": "dat_00",
-        "north": "dat_02"
+        "south": "gb_00",
+        "west": "gb_02"
       },
       "exitRequirements": {
-        "north": {
+        "west": {
           "defeatNpcs": [
-            "gb_yuwen_guard"
+            "gb_pegasus_sergeant"
           ],
-          "message": "敌人堵住了去路。"
+          "message": "叛军什长的横刀挡在甬道中央——不解决他，你和云雀都走不出这条甬道。"
         }
       },
       "npcs": [
-        "gb_yuwen_guard",
-        "gb_yuwen_guard"
+        "gb_pegasus_sergeant",
+        "gb2_yunque"
       ]
     },
-    "dat_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+    "gb_02": {
+      "name": "武英殿偏殿",
+      "description": "偏殿里散落着奏折与茶盏，像一场突然中断的会议。墙上挂着的先帝御笔画像被刀划破了面孔。云雀靠在柱边喘息，指了指西面——御花园的方向。",
       "exits": {
-        "south": "dat_01",
-        "north": "dat_03"
+        "east": "gb_01",
+        "north": "gb_03"
+      },
+      "npcs": [
+        "gb2_yunque"
+      ]
+    },
+    "gb_03": {
+      "name": "御花园石径",
+      "description": "御花园的石径在月光下泛白，假山与竹丛遮住了大半视野。远处传来兵刃交击之声——那是还在抵抗的禁军。你脚下的碎石路上，有人用血写了两个字：快走。",
+      "exits": {
+        "south": "gb_02",
+        "east": "gb_04"
+      },
+      "npcs": [
+        "gb2_old_eunuch"
+      ],
+      "actions": [
+        "examine_rockery"
+      ]
+    },
+    "gb_04": {
+      "name": "乾清宫广场",
+      "description": "乾清宫广场是宫变的中心——叛将独孤嶙的铁骑把广场围成一个铁桶。他看见你，猛地拔出佩刀指向天穹：\"杀了他！一个活口都不能留！\"",
+      "exits": {
+        "west": "gb_03",
+        "south": "gb_05"
       },
       "exitRequirements": {
-        "north": {
-          "requiredPuzzleStates": {
-            "gate": "open"
-          },
-          "message": "通道未开。"
+        "south": {
+          "defeatNpcs": [
+            "gb_dugu_ling"
+          ],
+          "message": "独孤嶙挡在密道入口——不击败他，你和云雀都出不去。"
         }
       },
-      "actions": [
-        "open_gate"
+      "npcs": [
+        "gb_dugu_ling"
       ]
     },
-    "dat_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+    "gb_05": {
+      "name": "密道出口",
+      "description": "密道的尽头是一口枯井。你攀着井绳爬出来，头顶是久违的星空。云雀靠在井沿喘息，手里攥着那本改变一切的册子。远处的宫城还在燃烧，但你们已经出来了。",
       "exits": {
-        "south": "dat_02"
+        "down": "gb_04"
       },
-      "npcs": [
-        "gb_yuwen_jun"
+      "actions": [
+        "take_ledgers",
+        "open_ledgers"
       ]
     }
   },
   "objectives": [
     {
-      "id": "kill_enemies",
-      "type": "kill",
-      "targetId": "gb_yuwen_guard",
-      "required": 2,
-      "weight": 20,
-      "description": "清剿宇文残兵"
-    },
-    {
-      "id": "open_gate",
+      "id": "find_contact",
       "type": "puzzle",
-      "targetId": "gate:open",
+      "targetId": "contact:found",
       "required": 1,
-      "weight": 15,
-      "description": "开启通道"
+      "weight": 10,
+      "description": "找到宫女云雀"
     },
     {
-      "id": "repel_boss",
+      "id": "kill_sergeant",
       "type": "kill",
-      "targetId": "gb_yuwen_jun",
+      "targetId": "gb_pegasus_sergeant",
       "required": 1,
-      "weight": 65,
-      "description": "挫宇文残部统领之锋"
+      "weight": 30,
+      "description": "突破东华门"
+    },
+    {
+      "id": "examine_rockery",
+      "type": "puzzle",
+      "targetId": "rockery:examined",
+      "required": 1,
+      "weight": 10,
+      "description": "发现假山密道"
+    },
+    {
+      "id": "repel_dugu",
+      "type": "kill",
+      "targetId": "gb_dugu_ling",
+      "required": 1,
+      "weight": 50,
+      "description": "击败叛将独孤嶙"
     }
   ],
   "rewards": {
-    "experience": 2400,
-    "potential": 1220,
-    "money": 850,
+    "experience": 2600,
+    "potential": 1300,
+    "money": 900,
+    "reputations": {
+      "luoyang_military": 20
+    },
     "items": {
-      "gongbian_jian": 1
+      "gongbian_mingzhu": 1
     }
   }
 }
