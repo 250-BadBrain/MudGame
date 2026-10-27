@@ -1,7 +1,7 @@
 {
   "id": "bianhuang_jueji",
   "name": "边荒绝地",
-  "description": "边荒绝地——边荒传说中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
+  "description": "边荒绝地——边荒传说中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
   "order": 50,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -45,7 +45,7 @@
   "rooms": {
     "bianhu_00": {
       "name": "入口",
-      "description": "入口——边荒绝地的必经之地，空气中弥漫着紧张的气氛。",
+      "description": "入口。法外之地——你踏入此处，前方的路在阴影中延伸。",
       "exits": {
         "north": "bianhu_01"
       },
@@ -55,7 +55,7 @@
     },
     "bianhu_01": {
       "name": "通道",
-      "description": "通道——边荒绝地的必经之地，空气中弥漫着紧张的气氛。",
+      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
       "exits": {
         "south": "bianhu_00",
         "north": "bianhu_02"
@@ -75,7 +75,7 @@
     },
     "bianhu_02": {
       "name": "关隘",
-      "description": "关隘——边荒绝地的必经之地，空气中弥漫着紧张的气氛。",
+      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
       "exits": {
         "south": "bianhu_01",
         "north": "bianhu_03"
@@ -94,7 +94,7 @@
     },
     "bianhu_03": {
       "name": "决战",
-      "description": "决战——边荒绝地的必经之地，空气中弥漫着紧张的气氛。",
+      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
       "exits": {
         "south": "bianhu_02"
       },
