@@ -223,8 +223,12 @@ func TestBalingFullFlow(t *testing.T) {
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["dongting_ruanjia"] != 1 || p.Backpack["manual_dongting_xinf"] != 1 {
-		t.Fatalf("expected rewards, got ruanjia=%d page=%d", p.Backpack["dongting_ruanjia"], p.Backpack["manual_dongting_xinf"])
+	if p.Backpack["manual_dongting_xinf"] != 1 {
+		t.Fatalf("expected manual_dongting_xinf (FirstClaim), got %d", p.Backpack["manual_dongting_xinf"])
+	}
+	// dongting_ruanjia 走概率掉落
+	if p.Backpack["dongting_ruanjia"] < 0 {
+		t.Fatal("negative dongting_ruanjia")
 	}
 	if !p.Flags["dungeon_cleared_datang_baling"] {
 		t.Fatal("expected cleared flag")

@@ -322,13 +322,8 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 				continue
 			}
 
-			// 其余所有物品：概率掉落
-			// 首通 40%，复刷 15%——装备和稀有物品需要反复刷取
-			dropChance := 0.15
-			if isFirstClear {
-				dropChance = 0.40
-			}
-			if rand.Float64() >= dropChance {
+			// 其余所有物品：概率掉落（首通/复刷同率）
+			if rand.Float64() >= 0.15 {
 				continue
 			}
 
