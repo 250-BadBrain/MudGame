@@ -45,7 +45,7 @@
   "rooms": {
     "pos_00": {
       "name": "入口",
-      "description": "战神遗境的入口。",
+      "description": "入口——战神遗境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "pos_01"
       },
@@ -55,7 +55,7 @@
     },
     "pos_01": {
       "name": "通道",
-      "description": "战神遗境的通道。",
+      "description": "通道——战神遗境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "pos_00",
         "north": "pos_02"
@@ -75,7 +75,7 @@
     },
     "pos_02": {
       "name": "关隘",
-      "description": "战神遗境的关隘。",
+      "description": "关隘——战神遗境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "pos_01",
         "north": "pos_03"
@@ -94,7 +94,7 @@
     },
     "pos_03": {
       "name": "Boss之间",
-      "description": "战神遗境的最终战场。",
+      "description": "Boss之间——战神遗境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "pos_02"
       },

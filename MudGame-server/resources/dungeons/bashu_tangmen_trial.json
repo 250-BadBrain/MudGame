@@ -45,7 +45,7 @@
   "rooms": {
     "bas_00": {
       "name": "入口",
-      "description": "唐门试炼的入口。",
+      "description": "入口——唐门试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "bas_01"
       },
@@ -55,7 +55,7 @@
     },
     "bas_01": {
       "name": "通道",
-      "description": "唐门试炼的通道。",
+      "description": "通道——唐门试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bas_00",
         "north": "bas_02"
@@ -75,7 +75,7 @@
     },
     "bas_02": {
       "name": "关隘",
-      "description": "唐门试炼的关隘。",
+      "description": "关隘——唐门试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bas_01",
         "north": "bas_03"
@@ -94,7 +94,7 @@
     },
     "bas_03": {
       "name": "Boss之间",
-      "description": "唐门试炼的最终战场。",
+      "description": "Boss之间——唐门试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bas_02"
       },

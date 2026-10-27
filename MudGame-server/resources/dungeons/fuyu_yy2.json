@@ -1,7 +1,7 @@
 {
   "id": "fuyu_yy2",
   "name": "烟雨剑冢",
-  "description": "烟雨剑冢——覆雨翻云的又一个考验。",
+  "description": "烟雨剑冢——覆雨翻云中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 64,
   "chainId": "fuyu_fan_yun",
   "chainName": "覆雨翻云",
@@ -45,7 +45,7 @@
   "rooms": {
     "yy2_00": {
       "name": "入口",
-      "description": "烟雨剑冢入口。",
+      "description": "入口——烟雨剑冢的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "yy2_01"
       },
@@ -55,7 +55,7 @@
     },
     "yy2_01": {
       "name": "通道",
-      "description": "烟雨剑冢通道。",
+      "description": "通道——烟雨剑冢的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "yy2_00",
         "north": "yy2_02"
@@ -75,7 +75,7 @@
     },
     "yy2_02": {
       "name": "关隘",
-      "description": "烟雨剑冢关隘。",
+      "description": "关隘——烟雨剑冢的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "yy2_01",
         "north": "yy2_03"
@@ -94,7 +94,7 @@
     },
     "yy2_03": {
       "name": "决战",
-      "description": "烟雨剑冢决战。",
+      "description": "决战——烟雨剑冢的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "yy2_02"
       },

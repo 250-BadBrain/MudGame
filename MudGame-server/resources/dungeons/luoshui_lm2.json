@@ -1,7 +1,7 @@
 {
   "id": "luoshui_lm2",
   "name": "雷鸣峡谷",
-  "description": "雷鸣峡谷——洛水风浪的又一个考验。",
+  "description": "雷鸣峡谷——洛水风浪中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 67,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -45,7 +45,7 @@
   "rooms": {
     "lm2_00": {
       "name": "入口",
-      "description": "雷鸣峡谷入口。",
+      "description": "入口——雷鸣峡谷的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "lm2_01"
       },
@@ -55,7 +55,7 @@
     },
     "lm2_01": {
       "name": "通道",
-      "description": "雷鸣峡谷通道。",
+      "description": "通道——雷鸣峡谷的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "lm2_00",
         "north": "lm2_02"
@@ -75,7 +75,7 @@
     },
     "lm2_02": {
       "name": "关隘",
-      "description": "雷鸣峡谷关隘。",
+      "description": "关隘——雷鸣峡谷的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "lm2_01",
         "north": "lm2_03"
@@ -94,7 +94,7 @@
     },
     "lm2_03": {
       "name": "决战",
-      "description": "雷鸣峡谷决战。",
+      "description": "决战——雷鸣峡谷的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "lm2_02"
       },

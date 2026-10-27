@@ -1,7 +1,7 @@
 {
   "id": "datang_tx2",
   "name": "铁血雄关",
-  "description": "铁血雄关——大唐双龙传的又一个考验。",
+  "description": "铁血雄关——大唐双龙传中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 63,
   "chainId": "datang_double_dragon",
   "chainName": "大唐双龙传",
@@ -45,7 +45,7 @@
   "rooms": {
     "tx2_00": {
       "name": "入口",
-      "description": "铁血雄关入口。",
+      "description": "入口——铁血雄关的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "tx2_01"
       },
@@ -55,7 +55,7 @@
     },
     "tx2_01": {
       "name": "通道",
-      "description": "铁血雄关通道。",
+      "description": "通道——铁血雄关的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "tx2_00",
         "north": "tx2_02"
@@ -75,7 +75,7 @@
     },
     "tx2_02": {
       "name": "关隘",
-      "description": "铁血雄关关隘。",
+      "description": "关隘——铁血雄关的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "tx2_01",
         "north": "tx2_03"
@@ -94,7 +94,7 @@
     },
     "tx2_03": {
       "name": "决战",
-      "description": "铁血雄关决战。",
+      "description": "决战——铁血雄关的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "tx2_02"
       },

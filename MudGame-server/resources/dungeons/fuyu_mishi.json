@@ -45,7 +45,7 @@
   "rooms": {
     "fuy_00": {
       "name": "入口",
-      "description": "魔师宫秘道的入口。",
+      "description": "入口——魔师宫秘道的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "fuy_01"
       },
@@ -55,7 +55,7 @@
     },
     "fuy_01": {
       "name": "通道",
-      "description": "魔师宫秘道的通道。",
+      "description": "通道——魔师宫秘道的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "fuy_00",
         "north": "fuy_02"
@@ -75,7 +75,7 @@
     },
     "fuy_02": {
       "name": "关隘",
-      "description": "魔师宫秘道的关隘。",
+      "description": "关隘——魔师宫秘道的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "fuy_01",
         "north": "fuy_03"
@@ -94,7 +94,7 @@
     },
     "fuy_03": {
       "name": "Boss之间",
-      "description": "魔师宫秘道的最终战场。",
+      "description": "Boss之间——魔师宫秘道的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "fuy_02"
       },

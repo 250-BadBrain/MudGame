@@ -1,7 +1,7 @@
 {
   "id": "saibei_langshan2",
   "name": "狼山雪岭",
-  "description": "狼山雪岭。",
+  "description": "狼山雪岭——边荒传说中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 54,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -45,7 +45,7 @@
   "rooms": {
     "saibei_00": {
       "name": "入口",
-      "description": "狼山雪岭入口。",
+      "description": "入口——狼山雪岭的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "saibei_01"
       },
@@ -55,7 +55,7 @@
     },
     "saibei_01": {
       "name": "通道",
-      "description": "狼山雪岭通道。",
+      "description": "通道——狼山雪岭的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "saibei_00",
         "north": "saibei_02"
@@ -75,7 +75,7 @@
     },
     "saibei_02": {
       "name": "关隘",
-      "description": "狼山雪岭关隘。",
+      "description": "关隘——狼山雪岭的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "saibei_01",
         "north": "saibei_03"
@@ -94,7 +94,7 @@
     },
     "saibei_03": {
       "name": "决战",
-      "description": "狼山雪岭决战。",
+      "description": "决战——狼山雪岭的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "saibei_02"
       },

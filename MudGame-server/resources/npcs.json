@@ -1115,7 +1115,6 @@
       }
     },
     "aggressive": false,
-    "combatMode": "protected",
     "dialogueId": "dlg_csj_boatman"
   },
   "csj_yuwen_soldier": {
@@ -1517,7 +1516,6 @@
       }
     },
     "aggressive": false,
-    "combatMode": "protected",
     "dialogueId": "dlg_nj_sentinel"
   },
   "nj_wounded": {
@@ -1586,7 +1584,6 @@
       }
     },
     "aggressive": false,
-    "combatMode": "protected",
     "dialogueId": "dlg_nj_wounded",
     "nonCombat": true
   },
@@ -2191,7 +2188,6 @@
       }
     },
     "aggressive": false,
-    "combatMode": "protected",
     "dialogueId": "dlg_bh_ji_qianqian"
   },
   "bh_swordsman": {
@@ -2856,7 +2852,6 @@
       }
     },
     "aggressive": false,
-    "combatMode": "protected",
     "dialogueId": "dlg_lj_old_boatman"
   },
   "lj_phantom_soldier": {
@@ -3476,7 +3471,6 @@
     "role": "enemy",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "attributes": {
       "level": 12,
       "realm": "trainee",
@@ -3544,7 +3538,6 @@
     "role": "enemy",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "attributes": {
       "level": 15,
       "realm": "trainee",
@@ -3612,7 +3605,6 @@
     "role": "enemy",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "attributes": {
       "level": 16,
       "realm": "master",
@@ -3747,7 +3739,6 @@
     "role": "enemy",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "attributes": {
       "level": 6,
       "realm": "trainee",
@@ -3815,7 +3806,6 @@
     "role": "guard",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_td_steward",
     "attributes": {
       "level": 10,
@@ -5164,7 +5154,6 @@
     "role": "enemy",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_ls_captive",
     "attributes": {
       "level": 6,
@@ -5232,7 +5221,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_fm_shang",
     "attributes": {
       "level": 14,
@@ -5499,7 +5487,6 @@
     "role": "enemy",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_fm_hand",
     "attributes": {
       "level": 8,
@@ -5567,7 +5554,6 @@
     "role": "quest",
     "importance": "common",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_ca_tea",
     "attributes": {
       "level": 9,
@@ -5635,7 +5621,6 @@
     "role": "quest",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_ca_shi",
     "attributes": {
       "level": 24,
@@ -5842,7 +5827,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_jm_qi",
     "attributes": {
       "level": 18,
@@ -6115,7 +6099,6 @@
     "role": "quest",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_zd_ying",
     "attributes": {
       "level": 30,
@@ -6388,7 +6371,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_wt_scout",
     "attributes": {
       "level": 15,
@@ -6661,7 +6643,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_mg_steward",
     "attributes": {
       "level": 16,
@@ -6934,7 +6915,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_wg_defender",
     "attributes": {
       "level": 18,
@@ -7414,7 +7394,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_ld_courier",
     "attributes": {
       "level": 16,
@@ -7621,7 +7600,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_db_boatwoman",
     "attributes": {
       "level": 17,
@@ -7894,7 +7872,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_sh_informant",
     "attributes": {
       "level": 18,
@@ -8167,7 +8144,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_fy2_helmsman",
     "attributes": {
       "level": 15,
@@ -8374,7 +8350,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_hy2_scout",
     "attributes": {
       "level": 16,
@@ -8852,7 +8827,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_jm2_guide",
     "attributes": {
       "level": 20,
@@ -9125,7 +9099,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_bd_caravan",
     "attributes": {
       "level": 18,
@@ -9398,7 +9371,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_kj_rope",
     "attributes": {
       "level": 18,
@@ -9671,7 +9643,6 @@
     "role": "quest",
     "importance": "local",
     "instanceOnly": true,
-    "combatMode": "protected",
     "dialogueId": "dlg_sd_escort",
     "attributes": {
       "level": 18,

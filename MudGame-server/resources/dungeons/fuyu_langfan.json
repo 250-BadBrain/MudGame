@@ -1,7 +1,7 @@
 {
   "id": "fuyu_langfan",
   "name": "浪翻云试炼",
-  "description": "浪翻云残影。",
+  "description": "浪翻云试炼——覆雨翻云中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 48,
   "chainId": "fuyu_fan_yun",
   "chainName": "覆雨翻云",
@@ -45,7 +45,7 @@
   "rooms": {
     "fuyu_l_00": {
       "name": "入口",
-      "description": "浪翻云试炼入口。",
+      "description": "入口——浪翻云试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "fuyu_l_01"
       },
@@ -55,7 +55,7 @@
     },
     "fuyu_l_01": {
       "name": "通道",
-      "description": "浪翻云试炼通道。",
+      "description": "通道——浪翻云试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "fuyu_l_00",
         "north": "fuyu_l_02"
@@ -75,7 +75,7 @@
     },
     "fuyu_l_02": {
       "name": "关隘",
-      "description": "浪翻云试炼关隘。",
+      "description": "关隘——浪翻云试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "fuyu_l_01",
         "north": "fuyu_l_03"
@@ -94,7 +94,7 @@
     },
     "fuyu_l_03": {
       "name": "决战",
-      "description": "浪翻云试炼决战。",
+      "description": "决战——浪翻云试炼的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "fuyu_l_02"
       },

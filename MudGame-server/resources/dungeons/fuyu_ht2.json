@@ -1,7 +1,7 @@
 {
   "id": "fuyu_ht2",
   "name": "寒潭蛟影",
-  "description": "寒潭蛟影——覆雨翻云的又一个考验。",
+  "description": "寒潭蛟影——覆雨翻云中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 58,
   "chainId": "fuyu_fan_yun",
   "chainName": "覆雨翻云",
@@ -45,7 +45,7 @@
   "rooms": {
     "ht2_00": {
       "name": "入口",
-      "description": "寒潭蛟影入口。",
+      "description": "入口——寒潭蛟影的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "ht2_01"
       },
@@ -55,7 +55,7 @@
     },
     "ht2_01": {
       "name": "通道",
-      "description": "寒潭蛟影通道。",
+      "description": "通道——寒潭蛟影的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "ht2_00",
         "north": "ht2_02"
@@ -75,7 +75,7 @@
     },
     "ht2_02": {
       "name": "关隘",
-      "description": "寒潭蛟影关隘。",
+      "description": "关隘——寒潭蛟影的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "ht2_01",
         "north": "ht2_03"
@@ -94,7 +94,7 @@
     },
     "ht2_03": {
       "name": "决战",
-      "description": "寒潭蛟影决战。",
+      "description": "决战——寒潭蛟影的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "ht2_02"
       },

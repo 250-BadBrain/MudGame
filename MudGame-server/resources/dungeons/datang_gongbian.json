@@ -45,7 +45,7 @@
   "rooms": {
     "dat_00": {
       "name": "入口",
-      "description": "东都宫变的入口。",
+      "description": "入口——东都宫变的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "dat_01"
       },
@@ -55,7 +55,7 @@
     },
     "dat_01": {
       "name": "通道",
-      "description": "东都宫变的通道。",
+      "description": "通道——东都宫变的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "dat_00",
         "north": "dat_02"
@@ -75,7 +75,7 @@
     },
     "dat_02": {
       "name": "关隘",
-      "description": "东都宫变的关隘。",
+      "description": "关隘——东都宫变的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "dat_01",
         "north": "dat_03"
@@ -94,7 +94,7 @@
     },
     "dat_03": {
       "name": "Boss之间",
-      "description": "东都宫变的最终战场。",
+      "description": "Boss之间——东都宫变的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "dat_02"
       },

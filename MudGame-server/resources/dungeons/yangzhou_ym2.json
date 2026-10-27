@@ -1,7 +1,7 @@
 {
   "id": "yangzhou_ym2",
   "name": "幽冥鬼市",
-  "description": "幽冥鬼市——运河风云的又一个考验。",
+  "description": "幽冥鬼市——运河风云中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 62,
   "chainId": "yangzhou_caoyun",
   "chainName": "运河风云",
@@ -45,7 +45,7 @@
   "rooms": {
     "ym2_00": {
       "name": "入口",
-      "description": "幽冥鬼市入口。",
+      "description": "入口——幽冥鬼市的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "ym2_01"
       },
@@ -55,7 +55,7 @@
     },
     "ym2_01": {
       "name": "通道",
-      "description": "幽冥鬼市通道。",
+      "description": "通道——幽冥鬼市的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "ym2_00",
         "north": "ym2_02"
@@ -75,7 +75,7 @@
     },
     "ym2_02": {
       "name": "关隘",
-      "description": "幽冥鬼市关隘。",
+      "description": "关隘——幽冥鬼市的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "ym2_01",
         "north": "ym2_03"
@@ -94,7 +94,7 @@
     },
     "ym2_03": {
       "name": "决战",
-      "description": "幽冥鬼市决战。",
+      "description": "决战——幽冥鬼市的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "ym2_02"
       },

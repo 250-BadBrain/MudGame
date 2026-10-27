@@ -156,7 +156,9 @@
     "stackable": true,
     "sellable": true,
     "usable": true,
-    "effects": { "escapeCombat": true },
+    "effects": {
+      "escapeCombat": true
+    },
     "value": 250,
     "rarity": 2,
     "unit": "包",

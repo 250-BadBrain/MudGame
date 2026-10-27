@@ -45,7 +45,7 @@
   "rooms": {
     "jia_00": {
       "name": "入口",
-      "description": "剑首之争的入口。",
+      "description": "入口——剑首之争的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "jia_01"
       },
@@ -55,7 +55,7 @@
     },
     "jia_01": {
       "name": "通道",
-      "description": "剑首之争的通道。",
+      "description": "通道——剑首之争的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "jia_00",
         "north": "jia_02"
@@ -75,7 +75,7 @@
     },
     "jia_02": {
       "name": "关隘",
-      "description": "剑首之争的关隘。",
+      "description": "关隘——剑首之争的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "jia_01",
         "north": "jia_03"
@@ -94,7 +94,7 @@
     },
     "jia_03": {
       "name": "Boss之间",
-      "description": "剑首之争的最终战场。",
+      "description": "Boss之间——剑首之争的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "jia_02"
       },

@@ -1,7 +1,7 @@
 {
   "id": "fuyu_yg2",
   "name": "幽谷回音",
-  "description": "幽谷回音——覆雨翻云的又一个考验。",
+  "description": "幽谷回音——覆雨翻云中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 70,
   "chainId": "fuyu_fan_yun",
   "chainName": "覆雨翻云",
@@ -45,7 +45,7 @@
   "rooms": {
     "yg2_00": {
       "name": "入口",
-      "description": "幽谷回音入口。",
+      "description": "入口——幽谷回音的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "yg2_01"
       },
@@ -55,7 +55,7 @@
     },
     "yg2_01": {
       "name": "通道",
-      "description": "幽谷回音通道。",
+      "description": "通道——幽谷回音的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "yg2_00",
         "north": "yg2_02"
@@ -75,7 +75,7 @@
     },
     "yg2_02": {
       "name": "关隘",
-      "description": "幽谷回音关隘。",
+      "description": "关隘——幽谷回音的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "yg2_01",
         "north": "yg2_03"
@@ -94,7 +94,7 @@
     },
     "yg2_03": {
       "name": "决战",
-      "description": "幽谷回音决战。",
+      "description": "决战——幽谷回音的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "yg2_02"
       },

@@ -1,7 +1,7 @@
 {
   "id": "posui_th2",
   "name": "天火熔炉",
-  "description": "天火熔炉——破碎虚空的又一个考验。",
+  "description": "天火熔炉——破碎虚空中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 65,
   "chainId": "posui_xukong",
   "chainName": "破碎虚空",
@@ -45,7 +45,7 @@
   "rooms": {
     "th2_00": {
       "name": "入口",
-      "description": "天火熔炉入口。",
+      "description": "入口——天火熔炉的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "th2_01"
       },
@@ -55,7 +55,7 @@
     },
     "th2_01": {
       "name": "通道",
-      "description": "天火熔炉通道。",
+      "description": "通道——天火熔炉的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "th2_00",
         "north": "th2_02"
@@ -75,7 +75,7 @@
     },
     "th2_02": {
       "name": "关隘",
-      "description": "天火熔炉关隘。",
+      "description": "关隘——天火熔炉的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "th2_01",
         "north": "th2_03"
@@ -94,7 +94,7 @@
     },
     "th2_03": {
       "name": "决战",
-      "description": "天火熔炉决战。",
+      "description": "决战——天火熔炉的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "th2_02"
       },

@@ -1,7 +1,7 @@
 {
   "id": "jiangnan_jianchi2",
   "name": "剑池深处",
-  "description": "剑池深处。",
+  "description": "剑池深处——洛水风浪中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 55,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -45,7 +45,7 @@
   "rooms": {
     "jiangn_00": {
       "name": "入口",
-      "description": "剑池深处入口。",
+      "description": "入口——剑池深处的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "jiangn_01"
       },
@@ -55,7 +55,7 @@
     },
     "jiangn_01": {
       "name": "通道",
-      "description": "剑池深处通道。",
+      "description": "通道——剑池深处的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "jiangn_00",
         "north": "jiangn_02"
@@ -75,7 +75,7 @@
     },
     "jiangn_02": {
       "name": "关隘",
-      "description": "剑池深处关隘。",
+      "description": "关隘——剑池深处的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "jiangn_01",
         "north": "jiangn_03"
@@ -94,7 +94,7 @@
     },
     "jiangn_03": {
       "name": "决战",
-      "description": "剑池深处决战。",
+      "description": "决战——剑池深处的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "jiangn_02"
       },

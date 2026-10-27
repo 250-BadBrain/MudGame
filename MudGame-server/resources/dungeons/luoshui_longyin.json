@@ -45,7 +45,7 @@
   "rooms": {
     "luo_00": {
       "name": "入口",
-      "description": "洛水龙吟的入口。",
+      "description": "入口——洛水龙吟的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "luo_01"
       },
@@ -55,7 +55,7 @@
     },
     "luo_01": {
       "name": "通道",
-      "description": "洛水龙吟的通道。",
+      "description": "通道——洛水龙吟的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "luo_00",
         "north": "luo_02"
@@ -75,7 +75,7 @@
     },
     "luo_02": {
       "name": "关隘",
-      "description": "洛水龙吟的关隘。",
+      "description": "关隘——洛水龙吟的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "luo_01",
         "north": "luo_03"
@@ -94,7 +94,7 @@
     },
     "luo_03": {
       "name": "Boss之间",
-      "description": "洛水龙吟的最终战场。",
+      "description": "Boss之间——洛水龙吟的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "luo_02"
       },

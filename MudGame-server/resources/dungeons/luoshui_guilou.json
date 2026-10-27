@@ -1,7 +1,7 @@
 {
   "id": "luoshui_guilou",
   "name": "归墟龙宫",
-  "description": "龙宫遗址。",
+  "description": "归墟龙宫——洛水风浪中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 51,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -45,7 +45,7 @@
   "rooms": {
     "luoshu_00": {
       "name": "入口",
-      "description": "归墟龙宫入口。",
+      "description": "入口——归墟龙宫的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "luoshu_01"
       },
@@ -55,7 +55,7 @@
     },
     "luoshu_01": {
       "name": "通道",
-      "description": "归墟龙宫通道。",
+      "description": "通道——归墟龙宫的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "luoshu_00",
         "north": "luoshu_02"
@@ -75,7 +75,7 @@
     },
     "luoshu_02": {
       "name": "关隘",
-      "description": "归墟龙宫关隘。",
+      "description": "关隘——归墟龙宫的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "luoshu_01",
         "north": "luoshu_03"
@@ -94,7 +94,7 @@
     },
     "luoshu_03": {
       "name": "决战",
-      "description": "归墟龙宫决战。",
+      "description": "决战——归墟龙宫的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "luoshu_02"
       },

@@ -1,7 +1,7 @@
 {
   "id": "posui_tx3",
   "name": "太虚幻境",
-  "description": "太虚幻境——破碎虚空的又一个考验。",
+  "description": "太虚幻境——破碎虚空中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 71,
   "chainId": "posui_xukong",
   "chainName": "破碎虚空",
@@ -45,7 +45,7 @@
   "rooms": {
     "tx3_00": {
       "name": "入口",
-      "description": "太虚幻境入口。",
+      "description": "入口——太虚幻境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "tx3_01"
       },
@@ -55,7 +55,7 @@
     },
     "tx3_01": {
       "name": "通道",
-      "description": "太虚幻境通道。",
+      "description": "通道——太虚幻境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "tx3_00",
         "north": "tx3_02"
@@ -75,7 +75,7 @@
     },
     "tx3_02": {
       "name": "关隘",
-      "description": "太虚幻境关隘。",
+      "description": "关隘——太虚幻境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "tx3_01",
         "north": "tx3_03"
@@ -94,7 +94,7 @@
     },
     "tx3_03": {
       "name": "决战",
-      "description": "太虚幻境决战。",
+      "description": "决战——太虚幻境的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "tx3_02"
       },

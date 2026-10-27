@@ -45,7 +45,7 @@
   "rooms": {
     "bia_00": {
       "name": "入口",
-      "description": "边荒传奇的入口。",
+      "description": "入口——边荒传奇的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "bia_01"
       },
@@ -55,7 +55,7 @@
     },
     "bia_01": {
       "name": "通道",
-      "description": "边荒传奇的通道。",
+      "description": "通道——边荒传奇的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bia_00",
         "north": "bia_02"
@@ -75,7 +75,7 @@
     },
     "bia_02": {
       "name": "关隘",
-      "description": "边荒传奇的关隘。",
+      "description": "关隘——边荒传奇的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bia_01",
         "north": "bia_03"
@@ -94,7 +94,7 @@
     },
     "bia_03": {
       "name": "Boss之间",
-      "description": "边荒传奇的最终战场。",
+      "description": "Boss之间——边荒传奇的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bia_02"
       },

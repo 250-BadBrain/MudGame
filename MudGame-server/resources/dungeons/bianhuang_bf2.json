@@ -1,7 +1,7 @@
 {
   "id": "bianhuang_bf2",
   "name": "冰封王座",
-  "description": "冰封王座——边荒传说的又一个考验。",
+  "description": "冰封王座——边荒传说中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 66,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -45,7 +45,7 @@
   "rooms": {
     "bf2_00": {
       "name": "入口",
-      "description": "冰封王座入口。",
+      "description": "入口——冰封王座的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "bf2_01"
       },
@@ -55,7 +55,7 @@
     },
     "bf2_01": {
       "name": "通道",
-      "description": "冰封王座通道。",
+      "description": "通道——冰封王座的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bf2_00",
         "north": "bf2_02"
@@ -75,7 +75,7 @@
     },
     "bf2_02": {
       "name": "关隘",
-      "description": "冰封王座关隘。",
+      "description": "关隘——冰封王座的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bf2_01",
         "north": "bf2_03"
@@ -94,7 +94,7 @@
     },
     "bf2_03": {
       "name": "决战",
-      "description": "冰封王座决战。",
+      "description": "决战——冰封王座的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bf2_02"
       },

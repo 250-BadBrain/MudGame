@@ -1,7 +1,7 @@
 {
   "id": "bashu_tangmen2",
   "name": "唐门天梯",
-  "description": "唐门天梯。",
+  "description": "唐门天梯——运河风云中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 53,
   "chainId": "yangzhou_caoyun",
   "chainName": "运河风云",
@@ -45,7 +45,7 @@
   "rooms": {
     "bashu__00": {
       "name": "入口",
-      "description": "唐门天梯入口。",
+      "description": "入口——唐门天梯的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "bashu__01"
       },
@@ -55,7 +55,7 @@
     },
     "bashu__01": {
       "name": "通道",
-      "description": "唐门天梯通道。",
+      "description": "通道——唐门天梯的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bashu__00",
         "north": "bashu__02"
@@ -75,7 +75,7 @@
     },
     "bashu__02": {
       "name": "关隘",
-      "description": "唐门天梯关隘。",
+      "description": "关隘——唐门天梯的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bashu__01",
         "north": "bashu__03"
@@ -94,7 +94,7 @@
     },
     "bashu__03": {
       "name": "决战",
-      "description": "唐门天梯决战。",
+      "description": "决战——唐门天梯的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "bashu__02"
       },

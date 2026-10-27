@@ -1,7 +1,7 @@
 {
   "id": "posui_sh2",
   "name": "沙海孤城",
-  "description": "沙海孤城——破碎虚空的又一个考验。",
+  "description": "沙海孤城——破碎虚空中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 59,
   "chainId": "posui_xukong",
   "chainName": "破碎虚空",
@@ -45,7 +45,7 @@
   "rooms": {
     "sh2_00": {
       "name": "入口",
-      "description": "沙海孤城入口。",
+      "description": "入口——沙海孤城的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "sh2_01"
       },
@@ -55,7 +55,7 @@
     },
     "sh2_01": {
       "name": "通道",
-      "description": "沙海孤城通道。",
+      "description": "通道——沙海孤城的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "sh2_00",
         "north": "sh2_02"
@@ -75,7 +75,7 @@
     },
     "sh2_02": {
       "name": "关隘",
-      "description": "沙海孤城关隘。",
+      "description": "关隘——沙海孤城的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "sh2_01",
         "north": "sh2_03"
@@ -94,7 +94,7 @@
     },
     "sh2_03": {
       "name": "决战",
-      "description": "沙海孤城决战。",
+      "description": "决战——沙海孤城的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "sh2_02"
       },

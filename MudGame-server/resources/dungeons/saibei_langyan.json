@@ -45,7 +45,7 @@
   "rooms": {
     "sai_00": {
       "name": "入口",
-      "description": "狼烟再起的入口。",
+      "description": "入口——狼烟再起的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "sai_01"
       },
@@ -55,7 +55,7 @@
     },
     "sai_01": {
       "name": "通道",
-      "description": "狼烟再起的通道。",
+      "description": "通道——狼烟再起的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "sai_00",
         "north": "sai_02"
@@ -75,7 +75,7 @@
     },
     "sai_02": {
       "name": "关隘",
-      "description": "狼烟再起的关隘。",
+      "description": "关隘——狼烟再起的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "sai_01",
         "north": "sai_03"
@@ -94,7 +94,7 @@
     },
     "sai_03": {
       "name": "Boss之间",
-      "description": "狼烟再起的最终战场。",
+      "description": "Boss之间——狼烟再起的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "sai_02"
       },

@@ -1,7 +1,7 @@
 {
   "id": "bianhuang_dz2",
   "name": "毒瘴密林",
-  "description": "毒瘴密林——边荒传说的又一个考验。",
+  "description": "毒瘴密林——边荒传说中一段鲜有人归来的旅程。前方的路布满未知，但你的刀已经出鞘。",
   "order": 60,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -45,7 +45,7 @@
   "rooms": {
     "dz2_00": {
       "name": "入口",
-      "description": "毒瘴密林入口。",
+      "description": "入口——毒瘴密林的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "north": "dz2_01"
       },
@@ -55,7 +55,7 @@
     },
     "dz2_01": {
       "name": "通道",
-      "description": "毒瘴密林通道。",
+      "description": "通道——毒瘴密林的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "dz2_00",
         "north": "dz2_02"
@@ -75,7 +75,7 @@
     },
     "dz2_02": {
       "name": "关隘",
-      "description": "毒瘴密林关隘。",
+      "description": "关隘——毒瘴密林的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "dz2_01",
         "north": "dz2_03"
@@ -94,7 +94,7 @@
     },
     "dz2_03": {
       "name": "决战",
-      "description": "毒瘴密林决战。",
+      "description": "决战——毒瘴密林的必经之地，空气中弥漫着紧张的气氛。",
       "exits": {
         "south": "dz2_02"
       },
