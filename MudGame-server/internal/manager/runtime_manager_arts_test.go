@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-// 慈航剑典：残页参悟 → 灰袍老者传授；洛水沉箱打捞给残页
+// 慈航剑典：秘本参悟与灰袍传授共用同一道传承门，入门后装备生效
 func TestCihangInsightAndTeaching(t *testing.T) {
 	r := NewRuntimeManager(t.TempDir())
 	t.Cleanup(func() { _ = r.Close() })
@@ -17,10 +17,9 @@ func TestCihangInsightAndTeaching(t *testing.T) {
 	}
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
-	players[playerID].RoomID = "ly_weapon_school"
+	players[playerID].RoomID = "ly_old_alley" // 灰袍老者所在
 	players[playerID].Skills["basic_sword"] = 120
 	players[playerID].Skills["basic_literacy"] = 80
-	players[playerID].Flags["dungeon_cleared_changan_trial_hall"] = true
 	players[playerID].Attributes.Experience = 200000 // 慈航剑典前置门槛
 	players[playerID].Backpack["manual_cihang_jiandian"] = 1
 	if err := r.savePlayers(players); err != nil {
@@ -29,25 +28,37 @@ func TestCihangInsightAndTeaching(t *testing.T) {
 	}
 	r.mu.Unlock()
 
-	// 未参悟 → 灰袍拒绝
-	if err := r.LearnSkill(playerID, "ancient_scroll_keeper", "cihang_jiandian"); err == nil {
-		t.Fatal("learning cihang without insight must fail")
-	}
-	// 参悟残页 → 1 级
-	if _, err := r.UseItem(playerID, "manual_cihang_jiandian"); err != nil {
-		t.Fatalf("insight cihang page failed: %v", err)
+	// 未入门 → 参悟被拒且秘本保留
+	if _, err := r.UseItem(playerID, "manual_cihang_jiandian"); err == nil {
+		t.Fatal("insight without introduction must fail")
 	}
 	after, _ := r.loadPlayers()
-	if after[playerID].Skills["cihang_jiandian"] != 1 {
-		t.Fatalf("expected cihang_jiandian level 1, got %d", after[playerID].Skills["cihang_jiandian"])
+	if after[playerID].Backpack["manual_cihang_jiandian"] != 1 {
+		t.Fatal("failed insight consumed book")
 	}
-	// 灰袍传授（上限 120）
+	// 灰袍传授入门 → 1 级并留下传承旗标
 	if err := r.LearnSkill(playerID, "ancient_scroll_keeper", "cihang_jiandian"); err != nil {
 		t.Fatalf("learn from keeper failed: %v", err)
 	}
 	after, _ = r.loadPlayers()
-	if after[playerID].State != "LEARNING" || after[playerID].LearningSkillID != "cihang_jiandian" {
-		t.Fatalf("expected LEARNING cihang, got state=%s skill=%s", after[playerID].State, after[playerID].LearningSkillID)
+	if after[playerID].Skills["cihang_jiandian"] != 1 {
+		t.Fatalf("expected cihang_jiandian level 1, got %d", after[playerID].Skills["cihang_jiandian"])
+	}
+	// 已入门后再参悟完整秘本 → 重复参悟被拒，秘本保留
+	if _, err := r.UseItem(playerID, "manual_cihang_jiandian"); err == nil {
+		t.Fatal("duplicate insight must fail")
+	}
+	after, _ = r.loadPlayers()
+	if after[playerID].Backpack["manual_cihang_jiandian"] != 1 {
+		t.Fatal("duplicate insight consumed book")
+	}
+	// 入门后即可装备
+	if _, err := r.EquipSkill(playerID, "cihang_jiandian"); err != nil {
+		t.Fatalf("equip cihang failed: %v", err)
+	}
+	after, _ = r.loadPlayers()
+	if after[playerID].ActiveArts["combat"] != "cihang_jiandian" {
+		t.Fatalf("expected cihang equipped, got %+v", after[playerID].ActiveArts)
 	}
 }
 

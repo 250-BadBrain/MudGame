@@ -16,7 +16,7 @@ func TestFoundationManualsEquipEffects(t *testing.T) {
 		t.Fatalf("create character failed: %v", err)
 	}
 
-	// 前置基本武功各 20，三本秘籍各练到 10 级
+	// 前置基本武功各 100，三本秘籍各练到 100 级
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
 	p := players[playerID]
@@ -41,31 +41,31 @@ func TestFoundationManualsEquipEffects(t *testing.T) {
 
 	d0, i0, a0, hp0, p0, def0 := effOf()
 
-	// 踏浪诀：躲闪 +1、先手 +2（10 级）
+	// 踏浪诀：躲闪 +14、先手 +6（100 级）
 	if _, err := r.EquipSkill(playerID, "talang_jue"); err != nil {
 		t.Fatalf("equip talang failed: %v", err)
 	}
 	d1, i1, _, _, _, _ := effOf()
 	if d1 != d0+14 || i1 != i0+6 {
-		t.Fatalf("talang expected dodge+1 initiative+2, got dodge %d->%d initiative %d->%d", d0, d1, i0, i1)
+		t.Fatalf("talang expected dodge+14 initiative+6, got dodge %d->%d initiative %d->%d", d0, d1, i0, i1)
 	}
 
-	// 伏虎劲：攻击 +1（每10级）、气血上限 +6（每级，10 级共 +60）
+	// 伏虎劲：攻击 +20、气血上限 +80（100 级）
 	if _, err := r.EquipSkill(playerID, "fuhu_jin"); err != nil {
 		t.Fatalf("equip fuhu failed: %v", err)
 	}
 	_, _, a1, hp1, _, _ := effOf()
 	if a1 != a0+20 || hp1 != hp0+80 {
-		t.Fatalf("fuhu expected attack+1 maxHP+60, got attack %d->%d maxHP %d->%d", a0, a1, hp0, hp1)
+		t.Fatalf("fuhu expected attack+20 maxHP+80, got attack %d->%d maxHP %d->%d", a0, a1, hp0, hp1)
 	}
 
-	// 铁壁功：招架 +2、防御 +1（10 级）
+	// 铁壁功：招架 +12、防御 +8（100 级）
 	if _, err := r.EquipSkill(playerID, "tiebi_gong"); err != nil {
 		t.Fatalf("equip tiebi failed: %v", err)
 	}
 	_, _, _, _, p1, def1 := effOf()
 	if p1 != p0+12 || def1 != def0+8 {
-		t.Fatalf("tiebi expected parry+2 defense+1, got parry %d->%d defense %d->%d", p0, p1, def0, def1)
+		t.Fatalf("tiebi expected parry+12 defense+8, got parry %d->%d defense %d->%d", p0, p1, def0, def1)
 	}
 }
 

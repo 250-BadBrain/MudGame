@@ -49,7 +49,7 @@ func TestWuzhenLearningInvestBonus(t *testing.T) {
 		t.Fatalf("expected 10 invested without manual, got %d", spent)
 	}
 
-	// 装备悟真篇 10 级：注入上限 11
+	// 装备悟真篇 50 级：注入上限 10 + 每 100 级 2 × 50/100 = 11
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
 	players[playerID].State = "IDLE"
@@ -291,9 +291,9 @@ func TestKujingFullFlow(t *testing.T) {
 	}
 	after, _ := r.loadPlayers()
 	// 镇水环走概率掉落
-		if !after[playerID].Flags["dungeon_cleared_luoshui_kujing"] {
-			t.Fatal("expected cleared flag")
-		}
+	if !after[playerID].Flags["dungeon_cleared_luoshui_kujing"] {
+		t.Fatal("expected cleared flag")
+	}
 }
 
 // 蜀道护镖全流程

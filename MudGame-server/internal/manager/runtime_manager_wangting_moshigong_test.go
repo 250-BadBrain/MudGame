@@ -76,9 +76,9 @@ func TestWangtingFullFlow(t *testing.T) {
 	after, _ := r.loadPlayers()
 	p := after[playerID]
 	// 狼王刀概率掉落
-		if p.Backpack["langwang_dao"] < 0 {
-			t.Fatal("negative")
-		}
+	if p.Backpack["langwang_dao"] < 0 {
+		t.Fatal("negative")
+	}
 	if !p.Flags["dungeon_cleared_bianhuang_wangting"] {
 		t.Fatal("expected cleared flag")
 	}

@@ -109,9 +109,9 @@ func TestJinglingSiegeExclusiveBranchFullFlow(t *testing.T) {
 	players, _ := r.loadPlayers()
 	p := players[playerID]
 	// 古铜残片走概率掉落，不保证必得
-		if p.Backpack["bronze_fragment"] < 0 {
-			t.Fatal("negative bronze fragment")
-		}
+	if p.Backpack["bronze_fragment"] < 0 {
+		t.Fatal("negative bronze fragment")
+	}
 	if !p.Flags["dungeon_cleared_datang_jingling"] {
 		t.Fatal("expected dungeon_cleared_datang_jingling flag")
 	}

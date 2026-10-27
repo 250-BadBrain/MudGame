@@ -16,7 +16,7 @@ func TestHunyuanMeditationBonus(t *testing.T) {
 		t.Fatalf("create character failed: %v", err)
 	}
 
-	// 基本内功 20 与混元功 10 在首次基准前就位（未装备时不计入），仅考察装备前后的差值
+	// 基本内功与混元功在首次基准前就位（未装备时不计入），仅考察装备前后的差值
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
 	players[playerID].Skills["basic_neigong"] = 100
@@ -52,14 +52,14 @@ func TestHunyuanMeditationBonus(t *testing.T) {
 	players[playerID].State = "IDLE"
 	_ = r.savePlayers(players)
 
-	// 装备混元功（10 级 → 打坐恢复 +3）
+	// 装备混元功（100 级 → 打坐恢复 +10：每 100 级 10）
 	if _, err := r.EquipSkill(playerID, "hunyuan_neigong"); err != nil {
 		t.Fatalf("equip hunyuan failed: %v", err)
 	}
 
 	after := baselineMP()
 	if after != before+10 {
-		t.Fatalf("expected meditation recovery +3 with hunyuan equipped, got %d -> %d", before, after)
+		t.Fatalf("expected meditation recovery +10 with hunyuan equipped, got %d -> %d", before, after)
 	}
 }
 

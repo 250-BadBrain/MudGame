@@ -16,7 +16,7 @@ func TestManualEquipSlotSemantics(t *testing.T) {
 		t.Fatalf("create character failed: %v", err)
 	}
 
-	// 基本刀法 40（满足天刀八诀门槛）+ 两本刀系秘籍各练到 10 级
+	// 基本刀法 120（满足天刀八诀门槛）+ 两本刀系秘籍各练到 100 级
 	r.mu.Lock()
 	players, _ := r.loadPlayers()
 	p := players[playerID]
@@ -24,39 +24,40 @@ func TestManualEquipSlotSemantics(t *testing.T) {
 	p.Skills["basic_literacy"] = 80
 	p.Equipment["WEAPON"] = "steel_blade"
 	p.Flags["dungeon_cleared_tiandao_trial_hall"] = true
-	grantArt(p, "xiulou_daofa", 100)  // // 攻+3/10 → 10级 +3
-	grantArt(p, "tiandao_blade", 100) //      // 攻+2/10 → 10级 +2
+	grantArt(p, "xiulou_daofa", 100)  // 攻 +28、命中 +12（每 100 级）
+	grantArt(p, "tiandao_blade", 100) // 攻 +34、命中 +22（每 100 级）
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)
 	}
 	r.mu.Unlock()
 
-	basicAttack := func() int {
+	basicEff := func() (attack, hitRate int) {
 		r.mu.RLock()
 		defer r.mu.RUnlock()
-		return effectiveAttributesForPlayerNoLock(r.playersCache[playerID]).Attack
+		eff := effectiveAttributesForPlayerNoLock(r.playersCache[playerID])
+		return eff.Attack, eff.HitRate
 	}
 
 	// 未装备任何秘籍：只有基本刀法的加成
-	attackNone := basicAttack()
+	attackNone, hitNone := basicEff()
 
-	// 装备战神图录 → 攻击 +3
+	// 装备修罗刀法 → 攻击 +28、命中 +12
 	if _, err := r.EquipSkill(playerID, "xiulou_daofa"); err != nil {
-		t.Fatalf("equip zhanshentu failed: %v", err)
+		t.Fatalf("equip xiuluo failed: %v", err)
 	}
-	attackZS := basicAttack()
-	if attackZS != attackNone+28 {
-		t.Fatalf("expected xiuluo to add 28 attack, got %d -> %d", attackNone, attackZS)
+	attackXS, hitXS := basicEff()
+	if attackXS != attackNone+28 || hitXS != hitNone+12 {
+		t.Fatalf("expected xiuluo to add 28 attack / 12 hit, got attack %d -> %d hit %d -> %d", attackNone, attackXS, hitNone, hitXS)
 	}
 
-	// 换装天刀八诀（同槽择一）→ 攻击 +2，战神图录加成消失
+	// 换装天刀八诀（同槽择一）→ 攻击 +34、命中 +22，修罗刀法加成消失
 	if _, err := r.EquipSkill(playerID, "tiandao_blade"); err != nil {
 		t.Fatalf("equip tiandao failed: %v", err)
 	}
-	attackTD := basicAttack()
-	if attackTD != attackNone+34 {
-		t.Fatalf("expected tiandao to add 34 attack (xiuluo unequipped), got %d -> %d", attackNone, attackTD)
+	attackTD, hitTD := basicEff()
+	if attackTD != attackNone+34 || hitTD != hitNone+22 {
+		t.Fatalf("expected tiandao to add 34 attack / 22 hit (xiuluo unequipped), got attack %d -> %d hit %d -> %d", attackNone, attackTD, hitNone, hitTD)
 	}
 
 	// 装备状态与持久化
@@ -83,7 +84,8 @@ func TestManualPrerequisiteGate(t *testing.T) {
 	players[playerID].Skills["basic_blade"] = 119
 	players[playerID].Skills["basic_literacy"] = 80
 	players[playerID].Flags["dungeon_cleared_tiandao_trial_hall"] = true
-	players[playerID].Attributes.Experience = 200000 // 天刀八诀要求 40
+	players[playerID].Flags["martial_taught_tiandao_blade"] = true
+	players[playerID].Attributes.Experience = 200000 // 天刀八诀要求基本刀法 120
 	players[playerID].Skills["tiandao_blade"] = 1
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
@@ -92,7 +94,7 @@ func TestManualPrerequisiteGate(t *testing.T) {
 	r.mu.Unlock()
 
 	if err := r.LearnSkill(playerID, "ancient_scroll_keeper", "tiandao_blade"); err == nil {
-		t.Fatal("learning tiandao with basic_blade 39 must fail")
+		t.Fatal("learning tiandao with basic_blade 119 must fail")
 	}
 
 	r.mu.Lock()
@@ -104,6 +106,6 @@ func TestManualPrerequisiteGate(t *testing.T) {
 	}
 	r.mu.Unlock()
 	if err := r.LearnSkill(playerID, "ancient_scroll_keeper", "tiandao_blade"); err != nil {
-		t.Fatalf("learning tiandao with basic_blade 40 must pass, got %v", err)
+		t.Fatalf("learning tiandao with basic_blade 120 must pass, got %v", err)
 	}
 }

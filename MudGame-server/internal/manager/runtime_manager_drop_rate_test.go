@@ -22,14 +22,26 @@ func TestDropRateLogic(t *testing.T) {
 		ID: "test", Backpack: map[string]int{}, Flags: map[string]bool{}, Skills: map[string]int{},
 	}
 	result := applyDungeonSettlementReward(p, s)
-	if !result.IsFirstClear { t.Fatal("should be first clear") }
-	if p.Backpack["sealed_letter"] < 1 { t.Fatal("quest item must be guaranteed") }
-	if !p.Flags["dungeon_cleared_test_dungeon"] { t.Fatal("flag missing") }
+	if !result.IsFirstClear {
+		t.Fatal("should be first clear")
+	}
+	if p.Backpack["sealed_letter"] < 1 {
+		t.Fatal("quest item must be guaranteed")
+	}
+	if !p.Flags["dungeon_cleared_test_dungeon"] {
+		t.Fatal("flag missing")
+	}
 	t.Logf("first clear: iron_sword=%d (40%% chance)", p.Backpack["iron_sword"])
 
 	p.Backpack["bronze_fragment"] = 0
 	result2 := applyDungeonSettlementReward(p, s)
-	if result2.IsFirstClear { t.Fatal("should not be first clear") }
-	if p.Backpack["sealed_letter"] > 1 { t.Fatalf("FirstClaim dup: %d", p.Backpack["sealed_letter"]) }
-	if p.Backpack["bronze_fragment"] < 2 { t.Fatalf("bronze bonus missing: %d", p.Backpack["bronze_fragment"]) }
+	if result2.IsFirstClear {
+		t.Fatal("should not be first clear")
+	}
+	if p.Backpack["sealed_letter"] > 1 {
+		t.Fatalf("FirstClaim dup: %d", p.Backpack["sealed_letter"])
+	}
+	if p.Backpack["bronze_fragment"] < 2 {
+		t.Fatalf("bronze bonus missing: %d", p.Backpack["bronze_fragment"])
+	}
 }

@@ -50,9 +50,17 @@ func TestV2RoutesAgainstRepresentativeBosses(t *testing.T) {
 		orders[tpl.ID] = tpl.Order
 	}
 	_ = probe.Close()
-	available := func(sid string, phase int) bool {
+	// 武器出自对应副本奖励（与 resources/dungeons 的 drops 保持一致），序号之前的章节视为已入手。
+	weaponOrder := map[string]int{
+		"langwang_dao": 15, "yanggong_sword": 6, "liangdao_spear": 18, "youlong_whip": 21,
+		"lieshi_mace": 17, "suolang_hook": 22, "jinggang_staff": 19, "tangmen_tili": 28,
+	}
+	available := func(sid string, order, level int) bool {
 		d := fileSkills[sid]
-		return d.SourceDungeon == "" || orders[d.SourceDungeon] < phase
+		if d.SourceDungeon != "" && orders[d.SourceDungeon] >= order {
+			return false
+		}
+		return level >= skillPrerequisiteLevel(d)
 	}
 	type result struct {
 		Order       int    `json:"order"`
@@ -118,12 +126,13 @@ func TestV2RoutesAgainstRepresentativeBosses(t *testing.T) {
 					if build.early != "" {
 						p.Equipment["WEAPON"] = build.early
 					}
-					if phase.order >= 38 && build.late != "" {
+					// 后期武器在其掉落章节之后视为已入手；此前仍用初期兵器。
+					if build.late != "" && weaponOrder[build.late] < phase.order {
 						p.Equipment["WEAPON"] = build.late
 					}
 					selectArt := func(candidates []string) {
 						for _, sid := range candidates {
-							if available(sid, phase.order) {
+							if available(sid, phase.order, phase.level) {
 								grantArt(p, sid, min(100, phase.level))
 								p.ActiveArts[fileSkills[sid].Slot] = sid
 								break
@@ -135,7 +144,10 @@ func TestV2RoutesAgainstRepresentativeBosses(t *testing.T) {
 					selectArt([]string{"taxue_wuhen", "lingxu_bu", "talang_jue"})
 					selectArt([]string{"jingang_buhuai", "tiebi_gong"})
 					p.Flags[inst.NPCs[bossID].WeaknessFlag] = true
+					// 打坐修满当前内力上限（已修内力 = 有效真气池），再以满状态迎战。
 					eff := effectiveAttributesForPlayerNoLock(p)
+					p.Attributes.Resources.TrainedMaxMP = eff.MaxMP
+					eff = effectiveAttributesForPlayerNoLock(p)
 					p.Attributes.Resources.HP = eff.MaxHP
 					p.Attributes.Resources.MP = eff.TrainedMaxMP
 					_ = r.savePlayers(players)

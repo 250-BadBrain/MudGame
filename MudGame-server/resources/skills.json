@@ -7,7 +7,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 30
+    },
     "slot": "combat",
     "weaponType": "unarmed",
     "requirements": {},
@@ -21,7 +23,9 @@
     "type": "BASIC",
     "category": "guard",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "parry_per_100_levels": 10
+    },
     "slot": "guard",
     "weaponType": "",
     "requirements": {},
@@ -36,6 +40,7 @@
     "category": "internal",
     "school": "common",
     "bonuses": {
+      "max_mp_per_100_levels": 1000,
       "trained_mp_to_max_hp_percent": 0.3
     },
     "slot": "internal",
@@ -51,7 +56,9 @@
     "type": "BASIC",
     "category": "movement",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "post_agility_per_100_levels": 10
+    },
     "slot": "movement",
     "weaponType": "",
     "requirements": {},
@@ -65,7 +72,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "blade",
     "requirements": {},
@@ -79,7 +88,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "sword",
     "requirements": {},
@@ -93,7 +104,9 @@
     "type": "BASIC",
     "category": "study",
     "school": "academy",
-    "bonuses": {},
+    "bonuses": {
+      "post_perception_per_100_levels": 10
+    },
     "slot": "study",
     "weaponType": "",
     "requirements": {},
@@ -107,6 +120,7 @@
     "category": "internal",
     "school": "hidden",
     "bonuses": {
+      "max_mp_per_100_levels": 600,
       "trained_mp_to_max_hp_percent": 0.15
     },
     "requirements": {
@@ -130,8 +144,9 @@
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 30,
-      "crit_rate_per_100_levels": 10
+      "attack_per_100_levels": 14,
+      "defense_per_100_levels": 22,
+      "max_mp_per_100_levels": 400
     },
     "requirements": {
       "prerequisite": {
@@ -154,8 +169,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "hit_rate_per_100_levels": 20
+      "attack_per_100_levels": 34,
+      "hit_rate_per_100_levels": 22
     },
     "requirements": {
       "prerequisite": {
@@ -178,7 +193,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "staff",
     "requirements": {},
@@ -192,7 +209,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "hidden_weapon",
     "requirements": {},
@@ -207,8 +226,8 @@
     "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_100_levels": 10,
-      "hit_rate_per_100_levels": 10
+      "attack_per_100_levels": 14,
+      "hit_rate_per_100_levels": 12
     },
     "slot": "combat",
     "weaponType": "sword",
@@ -231,7 +250,8 @@
     "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_100_levels": 20
+      "attack_per_100_levels": 20,
+      "hit_rate_per_100_levels": 6
     },
     "slot": "combat",
     "weaponType": "blade",
@@ -253,7 +273,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "spear",
     "requirements": {},
@@ -267,7 +289,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "whip",
     "requirements": {},
@@ -281,7 +305,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "mace",
     "requirements": {},
@@ -295,7 +321,9 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {},
+    "bonuses": {
+      "attack_per_100_levels": 20
+    },
     "slot": "combat",
     "weaponType": "hook",
     "requirements": {},
@@ -309,8 +337,9 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "hit_rate_per_100_levels": 20,
-      "dodge_per_100_levels": 10
+      "attack_per_100_levels": 28,
+      "hit_rate_per_100_levels": 24,
+      "parry_per_100_levels": 8
     },
     "requirements": {
       "prerequisite": {
@@ -333,8 +362,8 @@
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_100_levels": 800,
-      "meditate_recovery_per_100_levels": 30
+      "max_mp_per_100_levels": 200,
+      "meditate_recovery_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -356,8 +385,9 @@
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_100_levels": 1200,
-      "crit_rate_per_100_levels": 10
+      "attack_per_100_levels": 22,
+      "max_mp_per_100_levels": 450,
+      "crit_rate_per_100_levels": 3
     },
     "requirements": {
       "prerequisite": {
@@ -380,8 +410,8 @@
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_100_levels": 10,
-      "initiative_per_100_levels": 20
+      "dodge_per_100_levels": 14,
+      "initiative_per_100_levels": 6
     },
     "requirements": {
       "prerequisite": {
@@ -403,8 +433,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 10,
-      "max_hp_per_100_levels": 600
+      "attack_per_100_levels": 20,
+      "max_hp_per_100_levels": 80
     },
     "requirements": {
       "prerequisite": {
@@ -426,8 +456,8 @@
     "category": "guard",
     "school": "hidden",
     "bonuses": {
-      "parry_per_100_levels": 20,
-      "defense_per_100_levels": 10
+      "defense_per_100_levels": 8,
+      "parry_per_100_levels": 12
     },
     "requirements": {
       "prerequisite": {
@@ -449,7 +479,7 @@
     "category": "study",
     "school": "hidden",
     "bonuses": {
-      "learning_invest_bonus_per_100_levels": 10
+      "learning_invest_bonus_per_100_levels": 2
     },
     "requirements": {
       "prerequisite": {
@@ -471,8 +501,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "dodge_per_100_levels": 10
+      "attack_per_100_levels": 28,
+      "hit_rate_per_100_levels": 12
     },
     "requirements": {
       "prerequisite": {
@@ -494,8 +524,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 10,
-      "hit_rate_per_100_levels": 20
+      "attack_per_100_levels": 26,
+      "hit_rate_per_100_levels": 18
     },
     "requirements": {
       "prerequisite": {
@@ -517,8 +547,8 @@
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_100_levels": 1000,
-      "trained_mp_to_max_hp_percent": 0.35
+      "max_hp_per_100_levels": 60,
+      "max_mp_per_100_levels": 350
     },
     "requirements": {
       "prerequisite": {
@@ -540,7 +570,7 @@
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_100_levels": 10,
+      "dodge_per_100_levels": 20,
       "initiative_per_100_levels": 10
     },
     "requirements": {
@@ -563,8 +593,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "crit_rate_per_100_levels": 10
+      "attack_per_100_levels": 32,
+      "hit_rate_per_100_levels": 14
     },
     "requirements": {
       "prerequisite": {
@@ -586,8 +616,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "hit_rate_per_100_levels": 10
+      "attack_per_100_levels": 32,
+      "hit_rate_per_100_levels": 12
     },
     "requirements": {
       "prerequisite": {
@@ -609,8 +639,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_100_levels": 10,
-      "attack_per_100_levels": 10
+      "attack_per_100_levels": 28,
+      "dodge_per_100_levels": 24
     },
     "requirements": {
       "prerequisite": {
@@ -632,8 +662,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 10,
-      "parry_per_100_levels": 20
+      "attack_per_100_levels": 28,
+      "parry_per_100_levels": 26
     },
     "requirements": {
       "prerequisite": {
@@ -655,8 +685,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "defense_per_100_levels": 10
+      "attack_per_100_levels": 28,
+      "hit_rate_per_100_levels": 24
     },
     "requirements": {
       "prerequisite": {
@@ -678,8 +708,9 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
+      "attack_per_100_levels": 32,
       "hit_rate_per_100_levels": 20,
-      "crit_rate_per_100_levels": 20
+      "crit_rate_per_100_levels": 1
     },
     "requirements": {
       "prerequisite": {
@@ -701,8 +732,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "defense_per_100_levels": 20
+      "attack_per_100_levels": 28,
+      "parry_per_100_levels": 22
     },
     "requirements": {
       "prerequisite": {
@@ -724,8 +755,8 @@
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_100_levels": 20,
-      "initiative_per_100_levels": 30
+      "dodge_per_100_levels": 28,
+      "initiative_per_100_levels": 14
     },
     "requirements": {
       "prerequisite": {
@@ -747,8 +778,8 @@
     "category": "guard",
     "school": "hidden",
     "bonuses": {
-      "parry_per_100_levels": 20,
-      "defense_per_100_levels": 30
+      "defense_per_100_levels": 22,
+      "parry_per_100_levels": 22
     },
     "requirements": {
       "prerequisite": {
