@@ -77,6 +77,9 @@
       },
       "rumors": [
         "船娘说：二十四桥的月色和二十年前一样，看月色的人换了一茬又一茬——有人成了大将军，有人成了贼。"
+      ],
+      "actions": [
+        "listen_rumor"
       ]
     },
     "yz_lake": {
@@ -109,7 +112,9 @@
       "exits": {
         "north": "yz_dock",
         "east": "yz_lake"
-      }
+      },
+      "searchFlag": "found_caoyin_clue",
+      "searchMessage": "你在苇荡深处的泥滩上找到空银箱，箱底官印拓痕与盐运司的封条相符，留下了漕银被搬走的证据。"
     }
   }
 }

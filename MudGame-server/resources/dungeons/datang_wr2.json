@@ -48,7 +48,10 @@
       "description": "万刃窟入口。",
       "exits": {
         "north": "wr2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "wr2_01": {
       "name": "通道",

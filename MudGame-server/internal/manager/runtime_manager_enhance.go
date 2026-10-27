@@ -12,7 +12,7 @@ import (
 const maxEnhanceLevel = 5
 
 // EnhanceItem 强化装备：消耗银两 + 古铜残片，永久提升装备主属性。
-// 每级强化 +2 主属性，最高 5 级。费用递增：200/400/600/800/1000 两。
+// 每级强化 +2 主属性，最高 5 级。费用递增：200/400/600/800/1000 铜。
 func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 	r.mu.Lock()
 	defer r.mu.Unlock()
@@ -28,10 +28,16 @@ func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 	if p.State == "DEAD" {
 		return "", errors.New("dead_state")
 	}
+	if p.State != "IDLE" {
+		return "", errors.New("busy_state")
+	}
 
 	def, ok := fileItems[itemID]
 	if !ok || def.EquipmentSlot == "" {
 		return "", errors.New("item_not_equipment")
+	}
+	if p.Backpack[itemID] < 1 && p.Equipment[def.EquipmentSlot] != itemID {
+		return "", errors.New("item_not_in_inventory")
 	}
 
 	if p.EnhancedItems == nil {
@@ -47,7 +53,7 @@ func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 	costBronze := nextLevel
 
 	if p.Money < costSilver {
-		return "", errors.New("银两不足——强化到" + strconv.Itoa(nextLevel) + "级需要" + strconv.Itoa(costSilver) + "两。")
+		return "", errors.New("钱币不足——强化到" + strconv.Itoa(nextLevel) + "级需要" + strconv.Itoa(costSilver) + "文钱。")
 	}
 	if p.Backpack["bronze_fragment"] < costBronze {
 		return "", errors.New("古铜残片不足——需要" + strconv.Itoa(costBronze) + "枚。")
@@ -64,7 +70,7 @@ func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 		return "", err
 	}
 	return def.Name + "强化成功！当前等级：" + strconv.Itoa(nextLevel) + "/" + strconv.Itoa(maxEnhanceLevel) +
-		"（消耗" + strconv.Itoa(costSilver) + "两 + " + strconv.Itoa(costBronze) + "枚古铜残片）", nil
+		"（消耗" + strconv.Itoa(costSilver) + "文钱 + " + strconv.Itoa(costBronze) + "枚古铜残片）", nil
 }
 
 // getEnhanceBonus 计算装备强化附加属性（主属性 +2/级）。
@@ -98,4 +104,13 @@ func applyEnhancementNoLock(eff *model.EffectiveAttributes, p *model.Player) {
 			applyFlatBonus(eff, key, value)
 		}
 	}
+}
+
+func enhancementInfo(p *model.Player, itemID string) map[string]interface{} {
+	if fileItems[itemID].EquipmentSlot == "" {
+		return nil
+	}
+	level := p.EnhancedItems[itemID]
+	next := level + 1
+	return map[string]interface{}{"level": level, "maxLevel": maxEnhanceLevel, "nextMoney": next * 200, "nextBronze": next, "ownedMoney": p.Money, "ownedBronze": p.Backpack["bronze_fragment"], "atMax": level >= maxEnhanceLevel, "nextBonus": getEnhanceBonus(itemID, 1)}
 }

@@ -208,6 +208,7 @@ type DialogueDef struct {
 }
 
 type DialogueOption struct {
+	Repeatable      bool            `json:"repeatable,omitempty"`
 	ID              string          `json:"id"`
 	Text            string          `json:"text"`
 	Response        string          `json:"response"`
@@ -232,14 +233,16 @@ type DialogueRequire struct {
 }
 
 type QuestDef struct {
-	ID          string      `json:"id"`
-	Name        string      `json:"name"`
-	Description string      `json:"description"`
-	GiverNPCID  string      `json:"giverNpcId"`
-	TurnInNPCID string      `json:"turnInNpcId"`
-	Objectives  []Objective `json:"objectives"`
-	Rewards     Rewards     `json:"rewards"`
-	Repeatable  bool        `json:"repeatable"`
+	AliasOf       string      `json:"aliasOf,omitempty"`
+	SourceDungeon string      `json:"sourceDungeon,omitempty"`
+	ID            string      `json:"id"`
+	Name          string      `json:"name"`
+	Description   string      `json:"description"`
+	GiverNPCID    string      `json:"giverNpcId"`
+	TurnInNPCID   string      `json:"turnInNpcId"`
+	Objectives    []Objective `json:"objectives"`
+	Rewards       Rewards     `json:"rewards"`
+	Repeatable    bool        `json:"repeatable"`
 }
 
 type Objective struct {
@@ -283,6 +286,9 @@ type ExitRequirement struct {
 }
 
 type Room struct {
+	SearchFlag       string
+	SearchMessage    string
+	Rumors           []string
 	ID               string
 	WorldID          string
 	WorldName        string

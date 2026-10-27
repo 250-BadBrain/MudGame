@@ -48,7 +48,10 @@
       "description": "唐门试炼的入口。",
       "exits": {
         "north": "bas_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "bas_01": {
       "name": "通道",

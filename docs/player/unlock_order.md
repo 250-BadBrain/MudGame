@@ -1,8 +1,8 @@
-<!-- 资源校验指纹：bce13a531fcbf47cbc6f52978d776e275f5dca0e854d2601db8f498d41bc40ac；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：39402c30a532914b454ea8b483f57103e4ec3dc472a9573a175707d9d256411e；由 scripts/generate_player_guide.py 生成。 -->
 
 # 全部副本的全局解锁顺序
 
-> 本手册对应武学V2源码；服务器需配套部署与旧档迁移后生效。
+> 本手册对应当前源码，包含武学V2及内容机制修复；实际线上版本以发布记录为准。
 
 [返回玩家入口](README.md)
 

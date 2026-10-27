@@ -99,15 +99,18 @@ type rawWorldFile struct {
 }
 
 type rawRoom struct {
-	Name        string            `json:"name"`
-	Description string            `json:"description"`
-	Area        string            `json:"area"`
-	Tags        []string          `json:"tags"`
-	SafeZone    bool              `json:"safeZone"`
-	Function    string            `json:"function"`
-	Actions     []string          `json:"actions"`
-	Exits       map[string]string `json:"exits"`
-	NPCs        []string          `json:"npcs"`
+	SearchFlag    string            `json:"searchFlag"`
+	SearchMessage string            `json:"searchMessage"`
+	Rumors        []string          `json:"rumors"`
+	Name          string            `json:"name"`
+	Description   string            `json:"description"`
+	Area          string            `json:"area"`
+	Tags          []string          `json:"tags"`
+	SafeZone      bool              `json:"safeZone"`
+	Function      string            `json:"function"`
+	Actions       []string          `json:"actions"`
+	Exits         map[string]string `json:"exits"`
+	NPCs          []string          `json:"npcs"`
 }
 
 var (
@@ -174,6 +177,9 @@ func loadFromDisk() (StaticData, error) {
 	}
 
 	if err := validateMartialData(resourceDir, skills, items, npcs); err != nil {
+		return StaticData{}, err
+	}
+	if err := validateContentData(resourceDir, rooms, npcs, dialogues, quests); err != nil {
 		return StaticData{}, err
 	}
 	return StaticData{
@@ -520,6 +526,8 @@ func loadWorlds(worldDir string) ([]string, map[string]model.World, map[string]m
 			}
 			npcs := append([]string{}, rawRoom.NPCs...)
 			rooms[roomID] = model.Room{
+				SearchFlag: rawRoom.SearchFlag, SearchMessage: rawRoom.SearchMessage,
+				Rumors:      append([]string{}, rawRoom.Rumors...),
 				ID:          roomID,
 				WorldID:     worldID,
 				WorldName:   rawWorld.Name,
@@ -649,6 +657,7 @@ func cloneStaticData(in StaticData) StaticData {
 		roomCopy.NPCIDs = append([]string{}, room.NPCIDs...)
 		roomCopy.Tags = append([]string{}, room.Tags...)
 		roomCopy.Actions = append([]string{}, room.Actions...)
+		roomCopy.Rumors = append([]string{}, room.Rumors...)
 		roomCopy.Exits = map[string]model.Exit{}
 		for dir, ex := range room.Exits {
 			roomCopy.Exits[dir] = ex

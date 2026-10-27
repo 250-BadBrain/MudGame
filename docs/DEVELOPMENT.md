@@ -215,6 +215,8 @@ git add -A && git commit -m "xxx"
 3. 提交信息用中文短句、动词开头（例：“将NPC交谈改为消息区逐句展示”、“开放战斗中使用药品”）。**不主动 push**，推送时机由维护者决定。
 4. 大改动前确认工作区干净，保证有可回退基线。
 
+内容机制回归：`npm test`验证前端刷新意图和强化确认；`python scripts/tests/smoke_content_review.py --binary <隔离构建的程序路径>`会在临时目录启动独立端口，验证任务接交、显式配方、自然时间恢复、强化、战斗撤离、死亡与复活。Windows在PTY中运行，以便Ctrl+Break通知子进程正常落盘；不要传正式存档。新资源还须通过content_validation的任务闭环/主动作入口/消耗服务校验。
+
 ## 7. 常见陷阱
 
 - **composables 互相 import 会被架构破坏**——永远通过 GameView 装配注入。

@@ -48,7 +48,10 @@
       "description": "寒潭蛟影入口。",
       "exits": {
         "north": "ht2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "ht2_01": {
       "name": "通道",

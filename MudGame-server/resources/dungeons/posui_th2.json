@@ -48,7 +48,10 @@
       "description": "天火熔炉入口。",
       "exits": {
         "north": "th2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "th2_01": {
       "name": "通道",

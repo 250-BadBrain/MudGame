@@ -6,7 +6,7 @@
 - [全部 78 个副本的全局解锁表](player/unlock_order.md)
 - 七卷完整流程与剧透：[洛阳轶事](player/stories/luoyang.md) · [大唐双龙传](player/stories/datang.md) · [覆雨翻云](player/stories/fuyu.md) · [破碎虚空](player/stories/posui.md) · [边荒传说](player/stories/bianhuang.md) · [洛水风浪](player/stories/luoshui.md) · [运河风云](player/stories/yunhe.md)
 - [八城路线与全部常驻交谈](player/worlds.md)
-- [世界任务接取、推进与结局](player/quests.md)（4 条接通、37 条未接通的定义分别说明）
+- [世界任务接取、推进与结局](player/quests.md)（38个唯一任务全接通，3个旧ID兼容别名）
 - [修行、商店、武学传承与收藏目录](player/collections.md)
 - [当前内容缺口与文案/实现差异](player/content_status.md)
 
@@ -16,11 +16,14 @@
 - **[游戏系统总览与开发指引](SYSTEMS.md)**（副本/战斗/学习/商店/状态机等全部系统的机制、代码位置、扩展方法与注意事项；接手必读）
 - [后端安全部署修复计划](superpowers/plans/2026-10-26-safe-backend-deployment.md)（构建最新版本、存档保留、备份回滚与跨平台称号加载）
 - [玩家手册整理计划](superpowers/plans/2026-10-26-player-guide.md)（资源核对、七卷剧情、任务状态与全量覆盖检查）
+- [内容与机制修复计划](superpowers/plans/2026-10-27-content-mechanics-repair.md)（任务、对话交易、死亡恢复、撤离及强化；含实际验收记录与网页验证限制）
 - [武功 V2 实施与验收](design/martial_arts_v2_implementation.md)（实现范围、测试证据、首次发布及迁移方法）
 
 ## 设计
 
-- **[武功体系 V2 完整提案](design/martial_arts_v2_proposal.md)**（已实现、未部署：一功一名，38门五档目录、获取与修炼、全量旧技能映射和存档迁移）
+- [当前内容与机制复核及修复规格](design/content_mechanics_review_2026_10_27.md)（任务闭环、对话交易、死亡恢复、撤离、强化和剧情入口）
+
+- **[武功体系 V2 完整提案](design/martial_arts_v2_proposal.md)**（V2已首次上线：一功一名，38门五档目录、获取与修炼、全量旧技能映射和存档迁移）
 - [武功 V2 数值与机制审计](design/martial_arts_v2_balance_review.md)（首版38门可继续扩展；兵器缺口、修炼效率、流派差距、内力、招架、用药及经济复核）
 - [黄易世界格局设计](design/world_design_huangyi.md)
 - [玩家与 NPC 属性系统设计](design/attribute_system_design.md)（已实施，背景依据）

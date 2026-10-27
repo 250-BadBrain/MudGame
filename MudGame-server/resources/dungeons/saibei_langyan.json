@@ -48,7 +48,10 @@
       "description": "狼烟再起的入口。",
       "exits": {
         "north": "sai_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "sai_01": {
       "name": "通道",

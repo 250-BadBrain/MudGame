@@ -48,7 +48,10 @@
       "description": "冰封王座入口。",
       "exits": {
         "north": "bf2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "bf2_01": {
       "name": "通道",

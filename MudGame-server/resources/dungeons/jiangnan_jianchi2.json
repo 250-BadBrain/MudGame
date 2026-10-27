@@ -48,7 +48,10 @@
       "description": "剑池深处入口。",
       "exits": {
         "north": "jiangn_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "jiangn_01": {
       "name": "通道",

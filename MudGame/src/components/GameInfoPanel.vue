@@ -4,6 +4,15 @@
       <h3>{{ title }}</h3>
       <button @click="$emit('close')" class="close-btn">×</button>
     </div>
+    <div v-if="enhancingItem" class="enhance-confirm" role="dialog" aria-label="强化确认">
+      <strong>{{ enhancingItem.name }}：+{{ enhancingItem.enhancement.level }} → +{{ enhancingItem.enhancement.level + 1 }}</strong>
+      <div>消耗 {{ formatMoney(enhancingItem.enhancement.nextMoney) }}、古铜残片×{{ enhancingItem.enhancement.nextBronze }}</div>
+      <div>现有 {{ formatMoney(enhancingItem.enhancement.ownedMoney) }}、古铜残片×{{ enhancingItem.enhancement.ownedBronze }}</div>
+      <div>本次增加：{{ enhancementBonusText(enhancingItem.enhancement.nextBonus) }}</div>
+      <p v-if="!enhanceAffordable">钱币或古铜残片不足。</p>
+      <button :disabled="!enhanceAffordable" @click="$emit('confirmEnhance')">确认强化</button>
+      <button @click="$emit('cancelEnhance')">取消</button>
+    </div>
     <div class="panel-content">
       <div v-if="currentPanel === 'backpack'" class="backpack-panel-container">
         <div class="money-header">{{ formatMoney(playerMoney) }}</div>
@@ -23,6 +32,7 @@
                 <button v-if="item.usable" :disabled="recoverySeconds(item) > 0" @click.stop="$emit('useItem', item)" class="action-btn use-btn">{{ recoverySeconds(item) > 0 ? `冷却 ${recoverySeconds(item)}秒` : '使用' }}</button>
                 <button @click.stop="$emit('discardItem', item)" class="action-btn discard-btn">丢弃</button>
                 <button v-if="item.equipmentSlot" @click.stop="$emit('equipItem', item)" class="action-btn">装备</button>
+                <button v-if="item.equipmentSlot" :disabled="item.enhancement?.atMax" @click.stop="$emit('enhanceItem', item)" class="action-btn">强化{{ item.enhancement?.level ? ` +${item.enhancement.level}` : '' }}</button>
                 <button v-if="item.sellable && hasShopNpc" @click.stop="$emit('sellItem', item)" class="action-btn">出售</button>
               </div>
             </li>
@@ -133,6 +143,7 @@
             </div>
             <div v-if="selectedEquipmentSlot === slotKey && equipment[slotKey]" class="slot-actions">
               <button @click="$emit('unequipSlot', slotKey)" class="action-btn unequip-btn">脱下</button>
+              <button :disabled="equipment[slotKey].enhancement?.atMax" @click="$emit('enhanceItem', equipment[slotKey])" class="action-btn">强化{{ equipment[slotKey].enhancement?.level ? ` +${equipment[slotKey].enhancement.level}` : '' }}</button>
             </div>
           </div>
         </div>
@@ -251,6 +262,7 @@ import GameFactionPanel from './GameFactionPanel.vue'
 import GameQuestPanel from './GameQuestPanel.vue'
 
 const props = defineProps({
+  enhancingItem: Object,
   visible: Boolean,
   title: String,
   currentPanel: String,
@@ -317,7 +329,7 @@ const dungeonChainGroups = computed(() => {
 const fullRewardExperience = computed(() => Number(props.selectedDungeon?.rewards?.experience ?? props.selectedDungeon?.rewardBase) || 0)
 const fullRewardPotential = computed(() => Number(props.selectedDungeon?.rewards?.potential ?? props.selectedDungeon?.rewardBase) || 0)
 
-defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'useItem', 'sellItem',
+defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'useItem', 'sellItem', 'enhanceItem', 'confirmEnhance', 'cancelEnhance',
   'changeDiscardAmount', 'confirmDiscard', 'cancelDiscard',
   'changeSellAmount', 'confirmSell', 'cancelSell',
   'changeSkillTab', 'selectSkill', 'viewSkill', 'equipSkill', 'practiceSkill', 'unequipSkill',
@@ -326,6 +338,11 @@ defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipIte
   'selectDungeon', 'enterDungeon'])
 
 const gradeNames = { 1: '基础', 2: '江湖', 3: '名家', 4: '上乘', 5: '绝学' }
+const enhanceAffordable = computed(() => {
+  const info = props.enhancingItem?.enhancement
+  return info && !info.atMax && info.ownedMoney >= info.nextMoney && info.ownedBronze >= info.nextBronze
+})
+const enhancementBonusText = (bonuses) => Object.entries(bonuses || {}).map(([key, value]) => `${({ attack: '攻击', defense: '防御', hitRate: '命中', dodge: '躲闪', parry: '招架', maxHp: '气血上限', maxMp: '内力上限', initiative: '先手' })[key] || key} +${value}`).join('、')
 const martialSlots = { internal: '内功', movement: '身法', guard: '护体', combat: '战斗', study: '学识' }
 const getMartialColor = (grade) => ({ 1: '#aaa', 2: '#2ecc71', 3: '#3498db', 4: '#bb86fc', 5: '#f1c40f' })[grade] || '#aaa'
 const clock = ref(Date.now())
@@ -371,6 +388,9 @@ const getSkillBonusText = (skill) => {
 </script>
 
 <style scoped>
+.enhance-confirm { flex: 0 0 auto; padding: 10px; border: 1px solid #d49d25; background: #17130a; color: #ddd; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.enhance-confirm strong { color: #f1c40f; }
+.enhance-confirm button { margin: 8px 8px 0 0; padding: 5px 8px; }
 .game-info-panel { background: transparent; padding: 10px; margin: 0; overflow: hidden; min-width: 0; box-sizing: border-box; }
 .panel-header { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; min-width: 0; background: rgba(20,20,20,0.95); }
 .panel-header h3 { margin: 0; font-size: 14px; color: #f1c40f; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

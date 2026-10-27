@@ -11,7 +11,7 @@
         class="action-cmd-btn">
         {{ action.label }}
       </button>
-      <button v-if="isInDungeon" @click="$emit('leaveDungeon')" class="action-cmd-btn">离开副本</button>
+      <button v-if="isInDungeon" :disabled="['DEAD', 'COMBAT'].includes(playerState)" :title="playerState === 'COMBAT' ? '战斗中请使用烟尘粉撤离' : ''" @click="$emit('leaveDungeon')" class="action-cmd-btn">离开副本</button>
       <button v-if="playerState === 'DEAD'" @click="$emit('action', 'relive')" class="action-cmd-btn relive-btn">复活</button>
     </div>
   </div>

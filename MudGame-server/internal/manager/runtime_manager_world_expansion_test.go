@@ -171,7 +171,7 @@ func TestRefugeeRumorQuest(t *testing.T) {
 		t.Fatal("expected quest active")
 	}
 	// 打听旗标
-	if _, _, _, _, err := r.ChooseDialogue(playerID, "old_refugee", "gather_rumor"); err != nil {
+	if _, _, _, _, err := r.ChooseDialogue(playerID, "mute_refugee_woman", "gather_rumor"); err != nil {
 		t.Fatalf("gather rumor failed: %v", err)
 	}
 	after, _ = r.loadPlayers()

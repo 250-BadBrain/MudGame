@@ -48,7 +48,10 @@
       "description": "东都宫变的入口。",
       "exits": {
         "north": "dat_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "dat_01": {
       "name": "通道",

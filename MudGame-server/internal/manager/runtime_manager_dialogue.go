@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"sort"
 	"strings"
-	"time"
 
 	engruntime "mudgame/server/internal/engine/runtime"
 	"mudgame/server/internal/exception"
@@ -80,6 +79,7 @@ func (r *RuntimeManager) Talk(playerID, npcID string) (map[string]interface{}, e
 			}
 			result["message"] = message
 			result["logs"] = logs
+			result["dialogue"] = r.dialoguePayloadNoLock(p, npc, dialogue)
 			if err := r.savePlayers(players); err != nil {
 				return nil, err
 			}
@@ -95,6 +95,7 @@ func (r *RuntimeManager) Talk(playerID, npcID string) (map[string]interface{}, e
 	}
 	result["message"] = message
 	result["logs"] = logs
+	result["dialogue"] = r.dialoguePayloadNoLock(p, npc, dialogue)
 	if err := r.savePlayers(players); err != nil {
 		return nil, err
 	}
@@ -178,7 +179,7 @@ func (r *RuntimeManager) advanceStaticDialogueNoLock(p *model.Player, npc model.
 	for i := range dialogue.Options {
 		option := dialogue.Options[i]
 		key := npc.ID + "|" + option.ID
-		if history[key] || !r.dialogueRequirementMetNoLock(p, option.Requires) || option.TakeMoney > p.Money {
+		if option.Repeatable || !r.dialogueOptionAvailableNoLock(p, npc.ID, option, history) {
 			continue
 		}
 		logs, err := r.applyDialogueOptionEffectsNoLock(p, &option, npc.ID)
@@ -221,7 +222,18 @@ func dialogueVariant(value string, count int) int {
 }
 
 func (r *RuntimeManager) applyDialogueOptionEffectsNoLock(p *model.Player, selected *model.DialogueOption, npcID string) ([]string, error) {
+	if err := r.validateDialogueEffectsNoLock(p, selected, npcID); err != nil {
+		return nil, err
+	}
 	logs := []string{}
+	// Finish the only fallible effect before costs, flags or dungeon collection mutate.
+	if selected.CompleteQuestID != "" {
+		questLogs, err := r.completeQuestNoLock(p, selected.CompleteQuestID, npcID)
+		if err != nil {
+			return nil, err
+		}
+		logs = append(logs, questLogs...)
+	}
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
 	}
@@ -254,13 +266,6 @@ func (r *RuntimeManager) applyDialogueOptionEffectsNoLock(p *model.Player, selec
 		if log := r.startQuestNoLock(p, selected.StartQuestID); log != "" {
 			logs = append(logs, log)
 		}
-	}
-	if selected.CompleteQuestID != "" {
-		questLogs, err := r.completeQuestNoLock(p, selected.CompleteQuestID, npcID)
-		if err != nil {
-			return nil, err
-		}
-		logs = append(logs, questLogs...)
 	}
 	return logs, nil
 }
@@ -323,7 +328,7 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	var selected *model.DialogueOption
 	for i := range dialogue.Options {
 		opt := dialogue.Options[i]
-		if opt.ID == optionID && r.dialogueRequirementMetNoLock(p, opt.Requires) && opt.TakeMoney <= p.Money {
+		if opt.ID == optionID && r.dialogueOptionAvailableNoLock(p, npc.ID, opt, r.dialogueHistoryNoLock(p, npc.ID)) {
 			selected = &opt
 			break
 		}
@@ -336,6 +341,9 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	if err != nil {
 		return nil, "", nil, nil, err
 	}
+	if !selected.Repeatable {
+		r.dialogueHistoryNoLock(p, npc.ID)[npc.ID+"|"+selected.ID] = true
+	}
 
 	if err := r.savePlayers(players); err != nil {
 		return nil, "", nil, nil, err
@@ -344,32 +352,12 @@ func (r *RuntimeManager) ChooseDialogue(playerID, npcID, optionID string) (map[s
 	return payload, selected.Response, logs, nil, nil
 }
 
-func (r *RuntimeManager) GetQuests(playerID string) ([]map[string]interface{}, error) {
-	r.mu.RLock()
-	defer r.mu.RUnlock()
-
-	players, err := r.loadPlayers()
-	if err != nil {
-		return nil, err
-	}
-	p, ok := players[playerID]
-	if !ok {
-		return nil, exception.ErrPlayerNotFound
-	}
-	out := make([]map[string]interface{}, 0, len(p.QuestStates))
-	for questID, state := range p.QuestStates {
-		quest, ok := fileQuests[questID]
-		if !ok {
-			continue
-		}
-		out = append(out, questPayload(quest, state))
-	}
-	return out, nil
-}
-
 func (r *RuntimeManager) npcInPlayerRoomNoLock(p *model.Player, npcID string) (model.NPC, error) {
 	if p.State == "DEAD" {
 		return model.NPC{}, errors.New("dead_state")
+	}
+	if p.State != "IDLE" {
+		return model.NPC{}, errors.New("busy_state")
 	}
 	staticRooms, err := r.loadRooms()
 	if err != nil {
@@ -412,10 +400,12 @@ func (r *RuntimeManager) npcInPlayerRoomNoLock(p *model.Player, npcID string) (m
 func (r *RuntimeManager) dialoguePayloadNoLock(p *model.Player, npc model.NPC, dialogue model.DialogueDef) map[string]interface{} {
 	options := make([]map[string]interface{}, 0, len(dialogue.Options))
 	for _, opt := range dialogue.Options {
-		if !r.dialogueRequirementMetNoLock(p, opt.Requires) {
+		available := r.dialogueOptionAvailableNoLock(p, npc.ID, opt, r.dialogueHistoryNoLock(p, npc.ID))
+		if !available && !opt.Repeatable {
 			continue
 		}
 		options = append(options, map[string]interface{}{
+			"available": available, "repeatable": opt.Repeatable,
 			"id":   opt.ID,
 			"text": opt.Text,
 		})
@@ -480,10 +470,7 @@ func (r *RuntimeManager) puzzleActionRequirementsMetNoLock(p *model.Player, room
 
 func (r *RuntimeManager) dialogueRequirementMetNoLock(p *model.Player, req model.DialogueRequire) bool {
 	if req.QuestID != "" {
-		state, ok := p.QuestStates[req.QuestID]
-		if !ok {
-			return req.QuestStatus == "not_started"
-		}
+		state := questStateNoLock(p, req.QuestID)
 		if req.QuestStatus != "" && state.Status != req.QuestStatus {
 			return false
 		}
@@ -512,68 +499,6 @@ func (r *RuntimeManager) dialogueRequirementMetNoLock(p *model.Player, req model
 		}
 	}
 	return true
-}
-
-func (r *RuntimeManager) startQuestNoLock(p *model.Player, questID string) string {
-	quest, ok := fileQuests[questID]
-	if !ok {
-		return ""
-	}
-	state, exists := p.QuestStates[questID]
-	if exists && state.Status != "completed" {
-		return ""
-	}
-	if exists && state.Status == "completed" && !quest.Repeatable {
-		return ""
-	}
-	p.QuestStates[questID] = model.QuestState{ID: questID, Status: "active", Progress: 0}
-	return "你接下了任务：" + quest.Name
-}
-
-func (r *RuntimeManager) completeQuestNoLock(p *model.Player, questID, npcID string) ([]string, error) {
-	quest, ok := fileQuests[questID]
-	if !ok {
-		return nil, errors.New("quest_not_found")
-	}
-	if quest.TurnInNPCID != "" && npcID != quest.TurnInNPCID {
-		return nil, errors.New("quest_wrong_npc")
-	}
-	state, ok := p.QuestStates[questID]
-	if !ok || state.Status != "active" {
-		return nil, errors.New("quest_not_active")
-	}
-	if !r.questObjectivesMetNoLock(p, quest) {
-		return nil, errors.New("quest_not_finished")
-	}
-	state.Status = "completed"
-	state.Progress = 100
-	state.CompletedAt = time.Now().Unix()
-	p.QuestStates[questID] = state
-	p.Attributes.Experience += quest.Rewards.Experience
-	p.Attributes.Potential += quest.Rewards.Potential
-	p.Money += quest.Rewards.Money
-	if p.Backpack == nil {
-		p.Backpack = map[string]int{}
-	}
-	for itemID, amount := range quest.Rewards.Items {
-		if amount > 0 {
-			p.Backpack[itemID] += amount
-		}
-	}
-	for flag, value := range quest.Rewards.Flags {
-		p.Flags[flag] = value
-	}
-	if p.Reputations == nil {
-		p.Reputations = map[string]int{}
-	}
-	for factionID, value := range quest.Rewards.Reputations {
-		p.Reputations[factionID] += value
-	}
-	logs := []string{"你完成了任务：" + quest.Name}
-	if quest.Rewards.Experience > 0 || quest.Rewards.Potential > 0 || quest.Rewards.Money > 0 {
-		logs = append(logs, "你获得了任务奖励。")
-	}
-	return logs, nil
 }
 
 func (r *RuntimeManager) GetFactions(playerID string) ([]map[string]interface{}, error) {
@@ -611,39 +536,4 @@ func (r *RuntimeManager) GetFactions(playerID string) ([]map[string]interface{},
 		return out[i]["id"].(string) < out[j]["id"].(string)
 	})
 	return out, nil
-}
-
-func (r *RuntimeManager) questObjectivesMetNoLock(p *model.Player, quest model.QuestDef) bool {
-	for _, obj := range quest.Objectives {
-		switch obj.Type {
-		case "flag":
-			if !p.Flags[obj.TargetID] {
-				return false
-			}
-		default:
-			return false
-		}
-	}
-	return true
-}
-
-func questPayload(quest model.QuestDef, state model.QuestState) map[string]interface{} {
-	objectives := make([]map[string]interface{}, 0, len(quest.Objectives))
-	for _, obj := range quest.Objectives {
-		objectives = append(objectives, map[string]interface{}{
-			"type":        obj.Type,
-			"targetId":    obj.TargetID,
-			"description": obj.Description,
-			"required":    obj.Required,
-		})
-	}
-	return map[string]interface{}{
-		"id":          quest.ID,
-		"name":        quest.Name,
-		"description": quest.Description,
-		"status":      state.Status,
-		"progress":    state.Progress,
-		"objectives":  objectives,
-		"rewards":     quest.Rewards,
-	}
 }

@@ -48,7 +48,10 @@
       "description": "盐帮内乱的入口。",
       "exits": {
         "north": "yan_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "yan_01": {
       "name": "通道",

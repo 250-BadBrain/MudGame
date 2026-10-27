@@ -89,6 +89,26 @@
         "id": "ask_notice",
         "text": "近日官署有什么告示？",
         "response": "“南北商旅渐多，盗匪也随之生事。若有本事，可去军府或镖局问问差事。”"
+      },
+      {
+        "id": "quest_start_luoyang_bounty",
+        "text": "接取：粮道悬赏",
+        "response": "北城官署悬赏三两银，请你在《洛阳粮道》挫败瓦岗偏师，满通关结算后回来复命。",
+        "startQuestId": "luoyang_bounty",
+        "requires": {
+          "questId": "luoyang_bounty",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_luoyang_bounty",
+        "text": "交付：粮道悬赏",
+        "response": "韩录事核对了你的见闻：“《粮道悬赏》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "luoyang_bounty",
+        "requires": {
+          "questId": "luoyang_bounty",
+          "questStatus": "active"
+        }
       }
     ]
   },
@@ -334,53 +354,58 @@
         },
         "giveItems": {
           "simple_medicine": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "brew_herb_pill",
-        "text": "炼一炉回春丹（止血草×5 + 古铜残片×1）",
-        "response": "孙回春难得正色：\"五株草提药性，一片古铜做药引——这丹比金创药烈得多，接骨续脉都使得。\"——回春丹到手。",
+        "text": "制作回春丹（止血草×5、干粮×2）",
+        "response": "你交付止血草×5、干粮×2，制成回春丹。",
         "requires": {
           "items": {
             "herb": 5,
-            "bronze_fragment": 1
+            "dry_ration": 2
           }
         },
         "takeItems": {
           "herb": 5,
-          "bronze_fragment": 1
+          "dry_ration": 2
         },
         "giveItems": {
           "herb_pill": 1
-        }
+        },
+        "repeatable": true,
+        "takeMoney": 0
       },
       {
         "id": "brew_dahuandan",
-        "text": "炼一炉大还丹（止血草×8 + 古铜残片×2 + 150两）",
-        "response": "孙回春罕见地搓了搓手：\"八株草提药、两片铜引火、一百五十两工钱——大还丹！丹成之日，半条命都能给你捞回来。\"",
+        "text": "制作大还丹（止血草×8、干粮×4、150文钱）",
+        "response": "你交付止血草×8、干粮×4、150文钱，制成大还丹。",
         "requires": {
           "items": {
             "herb": 8,
-            "bronze_fragment": 2
+            "dry_ration": 4
           }
         },
         "takeItems": {
           "herb": 8,
-          "bronze_fragment": 2
+          "dry_ration": 4
         },
         "takeMoney": 150,
         "giveItems": {
           "dahuandan": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "consult_fee",
-        "text": "付诊金抓现成的金创药（100两）",
+        "text": "付诊金抓现成的金创药（100文钱）",
         "response": "孙回春收了银子，从百子柜里取出一瓶：\"拿好。比东市便宜二十文，老夫赚个跑腿钱。\"",
         "takeMoney": 100,
         "giveItems": {
           "simple_medicine": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "brew_with_rations",
@@ -396,7 +421,8 @@
         },
         "giveItems": {
           "simple_medicine": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "sell_herbs",
@@ -412,7 +438,8 @@
         },
         "giveItems": {
           "dry_ration": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "ask_herbs",
@@ -421,22 +448,23 @@
       },
       {
         "id": "brew_te_huan",
-        "text": "炼一炉特级大还丹（大还丹×2 + 古铜残片×3 + 300两）",
-        "response": "孙回春搓着手：\"两粒大还丹提药底，三片铜引天火，三百两工钱——特级大还丹！老夫这辈子就炼出来过三粒。\"",
+        "text": "制作特级大还丹（大还丹×2、干粮×5、300文钱）",
+        "response": "你交付大还丹×2、干粮×5、300文钱，制成特级大还丹。",
         "requires": {
           "items": {
             "dahuandan": 2,
-            "bronze_fragment": 3
+            "dry_ration": 5
           }
         },
         "takeItems": {
           "dahuandan": 2,
-          "bronze_fragment": 3
+          "dry_ration": 5
         },
         "takeMoney": 300,
         "giveItems": {
           "tezhong_dahuandan": 1
-        }
+        },
+        "repeatable": true
       }
     ]
   },
@@ -448,8 +476,8 @@
     "options": [
       {
         "id": "reforge_sword",
-        "text": "熔铸铁剑为钢刀（铁剑×1 + 500两）",
-        "response": "钟铁衣接过铁剑掂了掂：\"成色还行，回炉正好。\"——风箱拉响，火星四溅，一口钢刀递了出来。",
+        "text": "制作钢刀（铁剑×1、100文钱）",
+        "response": "你交付铁剑×1、100文钱，制成钢刀。",
         "requires": {
           "items": {
             "iron_sword": 1
@@ -458,15 +486,16 @@
         "takeItems": {
           "iron_sword": 1
         },
-        "takeMoney": 500,
+        "takeMoney": 100,
         "giveItems": {
           "steel_blade": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "reforge_staff",
-        "text": "熔铸铁棍为钢刀（铁棍×1 + 500两）",
-        "response": "钟铁衣把铁棍截成三段扔进炉膛：\"棍有棍的打法，不过你要刀，老钟就给你打刀。\"——钢刀到手。",
+        "text": "制作钢刀（铁棍×1、150文钱）",
+        "response": "你交付铁棍×1、150文钱，制成钢刀。",
         "requires": {
           "items": {
             "iron_staff": 1
@@ -475,27 +504,29 @@
         "takeItems": {
           "iron_staff": 1
         },
-        "takeMoney": 500,
+        "takeMoney": 150,
         "giveItems": {
           "steel_blade": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "forge_ring",
-        "text": "熔铸玄铁战指（古铜残片×5 + 200两）",
-        "response": "钟铁衣掂了掂那把古铜残片：\"成色杂，但火候到了就是玄铁。——手伸出来，别抖。\"——战指套上指骨，凉意直透心口。",
+        "text": "制作玄铁战指（古铜残片×2、200文钱）",
+        "response": "你交付古铜残片×2、200文钱，制成玄铁战指。",
         "requires": {
           "items": {
-            "bronze_fragment": 5
+            "bronze_fragment": 2
           }
         },
         "takeItems": {
-          "bronze_fragment": 5
+          "bronze_fragment": 2
         },
         "takeMoney": 200,
         "giveItems": {
           "xuantie_zhanzhi": 1
-        }
+        },
+        "repeatable": true
       },
       {
         "id": "ask_reforge",
@@ -518,18 +549,6 @@
         "requires": {
           "questId": "refugee_rumor_case",
           "questStatus": "not_started"
-        }
-      },
-      {
-        "id": "gather_rumor",
-        "text": "（向营南的哑婆打听白衣娘娘的事）",
-        "response": "哑婆不会说话，只在地上用炭条画了三笔：一口井，一条河，一个倒着写的\"隋\"字——画完她就躲回了窝棚。你把这三笔刻在了心里。",
-        "setFlags": {
-          "heard_refugee_whisper": true
-        },
-        "requires": {
-          "questId": "refugee_rumor_case",
-          "questStatus": "active"
         }
       },
       {
@@ -626,7 +645,58 @@
     "npcId": "ca2_monk",
     "title": "别院问讯",
     "opening": "知客僧合十：\"仙子闭关参悟和氏璧的启示，不见客。施主若有江湖急难，老衲倒可代传一句话。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_changan_letter",
+        "text": "接取：慈航托信",
+        "response": "慈航别院的师妃暄有一封信要送到洛阳旧坊暗巷——收信人是那位灰袍传承人。",
+        "startQuestId": "changan_letter",
+        "requires": {
+          "questId": "changan_letter",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_start_zhongjuan_daozhen",
+        "text": "接取：遗境道真",
+        "response": "将《战神遗境》的机关见闻带给长安化度寺知客僧辨读。",
+        "startQuestId": "zhongjuan_daozhen",
+        "requires": {
+          "questId": "zhongjuan_daozhen",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_zhongjuan_daozhen",
+        "text": "交付：遗境道真",
+        "response": "化度寺知客僧核对了你的见闻：“《遗境道真》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "zhongjuan_daozhen",
+        "requires": {
+          "questId": "zhongjuan_daozhen",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_kongming_daozhen",
+        "text": "接取：空明道真",
+        "response": "完成《破碎空明》的探索，将所见带回长安和春亭，向化度寺知客僧复命。",
+        "startQuestId": "kongming_daozhen",
+        "requires": {
+          "questId": "kongming_daozhen",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_kongming_daozhen",
+        "text": "交付：空明道真",
+        "response": "化度寺知客僧核对了你的见闻：“《空明道真》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "kongming_daozhen",
+        "requires": {
+          "questId": "kongming_daozhen",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_ld_courier": {
     "id": "dlg_ld_courier",
@@ -702,7 +772,28 @@
     "npcId": "yz_salt_merchant",
     "title": "盐商哭账",
     "opening": "程盐商一见客人就抹泪：\"三万两漕银哪！装船就没了——客官若能帮小老儿找回，谢银两百两！\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_caoyin_case",
+        "text": "接取：漕银失窃",
+        "response": "程老爷请你询问二十四桥船娘、核对盐运司书办的记录，再去苇荡搜索银箱凭据，回来报告漕银下落。",
+        "startQuestId": "caoyin_case",
+        "requires": {
+          "questId": "caoyin_case",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_caoyin_case",
+        "text": "交付：漕银失窃",
+        "response": "程盐商核对了你的见闻：“《漕银失窃》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "caoyin_case",
+        "requires": {
+          "questId": "caoyin_case",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_yz_boat": {
     "id": "dlg_yz_boat",
@@ -710,6 +801,18 @@
     "title": "湖上旧曲",
     "opening": "船娘摇着橹笑：\"客官坐稳——二十四桥的月亮，瘦西湖的水，都在这支曲子里。\"",
     "options": [
+      {
+        "id": "caoyin_witness",
+        "text": "询问漕银失窃的线索",
+        "response": "船娘指向苇荡：“那夜卸下的空箱子是官船制式，吃水却比来时浅。去问书办封条上的号。”",
+        "setFlags": {
+          "caoyin_boat_witness": true
+        },
+        "requires": {
+          "questId": "caoyin_case",
+          "questStatus": "active"
+        }
+      },
       {
         "id": "ask_water",
         "text": "瘦西湖的水路有什么讲究？",
@@ -722,7 +825,60 @@
     "npcId": "yz_yamen_clerk",
     "title": "衙门书办",
     "opening": "书办翻着账本，眼皮不抬：\"漕银失窃，上头催得紧。本官只提醒一句——水上的事，去水边查。\"",
-    "options": []
+    "options": [
+      {
+        "id": "caoyin_witness",
+        "text": "询问漕银失窃的线索",
+        "response": "书办核对封条：“箱号对得上。若要实证，去苇荡搜索泥滩，光凭传闻我不能销账。”",
+        "setFlags": {
+          "caoyin_office_witness": true
+        },
+        "requires": {
+          "questId": "caoyin_case",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_yangzhou_bounty",
+        "text": "接取：枯井缉邪",
+        "response": "盐运司书办请你追查上游暗桩，在《枯井之下》满通关结算后回盐运使署报告。",
+        "startQuestId": "yangzhou_bounty",
+        "requires": {
+          "questId": "yangzhou_bounty",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_yangzhou_bounty",
+        "text": "交付：枯井缉邪",
+        "response": "盐运司书办核对了你的见闻：“《枯井缉邪》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "yangzhou_bounty",
+        "requires": {
+          "questId": "yangzhou_bounty",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_yunhe_houyi",
+        "text": "接取：运河后患",
+        "response": "将《运河追击》的战况和水路见闻带回扬州盐运使署，供书办安排巡防。",
+        "startQuestId": "yunhe_houyi",
+        "requires": {
+          "questId": "yunhe_houyi",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_yunhe_houyi",
+        "text": "交付：运河后患",
+        "response": "盐运司书办核对了你的见闻：“《运河后患》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "yunhe_houyi",
+        "requires": {
+          "questId": "yunhe_houyi",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_bs_tang": {
     "id": "dlg_bs_tang",
@@ -734,6 +890,26 @@
         "id": "ask_tangmen",
         "text": "唐门的暗器为什么不出蜀？",
         "response": "管事叹了口气：\"暗器太利，人心太软——出了蜀地，唐家管不住它落在谁手里。\""
+      },
+      {
+        "id": "quest_start_bashu_thanks",
+        "text": "接取：唐门谢礼",
+        "response": "唐家坳对你在蜀道栈桥的表现非常满意——管事说要给你一份唐门的谢礼。",
+        "startQuestId": "bashu_thanks",
+        "requires": {
+          "questId": "bashu_thanks",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_bashu_thanks",
+        "text": "交付：唐门谢礼",
+        "response": "唐门管事核对了你的见闻：“《唐门谢礼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "bashu_thanks",
+        "requires": {
+          "questId": "bashu_thanks",
+          "questStatus": "active"
+        }
       }
     ]
   },
@@ -742,14 +918,96 @@
     "npcId": "bs_jiange_clerk",
     "title": "栈道余患",
     "opening": "驿丞指着栈道深处：\"猿叟是死了，可他的徒子徒孙还在栈道上收'过路钱'。唐家坳的药箱被劫了三回——唐门发话了：谁替他们把场子找回来，蜀地任行。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_zhandao_case",
+        "text": "接取：蜀道劫案",
+        "response": "猿叟虽伏诛，余党犹在栈道劫掠唐门药箱。助唐门管事清剿余党、擒下小猿王，蜀地任行。",
+        "startQuestId": "zhandao_case",
+        "requires": {
+          "questId": "zhandao_case",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_zhandao_case",
+        "text": "交付：蜀道劫案",
+        "response": "剑阁驿丞核对了你的见闻：“《蜀道劫案》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "zhandao_case",
+        "requires": {
+          "questId": "zhandao_case",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_sb_centurion": {
     "id": "dlg_sb_centurion",
     "npcId": "sb_centurion",
     "title": "烽火之约",
     "opening": "百夫长把兵册往案上一摔：\"白狼主封了狼山口，商路断了，戍卒天天折——边军的告急文书，出不了马邑。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_bianguan_fenghuo",
+        "text": "接取：边关烽火",
+        "response": "白狼主封了狼山口，马邑告急而边军不得擅动。江湖人的刀朝廷管不着——助百夫长破狼山口，重开商路。",
+        "startQuestId": "bianguan_fenghuo",
+        "requires": {
+          "questId": "bianguan_fenghuo",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_bianguan_fenghuo",
+        "text": "交付：边关烽火",
+        "response": "李百夫长核对了你的见闻：“《边关烽火》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "bianguan_fenghuo",
+        "requires": {
+          "questId": "bianguan_fenghuo",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_mishi_aftermath",
+        "text": "接取：秘道封堵",
+        "response": "魔师宫的秘道虽然断了，但入口还没封死——去塞北找李百夫长安排封堵。",
+        "startQuestId": "mishi_aftermath",
+        "requires": {
+          "questId": "mishi_aftermath",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_mishi_aftermath",
+        "text": "交付：秘道封堵",
+        "response": "李百夫长核对了你的见闻：“《秘道封堵》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "mishi_aftermath",
+        "requires": {
+          "questId": "mishi_aftermath",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_jueji_houji",
+        "text": "接取：绝地后记",
+        "response": "完成《边荒绝地》并满通关离开后，将见闻带回李百夫长处，领取一次性酬谢。",
+        "startQuestId": "jueji_houji",
+        "requires": {
+          "questId": "jueji_houji",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_jueji_houji",
+        "text": "交付：绝地后记",
+        "response": "李百夫长核对了你的见闻：“《绝地后记》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "jueji_houji",
+        "requires": {
+          "questId": "jueji_houji",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_sb_guard": {
     "id": "dlg_sb_guard",
@@ -763,7 +1021,68 @@
     "npcId": "jn_zither_player",
     "title": "琴剑之音",
     "opening": "抚琴女子指下不停：\"客人听出这曲子里的剑意了么？——江南的剑客，先学琴，再学剑。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_lanting_tie",
+        "text": "接取：兰亭帖",
+        "response": "听雨楼的琴师似有难言之隐，兰亭的老翁守着不卖的帖，剑池的哑叔在木牌上写：池底的剑少了两把。三件事，一条线。",
+        "startQuestId": "lanting_tie",
+        "requires": {
+          "questId": "lanting_tie",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_lanting_tie",
+        "text": "交付：兰亭帖",
+        "response": "抚琴女子核对了你的见闻：“《兰亭帖》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "lanting_tie",
+        "requires": {
+          "questId": "lanting_tie",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_jiangnan_heart",
+        "text": "接取：琴师心结",
+        "response": "抚琴女子的师父是沉剑入池的人——她想在剑池找回师父的佩剑。",
+        "startQuestId": "jiangnan_heart",
+        "requires": {
+          "questId": "jiangnan_heart",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_jiangnan_heart",
+        "text": "交付：琴师心结",
+        "response": "抚琴女子核对了你的见闻：“《琴师心结》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "jiangnan_heart",
+        "requires": {
+          "questId": "jiangnan_heart",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_langfan_legacy",
+        "text": "接取：浪翻云遗篇",
+        "response": "完成《浪翻云试炼》并满通关离开后，将见闻带回抚琴女子处，领取一次性酬谢。",
+        "startQuestId": "langfan_legacy",
+        "requires": {
+          "questId": "langfan_legacy",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_langfan_legacy",
+        "text": "交付：浪翻云遗篇",
+        "response": "抚琴女子核对了你的见闻：“《浪翻云遗篇》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "langfan_legacy",
+        "requires": {
+          "questId": "langfan_legacy",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_jn_calligrapher": {
     "id": "dlg_jn_calligrapher",
@@ -784,28 +1103,392 @@
     "npcId": "dd2_palace_guard",
     "title": "宫门禁令",
     "opening": "金吾卫校尉长戟一横：\"宫门重地，止步。——东都的规矩：看，可以；碰，不行。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_gongbian_aftermath",
+        "text": "接取：宫变余波",
+        "response": "宫变之后，东都戒严——金吾卫旧部托你查清余党的退路。",
+        "startQuestId": "gongbian_aftermath",
+        "requires": {
+          "questId": "gongbian_aftermath",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_gongbian_aftermath",
+        "text": "交付：宫变余波",
+        "response": "金吾卫校尉核对了你的见闻：“《宫变余波》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "gongbian_aftermath",
+        "requires": {
+          "questId": "gongbian_aftermath",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_xinggong_aftermath",
+        "text": "接取：行宫余波",
+        "response": "完成《行宫惊变》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "xinggong_aftermath",
+        "requires": {
+          "questId": "xinggong_aftermath",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_xinggong_aftermath",
+        "text": "交付：行宫余波",
+        "response": "金吾卫校尉核对了你的见闻：“《行宫余波》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "xinggong_aftermath",
+        "requires": {
+          "questId": "xinggong_aftermath",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_0",
+        "text": "接取：绝壁悬栈试炼",
+        "response": "完成《绝壁悬栈》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_0",
+        "requires": {
+          "questId": "quest_r204_0",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_0",
+        "text": "交付：绝壁悬栈试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《绝壁悬栈试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_0",
+        "requires": {
+          "questId": "quest_r204_0",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_1",
+        "text": "接取：寒潭蛟影试炼",
+        "response": "完成《寒潭蛟影》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_1",
+        "requires": {
+          "questId": "quest_r204_1",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_1",
+        "text": "交付：寒潭蛟影试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《寒潭蛟影试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_1",
+        "requires": {
+          "questId": "quest_r204_1",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_2",
+        "text": "接取：沙海孤城试炼",
+        "response": "完成《沙海孤城》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_2",
+        "requires": {
+          "questId": "quest_r204_2",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_2",
+        "text": "交付：沙海孤城试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《沙海孤城试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_2",
+        "requires": {
+          "questId": "quest_r204_2",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_3",
+        "text": "接取：毒瘴密林试炼",
+        "response": "完成《毒瘴密林》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_3",
+        "requires": {
+          "questId": "quest_r204_3",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_3",
+        "text": "交付：毒瘴密林试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《毒瘴密林试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_3",
+        "requires": {
+          "questId": "quest_r204_3",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_4",
+        "text": "接取：天罡北斗试炼",
+        "response": "完成《天罡北斗》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_4",
+        "requires": {
+          "questId": "quest_r204_4",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_4",
+        "text": "交付：天罡北斗试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《天罡北斗试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_4",
+        "requires": {
+          "questId": "quest_r204_4",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_5",
+        "text": "接取：幽冥鬼市试炼",
+        "response": "完成《幽冥鬼市》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_5",
+        "requires": {
+          "questId": "quest_r204_5",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_5",
+        "text": "交付：幽冥鬼市试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《幽冥鬼市试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_5",
+        "requires": {
+          "questId": "quest_r204_5",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_6",
+        "text": "接取：铁血雄关试炼",
+        "response": "完成《铁血雄关》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_6",
+        "requires": {
+          "questId": "quest_r204_6",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_6",
+        "text": "交付：铁血雄关试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《铁血雄关试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_6",
+        "requires": {
+          "questId": "quest_r204_6",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_7",
+        "text": "接取：烟雨剑冢试炼",
+        "response": "完成《烟雨剑冢》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_7",
+        "requires": {
+          "questId": "quest_r204_7",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_7",
+        "text": "交付：烟雨剑冢试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《烟雨剑冢试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_7",
+        "requires": {
+          "questId": "quest_r204_7",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_8",
+        "text": "接取：天火熔炉试炼",
+        "response": "完成《天火熔炉》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_8",
+        "requires": {
+          "questId": "quest_r204_8",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_8",
+        "text": "交付：天火熔炉试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《天火熔炉试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_8",
+        "requires": {
+          "questId": "quest_r204_8",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_quest_r204_9",
+        "text": "接取：冰封王座试炼",
+        "response": "完成《冰封王座》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
+        "startQuestId": "quest_r204_9",
+        "requires": {
+          "questId": "quest_r204_9",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_quest_r204_9",
+        "text": "交付：冰封王座试炼",
+        "response": "金吾卫校尉核对了你的见闻：“《冰封王座试炼》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "quest_r204_9",
+        "requires": {
+          "questId": "quest_r204_9",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_dd2_poet": {
     "id": "dlg_dd2_poet",
     "npcId": "dd2_pool_poet",
     "title": "醉里乾坤",
     "opening": "诗人举着空酒杯：\"你可知东都的月亮为什么比洛阳的圆？——因为宫墙里的人都在看它，看了太多年，看的人多了，月亮就重了。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_gongmen_ye",
+        "text": "接取：宫门夜",
+        "response": "万曲池畔的诗人在找一首诗的下落——传说天津桥的晓月之下沉着一方前朝古砚，砚中藏着他落第的真相。东都天津晓月的夜，比宫墙里的更深。",
+        "startQuestId": "gongmen_ye",
+        "requires": {
+          "questId": "gongmen_ye",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_gongmen_ye",
+        "text": "交付：宫门夜",
+        "response": "落魄诗人核对了你的见闻：“《宫门夜》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "gongmen_ye",
+        "requires": {
+          "questId": "gongmen_ye",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_dongdu_truth",
+        "text": "接取：诗人的真相",
+        "response": "前朝账册的最后一笔记着科举舞弊——诗人要你去宫门广场，当众焚账昭雪。",
+        "startQuestId": "dongdu_truth",
+        "requires": {
+          "questId": "dongdu_truth",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_dongdu_truth",
+        "text": "交付：诗人的真相",
+        "response": "落魄诗人核对了你的见闻：“《诗人的真相》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "dongdu_truth",
+        "requires": {
+          "questId": "dongdu_truth",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_longyin_zhengming",
+        "text": "接取：龙吟正名",
+        "response": "洛水守灵被你逐走后，前朝的秘密终于浮出水面——去告诉落魄诗人。",
+        "startQuestId": "longyin_zhengming",
+        "requires": {
+          "questId": "longyin_zhengming",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_longyin_zhengming",
+        "text": "交付：龙吟正名",
+        "response": "落魄诗人核对了你的见闻：“《龙吟正名》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "longyin_zhengming",
+        "requires": {
+          "questId": "longyin_zhengming",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_dm_captain": {
     "id": "dlg_dm_captain",
     "npcId": "dm_old_captain",
     "title": "归墟夜话",
     "opening": "老船长把酒囊塞进你怀里：\"你问海市？海市不是蜃楼——是一座城。它在浪底下等主人回来，等了三百年。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_cangming_yijuan",
+        "text": "接取：沧溟遗卷",
+        "response": "归墟港的老船长、鲛人市的珠娘、海市的守阁人——三句话凑出一段三百年前的旧事：沧溟宫的主人留下一枚玉简，在等有缘人。去海市深处取回它。",
+        "startQuestId": "cangming_yijuan",
+        "requires": {
+          "questId": "cangming_yijuan",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_cangming_yijuan",
+        "text": "交付：沧溟遗卷",
+        "response": "老船长核对了你的见闻：“《沧溟遗卷》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "cangming_yijuan",
+        "requires": {
+          "questId": "cangming_yijuan",
+          "questStatus": "active"
+        }
+      },
+      {
+        "id": "quest_start_longgong_yiji",
+        "text": "接取：龙宫遗事",
+        "response": "完成《归墟龙宫》并满通关离开后，将见闻带回老船长处，领取一次性酬谢。",
+        "startQuestId": "longgong_yiji",
+        "requires": {
+          "questId": "longgong_yiji",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_longgong_yiji",
+        "text": "交付：龙宫遗事",
+        "response": "老船长核对了你的见闻：“《龙宫遗事》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "longgong_yiji",
+        "requires": {
+          "questId": "longgong_yiji",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_dm_jiaoren": {
     "id": "dlg_dm_jiaoren",
     "npcId": "dm_jiaoren",
     "title": "鲛珠之约",
     "opening": "珠娘的歌声像海浪：\"客人要看海市？鲛人的歌能引路——但海市的门，只对拿着沧溟玉简的人开。\"",
-    "options": []
+    "options": [
+      {
+        "id": "quest_start_dongming_song",
+        "text": "接取：鲛人之歌",
+        "response": "你取回了沧溟玉简，鲛人一族要为你唱一首只唱给恩人的歌。",
+        "startQuestId": "dongming_song",
+        "requires": {
+          "questId": "dongming_song",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_dongming_song",
+        "text": "交付：鲛人之歌",
+        "response": "鲛人珠娘核对了你的见闻：“《鲛人之歌》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "dongming_song",
+        "requires": {
+          "questId": "dongming_song",
+          "questStatus": "active"
+        }
+      }
+    ]
   },
   "dlg_dm_keeper": {
     "id": "dlg_dm_keeper",
@@ -1016,5 +1699,71 @@
     "title": "琴圣",
     "opening": "岭南琴圣朝你点头。",
     "options": []
+  },
+  "dlg_mute_refugee": {
+    "id": "dlg_mute_refugee",
+    "npcId": "mute_refugee_woman",
+    "title": "炭痕里的线索",
+    "opening": "哑婆抬头看了你一眼，捡起地上的炭条。",
+    "options": [
+      {
+        "id": "gather_rumor",
+        "text": "向哑婆打听白衣娘娘",
+        "response": "她在地上画出一口井、一条河和一个倒写的“隋”字，随即指向老瘸子的窝棚。",
+        "setFlags": {
+          "heard_refugee_whisper": true
+        },
+        "requires": {
+          "questId": "refugee_rumor_case",
+          "questStatus": "active"
+        }
+      }
+    ]
+  },
+  "dlg_ancient_scroll_keeper_commissions": {
+    "id": "dlg_ancient_scroll_keeper_commissions",
+    "npcId": "ancient_scroll_keeper",
+    "title": "委托与复命",
+    "opening": "灰袍老者将手边的记录翻开：“有事便说，办妥的事也可来此复命。”",
+    "options": [
+      {
+        "id": "quest_complete_changan_letter",
+        "text": "交付：慈航托信",
+        "response": "灰袍老者核对了你的见闻：“《慈航托信》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "changan_letter",
+        "requires": {
+          "questId": "changan_letter",
+          "questStatus": "active"
+        }
+      }
+    ]
+  },
+  "dlg_sb_horse_trader_commissions": {
+    "id": "dlg_sb_horse_trader_commissions",
+    "npcId": "sb_horse_trader",
+    "title": "委托与复命",
+    "opening": "回鹘马商将手边的记录翻开：“有事便说，办妥的事也可来此复命。”",
+    "options": [
+      {
+        "id": "quest_start_saibei_treasure",
+        "text": "接取：狼山商路",
+        "response": "回鹘马商请你打通《狼山口》，满通关结算后回边关马市领取开路酬谢。",
+        "startQuestId": "saibei_treasure",
+        "requires": {
+          "questId": "saibei_treasure",
+          "questStatus": "not_started"
+        }
+      },
+      {
+        "id": "quest_complete_saibei_treasure",
+        "text": "交付：狼山商路",
+        "response": "回鹘马商核对了你的见闻：“《狼山商路》这件事办妥了，酬谢收好。”",
+        "completeQuestId": "saibei_treasure",
+        "requires": {
+          "questId": "saibei_treasure",
+          "questStatus": "active"
+        }
+      }
+    ]
   }
 }

@@ -438,6 +438,17 @@ func (r *RuntimeManager) LeaveDungeon(playerID string) (map[string]interface{}, 
 	if !ok {
 		return nil, exception.ErrPlayerNotFound
 	}
+	if p.State == "DEAD" {
+		return nil, errors.New("dead_state")
+	}
+	if p.State == "COMBAT" {
+		return nil, errors.New("战斗中不能直接离开，请使用烟尘粉撤离")
+	}
+	return r.leaveDungeonNoLock(players, p)
+}
+
+func (r *RuntimeManager) leaveDungeonNoLock(players map[string]*model.Player, p *model.Player) (map[string]interface{}, error) {
+	playerID := p.ID
 	instanceID, inDungeon := r.dungeonMgr.PlayerInstanceIDNoLock(playerID)
 	if !inDungeon {
 		return nil, errors.New("not_in_dungeon")

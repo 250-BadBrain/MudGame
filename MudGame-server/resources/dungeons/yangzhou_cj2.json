@@ -48,7 +48,10 @@
       "description": "苍穹之眼入口。",
       "exits": {
         "north": "cj2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "cj2_01": {
       "name": "通道",

@@ -232,6 +232,12 @@ func (r *RuntimeManager) buildRoomEntities(roomID string, players map[string]*mo
 			if npc.CombatMode != "" {
 				combatMode = npc.CombatMode
 			}
+			if staticNPCProtectedFromKill(npc) {
+				combatMode = "spar"
+				if npc.NonCombat || npc.CombatMode == "protected" {
+					combatMode = "protected"
+				}
+			}
 			dialogueID = npc.DialogueID
 			questIDs = append([]string{}, npc.QuestIDs...)
 			for skillID, level := range npc.Skills {

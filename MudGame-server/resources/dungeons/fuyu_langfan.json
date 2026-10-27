@@ -48,7 +48,10 @@
       "description": "浪翻云试炼入口。",
       "exits": {
         "north": "fuyu_l_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "fuyu_l_01": {
       "name": "通道",

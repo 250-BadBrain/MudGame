@@ -48,8 +48,8 @@ func TestBlacksmithReforgeMoney(t *testing.T) {
 	if p.Backpack["steel_blade"] != 1 || p.Backpack["iron_staff"] != 0 {
 		t.Fatalf("expected steel_blade=1 iron_staff=0, got %v", p.Backpack)
 	}
-	if p.Money != 0 {
-		t.Fatalf("expected money drained to 0, got %d", p.Money)
+	if p.Money != 350 {
+		t.Fatalf("expected 500-150 copper, got %d", p.Money)
 	}
 }
 
@@ -132,6 +132,7 @@ func TestHerbalPillAndConsultFee(t *testing.T) {
 	p := players[playerID]
 	p.RoomID = "ly_herbal_hall"
 	p.Backpack["herb"] = 5
+	p.Backpack["dry_ration"] = 2
 	p.Backpack["bronze_fragment"] = 1
 	p.Money = 100
 	if err := r.savePlayers(players); err != nil {

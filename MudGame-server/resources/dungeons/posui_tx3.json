@@ -48,7 +48,10 @@
       "description": "太虚幻境入口。",
       "exits": {
         "north": "tx3_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "tx3_01": {
       "name": "通道",

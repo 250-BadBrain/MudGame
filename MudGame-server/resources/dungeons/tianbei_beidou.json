@@ -1,7 +1,7 @@
 {
   "id": "tianbei_beidou",
   "name": "天罡北斗阵",
-  "description": "天北峰的北斗古阵——七步机关串联成阵，每一步对应北斗七星之一。全部走通则阵法崩解，星盘现世。走错一步，阵法重置。",
+  "description": "天北峰的北斗古阵，七步依次串联，全部走通后星盘现世。越序触碰不生效，已完成步骤保留。",
   "order": 43,
   "chainId": "posui_xukong",
   "chainName": "破碎虚空",
@@ -12,7 +12,7 @@
   },
   "puzzleActions": {
     "tianshu": {
-      "label": "贪狼位·踏天枢",
+      "label": "触动天枢星位",
       "puzzleId": "beidou",
       "rooms": [
         "bd_01"
@@ -21,11 +21,11 @@
         "dark"
       ],
       "nextState": "tianshu",
-      "message": "脚踏天枢位的石板，北斗第一星亮起——你的影子在地面排成了第一个点位。",
+      "message": "天枢星位亮起，星光在阵中连成一道新的轨迹。",
       "repeatMessage": "这一步你已经走过了。"
     },
     "jumen": {
-      "label": "巨门位·转巨门",
+      "label": "触动天璇星位",
       "puzzleId": "beidou",
       "rooms": [
         "bd_01"
@@ -34,11 +34,11 @@
         "tianshu"
       ],
       "nextState": "jumen",
-      "message": "转动巨门位的铜环，北斗第二星亮起——铜环后面是一段古老的铭文。",
+      "message": "天璇星位亮起，星光在阵中连成一道新的轨迹。",
       "repeatMessage": "这一步你已经走过了。"
     },
     "lucun": {
-      "label": "禄存位·举禄存",
+      "label": "触动天玑星位",
       "puzzleId": "beidou",
       "rooms": [
         "bd_01"
@@ -47,11 +47,11 @@
         "jumen"
       ],
       "nextState": "lucun",
-      "message": "举起禄存位的石灯，北斗第三星亮起——灯光照出了下一级石阶。",
+      "message": "天玑星位亮起，星光在阵中连成一道新的轨迹。",
       "repeatMessage": "这一步你已经走过了。"
     },
     "wenqu": {
-      "label": "文曲位·抚文曲",
+      "label": "触动天权星位",
       "puzzleId": "beidou",
       "rooms": [
         "bd_01"
@@ -60,11 +60,11 @@
         "lucun"
       ],
       "nextState": "wenqu",
-      "message": "抚过文曲位的碑文，北斗第四星亮起——碑文上的字迹在你指尖下重新排列。",
+      "message": "天权星位亮起，星光在阵中连成一道新的轨迹。",
       "repeatMessage": "这一步你已经走过了。"
     },
     "lianzhen": {
-      "label": "廉贞位·燃廉贞",
+      "label": "触动玉衡星位",
       "puzzleId": "beidou",
       "rooms": [
         "bd_01"
@@ -73,11 +73,11 @@
         "wenqu"
       ],
       "nextState": "lianzhen",
-      "message": "点燃廉贞位的长明灯，北斗第五星亮起——灯火在风中不灭，照亮了最后的两步。",
+      "message": "玉衡星位亮起，星光在阵中连成一道新的轨迹。",
       "repeatMessage": "这一步你已经走过了。"
     },
     "wuqu": {
-      "label": "武曲位·握武曲",
+      "label": "触动开阳星位",
       "puzzleId": "beidou",
       "rooms": [
         "bd_01"
@@ -86,11 +86,11 @@
         "lianzhen"
       ],
       "nextState": "wuqu",
-      "message": "握住武曲位的剑柄，北斗第六星亮起——剑柄上刻着传鹰的名字。",
+      "message": "开阳星位亮起，星光在阵中连成一道新的轨迹。",
       "repeatMessage": "这一步你已经走过了。"
     },
     "pojun": {
-      "label": "破军位·破军门",
+      "label": "触动摇光星位",
       "puzzleId": "beidou",
       "rooms": [
         "bd_01"
@@ -99,7 +99,7 @@
         "wuqu"
       ],
       "nextState": "pojun",
-      "message": "推开破军位的石门，北斗第七星亮起——七星归位，阵法崩解，山洞尽头露出了星盘。",
+      "message": "摇光星位亮起，星光在阵中连成一道新的轨迹。",
       "repeatMessage": "这一步你已经走过了。"
     }
   },
@@ -117,7 +117,7 @@
     },
     "bd_01": {
       "name": "北斗阵殿",
-      "description": "北斗阵殿七面石壁各嵌一颗星石——你必须按照北斗七星的顺序：天枢、天璇、天玑、天权、玉衡、开阳、摇光，逐一触发。走错一步，阵法重置。",
+      "description": "北斗阵殿七面石壁各嵌星石，须依次触发天枢、天璇、天玑、天权、玉衡、开阳、摇光。越序触碰不生效，已完成步骤保留。",
       "exits": {
         "south": "bd_00",
         "north": "bd_02"

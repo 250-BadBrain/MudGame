@@ -14,7 +14,7 @@
 | 秘籍装备 | `manager/runtime_manager_player.go`（EquipSkill） | skills.json requirements.prerequisite |
 | 装备强化 | `manager/runtime_manager_enhance.go`（EnhanceItem） | Player.EnhancedItems（0-5级，费用递增，仅当前合法装备生效） |
 | 称号系统 | `manager/runtime_manager_titles.go`（getPlayerTitles） | titles.json（33个旗标→称号映射） |
-| 马车跨城 | `manager/runtime_manager_player.go`（EnterWorld 收费100两） | worlds/*.json（8座城市） |
+| 马车跨城 | `manager/runtime_manager_player.go`（EnterWorld 跨城100铜、同城免费） | worlds/*.json（8座城市） |
 | 多世界 | `manager/runtime_manager_player.go`（EnterWorld） | worlds/*.json |
 | 房间与世界 | `manager/runtime_manager_room.go` | `resources/worlds/*.json` |
 | 副本 | `manager/runtime_manager_dungeon.go` + `engine/runtime/dungeon_manager.go` | `resources/dungeons/*.json` |
@@ -184,3 +184,11 @@ items.json：usable/effects（recoverHp回复、learnSkill参悟）、equipmentS
 - `git grep` 在本机对部分场景不可靠，验证历史内容用 `git show <rev>:<path> | grep` 或 pickaxe（`git log -S`）。
 - 资源 JSON 行尾约定：`npcs.json` 为 CRLF，其余资源文件 LF——脚本批量改写时按文件保持，避免整文件 diff 噪音。
 - shell 工作目录会在调用间残留：**每条命令显式 `cd` 到目标目录**。
+
+## 2026-10-27内容机制约定
+
+任务含38个规范项和3个aliasOf兼容定义，sourceDungeon决定副本委托开放；接取和交付必须绑定可达NPC。Room的searchFlag/searchMessage声明一次性线索，rumors声明本房传闻。gamedata加载会拒绝缺少目标来源、接交入口或不可达主动作。
+
+对话两条路径共享一次性历史；repeatable仅用于有真实成本的服务，Talk不自动制作，ChooseDialogue先检查全部成本及任务资格，再提交副作用。前端日志明确选择服务。GetQuests返回完整目录与状态、地点、目标进度，旧别名不重复呈现或发奖。
+
+Stop及常规LeaveDungeon不能取消死亡，战斗退出需烟尘粉；UseItem的房间变化须推送旧房离开、新房进入及当前快照。打坐/疗伤起手不恢复，完整10秒才结算。公共老师、商人和剧情任务人物不能击杀，合适的老师仍可切磋；切磋按有效MaxHP检查满血及20%认输线。强化先校验空闲与持有，网页确认成本，保持+2/级和5级上限。

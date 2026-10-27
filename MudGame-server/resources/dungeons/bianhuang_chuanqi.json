@@ -48,7 +48,10 @@
       "description": "边荒传奇的入口。",
       "exits": {
         "north": "bia_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "bia_01": {
       "name": "通道",

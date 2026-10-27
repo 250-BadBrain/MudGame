@@ -48,7 +48,10 @@
       "description": "幽谷回音入口。",
       "exits": {
         "north": "yg2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "yg2_01": {
       "name": "通道",

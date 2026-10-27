@@ -97,8 +97,8 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 			continue
 		}
 
-		attackerLimit := attacker.Attributes.Resources.MaxHP / 5
-		targetLimit := target.Attributes.Resources.MaxHP / 5
+		attackerLimit := attackerAttrs.MaxHP / 5
+		targetLimit := targetAttrs.MaxHP / 5
 		attackerLow := attacker.Attributes.Resources.HP <= attackerLimit
 		targetLow := target.Attributes.Resources.HP <= targetLimit
 		if attackerLow || targetLow {
@@ -155,7 +155,7 @@ func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Playe
 		return
 	}
 
-	attackerLimit := attacker.Attributes.Resources.MaxHP / 5
+	attackerLimit := playerAttrs.MaxHP / 5
 	targetLimit := target.Attributes.Resources.MaxHP / 5
 	attackerLow := attacker.Attributes.Resources.HP <= attackerLimit
 	targetLow := target.Attributes.Resources.HP <= targetLimit

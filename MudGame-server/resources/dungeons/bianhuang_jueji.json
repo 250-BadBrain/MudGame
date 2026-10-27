@@ -48,7 +48,10 @@
       "description": "边荒绝地入口。",
       "exits": {
         "north": "bianhu_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "bianhu_01": {
       "name": "通道",

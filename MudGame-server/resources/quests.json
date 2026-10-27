@@ -119,14 +119,26 @@
   "caoyin_case": {
     "id": "caoyin_case",
     "name": "漕银失窃",
-    "description": "扬州盐商程老爷的三万两漕银装船即失。去瘦西湖问船娘、去盐运司问书办，把银子的下落查个水落石出。",
+    "description": "程老爷请你询问二十四桥船娘、核对盐运司书办的记录，再去苇荡搜索银箱凭据，回来报告漕银下落。",
     "giverNpcId": "yz_salt_merchant",
     "turnInNpcId": "yz_salt_merchant",
     "objectives": [
       {
         "type": "flag",
+        "targetId": "caoyin_boat_witness",
+        "description": "向二十四桥船娘询问银箱的去向。",
+        "required": 1
+      },
+      {
+        "type": "flag",
+        "targetId": "caoyin_office_witness",
+        "description": "向盐运司书办核对封条，取得搜查方向。",
+        "required": 1
+      },
+      {
+        "type": "flag",
         "targetId": "found_caoyin_clue",
-        "description": "查出漕银的下落。",
+        "description": "在苇荡搜索空银箱及官印拓痕。",
         "required": 1
       }
     ],
@@ -155,8 +167,8 @@
     "objectives": [
       {
         "type": "flag",
-        "targetId": "zhandao_case_done",
-        "description": "在蜀道栈桥擒下小猿王。",
+        "targetId": "dungeon_cleared_datang_zhandao",
+        "description": "完成《蜀道栈桥》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -171,7 +183,8 @@
         "salt_gang": 5
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_zhandao"
   },
   "bianguan_fenghuo": {
     "id": "bianguan_fenghuo",
@@ -182,8 +195,8 @@
     "objectives": [
       {
         "type": "flag",
-        "targetId": "langshan_case_done",
-        "description": "在狼山口挫败白狼主。",
+        "targetId": "dungeon_cleared_saibei_langshan",
+        "description": "完成《狼山口》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -198,7 +211,8 @@
         "luoyang_military": 15
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "saibei_langshan"
   },
   "lanting_tie": {
     "id": "lanting_tie",
@@ -209,8 +223,8 @@
     "objectives": [
       {
         "type": "flag",
-        "targetId": "jianchi_case_done",
-        "description": "查明剑池盗剑案的真相（《剑池》副本）。",
+        "targetId": "dungeon_cleared_jiangnan_jianchi",
+        "description": "完成《剑池》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -225,7 +239,8 @@
         "lanting_tie_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "jiangnan_jianchi"
   },
   "gongmen_ye": {
     "id": "gongmen_ye",
@@ -236,8 +251,8 @@
     "objectives": [
       {
         "type": "flag",
-        "targetId": "tianjin_case_done",
-        "description": "在天津晓月的桥洞下查明古砚的下落（《天津晓月》副本）。",
+        "targetId": "dungeon_cleared_dongdu_tianjin",
+        "description": "完成《天津晓月》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -249,7 +264,8 @@
         "gongmen_ye_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "dongdu_tianjin"
   },
   "cangming_yijuan": {
     "id": "cangming_yijuan",
@@ -260,8 +276,8 @@
     "objectives": [
       {
         "type": "flag",
-        "targetId": "haisi_case_done",
-        "description": "在海市深处取得沧溟玉简（《海市》副本）。",
+        "targetId": "dungeon_cleared_dongming_haisi",
+        "description": "完成《海市》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -273,19 +289,20 @@
         "cangming_yijuan_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "dongming_haisi"
   },
   "luoyang_bounty": {
     "id": "luoyang_bounty",
     "name": "粮道悬赏",
-    "description": "洛阳粮道瓦岗余党肆虐，官府悬赏三百两缉拿旗号头目。",
-    "giverNpcId": "ld_courier_chief",
-    "turnInNpcId": "ld_courier_chief",
+    "description": "北城官署悬赏三两银，请你在《洛阳粮道》挫败瓦岗偏师，满通关结算后回来复命。",
+    "giverNpcId": "office_clerk",
+    "turnInNpcId": "office_clerk",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_datang_liangdao",
-        "description": "在洛阳粮道挫败瓦岗偏师。",
+        "description": "完成《洛阳粮道》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -300,7 +317,8 @@
         "luoyang_office": 10
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_liangdao"
   },
   "changan_letter": {
     "id": "changan_letter",
@@ -312,7 +330,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_datang_changan",
-        "description": "在长安风云中与师妃暄并肩。",
+        "description": "完成《长安风云》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -327,19 +345,20 @@
         "changan_letter_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_changan"
   },
   "yangzhou_bounty": {
     "id": "yangzhou_bounty",
-    "name": "苇荡缉盗",
-    "description": "扬州苇荡中仍有水匪残党，盐运司悬赏缉拿。",
+    "name": "枯井缉邪",
+    "description": "盐运司书办请你追查上游暗桩，在《枯井之下》满通关结算后回盐运使署报告。",
     "giverNpcId": "yz_yamen_clerk",
     "turnInNpcId": "yz_yamen_clerk",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_luoshui_kujing",
-        "description": "在枯井之下清剿阴癸派暗桩。",
+        "description": "完成《枯井之下》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -354,7 +373,8 @@
         "luoyang_office": 10
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "luoshui_kujing"
   },
   "bashu_thanks": {
     "id": "bashu_thanks",
@@ -366,7 +386,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_datang_zhandao",
-        "description": "在蜀道栈桥擒下小猿王。",
+        "description": "完成《蜀道栈桥》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -381,19 +401,20 @@
         "bashu_thanks_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_zhandao"
   },
   "saibei_treasure": {
     "id": "saibei_treasure",
-    "name": "狼王遗宝",
-    "description": "白狼主虽然败退，但他积累十年的宝藏还在狼山口——回鹘马商愿意出路费让你去翻。",
+    "name": "狼山商路",
+    "description": "回鹘马商请你打通《狼山口》，满通关结算后回边关马市领取开路酬谢。",
     "giverNpcId": "sb_horse_trader",
     "turnInNpcId": "sb_horse_trader",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_saibei_langshan",
-        "description": "在狼山口挫败白狼主。",
+        "description": "完成《狼山口》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -408,7 +429,8 @@
         "saibei_treasure_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "saibei_langshan"
   },
   "jiangnan_heart": {
     "id": "jiangnan_heart",
@@ -420,7 +442,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_jiangnan_jianchi",
-        "description": "在剑池夺回名剑。",
+        "description": "完成《剑池》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -435,7 +457,8 @@
         "jiangnan_heart_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "jiangnan_jianchi"
   },
   "dongdu_truth": {
     "id": "dongdu_truth",
@@ -447,7 +470,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_dongdu_tianjin",
-        "description": "在天津晓月取出前朝账册。",
+        "description": "完成《天津晓月》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -462,7 +485,8 @@
         "dongdu_truth_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "dongdu_tianjin"
   },
   "dongming_song": {
     "id": "dongming_song",
@@ -474,7 +498,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_dongming_haisi",
-        "description": "在海市取出沧溟玉简。",
+        "description": "完成《海市》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -489,7 +513,8 @@
         "dongming_song_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "dongming_haisi"
   },
   "gongbian_aftermath": {
     "id": "gongbian_aftermath",
@@ -501,7 +526,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_datang_gongbian",
-        "description": "宫变之后，东都戒严——金吾卫旧部托你查清余党的退路。",
+        "description": "完成《东都宫变》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -513,19 +538,20 @@
         "gongbian_aftermath_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_gongbian"
   },
   "yunhe_houyi": {
     "id": "yunhe_houyi",
     "name": "运河后患",
-    "description": "运河追击后，漕运司要你确保水路安全——去苇荡做最后一查。",
+    "description": "将《运河追击》的战况和水路见闻带回扬州盐运使署，供书办安排巡防。",
     "giverNpcId": "yz_yamen_clerk",
     "turnInNpcId": "yz_yamen_clerk",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_datang_yunhe",
-        "description": "运河追击后，漕运司要你确保水路安全——去苇荡做最后一查。",
+        "description": "完成《运河追击》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -537,7 +563,8 @@
         "yunhe_houyi_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_yunhe"
   },
   "mishi_aftermath": {
     "id": "mishi_aftermath",
@@ -549,7 +576,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_fuyu_mishi",
-        "description": "魔师宫的秘道虽然断了，但入口还没封死——去塞北找李百夫长安排封堵。",
+        "description": "完成《魔师宫秘道》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -561,19 +588,20 @@
         "mishi_aftermath_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "fuyu_mishi"
   },
   "zhongjuan_daozhen": {
     "id": "zhongjuan_daozhen",
-    "name": "终卷道真",
-    "description": "战神图录终卷的最后一页你看懂了——去雪山小寺告诉守图老僧。",
-    "giverNpcId": "jm2_old_monk",
-    "turnInNpcId": "jm2_old_monk",
+    "name": "遗境道真",
+    "description": "将《战神遗境》的机关见闻带给长安化度寺知客僧辨读。",
+    "giverNpcId": "ca2_monk",
+    "turnInNpcId": "ca2_monk",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_posui_zhongjuan",
-        "description": "战神图录终卷的最后一页你看懂了——去雪山小寺告诉守图老僧。",
+        "description": "完成《战神遗境》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -585,7 +613,8 @@
         "zhongjuan_daozhen_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "posui_zhongjuan"
   },
   "longyin_zhengming": {
     "id": "longyin_zhengming",
@@ -597,7 +626,7 @@
       {
         "type": "flag",
         "targetId": "dungeon_cleared_luoshui_longyin",
-        "description": "洛水守灵被你逐走后，前朝的秘密终于浮出水面——去告诉落魄诗人。",
+        "description": "完成《洛水龙吟》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -609,19 +638,20 @@
         "longyin_zhengming_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "luoshui_longyin"
   },
   "xinggong_aftermath": {
     "id": "xinggong_aftermath",
     "name": "行宫余波",
-    "description": "行宫余波",
+    "description": "完成《行宫惊变》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_datang_xinggong",
-        "description": "行宫余波",
+        "description": "完成《行宫惊变》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -633,19 +663,20 @@
         "xinggong_aftermath_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_xinggong"
   },
   "langfan_legacy": {
     "id": "langfan_legacy",
     "name": "浪翻云遗篇",
-    "description": "浪翻云遗篇",
+    "description": "完成《浪翻云试炼》并满通关离开后，将见闻带回抚琴女子处，领取一次性酬谢。",
     "giverNpcId": "jn_zither_player",
     "turnInNpcId": "jn_zither_player",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_fuyu_langfan",
-        "description": "浪翻云遗篇",
+        "description": "完成《浪翻云试炼》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -657,19 +688,20 @@
         "langfan_legacy_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "fuyu_langfan"
   },
   "kongming_daozhen": {
     "id": "kongming_daozhen",
     "name": "空明道真",
-    "description": "空明道真",
-    "giverNpcId": "jm2_old_monk",
-    "turnInNpcId": "jm2_old_monk",
+    "description": "完成《破碎空明》的探索，将所见带回长安和春亭，向化度寺知客僧复命。",
+    "giverNpcId": "ca2_monk",
+    "turnInNpcId": "ca2_monk",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_posui_kongming",
-        "description": "空明道真",
+        "description": "完成《破碎空明》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -681,19 +713,20 @@
         "kongming_daozhen_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "posui_kongming"
   },
   "jueji_houji": {
     "id": "jueji_houji",
     "name": "绝地后记",
-    "description": "绝地后记",
+    "description": "完成《边荒绝地》并满通关离开后，将见闻带回李百夫长处，领取一次性酬谢。",
     "giverNpcId": "sb_centurion",
     "turnInNpcId": "sb_centurion",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_bianhuang_jueji",
-        "description": "绝地后记",
+        "description": "完成《边荒绝地》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -705,19 +738,20 @@
         "jueji_houji_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "bianhuang_jueji"
   },
   "longgong_yiji": {
     "id": "longgong_yiji",
     "name": "龙宫遗事",
-    "description": "龙宫遗事",
+    "description": "完成《归墟龙宫》并满通关离开后，将见闻带回老船长处，领取一次性酬谢。",
     "giverNpcId": "dm_old_captain",
     "turnInNpcId": "dm_old_captain",
     "objectives": [
       {
         "type": "flag",
         "targetId": "dungeon_cleared_luoshui_guilou",
-        "description": "龙宫遗事",
+        "description": "完成《归墟龙宫》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -729,7 +763,8 @@
         "longgong_yiji_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "luoshui_guilou"
   },
   "xinggong_after": {
     "id": "xinggong_after",
@@ -753,7 +788,8 @@
         "xinggong_after_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "aliasOf": "xinggong_aftermath"
   },
   "kongming_dao": {
     "id": "kongming_dao",
@@ -777,7 +813,8 @@
         "kongming_dao_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "aliasOf": "kongming_daozhen"
   },
   "longgong_yi": {
     "id": "longgong_yi",
@@ -801,19 +838,20 @@
         "longgong_yi_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "aliasOf": "longgong_yiji"
   },
   "quest_r204_0": {
     "id": "quest_r204_0",
     "name": "绝壁悬栈试炼",
-    "description": "绝壁悬栈试炼",
+    "description": "完成《绝壁悬栈》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_datangdoubledragonxb2",
-        "description": "绝壁悬栈试炼",
+        "targetId": "dungeon_cleared_datang_xb2",
+        "description": "完成《绝壁悬栈》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -825,19 +863,20 @@
         "quest_r204_0_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_xb2"
   },
   "quest_r204_1": {
     "id": "quest_r204_1",
     "name": "寒潭蛟影试炼",
-    "description": "寒潭蛟影试炼",
+    "description": "完成《寒潭蛟影》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_fuyufanyunht2",
-        "description": "寒潭蛟影试炼",
+        "targetId": "dungeon_cleared_fuyu_ht2",
+        "description": "完成《寒潭蛟影》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -849,19 +888,20 @@
         "quest_r204_1_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "fuyu_ht2"
   },
   "quest_r204_2": {
     "id": "quest_r204_2",
     "name": "沙海孤城试炼",
-    "description": "沙海孤城试炼",
+    "description": "完成《沙海孤城》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_posuixukongsh2",
-        "description": "沙海孤城试炼",
+        "targetId": "dungeon_cleared_posui_sh2",
+        "description": "完成《沙海孤城》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -873,19 +913,20 @@
         "quest_r204_2_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "posui_sh2"
   },
   "quest_r204_3": {
     "id": "quest_r204_3",
     "name": "毒瘴密林试炼",
-    "description": "毒瘴密林试炼",
+    "description": "完成《毒瘴密林》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_bianhuanglegenddz2",
-        "description": "毒瘴密林试炼",
+        "targetId": "dungeon_cleared_bianhuang_dz2",
+        "description": "完成《毒瘴密林》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -897,19 +938,20 @@
         "quest_r204_3_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "bianhuang_dz2"
   },
   "quest_r204_4": {
     "id": "quest_r204_4",
     "name": "天罡北斗试炼",
-    "description": "天罡北斗试炼",
+    "description": "完成《天罡北斗》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_luoshuiraiderstg2",
-        "description": "天罡北斗试炼",
+        "targetId": "dungeon_cleared_luoshui_tg2",
+        "description": "完成《天罡北斗》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -921,19 +963,20 @@
         "quest_r204_4_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "luoshui_tg2"
   },
   "quest_r204_5": {
     "id": "quest_r204_5",
     "name": "幽冥鬼市试炼",
-    "description": "幽冥鬼市试炼",
+    "description": "完成《幽冥鬼市》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_yangzhoucaoyunym2",
-        "description": "幽冥鬼市试炼",
+        "targetId": "dungeon_cleared_yangzhou_ym2",
+        "description": "完成《幽冥鬼市》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -945,19 +988,20 @@
         "quest_r204_5_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "yangzhou_ym2"
   },
   "quest_r204_6": {
     "id": "quest_r204_6",
     "name": "铁血雄关试炼",
-    "description": "铁血雄关试炼",
+    "description": "完成《铁血雄关》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_datangdoubledragontx2",
-        "description": "铁血雄关试炼",
+        "targetId": "dungeon_cleared_datang_tx2",
+        "description": "完成《铁血雄关》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -969,19 +1013,20 @@
         "quest_r204_6_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "datang_tx2"
   },
   "quest_r204_7": {
     "id": "quest_r204_7",
     "name": "烟雨剑冢试炼",
-    "description": "烟雨剑冢试炼",
+    "description": "完成《烟雨剑冢》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_fuyufanyunyy2",
-        "description": "烟雨剑冢试炼",
+        "targetId": "dungeon_cleared_fuyu_yy2",
+        "description": "完成《烟雨剑冢》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -993,19 +1038,20 @@
         "quest_r204_7_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "fuyu_yy2"
   },
   "quest_r204_8": {
     "id": "quest_r204_8",
     "name": "天火熔炉试炼",
-    "description": "天火熔炉试炼",
+    "description": "完成《天火熔炉》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_posuixukongth2",
-        "description": "天火熔炉试炼",
+        "targetId": "dungeon_cleared_posui_th2",
+        "description": "完成《天火熔炉》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -1017,19 +1063,20 @@
         "quest_r204_8_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "posui_th2"
   },
   "quest_r204_9": {
     "id": "quest_r204_9",
     "name": "冰封王座试炼",
-    "description": "冰封王座试炼",
+    "description": "完成《冰封王座》并满通关离开后，将见闻带回金吾卫校尉处，领取一次性酬谢。",
     "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "dd2_palace_guard",
     "objectives": [
       {
         "type": "flag",
-        "targetId": "dungeon_cleared_bianhuanglegendbf2",
-        "description": "冰封王座试炼",
+        "targetId": "dungeon_cleared_bianhuang_bf2",
+        "description": "完成《冰封王座》的调查目标并满通关离开结算。",
         "required": 1
       }
     ],
@@ -1041,6 +1088,7 @@
         "quest_r204_9_completed": true
       }
     },
-    "repeatable": false
+    "repeatable": false,
+    "sourceDungeon": "bianhuang_bf2"
   }
 }

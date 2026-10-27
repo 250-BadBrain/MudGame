@@ -48,7 +48,10 @@
       "description": "沙海孤城入口。",
       "exits": {
         "north": "sh2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "sh2_01": {
       "name": "通道",

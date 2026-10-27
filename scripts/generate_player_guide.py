@@ -93,7 +93,8 @@ class Guide:
                         self.flags[flag].append((label, "worlds.md", "dialogue-" + did))
                 for item in option.get("giveItems", {}):
                     self.item_sources[item].append((label, "worlds.md", "dialogue-" + did))
-        self.wired_quests = {qid for qid in self.quests if self.starts.get(qid) and self.ends.get(qid)}
+        self.quest_aliases = {qid: q['aliasOf'] for qid, q in self.quests.items() if q.get('aliasOf')}
+        self.wired_quests = {qid for qid in self.quests if qid not in self.quest_aliases and self.starts.get(qid) and self.ends.get(qid)}
         for quest in self.quests.values():
             if quest["id"] in self.wired_quests:
                 for flag, value in quest.get("rewards", {}).get("flags", {}).items():
@@ -125,15 +126,16 @@ class Guide:
                 continue
             for item in definition.get("shopItems", []):
                 self.item_sources[item].append((self.npc_name(npc) + "商店", "collections.md", "shop-" + npc))
-        for flag, room in {"found_caoyin_clue": "yz_reed_marsh", "found_smuggling_evidence": "ly_salt_wharf", "found_beacon_signal": "tg_jingou_beacon"}.items():
-            self.flags[flag].append((self.room_name(room) + "点击「搜索」", "worlds.md", room))
-        for item, place in {"iron_pickaxe": "创角自带", "bronze_fragment": "洛阳城郊等默认采集点（60%）", "dry_ration": "各采集点（40%）", "herb": "洛阳芦苇滩采集（60%）", "reed_root": "扬州城郊苇荡采集（60%）"}.items():
-            self.item_sources[item].append((place, "worlds.md", "labor"))
+        for world in self.worlds:
+            for rid, room in world['rooms'].items():
+                if room.get('searchFlag'):
+                    self.flags[room['searchFlag']].append((self.room_name(rid) + '点击「搜索」', 'worlds.md', rid))
+        for item, place in {'iron_pickaxe': '创角自带', 'dry_ration': '各采集点（40%）', 'herb': '普通采集点（60%）', 'reed_root': '扬州苇荡采集（60%）'}.items():
+            self.item_sources[item].append((place, 'worlds.md', 'labor'))
         text = (ROOT / "MudGame-server/internal/manager/runtime_manager_player.go").read_text(encoding="utf-8")
         rumor_function = text.split("func roomRumor(", 1)[1].split("\nfunc ", 1)[0]
         self.rumors = {rid: json.loads(value) for rid, value in re.findall(r'case "([^"]+)":\s*return ("(?:\\.|[^"\\])*")', rumor_function)}
-        search_function = text.split("func (r *RuntimeManager) searchRoomNoLock(", 1)[1].split("\nfunc ", 1)[0]
-        self.search_text = {rid: json.loads(value) for rid, value in re.findall(r'if room.ID == "([^"]+)"[^\{]*\{.*?return ("(?:\\.|[^"\\])*")', search_function, re.S)}
+        self.search_text = {rid: room['searchMessage'] for w in self.worlds for rid, room in w['rooms'].items() if room.get('searchMessage')}
 
     def dungeon_page(self, dungeon):
         return "stories/" + CHAIN_FILES[dungeon["chainId"]] + ".md"
@@ -272,7 +274,7 @@ class Guide:
             qid = option["completeQuestId"]
             parts.append("交付 " + self.link("《" + self.quests[qid]["name"] + "》", "quests.md", current, qid) + "；任务全部目标必须完成")
         if option.get("takeMoney"):
-            parts.append("花费 " + str(option["takeMoney"]) + " 两")
+            parts.append("花费 " + str(option["takeMoney"]) + " 文钱")
         if option.get("takeItems"):
             parts.append("消耗 " + self.items_text(option["takeItems"]))
         if option.get("giveItems"):
@@ -281,10 +283,13 @@ class Guide:
             parts.append("记录剧情进度：" + "、".join("`" + flag + "`=" + str(value).lower() for flag, value in option["setFlags"].items()))
         return "；".join(parts)
 
-    def dialogue_lines(self, did, current, anchor=True):
+    def dialogue_lines(self, did, current, anchor=True, quest_id=None):
         dialogue = self.dialogues[did]
         lines = ([f'<a id="dialogue-{did}"></a>', ""] if anchor else []) + ["**" + dialogue.get("title", "交谈") + "**", "", quote(dialogue.get("opening", "")), ""]
         for option in dialogue.get("options", []):
+            linked = option.get('startQuestId') or option.get('completeQuestId')
+            if quest_id and linked and linked != quest_id:
+                continue
             lines += ["- 「" + option["text"] + "」；" + self.requirements(option.get("requires", {}), current), "", quote(option.get("response", "")), ""]
             effect = self.option_effect(option, current)
             if effect:
@@ -413,41 +418,36 @@ class Guide:
         return pages
 
     def quest_page(self):
-        current = "quests.md"
-        lines = ["# 世界任务：接取地点、触发与结局", "", "[返回玩家入口](README.md) · [八城地图与交谈](worlds.md)", "",
-                 f"当前资源定义 {len(self.quests)} 个任务，实际接好接取和交付对话的是 {len(self.wired_quests)} 条。其他任务列在后半页，标出缺口；不要把 NPC 的一句托付当成任务已接取。右侧「令」只列已经写入角色任务状态的任务。", "",
-                 "## 已接通的四条任务", "", "与 NPC 反复点击「交谈」即可逐句推进。首次通常只说开场白，下一次才接任务；有提醒台词时可能还需再交谈一次。交付前先完成目标，没完成时会提示任务未完成。", ""]
+        current = 'quests.md'
+        lines = ['# 世界任务：接取地点、触发与结局', '', '[返回玩家入口](README.md) · [八城地图与交谈](worlds.md)', '',
+                 f'当前{len(self.wired_quests)}个唯一任务均已接通，另保留{len(self.quest_aliases)}个重复ID作兼容别名。右侧「令」可分类查看可接取、进行中、未解锁及已完成任务，并显示实际接交地点与目标进度。', '',
+                 '## 已接通任务', '', '与人物交谈会逐句推进，也可点击日志里的明确选项。副本委托在来源关已解锁后开放；交付前完成全部目标，奖励仅领一次。配方服务须明确点击，交谈不会自动扣材料或钱。', '']
         for qid, quest in self.quests.items():
-            if qid not in self.wired_quests:
-                continue
-            lines += [f'<a id="{qid}"></a>', "", "### " + quest["name"], "", quest["description"], "", "1. 到 " + self.location(quest["giverNpcId"], current) + "，与" + self.npc_name(quest["giverNpcId"]) + "反复交谈，听到接取台词。"]
-            for index, objective in enumerate(quest.get("objectives", []), 2):
-                lines.append(str(index) + ". " + objective["description"] + " 实际触发：" + self.sources(self.flags.get(objective["targetId"], []), current) + "。")
-            lines += ["3. 回到 " + self.location(quest["turnInNpcId"], current) + "，继续交谈至交付台词。", "", "**奖励**：" + self.rewards(quest["rewards"]) + "。一次性任务。", ""]
-            if qid == "escort_rumor_run":
-                lines += ["注意：在酒楼只点击房间「听传闻」不完成任务；要和许说书人交谈到写入传闻进度。", ""]
-            if qid == "refugee_rumor_case":
-                lines += ["注意：哑婆没有独立 NPC。她的三幅画被写在老瘸子的下一段对话中；继续与老瘸子交谈即可得到线索，无需寻找另一个人物。", ""]
-            dialogue = self.starts[qid][0][0]
-            lines += ["<details>", "<summary>展开接取、推进和结局原文</summary>", ""] + self.dialogue_lines(dialogue, current, anchor=False) + ["</details>", ""]
-        lines += ["## 已有定义，但当前未接通的任务", "", "以下目标和奖励是配置记录，当前没有可用的接取/交付流程，因此不会正常出现在任务面板，也不能领取这些任务奖励。相关副本本身仍可按章节规则游玩。", ""]
-        for qid, quest in self.quests.items():
-            if qid in self.wired_quests:
-                continue
-            lines += [f'<a id="{qid}"></a>', "", "### " + quest["name"] + "（未接通）", "", "- **标识**：`" + qid + "`。", "- **现有剧情**：" + quest["description"],
-                      "- **配置发起人**：" + self.npc_name(quest["giverNpcId"]) + "；位置：" + self.location(quest["giverNpcId"], current) + "。",
-                      "- **入口缺口**：" + ("没有接取对话；" if not self.starts.get(qid) else "") + ("没有交付对话。" if not self.ends.get(qid) else "")]
-            for objective in quest.get("objectives", []):
-                source = self.flags.get(objective["targetId"], [])
-                lines += ["- **配置目标**：" + objective["description"] + "（`" + objective["targetId"] + "`）。", "- **目标当前来源**：" + (self.sources(source, current) if source else "没有找到写入点；目标 ID 与现有副本不对应，需要补接后才能完成") + "。"]
-            lines += ["- **配置奖励，当前不可领**：" + self.rewards(quest["rewards"]) + "。", ""]
-        return "\n".join(lines)
+            if qid not in self.wired_quests: continue
+            lines += [f'<a id="{qid}"></a>', '', '### ' + quest['name'], '', quest['description'], '',
+                      '- **接取**：' + self.npc_name(quest['giverNpcId']) + '；' + self.location(quest['giverNpcId'], current) + '。',
+                      '- **交付**：' + self.npc_name(quest['turnInNpcId']) + '；' + self.location(quest['turnInNpcId'], current) + '。']
+            if quest.get('sourceDungeon'):
+                lines += ['- **来源章节**：' + self.dungeon_link(self.by_dungeon[quest['sourceDungeon']], current) + '，章节可进入或曾通关后可接。']
+            for objective in quest.get('objectives', []):
+                lines += ['- **目标**：' + objective['description'], '- **操作来源**：' + self.sources(self.flags.get(objective['targetId'], []), current) + '。']
+            lines += ['- **一次性奖励**：' + self.rewards(quest['rewards']) + '。', '']
+            if qid == 'escort_rumor_run': lines += ['只听房间传闻不完成此任务，须与许说书交谈。', '']
+            if qid == 'refugee_rumor_case': lines += ['哑婆已作为独立人物放置在流民营，接取后向她打听，再回老瘸子处复命。', '']
+            lines += ['<details>', '<summary>接取与交付人物原文</summary>', '']
+            for did in dict.fromkeys([self.starts[qid][0][0], self.ends[qid][0][0]]):
+                lines += self.dialogue_lines(did, current, anchor=False, quest_id=qid)
+            lines += ['</details>', '']
+        lines += ['## 旧ID兼容', '', '以下旧任务不再重复显示或发奖；旧完成记录等同规范任务完成。', '']
+        for alias, target in self.quest_aliases.items():
+            lines += [f'<a id="{alias}"></a>', '', alias + ' → ' + self.link(self.quests[target]['name'], current, current, target), '']
+        return '\n'.join(lines)
 
     def world_page(self):
         current = "worlds.md"
         lines = ["# 八城探索、生活点与全部常驻交谈", "", "[返回玩家入口](README.md) · [任务攻略](quests.md) · [武学与收藏](collections.md)", "",
                  "通过右侧「图」选择城市进入，跨城消耗100钱币（1两银）；同城不收费。以下方向都从该城出生点计算，可以返回出生点重新按路线走。公共世界不靠杀 NPC 产出经验和掉落，剧情人物、商人和老师应优先交谈、请教或交易。", "",
-                 '<a id="labor"></a>', "", "## 不打副本时能做什么", "", "- 「帮工」持续 60 秒，完成给20钱币、2潜能。", "- 「采集」持续 30 秒，完成给 4 经验、6 潜能，再给材料或干粮。扬州苇荡60%芦根，其余地点默认60%止血草；各处另外40%干粮。普通采集不再给古铜残片。", "- 停止会放弃本次劳作收益；学习、打坐、疗伤等忙碌状态先停止再做其他事。", "- 与老师「请教」入门，已学武功从「技」自主修炼；与商人「交易」，携带材料后反复交谈可触发已有合成。", ""]
+                 '<a id="labor"></a>', "", "## 不打副本时能做什么", "", "- 「帮工」持续 60 秒，完成给20钱币、2潜能。", "- 「采集」持续 30 秒，完成给 4 经验、6 潜能，再给材料或干粮。扬州苇荡60%芦根，其余地点默认60%止血草；各处另外40%干粮。普通采集不再给古铜残片。", "- 停止会放弃本次劳作收益；学习、打坐、疗伤等忙碌状态先停止再做其他事。", "- 与老师「请教」入门，已学武功从「技」自主修炼；与商人「交易」，交谈后点击日志里的配方按钮，确认成本后制作；配方可重复。", ""]
         shown_dialogues = set()
         for world in self.worlds:
             lines += [f'<a id="world-{world["id"]}"></a>', "", "## " + world["name"], "", world.get("description", ""), "", "出生点：**" + world["rooms"][world["spawnRoomId"]]["name"] + "**。", ""]
@@ -456,14 +456,14 @@ class Guide:
                 if room.get("actions"):
                     lines += ["房间动作：" + "、".join(room.get("actionLabels", {}).get(a, ACTION_NAMES.get(a, a)) for a in room["actions"]) + "。", ""]
                 if "listen_rumor" in room.get("actions", []):
-                    lines += ["**当前「听传闻」实际台词**：", "", quote(self.rumors.get(rid, "你驻足听了一阵，只听见市井喧嚣里夹着几句真假难辨的江湖传闻。")), ""]
+                    lines += ["**当前「听传闻」实际台词**：", "", quote("\n".join(room.get("rumors", [])) or self.rumors.get(rid, "你驻足听了一阵，只听见市井喧嚣里夹着几句真假难辨的江湖传闻。")), ""]
                 if "search" in room.get("actions", []):
                     found = [(flag, src) for flag, src in self.flags.items() if any(page == current and anchor == rid for _, page, anchor in src)]
                     lines += ["**搜索**：" + ("首次记录 " + "、".join("`" + flag + "`" for flag, _ in found) if found else "当前没有专门调查脚本，返回没有发现") + "。", ""]
                     if rid in self.search_text:
                         lines += [quote(self.search_text[rid]), ""]
                 if room.get("rumors"):
-                    lines += ["<details>", "<summary>资源中的补充传闻（当前「听传闻」按钮未接入此字段）</summary>", ""]
+                    lines += ["<details>", "<summary>配置传闻全集（每次听取其中一句）</summary>", ""]
                     for rumor in room["rumors"]:
                         lines += [quote(rumor), ""]
                     lines += ["</details>", ""]
@@ -510,16 +510,16 @@ class Guide:
                     teachers.append(self.npc_name(npc) + "（入门）：" + self.location(npc, current))
             style = safe(skill.get("description", "")) + "<br>" + safe(self.skill_bonuses(skill.get("bonuses", {})))
             lines.append("| " + safe(skill["name"]) + "<br>`" + sid + "` | " + safe(category) + " | " + style + " | " + source + " | " + ("；".join(teachers) or "参悟后自主修炼，无老师上限") + " |")
-        lines += ["", "## 炼药、熔铸与材料交换", "", "带齐材料与银两，与对应 NPC 反复交谈，按当前符合条件的对话顺序触发。当前普通交谈会记住已读选项：同一角色已做过的配方不会再次自动触发；后端另有选项接口，但网页尚未提供通用重复选择菜单。", "", "| 操作 | 人物与位置 | 实际消耗 | 获得 |", "|---|---|---|---|"]
+        lines += ["", "## 炼药、熔铸与材料交换", "", "与药师或铁匠交谈后，点击日志里的服务选项，查看明确成本并制作。普通交谈不自动扣钱或材料；配方可以重复，每次都会校验并扣除完整成本。", "", "| 操作 | 人物与位置 | 实际消耗 | 获得 |", "|---|---|---|---|"]
         for did, dialogue in self.dialogues.items():
             if did not in self.live_dialogues:
                 continue
             for option in dialogue.get("options", []):
                 if option.get("takeItems") and option.get("giveItems"):
                     npc = dialogue["npcId"]
-                    cost = self.items_text(option["takeItems"]) + (" + " + str(option["takeMoney"]) + " 两" if option.get("takeMoney") else "")
+                    cost = self.items_text(option["takeItems"]) + (" + " + str(option["takeMoney"]) + " 文钱" if option.get("takeMoney") else "")
                     lines.append("| " + safe(option["text"]) + " | " + self.npc_name(npc) + "：" + self.location(npc, current) + " | " + safe(cost) + " | " + safe(self.items_text(option["giveItems"])) + " |")
-        lines += ["", "## 商店与价格", "", "购买按 value 原价，出售通常按 value 的一半向下取整，任务物品不可卖。烟尘粉虽有逃命用途的描述，目前没有配置可用效果，不能当成已经实现的脱战药。", ""]
+        lines += ["", "## 商店与价格", "", "购买按 value 原价，出售通常按 value 的一半向下取整，任务物品不可卖。烟尘粉战斗中消耗一包撤离，不回血；副本按当前进度结算，世界返回本城出生点。", ""]
         for npc, definition in self.npcs.items():
             if not definition.get("shopItems") or not self.locations.get(npc):
                 continue
@@ -547,26 +547,36 @@ class Guide:
         lines += ["", "## 全部称号", "", "称号由人物旗标自动授予，通关型称号要在 100% 完成后离开结算才会记录。", "", "| 称号 | 条件来源 | 旗标 |", "|---|---|---|"]
         for flag, title in self.titles.items():
             lines.append("| " + safe(title) + " | " + self.sources(self.flags.get(flag, []), current) + " | `" + flag + "` |")
-        lines += ["", "## 装备强化的当前入口", "", "后端已有 `enhance_item`，但当前网页源码没有强化按钮，聊天框也不解析游戏命令，因此普通网页游玩暂时无法直接发起强化。不要把「在聊天框输入 enhance_item」当作操作方法；后续接好 UI 后再把它加入常规成长路线。", ""]
+        lines += ["", "## 装备强化的当前入口", "", "在「囊」或「装」选择装备，点「强化」查看下级费用与属性，再确认；仅空闲且持有物品时可操作。第N级花200N铜和N枚古铜，最高5级。", ""]
         return "\n".join(lines)
 
     def status_page(self):
-        current = "content_status.md"
-        lines = ["# 当前内容状态与容易踩空的入口", "", "[返回玩家入口](README.md)", "", "本页按当前资源引用与运行时代码检查，记录玩家能遇到的缺口；没有修改游戏行为，也没有把未接内容补写成已发生的剧情。", "",
-                 "## 覆盖统计", "", "| 内容 | 配置条目 | 手册覆盖方式 |", "|---|---:|---|",
-                 f"| 世界 / 公共房间 | {len(self.worlds)} / {sum(len(w['rooms']) for w in self.worlds)} | 出生点路线、NPC、生活动作和实际交谈 |",
-                 f"| 副本 | {len(self.dungeons)} | 七卷全量逐房攻略、机关分支与剧情 |",
-                 f"| 任务 | {len(self.quests)} | {len(self.wired_quests)} 条已接通，{len(self.quests)-len(self.wired_quests)} 条缺少接取/交付 |",
-                 f"| 技能 / 物品 / 称号 | {len(self.skills)} / {len(self.items)} / {len(self.titles)} | 老师、前置、获取入口与条件 |",
-                 f"| 普通对话档案 | {len(self.dialogues)} | 常驻人物或附录逐份保留原文；未绑定的明确标记 |", "",
-                 "## 解锁与叙事差异", "", "- 当前序27空缺；序28《蜀道栈桥》仍需序26完成，服务端按最近存在的前序组检查，不会提前开放。", "- 同一全局序号的不同副本是并行替代入口：任一满通关结算可解下一序号，卷内 chapter 不是解锁条件。", "- 序号 42《幽冥鬼市》是三路地图，当前没有「选一锁死」机制；序号 62 的同名关是另一个四房战斗模板。", "- 序号 43《天罡北斗阵》有七步机关，但未实现文案所称的错误重置；序号 61 的同名关只有通用开门流程。", "- 《护送商队》用进入终点计目标，没有独立跟随 AI 和护送失败血条。", "- 后期部分副本的剧情只有「要点已明」「通道开启」等短句。攻略保留这些实际文字，不据副本名称编造一段完整原著故事。", "",
-                 "## 未绑定的副本动作", "", "这些动作有定义，但没有被房间 actions、可用对话或分支入口引用。一般是未接入的「听取任务」，主战斗路线仍可看各关攻略。", "", "| 副本 | 当前不能触发的动作 |", "|---|---|"]
-        for dungeon, aid in self.unbound:
-            lines.append("| " + self.dungeon_link(dungeon, current) + " | " + safe(dungeon["puzzleActions"][aid].get("label", aid)) + "（`" + aid + "`） |")
-        lines += ["", "## 其他实际入口差异", "", "- 世界任务只有四条接好了 startQuestId / completeQuestId；NPC 的 questIds 或一句「有赏」不会自动建立任务状态。其余 37 条见任务页。", "- 后十条任务的目标如 `dungeon_cleared_datangdoubledragonxb2` 使用不存在的副本 ID，即使补上接交对话，还需要修正目标。", "- 巴蜀药田与洛阳普通采集默认产止血草；扬州芦根单独保留。", "- 世界 JSON 的补充 rumors 尚未由 listen_rumor 读取；新城某些听传闻按钮目前只回泛用台词。", "- 强化已有后端接口，没有网页按钮。底部输入框是公开聊天，不能执行后端指令。", "- 没有查到可达来源的物品或老师，在收藏表中单列；资源总量不直接代表可收集总量。", "",
-                 "- 普通交谈会记录已读选项，炼药、熔铸等配方用此入口各自动触发一次；不能据此承诺网页支持无限重复炼药。", "- 烟尘粉只有用途描述，没有接入可用物品效果；当前不能用它脱战。", "",
-                 "## 维护与校对", "", "玩家入口和推荐路线是手写内容；本页、七卷故事、世界、任务与收藏事实页由 `python scripts/generate_player_guide.py` 从资源生成，`--check` 检查漂移和本手册的内部链接。行为规则已对照 manager 的副本解锁、交谈/任务、房间动作、学习/使用物品代码以及前端按钮核对；没有逐关实机通关或验证数值难度。", ""]
-        return "\n".join(lines)
+        current = 'content_status.md'
+        lines = ['# 当前内容状态与验证边界', '', '[返回玩家入口](README.md)', '',
+                 '本页对应本轮修复后的源码；上线状态以发布记录为准，不能把配置量等同完整实机通关。', '',
+                 '## 覆盖统计', '', '| 内容 | 当前数量 |', '|---|---:|',
+                 f'| 世界 / 公共房间 | {len(self.worlds)} / {sum(len(w["rooms"]) for w in self.worlds)} |',
+                 f'| 副本 | {len(self.dungeons)} |', f'| 唯一可玩任务 / 兼容别名 | {len(self.wired_quests)} / {len(self.quest_aliases)} |',
+                 f'| 武功 / 物品 / 称号 | {len(self.skills)} / {len(self.items)} / {len(self.titles)} |', '',
+                 '## 已修复的入口与机制', '',
+                 '- 所有唯一任务有接取与交付，后十条试炼目标ID已修正；重复ID不会重复领奖。',
+                 '- 哑婆有独立人物，漕银调查须询问船娘、书办并搜索苇荡。任务目录显示真实地点、解锁条件和进度。',
+                 '- 35段缺少入口的简报已登记房间动作；后续资源加载会拒绝无入口主动作。',
+                 '- 普通交谈与直接选择共用一次性记录；配方须明确点击，可重复，每次校验并消费成本。',
+                 '- 城市传闻优先采用房间配置，搜索线索由房间声明；帮工及交易的铜钱单位已统一。',
+                 '- 背包和装备页支持强化确认；最高5级，仅空闲且真实持有时可强化。',
+                 '- 烟尘粉可在战斗中消耗撤离；副本按当前进度结算，未满不会获得传承与通关旗标。',
+                 '- 死亡不能通过停止或退出取消；复活带虚弱，当前内力不越有效上限。打坐/疗伤开始时不即时恢复，首个完整10秒才结算。', '',
+                 '## 仍需区分的内容', '',
+                 '- 序27空缺，序28需要最近存在的序26完成。同号副本为并行替代，任一满结算即可推进。',
+                 '- 序42鬼市三路都能探索；序62同名关是另一短篇模板。北斗七步拒绝越序，保留已完成步骤，没有错误重置惩罚。',
+                 '- 护送以战斗和到达地点计目标，没有独立跟随AI或护送血条。',
+                 '- 后期部分章节仍是短篇机关战与简短台词。本轮接通既有内容，没有补写78关长篇原创剧情。',
+                 '- 没有完成全部初始属性、九流派连续78关和多人同时闯关的平衡验证；单首领样本不代表完整药耗收支。', '',
+                 '## 未绑定动作检查', '', '当前数量：' + str(len(self.unbound)) + '。', '']
+        for dungeon, aid in self.unbound: lines += [self.dungeon_link(dungeon, current) + '：' + aid, '']
+        lines += ['## 维护', '', '修改资源后运行生成器及--check，并实际验证行为。所有规范任务须有可达接交NPC、目标来源；选择分支从可达父动作进入。', '']
+        return '\n'.join(lines)
 
     def pages(self):
         result = self.story_pages()
@@ -581,7 +591,7 @@ class Guide:
             hashes.update(path.relative_to(RESOURCES).as_posix().encode())
             hashes.update(json.dumps(read(path), ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8"))
         marker = "<!-- 资源校验指纹：" + hashes.hexdigest() + "；由 scripts/generate_player_guide.py 生成。 -->\n\n"
-        return {path: marker + text.split("\n",1)[0] + "\n\n> 本手册对应武学V2源码；服务器需配套部署与旧档迁移后生效。\n" + text.split("\n",1)[1].rstrip() + "\n" for path, text in result.items()}
+        return {path: marker + text.split("\n",1)[0] + "\n\n> 本手册对应当前源码，包含武学V2及内容机制修复；实际线上版本以发布记录为准。\n" + text.split("\n",1)[1].rstrip() + "\n" for path, text in result.items()}
 
 
 def validate_links(pages):

@@ -16,6 +16,7 @@ type TransitionResult struct {
 }
 
 type StateActionResult struct {
+	Transition     *TransitionResult
 	Message        string
 	Room           map[string]interface{}
 	Choices        []map[string]string

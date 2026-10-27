@@ -48,7 +48,10 @@
       "description": "行宫惊变入口。",
       "exits": {
         "north": "datang_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "datang_01": {
       "name": "通道",

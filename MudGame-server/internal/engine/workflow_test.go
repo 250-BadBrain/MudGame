@@ -439,8 +439,16 @@ func TestDialogueAndQuestWorkflow(t *testing.T) {
 	if err != nil {
 		t.Fatalf("get quests failed: %v", err)
 	}
-	if len(quests.Quests) != 1 || quests.Quests[0]["status"] != "active" {
-		t.Fatalf("expected active quest, got %+v", quests.Quests)
+	questStatus := func(rows []map[string]interface{}) string {
+		for _, row := range rows {
+			if row["id"] == "escort_rumor_run" {
+				return row["status"].(string)
+			}
+		}
+		return ""
+	}
+	if len(quests.Quests) != 38 || questStatus(quests.Quests) != "active" {
+		t.Fatal("expected active rumor quest within the directory")
 	}
 
 	if _, err := MoveWithTransition(h.repo, h.playerID, "west"); err != nil {
@@ -465,8 +473,8 @@ func TestDialogueAndQuestWorkflow(t *testing.T) {
 	if err != nil {
 		t.Fatalf("get quests after completion failed: %v", err)
 	}
-	if len(quests.Quests) != 1 || quests.Quests[0]["status"] != "completed" {
-		t.Fatalf("expected completed quest, got %+v", quests.Quests)
+	if len(quests.Quests) != 38 || questStatus(quests.Quests) != "completed" {
+		t.Fatal("expected completed rumor quest within the directory")
 	}
 	attrs, err := GetAttributesView(h.repo, h.playerID)
 	if err != nil {
@@ -821,6 +829,12 @@ func TestStatusTickWorkflow(t *testing.T) {
 	if stop := StopWithEffects(h.repo, h.playerID); stop.Message != "你停止了打坐。" {
 		t.Fatalf("unexpected stop meditate message: %+v", stop)
 	}
+	// Meditation raised the effective HP cap without healing; spar requires actual full health.
+	if _, err := HealWithEffects(h.repo, h.playerID); err != nil {
+		t.Fatal(err)
+	}
+	runStatusTicks(t, h.repo, 10)
+	StopWithEffects(h.repo, h.playerID)
 
 	hpDropped := false
 	for attempt := 0; attempt < 3 && !hpDropped; attempt++ {

@@ -63,6 +63,10 @@ func TestTiandaoTrialFullFlow(t *testing.T) {
 	}
 	r.mu.Lock()
 	_, defeated, _, ok := r.dungeonMgr.DefeatNPCNoLock(songID)
+	// Direct objective simulation bypasses ProcessCombatTick's combat cleanup.
+	finishedPlayers, _ := r.loadPlayers()
+	r.clearCombatNoLock(finishedPlayers[playerID])
+	_ = r.savePlayers(finishedPlayers)
 	r.mu.Unlock()
 	if !ok || !defeated.Defeated || !defeated.Alive {
 		t.Fatalf("song que should yield at quarter health and stay alive, got %+v", defeated)

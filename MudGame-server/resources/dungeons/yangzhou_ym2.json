@@ -48,7 +48,10 @@
       "description": "幽冥鬼市入口。",
       "exits": {
         "north": "ym2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "ym2_01": {
       "name": "通道",

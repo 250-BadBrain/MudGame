@@ -360,7 +360,9 @@
       "exits": {
         "west": "ly_dock",
         "south": "ly_salt_hall"
-      }
+      },
+      "searchFlag": "found_smuggling_evidence",
+      "searchMessage": "你伏在盐垛后，记下把官盐搬上无籍小船的船号，船帮上刻着歪斜的鹞子记号。"
     },
     "ly_salt_hall": {
       "name": "盐帮分舵",
@@ -471,7 +473,9 @@
       ],
       "exits": {
         "south": "tg_taolin_station"
-      }
+      },
+      "searchFlag": "found_beacon_signal",
+      "searchMessage": "你在未点燃的整齐柴堆旁，捡到一枚被扯掉的戍卒号牌：断讯并非无人值守。"
     },
     "tg_tongguan_foot": {
       "name": "潼关城下",
@@ -558,7 +562,8 @@
         "listen_rumor"
       ],
       "npcs": [
-        "old_refugee"
+        "old_refugee",
+        "mute_refugee_woman"
       ],
       "exits": {
         "south": "ly_north_market"

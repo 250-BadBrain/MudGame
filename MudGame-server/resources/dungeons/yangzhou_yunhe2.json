@@ -48,7 +48,10 @@
       "description": "运河夜战入口。",
       "exits": {
         "north": "yangzh_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "yangzh_01": {
       "name": "通道",

@@ -48,7 +48,10 @@
       "description": "魔师宫秘道的入口。",
       "exits": {
         "north": "fuy_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "fuy_01": {
       "name": "通道",

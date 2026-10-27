@@ -48,7 +48,10 @@
       "description": "归墟龙宫入口。",
       "exits": {
         "north": "luoshu_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "luoshu_01": {
       "name": "通道",

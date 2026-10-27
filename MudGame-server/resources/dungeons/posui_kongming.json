@@ -48,7 +48,10 @@
       "description": "破碎空明入口。",
       "exits": {
         "north": "posui__01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "posui__01": {
       "name": "通道",

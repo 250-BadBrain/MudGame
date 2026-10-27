@@ -81,7 +81,8 @@ func (r *RuntimeManager) GetBackpack(playerID string) ([]map[string]interface{},
 			continue
 		}
 		items = append(items, map[string]interface{}{
-			"id": def.ID, "uniqueId": def.ID, "name": def.Name, "description": def.Description,
+			"enhancement": enhancementInfo(p, id),
+			"id":          def.ID, "uniqueId": def.ID, "name": def.Name, "description": def.Description,
 			"rarity": def.Rarity, "value": def.Value, "stackable": def.Stackable,
 			"unit": def.Unit, "count": count, "equipmentSlot": def.EquipmentSlot, "sellable": def.Sellable,
 			"type": def.Type, "subtype": def.Subtype, "bind": def.Bind, "questItem": def.QuestItem,
@@ -158,7 +159,7 @@ func (r *RuntimeManager) GetEquipment(playerID string) (map[string]interface{}, 
 		if !ok {
 			continue
 		}
-		out[slot] = map[string]interface{}{"id": def.ID, "name": def.Name, "description": def.Description, "rarity": def.Rarity, "effects": def.Effects}
+		out[slot] = map[string]interface{}{"id": def.ID, "name": def.Name, "description": def.Description, "rarity": def.Rarity, "effects": def.Effects, "equipmentSlot": def.EquipmentSlot, "enhancement": enhancementInfo(p, itemID)}
 	}
 	return out, nil
 }
@@ -209,8 +210,11 @@ func (r *RuntimeManager) EnterWorld(playerID, worldID string) (map[string]interf
 	}
 	// 马车费：跨城移动消耗银两（同城/同房间不收费）
 	carriageFee := 100
+	if origin, exists := fileRooms[p.RoomID]; exists && origin.WorldID == worldID {
+		carriageFee = 0
+	}
 	if p.Money < carriageFee {
-		return nil, errors.New("马车费不足——跨城需要" + strconv.Itoa(carriageFee) + "两，请找马车行付账。")
+		return nil, errors.New("马车费不足——跨城需要" + strconv.Itoa(carriageFee) + "文钱。")
 	}
 	p.Money -= carriageFee
 	p.RoomID = w.SpawnRoomID
@@ -830,7 +834,11 @@ func (r *RuntimeManager) DoRoomAction(playerID, action string) (map[string]inter
 		p.StateTickCountdown = workingSeconds
 		result["message"] = "你接了份零散差事，埋头干了起来……"
 	case "listen_rumor":
-		result["message"] = roomRumor(room.ID)
+		if len(room.Rumors) > 0 {
+			result["message"] = room.Rumors[rand.Intn(len(room.Rumors))]
+		} else {
+			result["message"] = roomRumor(room.ID)
+		}
 	case "search":
 		message, err := r.searchRoomNoLock(p, room)
 		if err != nil {
@@ -1032,18 +1040,9 @@ func (r *RuntimeManager) searchRoomNoLock(p *model.Player, room model.Room) (str
 	if p.Backpack == nil {
 		p.Backpack = map[string]int{}
 	}
-	// 剧情调查点：按房间脚本化（一次性旗标，供任务目标使用）
-	if room.ID == "yz_reed_marsh" && !p.Flags["found_caoyin_clue"] {
-		p.Flags["found_caoyin_clue"] = true
-		return "你在苇荡深处的泥滩上刨出几只空银箱——箱底的官印拓痕清清楚楚，是盐运司的封条。水路通向运河下游，箱子是从船上搬下来的。", nil
-	}
-	if room.ID == "ly_salt_wharf" && !p.Flags["found_smuggling_evidence"] {
-		p.Flags["found_smuggling_evidence"] = true
-		return "你伏在盐垛后看了半晌：几条黑影正把官盐搬上无籍小船，船帮上刻着一只歪歪扭扭的鹞子——是水匪的记号。你默默记下了船号。", nil
-	}
-	if room.ID == "tg_jingou_beacon" && !p.Flags["found_beacon_signal"] {
-		p.Flags["found_beacon_signal"] = true
-		return "你攀上残破的烽燧：燧台积灰下压着半燃的火薪，柴堆摆得整整齐齐却始终没有点起——不是断讯，是有人不许点。你在灰里捡到一枚扯掉的号牌。", nil
+	if room.SearchFlag != "" && !p.Flags[room.SearchFlag] {
+		p.Flags[room.SearchFlag] = true
+		return room.SearchMessage, nil
 	}
 	return "你仔细搜索四周，没有发现值得带走的东西。", nil
 }
@@ -1104,17 +1103,15 @@ func (r *RuntimeManager) Heal(playerID string) (string, error) {
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
 	}
+	if p.State != "IDLE" {
+		return "", errors.New("busy_state")
+	}
 	effectiveMaxHP := effectiveAttributesForPlayerNoLock(p).MaxHP
 	if p.Attributes.Resources.HP >= effectiveMaxHP {
 		return "", errors.New("hp_full")
 	}
-	if p.Attributes.Resources.MP < 10 {
+	if effectiveAttributesForPlayerNoLock(p).MP < 8 {
 		return "", errors.New("mp_insufficient")
-	}
-	p.Attributes.Resources.MP -= 10
-	p.Attributes.Resources.HP += 20
-	if p.Attributes.Resources.HP > effectiveMaxHP {
-		p.Attributes.Resources.HP = effectiveMaxHP
 	}
 	p.State = "HEALING"
 	p.StateTickCountdown = stateSettlementSeconds
@@ -1179,6 +1176,9 @@ func (r *RuntimeManager) UseItem(playerID, itemID string) (string, error) {
 	if !ok || !def.Usable {
 		return "", errors.New("item_not_usable")
 	}
+	if escape, _ := def.Effects["escapeCombat"].(bool); escape {
+		return r.escapeCombatNoLock(players, p, itemID)
+	}
 	// 传承残页：参悟进阶武学入门（见收益与经济设计文档 1.3.1）
 	if learnSkillID, ok := def.Effects["learnSkill"].(string); ok && learnSkillID != "" {
 		return r.insightSkillPageNoLock(players, p, itemID, learnSkillID)
@@ -1242,13 +1242,12 @@ func (r *RuntimeManager) Meditate(playerID string) (string, error) {
 	if p.State == "LEARNING" {
 		return "", errors.New("learning_state")
 	}
-	eff := effectiveAttributesForPlayerNoLock(p)
-	if p.Attributes.Resources.TrainedMaxMP >= eff.MaxMP && p.Attributes.Resources.MP >= p.Attributes.Resources.TrainedMaxMP {
-		return "", errors.New("full_state")
+	if p.State != "IDLE" {
+		return "", errors.New("busy_state")
 	}
-	p.Attributes.Resources.MP += 15
-	if p.Attributes.Resources.MP > p.Attributes.Resources.TrainedMaxMP {
-		p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP
+	eff := effectiveAttributesForPlayerNoLock(p)
+	if p.Attributes.Resources.TrainedMaxMP >= eff.MaxMP && p.Attributes.Resources.MP >= eff.TrainedMaxMP {
+		return "", errors.New("full_state")
 	}
 	p.State = "MEDITATING"
 	p.StateTickCountdown = stateSettlementSeconds
@@ -1265,6 +1264,9 @@ func (r *RuntimeManager) Stop(playerID string) string {
 	players, err := r.loadPlayers()
 	if err == nil {
 		if p, ok := players[playerID]; ok {
+			if p.State == "DEAD" {
+				return "你已经死了，请先复活。"
+			}
 			if p.State == "COMBAT" {
 				return "你正在战斗，待会再说"
 			}
@@ -1312,7 +1314,7 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 	if p.State != "IDLE" {
 		return "", errors.New("busy")
 	}
-	if p.Attributes.Resources.HP < p.Attributes.Resources.MaxHP {
+	if p.Attributes.Resources.HP < effectiveAttributesForPlayerNoLock(p).MaxHP {
 		return "", errors.New("self_not_full")
 	}
 	if targetID == "" {
@@ -1345,6 +1347,9 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 		if !ok {
 			return "", errors.New("target_not_in_room")
 		}
+		if npc.NonCombat || fileNpcs[targetID].CombatMode == "protected" {
+			return "", errors.New("target_is_protected")
+		}
 		if npc.Attributes.Resources.HP < npc.Attributes.Resources.MaxHP {
 			return "", errors.New("target_not_full")
 		}
@@ -1369,7 +1374,7 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 	if t.State != "IDLE" {
 		return "", errors.New("target_busy")
 	}
-	if t.Attributes.Resources.HP < t.Attributes.Resources.MaxHP {
+	if t.Attributes.Resources.HP < effectiveAttributesForPlayerNoLock(t).MaxHP {
 		return "", errors.New("target_not_full")
 	}
 	p.State = "COMBAT"
@@ -1448,6 +1453,9 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		if npc.NonCombat {
 			return "", errors.New(npc.Name + "并无战意，你无从下手。")
 		}
+		if staticNPCProtectedFromKill(fileNpcs[targetID]) {
+			return "", errors.New("target_is_protected")
+		}
 		p.State = "COMBAT"
 		p.TargetID = npc.ID
 		p.CombatType = "KILL"
@@ -1524,7 +1532,7 @@ func (r *RuntimeManager) Relive(playerID string) (string, error) {
 	eff := effectiveAttributesForPlayerNoLock(p)
 	// 复活仅恢复半血半内力，并附带 5 分钟虚弱（战斗属性减半，见收益与经济设计文档）
 	p.Attributes.Resources.HP = eff.MaxHP / 2
-	p.Attributes.Resources.MP = p.Attributes.Resources.TrainedMaxMP / 2
+	p.Attributes.Resources.MP = eff.TrainedMaxMP / 2
 	p.WeakUntil = time.Now().Unix() + weaknessDurationSeconds
 	if r.dungeonMgr != nil {
 		if inst, exists := r.dungeonMgr.PlayerInstanceNoLock(playerID); exists && inst.CheckpointRoomID != "" {
@@ -1584,7 +1592,7 @@ func (r *RuntimeManager) settleWorldLaborNoLock(p *model.Player, result *model.C
 		p.Attributes.Potential += 2
 		result.PlayerMessages = append(result.PlayerMessages, model.PlayerMessage{
 			PlayerID: p.ID,
-			Message:  "你干完了活计，赚得20两银子，也磨炼出2点潜能。",
+			Message:  "你干完了活计，赚得20文钱，也磨炼出2点潜能。",
 		})
 	}
 	updatedRoom[roomID] = true
@@ -1627,8 +1635,9 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 		}
 		switch p.State {
 		case "HEALING":
-			effectiveMaxHP := effectiveAttributesForPlayerNoLock(p).MaxHP
-			if p.Attributes.Resources.HP >= effectiveMaxHP || p.Attributes.Resources.MP < 8 {
+			healingAttributes := effectiveAttributesForPlayerNoLock(p)
+			effectiveMaxHP := healingAttributes.MaxHP
+			if p.Attributes.Resources.HP >= effectiveMaxHP || healingAttributes.MP < 8 {
 				p.State = "IDLE"
 				p.StateTickCountdown = 0
 				result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: p.CharacterName + "停止了运功疗伤。"})
@@ -1636,7 +1645,7 @@ func (r *RuntimeManager) ProcessStatusTick() (model.CombatTickResult, error) {
 				continue
 			}
 			beforeHP := p.Attributes.Resources.HP
-			p.Attributes.Resources.MP -= 8
+			p.Attributes.Resources.MP = healingAttributes.MP - 8
 			p.Attributes.Resources.HP += 20
 			if p.Attributes.Resources.HP > effectiveMaxHP {
 				p.Attributes.Resources.HP = effectiveMaxHP

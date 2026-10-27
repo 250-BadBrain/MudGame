@@ -91,6 +91,9 @@ func StopWithEffects(repo RuntimeRepository, playerID string) StateActionResult 
 	if err == nil && asString(status["state"]) == "COMBAT" {
 		return StateActionResult{Message: "你正在战斗，待会再说", NeedRoomUpdate: false}
 	}
+	if err == nil && asString(status["state"]) == "DEAD" {
+		return StateActionResult{Message: "你已经死了，请先复活。"}
+	}
 	name := playerName(repo, playerID)
 	msg := repo.Stop(playerID)
 	roomMsg := ""
@@ -110,11 +113,28 @@ func StopWithEffects(repo RuntimeRepository, playerID string) StateActionResult 
 }
 
 func UseItemWithEffects(repo RuntimeRepository, playerID, itemID string) (StateActionResult, error) {
+	fromID, fromName, err := repo.GetPlayerRoom(playerID)
+	if err != nil {
+		return StateActionResult{}, err
+	}
 	msg, err := repo.UseItem(playerID, itemID)
 	if err != nil {
 		return StateActionResult{}, err
 	}
-	return StateActionResult{Message: msg, NeedRoomUpdate: true}, nil
+	result := StateActionResult{Message: msg, NeedRoomUpdate: true}
+	toID, toName, err := repo.GetPlayerRoom(playerID)
+	if err != nil {
+		return StateActionResult{}, err
+	}
+	if fromID != toID {
+		room, _, err := repo.GetRoomSnapshot(playerID)
+		if err != nil {
+			return StateActionResult{}, err
+		}
+		result.Room = room
+		result.Transition = &TransitionResult{FromRoomID: fromID, FromRoomName: fromName, ToRoomID: toID, ToRoomName: toName, Room: room}
+	}
+	return result, nil
 }
 
 func DoRoomActionWithEffects(repo RuntimeRepository, playerID, action string) (StateActionResult, error) {

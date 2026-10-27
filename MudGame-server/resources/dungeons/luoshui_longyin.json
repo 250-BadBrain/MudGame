@@ -48,7 +48,10 @@
       "description": "洛水龙吟的入口。",
       "exits": {
         "north": "luo_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "luo_01": {
       "name": "通道",

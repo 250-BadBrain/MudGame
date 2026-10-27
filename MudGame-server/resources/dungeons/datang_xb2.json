@@ -48,7 +48,10 @@
       "description": "绝壁悬栈入口。",
       "exits": {
         "north": "xb2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "xb2_01": {
       "name": "通道",

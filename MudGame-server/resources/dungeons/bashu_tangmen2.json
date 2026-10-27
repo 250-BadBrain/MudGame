@@ -48,7 +48,10 @@
       "description": "唐门天梯入口。",
       "exits": {
         "north": "bashu__01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "bashu__01": {
       "name": "通道",

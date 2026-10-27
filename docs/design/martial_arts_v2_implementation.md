@@ -1,6 +1,6 @@
 # 武功 V2 实施与验收（2026-10-27）
 
-本地实现完成，未连接部署服务器、未修改正式存档。规则以[完整方案](martial_arts_v2_proposal.md)、[公式](formulas.md)和[总谱](martial_arts_curriculum.md)为准；[玩家手册](../player/README.md)及全部12份生成页面已同步。
+首次本地验收记录如下。发布补记：2026-10-27已将9b3ae4b部署上线，1个旧角色迁移成功，备份位于服务器.deploy/backups/20261027T002657Z-a45243cb；本轮内容机制修复另行记录，尚未随该次发布上线。规则以[完整方案](martial_arts_v2_proposal.md)、[公式](formulas.md)和[总谱](martial_arts_curriculum.md)为准；[玩家手册](../player/README.md)及全部12份生成页面已同步。
 
 ## 已实现
 

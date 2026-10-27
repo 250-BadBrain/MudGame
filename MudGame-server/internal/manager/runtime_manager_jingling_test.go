@@ -88,6 +88,10 @@ func TestJinglingSiegeExclusiveBranchFullFlow(t *testing.T) {
 	// 结束战斗并真正击杀都督（Kill 只负责开战与破招判定）
 	r.mu.Lock()
 	_, _, _, ok := r.dungeonMgr.DefeatNPCNoLock(bossID)
+	// Direct objective simulation bypasses ProcessCombatTick's combat cleanup.
+	finishedPlayers, _ := r.loadPlayers()
+	r.clearCombatNoLock(finishedPlayers[playerID])
+	_ = r.savePlayers(finishedPlayers)
 	r.mu.Unlock()
 	if !ok {
 		t.Fatal("defeat commander failed")

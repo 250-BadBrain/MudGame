@@ -22,6 +22,11 @@
             <button v-for="choice in log.choices" :key="choice.id" :disabled="log.used" @click="$emit('choose', log, choice.id)">{{ choice.label }}</button>
           </span>
         </template>
+        <template v-else-if="log?.type === 'dialogue_choice'">
+          <span class="dialogue-choice-buttons">
+            <button v-for="option in log.options" :key="option.id" :disabled="log.used || option.available === false" @click="$emit('chooseDialogue', log, option)">{{ option.text }}</button>
+          </span>
+        </template>
         <template v-else>
           {{ getLogText(log) }}
         </template>
@@ -41,7 +46,7 @@ import { DUNGEON_LEAVE_BUTTON_LOG_TYPE } from '../composables/useGameLog.js'
 
 const command = defineModel('command', { type: String, default: '' })
 
-defineEmits(['send', 'choose', 'confirmLeave'])
+defineEmits(['send', 'choose', 'confirmLeave', 'chooseDialogue'])
 
 const props = defineProps({
   logs: { type: Array, default: () => [] },
@@ -90,6 +95,9 @@ watch(() => props.logs.length, () => {
 </script>
 
 <style scoped>
+.dialogue-choice-buttons { display: flex; flex-wrap: wrap; gap: 5px; }
+.dialogue-choice-buttons button { max-width: 100%; white-space: normal; text-align: left; padding: 5px 8px; background: #1b1b1b; color: #e5c46e; border: 1px solid #6a562b; border-radius: 3px; font-size: 12px; }
+.dialogue-choice-buttons button:disabled { color: #777; border-color: #333; cursor: default; }
 .log-content-wrapper {
     flex: 1;
     display: flex;

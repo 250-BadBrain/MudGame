@@ -48,7 +48,10 @@
       "description": "狼山雪岭入口。",
       "exits": {
         "north": "saibei_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "saibei_01": {
       "name": "通道",

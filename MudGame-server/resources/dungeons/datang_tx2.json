@@ -48,7 +48,10 @@
       "description": "铁血雄关入口。",
       "exits": {
         "north": "tx2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "tx2_01": {
       "name": "通道",

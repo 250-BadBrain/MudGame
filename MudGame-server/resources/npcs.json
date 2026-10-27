@@ -128,7 +128,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "luoyang_bounty"
+    ]
   },
   "east_market_keeper": {
     "name": "杜掌柜",
@@ -3057,7 +3060,11 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "dialogueId": "dlg_ancient_scroll_keeper_commissions",
+    "questIds": [
+      "changan_letter"
+    ]
   },
   "jl_spearman": {
     "name": "江淮军长矛手",
@@ -4145,7 +4152,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "salt_smuggling_case"
+    ]
   },
   "salt_disciple": {
     "name": "盐帮弟子",
@@ -4739,7 +4749,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "beacon_signal_case"
+    ]
   },
   "herbalist_sun": {
     "name": "孙回春",
@@ -5006,7 +5019,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "refugee_rumor_case"
+    ]
   },
   "ls_pirate": {
     "name": "鹞子帮水匪",
@@ -7383,7 +7399,12 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "changan_letter",
+      "zhongjuan_daozhen",
+      "kongming_daozhen"
+    ]
   },
   "ld_courier_chief": {
     "name": "郑镖头",
@@ -9779,7 +9800,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "caoyin_case"
+    ]
   },
   "yz_boat_girl": {
     "name": "二十四桥船娘",
@@ -9911,7 +9935,11 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "yangzhou_bounty",
+      "yunhe_houyi"
+    ]
   },
   "bs_tang_steward": {
     "name": "唐门管事",
@@ -9977,7 +10005,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "bashu_thanks"
+    ]
   },
   "bs_herbalist": {
     "name": "药田老农",
@@ -10112,7 +10143,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "zhandao_case"
+    ]
   },
   "zd2_ape_rouge": {
     "name": "猿叟余党",
@@ -10317,7 +10351,12 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "bianguan_fenghuo",
+      "mishi_aftermath",
+      "jueji_houji"
+    ]
   },
   "sb_horse_trader": {
     "name": "回鹘马商",
@@ -10388,7 +10427,11 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "dialogueId": "dlg_sb_horse_trader_commissions",
+    "questIds": [
+      "saibei_treasure"
+    ]
   },
   "sb_beacon_guard": {
     "name": "烽燧戍卒",
@@ -10791,7 +10834,12 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "lanting_tie",
+      "jiangnan_heart",
+      "langfan_legacy"
+    ]
   },
   "jn_calligrapher": {
     "name": "临帖老翁",
@@ -11128,7 +11176,21 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "gongbian_aftermath",
+      "xinggong_aftermath",
+      "quest_r204_0",
+      "quest_r204_1",
+      "quest_r204_2",
+      "quest_r204_3",
+      "quest_r204_4",
+      "quest_r204_5",
+      "quest_r204_6",
+      "quest_r204_7",
+      "quest_r204_8",
+      "quest_r204_9"
+    ]
   },
   "dd2_silk_merchant": {
     "name": "锦绸庄主",
@@ -11264,7 +11326,12 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "gongmen_ye",
+      "dongdu_truth",
+      "longyin_zhengming"
+    ]
   },
   "dd3_water_ghost": {
     "name": "桥洞水鬼",
@@ -11469,7 +11536,11 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "cangming_yijuan",
+      "longgong_yiji"
+    ]
   },
   "dm_jiaoren": {
     "name": "鲛人珠娘",
@@ -11539,7 +11610,10 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "questIds": [
+      "dongming_song"
+    ]
   },
   "dm_mirage_keeper": {
     "name": "守阁人",
@@ -21072,5 +21146,74 @@
         "seal": 0
       }
     }
+  },
+  "mute_refugee_woman": {
+    "name": "哑婆",
+    "title": "营地南角",
+    "description": "她蜷在营地南角的窝棚旁，手边放着一截炭条。",
+    "faction": "neutral",
+    "role": "quest",
+    "importance": "local",
+    "dialogueId": "dlg_mute_refugee",
+    "attributes": {
+      "level": 7,
+      "realm": "trainee",
+      "experience": 0,
+      "potential": 0,
+      "base": {
+        "strength": 8,
+        "constitution": 10,
+        "agility": 8,
+        "perception": 14,
+        "willpower": 12,
+        "charm": 10,
+        "luck": 10
+      },
+      "growth": {
+        "postStrength": 0,
+        "postConstitution": 0,
+        "postAgility": 0,
+        "postPerception": 0,
+        "postWillpower": 0
+      },
+      "resources": {
+        "hp": 70,
+        "maxHp": 70,
+        "mp": 40,
+        "trainedMaxMp": 40,
+        "maxMp": 40,
+        "spirit": 100,
+        "maxSpirit": 100
+      },
+      "derived": {
+        "attack": 6,
+        "defense": 8,
+        "hitRate": 58,
+        "dodge": 40,
+        "parry": 38,
+        "critRate": 1,
+        "attackSpeed": 4,
+        "initiative": 45,
+        "guardBreak": 0,
+        "damageReduction": 0
+      },
+      "social": {
+        "fame": 0,
+        "notoriety": 0,
+        "authority": 0,
+        "credit": 0
+      },
+      "resistances": {
+        "poison": 0,
+        "bleed": 0,
+        "stun": 0,
+        "fear": 0,
+        "charm": 0,
+        "seal": 0
+      }
+    },
+    "questIds": [
+      "refugee_rumor_case"
+    ]
   }
 }

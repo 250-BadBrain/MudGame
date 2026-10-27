@@ -59,6 +59,7 @@
           :active-leave-token="pendingDungeonLeave?.token || ''"
           @send="sendCommand"
           @choose="chooseDungeonAction"
+          @choose-dialogue="chooseDialogueAction"
           @confirm-leave="confirmLeaveCurrentDungeon" />
 
         <!-- 右侧面板区域（包含信息面板） -->
@@ -70,6 +71,7 @@
               :backpackItems="backpackItems"
               :selectedBackpackItem="selectedBackpackItem"
               :viewingItem="viewingItem"
+              :enhancingItem="enhancingItem"
               :discardingItem="discardingItem"
               :discardAmount="discardAmount"
               :discardMax="maxDiscardCount"
@@ -105,6 +107,9 @@
               @equipItem="equipItem"
               @useItem="useBackpackItem"
               @sellItem="initiateSell"
+              @enhanceItem="initiateEnhance"
+              @confirmEnhance="confirmEnhance"
+              @cancelEnhance="cancelEnhance"
               @changeDiscardAmount="changeDiscardAmount"
               @confirmDiscard="confirmDiscard"
               @cancelDiscard="cancelDiscard"
@@ -217,6 +222,7 @@ const {
   discardingItem,
   discardAmount,
   sellingItem,
+  enhancingItem, initiateEnhance, confirmEnhance, cancelEnhance,
   sellAmount,
   selectEquipmentSlot,
   equipItem,
@@ -368,6 +374,17 @@ const chooseDungeonAction = (log, actionId) => {
   if (!log || log.used) return;
   log.used = true;
   doRoomAction(actionId);
+}
+
+const appendDialogueChoices = (dialogue) => {
+  if (!Array.isArray(dialogue?.options) || !dialogue.options.length) return
+  for (const log of logs.value) if (log?.type === 'dialogue_choice') log.used = true
+  appendLogEntry({ type: 'dialogue_choice', npcId: dialogue.npcId, options: dialogue.options, used: false })
+}
+const chooseDialogueAction = (log, option) => {
+  if (log.used || option.available === false || !checkCanAct('talk')) return
+  log.used = true
+  sendGameCommand('command', 'choose_dialogue', characterId.value, { npcId: log.npcId, optionId: option.id })
 }
 
 const { handleGlobalKeydown } = useKeyNavigation({ onNavigate: go })
@@ -713,6 +730,7 @@ const handleMessage = (msg) => {
       }
   } else if (msg.type === 'command' && msg.subtype === 'talk') {
       if (msg.flag) {
+          appendDialogueChoices(msg.results?.dialogue);
           showShopPanel.value = false;
           showLearnPanel.value = false;
           (msg.logs || []).forEach(l => addLog(l));
@@ -733,6 +751,7 @@ const handleMessage = (msg) => {
       }
   } else if (msg.type === 'command' && msg.subtype === 'choose_dialogue') {
       if (msg.flag) {
+          appendDialogueChoices(msg.results?.dialogue);
           (msg.logs || []).forEach(l => addLog(l));
           if (msg.results?.room) {
               room.value = msg.results.room;
@@ -908,8 +927,21 @@ const handleMessage = (msg) => {
       } else {
           addLog(describeCommandError(msg.results.error, '当前无法修炼或调整武学。'));
       }
+  } else if (msg.type === 'command' && msg.subtype === 'enhance_item') {
+      if (msg.flag) {
+          addLog(msg.results?.message);
+          sendSilentRefresh('get_backpack'); sendSilentRefresh('get_equipment'); sendSilentRefresh('get_attributes');
+      } else { addLog(describeCommandError(msg.results?.error, '当前无法强化这件装备。')); }
   } else if (msg.type === 'command' && msg.subtype === 'use_item') {
       if (msg.flag) {
+          if (msg.results?.room) {
+              room.value = msg.results.room;
+              selectedEntityKey.value = null;
+              keepCurrentPlayerOnlineInRoom(); syncDungeonSelectionFromRoom();
+              pendingDungeonLeave.value = null;
+              closeShop(); closeLearn();
+              sendSilentRefresh('get_dungeons'); sendSilentRefresh('get_quests');
+          }
           (msg.logs || []).forEach(l => addLog(l));
           if (msg.results && msg.results.message) addLog(msg.results.message);
           sendSilentRefresh("get_backpack");

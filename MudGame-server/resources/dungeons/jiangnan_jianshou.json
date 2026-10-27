@@ -48,7 +48,10 @@
       "description": "剑首之争的入口。",
       "exits": {
         "north": "jia_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "jia_01": {
       "name": "通道",

@@ -48,7 +48,10 @@
       "description": "雷鸣峡谷入口。",
       "exits": {
         "north": "lm2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "lm2_01": {
       "name": "通道",

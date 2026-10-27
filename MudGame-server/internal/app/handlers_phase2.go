@@ -330,6 +330,9 @@ func (s *Server) handleGameEnhanceItem(conn *websocket.Conn, cmd protocol.Comman
 	itemID := toString(cmd.Args["itemId"])
 	message, err := s.repo.EnhanceItem(playerID, itemID)
 	s.replyCommand(conn, "enhance_item", err, map[string]interface{}{"message": message}, nil)
+	if err == nil {
+		s.emitRoomUpdateByPlayer(playerID)
+	}
 }
 
 func (s *Server) handleGameUseItem(conn *websocket.Conn, cmd protocol.CommandMessage) {
@@ -339,7 +342,12 @@ func (s *Server) handleGameUseItem(conn *websocket.Conn, cmd protocol.CommandMes
 	}
 	itemID := toString(cmd.Args["itemId"])
 	res, err := engine.UseItemWithEffects(s.repo, playerID, itemID)
-	s.replyCommand(conn, "use_item", err, map[string]interface{}{"message": res.Message}, nil)
+	s.replyCommand(conn, "use_item", err, map[string]interface{}{"message": res.Message, "room": res.Room}, nil)
+	if err == nil && res.Transition != nil {
+		s.emitPlayerLeft(playerID, res.Transition.FromRoomID, res.Transition.FromRoomName)
+		s.emitPlayerEntered(playerID, res.Transition.ToRoomID, res.Transition.ToRoomName)
+		s.emitRoomUpdate(res.Transition.FromRoomID)
+	}
 	if err == nil && res.NeedRoomUpdate {
 		s.emitRoomUpdateByPlayer(playerID)
 	}

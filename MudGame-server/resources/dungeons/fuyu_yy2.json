@@ -48,7 +48,10 @@
       "description": "烟雨剑冢入口。",
       "exits": {
         "north": "yy2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "yy2_01": {
       "name": "通道",

@@ -48,7 +48,10 @@
       "description": "战神遗境的入口。",
       "exits": {
         "north": "pos_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "pos_01": {
       "name": "通道",

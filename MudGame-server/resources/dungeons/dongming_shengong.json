@@ -48,7 +48,10 @@
       "description": "神工秘殿入口。",
       "exits": {
         "north": "dongmi_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "dongmi_01": {
       "name": "通道",

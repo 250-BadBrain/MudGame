@@ -48,7 +48,10 @@
       "description": "天罡北斗入口。",
       "exits": {
         "north": "tg2_01"
-      }
+      },
+      "actions": [
+        "listen_brief"
+      ]
     },
     "tg2_01": {
       "name": "通道",
