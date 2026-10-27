@@ -2,6 +2,7 @@ package manager
 
 import (
 	"errors"
+	"math/rand"
 	"sort"
 
 	engruntime "mudgame/server/internal/engine/runtime"
@@ -275,6 +276,9 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 	if p == nil {
 		return settlement
 	}
+	// 判断是否首通（在设置旗标之前检查）
+	isFirstClear := !p.Flags["dungeon_cleared_"+settlement.DungeonID]
+
 	// 章节链通关旗标：100% 结算时写入，驱动 order N+1 解锁（见 economy_design.md 1.3）
 	if settlement.Progress >= 100 {
 		if p.Flags == nil {
@@ -292,9 +296,13 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 		received := map[string]int{}
 		for itemID, amount := range settlement.RewardItems {
 			def := fileItems[itemID]
+
+			// 秘籍残页：已学或已持有则跳过
 			if sid, ok := def.Effects["learnSkill"].(string); ok && (p.Skills[sid] > 0 || p.Backpack[itemID] > 0) {
 				continue
 			}
+
+			// FirstClaim 物品：一生只能获取一次
 			if def.FirstClaim {
 				if p.Flags == nil {
 					p.Flags = map[string]bool{}
@@ -304,6 +312,16 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 				}
 				p.Flags["item_claimed_"+itemID] = true
 			}
+
+			// 非首通掉落率：装备类物品在复刷时有概率掉落
+			// 首通必得；复刷时装备 15% 概率，材料/消耗品必得
+			if !isFirstClear && !def.FirstClaim && def.EquipmentSlot != "" {
+				dropChance := 0.15
+				if rand.Float64() >= dropChance {
+					continue
+				}
+			}
+
 			if amount > 0 {
 				received[itemID] = amount
 			}
@@ -311,6 +329,14 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 			if amount > 0 {
 				p.Backpack[itemID] += amount
 			}
+		}
+		// 复刷保底：给少量古铜残片作为farm收益
+		if !isFirstClear && settlement.Progress >= 100 {
+			if p.Backpack == nil {
+				p.Backpack = map[string]int{}
+			}
+			p.Backpack["bronze_fragment"] += 2
+			received["bronze_fragment"] = 2
 		}
 		settlement.RewardItems = received
 	}
@@ -330,6 +356,8 @@ func applyDungeonSettlementReward(p *model.Player, settlement engruntime.Settlem
 			p.Reputations[factionID] += value
 		}
 	}
+	// 首通状态写入结算结果供前端展示
+	settlement.IsFirstClear = isFirstClear
 	return settlement
 }
 

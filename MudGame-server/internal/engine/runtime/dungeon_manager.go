@@ -270,6 +270,7 @@ type Settlement struct {
 	ChainID           string
 	Chapter           int
 	Progress          int
+	IsFirstClear      bool
 	RewardExperience  int
 	RewardPotential   int
 	RewardMoney       int
