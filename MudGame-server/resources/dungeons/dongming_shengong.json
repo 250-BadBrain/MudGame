@@ -134,7 +134,8 @@
     "potential": 1220,
     "money": 1030,
     "items": {
-      "shengong_q": 1
+      "shengong_q": 1,
+      "shengong_qi": 1
     }
   }
 }

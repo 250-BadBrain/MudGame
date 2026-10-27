@@ -7,9 +7,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 30
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "unarmed",
     "requirements": {},
@@ -23,9 +21,7 @@
     "type": "BASIC",
     "category": "guard",
     "school": "common",
-    "bonuses": {
-      "parry_per_100_levels": 10
-    },
+    "bonuses": {},
     "slot": "guard",
     "weaponType": "",
     "requirements": {},
@@ -40,7 +36,6 @@
     "category": "internal",
     "school": "common",
     "bonuses": {
-      "max_mp_per_100_levels": 1000,
       "trained_mp_to_max_hp_percent": 0.3
     },
     "slot": "internal",
@@ -56,9 +51,7 @@
     "type": "BASIC",
     "category": "movement",
     "school": "common",
-    "bonuses": {
-      "post_agility_per_100_levels": 10
-    },
+    "bonuses": {},
     "slot": "movement",
     "weaponType": "",
     "requirements": {},
@@ -72,9 +65,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "blade",
     "requirements": {},
@@ -88,9 +79,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "sword",
     "requirements": {},
@@ -104,9 +93,7 @@
     "type": "BASIC",
     "category": "study",
     "school": "academy",
-    "bonuses": {
-      "post_perception_per_100_levels": 10
-    },
+    "bonuses": {},
     "slot": "study",
     "weaponType": "",
     "requirements": {},
@@ -115,12 +102,11 @@
   "csj_changshengjue": {
     "name": "长生诀",
     "description": "养生内功绝学。序47《行宫惊变》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 5,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_100_levels": 600,
       "trained_mp_to_max_hp_percent": 0.15
     },
     "requirements": {
@@ -132,22 +118,20 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "",
-    "sourceDungeon": "datang_xinggong",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_csj_changshengjue",
     "source": "序47《行宫惊变》满通关结算"
   },
   "jyg_zhanshentu_dao": {
     "name": "战神图录",
     "description": "均衡内功绝学。序40《战神遗境》（原《战神图录·终卷》）满通关结算，获得完整传承后自主修炼。",
-    "rarity": 5,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 14,
-      "defense_per_100_levels": 22,
-      "max_mp_per_100_levels": 400
+      "attack_per_100_levels": 30,
+      "crit_rate_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -158,21 +142,20 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "",
-    "sourceDungeon": "posui_zhongjuan",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_jyg_zhanshentu_dao",
     "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算"
   },
   "tiandao_blade": {
     "name": "天刀八诀",
     "description": "刀道绝学。序38《天刀试炼殿》满通关，由宋缺授予完整传承，获得完整传承后自主修炼。",
-    "rarity": 5,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 34,
-      "hit_rate_per_100_levels": 22
+      "attack_per_100_levels": 20,
+      "hit_rate_per_100_levels": 20
     },
     "requirements": {
       "prerequisite": {
@@ -183,8 +166,7 @@
     },
     "slot": "combat",
     "weaponType": "blade",
-    "teacherId": "",
-    "sourceDungeon": "tiandao_trial_hall",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_tiandao_blade",
     "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承"
   },
@@ -196,9 +178,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "staff",
     "requirements": {},
@@ -212,9 +192,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "hidden_weapon",
     "requirements": {},
@@ -229,13 +207,12 @@
     "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_100_levels": 14,
-      "hit_rate_per_100_levels": 12
+      "attack_per_100_levels": 10,
+      "hit_rate_per_100_levels": 10
     },
     "slot": "combat",
     "weaponType": "sword",
-    "teacherId": "military_instructor",
-    "sourceDungeon": "",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_thunder_sword",
     "source": "洛阳军府·秦校尉",
     "requirements": {
@@ -254,13 +231,11 @@
     "category": "combat",
     "school": "common",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "hit_rate_per_100_levels": 6
+      "attack_per_100_levels": 20
     },
     "slot": "combat",
     "weaponType": "blade",
-    "teacherId": "military_instructor",
-    "sourceDungeon": "",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_bloody_blade",
     "source": "洛阳军府·秦校尉",
     "requirements": {
@@ -278,9 +253,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "spear",
     "requirements": {},
@@ -294,9 +267,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "whip",
     "requirements": {},
@@ -310,9 +281,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "mace",
     "requirements": {},
@@ -326,9 +295,7 @@
     "type": "BASIC",
     "category": "combat",
     "school": "common",
-    "bonuses": {
-      "attack_per_100_levels": 20
-    },
+    "bonuses": {},
     "slot": "combat",
     "weaponType": "hook",
     "requirements": {},
@@ -337,14 +304,13 @@
   "cihang_jiandian": {
     "name": "慈航剑典",
     "description": "剑道绝学。序40《长安试炼殿》满通关，由师妃暄见证传承，获得完整传承后自主修炼。",
-    "rarity": 5,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 28,
-      "hit_rate_per_100_levels": 24,
-      "parry_per_100_levels": 8
+      "hit_rate_per_100_levels": 20,
+      "dodge_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -355,8 +321,7 @@
     },
     "slot": "combat",
     "weaponType": "sword",
-    "teacherId": "",
-    "sourceDungeon": "changan_trial_hall",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_cihang_jiandian",
     "source": "序40《长安试炼殿》满通关，由师妃暄见证传承"
   },
@@ -368,8 +333,8 @@
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_mp_per_100_levels": 200,
-      "meditate_recovery_per_100_levels": 10
+      "max_mp_per_100_levels": 800,
+      "meditate_recovery_per_100_levels": 30
     },
     "requirements": {
       "prerequisite": {
@@ -379,22 +344,20 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "academy_teacher",
-    "sourceDungeon": "",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_hunyuan_neigong",
     "source": "河洛书院·柳先生"
   },
   "tianmo_ce": {
     "name": "天魔策",
     "description": "杀伐内功绝学。序39《魔师宫秘道》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 5,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 22,
-      "max_mp_per_100_levels": 450,
-      "crit_rate_per_100_levels": 3
+      "max_mp_per_100_levels": 1200,
+      "crit_rate_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -405,8 +368,7 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "",
-    "sourceDungeon": "fuyu_mishi",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_tianmo_ce",
     "source": "序39《魔师宫秘道》满通关结算"
   },
@@ -418,8 +380,8 @@
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_100_levels": 14,
-      "initiative_per_100_levels": 6
+      "dodge_per_100_levels": 10,
+      "initiative_per_100_levels": 20
     },
     "requirements": {
       "prerequisite": {
@@ -429,8 +391,7 @@
     },
     "slot": "movement",
     "weaponType": "",
-    "teacherId": "weapon_school_master",
-    "sourceDungeon": "",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_talang_jue",
     "source": "河洛武馆·赵横江"
   },
@@ -442,8 +403,8 @@
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 20,
-      "max_hp_per_100_levels": 80
+      "attack_per_100_levels": 10,
+      "max_hp_per_100_levels": 600
     },
     "requirements": {
       "prerequisite": {
@@ -453,8 +414,7 @@
     },
     "slot": "combat",
     "weaponType": "unarmed",
-    "teacherId": "weapon_school_master",
-    "sourceDungeon": "",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_fuhu_jin",
     "source": "河洛武馆·赵横江"
   },
@@ -466,8 +426,8 @@
     "category": "guard",
     "school": "hidden",
     "bonuses": {
-      "defense_per_100_levels": 8,
-      "parry_per_100_levels": 12
+      "parry_per_100_levels": 20,
+      "defense_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -477,8 +437,7 @@
     },
     "slot": "guard",
     "weaponType": "",
-    "teacherId": "salt_hall_master",
-    "sourceDungeon": "",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_tiebi_gong",
     "source": "盐帮分舵·雷万钧"
   },
@@ -490,7 +449,7 @@
     "category": "study",
     "school": "hidden",
     "bonuses": {
-      "learning_invest_bonus_per_100_levels": 2
+      "learning_invest_bonus_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -500,21 +459,20 @@
     },
     "slot": "study",
     "weaponType": "",
-    "teacherId": "academy_teacher",
-    "sourceDungeon": "",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_wuzhen_pian",
     "source": "河洛书院·柳先生"
   },
   "xiulou_daofa": {
     "name": "修罗刀法",
     "description": "进攻刀路。序15《马贼王庭》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 28,
-      "hit_rate_per_100_levels": 12
+      "attack_per_100_levels": 20,
+      "dodge_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -524,21 +482,20 @@
     },
     "slot": "combat",
     "weaponType": "blade",
-    "teacherId": "",
-    "sourceDungeon": "bianhuang_wangting",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_xiulou_daofa",
     "source": "序15《马贼王庭》满通关结算"
   },
   "taiyi_jianfa": {
     "name": "太乙剑法",
     "description": "稳准剑路。序8《竟陵之围》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 26,
-      "hit_rate_per_100_levels": 18
+      "attack_per_100_levels": 10,
+      "hit_rate_per_100_levels": 20
     },
     "requirements": {
       "prerequisite": {
@@ -548,21 +505,20 @@
     },
     "slot": "combat",
     "weaponType": "sword",
-    "teacherId": "",
-    "sourceDungeon": "datang_jingling",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_taiyi_jianfa",
     "source": "序8《竟陵之围》满通关结算"
   },
   "dongting_xinf": {
     "name": "洞庭心法",
     "description": "气脉与耐力。序19《巴陵夜泊》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
     "bonuses": {
-      "max_hp_per_100_levels": 60,
-      "max_mp_per_100_levels": 350
+      "max_mp_per_100_levels": 1000,
+      "trained_mp_to_max_hp_percent": 0.35
     },
     "requirements": {
       "prerequisite": {
@@ -572,20 +528,19 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "",
-    "sourceDungeon": "datang_baling",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_dongting_xinf",
     "source": "序19《巴陵夜泊》满通关结算"
   },
   "lingxu_bu": {
     "name": "凌虚步",
     "description": "轻灵先机。序20《散花楼》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_100_levels": 20,
+      "dodge_per_100_levels": 10,
       "initiative_per_100_levels": 10
     },
     "requirements": {
@@ -596,21 +551,20 @@
     },
     "slot": "movement",
     "weaponType": "",
-    "teacherId": "",
-    "sourceDungeon": "datang_sanhua",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_lingxu_bu",
     "source": "序20《散花楼》满通关结算"
   },
   "poxu_zhi": {
     "name": "破虚指",
     "description": "空手精修。序23《惊雁遗刻》（原《图录·后卷》）满通关结算，获得完整传承后自主修炼。",
-    "rarity": 4,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 32,
-      "hit_rate_per_100_levels": 14
+      "attack_per_100_levels": 20,
+      "crit_rate_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -620,21 +574,20 @@
     },
     "slot": "combat",
     "weaponType": "unarmed",
-    "teacherId": "",
-    "sourceDungeon": "posui_houjuan",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_poxu_zhi",
     "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算"
   },
   "bawang_qiang": {
     "name": "霸王枪",
     "description": "正面冲阵。序18《洛阳粮道》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 32,
-      "hit_rate_per_100_levels": 12
+      "attack_per_100_levels": 20,
+      "hit_rate_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -644,21 +597,20 @@
     },
     "slot": "combat",
     "weaponType": "spear",
-    "teacherId": "",
-    "sourceDungeon": "datang_liangdao",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_bawang_qiang",
     "source": "序18《洛阳粮道》满通关结算"
   },
   "youlong_bian": {
     "name": "游龙鞭",
     "description": "游斗。序21《方夜羽复仇》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 28,
-      "dodge_per_100_levels": 24
+      "dodge_per_100_levels": 10,
+      "attack_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -668,21 +620,20 @@
     },
     "slot": "combat",
     "weaponType": "whip",
-    "teacherId": "",
-    "sourceDungeon": "fuyu_fangfuchou",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_youlong_bian",
     "source": "序21《方夜羽复仇》满通关结算"
   },
   "lieshi_jian": {
     "name": "裂石锏",
     "description": "攻守兼备。序17《瓦岗惊变》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 28,
-      "parry_per_100_levels": 26
+      "attack_per_100_levels": 10,
+      "parry_per_100_levels": 20
     },
     "requirements": {
       "prerequisite": {
@@ -692,21 +643,20 @@
     },
     "slot": "combat",
     "weaponType": "mace",
-    "teacherId": "",
-    "sourceDungeon": "datang_wagang",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_lieshi_jian",
     "source": "序17《瓦岗惊变》满通关结算"
   },
   "suolang_gou": {
     "name": "锁浪钩",
     "description": "准确牵制。序22《怒蛟水战》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 28,
-      "hit_rate_per_100_levels": 24
+      "attack_per_100_levels": 20,
+      "defense_per_100_levels": 10
     },
     "requirements": {
       "prerequisite": {
@@ -716,22 +666,20 @@
     },
     "slot": "combat",
     "weaponType": "hook",
-    "teacherId": "",
-    "sourceDungeon": "fuyu_shuizhan",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_suolang_gou",
     "source": "序22《怒蛟水战》满通关结算"
   },
   "mantian_huayu": {
     "name": "漫天花雨",
     "description": "唐门暗器专精。序44《唐门试炼》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 4,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 32,
       "hit_rate_per_100_levels": 20,
-      "crit_rate_per_100_levels": 1
+      "crit_rate_per_100_levels": 20
     },
     "requirements": {
       "prerequisite": {
@@ -741,21 +689,20 @@
     },
     "slot": "combat",
     "weaponType": "hidden_weapon",
-    "teacherId": "",
-    "sourceDungeon": "bashu_tangmen_trial",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_mantian_huayu",
     "source": "序44《唐门试炼》满通关结算"
   },
   "fengmo_gun": {
     "name": "疯魔棍",
     "description": "棍路攻守。序19《巴陵夜泊》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 3,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
     "bonuses": {
-      "attack_per_100_levels": 28,
-      "parry_per_100_levels": 22
+      "attack_per_100_levels": 20,
+      "defense_per_100_levels": 20
     },
     "requirements": {
       "prerequisite": {
@@ -765,21 +712,20 @@
     },
     "slot": "combat",
     "weaponType": "staff",
-    "teacherId": "",
-    "sourceDungeon": "datang_baling",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_fengmo_gun",
     "source": "序19《巴陵夜泊》满通关结算"
   },
   "taxue_wuhen": {
     "name": "踏雪无痕",
     "description": "身法专精。序30《剑池》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 4,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "movement",
     "school": "hidden",
     "bonuses": {
-      "dodge_per_100_levels": 28,
-      "initiative_per_100_levels": 14
+      "dodge_per_100_levels": 20,
+      "initiative_per_100_levels": 30
     },
     "requirements": {
       "prerequisite": {
@@ -789,21 +735,20 @@
     },
     "slot": "movement",
     "weaponType": "",
-    "teacherId": "",
-    "sourceDungeon": "jiangnan_jianchi",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_taxue_wuhen",
     "source": "序30《剑池》满通关结算"
   },
   "jingang_buhuai": {
     "name": "金刚不坏",
     "description": "守御专精。序37《竟陵试炼殿》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 4,
+    "rarity": 2,
     "type": "ADVANCED",
     "category": "guard",
     "school": "hidden",
     "bonuses": {
-      "defense_per_100_levels": 22,
-      "parry_per_100_levels": 22
+      "parry_per_100_levels": 20,
+      "defense_per_100_levels": 30
     },
     "requirements": {
       "prerequisite": {
@@ -813,8 +758,7 @@
     },
     "slot": "guard",
     "weaponType": "",
-    "teacherId": "",
-    "sourceDungeon": "jingling_trial_hall",
+    "teacherId": "ancient_scroll_keeper",
     "manualId": "manual_jingang_buhuai",
     "source": "序37《竟陵试炼殿》满通关结算"
   }

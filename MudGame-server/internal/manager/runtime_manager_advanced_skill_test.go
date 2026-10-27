@@ -27,6 +27,8 @@ func setupAdvancedSkillPlayer(t *testing.T) (*RuntimeManager, string) {
 	// 秘籍前置门槛：长生诀需基本内功达到 20 级
 	p.Skills["basic_neigong"] = 120
 	p.Skills["basic_literacy"] = 80
+	p.Flags["martial_taught_csj_changshengjue"] = true
+	p.Skills["basic_literacy"] = 80
 	p.Flags["dungeon_cleared_datang_xinggong"] = true
 	p.Attributes.Experience = 200000
 	if p.Backpack == nil {

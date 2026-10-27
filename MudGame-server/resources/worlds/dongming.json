@@ -62,7 +62,10 @@
       "exits": {
         "south": "dm_harbor",
         "east": "dm_mirage"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "dm_mirage": {
       "name": "海市入口",
@@ -93,7 +96,10 @@
       "safeZone": true,
       "exits": {
         "south": "dm_mirage"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     }
   }
 }

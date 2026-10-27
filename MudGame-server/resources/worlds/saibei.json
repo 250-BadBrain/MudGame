@@ -19,7 +19,10 @@
       "exits": {
         "east": "sb_market",
         "north": "sb_grassland"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "sb_market": {
       "name": "边关马市",
@@ -76,7 +79,10 @@
       "exits": {
         "south": "sb_mayi",
         "west": "sb_wolf_pass"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "sb_wolf_pass": {
       "name": "狼山口",

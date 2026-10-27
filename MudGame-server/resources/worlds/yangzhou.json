@@ -93,7 +93,10 @@
       "exits": {
         "north": "yz_bridge",
         "west": "yz_reed_marsh"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "yz_reed_marsh": {
       "name": "城郊苇荡",

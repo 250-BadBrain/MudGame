@@ -134,7 +134,8 @@
     "potential": 1220,
     "money": 970,
     "items": {
-      "tangmen_z": 1
+      "tangmen_z": 1,
+      "tangmen_zhenzhu": 1
     }
   }
 }

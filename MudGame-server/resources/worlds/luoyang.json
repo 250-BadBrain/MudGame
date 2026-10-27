@@ -276,7 +276,10 @@
       "function": "dungeon_entry",
       "exits": {
         "north": "ly_outskirts"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "ly_nan_market": {
       "name": "南市",

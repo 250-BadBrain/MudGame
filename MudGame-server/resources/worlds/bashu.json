@@ -19,7 +19,10 @@
       "exits": {
         "east": "bs_market",
         "north": "bs_qingcheng"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "bs_market": {
       "name": "蜀锦市集",
@@ -91,7 +94,10 @@
       "exits": {
         "east": "bs_qingcheng",
         "north": "bs_jiange"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "bs_jiange": {
       "name": "剑阁栈道口",

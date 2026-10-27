@@ -40,7 +40,10 @@
         "west": "ca2_west_market",
         "north": "ca2_anyang_gate",
         "east": "ca2_hechun_pavilion"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "ca2_anyang_gate": {
       "name": "皇城安上门",
@@ -86,7 +89,10 @@
       "safeZone": true,
       "exits": {
         "south": "ca2_hechun_pavilion"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "ca2_beitian_fang": {
       "name": "悲田坊",

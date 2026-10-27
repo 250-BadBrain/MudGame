@@ -299,9 +299,7 @@
       "basic_blade": 220,
       "basic_sword": 220,
       "basic_qinggong": 180,
-      "basic_mace": 160,
-      "talang_jue": 1,
-      "fuhu_jin": 1
+      "basic_mace": 160
     },
     "attributes": {
       "level": 20,
@@ -370,9 +368,7 @@
     "importance": "local",
     "skills": {
       "basic_neigong": 260,
-      "basic_literacy": 200,
-      "hunyuan_neigong": 1,
-      "wuzhen_pian": 1
+      "basic_literacy": 200
     },
     "attributes": {
       "level": 20,
@@ -443,9 +439,7 @@
       "basic_blade": 260,
       "basic_parry": 240,
       "basic_qinggong": 160,
-      "basic_spear": 180,
-      "thunder_sword": 1,
-      "bloody_blade": 1
+      "basic_spear": 180
     },
     "attributes": {
       "level": 20,
@@ -2998,7 +2992,33 @@
     "description": "翻阅旧闻的灰袍老者，愿意谈江湖掌故；真正的武学传承仍须亲历。",
     "role": "teacher",
     "importance": "local",
-    "skills": {},
+    "skills": {
+      "csj_changshengjue": 120,
+      "jyg_zhanshentu_dao": 120,
+      "thunder_sword": 120,
+      "bloody_blade": 120,
+      "cihang_jiandian": 120,
+      "hunyuan_neigong": 120,
+      "tianmo_ce": 120,
+      "talang_jue": 120,
+      "fuhu_jin": 120,
+      "tiebi_gong": 120,
+      "wuzhen_pian": 120,
+      "xiulou_daofa": 120,
+      "taiyi_jianfa": 120,
+      "dongting_xinf": 120,
+      "lingxu_bu": 120,
+      "poxu_zhi": 120,
+      "mantian_huayu": 120,
+      "fengmo_gun": 120,
+      "taxue_wuhen": 120,
+      "jingang_buhuai": 120,
+      "tiandao_blade": 120,
+      "bawang_qiang": 120,
+      "youlong_bian": 120,
+      "lieshi_jian": 120,
+      "suolang_gou": 120
+    },
     "attributes": {
       "level": 30,
       "realm": "elite",
@@ -4083,8 +4103,7 @@
     "skills": {
       "basic_staff": 240,
       "basic_parry": 180,
-      "basic_hook": 160,
-      "tiebi_gong": 1
+      "basic_hook": 160
     },
     "attributes": {
       "level": 18,

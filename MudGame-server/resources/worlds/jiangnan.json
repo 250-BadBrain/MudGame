@@ -18,7 +18,10 @@
       "exits": {
         "north": "jn_tingyu",
         "west": "jn_lanting"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "jn_tingyu": {
       "name": "听雨楼",
@@ -72,7 +75,10 @@
       "exits": {
         "north": "jn_lanting",
         "west": "jn_sword_pool"
-      }
+      },
+      "actions": [
+        "listen_rumor"
+      ]
     },
     "jn_sword_pool": {
       "name": "剑池",
