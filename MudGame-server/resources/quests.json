@@ -795,7 +795,7 @@
     "id": "kongming_dao",
     "name": "空明道真",
     "description": "空明道真",
-    "giverNpcId": "jm2_old_monk",
+    "giverNpcId": "dd2_palace_guard",
     "turnInNpcId": "jm2_old_monk",
     "objectives": [
       {
@@ -814,7 +814,8 @@
       }
     },
     "repeatable": false,
-    "aliasOf": "kongming_daozhen"
+    "aliasOf": "kongming_daozhen",
+    "turninNpcId": "dd2_palace_guard"
   },
   "longgong_yi": {
     "id": "longgong_yi",
