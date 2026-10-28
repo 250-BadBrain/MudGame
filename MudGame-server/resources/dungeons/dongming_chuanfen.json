@@ -214,6 +214,30 @@
       "presentItems": {
         "shenhai_zhenzhu": 1
       }
+    },
+    "connection_skill": {
+      "label": "以混元功试梁稳住受力",
+      "puzzleId": "content_support",
+      "rooms": [
+        "cf_02"
+      ],
+      "fromStates": [
+        "unseen",
+        "bracing"
+      ],
+      "nextState": "ready",
+      "message": "你先认清通气孔，再以混元功绵劲逐寸试出梁木的受力，把现有支点稳稳合拢，省去两步手工支护。压舱水怎样放，仍要结合舱梁痕迹决定。",
+      "repeatMessage": "你先认清通气孔，再以混元功绵劲逐寸试出梁木的受力，把现有支点稳稳合拢，省去两步手工支护。压舱水怎样放，仍要结合舱梁痕迹决定。",
+      "requiredSkills": {
+        "hunyuan_neigong": 1
+      },
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      },
+      "setFlags": {
+        "discovery_skill_route_dongming_chuanfen": true
+      },
+      "failureMessage": "须正式学会对应武学并满足原入门资格；先完成动作提示中的现场线索。也可继续普通调查路线。"
     }
   },
   "rooms": {
@@ -249,7 +273,7 @@
     },
     "cf_02": {
       "name": "压舱石室",
-      "description": "压舱石旁的通气孔尚有风，先支梁才能放水。",
+      "description": "压舱石旁的通气孔尚有风，先支梁才能放水。【旧事与武学】此处也可尝试：以混元功试梁稳住受力。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "north": "cf_03",
         "south": "cf_01"
@@ -271,7 +295,8 @@
         "content_detail",
         "content_brace",
         "content_secure",
-        "content_pickaxe"
+        "content_pickaxe",
+        "connection_skill"
       ]
     },
     "cf_03": {

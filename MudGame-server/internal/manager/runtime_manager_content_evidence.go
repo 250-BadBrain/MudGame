@@ -31,6 +31,18 @@ func contentEvidenceMet(p *model.Player, flags map[string]bool, items map[string
 	return true
 }
 
+// Exploration uses learned knowledge; active slots and weapon matching are
+// combat concerns. Original teaching/transmission and root requirements remain.
+func contentSkillsMet(p *model.Player, skills map[string]int) bool {
+	for id, level := range skills {
+		def, exists := fileSkills[id]
+		if !exists || level < 1 || p.Skills[id] < level || skillRequirementError(p, def) != nil {
+			return false
+		}
+	}
+	return true
+}
+
 // Journal entries are derived only from discoveries actually recorded in saves.
 func (r *RuntimeManager) GetJournal(playerID string) ([]map[string]string, error) {
 	r.mu.RLock()
@@ -72,6 +84,7 @@ func (r *RuntimeManager) GetJournal(playerID string) ([]map[string]string, error
 			}
 		}
 	}
+	out = append(out, r.journeyEntriesNoLock(p)...)
 	sort.Slice(out, func(i, j int) bool { return out[i]["id"] < out[j]["id"] })
 	return out, nil
 }

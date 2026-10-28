@@ -29,6 +29,7 @@ type TemplateRoom struct {
 }
 
 type PuzzleAction struct {
+	RequiredSkills       map[string]int
 	RequiredFlags        map[string]bool
 	PresentItems         map[string]int
 	GiveMoney            int
@@ -162,6 +163,7 @@ type exitRequirementFile struct {
 }
 
 type puzzleActionFile struct {
+	RequiredSkills       map[string]int     `json:"requiredSkills"`
 	RequiredFlags        map[string]bool    `json:"requiredFlags"`
 	PresentItems         map[string]int     `json:"presentItems"`
 	GiveMoney            int                `json:"giveMoney"`
@@ -506,6 +508,7 @@ func loadPuzzleActions(files map[string]puzzleActionFile) map[string]PuzzleActio
 			continue
 		}
 		out[id] = PuzzleAction{
+			RequiredSkills:       copyIntMap(action.RequiredSkills),
 			RequiredFlags:        copyBoolMap(action.RequiredFlags),
 			PresentItems:         copyIntMap(action.PresentItems),
 			ID:                   id,

@@ -23,7 +23,7 @@ def main():
     parser.add_argument('--binary', type=Path, required=True)
     parser.add_argument('--fixture-dir', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
-    parser.add_argument('--scenario', choices=['quick', 'enhancement', 'content-depth'], default='quick')
+    parser.add_argument('--scenario', choices=['quick', 'enhancement', 'content-depth', 'connected'], default='quick')
     args = parser.parse_args()
     fixture, output = args.fixture_dir.resolve(), args.output.resolve()
     allowed = (ROOT / 'artifacts/quick-complete').resolve()
@@ -46,7 +46,7 @@ def main():
                 break
             except OSError: time.sleep(.1)
         else: raise AssertionError('Vite did not start')
-        script = {'quick':'browser_dungeon_quick.cjs', 'enhancement':'browser_enhancement.cjs', 'content-depth':'browser_content_depth.cjs'}[args.scenario]
+        script = {'quick':'browser_dungeon_quick.cjs', 'enhancement':'browser_enhancement.cjs', 'content-depth':'browser_content_depth.cjs', 'connected':'browser_connected_exploration.cjs'}[args.scenario]
         subprocess.run(['node', str(ROOT / 'scripts/tests' / script)], cwd=ROOT, env=env, check=True, timeout=90)
     finally:
         if ui and ui.poll() is None:

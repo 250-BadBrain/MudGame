@@ -5,7 +5,13 @@
     </div>
     <div v-if="selectedTab === 'journal'" class="journal">
       <p v-if="!journal.length" class="quest-desc">调查场景、向人物明确询问专长或出示器物后，可在这里回看已经取得的线索。</p>
-      <details v-for="entry in journal" :key="entry.id" class="quest-entry">
+      <div v-for="entry in journeys" :key="entry.id" class="quest-entry journey-entry">
+        <div class="quest-title-row"><span class="quest-name">{{ entry.title }}</span><span class="quest-status">{{ entry.progress }}</span></div>
+        <p class="quest-location">{{ entry.state }} · 关联《{{ entry.related }}》</p>
+        <p class="quest-desc journey-next">下一步：{{ entry.next }}</p>
+      </div>
+      <p v-if="journeys.length && history.length" class="quest-location">已取得的见闻</p>
+      <details v-for="entry in history" :key="entry.id" class="quest-entry">
         <summary class="quest-name">{{ entry.title }}</summary>
         <p class="quest-desc">{{ entry.text }}</p>
       </details>
@@ -39,6 +45,8 @@ const props = defineProps({
   journal: { type: Array, default: () => [] }
 })
 const selectedTab = ref('available')
+const journeys = computed(() => props.journal.filter(entry => entry.group === 'journey'))
+const history = computed(() => props.journal.filter(entry => entry.group !== 'journey'))
 const tabs = [{ id: 'available', label: '可接取' }, { id: 'active', label: '进行中' }, { id: 'locked', label: '未解锁' }, { id: 'completed', label: '已完成' }, { id: 'journal', label: '见闻' }]
 const inCategory = (quest, category) => category === 'available' ? quest.status === 'not_started' && !quest.locked : category === 'locked' ? quest.status === 'not_started' && quest.locked : quest.status === category
 const visibleQuests = computed(() => props.quests.filter(quest => inCategory(quest, selectedTab.value)))
@@ -54,6 +62,8 @@ const countFor = (category) => category === 'journal' ? props.journal.length : p
 .quest-panel-container { display: flex; flex-direction: column; gap: 8px; }
 .quest-list { display: flex; flex-direction: column; gap: 8px; }
 .quest-entry { padding: 8px; border-bottom: 1px solid #2a2a2a; background: rgba(0,0,0,0.18); border-radius: 4px; }
+.journey-entry { border-left: 2px solid #ac8122; margin-bottom: 8px; }
+.journey-next { color: #d6c99a; overflow-wrap: anywhere; }
 .quest-title-row { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
 .quest-name { color: #f1c40f; font-weight: bold; font-size: 12px; overflow-wrap: anywhere; }
 .quest-status { color: #2ecc71; font-size: 11px; white-space: nowrap; }

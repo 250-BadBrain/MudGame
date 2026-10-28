@@ -150,6 +150,27 @@
       "presentItems": {
         "jianshou_jian": 1
       }
+    },
+    "connection_skill": {
+      "label": "以奔雷剑法辨枝口收锋",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "jia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你用奔雷剑法的发力与收势比对折枝，发现切口虽平，枝根却未受损。留下痕迹的人能发也能收，并未靠伤人立威；藏锋水台的两道剑痕仍待核验。",
+      "repeatMessage": "你用奔雷剑法的发力与收势比对折枝，发现切口虽平，枝根却未受损。留下痕迹的人能发也能收，并未靠伤人立威；藏锋水台的两道剑痕仍待核验。",
+      "requiredSkills": {
+        "thunder_sword": 1
+      },
+      "requiredPuzzleStates": {},
+      "setFlags": {
+        "discovery_skill_route_jiangnan_jianshou": true
+      },
+      "failureMessage": "须正式学会对应武学并满足原入门资格；先完成动作提示中的现场线索。也可继续普通调查路线。"
     }
   },
   "rooms": {
@@ -165,7 +186,7 @@
     },
     "jia_01": {
       "name": "折枝剑径",
-      "description": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。",
+      "description": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。【旧事与武学】此处也可尝试：以奔雷剑法辨枝口收锋。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "jia_00",
         "north": "jia_02"
@@ -184,7 +205,8 @@
       ],
       "actions": [
         "content_trace",
-        "content_aid_jianshou_jian"
+        "content_aid_jianshou_jian",
+        "connection_skill"
       ]
     },
     "jia_02": {

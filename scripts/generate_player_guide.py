@@ -274,7 +274,7 @@ class Guide:
         if requirement.get("presentItems"):
             parts.append("出示本人持有或合法穿戴的 " + self.items_text(requirement["presentItems"]) + "（不消耗）")
         for flag, value in requirement.get("flags", {}).items():
-            parts.append(("已取得" if value else "尚未取得") + " `" + flag + "`")
+            parts.append(("先完成" if value else "尚未完成") + self.sources(self.flags.get(flag, []), current))
         for sid, level in requirement.get("skills", {}).items():
             parts.append("已学" + self.skills[sid]["name"] + "≥" + str(level) + "级")
         return "；".join(parts) or "无额外条件"
@@ -324,7 +324,8 @@ class Guide:
                 values.append("先完成「" + "」或「".join(producers) + "」" if producers else "状态 `" + puzzle + ":" + state + "`")
         return " / ".join(values)
 
-    def action_requirements(self, dungeon, action):
+    def action_requirements(self, dungeon, action, current=None):
+        current = current or self.dungeon_page(dungeon)
         parts = [self.state_requirement(dungeon, action.get("puzzleId", ""), action.get("fromStates", []))]
         if action.get("requiredDefeatNpcs"):
             parts.append("先击败本房间 " + "、".join(self.npc_name(npc) for npc in action["requiredDefeatNpcs"]))
@@ -333,7 +334,12 @@ class Guide:
         if action.get("presentItems"):
             parts.append("出示本人携带或穿戴的"+self.items_text(action['presentItems'])+"（不消耗）")
         if action.get("requiredFlags"):
-            parts.append("先取得"+"、".join('`'+f+'`' for f,v in action['requiredFlags'].items() if v))
+            parts += [("先完成" if v else "尚未完成") + self.sources(self.flags.get(f, []), current) for f,v in action['requiredFlags'].items()]
+        for sid, level in action.get('requiredSkills', {}).items():
+            skill = self.skills[sid]
+            base = skill.get('requirements', {}).get('prerequisite', {})
+            qualifier = ('，' + self.skills[base['skill']]['name'] + '≥' + str(base['level']) + '级') if base else ''
+            parts.append('已正式学会' + skill['name'] + '≥' + str(level) + '级' + qualifier + '；无须装备，不扣内力')
         return "；".join(parts)
 
     def door_requirement(self, dungeon, requirement):
@@ -365,6 +371,8 @@ class Guide:
             lines.append("- **通关称号**：" + title + "。")
         if did in NOTES:
             lines += ["", "**本关要点**：" + NOTES[did]]
+        if any(aid.startswith('connection_') for aid in dungeon.get('puzzleActions', {})):
+            lines += ['', '**城市旧事与武学解法**：本关有可选替代步骤，普通解法和原通关条件仍保留。详见' + self.link('三件旧事与六门武学', 'connected_exploration.md', current) + '。']
         unbound = [aid for d, aid in self.unbound if d["id"] == did]
         if unbound:
             labels = "、".join(dungeon["puzzleActions"][aid].get("label", aid) for aid in unbound)
@@ -612,9 +620,45 @@ class Guide:
         lines += ['## 维护', '', '修改资源后运行生成器及--check，并实际验证行为。所有规范任务须有可达接交NPC、目标来源；选择分支从可达父动作进入。', '']
         return '\n'.join(lines)
 
+    def connected_exploration_page(self):
+        current = 'connected_exploration.md'
+        lines = ['# 三件旧事与六门武学：已有选择怎样影响探索', '', '[返回玩家入口](README.md)', '',
+                 '这里介绍已接通的城市后续与武学替代解法，后半含具体分支作用。它们不新增任务、物品或额外奖励；普通调查始终能够独立通关。', '',
+                 '## 从哪里开始', '',
+                 '在城里向办理者或任一证人明确询问「专长」，打开「令→见闻」，已知事件会出现关联卡片。卡片依次提示还缺谁的证词、携什么凭证、选择后找谁追问、可在哪个原副本使用情报。没有接触的事件和未选结局不会在游戏卡片中提前展示。', '',
+                 '出示原凭证不消耗；决定作出后，不必继续持有凭证。回到对应人物，点击「追问旧事」按钮才算拿到后续情报，反复普通交谈不会自动完成。原先已经作出选择的角色可以直接续接。', '']
+        for d in self.dialogues.values():
+            j = d.get('journey')
+            if not j: continue
+            dungeon = self.by_dungeon[j['dungeonId']]
+            lines += ['## ' + j['title'], '',
+                      '- 办理者：' + self.npc_name(d['npcId']) + '，在' + self.location(d['npcId'], current) + '。',
+                      '- 分别询问：' + '；'.join(self.npc_name(n) + '（' + self.location(n,current) + '）' for n in j['witnesses']) + '。',
+                      '- 原始凭证：' + self.items[j['itemId']]['name'] + '；来源见' + self.sources(self.item_sources[j['itemId']], current) + '。',
+                      '- 关联副本：' + self.dungeon_link(dungeon,current) + '；' + self.unlock(dungeon,current).rstrip('。') + '。城中选择不提前解锁章节。', '',
+                      '| 已选择的处理方式 | 到哪里追问 | 副本中的实际作用 |', '|---|---|---|']
+            for b in j['branches']:
+                o = next(o for o in d['options'] if o.get('setFlags',{}).get(b['flag']))
+                a = dungeon['puzzleActions'][b['actionId']]
+                place = dungeon['rooms'][a['rooms'][0]]['name']
+                lines.append('| ' + safe(o['text']) + ' | ' + self.npc_name(b['npcId']) + '，' + self.location(b['npcId'],current) + '，明确选择「追问旧事：' + j['title'] + '的后续」 | 在' + place + '点击「' + a['label'] + '」。' + safe(a['message']) + ' |')
+            lines += ['', '两种城市结论互斥，每个角色保留自己的处理方式。副本中的终局取舍仍由现场决定，城市立场不会替你自动选择。', '']
+        lines += ['## 六门武学的替代解法', '',
+                  '以下动作都要求已正式入门、对应武学至少1级且仍满足原根基资格（本表六门均为对应基本功20级）。无需装备该武学或切换主武器；不扣钱、物品或内力。房间说明会提示可以尝试的手法，满足资格后才显示按钮。', '',
+                  '| 原副本 / 场景 | 武学与基本功 | 点击什么、还有什么要做 |', '|---|---|---|']
+        for dungeon in self.dungeons:
+            for a in dungeon.get('puzzleActions',{}).values():
+                for sid,level in a.get('requiredSkills',{}).items():
+                    skill=self.skills[sid]; base=skill['requirements']['prerequisite']
+                    lines.append('| ' + self.dungeon_link(dungeon,current) + ' / ' + dungeon['rooms'][a['rooms'][0]]['name'] + ' | ' + skill['name'] + '≥' + str(level) + '；' + self.skills[base['skill']]['name'] + '≥' + str(base['level']) + ' | 「' + a['label'] + '」：' + safe(a['message']) + ' |')
+        lines += ['', '## 见闻卡片怎样算走完', '',
+                  '先完成证人与凭证核对，再作城市选择、明确追问，最后在现场使用情报。实际使用后显示「已在现场互证」；如果你已经靠普通解法完成相关章节的现场判断，追问后会显示「已自行解开现场」，不要求重复刷本补进度。4/4只表示这件旧事的衔接已完成，不代表整个副本已经满通关。', '',
+                  '章节尚未解锁时，见闻会说明原前置；情报一直保留。进入后仍须处理敌人、其余调查与最后判断。快速完成不执行这些明确追问或替代解法，也不产生对应的新经历。', '']
+        return '\n'.join(lines)
+
     def pages(self):
         result = self.story_pages()
-        result.update({"worlds.md": self.world_page(), "quests.md": self.quest_page(), "collections.md": self.collection_page(), "content_status.md": self.status_page()})
+        result.update({"worlds.md": self.world_page(), "quests.md": self.quest_page(), "collections.md": self.collection_page(), "content_status.md": self.status_page(), "connected_exploration.md": self.connected_exploration_page()})
         current = "unlock_order.md"
         index = ["# 全部副本的全局解锁顺序", "", "[返回玩家入口](README.md)", "", "同序号的关卡任一 100% 离开结算即可解锁下一序号；它们不是必须全部完成的连续章节。卷内章号不参与判断。当前序号27空缺，28仍检查最近存在的序26。", "", "| 全局序号 | 副本与卷 | 实际前置 |", "|---:|---|---|"]
         for dungeon in self.dungeons:

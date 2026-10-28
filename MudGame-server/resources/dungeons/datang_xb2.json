@@ -214,6 +214,73 @@
       "presentItems": {
         "xb2_relic": 1
       }
+    },
+    "connection_skill": {
+      "label": "以血战刀法辨绳势与桩力",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "xb2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你按血战刀法辨刃口与磨耗的经验比对双桩绳纤：旧桩磨痕均匀，新桩的绳纤却被生拉成束，桩下浮土未实。你没有斩任何承重索；旧接头与支撑仍要另查。",
+      "repeatMessage": "你按血战刀法辨刃口与磨耗的经验比对双桩绳纤：旧桩磨痕均匀，新桩的绳纤却被生拉成束，桩下浮土未实。你没有斩任何承重索；旧接头与支撑仍要另查。",
+      "requiredSkills": {
+        "bloody_blade": 1
+      },
+      "requiredPuzzleStates": {},
+      "setFlags": {
+        "discovery_skill_route_datang_xb2": true
+      },
+      "failureMessage": "须正式学会对应武学并满足原入门资格；先完成动作提示中的现场线索。也可继续普通调查路线。"
+    },
+    "connection_case_left": {
+      "label": "依驿丞修路方案分担承重",
+      "puzzleId": "content_support",
+      "rooms": [
+        "xb2_02"
+      ],
+      "fromStates": [
+        "unseen",
+        "bracing"
+      ],
+      "nextState": "ready",
+      "message": "你先验过双桩，再依驿丞的分载方案合上已有支点，让窄路保留回程。支护已稳，接索怎样处理仍须你结合旧接头判断。",
+      "repeatMessage": "你先验过双桩，再依驿丞的分载方案合上已有支点，让窄路保留回程。支护已稳，接索怎样处理仍须你结合旧接头判断。",
+      "requiredFlags": {
+        "discovery_case_bs_tang_steward_left": true,
+        "discovery_connection_follow_bs_tang_steward_left": true
+      },
+      "setFlags": {
+        "discovery_connection_used_bs_tang_steward_left": true
+      },
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      },
+      "failureMessage": "须先完成所选城市旧事，并向对应人物明确追问后续；现场前置调查也须完成。普通解法始终保留。"
+    },
+    "connection_case_right": {
+      "label": "凭封段见证辨旧接头",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "xb2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你照封段那日的见证比对旧接头，确认断索先磨损后崩开，并非被人挥刀斩断。双桩与支护仍待检查。",
+      "repeatMessage": "你照封段那日的见证比对旧接头，确认断索先磨损后崩开，并非被人挥刀斩断。双桩与支护仍待检查。",
+      "requiredFlags": {
+        "discovery_case_bs_tang_steward_right": true,
+        "discovery_connection_follow_bs_tang_steward_right": true
+      },
+      "setFlags": {
+        "discovery_connection_used_bs_tang_steward_right": true
+      },
+      "failureMessage": "须先完成所选城市旧事，并向对应人物明确追问后续；现场前置调查也须完成。普通解法始终保留。"
     }
   },
   "rooms": {
@@ -229,7 +296,7 @@
     },
     "xb2_01": {
       "name": "风剪悬栈",
-      "description": "断索断在旧接头，不是被刀割断，拉得越紧越危险。",
+      "description": "断索断在旧接头，不是被刀割断，拉得越紧越危险。【旧事与武学】此处也可尝试：凭封段见证辨旧接头。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "xb2_00",
         "north": "xb2_02"
@@ -249,12 +316,13 @@
       "actions": [
         "content_trace",
         "content_aid_iron_pickaxe",
-        "content_aid_xb2_relic"
+        "content_aid_xb2_relic",
+        "connection_case_right"
       ]
     },
     "xb2_02": {
       "name": "承重双桩",
-      "description": "两根木桩一新一旧，新桩下的泥土还没有压实。",
+      "description": "两根木桩一新一旧，新桩下的泥土还没有压实。【旧事与武学】此处也可尝试：以血战刀法辨绳势与桩力；依驿丞修路方案分担承重。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "xb2_01",
         "north": "xb2_03"
@@ -272,7 +340,9 @@
         "content_detail",
         "content_brace",
         "content_secure",
-        "content_pickaxe"
+        "content_pickaxe",
+        "connection_skill",
+        "connection_case_left"
       ]
     },
     "xb2_03": {

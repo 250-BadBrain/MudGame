@@ -168,6 +168,48 @@
       "presentItems": {
         "manual_tiebi_gong": 1
       }
+    },
+    "connection_case_left": {
+      "label": "凭船娘水路证词核脚夫联",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "yan_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你以船娘记下的船次与尾数核账，脚夫联有实际搬运记录，官联商联却互相照抄。匿名证人被保全，盐引和最后取舍仍须现场判断。",
+      "repeatMessage": "你以船娘记下的船次与尾数核账，脚夫联有实际搬运记录，官联商联却互相照抄。匿名证人被保全，盐引和最后取舍仍须现场判断。",
+      "requiredFlags": {
+        "discovery_case_yz_yamen_clerk_left": true,
+        "discovery_connection_follow_yz_yamen_clerk_left": true
+      },
+      "setFlags": {
+        "discovery_connection_used_yz_yamen_clerk_left": true
+      },
+      "failureMessage": "须先完成所选城市旧事，并向对应人物明确追问后续；现场前置调查也须完成。普通解法始终保留。"
+    },
+    "connection_case_right": {
+      "label": "凭三联封存记录查破角盐引",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "yan_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你依三联封存时的验引顺序逐担比对，工人盐引有破角，堂口收到的却张张完好。三份账的责任仍须另外查证。",
+      "repeatMessage": "你依三联封存时的验引顺序逐担比对，工人盐引有破角，堂口收到的却张张完好。三份账的责任仍须另外查证。",
+      "requiredFlags": {
+        "discovery_case_yz_yamen_clerk_right": true,
+        "discovery_connection_follow_yz_yamen_clerk_right": true
+      },
+      "setFlags": {
+        "discovery_connection_used_yz_yamen_clerk_right": true
+      },
+      "failureMessage": "须先完成所选城市旧事，并向对应人物明确追问后续；现场前置调查也须完成。普通解法始终保留。"
     }
   },
   "rooms": {
@@ -183,7 +225,7 @@
     },
     "yan_01": {
       "name": "分盐旧秤",
-      "description": "工人的盐引有破角，堂口收到的盐引却张张完好。",
+      "description": "工人的盐引有破角，堂口收到的盐引却张张完好。【旧事与武学】此处也可尝试：凭三联封存记录查破角盐引。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "yan_00",
         "north": "yan_02"
@@ -203,12 +245,13 @@
       "actions": [
         "content_trace",
         "content_aid_yanbang_yupei",
-        "content_aid_manual_tiebi_gong"
+        "content_aid_manual_tiebi_gong",
+        "connection_case_right"
       ]
     },
     "yan_02": {
       "name": "三联账房",
-      "description": "三联账中只有脚夫联留着实数，官联与商联互相照抄。",
+      "description": "三联账中只有脚夫联留着实数，官联与商联互相照抄。【旧事与武学】此处也可尝试：凭船娘水路证词核脚夫联。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "yan_01",
         "north": "yan_03"
@@ -223,7 +266,8 @@
       },
       "actions": [
         "open_gate",
-        "content_detail"
+        "content_detail",
+        "connection_case_left"
       ]
     },
     "yan_03": {

@@ -235,3 +235,5 @@ git add -A && git commit -m "xxx"
 烟尘粉/强化回归：`scripts/tests/smoke_enhancement_coefficients.py`使用合成旧档验证无限购买、分属性增益及单次重置，`browser_dungeon_quick.py --scenario enhancement`接其合成目录验证页面和真实购买；具体命令、系数与旧档兼容见[实施规格](design/smoke_enhancement_2026_10_28.md)。
 
 既有资源深化回归：`gamedata/content_depth_test.go`冻结本轮实体ID和奖励，`manager/runtime_manager_content_depth_test.go`遍历78关交互、135件物品出示和八城事件。真实协议与网页命令见[深化规格与验收](design/existing_content_depth_2026_10_28.md)；所有服务只用临时端口及合成存档。`scripts/enrich_existing_content.py`是本轮内容编辑器，依赖71085f3历史，重复运行会重建本轮`content_*`选项；未来扩资源或手写新内容时不要直接重跑它覆盖后续编辑，应按新的设计修改对应JSON并更新测试基线。常规维护只运行玩家手册生成器。
+
+城市选择/武学探索回归：`runtime_manager_connected_exploration_test.go`覆盖三事件六分支、六门武学、资格/位置/前置拒绝和无剧透指引；`gamedata/connected_exploration_test.go`检查坏技能和断开的后续引用。独立真实协议用`smoke_connected_exploration.py`，网页用`browser_dungeon_quick.py --scenario connected`接其新合成目录，命令和证据见[实施规格](design/connected_exploration_2026_10_28.md)。`connect_existing_exploration.py`只维护本轮connection_*内容，不回滚前轮资源；新增手写改动同样先核对覆盖范围，常规文档维护运行generate_player_guide.py即可。

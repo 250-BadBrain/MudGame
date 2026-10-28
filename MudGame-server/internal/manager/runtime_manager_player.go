@@ -906,7 +906,7 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 	}
 	currentState := inst.PuzzleStates[action.PuzzleID]
 	stateStatus := r.dungeonMgr.PuzzleActionStateStatusNoLock(inst, action)
-	if stateStatus == engruntime.PuzzleActionRepeat {
+	if stateStatus == engruntime.PuzzleActionRepeat && contentEvidenceMet(p, action.RequiredFlags, action.PresentItems) && contentSkillsMet(p, action.RequiredSkills) {
 		message := action.RepeatMessage
 		if message == "" {
 			message = "你已经完成“" + action.Label + "”，无需重复。"
@@ -931,7 +931,7 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 	}
 	allowedState := stateStatus == engruntime.PuzzleActionReady
 	itemsReady := true
-	if !contentEvidenceMet(p, action.RequiredFlags, action.PresentItems) {
+	if !contentEvidenceMet(p, action.RequiredFlags, action.PresentItems) || !contentSkillsMet(p, action.RequiredSkills) {
 		itemsReady = false
 	}
 	for itemID, amount := range action.RequiredItems {

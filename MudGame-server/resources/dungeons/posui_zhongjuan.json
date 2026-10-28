@@ -361,6 +361,27 @@
       "presentItems": {
         "training_whip": 1
       }
+    },
+    "connection_skill": {
+      "label": "以悟真篇校读三相异文",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "pos_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你依悟真篇校异文的方法，逐一比较图壁重复出现的笔势，人的轮廓始终正立，天地两形却互为倒像。留白的意义仍需结合残图判断，图壁也仍须按步骤操作。",
+      "repeatMessage": "你依悟真篇校异文的方法，逐一比较图壁重复出现的笔势，人的轮廓始终正立，天地两形却互为倒像。留白的意义仍需结合残图判断，图壁也仍须按步骤操作。",
+      "requiredSkills": {
+        "wuzhen_pian": 1
+      },
+      "requiredPuzzleStates": {},
+      "setFlags": {
+        "discovery_skill_route_posui_zhongjuan": true
+      },
+      "failureMessage": "须正式学会对应武学并满足原入门资格；先完成动作提示中的现场线索。也可继续普通调查路线。"
     }
   },
   "rooms": {
@@ -410,7 +431,7 @@
     },
     "pos_02": {
       "name": "三相图壁",
-      "description": "图壁中人的轮廓始终正立，天与地倒置后才彼此相接。",
+      "description": "图壁中人的轮廓始终正立，天与地倒置后才彼此相接。【旧事与武学】此处也可尝试：以悟真篇校读三相异文。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "pos_01",
         "north": "pos_03"
@@ -425,7 +446,8 @@
       },
       "actions": [
         "open_gate",
-        "content_detail"
+        "content_detail",
+        "connection_skill"
       ]
     },
     "pos_03": {

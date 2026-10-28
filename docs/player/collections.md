@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：acc9a19efd5c2142911ae95ace2b99fcb893a48892414d55d0279937b0f14723；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：8a45f361faa563f99c77eb85836e1ff0a973bb2f8709b61b347b27e642ffe421；由 scripts/generate_player_guide.py 生成。 -->
 
 # 修行、商店、传承与收藏目录
 

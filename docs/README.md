@@ -10,6 +10,7 @@
 - [修行、商店、武学传承与收藏目录](player/collections.md)
 - [当前内容缺口与文案/实现差异](player/content_status.md)
 - [全部既有人物、器物与章节的用途索引](content/existing_resource_roles.md)（313个人物、135件器物、78关交互及八城互证事件）
+- [三件旧事与六门武学](player/connected_exploration.md)（玩家视角：分支后续、人物地点、武学探索手法和见闻进度）
 
 ## 开发流程
 
@@ -21,6 +22,8 @@
 - [武功 V2 实施与验收](design/martial_arts_v2_implementation.md)（实现范围、测试证据、首次发布及迁移方法）
 
 ## 设计
+
+- [城市选择、武学解法与见闻指引](design/connected_exploration_2026_10_28.md)（三件旧事接入现场、六门武学替代解法）
 
 - [既有资源内容深化](design/existing_content_depth_2026_10_28.md)（冻结实体ID，人物专长、物品出示、在地调查及章节交互）
 - [全量审查修复规格](design/audit_repairs_2026_10_28.md)（用户确认的战斗、20%回收、转化价值、装备合并及内容标记）

@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：acc9a19efd5c2142911ae95ace2b99fcb893a48892414d55d0279937b0f14723；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：8a45f361faa563f99c77eb85836e1ff0a973bb2f8709b61b347b27e642ffe421；由 scripts/generate_player_guide.py 生成。 -->
 
 # 世界任务：接取地点、触发与结局
 
@@ -218,13 +218,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_old_refugee_specialty`=true
 
-- 「追问“密信应怎样入卷”之后的变化」；已取得 `discovery_case_office_clerk_left`
+- 「追问“密信应怎样入卷”之后的变化」；先完成[韩录事交谈「密信应怎样入卷：隐去受胁者姓名，只追转运主使（此事只选一种）」](worlds.md#dialogue-office_clerk_intro)
 
 > 老瘸子说起后续：证词被匿名保全，秦三娘以后只替证人转达不涉及姓名的消息。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_aftermath_office_clerk_left`=true
 
-- 「追问“密信应怎样入卷”之后的变化」；已取得 `discovery_case_office_clerk_right`
+- 「追问“密信应怎样入卷”之后的变化」；先完成[韩录事交谈「密信应怎样入卷：保留完整名单，提交可复查原卷（此事只选一种）」](worlds.md#dialogue-office_clerk_intro)
 
 > 老瘸子说起后续：原卷保留了每个签名，韩录事承诺每次调阅都留查阅记录。
 
@@ -279,6 +279,12 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_item_yanbang_yupei`=true
 
+- 「追问旧事：三联旧账与盐帮内乱的后续」；先完成[盐运司书办交谈「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)
+
+> 程盐商交代封存时逐担验引的顺序，也承认原封记录不能只由他一人解释。去《盐帮内乱》的分盐旧秤，可以记录辨破角盐引；三联账仍须另核。
+
+  效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_connection_follow_yz_yamen_clerk_right`=true
+
 </details>
 
 <a id="zhandao_case"></a>
@@ -331,6 +337,12 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_item_tangmen_baojian`=true
 
+- 「追问旧事：修路与绝壁悬栈的后续」；先完成[唐门管事交谈「栈道应先修还是先封：先支旧桩，给返乡人留一条窄路（此事只选一种）」](worlds.md#dialogue-dlg_bs_tang)
+
+> 剑阁驿丞把留窄路的分载法教给你：先辨哪根桩真正吃力，再把支点连回旧桩。去《绝壁悬栈》的承重双桩核验后，可以此方案直接稳住支护。
+
+  效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_connection_follow_bs_tang_steward_left`=true
+
 </details>
 
 <a id="bianguan_fenghuo"></a>
@@ -371,13 +383,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_sb_centurion_specialty`=true
 
-- 「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_sb_scout_captain_specialty`；已取得 `discovery_sb_beacon_guard_specialty`；尚未取得 `discovery_case_sb_centurion_left`；尚未取得 `discovery_case_sb_centurion_right`
+- 「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[塞北斥候长交谈「专长：核失联巡队的回程」](worlds.md#dialogue-dlg_sb_scout)；先完成[烽燧戍卒交谈「专长：烟色与更牌雪痕」](worlds.md#dialogue-dlg_sb_guard)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 空格没有被草率填成战死，斥候与马商把反穿靴的假迹标在同一张旧路图上。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_sb_centurion_left`=true
 
-- 「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_sb_scout_captain_specialty`；已取得 `discovery_sb_beacon_guard_specialty`；尚未取得 `discovery_case_sb_centurion_left`；尚未取得 `discovery_case_sb_centurion_right`
+- 「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[塞北斥候长交谈「专长：核失联巡队的回程」](worlds.md#dialogue-dlg_sb_scout)；先完成[烽燧戍卒交谈「专长：烟色与更牌雪痕」](worlds.md#dialogue-dlg_sb_guard)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 更牌随失联记录一同公布，年轻戍卒终于不必独自承担假烽的责任。
 
@@ -517,13 +529,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_dd2_pool_poet_specialty`=true
 
-- 「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；已取得 `discovery_dd2_palace_guard_specialty`；已取得 `discovery_dd2_silk_merchant_specialty`；尚未取得 `discovery_case_dd2_pool_poet_left`；尚未取得 `discovery_case_dd2_pool_poet_right`
+- 「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；先完成[金吾卫校尉交谈「专长：内锁与宫人出入」](worlds.md#dialogue-dlg_dd2_guard)；先完成[锦绸庄主交谈「专长：水渍布纹与夹缝生意」](worlds.md#dialogue-content_npc_dd2_silk_merchant)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)
 
 > 诗没有被当成口供，账册也没有被当成谜语，桥下的来历终于可以各自查证。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_dd2_pool_poet_left`=true
 
-- 「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；已取得 `discovery_dd2_palace_guard_specialty`；已取得 `discovery_dd2_silk_merchant_specialty`；尚未取得 `discovery_case_dd2_pool_poet_left`；尚未取得 `discovery_case_dd2_pool_poet_right`
+- 「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；先完成[金吾卫校尉交谈「专长：内锁与宫人出入」](worlds.md#dialogue-dlg_dd2_guard)；先完成[锦绸庄主交谈「专长：水渍布纹与夹缝生意」](worlds.md#dialogue-content_npc_dd2_silk_merchant)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)
 
 > 入口暂不示众，锦绸庄把押运次序交给有名字可追的承运人。
 
@@ -593,13 +605,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_dm_old_captain_specialty`=true
 
-- 「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_dm_jiaoren_specialty`；已取得 `discovery_dm_pearl_diver_specialty`；尚未取得 `discovery_case_dm_old_captain_left`；尚未取得 `discovery_case_dm_old_captain_right`
+- 「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[鲛人珠娘交谈「专长：真珠寒意与海市旧约」](worlds.md#dialogue-dlg_dm_jiaoren)；先完成[采珠人交谈「专长：验珠回温与水下旧契」](worlds.md#dialogue-dlg_dm_diver)；尚未完成[老船长交谈「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)；尚未完成[老船长交谈「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)
 
 > 采珠人把压舱放水的先后留给所有下水的人，船货不再比活人优先。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_dm_old_captain_left`=true
 
-- 「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_dm_jiaoren_specialty`；已取得 `discovery_dm_pearl_diver_specialty`；尚未取得 `discovery_case_dm_old_captain_left`；尚未取得 `discovery_case_dm_old_captain_right`
+- 「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[鲛人珠娘交谈「专长：真珠寒意与海市旧约」](worlds.md#dialogue-dlg_dm_jiaoren)；先完成[采珠人交谈「专长：验珠回温与水下旧契」](worlds.md#dialogue-dlg_dm_diver)；尚未完成[老船长交谈「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)；尚未完成[老船长交谈「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)
 
 > 船骸暂不打捞，珠娘守着原来的潮门盐线，让下一次调查仍能核对现场。
 
@@ -649,15 +661,15 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_office_clerk_specialty`=true
 
-- 「密信应怎样入卷：隐去受胁者姓名，只追转运主使（此事只选一种）」；出示本人持有或合法穿戴的 染血密信×1（不消耗）；已取得 `discovery_qingyi_spy_specialty`；已取得 `discovery_luoyang_guard_specialty`；尚未取得 `discovery_case_office_clerk_left`；尚未取得 `discovery_case_office_clerk_right`
+- 「密信应怎样入卷：隐去受胁者姓名，只追转运主使（此事只选一种）」；出示本人持有或合法穿戴的 染血密信×1（不消耗）；先完成[秦三娘交谈「专长：反向追踪与匿名证人」](worlds.md#dialogue-qingyi_intro)；先完成[洛阳府卫交谈「专长：辨伪路引」](worlds.md#dialogue-content_npc_luoyang_guard)；尚未完成[韩录事交谈「密信应怎样入卷：隐去受胁者姓名，只追转运主使（此事只选一种）」](worlds.md#dialogue-office_clerk_intro)；尚未完成[韩录事交谈「密信应怎样入卷：保留完整名单，提交可复查原卷（此事只选一种）」](worlds.md#dialogue-office_clerk_intro)
 
-> 证词被匿名保全，秦三娘以后只替证人转达不涉及姓名的消息。
+> 证词被匿名保全，秦三娘以后只替证人转达不涉及姓名的消息。【后续】可向秦三娘明确追问“密信与运河转运的后续”，取得可用于《运河追击》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_office_clerk_left`=true
 
-- 「密信应怎样入卷：保留完整名单，提交可复查原卷（此事只选一种）」；出示本人持有或合法穿戴的 染血密信×1（不消耗）；已取得 `discovery_qingyi_spy_specialty`；已取得 `discovery_luoyang_guard_specialty`；尚未取得 `discovery_case_office_clerk_left`；尚未取得 `discovery_case_office_clerk_right`
+- 「密信应怎样入卷：保留完整名单，提交可复查原卷（此事只选一种）」；出示本人持有或合法穿戴的 染血密信×1（不消耗）；先完成[秦三娘交谈「专长：反向追踪与匿名证人」](worlds.md#dialogue-qingyi_intro)；先完成[洛阳府卫交谈「专长：辨伪路引」](worlds.md#dialogue-content_npc_luoyang_guard)；尚未完成[韩录事交谈「密信应怎样入卷：隐去受胁者姓名，只追转运主使（此事只选一种）」](worlds.md#dialogue-office_clerk_intro)；尚未完成[韩录事交谈「密信应怎样入卷：保留完整名单，提交可复查原卷（此事只选一种）」](worlds.md#dialogue-office_clerk_intro)
 
-> 原卷保留了每个签名，韩录事承诺每次调阅都留查阅记录。
+> 原卷保留了每个签名，韩录事承诺每次调阅都留查阅记录。【后续】可向韩录事明确追问“密信与运河转运的后续”，取得可用于《运河追击》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_office_clerk_right`=true
 
@@ -690,6 +702,12 @@
 > 序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 染血密信的纸被雨打皱，火漆却在雨前就碎了。把纸与印分开记，才不会让转交者背了主谋的罪。 韩录事建议把洞庭心法秘本与《巴陵夜泊》的这个问题互证：火后的泊口 这是一条调查线索，最后的判断仍须亲历现场。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_item_manual_dongting_xinf`=true
+
+- 「追问旧事：密信与运河转运的后续」；先完成[韩录事交谈「密信应怎样入卷：保留完整名单，提交可复查原卷（此事只选一种）」](worlds.md#dialogue-office_clerk_intro)
+
+> 韩录事让你记下原卷中的更次旁注，不带走原件。去《运河追击》的双闸绞盘，先看纤道绳迹，再以旁注核更次，可省去回码头查簿。
+
+  效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_connection_follow_office_clerk_right`=true
 
 </details>
 
@@ -725,13 +743,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_ca2_monk_specialty`=true
 
-- 「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；已取得 `discovery_academy_teacher_specialty`；已取得 `discovery_ca2_erci_soldier_specialty`；尚未取得 `discovery_case_ca2_monk_left`；尚未取得 `discovery_case_ca2_monk_right`
+- 「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；先完成[柳先生交谈「专长：古文字与留白校勘」](worlds.md#dialogue-content_npc_academy_teacher)；先完成[骁果卫士交谈「专长：宫门换班的真假」](worlds.md#dialogue-dlg_ca2_soldier)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)
 
 > 字形与异文一并公开，任何后来者都能指出抄错的一笔。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_ca2_monk_left`=true
 
-- 「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；已取得 `discovery_academy_teacher_specialty`；已取得 `discovery_ca2_erci_soldier_specialty`；尚未取得 `discovery_case_ca2_monk_left`；尚未取得 `discovery_case_ca2_monk_right`
+- 「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；先完成[柳先生交谈「专长：古文字与留白校勘」](worlds.md#dialogue-content_npc_academy_teacher)；先完成[骁果卫士交谈「专长：宫门换班的真假」](worlds.md#dialogue-dlg_ca2_soldier)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)
 
 > 抄本暂不外传，知客把每个不相同的说法分开记录，不让整齐口径盖过事实。
 
@@ -835,15 +853,15 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_yz_yamen_clerk_specialty`=true
 
-- 「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；已取得 `discovery_yz_boat_girl_specialty`；已取得 `discovery_yz_salt_merchant_specialty`；尚未取得 `discovery_case_yz_yamen_clerk_left`；尚未取得 `discovery_case_yz_yamen_clerk_right`
+- 「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；先完成[二十四桥船娘交谈「专长：水位节拍与暗渠回流」](worlds.md#dialogue-dlg_yz_boat)；先完成[程盐商交谈「专长：盐引损耗与脚夫实账」](worlds.md#dialogue-dlg_yz_salt)；尚未完成[盐运司书办交谈「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)；尚未完成[盐运司书办交谈「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)
 
-> 匿名尾数被保留下来，程盐商也须解释自己的损耗，不再由最弱的人独担亏空。
+> 匿名尾数被保留下来，程盐商也须解释自己的损耗，不再由最弱的人独担亏空。【后续】可向二十四桥船娘明确追问“三联旧账与盐帮内乱的后续”，取得可用于《盐帮内乱》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_yz_yamen_clerk_left`=true
 
-- 「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；已取得 `discovery_yz_boat_girl_specialty`；已取得 `discovery_yz_salt_merchant_specialty`；尚未取得 `discovery_case_yz_yamen_clerk_left`；尚未取得 `discovery_case_yz_yamen_clerk_right`
+- 「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；先完成[二十四桥船娘交谈「专长：水位节拍与暗渠回流」](worlds.md#dialogue-dlg_yz_boat)；先完成[程盐商交谈「专长：盐引损耗与脚夫实账」](worlds.md#dialogue-dlg_yz_salt)；尚未完成[盐运司书办交谈「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)；尚未完成[盐运司书办交谈「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)
 
-> 三联分交不同的人保存；船娘只证明水路，茶博士只证明来客时刻，各自不能冒认别人的见证。
+> 三联分交不同的人保存；船娘只证明水路，茶博士只证明来客时刻，各自不能冒认别人的见证。【后续】可向程盐商明确追问“三联旧账与盐帮内乱的后续”，取得可用于《盐帮内乱》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_yz_yamen_clerk_right`=true
 
@@ -897,15 +915,15 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_bs_tang_steward_specialty`=true
 
-- 「栈道应先修还是先封：先支旧桩，给返乡人留一条窄路（此事只选一种）」；出示本人持有或合法穿戴的 铁镐×1（不消耗）；已取得 `discovery_bs_jiange_clerk_specialty`；已取得 `discovery_bs_wine_maker_specialty`；尚未取得 `discovery_case_bs_tang_steward_left`；尚未取得 `discovery_case_bs_tang_steward_right`
+- 「栈道应先修还是先封：先支旧桩，给返乡人留一条窄路（此事只选一种）」；出示本人持有或合法穿戴的 铁镐×1（不消耗）；先完成[剑阁驿丞交谈「专长：剑阁补路与旧驿绳法」](worlds.md#dialogue-dlg_bs_jiange)；先完成[巴蜀酒娘交谈「专长：用酒曲气味辨假香掩毒」](worlds.md#dialogue-dlg_bs_wine)；尚未完成[唐门管事交谈「栈道应先修还是先封：先支旧桩，给返乡人留一条窄路（此事只选一种）」](worlds.md#dialogue-dlg_bs_tang)；尚未完成[唐门管事交谈「栈道应先修还是先封：先封危险段，公开所有松索位置（此事只选一种）」](worlds.md#dialogue-dlg_bs_tang)
 
-> 唐家坳的修索办法交给驿丞，茶棚不再把缺席的赶路人直接算作遇匪。
+> 唐家坳的修索办法交给驿丞，茶棚不再把缺席的赶路人直接算作遇匪。【后续】可向剑阁驿丞明确追问“修路与绝壁悬栈的后续”，取得可用于《绝壁悬栈》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_bs_tang_steward_left`=true
 
-- 「栈道应先修还是先封：先封危险段，公开所有松索位置（此事只选一种）」；出示本人持有或合法穿戴的 铁镐×1（不消耗）；已取得 `discovery_bs_jiange_clerk_specialty`；已取得 `discovery_bs_wine_maker_specialty`；尚未取得 `discovery_case_bs_tang_steward_left`；尚未取得 `discovery_case_bs_tang_steward_right`
+- 「栈道应先修还是先封：先封危险段，公开所有松索位置（此事只选一种）」；出示本人持有或合法穿戴的 铁镐×1（不消耗）；先完成[剑阁驿丞交谈「专长：剑阁补路与旧驿绳法」](worlds.md#dialogue-dlg_bs_jiange)；先完成[巴蜀酒娘交谈「专长：用酒曲气味辨假香掩毒」](worlds.md#dialogue-dlg_bs_wine)；尚未完成[唐门管事交谈「栈道应先修还是先封：先支旧桩，给返乡人留一条窄路（此事只选一种）」](worlds.md#dialogue-dlg_bs_tang)；尚未完成[唐门管事交谈「栈道应先修还是先封：先封危险段，公开所有松索位置（此事只选一种）」](worlds.md#dialogue-dlg_bs_tang)
 
-> 栈道暂时封存，酒娘替留宿者辨草药，没人再被催着踏上尚未压实的新桩。
+> 栈道暂时封存，酒娘替留宿者辨草药，没人再被催着踏上尚未压实的新桩。【后续】可向巴蜀酒娘明确追问“修路与绝壁悬栈的后续”，取得可用于《绝壁悬栈》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_bs_tang_steward_right`=true
 
@@ -949,13 +967,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_sb_horse_trader_specialty`=true
 
-- 「追问“兵册上失联者该怎样记”之后的变化」；已取得 `discovery_case_sb_centurion_left`
+- 「追问“兵册上失联者该怎样记”之后的变化」；先完成[李百夫长交谈「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 回鹘马商说起后续：空格没有被草率填成战死，斥候与马商把反穿靴的假迹标在同一张旧路图上。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_aftermath_sb_centurion_left`=true
 
-- 「追问“兵册上失联者该怎样记”之后的变化」；已取得 `discovery_case_sb_centurion_right`
+- 「追问“兵册上失联者该怎样记”之后的变化」；先完成[李百夫长交谈「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 回鹘马商说起后续：更牌随失联记录一同公布，年轻戍卒终于不必独自承担假烽的责任。
 
@@ -1083,13 +1101,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_dd2_pool_poet_specialty`=true
 
-- 「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；已取得 `discovery_dd2_palace_guard_specialty`；已取得 `discovery_dd2_silk_merchant_specialty`；尚未取得 `discovery_case_dd2_pool_poet_left`；尚未取得 `discovery_case_dd2_pool_poet_right`
+- 「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；先完成[金吾卫校尉交谈「专长：内锁与宫人出入」](worlds.md#dialogue-dlg_dd2_guard)；先完成[锦绸庄主交谈「专长：水渍布纹与夹缝生意」](worlds.md#dialogue-content_npc_dd2_silk_merchant)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)
 
 > 诗没有被当成口供，账册也没有被当成谜语，桥下的来历终于可以各自查证。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_dd2_pool_poet_left`=true
 
-- 「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；已取得 `discovery_dd2_palace_guard_specialty`；已取得 `discovery_dd2_silk_merchant_specialty`；尚未取得 `discovery_case_dd2_pool_poet_left`；尚未取得 `discovery_case_dd2_pool_poet_right`
+- 「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；先完成[金吾卫校尉交谈「专长：内锁与宫人出入」](worlds.md#dialogue-dlg_dd2_guard)；先完成[锦绸庄主交谈「专长：水渍布纹与夹缝生意」](worlds.md#dialogue-content_npc_dd2_silk_merchant)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)
 
 > 入口暂不示众，锦绸庄把押运次序交给有名字可追的承运人。
 
@@ -1257,15 +1275,15 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_yz_yamen_clerk_specialty`=true
 
-- 「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；已取得 `discovery_yz_boat_girl_specialty`；已取得 `discovery_yz_salt_merchant_specialty`；尚未取得 `discovery_case_yz_yamen_clerk_left`；尚未取得 `discovery_case_yz_yamen_clerk_right`
+- 「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；先完成[二十四桥船娘交谈「专长：水位节拍与暗渠回流」](worlds.md#dialogue-dlg_yz_boat)；先完成[程盐商交谈「专长：盐引损耗与脚夫实账」](worlds.md#dialogue-dlg_yz_salt)；尚未完成[盐运司书办交谈「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)；尚未完成[盐运司书办交谈「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)
 
-> 匿名尾数被保留下来，程盐商也须解释自己的损耗，不再由最弱的人独担亏空。
+> 匿名尾数被保留下来，程盐商也须解释自己的损耗，不再由最弱的人独担亏空。【后续】可向二十四桥船娘明确追问“三联旧账与盐帮内乱的后续”，取得可用于《盐帮内乱》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_yz_yamen_clerk_left`=true
 
-- 「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；已取得 `discovery_yz_boat_girl_specialty`；已取得 `discovery_yz_salt_merchant_specialty`；尚未取得 `discovery_case_yz_yamen_clerk_left`；尚未取得 `discovery_case_yz_yamen_clerk_right`
+- 「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」；出示本人持有或合法穿戴的 芦根×1（不消耗）；先完成[二十四桥船娘交谈「专长：水位节拍与暗渠回流」](worlds.md#dialogue-dlg_yz_boat)；先完成[程盐商交谈「专长：盐引损耗与脚夫实账」](worlds.md#dialogue-dlg_yz_salt)；尚未完成[盐运司书办交谈「三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)；尚未完成[盐运司书办交谈「三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）」](worlds.md#dialogue-dlg_yz_clerk)
 
-> 三联分交不同的人保存；船娘只证明水路，茶博士只证明来客时刻，各自不能冒认别人的见证。
+> 三联分交不同的人保存；船娘只证明水路，茶博士只证明来客时刻，各自不能冒认别人的见证。【后续】可向程盐商明确追问“三联旧账与盐帮内乱的后续”，取得可用于《盐帮内乱》的线索。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_yz_yamen_clerk_right`=true
 
@@ -1315,13 +1333,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_sb_centurion_specialty`=true
 
-- 「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_sb_scout_captain_specialty`；已取得 `discovery_sb_beacon_guard_specialty`；尚未取得 `discovery_case_sb_centurion_left`；尚未取得 `discovery_case_sb_centurion_right`
+- 「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[塞北斥候长交谈「专长：核失联巡队的回程」](worlds.md#dialogue-dlg_sb_scout)；先完成[烽燧戍卒交谈「专长：烟色与更牌雪痕」](worlds.md#dialogue-dlg_sb_guard)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 空格没有被草率填成战死，斥候与马商把反穿靴的假迹标在同一张旧路图上。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_sb_centurion_left`=true
 
-- 「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_sb_scout_captain_specialty`；已取得 `discovery_sb_beacon_guard_specialty`；尚未取得 `discovery_case_sb_centurion_left`；尚未取得 `discovery_case_sb_centurion_right`
+- 「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[塞北斥候长交谈「专长：核失联巡队的回程」](worlds.md#dialogue-dlg_sb_scout)；先完成[烽燧戍卒交谈「专长：烟色与更牌雪痕」](worlds.md#dialogue-dlg_sb_guard)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 更牌随失联记录一同公布，年轻戍卒终于不必独自承担假烽的责任。
 
@@ -1385,13 +1403,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_ca2_monk_specialty`=true
 
-- 「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；已取得 `discovery_academy_teacher_specialty`；已取得 `discovery_ca2_erci_soldier_specialty`；尚未取得 `discovery_case_ca2_monk_left`；尚未取得 `discovery_case_ca2_monk_right`
+- 「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；先完成[柳先生交谈「专长：古文字与留白校勘」](worlds.md#dialogue-content_npc_academy_teacher)；先完成[骁果卫士交谈「专长：宫门换班的真假」](worlds.md#dialogue-dlg_ca2_soldier)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)
 
 > 字形与异文一并公开，任何后来者都能指出抄错的一笔。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_ca2_monk_left`=true
 
-- 「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；已取得 `discovery_academy_teacher_specialty`；已取得 `discovery_ca2_erci_soldier_specialty`；尚未取得 `discovery_case_ca2_monk_left`；尚未取得 `discovery_case_ca2_monk_right`
+- 「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；先完成[柳先生交谈「专长：古文字与留白校勘」](worlds.md#dialogue-content_npc_academy_teacher)；先完成[骁果卫士交谈「专长：宫门换班的真假」](worlds.md#dialogue-dlg_ca2_soldier)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)
 
 > 抄本暂不外传，知客把每个不相同的说法分开记录，不让整齐口径盖过事实。
 
@@ -1461,13 +1479,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_dd2_pool_poet_specialty`=true
 
-- 「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；已取得 `discovery_dd2_palace_guard_specialty`；已取得 `discovery_dd2_silk_merchant_specialty`；尚未取得 `discovery_case_dd2_pool_poet_left`；尚未取得 `discovery_case_dd2_pool_poet_right`
+- 「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；先完成[金吾卫校尉交谈「专长：内锁与宫人出入」](worlds.md#dialogue-dlg_dd2_guard)；先完成[锦绸庄主交谈「专长：水渍布纹与夹缝生意」](worlds.md#dialogue-content_npc_dd2_silk_merchant)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)
 
 > 诗没有被当成口供，账册也没有被当成谜语，桥下的来历终于可以各自查证。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_dd2_pool_poet_left`=true
 
-- 「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；已取得 `discovery_dd2_palace_guard_specialty`；已取得 `discovery_dd2_silk_merchant_specialty`；尚未取得 `discovery_case_dd2_pool_poet_left`；尚未取得 `discovery_case_dd2_pool_poet_right`
+- 「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」；出示本人持有或合法穿戴的 旧商路残图×1（不消耗）；先完成[金吾卫校尉交谈「专长：内锁与宫人出入」](worlds.md#dialogue-dlg_dd2_guard)；先完成[锦绸庄主交谈「专长：水渍布纹与夹缝生意」](worlds.md#dialogue-content_npc_dd2_silk_merchant)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：以诗指方位，以原账认责任（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)；尚未完成[落魄诗人交谈「晓月与账册谁作见证：先保全原账，暂不公布桥下入口（此事只选一种）」](worlds.md#dialogue-dlg_dd2_poet)
 
 > 入口暂不示众，锦绸庄把押运次序交给有名字可追的承运人。
 
@@ -1653,13 +1671,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_ca2_monk_specialty`=true
 
-- 「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；已取得 `discovery_academy_teacher_specialty`；已取得 `discovery_ca2_erci_soldier_specialty`；尚未取得 `discovery_case_ca2_monk_left`；尚未取得 `discovery_case_ca2_monk_right`
+- 「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；先完成[柳先生交谈「专长：古文字与留白校勘」](worlds.md#dialogue-content_npc_academy_teacher)；先完成[骁果卫士交谈「专长：宫门换班的真假」](worlds.md#dialogue-dlg_ca2_soldier)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)
 
 > 字形与异文一并公开，任何后来者都能指出抄错的一笔。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_ca2_monk_left`=true
 
-- 「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；已取得 `discovery_academy_teacher_specialty`；已取得 `discovery_ca2_erci_soldier_specialty`；尚未取得 `discovery_case_ca2_monk_left`；尚未取得 `discovery_case_ca2_monk_right`
+- 「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」；出示本人持有或合法穿戴的 铜匣拓片×1（不消耗）；先完成[柳先生交谈「专长：古文字与留白校勘」](worlds.md#dialogue-content_npc_academy_teacher)；先完成[骁果卫士交谈「专长：宫门换班的真假」](worlds.md#dialogue-dlg_ca2_soldier)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：附上异文公开抄本，不替古人补字（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)；尚未完成[化度寺知客僧交谈「异本证词该如何流传：先封存抄本，逐个核对见证人的口述（此事只选一种）」](worlds.md#dialogue-dlg_ca2_monk)
 
 > 抄本暂不外传，知客把每个不相同的说法分开记录，不让整齐口径盖过事实。
 
@@ -1729,13 +1747,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_sb_centurion_specialty`=true
 
-- 「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_sb_scout_captain_specialty`；已取得 `discovery_sb_beacon_guard_specialty`；尚未取得 `discovery_case_sb_centurion_left`；尚未取得 `discovery_case_sb_centurion_right`
+- 「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[塞北斥候长交谈「专长：核失联巡队的回程」](worlds.md#dialogue-dlg_sb_scout)；先完成[烽燧戍卒交谈「专长：烟色与更牌雪痕」](worlds.md#dialogue-dlg_sb_guard)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 空格没有被草率填成战死，斥候与马商把反穿靴的假迹标在同一张旧路图上。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_sb_centurion_left`=true
 
-- 「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_sb_scout_captain_specialty`；已取得 `discovery_sb_beacon_guard_specialty`；尚未取得 `discovery_case_sb_centurion_left`；尚未取得 `discovery_case_sb_centurion_right`
+- 「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[塞北斥候长交谈「专长：核失联巡队的回程」](worlds.md#dialogue-dlg_sb_scout)；先完成[烽燧戍卒交谈「专长：烟色与更牌雪痕」](worlds.md#dialogue-dlg_sb_guard)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：先按归队路线寻人，暂不填阵亡（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)；尚未完成[李百夫长交谈「兵册上失联者该怎样记：保留失联记录，同时公开最后更牌（此事只选一种）」](worlds.md#dialogue-dlg_sb_centurion)
 
 > 更牌随失联记录一同公布，年轻戍卒终于不必独自承担假烽的责任。
 
@@ -1799,13 +1817,13 @@
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_dm_old_captain_specialty`=true
 
-- 「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_dm_jiaoren_specialty`；已取得 `discovery_dm_pearl_diver_specialty`；尚未取得 `discovery_case_dm_old_captain_left`；尚未取得 `discovery_case_dm_old_captain_right`
+- 「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[鲛人珠娘交谈「专长：真珠寒意与海市旧约」](worlds.md#dialogue-dlg_dm_jiaoren)；先完成[采珠人交谈「专长：验珠回温与水下旧契」](worlds.md#dialogue-dlg_dm_diver)；尚未完成[老船长交谈「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)；尚未完成[老船长交谈「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)
 
 > 采珠人把压舱放水的先后留给所有下水的人，船货不再比活人优先。
 
   效果：须明确选择，普通交谈不会自动执行；记录剧情进度：`discovery_case_dm_old_captain_left`=true
 
-- 「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；已取得 `discovery_dm_jiaoren_specialty`；已取得 `discovery_dm_pearl_diver_specialty`；尚未取得 `discovery_case_dm_old_captain_left`；尚未取得 `discovery_case_dm_old_captain_right`
+- 「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」；出示本人持有或合法穿戴的 干粮×1（不消耗）；先完成[鲛人珠娘交谈「专长：真珠寒意与海市旧约」](worlds.md#dialogue-dlg_dm_jiaoren)；先完成[采珠人交谈「专长：验珠回温与水下旧契」](worlds.md#dialogue-dlg_dm_diver)；尚未完成[老船长交谈「沉船该捞货还是留证：先标出活梁，给后来潜水者留通路（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)；尚未完成[老船长交谈「沉船该捞货还是留证：先封住脆弱舱口，保留沉船原状（此事只选一种）」](worlds.md#dialogue-dlg_dm_captain)
 
 > 船骸暂不打捞，珠娘守着原来的潮门盐线，让下一次调查仍能核对现场。
 

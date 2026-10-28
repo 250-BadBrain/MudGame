@@ -141,6 +141,10 @@ items.json：usable/effects（recoverHp回复、learnSkill参悟）、equipmentS
 
 `GetJournal`从玩家已取得的调查、`discovery_*`对话/机关旗标派生记录，`get_quests.journal`供“令→见闻”显示。只收录真正取得的响应，不列出未选择分支；沿用旗标持久化，无新任务定义。八城事件的两种结论长期互斥，另一位人物的后续也须明确追问。新增叙事不增奖励、不计入快速完成额外收益。
 
+进一步衔接见[城市选择与武学探索](design/connected_exploration_2026_10_28.md)。三条已有对话附`journey`元数据，引用证人、凭证、分支/追问旗标与真实副本动作；`runtime_manager_journeys.go`派生进度、相关章与下一步，追加到`get_quests.journal`（`group: journey`、`progress/state/related/next`），前端优先展示关联卡。只有事件办理者/证人的专长已知或已有结论时才显示，不把未选分支信息下发。旧角色沿既有旗标续接，不新增存档字段；普通解法已完成现场时不要求重刷。
+
+机关`requiredSkills`验证已学等级及原`skillRequirementError`（根基、入门老师/传承等），探索不要求当前装备该武学或对应兵器，不扣内力。只隐藏不具备条件的武学/情报辅助，服务端直接请求和已完成状态重放也要验证资格，不能通过普通观察先完成同一状态再读取未取得的分支响应。普通动作、阻路敌人和终局决定保持。玩家实际操作指南见[三件旧事与六门武学](player/connected_exploration.md)。
+
 ## 11. 任务系统
 
 `quests.json`：giver/turnIn NPC + objectives（当前实现为 **flag 型目标**：玩家持有某旗标即完成，如"听说书人传闻"）+ rewards（经验/潜能/钱/物品/声望）。设计原则：任务是一次性大额奖励与剧情钩子，**不做可重复刷源**（economy_design.md §1.2）。

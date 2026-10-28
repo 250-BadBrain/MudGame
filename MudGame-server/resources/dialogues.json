@@ -210,7 +210,7 @@
       {
         "id": "content_case_left",
         "text": "密信应怎样入卷：隐去受胁者姓名，只追转运主使（此事只选一种）",
-        "response": "证词被匿名保全，秦三娘以后只替证人转达不涉及姓名的消息。",
+        "response": "证词被匿名保全，秦三娘以后只替证人转达不涉及姓名的消息。【后续】可向秦三娘明确追问“密信与运河转运的后续”，取得可用于《运河追击》的线索。",
         "explicit": true,
         "requires": {
           "presentItems": {
@@ -230,7 +230,7 @@
       {
         "id": "content_case_right",
         "text": "密信应怎样入卷：保留完整名单，提交可复查原卷（此事只选一种）",
-        "response": "原卷保留了每个签名，韩录事承诺每次调阅都留查阅记录。",
+        "response": "原卷保留了每个签名，韩录事承诺每次调阅都留查阅记录。【后续】可向韩录事明确追问“密信与运河转运的后续”，取得可用于《运河追击》的线索。",
         "explicit": true,
         "requires": {
           "presentItems": {
@@ -316,8 +316,50 @@
         "setFlags": {
           "discovery_item_manual_dongting_xinf": true
         }
+      },
+      {
+        "id": "connection_follow_office_clerk_right",
+        "text": "追问旧事：密信与运河转运的后续",
+        "response": "韩录事让你记下原卷中的更次旁注，不带走原件。去《运河追击》的双闸绞盘，先看纤道绳迹，再以旁注核更次，可省去回码头查簿。",
+        "explicit": true,
+        "requires": {
+          "flags": {
+            "discovery_case_office_clerk_right": true
+          }
+        },
+        "setFlags": {
+          "discovery_connection_follow_office_clerk_right": true
+        }
       }
-    ]
+    ],
+    "journey": {
+      "title": "密信与运河转运",
+      "dungeonId": "datang_yunhe",
+      "startFlag": "discovery_office_clerk_specialty",
+      "witnesses": [
+        "qingyi_spy",
+        "luoyang_guard"
+      ],
+      "itemId": "sealed_letter",
+      "branches": [
+        {
+          "flag": "discovery_case_office_clerk_left",
+          "npcId": "qingyi_spy",
+          "optionId": "connection_follow_office_clerk_left",
+          "followFlag": "discovery_connection_follow_office_clerk_left",
+          "actionId": "connection_case_left",
+          "usedFlag": "discovery_connection_used_office_clerk_left"
+        },
+        {
+          "flag": "discovery_case_office_clerk_right",
+          "npcId": "office_clerk",
+          "optionId": "connection_follow_office_clerk_right",
+          "followFlag": "discovery_connection_follow_office_clerk_right",
+          "actionId": "connection_case_right",
+          "usedFlag": "discovery_connection_used_office_clerk_right"
+        }
+      ]
+    }
   },
   "merchant_guild_intro": {
     "id": "merchant_guild_intro",
@@ -527,6 +569,20 @@
         },
         "setFlags": {
           "discovery_item_youlong_whip": true
+        }
+      },
+      {
+        "id": "connection_follow_office_clerk_left",
+        "text": "追问旧事：密信与运河转运的后续",
+        "response": "秦三娘把证人姓名隐去，只教你辨认转运队的旧绳结。去《运河追击》的断缆纤道，可凭口信核对前段痕迹；更次仍须另外查证。",
+        "explicit": true,
+        "requires": {
+          "flags": {
+            "discovery_case_office_clerk_left": true
+          }
+        },
+        "setFlags": {
+          "discovery_connection_follow_office_clerk_left": true
         }
       }
     ]
@@ -2170,6 +2226,20 @@
         "setFlags": {
           "discovery_item_yanbang_yupei": true
         }
+      },
+      {
+        "id": "connection_follow_yz_yamen_clerk_right",
+        "text": "追问旧事：三联旧账与盐帮内乱的后续",
+        "response": "程盐商交代封存时逐担验引的顺序，也承认原封记录不能只由他一人解释。去《盐帮内乱》的分盐旧秤，可以记录辨破角盐引；三联账仍须另核。",
+        "explicit": true,
+        "requires": {
+          "flags": {
+            "discovery_case_yz_yamen_clerk_right": true
+          }
+        },
+        "setFlags": {
+          "discovery_connection_follow_yz_yamen_clerk_right": true
+        }
       }
     ]
   },
@@ -2231,6 +2301,20 @@
         },
         "setFlags": {
           "discovery_item_longyin_zhu": true
+        }
+      },
+      {
+        "id": "connection_follow_yz_yamen_clerk_left",
+        "text": "追问旧事：三联旧账与盐帮内乱的后续",
+        "response": "船娘只替真实走过的水路作证，不交出脚夫姓名。去《盐帮内乱》的三联账房，可以搬盐的零碎尾数核脚夫联；破角盐引仍须另查。",
+        "explicit": true,
+        "requires": {
+          "flags": {
+            "discovery_case_yz_yamen_clerk_left": true
+          }
+        },
+        "setFlags": {
+          "discovery_connection_follow_yz_yamen_clerk_left": true
         }
       }
     ]
@@ -2305,7 +2389,7 @@
       {
         "id": "content_case_left",
         "text": "三联账怎样才算对清：保全脚夫的匿名实账，逐担核对（此事只选一种）",
-        "response": "匿名尾数被保留下来，程盐商也须解释自己的损耗，不再由最弱的人独担亏空。",
+        "response": "匿名尾数被保留下来，程盐商也须解释自己的损耗，不再由最弱的人独担亏空。【后续】可向二十四桥船娘明确追问“三联旧账与盐帮内乱的后续”，取得可用于《盐帮内乱》的线索。",
         "explicit": true,
         "requires": {
           "presentItems": {
@@ -2325,7 +2409,7 @@
       {
         "id": "content_case_right",
         "text": "三联账怎样才算对清：三联同时封存，交不同见证人复查（此事只选一种）",
-        "response": "三联分交不同的人保存；船娘只证明水路，茶博士只证明来客时刻，各自不能冒认别人的见证。",
+        "response": "三联分交不同的人保存；船娘只证明水路，茶博士只证明来客时刻，各自不能冒认别人的见证。【后续】可向程盐商明确追问“三联旧账与盐帮内乱的后续”，取得可用于《盐帮内乱》的线索。",
         "explicit": true,
         "requires": {
           "presentItems": {
@@ -2356,7 +2440,35 @@
           "discovery_item_ym2_relic": true
         }
       }
-    ]
+    ],
+    "journey": {
+      "title": "三联旧账与盐帮内乱",
+      "dungeonId": "yangzhou_neiluan",
+      "startFlag": "discovery_yz_yamen_clerk_specialty",
+      "witnesses": [
+        "yz_boat_girl",
+        "yz_salt_merchant"
+      ],
+      "itemId": "reed_root",
+      "branches": [
+        {
+          "flag": "discovery_case_yz_yamen_clerk_left",
+          "npcId": "yz_boat_girl",
+          "optionId": "connection_follow_yz_yamen_clerk_left",
+          "followFlag": "discovery_connection_follow_yz_yamen_clerk_left",
+          "actionId": "connection_case_left",
+          "usedFlag": "discovery_connection_used_yz_yamen_clerk_left"
+        },
+        {
+          "flag": "discovery_case_yz_yamen_clerk_right",
+          "npcId": "yz_salt_merchant",
+          "optionId": "connection_follow_yz_yamen_clerk_right",
+          "followFlag": "discovery_connection_follow_yz_yamen_clerk_right",
+          "actionId": "connection_case_right",
+          "usedFlag": "discovery_connection_used_yz_yamen_clerk_right"
+        }
+      ]
+    }
   },
   "dlg_bs_tang": {
     "id": "dlg_bs_tang",
@@ -2401,7 +2513,7 @@
       {
         "id": "content_case_left",
         "text": "栈道应先修还是先封：先支旧桩，给返乡人留一条窄路（此事只选一种）",
-        "response": "唐家坳的修索办法交给驿丞，茶棚不再把缺席的赶路人直接算作遇匪。",
+        "response": "唐家坳的修索办法交给驿丞，茶棚不再把缺席的赶路人直接算作遇匪。【后续】可向剑阁驿丞明确追问“修路与绝壁悬栈的后续”，取得可用于《绝壁悬栈》的线索。",
         "explicit": true,
         "requires": {
           "presentItems": {
@@ -2421,7 +2533,7 @@
       {
         "id": "content_case_right",
         "text": "栈道应先修还是先封：先封危险段，公开所有松索位置（此事只选一种）",
-        "response": "栈道暂时封存，酒娘替留宿者辨草药，没人再被催着踏上尚未压实的新桩。",
+        "response": "栈道暂时封存，酒娘替留宿者辨草药，没人再被催着踏上尚未压实的新桩。【后续】可向巴蜀酒娘明确追问“修路与绝壁悬栈的后续”，取得可用于《绝壁悬栈》的线索。",
         "explicit": true,
         "requires": {
           "presentItems": {
@@ -2438,7 +2550,35 @@
           "discovery_case_bs_tang_steward_right": true
         }
       }
-    ]
+    ],
+    "journey": {
+      "title": "修路与绝壁悬栈",
+      "dungeonId": "datang_xb2",
+      "startFlag": "discovery_bs_tang_steward_specialty",
+      "witnesses": [
+        "bs_jiange_clerk",
+        "bs_wine_maker"
+      ],
+      "itemId": "iron_pickaxe",
+      "branches": [
+        {
+          "flag": "discovery_case_bs_tang_steward_left",
+          "npcId": "bs_jiange_clerk",
+          "optionId": "connection_follow_bs_tang_steward_left",
+          "followFlag": "discovery_connection_follow_bs_tang_steward_left",
+          "actionId": "connection_case_left",
+          "usedFlag": "discovery_connection_used_bs_tang_steward_left"
+        },
+        {
+          "flag": "discovery_case_bs_tang_steward_right",
+          "npcId": "bs_wine_maker",
+          "optionId": "connection_follow_bs_tang_steward_right",
+          "followFlag": "discovery_connection_follow_bs_tang_steward_right",
+          "actionId": "connection_case_right",
+          "usedFlag": "discovery_connection_used_bs_tang_steward_right"
+        }
+      ]
+    }
   },
   "dlg_bs_jiange": {
     "id": "dlg_bs_jiange",
@@ -2501,6 +2641,20 @@
         },
         "setFlags": {
           "discovery_item_tangmen_baojian": true
+        }
+      },
+      {
+        "id": "connection_follow_bs_tang_steward_left",
+        "text": "追问旧事：修路与绝壁悬栈的后续",
+        "response": "剑阁驿丞把留窄路的分载法教给你：先辨哪根桩真正吃力，再把支点连回旧桩。去《绝壁悬栈》的承重双桩核验后，可以此方案直接稳住支护。",
+        "explicit": true,
+        "requires": {
+          "flags": {
+            "discovery_case_bs_tang_steward_left": true
+          }
+        },
+        "setFlags": {
+          "discovery_connection_follow_bs_tang_steward_left": true
         }
       }
     ]
@@ -3832,6 +3986,20 @@
         },
         "setFlags": {
           "discovery_item_tangmen_z": true
+        }
+      },
+      {
+        "id": "connection_follow_bs_tang_steward_right",
+        "text": "追问旧事：修路与绝壁悬栈的后续",
+        "response": "巴蜀酒娘记得封段那天哪些赶路人被留在茶棚，也记得最早松动的旧接头。去《绝壁悬栈》的风剪悬栈，可用这份见证核前段绳迹；承重仍须现场处理。",
+        "explicit": true,
+        "requires": {
+          "flags": {
+            "discovery_case_bs_tang_steward_right": true
+          }
+        },
+        "setFlags": {
+          "discovery_connection_follow_bs_tang_steward_right": true
         }
       }
     ]

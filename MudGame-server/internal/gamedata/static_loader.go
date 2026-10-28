@@ -193,7 +193,7 @@ func loadFromDisk() (StaticData, error) {
 	if err := validateContentData(resourceDir, rooms, npcs, dialogues, quests); err != nil {
 		return StaticData{}, err
 	}
-	if err := validateContentEvidence(resourceDir, items, skills, dialogues); err != nil {
+	if err := validateContentEvidence(resourceDir, items, skills, dialogues, npcs, rooms); err != nil {
 		return StaticData{}, err
 	}
 	if err := validateQuickRewards(resourceDir, items); err != nil {
@@ -705,6 +705,12 @@ func cloneStaticData(in StaticData) StaticData {
 	}
 	for id, dialogue := range in.Dialogues {
 		dialogueCopy := dialogue
+		if dialogue.Journey != nil {
+			journeyCopy := *dialogue.Journey
+			journeyCopy.Witnesses = append([]string{}, dialogue.Journey.Witnesses...)
+			journeyCopy.Branches = append([]model.DialogueJourneyBranch{}, dialogue.Journey.Branches...)
+			dialogueCopy.Journey = &journeyCopy
+		}
 		dialogueCopy.Options = append([]model.DialogueOption{}, dialogue.Options...)
 		out.Dialogues[id] = dialogueCopy
 	}

@@ -199,6 +199,27 @@
       "presentItems": {
         "manual_mantian_huayu": 1
       }
+    },
+    "connection_skill": {
+      "label": "以铁壁功护架试探回簧",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bas_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你以铁壁功的护架控制试探距离，只轻触空簧的传力处便撤手，辨出危险来自下一轮回弹而非毒色。你没有硬接暗器；牵丝机台的卸力次序仍须查清。",
+      "repeatMessage": "你以铁壁功的护架控制试探距离，只轻触空簧的传力处便撤手，辨出危险来自下一轮回弹而非毒色。你没有硬接暗器；牵丝机台的卸力次序仍须查清。",
+      "requiredSkills": {
+        "tiebi_gong": 1
+      },
+      "requiredPuzzleStates": {},
+      "setFlags": {
+        "discovery_skill_route_bashu_tangmen_trial": true
+      },
+      "failureMessage": "须正式学会对应武学并满足原入门资格；先完成动作提示中的现场线索。也可继续普通调查路线。"
     }
   },
   "rooms": {
@@ -214,7 +235,7 @@
     },
     "bas_01": {
       "name": "错簧回廊",
-      "description": "机簧上没有毒色，真正危险的是下一轮回弹。",
+      "description": "机簧上没有毒色，真正危险的是下一轮回弹。【旧事与武学】此处也可尝试：以铁壁功护架试探回簧。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "bas_00",
         "north": "bas_02"
@@ -234,7 +255,8 @@
       "actions": [
         "content_trace",
         "content_aid_tangmen_baojian",
-        "content_aid_manual_mantian_huayu"
+        "content_aid_manual_mantian_huayu",
+        "connection_skill"
       ]
     },
     "bas_02": {

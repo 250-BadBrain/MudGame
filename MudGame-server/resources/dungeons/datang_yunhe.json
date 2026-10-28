@@ -30,7 +30,7 @@
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "推断：回码头核更次后开下游闸",
+      "label": "推断：核清更次后开下游闸",
       "puzzleId": "gate",
       "rooms": [
         "dat_02"
@@ -58,7 +58,7 @@
         },
         {
           "id": "content_decide_good",
-          "label": "回码头核更次后开下游闸"
+          "label": "核清更次后开下游闸"
         }
       ]
     },
@@ -105,7 +105,7 @@
       }
     },
     "content_decide_good": {
-      "label": "回码头核更次后开下游闸",
+      "label": "核清更次后开下游闸",
       "puzzleId": "gate",
       "rooms": [
         "dat_02"
@@ -992,6 +992,74 @@
       "presentItems": {
         "gongbian_mingzhu": 1
       }
+    },
+    "connection_skill": {
+      "label": "以踏浪诀沿潮痕核更次",
+      "puzzleId": "content_compare",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "checked",
+      "message": "你循踏浪诀辨水势的法门，把北散绳屑与闸盘水痕逐段相校，辨清折返相差的更次，无须再回码头核簿。闸盘细节与最终开闸方向仍须你亲自核验。",
+      "repeatMessage": "你循踏浪诀辨水势的法门，把北散绳屑与闸盘水痕逐段相校，辨清折返相差的更次，无须再回码头核簿。闸盘细节与最终开闸方向仍须你亲自核验。",
+      "requiredPuzzleStates": {
+        "content_trace": "known"
+      },
+      "requiredSkills": {
+        "talang_jue": 1
+      },
+      "setFlags": {
+        "discovery_skill_route_datang_yunhe": true
+      },
+      "failureMessage": "须正式学会对应武学并满足原入门资格；先完成动作提示中的现场线索。也可继续普通调查路线。"
+    },
+    "connection_case_left": {
+      "label": "凭匿名口信辨转运绳迹",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你依秦三娘的匿名口信对上北散绳屑：粮船曾逆流折返，证人身份始终没有暴露。你仍需核对更次与闸盘。",
+      "repeatMessage": "你依秦三娘的匿名口信对上北散绳屑：粮船曾逆流折返，证人身份始终没有暴露。你仍需核对更次与闸盘。",
+      "requiredFlags": {
+        "discovery_case_office_clerk_left": true,
+        "discovery_connection_follow_office_clerk_left": true
+      },
+      "setFlags": {
+        "discovery_connection_used_office_clerk_left": true
+      },
+      "failureMessage": "须先完成所选城市旧事，并向对应人物明确追问后续；现场前置调查也须完成。普通解法始终保留。"
+    },
+    "connection_case_right": {
+      "label": "凭原卷更次核发船簿",
+      "puzzleId": "content_compare",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "checked",
+      "message": "你将韩录事保留的更次旁注与北散绳屑相校，补全了发船簿的时间差，不必折返码头。闸盘刻号与最后开闸仍待判断。",
+      "repeatMessage": "你将韩录事保留的更次旁注与北散绳屑相校，补全了发船簿的时间差，不必折返码头。闸盘刻号与最后开闸仍待判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known"
+      },
+      "requiredFlags": {
+        "discovery_case_office_clerk_right": true,
+        "discovery_connection_follow_office_clerk_right": true
+      },
+      "setFlags": {
+        "discovery_connection_used_office_clerk_right": true
+      },
+      "failureMessage": "须先完成所选城市旧事，并向对应人物明确追问后续；现场前置调查也须完成。普通解法始终保留。"
     }
   },
   "rooms": {
@@ -1008,7 +1076,7 @@
     },
     "dat_01": {
       "name": "断缆纤道",
-      "description": "纤道绳屑朝北散落，粮船曾逆流折返。",
+      "description": "纤道绳屑朝北散落，粮船曾逆流折返。【旧事与武学】此处也可尝试：凭匿名口信辨转运绳迹。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "dat_00",
         "north": "dat_02"
@@ -1073,12 +1141,13 @@
         "content_aid_liangdao_spear",
         "content_aid_lieshi_mace",
         "content_aid_jinggang_staff",
-        "content_aid_gongbian_mingzhu"
+        "content_aid_gongbian_mingzhu",
+        "connection_case_left"
       ]
     },
     "dat_02": {
       "name": "双闸绞盘",
-      "description": "闸盘旧刻号与码头的发船簿相差一个更次。",
+      "description": "闸盘旧刻号与码头的发船簿相差一个更次。【旧事与武学】此处也可尝试：以踏浪诀沿潮痕核更次；凭原卷更次核发船簿。需具备对应已学武学或亲自追问所得情报；普通调查仍可独立完成。",
       "exits": {
         "south": "dat_01",
         "north": "dat_03"
@@ -1093,7 +1162,9 @@
       },
       "actions": [
         "open_gate",
-        "content_detail"
+        "content_detail",
+        "connection_skill",
+        "connection_case_right"
       ]
     },
     "dat_03": {

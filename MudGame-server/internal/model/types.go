@@ -201,11 +201,31 @@ type NPC struct {
 }
 
 type DialogueDef struct {
+	Journey *DialogueJourney `json:"journey,omitempty"`
 	ID      string           `json:"id"`
 	NPCID   string           `json:"npcId"`
 	Title   string           `json:"title"`
 	Opening string           `json:"opening"`
 	Options []DialogueOption `json:"options"`
+}
+
+// Optional guidance for an existing dialogue event, derived from saved flags.
+type DialogueJourney struct {
+	Title     string                  `json:"title"`
+	DungeonID string                  `json:"dungeonId"`
+	StartFlag string                  `json:"startFlag"`
+	Witnesses []string                `json:"witnesses"`
+	ItemID    string                  `json:"itemId"`
+	Branches  []DialogueJourneyBranch `json:"branches"`
+}
+
+type DialogueJourneyBranch struct {
+	Flag       string `json:"flag"`
+	NPCID      string `json:"npcId"`
+	OptionID   string `json:"optionId"`
+	FollowFlag string `json:"followFlag"`
+	ActionID   string `json:"actionId"`
+	UsedFlag   string `json:"usedFlag"`
 }
 
 type DialogueOption struct {

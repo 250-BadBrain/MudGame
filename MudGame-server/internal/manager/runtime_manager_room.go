@@ -151,7 +151,8 @@ func (r *RuntimeManager) buildRoomPayload(roomID string, players map[string]*mod
 				visible := make([]string, 0, len(actions))
 				for _, aid := range actions {
 					_, action, ok := r.dungeonMgr.PuzzleActionNoLock(inst.OwnerPlayer, room.ID, aid)
-					if ok && (strings.HasPrefix(aid, "content_aid_") || len(action.PresentItems) > 0) && !contentEvidenceMet(players[inst.OwnerPlayer], action.RequiredFlags, action.PresentItems) {
+					conditional := strings.HasPrefix(aid, "content_aid_") || strings.HasPrefix(aid, "connection_") || len(action.PresentItems) > 0 || len(action.RequiredSkills) > 0
+					if ok && conditional && (!contentEvidenceMet(players[inst.OwnerPlayer], action.RequiredFlags, action.PresentItems) || !contentSkillsMet(players[inst.OwnerPlayer], action.RequiredSkills)) {
 						continue
 					}
 					visible = append(visible, aid)
