@@ -248,6 +248,9 @@
           <div v-if="isInDungeon && dungeonRoomId === selectedDungeon?.id" class="map-sub-line">当前进度：{{ dungeonProgress ?? 0 }}%</div>
           <div v-if="selectedDungeon.locked" class="map-sub-line">{{ selectedDungeon.lockHint }}</div>
           <button @click.stop="$emit('enterDungeon')" class="enter-world-btn" :disabled="isInDungeon || !!selectedDungeon.locked">{{ selectedDungeon.locked ? '尚未解锁' : '进入副本' }}</button>
+          <button @click.stop="$emit('quickCompleteDungeon')" class="enter-world-btn" :disabled="isInDungeon || quickCompleting || !selectedDungeon.canQuickComplete">{{ quickCompleting ? '结算中…' : '快速完成' }}</button>
+          <div class="map-sub-line">{{ selectedDungeon.cleared ? '已通关 · 快速完成当前免费，结算普通物品独立15%掉落；途中固定收益必得。' : '首次100%通关并结算后开放快速完成。' }}</div>
+          <div v-if="selectedDungeon.cleared && selectedDungeon.quickCompleteHint" class="map-sub-line">{{ selectedDungeon.quickCompleteHint }}</div>
         </div>
       </div>
       <GameQuestPanel v-if="currentPanel === 'quests'" :quests="questsList" />
@@ -292,6 +295,7 @@ const props = defineProps({
   dungeonsList: { type: Array, default: () => [] },
   selectedDungeonId: String,
   selectedDungeon: Object,
+    quickCompleting: Boolean,
   isInDungeon: Boolean,
   dungeonRoomId: String,
   dungeonProgress: { type: Number, default: 0 },
@@ -335,7 +339,7 @@ defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipIte
   'changeSkillTab', 'selectSkill', 'viewSkill', 'equipSkill', 'practiceSkill', 'unequipSkill',
   'selectEquipSlot', 'unequipSlot',
   'selectWorld', 'enterWorld',
-  'selectDungeon', 'enterDungeon'])
+    'selectDungeon', 'enterDungeon', 'quickCompleteDungeon'])
 
 const gradeNames = { 1: '基础', 2: '江湖', 3: '名家', 4: '上乘', 5: '绝学' }
 const enhanceAffordable = computed(() => {

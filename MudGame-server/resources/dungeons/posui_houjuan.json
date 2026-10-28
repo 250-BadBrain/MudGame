@@ -153,5 +153,8 @@
     "items": {
       "manual_poxu_zhi": 1
     }
+  },
+  "quickRewards": {
+    "money": 300
   }
 }

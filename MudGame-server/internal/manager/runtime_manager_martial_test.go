@@ -78,16 +78,15 @@ func TestV2ManualFailsWithoutConsumingAndAllEntrancesShareGate(t *testing.T) {
 	p.Skills["basic_neigong"] = 120
 	p.Skills["basic_literacy"] = 80
 	_ = r.savePlayers(players)
-	// 未向灰袍老者请教入门 → 参悟被拒且秘本保留
 	if _, err := r.UseItem(id, "manual_csj_changshengjue"); err == nil {
-		t.Fatal("ungated insight accepted")
+		t.Fatal("missing transmission accepted")
 	}
 	players, _ = r.loadPlayers()
 	p = players[id]
 	if p.Backpack["manual_csj_changshengjue"] != 1 {
 		t.Fatal("failed insight consumed book")
 	}
-	p.Flags["martial_taught_csj_changshengjue"] = true
+	p.Flags["dungeon_cleared_datang_xinggong"] = true
 	_ = r.savePlayers(players)
 	if _, err := r.UseItem(id, "manual_csj_changshengjue"); err != nil {
 		t.Fatal(err)
@@ -105,11 +104,10 @@ func TestV2ManualFailsWithoutConsumingAndAllEntrancesShareGate(t *testing.T) {
 	players, _ = r.loadPlayers()
 	p = players[id]
 	p.State = "IDLE"
-	// 入门旗标同样是修炼门：清除后修炼与常驻判定走同一道闸
-	p.Flags["martial_taught_csj_changshengjue"] = false
+	p.Flags["dungeon_cleared_datang_xinggong"] = false
 	_ = r.savePlayers(players)
 	if err := r.PracticeSkill(id, "csj_changshengjue"); err == nil {
-		t.Fatal("practice bypassed transmission gate")
+		t.Fatal("practice bypassed source gate")
 	}
 	if skillActiveReason(p, fileSkills["csj_changshengjue"]) == "" {
 		t.Fatal("invalid skill still active")

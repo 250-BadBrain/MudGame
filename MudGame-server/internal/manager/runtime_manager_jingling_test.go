@@ -103,15 +103,12 @@ func TestJinglingSiegeExclusiveBranchFullFlow(t *testing.T) {
 	}
 
 	// 结算：离开副本 → 奖励与通关旗标
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave dungeon failed: %v", err)
 	}
 	players, _ := r.loadPlayers()
 	p := players[playerID]
 	// 古铜残片走概率掉落，不保证必得
-	if p.Backpack["bronze_fragment"] < 0 {
-		t.Fatal("negative bronze fragment")
-	}
 	if !p.Flags["dungeon_cleared_datang_jingling"] {
 		t.Fatal("expected dungeon_cleared_datang_jingling flag")
 	}

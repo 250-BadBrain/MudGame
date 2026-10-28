@@ -206,10 +206,18 @@ class Guide:
                 values.append(key + "=" + str(value))
         return "；".join(values) or "未配置额外加成"
 
-    def rewards(self, rewards):
+    def rewards(self, rewards, drop_rates=False):
         parts = [label + " " + str(rewards.get(key, 0)) for key, label in (("experience", "经验"), ("potential", "潜能"), ("money", "钱币"))]
         if rewards.get("items"):
-            parts.append(self.items_text(rewards["items"]))
+            if drop_rates:
+                labels = []
+                for iid, amount in rewards["items"].items():
+                    item = self.items.get(iid, {})
+                    chance = "必得，已学/已有不重复" if item.get("effects", {}).get("learnSkill") else ("必得，一次性" if item.get("questItem") and item.get("firstClaim", item.get("FirstClaim")) else ("必得" if item.get("questItem") else "15%独立概率"))
+                    labels.append(self.items_text({iid: amount}) + "（" + chance + "）")
+                parts.append("、".join(labels))
+            else:
+                parts.append(self.items_text(rewards["items"]))
         if rewards.get("reputations"):
             factions = read(RESOURCES / "factions.json")
             parts.extend(factions.get(key, {}).get("name", key) + "声望 +" + str(value) for key, value in rewards["reputations"].items())
@@ -328,7 +336,14 @@ class Guide:
         did = dungeon["id"]
         lines = [f'<a id="{did}"></a>', "", f'## 序号 {dungeon["order"]} · {dungeon["name"]}', "", dungeon.get("description", ""), "",
                  "- **触发入口**：右侧「境」→本卷→本副本→进入；不需要先在城市找到 NPC。", "- **解锁**：" + self.unlock(dungeon, current),
-                 "- **标识**：`" + did + "`；卷内标签「第 " + str(dungeon.get("chapter", "—")) + " 章」，解锁按全局序号判断。", "- **满额结算奖励**：" + self.rewards(dungeon.get("rewards", {})) + "。"]
+                 "- **标识**：`" + did + "`；卷内标签「第 " + str(dungeon.get("chapter", "—")) + " 章」，解锁按全局序号判断。", "- **满额结算奖励**：" + self.rewards(dungeon.get("rewards", {}), drop_rates=True) + "。"]
+        lines.append("- **快速完成**：本关100%通关并结算后，在公共世界空闲时点击「快速完成」；当前免费，同结算掉率，每次复刷另加古铜残片2。不会自动交付世界任务，也不会回复气血内力。")
+        quick = dungeon.get("quickRewards", {})
+        if quick:
+            parts = []
+            if quick.get("money"): parts.append(str(quick["money"]) + "铜钱")
+            if quick.get("items"): parts.append(self.items_text(quick["items"]))
+            lines.append("- **快速完成额外固定流程收益**：" + "、".join(parts) + "（必得）。")
         title = self.titles.get("dungeon_cleared_" + did)
         if title:
             lines.append("- **通关称号**：" + title + "。")

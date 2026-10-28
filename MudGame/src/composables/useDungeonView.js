@@ -2,10 +2,19 @@ import { computed, ref } from 'vue'
 
 // 副本相关的视图状态：副本列表/选中项、当前是否处于副本、
 // 离开副本的确认提示（含防伪造 token）与房间同步。
-export function useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGameCommand, checkCanAct, getPlayerId }) {
+export function useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGameCommand, checkCanAct, getPlayerId, getPlayerState = () => 'IDLE', refreshAfterQuickComplete = () => {} }) {
   const dungeonsList = ref([])
   const selectedDungeonId = ref(null)
   const pendingDungeonLeave = ref(null)
+  const quickCompleting = ref(false)
+  let quickTimer = null
+  const finishQuickComplete = () => {
+    clearTimeout(quickTimer)
+    quickTimer = null
+    quickCompleting.value = false
+    refreshAfterQuickComplete()
+  }
+  const disposeDungeonView = () => { clearTimeout(quickTimer); quickCompleting.value = false }
 
   const sortedDungeonsList = computed(() => {
     if (!dungeonsList.value) return []
@@ -68,6 +77,17 @@ export function useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGam
     sendGameCommand("command", "enter_dungeon", getPlayerId(), { dungeonId: selectedDungeonId.value })
   }
 
+  const quickCompleteDungeon = () => {
+    if (quickCompleting.value || isInDungeon.value || getPlayerState() !== 'IDLE' || !selectedDungeon.value?.canQuickComplete) return
+    if (!checkCanAct('quick_complete_dungeon')) return
+    quickCompleting.value = true
+    quickTimer = setTimeout(() => {
+      addLog('快速完成响应尚未收到，已刷新目录；请核对收益后重试。')
+      finishQuickComplete()
+    }, 15000)
+    sendGameCommand('command', 'quick_complete_dungeon', getPlayerId(), { dungeonId: selectedDungeonId.value, expectedSequence: selectedDungeon.value.quickCompleteSequence })
+  }
+
   const leaveCurrentDungeon = () => {
     if (!checkCanAct('leave_dungeon')) return
     const prompt = buildDungeonLeavePrompt()
@@ -89,6 +109,10 @@ export function useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGam
   }
 
   return {
+    quickCompleting,
+    quickCompleteDungeon,
+    finishQuickComplete,
+    disposeDungeonView,
     dungeonsList,
     selectedDungeonId,
     pendingDungeonLeave,

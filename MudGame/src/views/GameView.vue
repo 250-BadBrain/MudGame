@@ -127,7 +127,7 @@
               @selectWorld="selectWorld"
               @enterWorld="enterWorld"
               @selectDungeon="selectDungeon"
-              @enterDungeon="enterDungeon" />
+              @enterDungeon="enterDungeon" :quickCompleting="quickCompleting" @quickCompleteDungeon="quickCompleteDungeon" />
 
             <GameActionPanel
               :room-actions="roomActions"
@@ -297,9 +297,13 @@ const {
   applyRoomDungeonUpdate,
   selectDungeon,
   enterDungeon,
+  quickCompleting, quickCompleteDungeon, finishQuickComplete, disposeDungeonView,
   leaveCurrentDungeon,
   confirmLeaveCurrentDungeon
-} = useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGameCommand, checkCanAct, getPlayerId })
+} = useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGameCommand, checkCanAct, getPlayerId,
+  getPlayerState: () => currentPlayer.value.state,
+  refreshAfterQuickComplete: () => { for (const subtype of ["get_dungeons", "get_attributes", "get_backpack", "get_quests", "get_factions"]) sendSilentRefresh(subtype) }
+})
 
 const {
   showShopPanel,
@@ -440,6 +444,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  disposeDungeonView()
     disposeCommandQueue()
     removeMessageHandler(handleMessage)
     window.removeEventListener('keydown', handleGlobalKeydown)
@@ -641,6 +646,10 @@ const handleMessage = (msg) => {
       } else if (!generatedMsg) {
           addLog(describeCommandError(msg.results.error, '你现在无法进入这处秘境。'));
       }
+  } else if (msg.type === 'command' && msg.subtype === 'quick_complete_dungeon') {
+      finishQuickComplete();
+      if (msg.flag) (msg.logs || []).forEach(l => addLog(l));
+      else addLog(describeCommandError(msg.results?.error, '当前无法快速完成副本。'));
   } else if (msg.type === 'command' && msg.subtype === 'leave_dungeon') {
       if (msg.flag) {
           room.value = msg.results.room;
@@ -814,6 +823,7 @@ const handleMessage = (msg) => {
             if (msg.results?.playerId) {
                 playerStore.setPlayerId(msg.results.playerId)
             }
+            disposeDungeonView()
             resetPanelRequests()
             requestCoreGameState()
             refreshOpenPanels()

@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：39402c30a532914b454ea8b483f57103e4ec3dc472a9573a175707d9d256411e；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：2004581fb01136bd479729a9b04c7d3687e38494672648bc514a0541835f3ccd；由 scripts/generate_player_guide.py 生成。 -->
 
 # 修行、商店、传承与收藏目录
 
@@ -285,7 +285,7 @@
 | 天刀遗篇<br>`songque_testament` | 项链；攻击+4、暴击率+2、先手+2<br>宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。 | [100% 结算《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) |
 | 天魔羽<br>`wanwan_feather` | 戒指；躲闪+3、暴击率+2、内力上限+15<br>婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。 | [100% 结算《飞马试炼殿》](stories/datang.md#feima_trial_hall) |
 | 边不负的念珠<br>`bianbuou_wisdom` | 项链；防御+5、命中+3、内力上限+10<br>边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。 | [100% 结算《长安试炼殿》](stories/datang.md#changan_trial_hall) |
-| 宫变密剑<br>`gongbian_jian` | 兵器；攻击+5、暴击率+3、先手+3、躲闪+2<br>宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。 | [100% 结算《东都宫变》](stories/datang.md#datang_gongbian) |
+| 宫变密剑<br>`gongbian_jian` | 兵器；攻击+5、暴击率+3、先手+3、躲闪+2<br>宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。 | 未找到当前可达获取入口；资源备注「东都宫变」尚不足以证明入口已接通 |
 | 运河披风<br>`yunhe_pao` | 衣甲；防御+10、躲闪+3、招架+2、气血上限+30<br>运河船工的桐油披风，防雨防刀，水性好的人离不开它。 | [100% 结算《运河追击》](stories/datang.md#datang_yunhe) |
 | 魔师宫主令珠<br>`moshi_lingzhu` | 戒指；暴击率+4、内力上限+20、攻击+2、命中+2<br>魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。 | [100% 结算《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) |
 | 破碎虚空·悟<br>`zhongjuan_wu` | 项链；攻击+3、防御+3、内力上限+20、躲闪+3、先手+2<br>终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。 | [100% 结算《战神遗境》](stories/posui.md#posui_zhongjuan) |
@@ -296,15 +296,15 @@
 | 狼烟令<br>`langyan_ling` | 戒指；气血上限+20、防御+3、命中+2<br>边军的狼烟令——持此令者，九边烽燧为你而燃。 | [100% 结算《狼烟再起》](stories/bianhuang.md#saibei_langyan) |
 | 江南剑首佩剑<br>`jianshou_jian` | 兵器；攻击+8、命中+5、暴击率+2、躲闪+2<br>二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。 | [100% 结算《剑首之争》](stories/luoshui.md#jiangnan_jianshou) |
 | 行宫密剑<br>`xinggong_jian` | 兵器；攻击+9、暴击率+3<br>行宫惊变奖励。 | [100% 结算《行宫惊变》](stories/datang.md#datang_xinggong) |
-| 浪翻云剑穗<br>`langfan_jian` | 项链；攻击+6、命中+4<br>浪翻云试炼的奖励装备。 | 未找到当前可达获取入口；资源备注「浪翻云试炼」尚不足以证明入口已接通 |
-| 空明珠<br>`kongming_zhu` | 戒指；内力上限+30、防御+4<br>破碎空明的奖励装备。 | 未找到当前可达获取入口；资源备注「破碎空明」尚不足以证明入口已接通 |
-| 绝地护符<br>`jueji_hu` | 衣甲；防御+8、气血上限+60<br>边荒绝地的奖励装备。 | 未找到当前可达获取入口；资源备注「边荒绝地」尚不足以证明入口已接通 |
-| 龙宫宝珠<br>`longgong_zhu` | 戒指；攻击+5、内力上限+25<br>归墟龙宫的奖励装备。 | 未找到当前可达获取入口；资源备注「归墟龙宫」尚不足以证明入口已接通 |
-| 漕运钢刀<br>`yunhe_gangdao` | 兵器；攻击+10、防御+3<br>运河夜战的奖励装备。 | 未找到当前可达获取入口；资源备注「运河夜战」尚不足以证明入口已接通 |
-| 唐门毒珠<br>`tangmen_zhenzhu` | 戒指；暴击率+4、攻击+4<br>唐门天梯的奖励装备。 | 未找到当前可达获取入口；资源备注「唐门天梯」尚不足以证明入口已接通 |
-| 雪岭护符<br>`xueling_hu` | 衣甲；防御+7、躲闪+3<br>狼山雪岭的奖励装备。 | 未找到当前可达获取入口；资源备注「狼山雪岭」尚不足以证明入口已接通 |
-| 剑池名剑<br>`jianchi_mingjian` | 兵器；攻击+11、命中+4<br>剑池深处的奖励装备。 | 未找到当前可达获取入口；资源备注「剑池深处」尚不足以证明入口已接通 |
-| 神工遗器<br>`shengong_qi` | 戒指；攻击+6、防御+6、内力上限+20<br>神工秘殿的奖励装备。 | 未找到当前可达获取入口；资源备注「神工秘殿」尚不足以证明入口已接通 |
+| 浪翻云剑穗<br>`langfan_jian` | 项链；攻击+6、命中+4<br>浪翻云试炼的奖励装备。 | [100% 结算《浪翻云试炼》](stories/fuyu.md#fuyu_langfan) |
+| 空明珠<br>`kongming_zhu` | 戒指；内力上限+30、防御+4<br>破碎空明的奖励装备。 | [100% 结算《破碎空明》](stories/posui.md#posui_kongming) |
+| 绝地护符<br>`jueji_hu` | 衣甲；防御+8、气血上限+60<br>边荒绝地的奖励装备。 | [100% 结算《边荒绝地》](stories/bianhuang.md#bianhuang_jueji) |
+| 龙宫宝珠<br>`longgong_zhu` | 戒指；攻击+5、内力上限+25<br>归墟龙宫的奖励装备。 | [100% 结算《归墟龙宫》](stories/luoshui.md#luoshui_guilou) |
+| 漕运钢刀<br>`yunhe_gangdao` | 兵器；攻击+10、防御+3<br>运河夜战的奖励装备。 | [100% 结算《运河夜战》](stories/yunhe.md#yangzhou_yunhe2) |
+| 唐门毒珠<br>`tangmen_zhenzhu` | 戒指；暴击率+4、攻击+4<br>唐门天梯的奖励装备。 | [100% 结算《唐门天梯》](stories/yunhe.md#bashu_tangmen2) |
+| 雪岭护符<br>`xueling_hu` | 衣甲；防御+7、躲闪+3<br>狼山雪岭的奖励装备。 | [100% 结算《狼山雪岭》](stories/bianhuang.md#saibei_langshan2) |
+| 剑池名剑<br>`jianchi_mingjian` | 兵器；攻击+11、命中+4<br>剑池深处的奖励装备。 | [100% 结算《剑池深处》](stories/luoshui.md#jiangnan_jianchi2) |
+| 神工遗器<br>`shengong_qi` | 戒指；攻击+6、防御+6、内力上限+20<br>神工秘殿的奖励装备。 | [100% 结算《神工秘殿》](stories/luoshui.md#dongming_shengong) |
 | 浪翻云剑穗<br>`langfan_j` | 项链；攻击+6、命中+4<br>浪翻云试炼奖励。 | [100% 结算《浪翻云试炼》](stories/fuyu.md#fuyu_langfan) |
 | 空明珠<br>`kongming_z` | 戒指；内力上限+30、防御+4<br>破碎空明奖励。 | [100% 结算《破碎空明》](stories/posui.md#posui_kongming) |
 | 绝地护符<br>`jueji_h` | 衣甲；防御+8、气血上限+60<br>边荒绝地奖励。 | [100% 结算《边荒绝地》](stories/bianhuang.md#bianhuang_jueji) |
@@ -369,6 +369,7 @@
 | 裂石铁锏<br>`lieshi_mace` | 兵器；攻击+11、招架+2<br>裂石铁锏，适合mace流派修炼。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
 | 锁浪双钩<br>`suolang_hook` | 兵器；攻击+11、命中+2<br>锁浪双钩，适合hook流派修炼。 | [100% 结算《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
 | 精钢长棍<br>`jinggang_staff` | 兵器；攻击+11、招架+2<br>精钢长棍，适合staff流派修炼。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 宫变夜明珠<br>`gongbian_mingzhu` | 项链；命中+5、内力上限+25、先手+3<br>从乾清宫的密道中取得的夜明珠——珠内封着一缕不灭的火光，像是那晚的宫火永远不会熄灭。 | [100% 结算《东都宫变》](stories/datang.md#datang_gongbian) |
 
 ## 全部称号
 

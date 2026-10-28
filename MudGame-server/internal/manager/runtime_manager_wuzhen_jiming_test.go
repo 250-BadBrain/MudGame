@@ -151,7 +151,7 @@ func TestJimingshanFullFlow(t *testing.T) {
 		t.Fatalf("take supply failed: %v", err)
 	}
 
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave dungeon failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
@@ -219,11 +219,11 @@ func TestDuoqiFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d", inst.Progress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
-	if after[playerID].Backpack["bianhuang_xue"] < 0 || !after[playerID].Flags["dungeon_cleared_bianhuang_duoqi"] { // probabilistic
+	if !after[playerID].Flags["dungeon_cleared_bianhuang_duoqi"] { // probabilistic
 		t.Fatal("expected rewards")
 	}
 }
@@ -286,7 +286,7 @@ func TestKujingFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d", inst.Progress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
@@ -351,11 +351,11 @@ func TestShudaoFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d", inst.Progress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
-	if after[playerID].Backpack["shujin_pifeng"] < 0 || !after[playerID].Flags["dungeon_cleared_datang_shudao"] {
+	if !after[playerID].Flags["dungeon_cleared_datang_shudao"] {
 		t.Fatal("expected rewards")
 	}
 }
@@ -416,12 +416,12 @@ func TestZhandaoFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d", inst.Progress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["tangmen_tili"] < 0 || !p.Flags["dungeon_cleared_datang_zhandao"] || !p.Flags["zhandao_case_done"] {
+	if !p.Flags["dungeon_cleared_datang_zhandao"] || !p.Flags["zhandao_case_done"] {
 		t.Fatalf("expected rewards, got tili=%d flags=%v", p.Backpack["tangmen_tili"], p.Flags)
 	}
 }
@@ -483,12 +483,12 @@ func TestLangshanFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d", inst.Progress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["langya_chui"] < 0 || !p.Flags["dungeon_cleared_saibei_langshan"] || !p.Flags["langshan_case_done"] {
+	if !p.Flags["dungeon_cleared_saibei_langshan"] || !p.Flags["langshan_case_done"] {
 		t.Fatalf("expected rewards, got chui=%d flags=%v", p.Backpack["langya_chui"], p.Flags)
 	}
 }
@@ -549,12 +549,12 @@ func TestJianchiFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d", inst.Progress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["jianchi_jian"] < 0 || !p.Flags["dungeon_cleared_jiangnan_jianchi"] || !p.Flags["jianchi_case_done"] {
+	if !p.Flags["dungeon_cleared_jiangnan_jianchi"] || !p.Flags["jianchi_case_done"] {
 		t.Fatalf("expected rewards, got jian=%d flags=%v", p.Backpack["jianchi_jian"], p.Flags)
 	}
 }
@@ -621,12 +621,12 @@ func TestTianjinFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d", inst.Progress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["tianjin_yuepei"] < 0 || !p.Flags["dungeon_cleared_dongdu_tianjin"] || !p.Flags["tianjin_case_done"] {
+	if !p.Flags["dungeon_cleared_dongdu_tianjin"] || !p.Flags["tianjin_case_done"] {
 		t.Fatalf("expected rewards, got pei=%d flags=%v", p.Backpack["tianjin_yuepei"], p.Flags)
 	}
 }

@@ -226,3 +226,6 @@ git add -A && git commit -m "xxx"
 - **`utils/ws.js` 改动要保留心跳、重连与会话恢复逻辑**，注意 `event.target !== socket` 过期连接守卫。
 - **测试一律用临时 MUD_DATA_DIR + 独立端口**，不要碰 `data/servers/server1` 正式数据。
 - Windows 环境下 `go test -race` 不可用（环境限制，非代码问题）。
+
+
+快速完成回归：`scripts/tests/smoke_dungeon_quick.py`使用临时端口和合成存档验证资格、收益和持久化重放；`scripts/tests/browser_dungeon_quick.py`在该合成目录上启动独立后端、Vite和无头浏览器，验证按钮与真实消息。详细命令及依赖见[快速完成规格与验收](design/dungeon_quick_complete_2026_10_28.md)。新增途中收益时同步quickRewards与玩家手册，不能将付费配方或临时钥匙加入免费奖励。

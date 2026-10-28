@@ -126,5 +126,8 @@
       "giveItems": {},
       "giveMoney": 250
     }
+  },
+  "quickRewards": {
+    "money": 250
   }
 }

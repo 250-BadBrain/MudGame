@@ -170,5 +170,8 @@
       "youlong_whip": 1,
       "manual_youlong_bian": 1
     }
+  },
+  "quickRewards": {
+    "money": 300
   }
 }

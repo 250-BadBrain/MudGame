@@ -74,6 +74,7 @@ const (
 )
 
 type Template struct {
+	QuickRewards        model.Rewards
 	ID                  string
 	Name                string
 	Description         string
@@ -116,6 +117,7 @@ type UnlockCondition struct {
 }
 
 type templateFile struct {
+	QuickRewards        model.Rewards               `json:"quickRewards"`
 	ID                  string                      `json:"id"`
 	Name                string                      `json:"name"`
 	Description         string                      `json:"description"`
@@ -371,6 +373,7 @@ func (m *Manager) LoadTemplatesNoLock() error {
 			ProgressOnKill:      progressOnKill,
 			Objectives:          loadObjectives(df.Objectives),
 			Rewards:             normalizeDungeonRewards(df.Rewards),
+			QuickRewards:        df.QuickRewards,
 			UnlockConditions:    loadUnlockConditions(df.UnlockConditions),
 			PuzzleInitialStates: copyStringMap(df.PuzzleInitialStates),
 			PuzzleActions:       loadPuzzleActions(df.PuzzleActions),

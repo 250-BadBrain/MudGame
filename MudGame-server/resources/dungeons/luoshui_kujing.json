@@ -180,5 +180,8 @@
       "zhenshui_huan": 1,
       "yinkui_lotus": 1
     }
+  },
+  "quickRewards": {
+    "money": 400
   }
 }

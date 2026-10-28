@@ -195,5 +195,12 @@
     "experience": 2600,
     "potential": 1300,
     "money": 900
+  },
+  "quickRewards": {
+    "items": {
+      "guishi_ledger": 1,
+      "guishi_jade": 1,
+      "guishi_blade": 1
+    }
   }
 }

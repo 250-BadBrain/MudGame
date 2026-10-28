@@ -235,5 +235,8 @@
       "yg_baoku_pearl": 1,
       "yanggong_sword": 1
     }
+  },
+  "quickRewards": {
+    "money": 250
   }
 }

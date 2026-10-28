@@ -220,5 +220,11 @@
     "experience": 1240,
     "potential": 740,
     "money": 420
+  },
+  "quickRewards": {
+    "items": {
+      "dahuandan": 1
+    },
+    "money": 400
   }
 }

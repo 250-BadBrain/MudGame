@@ -76,14 +76,11 @@ func TestTiandaoTrialFullFlow(t *testing.T) {
 	}
 
 	// 结算：奖励 + 通关旗标 + 残页
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave dungeon failed: %v", err)
 	}
 	players, _ := r.loadPlayers()
 	p := players[playerID]
-	if p.Backpack["xiaohuandan"] < 0 {
-		t.Fatal("negative xiaohuandan")
-	}
 	if !p.Flags["dungeon_cleared_datang_tiandao"] {
 		t.Fatal("expected dungeon_cleared_datang_tiandao flag")
 	}

@@ -172,5 +172,8 @@
     "flags": {
       "jianchi_case_done": true
     }
+  },
+  "quickRewards": {
+    "money": 400
   }
 }

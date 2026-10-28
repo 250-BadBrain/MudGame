@@ -31,6 +31,7 @@ func (s *Server) registerCommandHandlers() {
 	s.handlersGame["enter_world"] = s.handleGameEnterWorld
 	s.handlersGame["enter_dungeon"] = s.handleGameEnterDungeon
 	s.handlersGame["leave_dungeon"] = s.handleGameLeaveDungeon
+	s.handlersGame["quick_complete_dungeon"] = s.handleGameQuickCompleteDungeon
 	s.handlersGame["go"] = s.handleGameGo
 	s.handlersGame["get_shop"] = s.handleGameGetShop
 	s.handlersGame["buy"] = s.handleGameBuy

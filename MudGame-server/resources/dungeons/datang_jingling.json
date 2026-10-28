@@ -398,5 +398,8 @@
       "bronze_fragment": 3,
       "manual_taiyi_jianfa": 1
     }
+  },
+  "quickRewards": {
+    "money": 300
   }
 }

@@ -115,7 +115,7 @@
   "csj_changshengjue": {
     "name": "长生诀",
     "description": "养生内功绝学。序47《行宫惊变》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 5,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
@@ -132,14 +132,15 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_csj_changshengjue",
-    "source": "序47《行宫惊变》满通关结算"
+    "source": "序47《行宫惊变》满通关结算",
+    "sourceDungeon": "datang_xinggong"
   },
   "jyg_zhanshentu_dao": {
     "name": "战神图录",
     "description": "均衡内功绝学。序40《战神遗境》（原《战神图录·终卷》）满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 5,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
@@ -157,14 +158,15 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_jyg_zhanshentu_dao",
-    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算"
+    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算",
+    "sourceDungeon": "posui_zhongjuan"
   },
   "tiandao_blade": {
     "name": "天刀八诀",
     "description": "刀道绝学。序38《天刀试炼殿》满通关，由宋缺授予完整传承，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 5,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -181,9 +183,10 @@
     },
     "slot": "combat",
     "weaponType": "blade",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_tiandao_blade",
-    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承"
+    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承",
+    "sourceDungeon": "tiandao_trial_hall"
   },
   "basic_staff": {
     "id": "basic_staff",
@@ -231,7 +234,7 @@
     },
     "slot": "combat",
     "weaponType": "sword",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "military_instructor",
     "manualId": "manual_thunder_sword",
     "source": "洛阳军府·秦校尉",
     "requirements": {
@@ -239,7 +242,8 @@
         "skill": "basic_sword",
         "level": 20
       }
-    }
+    },
+    "sourceDungeon": ""
   },
   "bloody_blade": {
     "id": "bloody_blade",
@@ -255,7 +259,7 @@
     },
     "slot": "combat",
     "weaponType": "blade",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "military_instructor",
     "manualId": "manual_bloody_blade",
     "source": "洛阳军府·秦校尉",
     "requirements": {
@@ -263,7 +267,8 @@
         "skill": "basic_blade",
         "level": 20
       }
-    }
+    },
+    "sourceDungeon": ""
   },
   "basic_spear": {
     "id": "basic_spear",
@@ -332,7 +337,7 @@
   "cihang_jiandian": {
     "name": "慈航剑典",
     "description": "剑道绝学。序40《长安试炼殿》满通关，由师妃暄见证传承，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 5,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -350,9 +355,10 @@
     },
     "slot": "combat",
     "weaponType": "sword",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_cihang_jiandian",
-    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承"
+    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承",
+    "sourceDungeon": "changan_trial_hall"
   },
   "hunyuan_neigong": {
     "name": "混元功",
@@ -373,14 +379,15 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "academy_teacher",
     "manualId": "manual_hunyuan_neigong",
-    "source": "河洛书院·柳先生"
+    "source": "河洛书院·柳先生",
+    "sourceDungeon": ""
   },
   "tianmo_ce": {
     "name": "天魔策",
     "description": "杀伐内功绝学。序39《魔师宫秘道》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 5,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
@@ -398,9 +405,10 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_tianmo_ce",
-    "source": "序39《魔师宫秘道》满通关结算"
+    "source": "序39《魔师宫秘道》满通关结算",
+    "sourceDungeon": "fuyu_mishi"
   },
   "talang_jue": {
     "name": "踏浪诀",
@@ -421,9 +429,10 @@
     },
     "slot": "movement",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "weapon_school_master",
     "manualId": "manual_talang_jue",
-    "source": "河洛武馆·赵横江"
+    "source": "河洛武馆·赵横江",
+    "sourceDungeon": ""
   },
   "fuhu_jin": {
     "name": "伏虎劲",
@@ -444,9 +453,10 @@
     },
     "slot": "combat",
     "weaponType": "unarmed",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "weapon_school_master",
     "manualId": "manual_fuhu_jin",
-    "source": "河洛武馆·赵横江"
+    "source": "河洛武馆·赵横江",
+    "sourceDungeon": ""
   },
   "tiebi_gong": {
     "name": "铁壁功",
@@ -467,9 +477,10 @@
     },
     "slot": "guard",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "salt_hall_master",
     "manualId": "manual_tiebi_gong",
-    "source": "盐帮分舵·雷万钧"
+    "source": "盐帮分舵·雷万钧",
+    "sourceDungeon": ""
   },
   "wuzhen_pian": {
     "name": "悟真篇",
@@ -489,14 +500,15 @@
     },
     "slot": "study",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "academy_teacher",
     "manualId": "manual_wuzhen_pian",
-    "source": "河洛书院·柳先生"
+    "source": "河洛书院·柳先生",
+    "sourceDungeon": ""
   },
   "xiulou_daofa": {
     "name": "修罗刀法",
     "description": "进攻刀路。序15《马贼王庭》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -512,14 +524,15 @@
     },
     "slot": "combat",
     "weaponType": "blade",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_xiulou_daofa",
-    "source": "序15《马贼王庭》满通关结算"
+    "source": "序15《马贼王庭》满通关结算",
+    "sourceDungeon": "bianhuang_wangting"
   },
   "taiyi_jianfa": {
     "name": "太乙剑法",
     "description": "稳准剑路。序8《竟陵之围》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -535,14 +548,15 @@
     },
     "slot": "combat",
     "weaponType": "sword",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_taiyi_jianfa",
-    "source": "序8《竟陵之围》满通关结算"
+    "source": "序8《竟陵之围》满通关结算",
+    "sourceDungeon": "datang_jingling"
   },
   "dongting_xinf": {
     "name": "洞庭心法",
     "description": "气脉与耐力。序19《巴陵夜泊》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "internal",
     "school": "hidden",
@@ -558,14 +572,15 @@
     },
     "slot": "internal",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_dongting_xinf",
-    "source": "序19《巴陵夜泊》满通关结算"
+    "source": "序19《巴陵夜泊》满通关结算",
+    "sourceDungeon": "datang_baling"
   },
   "lingxu_bu": {
     "name": "凌虚步",
     "description": "轻灵先机。序20《散花楼》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "movement",
     "school": "hidden",
@@ -581,14 +596,15 @@
     },
     "slot": "movement",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_lingxu_bu",
-    "source": "序20《散花楼》满通关结算"
+    "source": "序20《散花楼》满通关结算",
+    "sourceDungeon": "datang_sanhua"
   },
   "poxu_zhi": {
     "name": "破虚指",
     "description": "空手精修。序23《惊雁遗刻》（原《图录·后卷》）满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 4,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -604,14 +620,15 @@
     },
     "slot": "combat",
     "weaponType": "unarmed",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_poxu_zhi",
-    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算"
+    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算",
+    "sourceDungeon": "posui_houjuan"
   },
   "bawang_qiang": {
     "name": "霸王枪",
     "description": "正面冲阵。序18《洛阳粮道》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -627,14 +644,15 @@
     },
     "slot": "combat",
     "weaponType": "spear",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_bawang_qiang",
-    "source": "序18《洛阳粮道》满通关结算"
+    "source": "序18《洛阳粮道》满通关结算",
+    "sourceDungeon": "datang_liangdao"
   },
   "youlong_bian": {
     "name": "游龙鞭",
     "description": "游斗。序21《方夜羽复仇》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -650,14 +668,15 @@
     },
     "slot": "combat",
     "weaponType": "whip",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_youlong_bian",
-    "source": "序21《方夜羽复仇》满通关结算"
+    "source": "序21《方夜羽复仇》满通关结算",
+    "sourceDungeon": "fuyu_fangfuchou"
   },
   "lieshi_jian": {
     "name": "裂石锏",
     "description": "攻守兼备。序17《瓦岗惊变》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -673,14 +692,15 @@
     },
     "slot": "combat",
     "weaponType": "mace",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_lieshi_jian",
-    "source": "序17《瓦岗惊变》满通关结算"
+    "source": "序17《瓦岗惊变》满通关结算",
+    "sourceDungeon": "datang_wagang"
   },
   "suolang_gou": {
     "name": "锁浪钩",
     "description": "准确牵制。序22《怒蛟水战》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -696,14 +716,15 @@
     },
     "slot": "combat",
     "weaponType": "hook",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_suolang_gou",
-    "source": "序22《怒蛟水战》满通关结算"
+    "source": "序22《怒蛟水战》满通关结算",
+    "sourceDungeon": "fuyu_shuizhan"
   },
   "mantian_huayu": {
     "name": "漫天花雨",
     "description": "唐门暗器专精。序44《唐门试炼》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 4,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -720,14 +741,15 @@
     },
     "slot": "combat",
     "weaponType": "hidden_weapon",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_mantian_huayu",
-    "source": "序44《唐门试炼》满通关结算"
+    "source": "序44《唐门试炼》满通关结算",
+    "sourceDungeon": "bashu_tangmen_trial"
   },
   "fengmo_gun": {
     "name": "疯魔棍",
     "description": "棍路攻守。序19《巴陵夜泊》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 3,
     "type": "ADVANCED",
     "category": "combat",
     "school": "hidden",
@@ -743,14 +765,15 @@
     },
     "slot": "combat",
     "weaponType": "staff",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_fengmo_gun",
-    "source": "序19《巴陵夜泊》满通关结算"
+    "source": "序19《巴陵夜泊》满通关结算",
+    "sourceDungeon": "datang_baling"
   },
   "taxue_wuhen": {
     "name": "踏雪无痕",
     "description": "身法专精。序30《剑池》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 4,
     "type": "ADVANCED",
     "category": "movement",
     "school": "hidden",
@@ -766,14 +789,15 @@
     },
     "slot": "movement",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_taxue_wuhen",
-    "source": "序30《剑池》满通关结算"
+    "source": "序30《剑池》满通关结算",
+    "sourceDungeon": "jiangnan_jianchi"
   },
   "jingang_buhuai": {
     "name": "金刚不坏",
     "description": "守御专精。序37《竟陵试炼殿》满通关结算，获得完整传承后自主修炼。",
-    "rarity": 2,
+    "rarity": 4,
     "type": "ADVANCED",
     "category": "guard",
     "school": "hidden",
@@ -789,8 +813,9 @@
     },
     "slot": "guard",
     "weaponType": "",
-    "teacherId": "ancient_scroll_keeper",
+    "teacherId": "",
     "manualId": "manual_jingang_buhuai",
-    "source": "序37《竟陵试炼殿》满通关结算"
+    "source": "序37《竟陵试炼殿》满通关结算",
+    "sourceDungeon": "jingling_trial_hall"
   }
 }

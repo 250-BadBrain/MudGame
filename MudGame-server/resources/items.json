@@ -1896,11 +1896,7 @@
     "effects": {
       "learnSkill": "csj_changshengjue"
     },
-    "source": "序47《行宫惊变》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序47《行宫惊变》满通关结算"
   },
   "manual_jyg_zhanshentu_dao": {
     "name": "战神图录秘本",
@@ -1918,11 +1914,7 @@
     "effects": {
       "learnSkill": "jyg_zhanshentu_dao"
     },
-    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算"
   },
   "manual_tiandao_blade": {
     "name": "天刀八诀秘本",
@@ -1940,11 +1932,7 @@
     "effects": {
       "learnSkill": "tiandao_blade"
     },
-    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承"
   },
   "manual_thunder_sword": {
     "name": "奔雷剑法秘本",
@@ -1962,11 +1950,7 @@
     "effects": {
       "learnSkill": "thunder_sword"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "旧版迁移保留；新入门由指定老师传授。"
   },
   "manual_bloody_blade": {
     "name": "血战刀法秘本",
@@ -1984,11 +1968,7 @@
     "effects": {
       "learnSkill": "bloody_blade"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "旧版迁移保留；新入门由指定老师传授。"
   },
   "manual_cihang_jiandian": {
     "name": "慈航剑典秘本",
@@ -2006,11 +1986,7 @@
     "effects": {
       "learnSkill": "cihang_jiandian"
     },
-    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承"
   },
   "manual_hunyuan_neigong": {
     "name": "混元功秘本",
@@ -2028,11 +2004,7 @@
     "effects": {
       "learnSkill": "hunyuan_neigong"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "旧版迁移保留；新入门由指定老师传授。"
   },
   "manual_tianmo_ce": {
     "name": "天魔策秘本",
@@ -2050,11 +2022,7 @@
     "effects": {
       "learnSkill": "tianmo_ce"
     },
-    "source": "序39《魔师宫秘道》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序39《魔师宫秘道》满通关结算"
   },
   "manual_talang_jue": {
     "name": "踏浪诀秘本",
@@ -2072,11 +2040,7 @@
     "effects": {
       "learnSkill": "talang_jue"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "旧版迁移保留；新入门由指定老师传授。"
   },
   "manual_fuhu_jin": {
     "name": "伏虎劲秘本",
@@ -2094,11 +2058,7 @@
     "effects": {
       "learnSkill": "fuhu_jin"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "旧版迁移保留；新入门由指定老师传授。"
   },
   "manual_tiebi_gong": {
     "name": "铁壁功秘本",
@@ -2116,11 +2076,7 @@
     "effects": {
       "learnSkill": "tiebi_gong"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "旧版迁移保留；新入门由指定老师传授。"
   },
   "manual_wuzhen_pian": {
     "name": "悟真篇秘本",
@@ -2138,11 +2094,7 @@
     "effects": {
       "learnSkill": "wuzhen_pian"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "旧版迁移保留；新入门由指定老师传授。"
   },
   "manual_xiulou_daofa": {
     "name": "修罗刀法秘本",
@@ -2160,11 +2112,7 @@
     "effects": {
       "learnSkill": "xiulou_daofa"
     },
-    "source": "序15《马贼王庭》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序15《马贼王庭》满通关结算"
   },
   "manual_taiyi_jianfa": {
     "name": "太乙剑法秘本",
@@ -2182,11 +2130,7 @@
     "effects": {
       "learnSkill": "taiyi_jianfa"
     },
-    "source": "序8《竟陵之围》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序8《竟陵之围》满通关结算"
   },
   "manual_dongting_xinf": {
     "name": "洞庭心法秘本",
@@ -2204,11 +2148,7 @@
     "effects": {
       "learnSkill": "dongting_xinf"
     },
-    "source": "序19《巴陵夜泊》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序19《巴陵夜泊》满通关结算"
   },
   "manual_lingxu_bu": {
     "name": "凌虚步秘本",
@@ -2226,11 +2166,7 @@
     "effects": {
       "learnSkill": "lingxu_bu"
     },
-    "source": "序20《散花楼》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序20《散花楼》满通关结算"
   },
   "manual_poxu_zhi": {
     "name": "破虚指秘本",
@@ -2248,11 +2184,7 @@
     "effects": {
       "learnSkill": "poxu_zhi"
     },
-    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算"
   },
   "manual_bawang_qiang": {
     "name": "霸王枪秘本",
@@ -2270,11 +2202,7 @@
     "effects": {
       "learnSkill": "bawang_qiang"
     },
-    "source": "序18《洛阳粮道》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序18《洛阳粮道》满通关结算"
   },
   "manual_youlong_bian": {
     "name": "游龙鞭秘本",
@@ -2292,11 +2220,7 @@
     "effects": {
       "learnSkill": "youlong_bian"
     },
-    "source": "序21《方夜羽复仇》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序21《方夜羽复仇》满通关结算"
   },
   "manual_lieshi_jian": {
     "name": "裂石锏秘本",
@@ -2314,11 +2238,7 @@
     "effects": {
       "learnSkill": "lieshi_jian"
     },
-    "source": "序17《瓦岗惊变》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序17《瓦岗惊变》满通关结算"
   },
   "manual_suolang_gou": {
     "name": "锁浪钩秘本",
@@ -2336,11 +2256,7 @@
     "effects": {
       "learnSkill": "suolang_gou"
     },
-    "source": "序22《怒蛟水战》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序22《怒蛟水战》满通关结算"
   },
   "manual_mantian_huayu": {
     "name": "漫天花雨秘本",
@@ -2358,11 +2274,7 @@
     "effects": {
       "learnSkill": "mantian_huayu"
     },
-    "source": "序44《唐门试炼》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序44《唐门试炼》满通关结算"
   },
   "manual_fengmo_gun": {
     "name": "疯魔棍秘本",
@@ -2380,11 +2292,7 @@
     "effects": {
       "learnSkill": "fengmo_gun"
     },
-    "source": "序19《巴陵夜泊》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序19《巴陵夜泊》满通关结算"
   },
   "manual_taxue_wuhen": {
     "name": "踏雪无痕秘本",
@@ -2402,11 +2310,7 @@
     "effects": {
       "learnSkill": "taxue_wuhen"
     },
-    "source": "序30《剑池》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序30《剑池》满通关结算"
   },
   "manual_jingang_buhuai": {
     "name": "金刚不坏秘本",
@@ -2424,11 +2328,7 @@
     "effects": {
       "learnSkill": "jingang_buhuai"
     },
-    "source": "序37《竟陵试炼殿》满通关结算",
-    "FirstClaim": true,
-    "Sellable": false,
-    "Value": 0,
-    "Bind": "character"
+    "source": "序37《竟陵试炼殿》满通关结算"
   },
   "training_spear": {
     "name": "练习长枪",

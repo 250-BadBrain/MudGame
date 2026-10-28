@@ -208,5 +208,11 @@
     "items": {
       "posui_huan": 1
     }
+  },
+  "quickRewards": {
+    "items": {
+      "dry_ration": 2,
+      "bronze_fragment": 2
+    }
   }
 }

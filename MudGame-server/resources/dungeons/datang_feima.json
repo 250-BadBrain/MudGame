@@ -213,5 +213,11 @@
     "items": {
       "tianma_ling": 1
     }
+  },
+  "quickRewards": {
+    "items": {
+      "xiaohuandan": 1,
+      "herb": 10
+    }
   }
 }

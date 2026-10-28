@@ -77,7 +77,7 @@ func TestZhanshenFullFlow(t *testing.T) {
 		t.Fatalf("open box failed: %v", err)
 	}
 
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave dungeon failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
@@ -146,7 +146,7 @@ func TestLiangdaoFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave dungeon failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
@@ -218,7 +218,7 @@ func TestBalingFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
@@ -227,9 +227,6 @@ func TestBalingFullFlow(t *testing.T) {
 		t.Fatalf("expected manual_dongting_xinf (FirstClaim), got %d", p.Backpack["manual_dongting_xinf"])
 	}
 	// dongting_ruanjia 走概率掉落
-	if p.Backpack["dongting_ruanjia"] < 0 {
-		t.Fatal("negative dongting_ruanjia")
-	}
 	if !p.Flags["dungeon_cleared_datang_baling"] {
 		t.Fatal("expected cleared flag")
 	}
@@ -295,12 +292,12 @@ func TestSanhuaFullFlow(t *testing.T) {
 	if _, err := r.DoRoomAction(playerID, "open_box_sh"); err != nil {
 		t.Fatalf("open box failed: %v", err)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["sanhua_yuzhuo"] < 0 || p.Backpack["manual_lingxu_bu"] != 1 {
+	if p.Backpack["manual_lingxu_bu"] != 1 {
 		t.Fatalf("expected rewards, got yuzhuo=%d page=%d", p.Backpack["sanhua_yuzhuo"], p.Backpack["manual_lingxu_bu"])
 	}
 	if !p.Flags["dungeon_cleared_datang_sanhua"] {
@@ -364,7 +361,7 @@ func TestFangfuchouFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
@@ -432,12 +429,12 @@ func TestShuizhanFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()
 	p := after[playerID]
-	if p.Backpack["fenshui_ci"] < 0 || !p.Flags["dungeon_cleared_fuyu_shuizhan"] {
+	if !p.Flags["dungeon_cleared_fuyu_shuizhan"] {
 		t.Fatalf("expected rewards, got ci=%d flag=%v", p.Backpack["fenshui_ci"], p.Flags["dungeon_cleared_fuyu_shuizhan"])
 	}
 }
@@ -499,7 +496,7 @@ func TestHoujuanFullFlow(t *testing.T) {
 	if inst.Progress != 100 {
 		t.Fatalf("expected 100%%, got %d (%+v)", inst.Progress, inst.ObjectiveProgress)
 	}
-	if _, err := r.LeaveDungeon(playerID); err != nil {
+	if _, err := leaveDungeonWithRewardCheck(t, r, playerID); err != nil {
 		t.Fatalf("leave failed: %v", err)
 	}
 	after, _ := r.loadPlayers()

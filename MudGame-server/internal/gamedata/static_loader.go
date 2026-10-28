@@ -182,6 +182,9 @@ func loadFromDisk() (StaticData, error) {
 	if err := validateContentData(resourceDir, rooms, npcs, dialogues, quests); err != nil {
 		return StaticData{}, err
 	}
+	if err := validateQuickRewards(resourceDir, items); err != nil {
+		return StaticData{}, err
+	}
 	return StaticData{
 		WorldOrder: worldOrder,
 		Worlds:     worlds,

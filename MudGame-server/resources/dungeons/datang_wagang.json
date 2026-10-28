@@ -180,5 +180,8 @@
       "lieshi_mace": 1,
       "manual_lieshi_jian": 1
     }
+  },
+  "quickRewards": {
+    "money": 300
   }
 }

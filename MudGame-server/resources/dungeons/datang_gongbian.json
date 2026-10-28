@@ -1,7 +1,7 @@
 {
   "id": "datang_gongbian",
   "name": "东都宫变",
-  "description": "宫变之夜，杨广的仪仗在乾清宫广场被截。一名自称金吾卫旧部的宫女冒死送出密信——乾清宫的密道里藏着能让这场政变翻盘的名册。你潜入火光冲天的宫城，在叛军的刀锋与忠卒的血泊之间，护送那个足以改写天下的人走出这座吃人的皇城。",
+  "description": "宫变之夜，宫女云雀冒死求援。你潜入东都宫城，突破东华门、查明假山密道、击败叛将，再取出密账名册，从枯井脱身。",
   "order": 37,
   "chainId": "datang_double_dragon",
   "chainName": "大唐双龙传",
@@ -60,21 +60,29 @@
         "taken"
       ],
       "nextState": "read",
-      "message": "你借着火把翻开名册。第一页的名字让你倒吸一口凉气——那不是一个官员，是你在洛阳见过的每一个人。",
+      "message": "你展开名册，记下与叛军勾结的官员和往来款项。云雀确认册页无缺后与你攀绳出井。宫城仍在燃烧，你们已带着证据脱身。",
       "repeatMessage": "名册上的名字你已记在心里。"
     }
   },
   "rooms": {
     "gb_00": {
       "name": "宫门火光",
-      "description": "宫变之夜。乾清宫广场上烈焰冲天，倒伏的仪仗和碎裂的丹墀之间，溃散的守军与叛军的喊杀声交织。你从倒塌的宫墙缺口翻入——脚下踩到一具尸体时，才发现自己握刀的手在抖。",
+      "description": "宫变之夜，东都宫门前烈焰冲天。倒伏的仪仗横在缺口里，甬道深处传来叛军的喊杀声。一名宫女躲在仪仗后，正朝你打手势。",
       "exits": {
         "north": "gb_01"
       },
       "npcs": [],
       "actions": [
         "find_contact"
-      ]
+      ],
+      "exitRequirements": {
+        "north": {
+          "requiredPuzzleStates": {
+            "contact": "found"
+          },
+          "message": "先找到接应的宫女，确认潜入路线。"
+        }
+      }
     },
     "gb_01": {
       "name": "东华门甬道",
@@ -103,9 +111,7 @@
         "east": "gb_01",
         "north": "gb_03"
       },
-      "npcs": [
-        "gb2_yunque"
-      ]
+      "npcs": []
     },
     "gb_03": {
       "name": "御花园石径",
@@ -119,11 +125,19 @@
       ],
       "actions": [
         "examine_rockery"
-      ]
+      ],
+      "exitRequirements": {
+        "east": {
+          "requiredPuzzleStates": {
+            "rockery": "examined"
+          },
+          "message": "先检查假山，找到通往藏册密道的线索。"
+        }
+      }
     },
     "gb_04": {
-      "name": "乾清宫广场",
-      "description": "乾清宫广场是宫变的中心——叛将独孤嶙的铁骑把广场围成一个铁桶。他看见你，猛地拔出佩刀指向天穹：\"杀了他！一个活口都不能留！\"",
+      "name": "宫城内廷广场",
+      "description": "内廷广场被叛军封锁。叛将独孤嶙守在通往密道的石阶前，铁甲在火光里泛红。他拔刀喝道：“名册绝不能落到外人手里！”",
       "exits": {
         "west": "gb_03",
         "south": "gb_05"
@@ -141,8 +155,8 @@
       ]
     },
     "gb_05": {
-      "name": "密道出口",
-      "description": "密道的尽头是一口枯井。你攀着井绳爬出来，头顶是久违的星空。云雀靠在井沿喘息，手里攥着那本改变一切的册子。远处的宫城还在燃烧，但你们已经出来了。",
+      "name": "密道藏册处",
+      "description": "石阶尽头是一条陈旧密道。墙边的暗格露出油布一角，更远处垂下一根井绳。先找到名册、查明内容，再从枯井离开。",
       "exits": {
         "down": "gb_04"
       },
@@ -158,7 +172,7 @@
       "type": "puzzle",
       "targetId": "contact:found",
       "required": 1,
-      "weight": 10,
+      "weight": 5,
       "description": "找到宫女云雀"
     },
     {
@@ -166,7 +180,7 @@
       "type": "kill",
       "targetId": "gb_pegasus_sergeant",
       "required": 1,
-      "weight": 30,
+      "weight": 35,
       "description": "突破东华门"
     },
     {
@@ -174,7 +188,7 @@
       "type": "puzzle",
       "targetId": "rockery:examined",
       "required": 1,
-      "weight": 10,
+      "weight": 5,
       "description": "发现假山密道"
     },
     {
@@ -182,8 +196,16 @@
       "type": "kill",
       "targetId": "gb_dugu_ling",
       "required": 1,
-      "weight": 50,
+      "weight": 45,
       "description": "击败叛将独孤嶙"
+    },
+    {
+      "id": "read_ledgers",
+      "type": "puzzle",
+      "targetId": "ledgers:read",
+      "required": 1,
+      "weight": 10,
+      "description": "取得并阅读名册，带着证据脱身"
     }
   ],
   "rewards": {

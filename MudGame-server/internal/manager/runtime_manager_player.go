@@ -1420,6 +1420,9 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		if dnpc.NonCombat {
 			return "", errors.New(dnpc.Name + "并无战意，你无从下手。")
 		}
+		if dnpc.CombatMode == "protected" {
+			return "", errors.New("target_is_protected")
+		}
 		if dnpc.RoomID != p.RoomID {
 			return "", errors.New("target_not_in_room")
 		}

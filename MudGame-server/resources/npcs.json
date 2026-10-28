@@ -299,7 +299,9 @@
       "basic_blade": 220,
       "basic_sword": 220,
       "basic_qinggong": 180,
-      "basic_mace": 160
+      "basic_mace": 160,
+      "talang_jue": 1,
+      "fuhu_jin": 1
     },
     "attributes": {
       "level": 20,
@@ -368,7 +370,9 @@
     "importance": "local",
     "skills": {
       "basic_neigong": 260,
-      "basic_literacy": 200
+      "basic_literacy": 200,
+      "hunyuan_neigong": 1,
+      "wuzhen_pian": 1
     },
     "attributes": {
       "level": 20,
@@ -439,7 +443,9 @@
       "basic_blade": 260,
       "basic_parry": 240,
       "basic_qinggong": 160,
-      "basic_spear": 180
+      "basic_spear": 180,
+      "thunder_sword": 1,
+      "bloody_blade": 1
     },
     "attributes": {
       "level": 20,
@@ -1109,7 +1115,8 @@
       }
     },
     "aggressive": false,
-    "dialogueId": "dlg_csj_boatman"
+    "dialogueId": "dlg_csj_boatman",
+    "combatMode": "protected"
   },
   "csj_yuwen_soldier": {
     "name": "宇文阀武士",
@@ -1510,7 +1517,8 @@
       }
     },
     "aggressive": false,
-    "dialogueId": "dlg_nj_sentinel"
+    "dialogueId": "dlg_nj_sentinel",
+    "combatMode": "protected"
   },
   "nj_wounded": {
     "name": "怒蛟帮伤兵",
@@ -1579,7 +1587,8 @@
     },
     "aggressive": false,
     "dialogueId": "dlg_nj_wounded",
-    "nonCombat": true
+    "nonCombat": true,
+    "combatMode": "protected"
   },
   "nj_daoshou": {
     "name": "魔师宫刀手",
@@ -2182,7 +2191,8 @@
       }
     },
     "aggressive": false,
-    "dialogueId": "dlg_bh_ji_qianqian"
+    "dialogueId": "dlg_bh_ji_qianqian",
+    "combatMode": "protected"
   },
   "bh_swordsman": {
     "name": "荒集剑手",
@@ -2846,7 +2856,8 @@
       }
     },
     "aggressive": false,
-    "dialogueId": "dlg_lj_old_boatman"
+    "dialogueId": "dlg_lj_old_boatman",
+    "combatMode": "protected"
   },
   "lj_phantom_soldier": {
     "name": "江雾幻兵",
@@ -2992,33 +3003,7 @@
     "description": "翻阅旧闻的灰袍老者，愿意谈江湖掌故；真正的武学传承仍须亲历。",
     "role": "teacher",
     "importance": "local",
-    "skills": {
-      "csj_changshengjue": 120,
-      "jyg_zhanshentu_dao": 120,
-      "thunder_sword": 120,
-      "bloody_blade": 120,
-      "cihang_jiandian": 120,
-      "hunyuan_neigong": 120,
-      "tianmo_ce": 120,
-      "talang_jue": 120,
-      "fuhu_jin": 120,
-      "tiebi_gong": 120,
-      "wuzhen_pian": 120,
-      "xiulou_daofa": 120,
-      "taiyi_jianfa": 120,
-      "dongting_xinf": 120,
-      "lingxu_bu": 120,
-      "poxu_zhi": 120,
-      "mantian_huayu": 120,
-      "fengmo_gun": 120,
-      "taxue_wuhen": 120,
-      "jingang_buhuai": 120,
-      "tiandao_blade": 120,
-      "bawang_qiang": 120,
-      "youlong_bian": 120,
-      "lieshi_jian": 120,
-      "suolang_gou": 120
-    },
+    "skills": {},
     "attributes": {
       "level": 30,
       "realm": "elite",
@@ -3548,7 +3533,8 @@
         "seal": 0
       }
     },
-    "dialogueId": "dlg_jl_fang"
+    "dialogueId": "dlg_jl_fang",
+    "combatMode": "protected"
   },
   "jl_lu_miaozi": {
     "name": "鲁妙子",
@@ -3615,7 +3601,8 @@
         "seal": 0
       }
     },
-    "dialogueId": "dlg_jl_lu"
+    "dialogueId": "dlg_jl_lu",
+    "combatMode": "protected"
   },
   "jl_kou_zhong": {
     "name": "寇仲",
@@ -3682,7 +3669,8 @@
         "seal": 0
       }
     },
-    "dialogueId": "dlg_jl_twins"
+    "dialogueId": "dlg_jl_twins",
+    "combatMode": "protected"
   },
   "jl_xu_ziling": {
     "name": "徐子陵",
@@ -3816,7 +3804,8 @@
         "seal": 0
       }
     },
-    "dialogueId": "dlg_jl_refugees"
+    "dialogueId": "dlg_jl_refugees",
+    "combatMode": "protected"
   },
   "td_steward": {
     "name": "宋阀管事",
@@ -3883,7 +3872,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "td_wood_puppet": {
     "name": "木人",
@@ -4103,7 +4093,8 @@
     "skills": {
       "basic_staff": 240,
       "basic_parry": 180,
-      "basic_hook": 160
+      "basic_hook": 160,
+      "tiebi_gong": 1
     },
     "attributes": {
       "level": 18,
@@ -5230,7 +5221,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "fm_shang_xiuxun": {
     "name": "商秀珣",
@@ -5297,7 +5289,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "fm_yinkui_acolyte": {
     "name": "阴葵刺客",
@@ -5563,7 +5556,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "ca_tea_master": {
     "name": "茶博士",
@@ -5630,7 +5624,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "ca_shi_feixuan": {
     "name": "师妃暄",
@@ -5697,7 +5692,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "ca_yinkui_guard": {
     "name": "阴葵死士",
@@ -5903,7 +5899,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "jm_mongol_warrior": {
     "name": "蒙古武士",
@@ -6175,7 +6172,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "zd_shaman_guard": {
     "name": "萨满武士",
@@ -6447,7 +6445,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "wt_archer": {
     "name": "哨塔弓手",
@@ -6719,7 +6718,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "mg_disciple": {
     "name": "魔师宫弟子",
@@ -6991,7 +6991,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "wg_elite": {
     "name": "瓦岗锐士",
@@ -7470,7 +7471,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "ld_wagang_rider": {
     "name": "瓦岗游骑",
@@ -7676,7 +7678,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "db_scout": {
     "name": "水军哨探",
@@ -7948,7 +7951,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "sh_yinkui_maid": {
     "name": "阴葵侍女",
@@ -8220,7 +8224,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "fy2_moshi_elite": {
     "name": "魔师宫好手",
@@ -8426,7 +8431,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "hy2_yuan_sailor": {
     "name": "元军水手",
@@ -8903,7 +8909,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "bd_flag_guard": {
     "name": "燕军旗卫",
@@ -9175,7 +9182,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "kj_yinkui_adept": {
     "name": "井底伏修",
@@ -9447,7 +9455,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "sd_ape_rouge": {
     "name": "剑阁劫匪",
@@ -9719,7 +9728,8 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "combatMode": "protected"
   },
   "yz_salt_merchant": {
     "name": "程盐商",

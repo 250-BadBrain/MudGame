@@ -203,5 +203,11 @@
       "simple_medicine": 2,
       "dry_ration": 1
     }
+  },
+  "quickRewards": {
+    "items": {
+      "herb": 4,
+      "dry_ration": 2
+    }
   }
 }

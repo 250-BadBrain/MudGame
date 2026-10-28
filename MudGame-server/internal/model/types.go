@@ -80,6 +80,7 @@ type ResistanceAttributes struct {
 const MartialVersion = 2
 
 type Player struct {
+	QuickCompleteSequence int
 	MartialVersion        int
 	ActiveArts            map[string]string
 	RecoveryItemReadyAt   int64

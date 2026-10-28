@@ -170,5 +170,8 @@
       "liangdao_spear": 1,
       "manual_bawang_qiang": 1
     }
+  },
+  "quickRewards": {
+    "money": 300
   }
 }

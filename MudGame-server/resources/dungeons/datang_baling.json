@@ -211,5 +211,8 @@
       "manual_dongting_xinf": 1,
       "manual_fengmo_gun": 1
     }
+  },
+  "quickRewards": {
+    "money": 550
   }
 }

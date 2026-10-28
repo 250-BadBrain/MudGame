@@ -197,5 +197,8 @@
       "nujiao_saber": 1,
       "nujiao_belt": 1
     }
+  },
+  "quickRewards": {
+    "money": 250
   }
 }

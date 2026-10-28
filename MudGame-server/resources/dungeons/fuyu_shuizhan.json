@@ -208,5 +208,8 @@
       "suolang_hook": 1,
       "manual_suolang_gou": 1
     }
+  },
+  "quickRewards": {
+    "money": 700
   }
 }

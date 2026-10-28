@@ -192,3 +192,8 @@ items.json：usable/effects（recoverHp回复、learnSkill参悟）、equipmentS
 对话两条路径共享一次性历史；repeatable仅用于有真实成本的服务，Talk不自动制作，ChooseDialogue先检查全部成本及任务资格，再提交副作用。前端日志明确选择服务。GetQuests返回完整目录与状态、地点、目标进度，旧别名不重复呈现或发奖。
 
 Stop及常规LeaveDungeon不能取消死亡，战斗退出需烟尘粉；UseItem的房间变化须推送旧房离开、新房进入及当前快照。打坐/疗伤起手不恢复，完整10秒才结算。公共老师、商人和剧情任务人物不能击杀，合适的老师仍可切磋；切磋按有效MaxHP检查满血及20%认输线。强化先校验空闲与持有，网页确认成本，保持+2/级和5级上限。
+
+
+## 2026-10-28快速完成与掉落修复
+
+详见[权威规格](design/dungeon_quick_complete_2026_10_28.md)。quick_complete_dungeon要求选中角色、公共世界空闲、该关满通关旗标和持久化expectedSequence；正常掉落与快速结算共用manager/runtime_manager_dungeon_rewards.go。模板quickRewards只配置途中固定items/money，资源加载验证来源，禁止临时钥匙/付费配方。副本protected须同时在实例Kill后端校验。

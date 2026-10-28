@@ -172,5 +172,8 @@
     "flags": {
       "zhandao_case_done": true
     }
+  },
+  "quickRewards": {
+    "money": 300
   }
 }

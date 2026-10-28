@@ -113,6 +113,7 @@ type RuntimeRepository interface {
 	EnterWorld(playerID, worldID string) (map[string]interface{}, error)
 	EnterDungeon(playerID, dungeonID string) (map[string]interface{}, error)
 	LeaveDungeon(playerID string) (map[string]interface{}, error)
+	QuickCompleteDungeon(playerID, dungeonID string, expectedSequence int) (map[string]interface{}, error)
 	Move(playerID, direction string) (map[string]interface{}, error)
 	GetShop(playerID, npcID string) ([]map[string]interface{}, string, string, string, error)
 	Buy(playerID, npcID, itemID string, amount int) (int, int, error)

@@ -207,5 +207,8 @@
       "langwang_dao": 1,
       "manual_xiulou_daofa": 1
     }
+  },
+  "quickRewards": {
+    "money": 700
   }
 }

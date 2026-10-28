@@ -211,5 +211,11 @@
     "experience": 1180,
     "potential": 720,
     "money": 420
+  },
+  "quickRewards": {
+    "items": {
+      "xiaohuandan": 2
+    },
+    "money": 400
   }
 }

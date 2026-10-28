@@ -148,7 +148,7 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, p
 		Backpack:              map[string]int{"iron_pickaxe": 1},
 		Equipment:             map[string]string{},
 		QuestStates:           map[string]model.QuestState{},
-		Flags:                 map[string]bool{},
+		Flags:                 map[string]bool{"dungeon_drop_claim_repair_v1": true},
 		DialogueHistory:       map[string]bool{},
 		Reputations:           map[string]int{},
 		Online:                false,

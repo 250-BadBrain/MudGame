@@ -31,7 +31,7 @@ func TestDropRateLogic(t *testing.T) {
 	if !p.Flags["dungeon_cleared_test_dungeon"] {
 		t.Fatal("flag missing")
 	}
-	t.Logf("first clear: iron_sword=%d (40%% chance)", p.Backpack["iron_sword"])
+	t.Logf("first clear: iron_sword=%d (15%% chance)", p.Backpack["iron_sword"])
 
 	p.Backpack["bronze_fragment"] = 0
 	result2 := applyDungeonSettlementReward(p, s)

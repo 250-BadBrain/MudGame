@@ -188,5 +188,8 @@
     "experience": 400,
     "potential": 270,
     "money": 120
+  },
+  "quickRewards": {
+    "money": 250
   }
 }
