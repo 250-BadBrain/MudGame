@@ -66,8 +66,13 @@ func (r *RuntimeManager) npcMoveDefNoLock(entityID, moveID string) (model.Combat
 func (r *RuntimeManager) scheduleNPCIntentsNoLock(players map[string]*model.Player) {
 	r.initNPCCombatStateNoLock()
 	now := combatNowUnix(r)
-	for key := range r.npcCombatStates {
-		actorKey := parseActorKey(key)
+	// 遍历NPC侧绑定（玩家主动发起的每场战斗都为NPC建有绑定）
+	for _, binding := range r.combatBindings {
+		if binding.Self.Kind == "player" {
+			continue
+		}
+		actorKey := binding.Self
+		key := actorKey.String()
 		if _, busy := r.npcIntents[key]; busy {
 			continue
 		}
@@ -75,8 +80,7 @@ func (r *RuntimeManager) scheduleNPCIntentsNoLock(players map[string]*model.Play
 		if entity == nil || !entity.canAct() {
 			continue
 		}
-		binding := r.currentBindingNoLock(actorKey)
-		if binding == nil || binding.AutoRounds < 1 {
+		if binding.AutoRounds < 1 {
 			continue
 		}
 		state := r.npcCombatStateNoLock(actorKey)

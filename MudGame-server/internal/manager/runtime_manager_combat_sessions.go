@@ -321,11 +321,8 @@ func (b *combatBinding) recentEventNoLock(now int64, from ActorKey, kind string,
 		if needDamage && ev.ActualDamage <= 0 {
 			continue
 		}
-		if ev.At < now || ev.At >= now+4000 {
-			continue
-		}
-		if now-ev.At >= 4000 {
-			continue
+		if ev.At > now || now-ev.At >= 4000 {
+			continue // 窗口：0≤经过时间<4000毫秒
 		}
 		return &b.Recent[i]
 	}

@@ -1397,6 +1397,8 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 		p.CombatType = "SPAR"
 		r.beginCombatBindingNoLock(ActorKey{Kind: "player", EntityID: p.ID},
 			ActorKey{Kind: "static_npc", EntityID: npc.ID}, p.RoomID, "SPAR")
+		r.beginCombatBindingNoLock(ActorKey{Kind: "static_npc", EntityID: npc.ID},
+			ActorKey{Kind: "player", EntityID: p.ID}, p.RoomID, "SPAR")
 		if err := r.savePlayers(players); err != nil {
 			return "", err
 		}
@@ -1485,6 +1487,8 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		p.CombatType = "KILL"
 		r.beginCombatBindingNoLock(ActorKey{Kind: "player", EntityID: p.ID},
 			ActorKey{Kind: "dungeon_npc", EntityID: dnpc.ID}, p.RoomID, "KILL") // 副本NPC运行时ID全服唯一
+		r.beginCombatBindingNoLock(ActorKey{Kind: "dungeon_npc", EntityID: dnpc.ID},
+			ActorKey{Kind: "player", EntityID: p.ID}, p.RoomID, "KILL")
 		if err := r.savePlayers(players); err != nil {
 			return "", err
 		}
@@ -1514,6 +1518,8 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		p.CombatType = "KILL"
 		r.beginCombatBindingNoLock(ActorKey{Kind: "player", EntityID: p.ID},
 			ActorKey{Kind: "static_npc", EntityID: npc.ID}, p.RoomID, "KILL")
+		r.beginCombatBindingNoLock(ActorKey{Kind: "static_npc", EntityID: npc.ID},
+			ActorKey{Kind: "player", EntityID: p.ID}, p.RoomID, "KILL")
 		if err := r.savePlayers(players); err != nil {
 			return "", err
 		}

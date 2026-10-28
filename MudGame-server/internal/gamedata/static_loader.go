@@ -765,11 +765,12 @@ func copyCombatMoves(in []model.CombatMoveDef) []model.CombatMoveDef {
 	out := make([]model.CombatMoveDef, 0, len(in))
 	for _, m := range in {
 		m.Conditions = append([]model.MoveCondition{}, m.Conditions...)
-		m.Effects = make([]model.MoveEffect, 0, len(m.Effects))
+		effects := make([]model.MoveEffect, 0, len(m.Effects))
 		for _, e := range m.Effects {
 			e.Tags = append([]string{}, e.Tags...)
-			m.Effects = append(m.Effects, e)
+			effects = append(effects, e)
 		}
+		m.Effects = effects
 		out = append(out, m)
 	}
 	return out

@@ -30,6 +30,7 @@ type RuntimeManager struct {
 	autosaveEvery time.Duration
 	autosaveStop  chan struct{}
 	autosaveDone  chan struct{}
+	closeOnce     sync.Once
 
 	dungeonLoadErr error
 	dungeonMgr     *engruntime.Manager
@@ -155,7 +156,9 @@ func (r *RuntimeManager) flushDirtyNoLock() error {
 }
 
 func (r *RuntimeManager) Close() error {
-	close(r.autosaveStop)
+	r.closeOnce.Do(func() {
+		close(r.autosaveStop)
+	})
 	<-r.autosaveDone
 	r.mu.Lock()
 	defer r.mu.Unlock()

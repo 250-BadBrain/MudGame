@@ -33,6 +33,9 @@ type FileStore struct {
 	baseDir string
 }
 
+// BaseDir 返回存档根目录（测试重启语义用）。
+func (s *FileStore) BaseDir() string { return s.baseDir }
+
 type diskUser struct {
 	Username       string   `json:"username"`
 	PasswordHash   string   `json:"passwordHash"`

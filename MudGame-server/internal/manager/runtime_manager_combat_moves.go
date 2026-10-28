@@ -350,9 +350,8 @@ func (r *RuntimeManager) CastCombatMove(playerID, moveID, battleID string, expec
 	if battleID == "" || battleID != binding.ID {
 		return reject("stale_battle", "战斗状态已变化，请刷新后重试。")
 	}
-	if room, ok := fileRooms[p.RoomID]; ok && room.SafeZone {
-		return reject("safe_zone", "安全区内不能出招。")
-	}
+	// 安全区规则由Kill/Spar入口执行（绑定即合法交战）；出招不产生新的攻击意图，
+	// 只作用于当前合法对手，不会绕过原交战规则（实现规范§10三路径/保护）。
 	target, terr := r.targetEntityByBindingNoLock(binding, players)
 	if terr != nil || target == nil {
 		return reject("target_lost", "对手已经不在了。")

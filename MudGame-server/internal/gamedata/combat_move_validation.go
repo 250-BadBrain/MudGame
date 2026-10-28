@@ -82,6 +82,7 @@ var moveConditionKinds = map[string]bool{
 var moveStats = map[string]bool{
 	"damage": true, "hit_pp": true, "crit_pp": true, "armor_ignore": true, "guard_pierce": true,
 	"attack": true, "defense": true, "hit": true, "dodge": true, "parry": true,
+	"parry_mult": true, // 锁浪借势：招架概率乘数（乘数=max(0.3,1-Value)）
 	"initiative": true, "vulnerability": true, "bleed": true, "haste": true,
 }
 
@@ -149,7 +150,7 @@ func validateCombatMoveDef(m model.CombatMoveDef) error {
 var effectOpRules = map[string]struct{ targets, triggers, scopes []string }{
 	"heal":                {[]string{"self"}, []string{"cast"}, nil},
 	"hot":                 {[]string{"self"}, []string{"cast"}, nil},
-	"next_active":         {[]string{"self"}, []string{"cast"}, []string{"active_attack"}},
+	"next_active":         {[]string{"self"}, []string{"cast", "missed"}, []string{"active_attack"}}, // 逆浪回步在来袭落空后补蓄势
 	"guard":               {[]string{"self"}, []string{"cast"}, []string{"direct_incoming", "multi_active"}},
 	"stat_mod":            {[]string{"self", "opponent"}, []string{"cast", "hit"}, nil},
 	"outgoing_reduce":     {[]string{"opponent"}, []string{"cast", "hit"}, []string{"normal_or_active"}},
@@ -198,8 +199,15 @@ func validateMoveEffect(m model.CombatMoveDef, e model.MoveEffect) error {
 			return fmt.Errorf("op %s forbids scope %q", e.Op, e.Scope)
 		}
 	}
+	// stat_mod 的负值是削弱语义（横拦/拿虎卸劲等），其余Op幅度非负
+	if e.Op != "stat_mod" && e.Value < 0 {
+		return fmt.Errorf("op %s has negative value", e.Op)
+	}
+	if e.Cap < 0 || e.Power < 0 {
+		return fmt.Errorf("op %s has negative cap/power", e.Op)
+	}
 	for _, v := range []float64{e.Value, e.Cap, e.Power} {
-		if math.IsNaN(v) || math.IsInf(v, 0) || v < 0 {
+		if math.IsNaN(v) || math.IsInf(v, 0) {
 			return fmt.Errorf("op %s has invalid scalar", e.Op)
 		}
 	}

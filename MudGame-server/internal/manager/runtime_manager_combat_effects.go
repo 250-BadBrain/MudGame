@@ -18,20 +18,24 @@ func (r *RuntimeManager) applyMoveCastEffectsNoLock(def model.CombatMoveDef, lev
 		switch e.Op {
 		case "cleanse":
 			r.applyCleanseNoLock(actor, e.Tags)
-		case "haste", "immunity", "mp_discount":
+		case "self_hp_cost":
+			selfDamage += int(float64(actorMaxHPNoLock(r, actor)) * e.Value)
+		case "next_active", "guard", "stat_mod", "vulnerability", "haste", "immunity", "mp_discount", "paid_mp_refund", "delayed_damage_heal":
+			if e.Target != "self" {
+				continue // 敌向效果由命中触发或debuff专用路径处理
+			}
 			ef := &CombatEffect{
 				ID: newBattleToken(), BattleID: battleID, MoveID: def.ID,
 				Owner: actor, Source: actor, Op: e.Op, Stat: e.Stat, Scope: e.Scope,
-				Group: e.Group, Value: e.Value, Cap: e.Cap, Charges: e.Charges,
-				DurationMs: e.DurationMs, CreatedAt: now, ExpiresAt: effectExpiry(now, e.DurationMs), Tags: e.Tags,
+				Group: e.Group, Value: e.Value, Cap: e.Cap, Power: e.Power,
+				Charges: e.Charges, Ticks: e.Ticks, DurationMs: e.DurationMs,
+				CreatedAt: now, ExpiresAt: effectExpiry(now, e.DurationMs), Tags: e.Tags,
+				PaidMP: paidMP,
 			}
 			r.addCombatEffectNoLock(ef)
-		case "self_hp_cost":
-			selfDamage += int(float64(actorMaxHPNoLock(r, actor)) * e.Value)
 		}
 	}
 	_ = target
-	_ = paidMP
 	return selfDamage
 }
 
