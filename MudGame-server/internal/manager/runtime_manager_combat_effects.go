@@ -88,6 +88,24 @@ func (r *RuntimeManager) applyMoveHitEffectsNoLock(def model.CombatMoveDef, leve
 	}
 }
 
+// applyDebuffCastNoLock 纯敌向减益（缚龙引）命中后落效果：按正常命中概率单独判定，
+// 无伤害、无暴击/招架，不消耗next_active增伤，也不触发来袭防护/反击。
+func (r *RuntimeManager) applyDebuffCastNoLock(def model.CombatMoveDef, level int, source, targetOwner ActorKey, battleID string) {
+	now := combatNowUnix(r)
+	for _, e := range def.EffectiveEffects(level) {
+		if e.Op != "stat_mod" || e.Target != "opponent" {
+			continue
+		}
+		ef := &CombatEffect{
+			ID: newBattleToken(), BattleID: battleID, MoveID: def.ID,
+			Owner: targetOwner, Source: source, Op: e.Op, Stat: e.Stat, Scope: e.Scope,
+			Group: e.Group, Value: e.Value, Charges: max(1, e.Charges),
+			CreatedAt: now, ExpiresAt: effectExpiry(now, e.DurationMs), Tags: e.Tags,
+		}
+		r.addCombatEffectNoLock(ef)
+	}
+}
+
 // bleedBaseNoLock 流血预算的D快照基数：以动作结算时的基础伤害公式重算（不含倍率）。
 func bleedBaseNoLock(act combatAction) int {
 	aAttack := act.Actor.attrs.Attack

@@ -39,13 +39,14 @@ type RuntimeManager struct {
 	staticNPCs   map[string]*engruntime.NPCState
 
 	// 主动招式战斗会话（实现规范§3）：mu保护；临时效果只在内存，CD随玩家存档持久化
-	combatBindings map[string]*combatBinding  // battleID → 绑定
-	actorBattles   map[string]string          // actorKey → battleID
-	combatEffects  map[string][]*CombatEffect // ownerKey → 效果列表
-	npcIntents     map[string]*npcIntentState // npcKey → 公开意图
-	combatRevision map[string]int64           // playerID → 视图修订号
-	combatEpoch    string                     // 进程纪元：重启即换，旧视图作废
-	combatNow      func() time.Time           // 可注入时钟，测试用
+	combatBindings  map[string]*combatBinding  // battleID → 绑定
+	actorBattles    map[string]string          // actorKey → battleID
+	combatEffects   map[string][]*CombatEffect // ownerKey → 效果列表
+	npcIntents      map[string]*npcIntentState // npcKey → 公开意图
+	npcCombatStates map[string]*npcCombatState // npcKey → 内存双CD
+	combatRevision  map[string]int64           // playerID → 视图修订号
+	combatEpoch     string                     // 进程纪元：重启即换，旧视图作废
+	combatNow       func() time.Time           // 可注入时钟，测试用
 }
 
 var (

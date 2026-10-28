@@ -118,6 +118,7 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 		}
 	}
 
+	r.scheduleNPCIntentsNoLock(players)
 	for roomID := range updatedRoom {
 		result.UpdatedRoomIDs = append(result.UpdatedRoomIDs, roomID)
 	}

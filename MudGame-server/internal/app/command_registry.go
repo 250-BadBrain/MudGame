@@ -57,6 +57,8 @@ func (s *Server) registerCommandHandlers() {
 	s.handlersGame["kill"] = s.handleGameKill
 	s.handlersGame["spar"] = s.handleGameSpar
 	s.handlersGame["relive"] = s.handleGameRelive
+	s.handlersGame["get_combat_moves"] = s.handleGameGetCombatMoves
+	s.handlersGame["cast_combat_move"] = s.handleGameCastCombatMove
 
 	// chat commands
 	s.handlersChat["public"] = s.handleChatPublic

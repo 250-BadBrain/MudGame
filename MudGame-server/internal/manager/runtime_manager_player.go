@@ -1395,6 +1395,8 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 		p.State = "COMBAT"
 		p.TargetID = npc.ID
 		p.CombatType = "SPAR"
+		r.beginCombatBindingNoLock(ActorKey{Kind: "player", EntityID: p.ID},
+			ActorKey{Kind: "static_npc", EntityID: npc.ID}, p.RoomID, "SPAR")
 		if err := r.savePlayers(players); err != nil {
 			return "", err
 		}
@@ -1425,6 +1427,10 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 	t.State = "COMBAT"
 	t.TargetID = p.ID
 	t.CombatType = "SPAR"
+	selfKey := ActorKey{Kind: "player", EntityID: p.ID}
+	targetKey := ActorKey{Kind: "player", EntityID: t.ID}
+	r.beginCombatBindingNoLock(selfKey, targetKey, p.RoomID, "SPAR")
+	r.beginCombatBindingNoLock(targetKey, selfKey, p.RoomID, "SPAR")
 	if err := r.savePlayers(players); err != nil {
 		return "", err
 	}
@@ -1477,6 +1483,8 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		p.State = "COMBAT"
 		p.TargetID = dnpc.ID
 		p.CombatType = "KILL"
+		r.beginCombatBindingNoLock(ActorKey{Kind: "player", EntityID: p.ID},
+			ActorKey{Kind: "dungeon_npc", EntityID: dnpc.ID}, p.RoomID, "KILL") // 副本NPC运行时ID全服唯一
 		if err := r.savePlayers(players); err != nil {
 			return "", err
 		}
@@ -1504,6 +1512,8 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 		p.State = "COMBAT"
 		p.TargetID = npc.ID
 		p.CombatType = "KILL"
+		r.beginCombatBindingNoLock(ActorKey{Kind: "player", EntityID: p.ID},
+			ActorKey{Kind: "static_npc", EntityID: npc.ID}, p.RoomID, "KILL")
 		if err := r.savePlayers(players); err != nil {
 			return "", err
 		}
@@ -1531,6 +1541,10 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 	t.State = "COMBAT"
 	t.TargetID = p.ID
 	t.CombatType = "KILL"
+	selfKey := ActorKey{Kind: "player", EntityID: p.ID}
+	targetKey := ActorKey{Kind: "player", EntityID: t.ID}
+	r.beginCombatBindingNoLock(selfKey, targetKey, p.RoomID, "KILL")
+	r.beginCombatBindingNoLock(targetKey, selfKey, p.RoomID, "KILL")
 	if err := r.savePlayers(players); err != nil {
 		return "", err
 	}

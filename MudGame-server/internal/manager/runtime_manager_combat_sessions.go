@@ -82,8 +82,8 @@ type combatBinding struct {
 
 // npcIntentState NPC公开预告的招式意图：到公开时刻仍按即时技能结算。
 type npcIntentState struct {
+	Kind        string // static_npc / dungeon_npc
 	NPCID       string
-	InstanceID  string
 	MoveID      string
 	MoveName    string
 	TargetID    string

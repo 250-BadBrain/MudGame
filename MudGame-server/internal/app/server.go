@@ -435,11 +435,20 @@ func toString(v interface{}) string {
 func (s *Server) runBackgroundTicker() {
 	statusTicker := time.NewTicker(1 * time.Second)
 	combatTicker := time.NewTicker(2 * time.Second)
+	moveTicker := time.NewTicker(100 * time.Millisecond)
 	defer statusTicker.Stop()
 	defer combatTicker.Stop()
+	defer moveTicker.Stop()
 
 	for {
 		select {
+		case <-moveTicker.C:
+			// 100ms调度仅处理NPC意图的到点释放，不在该精度结算普攻/流血（实现规范§8）
+			if moveRes, err := engine.ProcessCombatMovesTickWithEffects(s.repo); err != nil {
+				log.Printf("combat moves tick failed: %v", err)
+			} else {
+				s.emitTickResult(moveRes)
+			}
 		case <-statusTicker.C:
 			if statusRes, err := engine.ProcessStatusTickWithEffects(s.repo); err != nil {
 				log.Printf("status tick failed: %v", err)

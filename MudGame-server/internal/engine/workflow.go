@@ -147,6 +147,9 @@ type RuntimeRepository interface {
 	IsPlayerInRoom(playerID, roomID string) bool
 	ProcessCombatTick() (model.CombatTickResult, error)
 	ProcessStatusTick() (model.CombatTickResult, error)
+	GetCombatMoves(playerID string) (model.CombatMovesView, error)
+	CastCombatMove(playerID, moveID, battleID string, expectedSequence int64) (model.CombatMoveResult, error)
+	ProcessCombatMovesTick() (model.CombatTickResult, error)
 }
 
 func asString(v interface{}) string {
