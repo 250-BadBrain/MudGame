@@ -87,26 +87,41 @@ func (r *RuntimeManager) scheduleNPCIntentsNoLock(players map[string]*model.Play
 		if art == nil {
 			continue
 		}
-		for _, moveID := range art.MoveIDs {
-			def, _, ok := r.npcMoveDefNoLock(actorKey.EntityID, moveID)
-			if !ok {
-				continue
-			}
-			if entity.mp != nil && *entity.mp < def.MPCost {
-				continue
-			}
-			if skillReady, ok := state.Skills[moveID]; ok && now < skillReady.ReadyAt {
-				continue
-			}
-			r.npcIntents[key] = &npcIntentState{
-				Kind: actorKey.Kind, NPCID: actorKey.EntityID,
-				MoveID: moveID, MoveName: def.Name,
-				TargetID:    binding.Target.EntityID,
-				AnnouncedAt: now, ReleaseAt: now + 2000,
-			}
-			break // 按配置顺序取第一个可用招式
+		ready := func(moveID string) bool {
+			skillReady, ok := state.Skills[moveID]
+			return !(ok && now < skillReady.ReadyAt)
 		}
-		_ = art
+		hpRatio := float64(*entity.hp) / float64(entity.maxHP)
+		preferDefense := art.LowHPPercent > 0 && hpRatio < art.LowHPPercent
+		pick := ""
+		if preferDefense { // 低血优先非攻击招式（宋缺归鞘/庞斑幻身）
+			for _, moveID := range art.MoveIDs {
+				def, _, ok := r.npcMoveDefNoLock(actorKey.EntityID, moveID)
+				if ok && def.Kind != "attack" && ready(moveID) && (entity.mp == nil || *entity.mp >= def.MPCost) {
+					pick = moveID
+					break
+				}
+			}
+		}
+		if pick == "" {
+			for _, moveID := range art.MoveIDs {
+				def, _, ok := r.npcMoveDefNoLock(actorKey.EntityID, moveID)
+				if ok && ready(moveID) && (entity.mp == nil || *entity.mp >= def.MPCost) {
+					pick = moveID
+					break
+				}
+			}
+		}
+		if pick == "" {
+			continue
+		}
+		def, _, _ := r.npcMoveDefNoLock(actorKey.EntityID, pick)
+		r.npcIntents[key] = &npcIntentState{
+			Kind: actorKey.Kind, NPCID: actorKey.EntityID,
+			MoveID: pick, MoveName: def.Name,
+			TargetID:    binding.Target.EntityID,
+			AnnouncedAt: now, ReleaseAt: now + 2000,
+		}
 	}
 }
 

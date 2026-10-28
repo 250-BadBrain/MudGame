@@ -3096,7 +3096,18 @@
     },
     "specialty": "拦江一战·残影·拦江战台的武备与守位",
     "dialogueId": "content_npc_lj_pang_ban",
-    "combatMode": "kill"
+    "combatMode": "kill",
+    "combatArts": [
+      {
+        "artId": "tianmo_ce",
+        "level": 100,
+        "moveIds": [
+          "tianmo_ce/m01",
+          "tianmo_ce/m02"
+        ],
+        "lowHPPercent": 0.5
+      }
+    ]
   },
   "ancient_scroll_keeper": {
     "name": "灰袍老者",
@@ -4214,7 +4225,18 @@
     },
     "skills": {},
     "dialogueId": "content_npc_td_song_que",
-    "specialty": "天刀试炼·演武场的武备与守位"
+    "specialty": "天刀试炼·演武场的武备与守位",
+    "combatArts": [
+      {
+        "artId": "tiandao_blade",
+        "level": 100,
+        "moveIds": [
+          "tiandao_blade/m01",
+          "tiandao_blade/m02"
+        ],
+        "lowHPPercent": 0.4
+      }
+    ]
   },
   "salt_hall_master": {
     "name": "雷万钧",
@@ -8133,7 +8155,16 @@
       "defense": -8
     },
     "specialty": "巴陵夜泊·中军楼船的武备与守位",
-    "dialogueId": "content_npc_db_zhang_xiu"
+    "dialogueId": "content_npc_db_zhang_xiu",
+    "combatArts": [
+      {
+        "artId": "bawang_qiang",
+        "level": 100,
+        "moveIds": [
+          "bawang_qiang/m01"
+        ]
+      }
+    ]
   },
   "sh_informant": {
     "name": "琵琶娘子",

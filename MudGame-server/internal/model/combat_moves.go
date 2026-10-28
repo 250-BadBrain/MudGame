@@ -71,10 +71,12 @@ type CombatMoveDef struct {
 }
 
 // NPCCombatArt NPC 的只读战斗配置：不进入教学 Skills，防止玩家免费请教绝学。
+// MoveIDs 顺序即出招优先序；LowHPPercent>0 时气血低于该比例优先选非攻击招式（提案§7）。
 type NPCCombatArt struct {
-	ArtID   string   `json:"artId"`
-	Level   int      `json:"level"`
-	MoveIDs []string `json:"moveIds"`
+	ArtID        string   `json:"artId"`
+	Level        int      `json:"level"`
+	MoveIDs      []string `json:"moveIds"`
+	LowHPPercent float64  `json:"lowHPPercent,omitempty"`
 }
 
 // CombatMoveGrowth 招式效果成长系数 S(L)=0.8+0.4L/(L+100)：
