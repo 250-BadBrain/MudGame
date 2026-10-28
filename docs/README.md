@@ -23,7 +23,7 @@
 
 ## 设计
 
-- [武功专属主动招式完整提案](design/active_martial_moves_proposal.md)（**待确认、未实现**：38门72招、逐招独立10～60秒CD、招式数量不随等级增长）
+- [武功专属主动招式完整提案](design/active_martial_moves_proposal.md)（**待确认、未实现**：38门72招；即时主动与普攻并行，4秒出招CD联动攻速，逐招10～60秒技能CD，合并进度条）
 
 - [城市选择、武学解法与见闻指引](design/connected_exploration_2026_10_28.md)（三件旧事接入现场、六门武学替代解法）
 
