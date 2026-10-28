@@ -83,7 +83,7 @@ func (r *RuntimeManager) GetBackpack(playerID string) ([]map[string]interface{},
 		items = append(items, map[string]interface{}{
 			"enhancement": enhancementInfo(p, id),
 			"id":          def.ID, "uniqueId": def.ID, "name": def.Name, "description": def.Description,
-			"rarity": def.Rarity, "value": def.Value, "stackable": def.Stackable,
+			"rarity": def.Rarity, "value": def.Value, "sellPrice": model.ItemSellPrice(def.Value), "stackable": def.Stackable,
 			"unit": def.Unit, "count": count, "equipmentSlot": def.EquipmentSlot, "sellable": def.Sellable,
 			"type": def.Type, "subtype": def.Subtype, "bind": def.Bind, "questItem": def.QuestItem,
 			"usable": def.Usable, "effects": def.Effects, "source": def.Source,
@@ -414,6 +414,7 @@ func (r *RuntimeManager) GetShop(playerID, npcID string) ([]map[string]interface
 			"subtype":     def.Subtype,
 			"rarity":      def.Rarity,
 			"value":       def.Value,
+			"sellPrice":   model.ItemSellPrice(def.Value),
 			"stackable":   def.Stackable,
 			"unit":        def.Unit,
 			"bind":        def.Bind,
@@ -432,11 +433,12 @@ func (r *RuntimeManager) GetShop(playerID, npcID string) ([]map[string]interface
 }
 
 func (r *RuntimeManager) Buy(playerID, npcID, itemID string, amount int) (int, int, error) {
+	itemID = canonicalItemID(itemID)
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	if amount <= 0 {
-		amount = 1
+	if !model.ValidTransactionQuantity(amount) {
+		return 0, 0, errors.New("数量须为1至10000的整数")
 	}
 	players, err := r.loadPlayers()
 	if err != nil {
@@ -501,12 +503,19 @@ func (r *RuntimeManager) Buy(playerID, npcID, itemID string, amount int) (int, i
 	if !ok {
 		return 0, 0, errors.New("item_not_found")
 	}
-	total := def.Value * amount
+	total, err := model.CheckedProduct(def.Value, amount)
+	if err != nil {
+		return 0, 0, err
+	}
+	newCount, err := model.CheckedAdd(p.Backpack[itemID], amount)
+	if err != nil {
+		return 0, 0, err
+	}
 	if p.Money < total {
 		return 0, 0, errors.New("money_not_enough")
 	}
 	p.Money -= total
-	p.Backpack[itemID] += amount
+	p.Backpack[itemID] = newCount
 	if limit != -1 {
 		shopInventory[itemID] -= amount
 		if dungeonShop {
@@ -522,11 +531,12 @@ func (r *RuntimeManager) Buy(playerID, npcID, itemID string, amount int) (int, i
 }
 
 func (r *RuntimeManager) DiscardItem(playerID, itemID string, amount int) error {
+	itemID = canonicalItemID(itemID)
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	if amount <= 0 {
-		amount = 1
+	if !model.ValidTransactionQuantity(amount) {
+		return errors.New("数量须为1至10000的整数")
 	}
 	players, err := r.loadPlayers()
 	if err != nil {
@@ -554,11 +564,12 @@ func (r *RuntimeManager) DiscardItem(playerID, itemID string, amount int) error 
 }
 
 func (r *RuntimeManager) SellItem(playerID, itemID string, amount int) (int, int, error) {
+	itemID = canonicalItemID(itemID)
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
-	if amount <= 0 {
-		amount = 1
+	if !model.ValidTransactionQuantity(amount) {
+		return 0, 0, errors.New("数量须为1至10000的整数")
 	}
 	players, err := r.loadPlayers()
 	if err != nil {
@@ -579,7 +590,18 @@ func (r *RuntimeManager) SellItem(playerID, itemID string, amount int) (int, int
 	if !ok {
 		return 0, 0, exception.ErrRoomNotFound
 	}
-	if len(room.NPCIDs) == 0 {
+	buyer := false
+	for _, nid := range room.NPCIDs {
+		if npc, _, ok := r.dungeonNPCInRoomNoLock(room.ID, nid); ok && npc.IsShop {
+			buyer = true
+			break
+		}
+		if npc, ok := r.staticNPCInRoomNoLock(room, nid); ok && npc.IsShop {
+			buyer = true
+			break
+		}
+	}
+	if !buyer {
 		return 0, 0, errors.New("no_npc_buyer")
 	}
 	have := p.Backpack[itemID]
@@ -596,12 +618,19 @@ func (r *RuntimeManager) SellItem(playerID, itemID string, amount int) (int, int
 	if !def.Sellable {
 		return 0, 0, errors.New("item_not_sellable")
 	}
+	gain, err := model.CheckedProduct(model.ItemSellPrice(def.Value), amount)
+	if err != nil {
+		return 0, 0, err
+	}
+	newMoney, err := model.CheckedAdd(p.Money, gain)
+	if err != nil {
+		return 0, 0, err
+	}
 	p.Backpack[itemID] -= amount
 	if p.Backpack[itemID] <= 0 {
 		delete(p.Backpack, itemID)
 	}
-	gain := (def.Value / 2) * amount
-	p.Money += gain
+	p.Money = newMoney
 	if err := r.savePlayers(players); err != nil {
 		return 0, 0, err
 	}
@@ -609,6 +638,7 @@ func (r *RuntimeManager) SellItem(playerID, itemID string, amount int) (int, int
 }
 
 func (r *RuntimeManager) EquipItem(playerID, itemID string) error {
+	itemID = canonicalItemID(itemID)
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -1151,6 +1181,7 @@ func (r *RuntimeManager) insightSkillPageNoLock(players map[string]*model.Player
 }
 
 func (r *RuntimeManager) UseItem(playerID, itemID string) (string, error) {
+	itemID = canonicalItemID(itemID)
 	r.mu.Lock()
 	defer r.mu.Unlock()
 
@@ -1353,6 +1384,11 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 		if npc.Attributes.Resources.HP < npc.Attributes.Resources.MaxHP {
 			return "", errors.New("target_not_full")
 		}
+		for _, other := range players {
+			if other.State == "COMBAT" && other.TargetID == npc.ID {
+				return "", errors.New("target_busy")
+			}
+		}
 		p.State = "COMBAT"
 		p.TargetID = npc.ID
 		p.CombatType = "SPAR"
@@ -1360,6 +1396,9 @@ func (r *RuntimeManager) Spar(playerID, targetID string) (string, error) {
 			return "", err
 		}
 		return p.CharacterName + "对" + npc.Name + "抱拳道：请赐教！", nil
+	}
+	if room, ok := fileRooms[p.RoomID]; ok && room.SafeZone {
+		return "", errors.New("安全区内不能攻击玩家")
 	}
 	t, ok2 := players[targetID]
 	if !ok2 {
@@ -1466,6 +1505,9 @@ func (r *RuntimeManager) Kill(playerID, targetID string) (string, error) {
 			return "", err
 		}
 		return p.CharacterName + "对" + npc.Name + "喝道：纳命来！", nil
+	}
+	if room, ok := fileRooms[p.RoomID]; ok && room.SafeZone {
+		return "", errors.New("安全区内不能攻击玩家")
 	}
 	t, ok2 := players[targetID]
 	if !ok2 {

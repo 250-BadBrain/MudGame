@@ -199,10 +199,12 @@ func (s *FileStore) LoadPlayers() (map[string]*model.Player, error) {
 			learningSkillID = v
 		}
 		attrs := model.NormalizeAttributes(dp.Attributes)
-		// 副本内死亡的角色落盘时会重置为 ly_00/IDLE 但保留 HP=0，
-		// 加载时恢复气血，避免出现"活着但零血"的异常状态
-		if state != "DEAD" && attrs.Resources.HP <= 0 {
-			attrs.Resources.HP = attrs.Resources.MaxHP
+		// Zero HP is a life-state invariant, never a login recovery source.
+		if attrs.Resources.HP <= 0 {
+			state = "DEAD"
+		}
+		if state == "DEAD" {
+			attrs.Resources.HP = 0
 		}
 		players[dp.ID] = &model.Player{
 			QuickCompleteSequence: dp.QuickCompleteSequence, MartialVersion: dp.MartialVersion, ActiveArts: dp.ActiveArts, RecoveryItemReadyAt: dp.RecoveryItemReadyAt,
@@ -254,7 +256,9 @@ func (s *FileStore) SavePlayers(players map[string]*model.Player) error {
 		learningTeacherLevel := p.LearningTeacherLevel
 		if strings.HasPrefix(roomID, "dg_") {
 			roomID = "ly_00"
-			state = "IDLE"
+			if state != "DEAD" {
+				state = "IDLE"
+			}
 			targetID = ""
 			combatType = ""
 			learningSkillID = ""

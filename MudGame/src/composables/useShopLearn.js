@@ -46,7 +46,7 @@ export function useShopLearn({ sendGameCommand, getPlayerId, checkCanAct, closeI
       newAmount = 10000
     }
 
-    buyAmount.value = newAmount
+    buyAmount.value = Math.min(10000, newAmount)
   }
 
   const openShop = (npc) => {

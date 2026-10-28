@@ -116,7 +116,7 @@ func TestLiaoshuiLairFullFlow(t *testing.T) {
 	}
 }
 
-// 回春堂：古铜残片进入炼丹配方；诊金走银两
+// 回春堂：材料价值高于成品，诊金按现货价格收取
 func TestHerbalPillAndConsultFee(t *testing.T) {
 	r := NewRuntimeManager(t.TempDir())
 	t.Cleanup(func() { _ = r.Close() })
@@ -131,10 +131,10 @@ func TestHerbalPillAndConsultFee(t *testing.T) {
 	players, _ := r.loadPlayers()
 	p := players[playerID]
 	p.RoomID = "ly_herbal_hall"
-	p.Backpack["herb"] = 5
-	p.Backpack["dry_ration"] = 2
+	p.Backpack["herb"] = 15
+	p.Backpack["dry_ration"] = 4
 	p.Backpack["bronze_fragment"] = 1
-	p.Money = 100
+	p.Money = 120
 	if err := r.savePlayers(players); err != nil {
 		r.mu.Unlock()
 		t.Fatalf("save failed: %v", err)

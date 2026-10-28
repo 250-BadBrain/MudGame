@@ -167,6 +167,8 @@ func applyFlatBonus(eff *model.EffectiveAttributes, key string, value int) {
 		eff.Dodge += value
 	case "parry":
 		eff.Parry += value
+	case "initiative":
+		eff.Initiative += value
 	case "critRate":
 		eff.CritRate += float64(value)
 	case "maxHp":

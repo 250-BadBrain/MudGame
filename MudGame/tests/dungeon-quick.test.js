@@ -29,3 +29,17 @@ test('uncleared, busy and dungeon characters cannot quick complete from the UI',
   state.value = 'IDLE'; room.value.worldId = 'dungeon_temple'; d.quickCompleteDungeon()
   assert.equal(sent.length, 0)
 })
+
+test('finishing meditation immediately restores quick completion without refetching the directory', () => {
+  const state = ref('MEDITATING'), sent = []
+  const d = useDungeonView({ room: ref({ worldId: 'luoyang' }), addLog: () => {}, addDungeonLeaveButtonLog: () => {},
+    sendGameCommand: (...args) => sent.push(args), checkCanAct: () => true, getPlayerId: () => 'player', getPlayerState: () => state.value })
+  d.dungeonsList.value = [{ id: 'temple', cleared: true, canQuickComplete: false, quickCompleteSequence: 2 }]
+  d.selectedDungeonId.value = 'temple'
+  assert.equal(d.canQuickCompleteSelected.value, false)
+  state.value = 'IDLE'
+  assert.equal(d.canQuickCompleteSelected.value, true)
+  d.quickCompleteDungeon()
+  assert.equal(sent.length, 1)
+  d.disposeDungeonView()
+})

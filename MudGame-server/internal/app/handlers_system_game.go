@@ -44,11 +44,16 @@ func (s *Server) handleSystemCreateCharacter(conn *websocket.Conn, cmd protocol.
 		return
 	}
 	charName := toString(cmd.Args["characterName"])
-	str := toInt(cmd.Args["strength"], 20)
-	con := toInt(cmd.Args["constitution"], 20)
-	agi := toInt(cmd.Args["agility"], 20)
-	perception := toInt(cmd.Args["perception"], 16)
-	willpower := toInt(cmd.Args["willpower"], 16)
+	values := make([]int, 5)
+	for i, key := range []string{"strength", "constitution", "agility", "perception", "willpower"} {
+		n, ok := strictBoundedInt(cmd.Args[key], 10, 25)
+		if !ok {
+			s.write(conn, protocol.NewResult(protocol.TypeSystem, "create_character", false, map[string]interface{}{"error": "先天属性每项须为10至25的整数"}, nil))
+			return
+		}
+		values[i] = n
+	}
+	str, con, agi, perception, willpower := values[0], values[1], values[2], values[3], values[4]
 	id, err := s.repo.CreateCharacter(username, charName, str, con, agi, perception, willpower)
 	if err != nil {
 		s.write(conn, protocol.NewResult(protocol.TypeSystem, "create_character", false, map[string]interface{}{"error": err.Error()}, nil))

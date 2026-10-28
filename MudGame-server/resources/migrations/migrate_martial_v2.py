@@ -114,7 +114,30 @@ def clamp_resources(p, skills, items):
     if p.get('state') != 'DEAD': resources['hp'] = max(1, resources['hp'])
 
 
-def migrate(player, legacy, skills, items):
+def normalize_item_aliases(p, aliases):
+    inventory = p.setdefault('items', {})
+    upgrades = p.setdefault('enhancedItems', {})
+    for old, canonical in aliases.items():
+        if old in inventory:
+            inventory[canonical] = integer(inventory.get(canonical, 0) + inventory.pop(old), 'alias quantity')
+        for slot, iid in p.get('equipment', {}).items():
+            if iid == old: p['equipment'][slot] = canonical
+        if old in upgrades:
+            level, other = upgrades.pop(old), upgrades.get(canonical, 0)
+            if not all(type(v) is int and 0 <= v <= 5 for v in [level, other]): raise ValueError('invalid alias enhancement')
+            duplicate = min(level, other)
+            p['money'] = integer(p.get('money', 0) + 100 * duplicate * (duplicate + 1), 'alias money')
+            if duplicate: inventory['bronze_fragment'] = integer(inventory.get('bronze_fragment', 0) + duplicate * (duplicate + 1) // 2, 'alias bronze')
+            upgrades[canonical] = max(level, other)
+        flags = p.setdefault('flags', {})
+        key = 'item_claimed_' + old
+        if key in flags:
+            old_claim = flags.pop(key)
+            flags['item_claimed_' + canonical] = flags.get('item_claimed_' + canonical, False) or old_claim
+    return p
+
+
+def migrate(player, legacy, skills, items, aliases=None):
     p = copy.deepcopy(player)
     if p.get('martialVersion', 0) == VERSION:
         return p, {'id': p['id'], 'status': 'already_v2'}
@@ -123,6 +146,8 @@ def migrate(player, legacy, skills, items):
     potential = integer(attributes.get('potential', 0), 'potential')
     experience = integer(attributes.get('experience', 0), 'experience')
     cap = experience_cap(experience)
+    if aliases is None: aliases = read(Path(__file__).resolve().parents[1] / 'item_aliases.json')
+    normalize_item_aliases(p, aliases)
     old_skills = p.get('skills') or {}; old_progress = p.get('skillLearningProgress') or {}
     credits = {}; owned = set(); retired = 0
     old_total = potential
@@ -220,7 +245,7 @@ def run(data_dir, resources, apply=False, server_stopped=False, backup_dir=None)
         if path.is_symlink(): raise ValueError('symlinked player files are not supported')
         original = path.read_bytes(); player = read(path)
         if path.stem != player['id']: raise ValueError('player filename/id mismatch')
-        updated, report = migrate(player, legacy, skills, items)
+        updated, report = migrate(player, legacy, skills, items, read(resources / 'item_aliases.json'))
         reports.append(report)
         if report['status'] != 'already_v2':
             payload = (json.dumps(updated, ensure_ascii=False, indent=2) + '\n').encode('utf-8')

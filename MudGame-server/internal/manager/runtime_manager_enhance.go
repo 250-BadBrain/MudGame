@@ -11,9 +11,10 @@ import (
 // maxEnhanceLevel 装备强化最大等级
 const maxEnhanceLevel = 5
 
-// EnhanceItem 强化装备：消耗银两 + 古铜残片，永久提升装备主属性。
-// 每级强化 +2 主属性，最高 5 级。费用递增：200/400/600/800/1000 铜。
+// EnhanceItem 消耗钱币与古铜，按物品ID记录强化等级；当前每个效果均+2/级。
+// 最高5级，费用递增200/400/600/800/1000铜。预算调整等待用户选择。
 func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
+	itemID = canonicalItemID(itemID)
 	r.mu.Lock()
 	defer r.mu.Unlock()
 

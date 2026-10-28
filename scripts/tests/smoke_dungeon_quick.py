@@ -13,6 +13,13 @@ ROOT = Path(__file__).resolve().parents[2]
 USER, PASSWORD = 'quick_review_ui', 'temporary-quick-pass'
 
 
+def stable_attributes(attributes):
+    state = {key: value for key, value in attributes.items() if key != 'serverTime'}
+    # Titles are an unordered set returned from a Go map.
+    state['titles'] = sorted(state.get('titles') or [])
+    return state
+
+
 def connect(port, player):
     client = WebSocket(port)
     client.call('system', 'login', username=USER, password=PASSWORD)
@@ -58,7 +65,9 @@ def run(binary, directory):
         after = client.call('command', 'get_attributes')['attributes']
         assert after['currentHp'] == before['currentHp'] and after['currentMp'] == before['currentMp']
         assert not raw_call(client, 'command', 'quick_complete_dungeon', dungeonId=dungeon['id'], expectedSequence=0)['flag']
-        assert client.call('command', 'get_attributes')['attributes'] == after
+        replay_after = client.call('command', 'get_attributes')['attributes']
+        # The server clock advances independently of rejected replay requests.
+        assert stable_attributes(replay_after) == stable_attributes(after), (replay_after, after)
         checks.append('full rewards, fixed process loot, bronze, no recovery and replay rejected')
         second = client.call('command', 'quick_complete_dungeon', dungeonId='datang_changan', expectedSequence=1)['settlement']
         assert second['rewardItems']['bronze_fragment'] == 2 and second['rewardItems']['xiaohuandan'] == 2

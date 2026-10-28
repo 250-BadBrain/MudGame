@@ -90,7 +90,7 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
     viewingItem.value = null
     discardingItem.value = null
     // Default to max amount for selling
-    sellAmount.value = item.count || 1
+    sellAmount.value = Math.min(10000, item.count || 1)
   }
 
   const changeDiscardAmount = (delta) => {
@@ -100,7 +100,7 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
     // Count items in backpack
     // Since we now group items, item.count should be available
     const count = discardingItem.value.count || backpackItems.value.filter(i => i.id === discardingItem.value.id).length
-    if (newAmount > count) newAmount = count
+    newAmount = Math.min(10000, newAmount, count)
 
     discardAmount.value = newAmount
   }
@@ -118,7 +118,7 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
 
   const changeSellAmount = (delta) => {
     let newAmount = sellAmount.value
-    const max = sellingItem.value.count || 1
+    const max = Math.min(10000, sellingItem.value.count || 1)
 
     if (delta === 'min') {
       newAmount = 1
@@ -136,12 +136,12 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
 
   const maxSellCount = computed(() => {
     if (!sellingItem.value) return 1
-    return sellingItem.value.count || 1
+    return Math.min(10000, sellingItem.value.count || 1)
   })
 
   const maxDiscardCount = computed(() => {
     if (!discardingItem.value) return 1
-    return discardingItem.value.count || backpackItems.value.filter(i => i.id === discardingItem.value.id).length || 1
+    return Math.min(10000, discardingItem.value.count || backpackItems.value.filter(i => i.id === discardingItem.value.id).length || 1)
   })
 
   const discardShowAmount = computed(() => {

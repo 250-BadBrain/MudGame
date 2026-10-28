@@ -72,6 +72,7 @@ func (r *RuntimeManager) GetDungeons(playerID string) []map[string]interface{} {
 			})
 		}
 		out = append(out, map[string]interface{}{
+			"contentStatus": tpl.ContentStatus, "contentNote": tpl.ContentNote,
 			"cleared":               player != nil && player.Flags["dungeon_cleared_"+tpl.ID],
 			"canQuickComplete":      quickHint == "",
 			"quickCompleteHint":     quickHint,

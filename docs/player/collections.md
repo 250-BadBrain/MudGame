@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：2004581fb01136bd479729a9b04c7d3687e38494672648bc514a0541835f3ccd；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：76b02a73de7acb5c4d82cf222053b4e333c9b40d11f6820c21fc699269bd1eae；由 scripts/generate_player_guide.py 生成。 -->
 
 # 修行、商店、传承与收藏目录
 
@@ -59,14 +59,14 @@
 
 ## 炼药、熔铸与材料交换
 
-与药师或铁匠交谈后，点击日志里的服务选项，查看明确成本并制作。普通交谈不自动扣钱或材料；配方可以重复，每次都会校验并扣除完整成本。
+与药师或铁匠交谈后，点击日志里的服务选项，查看明确成本并制作。普通交谈不自动扣钱或材料；配方可以重复，每次都会校验并扣除完整成本。成品标称价值严格低于原材料总值，手续费另计。
 
 | 操作 | 人物与位置 | 实际消耗 | 获得 |
 |---|---|---|---|
-| 替我炼一炉金创药（止血草×3 + 干粮×1） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 止血草×3、干粮×1 | 金创药×1 |
-| 制作回春丹（止血草×5、干粮×2） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 止血草×5、干粮×2 | 回春丹×1 |
-| 制作大还丹（止血草×8、干粮×4、150文钱） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 止血草×8、干粮×4 + 150 文钱 | 大还丹×1 |
-| 用干粮抵全部材料（干粮×4） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 干粮×4 | 金创药×1 |
+| 制作金创药（止血草×7、干粮×1） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 止血草×7、干粮×1 | 金创药×1 |
+| 制作回春丹（止血草×15、干粮×4） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 止血草×15、干粮×4 | 回春丹×1 |
+| 制作大还丹（止血草×40、干粮×11、150铜钱） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 止血草×40、干粮×11 + 150 文钱 | 大还丹×1 |
+| 制作金创药（干粮×7） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 干粮×7 | 金创药×1 |
 | 出手止血草（×2 换干粮×1） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 止血草×2 | 干粮×1 |
 | 制作特级大还丹（大还丹×2、干粮×5、300文钱） | 孙回春：[洛阳·回春堂](worlds.md#ly_herbal_hall) | 大还丹×2、干粮×5 + 300 文钱 | 特级大还丹×1 |
 | 制作钢刀（铁剑×1、100文钱） | 钟铁衣：[洛阳·东市](worlds.md#ly_east_market) | 铁剑×1 + 100 文钱 | 钢刀×1 |
@@ -75,7 +75,7 @@
 
 ## 商店与价格
 
-购买按 value 原价，出售通常按 value 的一半向下取整，任务物品不可卖。烟尘粉战斗中消耗一包撤离，不回血；副本按当前进度结算，世界返回本城出生点。
+购买按 value 原价，出售按 value 的20%逐件向下取整，任务物品不可卖。烟尘粉战斗中消耗一包撤离，不回血；副本按当前进度结算，世界返回本城出生点。
 
 <a id="shop-east_market_keeper"></a>
 
@@ -99,7 +99,7 @@
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
 | 铁剑 | 400 | 河洛铁匠打制的铁剑，剑身朴实无华。 |
-| 钢刀 | 400 | 刀背厚重，适合劈斩，是军府和镖局常用的兵器。 |
+| 钢刀 | 300 | 旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。 |
 | 铁棍 | 350 | 一根沉重铁棍，招式简单，胜在结实。 |
 | 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
 | 铁镐 | 600 | 一把结实铁镐，能用于采石、开箱和清理塌方。 |
@@ -206,7 +206,7 @@
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
 | 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 大还丹 | 800 | 战神殿中丹炉里留下的最后一粒大还丹，药香千年不散。气血重创亦可一粒回春。 |
+| 大还丹 | 800 | 传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。 |
 | 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
 
 <a id="shop-dm_jiaoren"></a>
@@ -217,24 +217,24 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 大还丹 | 800 | 战神殿中丹炉里留下的最后一粒大还丹，药香千年不散。气血重创亦可一粒回春。 |
+| 大还丹 | 800 | 传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。 |
 | 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
 
 ## 全部物品与实际获取入口
 
-同名装备可能有历史别名；武学已归并为一门一名。7种江湖秘本仅供旧档迁移保留，新角色直接向指定老师入门。没有可达入口的条目不能作为当前收集目标。
+同名装备已合并为一个规范条目，旧ID仅用于存档兼容；武学已归并为一门一名。7种江湖秘本仅供旧档迁移保留，新角色直接向指定老师入门。没有可达入口的条目不能作为当前收集目标。
 
 | 物品 / ID | 类型与用途 | 当前来源 |
 |---|---|---|
 | 粗布衣<br>`common_clothes` | 衣甲<br>一件耐磨的粗布衣，洛阳城中最常见的行装。 | [杜掌柜商店](collections.md#shop-east_market_keeper)；[牛金牙商店](collections.md#shop-north_market_broker)；[程盐商商店](collections.md#shop-yz_salt_merchant) |
 | 布鞋<br>`common_shoes` | 鞋靴<br>一双普通布鞋，走城中石板路还算合脚。 | [杜掌柜商店](collections.md#shop-east_market_keeper)；[牛金牙商店](collections.md#shop-north_market_broker) |
 | 铁剑<br>`iron_sword` | 兵器；攻击+6<br>河洛铁匠打制的铁剑，剑身朴实无华。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 钢刀<br>`steel_blade` | 兵器；攻击+7<br>刀背厚重，适合劈斩，是军府和镖局常用的兵器。 | [钟铁衣交谈「制作钢刀（铁剑×1、100文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣交谈「制作钢刀（铁棍×1、150文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 钢刀<br>`steel_blade` | 兵器；攻击+7<br>旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。 | [钟铁衣交谈「制作钢刀（铁剑×1、100文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣交谈「制作钢刀（铁棍×1、150文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
 | 铁棍<br>`iron_staff` | 兵器；攻击+5、招架+2<br>一根沉重铁棍，招式简单，胜在结实。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
 | 飞镖<br>`darts` | 兵器；暴击率+1、攻击+6<br>西市常见的暗器，薄而锋利。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith)；[牛金牙商店](collections.md#shop-north_market_broker)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant) |
 | 铁镐<br>`iron_pickaxe` | tool<br>一把结实铁镐，能用于采石、开箱和清理塌方。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith)；[创角自带](worlds.md#labor) |
 | 干粮<br>`dry_ration` | consumable；回复气血 5<br>商旅常备的粗粮饼，味道普通，却能充饥。 | [孙回春交谈「出手止血草（×2 换干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《洛水传闻》](quests.md#escort_rumor_run)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[《扬子江惊变》「打捞铁匣」现场获得](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[《鸡鸣山之约》「取走供品箱」现场获得](stories/posui.md#posui_jiming)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[药田老农商店](collections.md#shop-bs_herbalist)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[各采集点（40%）](worlds.md#labor) |
-| 金创药<br>`simple_medicine` | consumable；回复气血 25<br>普通外伤药，行走江湖的人多少会备上一些。 | [孙回春交谈「替我炼一炉金创药（止血草×3 + 干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「付诊金抓现成的金创药（100文钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「用干粮抵全部材料（干粮×4）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《烽燧疑警》](quests.md#beacon_signal_case)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
+| 金创药<br>`simple_medicine` | consumable；回复气血 25<br>普通外伤药，行走江湖的人多少会备上一些。 | [孙回春交谈「制作金创药（止血草×7、干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「付诊金取现货金创药（120铜钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「制作金创药（干粮×7）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《烽燧疑警》](quests.md#beacon_signal_case)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
 | 烟尘粉<br>`smoke_powder` | consumable；当前使用逻辑未支持其效果；escapeCombat+True<br>战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。 | [任务《漕运疑云》](quests.md#salt_smuggling_case)；[任务《流民疑云》](quests.md#refugee_rumor_case)；[任务《漕银失窃》](quests.md#caoyin_case)；[裴玄商店](collections.md#shop-black_market_broker)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader) |
 | 旧商路残图<br>`old_map_fragment` | material<br>一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。 | [裴玄商店](collections.md#shop-black_market_broker) |
 | 铜匣拓片<br>`bronze_box_rubbing` | quest<br>拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。 | [裴玄商店](collections.md#shop-black_market_broker) |
@@ -245,9 +245,9 @@
 | 杨公宝剑<br>`yanggong_sword` | 兵器；攻击+12、命中+4<br>出自杨公宝库的古剑，剑气内敛，锋锐无匹。 | [100% 结算《杨公宝库》](stories/datang.md#datang_yanggong) |
 | 拦江劲衣<br>`lanjiang_vest` | 衣甲；防御+8、躲闪+3<br>以拦江一战中流传的贴身劲衣，柔韧贴身，避锋藏锐。 | [100% 结算《拦江一战·残影》](stories/fuyu.md#fuyu_lanjiang) |
 | 止血草<br>`herb` | material<br>洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。 | [《扬子江惊变》「打捞铁匣」现场获得](stories/datang.md#datang_changshengjue)；[《飞马牧场》「拾取遗落的玉匣」现场获得](stories/datang.md#datang_feima)；[药田老农商店](collections.md#shop-bs_herbalist)；[普通采集点（60%）](worlds.md#labor) |
-| 回春丹<br>`herb_pill` | medicine；回复气血 60<br>回春堂秘制的伤药，以止血草合古铜药引炼成，一粒下去血止伤愈。 | [孙回春交谈「制作回春丹（止血草×5、干粮×2）」](worlds.md#dialogue-dlg_herbalist_sun) |
+| 回春丹<br>`herb_pill` | medicine；回复气血 60<br>回春堂以止血草与干粮配制的伤药，便于携带，一粒可补益气血。 | [孙回春交谈「制作回春丹（止血草×15、干粮×4）」](worlds.md#dialogue-dlg_herbalist_sun) |
 | 小还丹<br>`xiaohuandan` | medicine；回复气血 100<br>慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。 | [100% 结算《天刀试炼》](stories/datang.md#datang_tiandao)；[《飞马牧场》「拾取遗落的玉匣」现场获得](stories/datang.md#datang_feima)；[《长安风云》「受仙子赠丹」现场获得](stories/datang.md#datang_changan) |
-| 大还丹<br>`dahuandan` | medicine；回复气血 150<br>战神殿中丹炉里留下的最后一粒大还丹，药香千年不散。气血重创亦可一粒回春。 | [孙回春交谈「制作大还丹（止血草×8、干粮×4、150文钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《兰亭帖》](quests.md#lanting_tie)；[任务《慈航托信》](quests.md#changan_letter)；[任务《唐门谢礼》](quests.md#bashu_thanks)；[任务《狼山商路》](quests.md#saibei_treasure)；[任务《琴师心结》](quests.md#jiangnan_heart)；[任务《诗人的真相》](quests.md#dongdu_truth)；[任务《鲛人之歌》](quests.md#dongming_song)；[《战神殿》「拾取遗落玉盒」现场获得](stories/posui.md#posui_zhanshen)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
+| 大还丹<br>`dahuandan` | medicine；回复气血 150<br>传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。 | [孙回春交谈「制作大还丹（止血草×40、干粮×11、150铜钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《兰亭帖》](quests.md#lanting_tie)；[任务《慈航托信》](quests.md#changan_letter)；[任务《唐门谢礼》](quests.md#bashu_thanks)；[任务《狼山商路》](quests.md#saibei_treasure)；[任务《琴师心结》](quests.md#jiangnan_heart)；[任务《诗人的真相》](quests.md#dongdu_truth)；[任务《鲛人之歌》](quests.md#dongming_song)；[《战神殿》「拾取遗落玉盒」现场获得](stories/posui.md#posui_zhanshen)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
 | 狼王刀<br>`langwang_dao` | 兵器；攻击+10、命中+3<br>马贼王赫连霸的佩刀，刀背宽厚，刃口却薄得能吹断头发——边荒十年的风霜都在刀身上。 | [100% 结算《马贼王庭》](stories/bianhuang.md#bianhuang_wangting) |
 | 天魔佩<br>`tianmo_pei` | 戒指；暴击率+3、命中+3<br>厉工退走时遗落的魔门古玉，触手冰凉——佩之能凝神索敌，魔门的旧物未必只属于魔。 | [100% 结算《魔师宫索战》](stories/fuyu.md#fuyu_moshigong) |
 | 瓦岗铁甲<br>`wagang_tiejia` | 衣甲；防御+10、气血上限+50<br>瓦岗军的制式重甲改良而来，甲片层叠如鳞，刀砍上去只留一道白痕。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang) |
@@ -285,7 +285,7 @@
 | 天刀遗篇<br>`songque_testament` | 项链；攻击+4、暴击率+2、先手+2<br>宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。 | [100% 结算《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) |
 | 天魔羽<br>`wanwan_feather` | 戒指；躲闪+3、暴击率+2、内力上限+15<br>婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。 | [100% 结算《飞马试炼殿》](stories/datang.md#feima_trial_hall) |
 | 边不负的念珠<br>`bianbuou_wisdom` | 项链；防御+5、命中+3、内力上限+10<br>边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。 | [100% 结算《长安试炼殿》](stories/datang.md#changan_trial_hall) |
-| 宫变密剑<br>`gongbian_jian` | 兵器；攻击+5、暴击率+3、先手+3、躲闪+2<br>宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。 | 未找到当前可达获取入口；资源备注「东都宫变」尚不足以证明入口已接通 |
+| 宫变密剑<br>`gongbian_jian` | 兵器；攻击+5、暴击率+3、先手+3、躲闪+2<br>宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。 | 未找到当前可达获取入口；资源备注「历史版本东都宫变奖励，仅保留旧档持有；当前不再投放。」尚不足以证明入口已接通 |
 | 运河披风<br>`yunhe_pao` | 衣甲；防御+10、躲闪+3、招架+2、气血上限+30<br>运河船工的桐油披风，防雨防刀，水性好的人离不开它。 | [100% 结算《运河追击》](stories/datang.md#datang_yunhe) |
 | 魔师宫主令珠<br>`moshi_lingzhu` | 戒指；暴击率+4、内力上限+20、攻击+2、命中+2<br>魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。 | [100% 结算《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) |
 | 破碎虚空·悟<br>`zhongjuan_wu` | 项链；攻击+3、防御+3、内力上限+20、躲闪+3、先手+2<br>终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。 | [100% 结算《战神遗境》](stories/posui.md#posui_zhongjuan) |
@@ -296,15 +296,6 @@
 | 狼烟令<br>`langyan_ling` | 戒指；气血上限+20、防御+3、命中+2<br>边军的狼烟令——持此令者，九边烽燧为你而燃。 | [100% 结算《狼烟再起》](stories/bianhuang.md#saibei_langyan) |
 | 江南剑首佩剑<br>`jianshou_jian` | 兵器；攻击+8、命中+5、暴击率+2、躲闪+2<br>二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。 | [100% 结算《剑首之争》](stories/luoshui.md#jiangnan_jianshou) |
 | 行宫密剑<br>`xinggong_jian` | 兵器；攻击+9、暴击率+3<br>行宫惊变奖励。 | [100% 结算《行宫惊变》](stories/datang.md#datang_xinggong) |
-| 浪翻云剑穗<br>`langfan_jian` | 项链；攻击+6、命中+4<br>浪翻云试炼的奖励装备。 | [100% 结算《浪翻云试炼》](stories/fuyu.md#fuyu_langfan) |
-| 空明珠<br>`kongming_zhu` | 戒指；内力上限+30、防御+4<br>破碎空明的奖励装备。 | [100% 结算《破碎空明》](stories/posui.md#posui_kongming) |
-| 绝地护符<br>`jueji_hu` | 衣甲；防御+8、气血上限+60<br>边荒绝地的奖励装备。 | [100% 结算《边荒绝地》](stories/bianhuang.md#bianhuang_jueji) |
-| 龙宫宝珠<br>`longgong_zhu` | 戒指；攻击+5、内力上限+25<br>归墟龙宫的奖励装备。 | [100% 结算《归墟龙宫》](stories/luoshui.md#luoshui_guilou) |
-| 漕运钢刀<br>`yunhe_gangdao` | 兵器；攻击+10、防御+3<br>运河夜战的奖励装备。 | [100% 结算《运河夜战》](stories/yunhe.md#yangzhou_yunhe2) |
-| 唐门毒珠<br>`tangmen_zhenzhu` | 戒指；暴击率+4、攻击+4<br>唐门天梯的奖励装备。 | [100% 结算《唐门天梯》](stories/yunhe.md#bashu_tangmen2) |
-| 雪岭护符<br>`xueling_hu` | 衣甲；防御+7、躲闪+3<br>狼山雪岭的奖励装备。 | [100% 结算《狼山雪岭》](stories/bianhuang.md#saibei_langshan2) |
-| 剑池名剑<br>`jianchi_mingjian` | 兵器；攻击+11、命中+4<br>剑池深处的奖励装备。 | [100% 结算《剑池深处》](stories/luoshui.md#jiangnan_jianchi2) |
-| 神工遗器<br>`shengong_qi` | 戒指；攻击+6、防御+6、内力上限+20<br>神工秘殿的奖励装备。 | [100% 结算《神工秘殿》](stories/luoshui.md#dongming_shengong) |
 | 浪翻云剑穗<br>`langfan_j` | 项链；攻击+6、命中+4<br>浪翻云试炼奖励。 | [100% 结算《浪翻云试炼》](stories/fuyu.md#fuyu_langfan) |
 | 空明珠<br>`kongming_z` | 戒指；内力上限+30、防御+4<br>破碎空明奖励。 | [100% 结算《破碎空明》](stories/posui.md#posui_kongming) |
 | 绝地护符<br>`jueji_h` | 衣甲；防御+8、气血上限+60<br>边荒绝地奖励。 | [100% 结算《边荒绝地》](stories/bianhuang.md#bianhuang_jueji) |

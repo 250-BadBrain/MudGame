@@ -70,6 +70,13 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 			continue
 		}
 
+		if room, ok := fileRooms[attacker.RoomID]; ok && room.SafeZone {
+			r.clearCombatNoLock(attacker)
+			r.clearCombatNoLock(target)
+			updatedRoom[attacker.RoomID] = true
+			result.Messages = append(result.Messages, model.RoomMessage{RoomID: attacker.RoomID, Message: "安全区保护生效，双方停止交战。"})
+			continue
+		}
 		processed[attacker.ID] = true
 		processed[target.ID] = true
 		roomID := attacker.RoomID
@@ -87,7 +94,7 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 		strikeBToA := r.resolveCombatStrikeEntity(target.CharacterName, targetAttrs, attacker.CharacterName, attackerAttrs, combatType)
 		attackerFirst := attackerAttrs.Initiative >= targetAttrs.Initiative
 
-		applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, attackerFirst, combatType == "KILL", roomID, &result.Messages)
+		applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, attackerFirst, combatType == "KILL", roomID, &result.Messages, attackerAttrs.MaxHP/5, targetAttrs.MaxHP/5)
 		updatedRoom[roomID] = true
 
 		if combatType == "KILL" {
@@ -130,14 +137,14 @@ func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Playe
 
 	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), target.Name, model.BuildEffectiveAttributes(target.Attributes), combatType)
 	counterType := combatType
-	if combatType == "KILL" || target.Aggressive {
+	if combatType == "KILL" {
 		counterType = "KILL"
 	}
 	playerAttrs := effectiveAttributesForPlayerNoLock(attacker)
 	npcAttrs := model.BuildEffectiveAttributes(target.Attributes)
 	strikeBToA := r.resolveCombatStrikeEntity(target.Name, npcAttrs, attacker.CharacterName, playerAttrs, counterType)
 
-	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages)
+	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages, playerAttrs.MaxHP/5, npcAttrs.MaxHP/5)
 	updatedRoom[roomID] = true
 
 	if combatType == "KILL" {
@@ -161,9 +168,7 @@ func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Playe
 	targetLow := target.Attributes.Resources.HP <= targetLimit
 	if attackerLow || targetLow {
 		r.clearCombatNoLock(attacker)
-		if targetLow {
-			target.Attributes.Resources.HP = target.Attributes.Resources.MaxHP
-		}
+		target.Attributes.Resources.HP = target.Attributes.Resources.MaxHP
 		if attackerLow && targetLow {
 			result.Messages = append(result.Messages, model.RoomMessage{RoomID: roomID, Message: "双方点到为止，抱拳收招。"})
 		} else if attackerLow {
@@ -257,6 +262,15 @@ func (r *RuntimeManager) resolveKillEndNoLock(a, b *model.Player, roomID string,
 }
 
 func (r *RuntimeManager) clearCombatNoLock(p *model.Player) {
+	// Aborting a spar (including smoke escape) must not leave the shared teacher
+	// permanently injured and unable to accept the next full-health challenge.
+	if p.CombatType == "SPAR" {
+		r.staticNPCsMu.Lock()
+		if npc := r.staticNPCs[p.TargetID]; npc != nil && npc.Alive {
+			npc.Attributes.Resources.HP = npc.Attributes.Resources.MaxHP
+		}
+		r.staticNPCsMu.Unlock()
+	}
 	if p.State != "DEAD" {
 		p.State = "IDLE"
 	}
@@ -336,16 +350,21 @@ type combatStrikeResult struct {
 }
 
 // applyPairedStrikesNoLock 按先攻值决定双方出手顺序：先攻高者先出手。
-// killRound（生死战）中已倒下的一方不再出手；切磋（SPAR）双方各自打完一轮再判定点到为止。
+// 生死战中倒下的一方不再出手；切磋保留至少1血，达到认输线即取消后续出手。
 // strikeA 为 A 方打向 B 方的一击，strikeB 为 B 方打向 A 方的一击。
-func applyPairedStrikesNoLock(aHP, bHP *int, strikeA, strikeB combatStrikeResult, aFirst bool, killRound bool, roomID string, messages *[]model.RoomMessage) {
+func applyPairedStrikesNoLock(aHP, bHP *int, strikeA, strikeB combatStrikeResult, aFirst bool, killRound bool, roomID string, messages *[]model.RoomMessage, sparLimits ...int) {
 	swing := func(strikerHP, victimHP *int, strike combatStrikeResult) {
+		if !killRound && len(sparLimits) == 2 && (*aHP <= sparLimits[0] || *bHP <= sparLimits[1]) {
+			return
+		}
 		if killRound && *strikerHP <= 0 {
 			return
 		}
 		*victimHP -= strike.Damage
-		if *victimHP < 0 {
-			*victimHP = 0
+		if killRound {
+			*victimHP = max(0, *victimHP)
+		} else {
+			*victimHP = max(1, *victimHP)
 		}
 		if strike.Message != "" {
 			*messages = append(*messages, model.RoomMessage{RoomID: roomID, Message: strike.Message})
@@ -394,6 +413,9 @@ func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attacker
 		damage /= 2
 	}
 
+	if combatType == "SPAR" {
+		damage = min(damage, max(1, defenderAttrs.MaxHP/5), max(0, defenderAttrs.HP-1))
+	}
 	msg := attackerName + "一招击中" + defenderName + "，造成" + strconv.Itoa(damage) + "点伤害"
 	if crit {
 		msg = attackerName + "发动致命一击，重创" + defenderName + "，造成" + strconv.Itoa(damage) + "点伤害"

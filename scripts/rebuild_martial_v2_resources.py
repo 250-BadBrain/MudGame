@@ -1,4 +1,8 @@
-"""One-time V1 -> V2 content conversion. Runtime content remains data-driven."""
+"""Historical one-time V1 -> V2 authoring script, not a current resource rebuild.
+
+Do not rerun against current resources: subsequent economy/content repairs are
+specified in docs/design/audit_repairs_2026_10_28.md and maintained in JSON.
+"""
 import json
 import re
 from pathlib import Path
@@ -122,9 +126,9 @@ def main():
         if item.get('equipmentSlot') in ['WEAPON', 'HIDDEN_WEAPON']:
             item['equipmentSlot'] = 'WEAPON'
             if item['subtype'] not in ['relic', 'gathering']: item['weaponType'] = item['subtype']
-    for iid in ['gongbian_jian', 'jianshou_jian', 'xinggong_jian', 'jianchi_mingjian', 'jianchi_m']:
+    for iid in ['gongbian_jian', 'jianshou_jian', 'xinggong_jian', 'jianchi_m']:
         items[iid].update(subtype='sword', weaponType='sword')
-    for iid in ['yunhe_gangdao', 'yunhe_g']: items[iid].update(subtype='blade', weaponType='blade')
+    for iid in ['yunhe_g']: items[iid].update(subtype='blade', weaponType='blade')
     items['langyan_ling'].update(equipmentSlot='RING', effects={'maxHp': 20, 'defense': 3, 'hitRate': 2})
     for iid in ['xb2_relic', 'tg2_relic', 'th2_relic', 'wr2_relic']: items[iid]['equipmentSlot'] = 'NECKLACE'
     items['iron_pickaxe'].pop('equipmentSlot', None)

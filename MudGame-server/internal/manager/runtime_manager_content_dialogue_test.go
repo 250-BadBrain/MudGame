@@ -70,7 +70,7 @@ func TestContentTalkDoesNotAutomaticallySpendIngredients(t *testing.T) {
 	players, _ := r.loadPlayers()
 	p := players[id]
 	p.RoomID = "ly_herbal_hall"
-	p.Backpack = map[string]int{"herb": 6, "dry_ration": 2}
+	p.Backpack = map[string]int{"herb": 14, "dry_ration": 2}
 	_ = r.savePlayers(players)
 	for i := 0; i < 3; i++ {
 		if _, err := r.Talk(id, "herbalist_sun"); err != nil {
@@ -79,7 +79,7 @@ func TestContentTalkDoesNotAutomaticallySpendIngredients(t *testing.T) {
 	}
 	players, _ = r.loadPlayers()
 	p = players[id]
-	if p.Backpack["herb"] != 6 || p.Backpack["dry_ration"] != 2 || p.Backpack["simple_medicine"] != 0 {
+	if p.Backpack["herb"] != 14 || p.Backpack["dry_ration"] != 2 || p.Backpack["simple_medicine"] != 0 {
 		t.Fatal("passive talk spent ingredients")
 	}
 	for i := 0; i < 2; i++ {

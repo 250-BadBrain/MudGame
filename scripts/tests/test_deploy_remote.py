@@ -60,7 +60,7 @@ class DeployTests(unittest.TestCase):
         elf[:6] = b"\x7fELF\x02\x01"
         elf[18] = 62
         files = {"mud": bytes(elf)}
-        for name in ("items", "skills", "npcs", "titles"):
+        for name in ("items", "skills", "npcs", "titles", "item_aliases"):
             files[f"resources/{name}.json"] = b"{}"
         files["resources/worlds/test.json"] = b"{}"
         files.update(resource_files or {})
@@ -96,7 +96,7 @@ class DeployTests(unittest.TestCase):
 
     def prepare_martial_release(self):
         resources = Path(__file__).resolve().parents[2] / 'MudGame-server/resources'
-        names = ['skills.json', 'items.json', 'migrations/martial_v1.json', 'migrations/migrate_martial_v2.py']
+        names = ['skills.json', 'items.json', 'item_aliases.json', 'migrations/martial_v1.json', 'migrations/migrate_martial_v2.py']
         self.package(resource_files={'resources/' + name: (resources / name).read_bytes() for name in names})
         directory = self.root / 'data/servers/server1/players'
         directory.mkdir()

@@ -25,6 +25,19 @@ def player(identifier='hero'):
 
 
 class MartialMigrationTests(unittest.TestCase):
+
+    def test_item_aliases_merge_and_refund_once(self):
+        original = player()
+        original['items'] = {'langfan_jian': 2, 'langfan_j': 1}
+        original['enhancedItems'] = {'langfan_jian': 2, 'langfan_j': 3}
+        aliases = json.loads((RES / 'item_aliases.json').read_text(encoding='utf-8'))
+        result = M.normalize_item_aliases(original, aliases)
+        self.assertEqual(result['items']['langfan_j'], 3)
+        self.assertEqual(result['enhancedItems'], {'langfan_j': 3})
+        self.assertEqual(result['money'], 5600)
+        self.assertEqual(result['items']['bronze_fragment'], 3)
+        before = json.dumps(result, sort_keys=True)
+        self.assertEqual(json.dumps(M.normalize_item_aliases(result, aliases), sort_keys=True), before)
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()
         self.addCleanup(self.temporary.cleanup)

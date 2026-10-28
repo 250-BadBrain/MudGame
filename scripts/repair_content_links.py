@@ -1,4 +1,8 @@
-"""Apply the documented content repair; safe to rerun without duplicate links."""
+"""Historical 2026-10-27 content repair, not a current resource rebuild.
+
+Do not rerun against current resources: its recipe values predate
+docs/design/audit_repairs_2026_10_28.md. Maintain current resources directly.
+"""
 import copy
 import json
 from pathlib import Path

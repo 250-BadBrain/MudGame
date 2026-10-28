@@ -340,16 +340,16 @@
     "options": [
       {
         "id": "brew_with_herbs",
-        "text": "替我炼一炉金创药（止血草×3 + 干粮×1）",
-        "response": "孙回春拨了拨算盘：\"三株草管药性，一袋粮抵柴火。炉上坐一个时辰，自己来取。\"——金创药到手。",
+        "text": "制作金创药（止血草×7、干粮×1）",
+        "response": "你交付止血草×7、干粮×1，制成金创药。",
         "requires": {
           "items": {
-            "herb": 3,
+            "herb": 7,
             "dry_ration": 1
           }
         },
         "takeItems": {
-          "herb": 3,
+          "herb": 7,
           "dry_ration": 1
         },
         "giveItems": {
@@ -359,17 +359,17 @@
       },
       {
         "id": "brew_herb_pill",
-        "text": "制作回春丹（止血草×5、干粮×2）",
-        "response": "你交付止血草×5、干粮×2，制成回春丹。",
+        "text": "制作回春丹（止血草×15、干粮×4）",
+        "response": "你交付止血草×15、干粮×4，制成回春丹。",
         "requires": {
           "items": {
-            "herb": 5,
-            "dry_ration": 2
+            "herb": 15,
+            "dry_ration": 4
           }
         },
         "takeItems": {
-          "herb": 5,
-          "dry_ration": 2
+          "herb": 15,
+          "dry_ration": 4
         },
         "giveItems": {
           "herb_pill": 1
@@ -379,17 +379,17 @@
       },
       {
         "id": "brew_dahuandan",
-        "text": "制作大还丹（止血草×8、干粮×4、150文钱）",
-        "response": "你交付止血草×8、干粮×4、150文钱，制成大还丹。",
+        "text": "制作大还丹（止血草×40、干粮×11、150铜钱）",
+        "response": "你交付止血草×40、干粮×11及150铜钱，制成大还丹。",
         "requires": {
           "items": {
-            "herb": 8,
-            "dry_ration": 4
+            "herb": 40,
+            "dry_ration": 11
           }
         },
         "takeItems": {
-          "herb": 8,
-          "dry_ration": 4
+          "herb": 40,
+          "dry_ration": 11
         },
         "takeMoney": 150,
         "giveItems": {
@@ -399,9 +399,9 @@
       },
       {
         "id": "consult_fee",
-        "text": "付诊金抓现成的金创药（100文钱）",
-        "response": "孙回春收了银子，从百子柜里取出一瓶：\"拿好。比东市便宜二十文，老夫赚个跑腿钱。\"",
-        "takeMoney": 100,
+        "text": "付诊金取现货金创药（120铜钱）",
+        "response": "孙回春收下120铜钱，从药柜取出金创药：“现货便在这里，拿好。”",
+        "takeMoney": 120,
         "giveItems": {
           "simple_medicine": 1
         },
@@ -409,15 +409,15 @@
       },
       {
         "id": "brew_with_rations",
-        "text": "用干粮抵全部材料（干粮×4）",
-        "response": "孙回春皱眉看了看你抱来的干粮：\"全拿粮凑……药性差些，胜在管饱。\"——凑合着一炉。",
+        "text": "制作金创药（干粮×7）",
+        "response": "你交付干粮×7，制成金创药。",
         "requires": {
           "items": {
-            "dry_ration": 4
+            "dry_ration": 7
           }
         },
         "takeItems": {
-          "dry_ration": 4
+          "dry_ration": 7
         },
         "giveItems": {
           "simple_medicine": 1

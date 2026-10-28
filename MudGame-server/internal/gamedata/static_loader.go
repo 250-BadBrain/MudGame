@@ -16,15 +16,16 @@ import (
 )
 
 type StaticData struct {
-	WorldOrder []string
-	Worlds     map[string]model.World
-	Rooms      map[string]model.Room
-	Items      map[string]model.ItemDef
-	Skills     map[string]model.SkillDef
-	NPCs       map[string]model.NPC
-	Dialogues  map[string]model.DialogueDef
-	Quests     map[string]model.QuestDef
-	Factions   map[string]model.FactionDef
+	ItemAliases map[string]string
+	WorldOrder  []string
+	Worlds      map[string]model.World
+	Rooms       map[string]model.Room
+	Items       map[string]model.ItemDef
+	Skills      map[string]model.SkillDef
+	NPCs        map[string]model.NPC
+	Dialogues   map[string]model.DialogueDef
+	Quests      map[string]model.QuestDef
+	Factions    map[string]model.FactionDef
 }
 
 type rawItem struct {
@@ -147,6 +148,10 @@ func loadFromDisk() (StaticData, error) {
 	if err != nil {
 		return StaticData{}, err
 	}
+	aliases, err := loadItemAliases(resourceDir, items)
+	if err != nil {
+		return StaticData{}, err
+	}
 	skills, err := loadSkills(filepath.Join(resourceDir, "skills.json"))
 	if err != nil {
 		return StaticData{}, err
@@ -176,6 +181,12 @@ func loadFromDisk() (StaticData, error) {
 		return StaticData{}, errors.New("static resource files are loaded but contain empty core datasets")
 	}
 
+	if err := validateEconomy(items, dialogues); err != nil {
+		return StaticData{}, err
+	}
+	if err := validateDungeonEconomy(resourceDir, items); err != nil {
+		return StaticData{}, err
+	}
 	if err := validateMartialData(resourceDir, skills, items, npcs); err != nil {
 		return StaticData{}, err
 	}
@@ -186,15 +197,16 @@ func loadFromDisk() (StaticData, error) {
 		return StaticData{}, err
 	}
 	return StaticData{
-		WorldOrder: worldOrder,
-		Worlds:     worlds,
-		Rooms:      rooms,
-		Items:      items,
-		Skills:     skills,
-		NPCs:       npcs,
-		Dialogues:  dialogues,
-		Quests:     quests,
-		Factions:   factions,
+		ItemAliases: aliases,
+		WorldOrder:  worldOrder,
+		Worlds:      worlds,
+		Rooms:       rooms,
+		Items:       items,
+		Skills:      skills,
+		NPCs:        npcs,
+		Dialogues:   dialogues,
+		Quests:      quests,
+		Factions:    factions,
 	}, nil
 }
 
@@ -633,15 +645,19 @@ func buildWorldOrder(foundWorldIDs []string, worlds map[string]model.World) []st
 
 func cloneStaticData(in StaticData) StaticData {
 	out := StaticData{
-		WorldOrder: append([]string{}, in.WorldOrder...),
-		Worlds:     map[string]model.World{},
-		Rooms:      map[string]model.Room{},
-		Items:      map[string]model.ItemDef{},
-		Skills:     map[string]model.SkillDef{},
-		NPCs:       map[string]model.NPC{},
-		Dialogues:  map[string]model.DialogueDef{},
-		Quests:     map[string]model.QuestDef{},
-		Factions:   map[string]model.FactionDef{},
+		ItemAliases: map[string]string{},
+		WorldOrder:  append([]string{}, in.WorldOrder...),
+		Worlds:      map[string]model.World{},
+		Rooms:       map[string]model.Room{},
+		Items:       map[string]model.ItemDef{},
+		Skills:      map[string]model.SkillDef{},
+		NPCs:        map[string]model.NPC{},
+		Dialogues:   map[string]model.DialogueDef{},
+		Quests:      map[string]model.QuestDef{},
+		Factions:    map[string]model.FactionDef{},
+	}
+	for id, target := range in.ItemAliases {
+		out.ItemAliases[id] = target
 	}
 	for id, w := range in.Worlds {
 		out.Worlds[id] = w

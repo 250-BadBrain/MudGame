@@ -37,7 +37,7 @@
 
         <div v-else class="room-entities-area">
           <GameRoomPanel
-            :entities="combinedEntities"
+            :entities="combinedEntities" :safeZone="!!room?.safeZone"
             :selectedEntity="selectedEntityObj"
             @selectEntity="handleEntitySelect"
             @viewEntity="viewEntity"
@@ -127,7 +127,7 @@
               @selectWorld="selectWorld"
               @enterWorld="enterWorld"
               @selectDungeon="selectDungeon"
-              @enterDungeon="enterDungeon" :quickCompleting="quickCompleting" @quickCompleteDungeon="quickCompleteDungeon" />
+              @enterDungeon="enterDungeon" :quickCompleting="quickCompleting" :canQuickCompleteSelected="canQuickCompleteSelected" :quickCompleteStatusHint="quickCompleteStatusHint" @quickCompleteDungeon="quickCompleteDungeon" />
 
             <GameActionPanel
               :room-actions="roomActions"
@@ -297,7 +297,7 @@ const {
   applyRoomDungeonUpdate,
   selectDungeon,
   enterDungeon,
-  quickCompleting, quickCompleteDungeon, finishQuickComplete, disposeDungeonView,
+  canQuickCompleteSelected, quickCompleteStatusHint, quickCompleting, quickCompleteDungeon, finishQuickComplete, disposeDungeonView,
   leaveCurrentDungeon,
   confirmLeaveCurrentDungeon
 } = useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGameCommand, checkCanAct, getPlayerId,

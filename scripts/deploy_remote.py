@@ -186,7 +186,7 @@ def stage(config):
         for name in expected:
             if name != config.executable and not name.startswith("resources/"):
                 raise DeployError("package may contain only the executable and resources")
-        required = {config.executable} | {"resources/" + name + ".json" for name in ("items", "skills", "npcs", "titles")}
+        required = {config.executable} | {"resources/" + name + ".json" for name in ("items", "skills", "npcs", "titles", "item_aliases")}
         if not required.issubset(expected) or not any(name.startswith("resources/worlds/") for name in expected):
             raise DeployError("release is missing required resources")
         config.staging.mkdir(parents=True)

@@ -89,7 +89,7 @@
 
 ## 4. 战斗系统
 
-Kill（决斗，至死）/ Spar（切磋，单次伤害上限 MaxHP/5，不可误杀）。战斗 tick 2 秒；状态 tick 1 秒。同房多敌时**串行结仇**（先打第一个敌对 NPC）。先手值决定开战首击。公式全部在 formulas.md §2（命中/招架/伤害/暴击）。
+Kill（决斗，至死）/ Spar（切磋，双方须满血，单次伤害上限为受击方有效MaxHP/5，至少留1血，认输后取消反击）。战斗 tick 2 秒；状态 tick 1 秒。敌对NPC默认不主动交战；Aggressive仅标识敌对，当前没有自动开战例外。先手值决定开战首击。公式全部在 formulas.md §2（命中/招架/伤害/暴击）。
 
 - **注意**：药品**可在战斗中使用**（核心消耗品，别加回 COMBAT 拒绝）；死亡 relive 后虚弱 300 秒（战斗衍生减半）回副本检查点/洛阳；测试中连杀用 `dungeonMgr.DefeatNPCNoLock`（直接结算目标），`Kill` 会把玩家置 COMBAT 导致下一杀 busy_state；`Kill` 同时是破招判定入口。
 
@@ -197,3 +197,6 @@ Stop及常规LeaveDungeon不能取消死亡，战斗退出需烟尘粉；UseItem
 ## 2026-10-28快速完成与掉落修复
 
 详见[权威规格](design/dungeon_quick_complete_2026_10_28.md)。quick_complete_dungeon要求选中角色、公共世界空闲、该关满通关旗标和持久化expectedSequence；正常掉落与快速结算共用manager/runtime_manager_dungeon_rewards.go。模板quickRewards只配置途中固定items/money，资源加载验证来源，禁止临时钥匙/付费配方。副本protected须同时在实例Kill后端校验。
+
+
+2026-10-28审查修复：安全区保护玩家（包括拒绝强制切磋），区外离线不免战；NPC默认被动。交易数量1～10000整数，检查乘加溢出；回收20%，由服务端sellPrice统一。所有配方物品价值严格递减，9组装备通过item_aliases.json规范化并幂等保留/退还旧强化投入。40关标needs_depth而不移除；详见[本轮规格](design/audit_repairs_2026_10_28.md)。

@@ -337,6 +337,7 @@ class Guide:
         lines = [f'<a id="{did}"></a>', "", f'## 序号 {dungeon["order"]} · {dungeon["name"]}', "", dungeon.get("description", ""), "",
                  "- **触发入口**：右侧「境」→本卷→本副本→进入；不需要先在城市找到 NPC。", "- **解锁**：" + self.unlock(dungeon, current),
                  "- **标识**：`" + did + "`；卷内标签「第 " + str(dungeon.get("chapter", "—")) + " 章」，解锁按全局序号判断。", "- **满额结算奖励**：" + self.rewards(dungeon.get("rewards", {}), drop_rates=True) + "。"]
+        if dungeon.get("contentStatus") == "needs_depth": lines.append("- **内容状态：待深化**：" + dungeon["contentNote"])
         lines.append("- **快速完成**：本关100%通关并结算后，在公共世界空闲时点击「快速完成」；当前免费，同结算掉率，每次复刷另加古铜残片2。不会自动交付世界任务，也不会回复气血内力。")
         quick = dungeon.get("quickRewards", {})
         if quick:
@@ -525,7 +526,7 @@ class Guide:
                     teachers.append(self.npc_name(npc) + "（入门）：" + self.location(npc, current))
             style = safe(skill.get("description", "")) + "<br>" + safe(self.skill_bonuses(skill.get("bonuses", {})))
             lines.append("| " + safe(skill["name"]) + "<br>`" + sid + "` | " + safe(category) + " | " + style + " | " + source + " | " + ("；".join(teachers) or "参悟后自主修炼，无老师上限") + " |")
-        lines += ["", "## 炼药、熔铸与材料交换", "", "与药师或铁匠交谈后，点击日志里的服务选项，查看明确成本并制作。普通交谈不自动扣钱或材料；配方可以重复，每次都会校验并扣除完整成本。", "", "| 操作 | 人物与位置 | 实际消耗 | 获得 |", "|---|---|---|---|"]
+        lines += ["", "## 炼药、熔铸与材料交换", "", "与药师或铁匠交谈后，点击日志里的服务选项，查看明确成本并制作。普通交谈不自动扣钱或材料；配方可以重复，每次都会校验并扣除完整成本。成品标称价值严格低于原材料总值，手续费另计。", "", "| 操作 | 人物与位置 | 实际消耗 | 获得 |", "|---|---|---|---|"]
         for did, dialogue in self.dialogues.items():
             if did not in self.live_dialogues:
                 continue
@@ -534,7 +535,7 @@ class Guide:
                     npc = dialogue["npcId"]
                     cost = self.items_text(option["takeItems"]) + (" + " + str(option["takeMoney"]) + " 文钱" if option.get("takeMoney") else "")
                     lines.append("| " + safe(option["text"]) + " | " + self.npc_name(npc) + "：" + self.location(npc, current) + " | " + safe(cost) + " | " + safe(self.items_text(option["giveItems"])) + " |")
-        lines += ["", "## 商店与价格", "", "购买按 value 原价，出售通常按 value 的一半向下取整，任务物品不可卖。烟尘粉战斗中消耗一包撤离，不回血；副本按当前进度结算，世界返回本城出生点。", ""]
+        lines += ["", "## 商店与价格", "", "购买按 value 原价，出售按 value 的20%逐件向下取整，任务物品不可卖。烟尘粉战斗中消耗一包撤离，不回血；副本按当前进度结算，世界返回本城出生点。", ""]
         for npc, definition in self.npcs.items():
             if not definition.get("shopItems") or not self.locations.get(npc):
                 continue
@@ -543,7 +544,7 @@ class Guide:
                 value = self.items[item]
                 lines.append("| " + safe(value["name"]) + " | " + str(value.get("value", 0)) + " | " + safe(value.get("description", "")) + " |")
             lines.append("")
-        lines += ["## 全部物品与实际获取入口", "", "同名装备可能有历史别名；武学已归并为一门一名。7种江湖秘本仅供旧档迁移保留，新角色直接向指定老师入门。没有可达入口的条目不能作为当前收集目标。", "", "| 物品 / ID | 类型与用途 | 当前来源 |", "|---|---|---|"]
+        lines += ["## 全部物品与实际获取入口", "", "同名装备已合并为一个规范条目，旧ID仅用于存档兼容；武学已归并为一门一名。7种江湖秘本仅供旧档迁移保留，新角色直接向指定老师入门。没有可达入口的条目不能作为当前收集目标。", "", "| 物品 / ID | 类型与用途 | 当前来源 |", "|---|---|---|"]
         for iid, item in self.items.items():
             use = SLOTS.get(item.get("equipmentSlot"), item.get("type", "物品"))
             effects = item.get("effects", {})

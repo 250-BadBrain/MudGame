@@ -74,6 +74,8 @@ const (
 )
 
 type Template struct {
+	ContentStatus       string
+	ContentNote         string
 	QuickRewards        model.Rewards
 	ID                  string
 	Name                string
@@ -117,6 +119,8 @@ type UnlockCondition struct {
 }
 
 type templateFile struct {
+	ContentStatus       string                      `json:"contentStatus"`
+	ContentNote         string                      `json:"contentNote"`
 	QuickRewards        model.Rewards               `json:"quickRewards"`
 	ID                  string                      `json:"id"`
 	Name                string                      `json:"name"`
@@ -361,6 +365,7 @@ func (m *Manager) LoadTemplatesNoLock() error {
 		}
 
 		tpl := Template{
+			ContentStatus: df.ContentStatus, ContentNote: df.ContentNote,
 			ID:                  tplID,
 			Name:                strings.TrimSpace(df.Name),
 			Description:         strings.TrimSpace(df.Description),

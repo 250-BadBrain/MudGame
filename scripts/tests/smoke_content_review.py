@@ -71,7 +71,7 @@ def run(binary, directory):
     # Offline fixture injection is confined to this script's freshly created character.
     path = directory / 'saves/players' / (player + '.json')
     saved = json.loads(path.read_text(encoding='utf-8'))
-    saved['items'].update(herb=20, dry_ration=10, bronze_fragment=5, iron_sword=1, smoke_powder=2)
+    saved['items'].update(herb=100, dry_ration=60, bronze_fragment=5, iron_sword=1, smoke_powder=2)
     saved['attributes']['resources'].update(hp=40, mp=30)
     path.write_text(json.dumps(saved, ensure_ascii=False), encoding='utf-8')
     process = start(binary, directory, port); client = None
@@ -116,7 +116,7 @@ def run(binary, directory):
         assert next(i['count'] for i in after if i['id'] == 'herb') == herb_before
         for _ in range(2): client.call('command', 'choose_dialogue', npcId='herbalist_sun', optionId='brew_with_herbs')
         after = client.call('command', 'get_backpack')['items']
-        assert next(i['count'] for i in after if i['id'] == 'herb') == herb_before - 6
+        assert next(i['count'] for i in after if i['id'] == 'herb') == herb_before - 14
         checks.append('talk never spends; explicit recipes repeat and charge')
         assert not raw_call(client, 'command', 'enhance_item', itemId='training_spear')['flag']
         client.call('command', 'enhance_item', itemId='iron_sword')

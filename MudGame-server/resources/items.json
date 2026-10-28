@@ -47,12 +47,12 @@
   },
   "steel_blade": {
     "name": "钢刀",
-    "description": "刀背厚重，适合劈斩，是军府和镖局常用的兵器。",
+    "description": "旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
     "sellable": true,
-    "value": 400,
+    "value": 300,
     "rarity": 1,
     "unit": "柄",
     "equipmentSlot": "WEAPON",
@@ -300,7 +300,7 @@
   },
   "herb_pill": {
     "name": "回春丹",
-    "description": "回春堂秘制的伤药，以止血草合古铜药引炼成，一粒下去血止伤愈。",
+    "description": "回春堂以止血草与干粮配制的伤药，便于携带，一粒可补益气血。",
     "type": "medicine",
     "subtype": "pill",
     "stackable": true,
@@ -332,7 +332,7 @@
   },
   "dahuandan": {
     "name": "大还丹",
-    "description": "战神殿中丹炉里留下的最后一粒大还丹，药香千年不散。气血重创亦可一粒回春。",
+    "description": "传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。",
     "type": "medicine",
     "subtype": "pill",
     "stackable": true,
@@ -999,7 +999,7 @@
       "initiative": 3,
       "dodge": 2
     },
-    "source": "东都宫变",
+    "source": "历史版本东都宫变奖励，仅保留旧档持有；当前不再投放。",
     "weaponType": "sword"
   },
   "yunhe_pao": {
@@ -1190,162 +1190,6 @@
     },
     "source": "行宫惊变",
     "weaponType": "sword"
-  },
-  "langfan_jian": {
-    "name": "浪翻云剑穗",
-    "description": "浪翻云试炼的奖励装备。",
-    "type": "equipment",
-    "subtype": "relic",
-    "stackable": false,
-    "sellable": true,
-    "value": 3800,
-    "rarity": 4,
-    "unit": "件",
-    "equipmentSlot": "NECKLACE",
-    "effects": {
-      "attack": 6,
-      "hitRate": 4
-    },
-    "source": "浪翻云试炼"
-  },
-  "kongming_zhu": {
-    "name": "空明珠",
-    "description": "破碎空明的奖励装备。",
-    "type": "equipment",
-    "subtype": "relic",
-    "stackable": false,
-    "sellable": true,
-    "value": 3800,
-    "rarity": 4,
-    "unit": "件",
-    "equipmentSlot": "RING",
-    "effects": {
-      "maxMp": 30,
-      "defense": 4
-    },
-    "source": "破碎空明"
-  },
-  "jueji_hu": {
-    "name": "绝地护符",
-    "description": "边荒绝地的奖励装备。",
-    "type": "equipment",
-    "subtype": "relic",
-    "stackable": false,
-    "sellable": true,
-    "value": 3800,
-    "rarity": 5,
-    "unit": "件",
-    "equipmentSlot": "BODY",
-    "effects": {
-      "defense": 8,
-      "maxHp": 60
-    },
-    "source": "边荒绝地"
-  },
-  "longgong_zhu": {
-    "name": "龙宫宝珠",
-    "description": "归墟龙宫的奖励装备。",
-    "type": "equipment",
-    "subtype": "relic",
-    "stackable": false,
-    "sellable": true,
-    "value": 4000,
-    "rarity": 5,
-    "unit": "件",
-    "equipmentSlot": "RING",
-    "effects": {
-      "attack": 5,
-      "maxMp": 25
-    },
-    "source": "归墟龙宫"
-  },
-  "yunhe_gangdao": {
-    "name": "漕运钢刀",
-    "description": "运河夜战的奖励装备。",
-    "type": "equipment",
-    "subtype": "blade",
-    "stackable": false,
-    "sellable": true,
-    "value": 4000,
-    "rarity": 5,
-    "unit": "件",
-    "equipmentSlot": "WEAPON",
-    "effects": {
-      "attack": 10,
-      "defense": 3
-    },
-    "source": "运河夜战",
-    "weaponType": "blade"
-  },
-  "tangmen_zhenzhu": {
-    "name": "唐门毒珠",
-    "description": "唐门天梯的奖励装备。",
-    "type": "equipment",
-    "subtype": "relic",
-    "stackable": false,
-    "sellable": true,
-    "value": 4200,
-    "rarity": 5,
-    "unit": "件",
-    "equipmentSlot": "RING",
-    "effects": {
-      "critRate": 4,
-      "attack": 4
-    },
-    "source": "唐门天梯"
-  },
-  "xueling_hu": {
-    "name": "雪岭护符",
-    "description": "狼山雪岭的奖励装备。",
-    "type": "equipment",
-    "subtype": "relic",
-    "stackable": false,
-    "sellable": true,
-    "value": 4200,
-    "rarity": 5,
-    "unit": "件",
-    "equipmentSlot": "BODY",
-    "effects": {
-      "defense": 7,
-      "dodge": 3
-    },
-    "source": "狼山雪岭"
-  },
-  "jianchi_mingjian": {
-    "name": "剑池名剑",
-    "description": "剑池深处的奖励装备。",
-    "type": "equipment",
-    "subtype": "sword",
-    "stackable": false,
-    "sellable": true,
-    "value": 4400,
-    "rarity": 5,
-    "unit": "件",
-    "equipmentSlot": "WEAPON",
-    "effects": {
-      "attack": 11,
-      "hitRate": 4
-    },
-    "source": "剑池深处",
-    "weaponType": "sword"
-  },
-  "shengong_qi": {
-    "name": "神工遗器",
-    "description": "神工秘殿的奖励装备。",
-    "type": "equipment",
-    "subtype": "relic",
-    "stackable": false,
-    "sellable": true,
-    "value": 4600,
-    "rarity": 5,
-    "unit": "件",
-    "equipmentSlot": "RING",
-    "effects": {
-      "attack": 6,
-      "defense": 6,
-      "maxMp": 20
-    },
-    "source": "神工秘殿"
   },
   "langfan_j": {
     "name": "浪翻云剑穗",

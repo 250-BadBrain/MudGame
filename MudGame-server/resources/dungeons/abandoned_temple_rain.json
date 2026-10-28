@@ -124,7 +124,11 @@
       "message": "你细看蒙面刺客的遗物：贴胸藏着一页染血功谱，伏虎门的拳劲法门《伏虎劲》——他原是伏虎门中人。",
       "repeatMessage": "刺客的遗物已被你翻检一空。",
       "giveItems": {},
-      "giveMoney": 250
+      "giveMoney": 250,
+      "requiredDefeatNpcs": [
+        "temple_assassin"
+      ],
+      "failureMessage": "刺客尚未败退，先结束战斗再翻检遗物。"
     }
   },
   "quickRewards": {

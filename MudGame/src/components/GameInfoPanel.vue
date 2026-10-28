@@ -43,7 +43,7 @@
           <div v-if="viewingItem" class="item-details-view collapsible-detail" @click="$emit('viewItem', viewingItem)">
             <div class="detail-header">
               <span class="detail-name" :style="{ color: viewingItem.subtype === 'manual' ? getMartialColor(viewingItem.rarity) : getItemColor(viewingItem.rarity) }">{{ viewingItem.name }}</span>
-              <span class="detail-sell-price" v-if="viewingItem.sellable">{{ formatPrice(Math.floor(viewingItem.value / 2)) }}/{{ viewingItem.unit || '个' }}</span>
+              <span class="detail-sell-price" v-if="viewingItem.sellable">{{ formatPrice(sellUnitPrice(viewingItem)) }}/{{ viewingItem.unit || '个' }}</span>
             </div>
             <div class="detail-desc">{{ viewingItem.description }}</div>
             <div v-if="viewingItem.equipmentSlot" class="detail-slot">部位: {{ equipmentSlotLabels[viewingItem.equipmentSlot] || viewingItem.equipmentSlot }}</div>
@@ -62,7 +62,7 @@
           </div>
           <div v-else-if="sellingItem" class="discard-prompt">
             <div class="discard-info">出售 {{ sellingItem.name }}</div>
-            <div class="sell-price-info">单价: {{ formatPrice(Math.floor(sellingItem.value / 2)) }}</div>
+            <div class="sell-price-info">单价: {{ formatPrice(sellUnitPrice(sellingItem)) }}</div>
             <div class="amount-selector" v-if="sellingItem.stackable && sellingItem.count > 1">
               <button @click="$emit('changeSellAmount', 'min')" :disabled="sellAmount <= 1" class="small-btn">最少</button>
               <button @click="$emit('changeSellAmount', -10)" :disabled="sellAmount <= 10" class="small-btn">-10</button>
@@ -70,7 +70,7 @@
               <button @click="$emit('changeSellAmount', 10)" :disabled="sellAmount >= sellMax" class="small-btn">+10</button>
               <button @click="$emit('changeSellAmount', 'max')" :disabled="sellAmount >= sellMax" class="small-btn">最多</button>
             </div>
-            <div class="total-price-info">总价: {{ formatPrice(Math.floor(sellingItem.value / 2) * sellAmount) }}</div>
+            <div class="total-price-info">总价: {{ formatPrice(sellUnitPrice(sellingItem) * sellAmount) }}</div>
             <div class="discard-actions">
               <button @click="$emit('confirmSell')" class="confirm-btn">确认出售</button>
               <button @click="$emit('cancelSell')" class="cancel-btn">取消</button>
@@ -183,7 +183,6 @@
             <div class="status-item"><span class="label">躲闪:</span> <span class="value">{{ statusAttributes.dodge || 100 }}</span></div>
             <div class="status-item"><span class="label">招架:</span> <span class="value">{{ statusAttributes.parry || 100 }}</span></div>
             <div class="status-item"><span class="label">暴击:</span> <span class="value">{{ statusAttributes.critRate || 1 }}%</span></div>
-            <div class="status-item full-width"><span class="label">攻速:</span> <span class="value">{{ statusAttributes.attackSpeed || 4 }}</span></div>
           </div>
         </div>
       </div>
@@ -233,7 +232,7 @@
                     @click="$emit('selectDungeon', dungeon.id)">
                     <div class="map-item-line">
                       <span class="map-name">{{ dungeon.locked ? '🔒 ' : '' }}{{ dungeon.name }}</span>
-                      <span v-if="dungeon.locked" class="folder-state">{{ dungeon.lockHint }}</span>
+                      <span v-if="dungeon.contentStatus === 'needs_depth' || dungeon.locked" class="folder-state">{{ dungeon.contentStatus === 'needs_depth' ? '待深化' : '' }}{{ dungeon.contentStatus === 'needs_depth' && dungeon.locked ? ' · ' : '' }}{{ dungeon.locked ? dungeon.lockHint : '' }}</span>
                     </div>
                   </li>
                 </template>
@@ -244,13 +243,14 @@
         </div>
         <div v-if="selectedDungeon" class="map-description-area collapsible-detail" @click="$emit('selectDungeon', selectedDungeon.id)">
           <div class="map-desc-text">{{ selectedDungeon.description }}</div>
+          <div v-if="selectedDungeon.contentStatus === 'needs_depth'" class="map-sub-line">{{ selectedDungeon.contentNote }}</div>
           <div class="map-sub-line">满额奖励：{{ fullRewardExperience }}经验 {{ fullRewardPotential }}潜能</div>
           <div v-if="isInDungeon && dungeonRoomId === selectedDungeon?.id" class="map-sub-line">当前进度：{{ dungeonProgress ?? 0 }}%</div>
           <div v-if="selectedDungeon.locked" class="map-sub-line">{{ selectedDungeon.lockHint }}</div>
           <button @click.stop="$emit('enterDungeon')" class="enter-world-btn" :disabled="isInDungeon || !!selectedDungeon.locked">{{ selectedDungeon.locked ? '尚未解锁' : '进入副本' }}</button>
-          <button @click.stop="$emit('quickCompleteDungeon')" class="enter-world-btn" :disabled="isInDungeon || quickCompleting || !selectedDungeon.canQuickComplete">{{ quickCompleting ? '结算中…' : '快速完成' }}</button>
+          <button @click.stop="$emit('quickCompleteDungeon')" class="enter-world-btn" :disabled="!canQuickCompleteSelected">{{ quickCompleting ? '结算中…' : '快速完成' }}</button>
           <div class="map-sub-line">{{ selectedDungeon.cleared ? '已通关 · 快速完成当前免费，结算普通物品独立15%掉落；途中固定收益必得。' : '首次100%通关并结算后开放快速完成。' }}</div>
-          <div v-if="selectedDungeon.cleared && selectedDungeon.quickCompleteHint" class="map-sub-line">{{ selectedDungeon.quickCompleteHint }}</div>
+          <div v-if="selectedDungeon.cleared && quickCompleteStatusHint" class="map-sub-line">{{ quickCompleteStatusHint }}</div>
         </div>
       </div>
       <GameQuestPanel v-if="currentPanel === 'quests'" :quests="questsList" />
@@ -296,6 +296,8 @@ const props = defineProps({
   selectedDungeonId: String,
   selectedDungeon: Object,
     quickCompleting: Boolean,
+    canQuickCompleteSelected: Boolean,
+    quickCompleteStatusHint: String,
   isInDungeon: Boolean,
   dungeonRoomId: String,
   dungeonProgress: { type: Number, default: 0 },
@@ -381,6 +383,8 @@ const formatPrice = (value) => {
   if (!value && value !== 0) return ''
   return formatMoney(value)
 }
+
+const sellUnitPrice = (item) => item?.sellPrice ?? Math.floor((item?.value || 0) / 5)
 
 const getSkillBonusText = (skill) => {
   if (!skill?.level) return skill?.referenceBonusText || []
@@ -477,6 +481,8 @@ const getSkillBonusText = (skill) => {
 .dungeon-folder-line { color: #f1c40f; }
 .folder-state { flex: 0 0 auto; color: #888; font-size: 11px; font-weight: normal; }
 .dungeon-child-item { padding-left: 18px; }
+.dungeon-child-item .map-item-line { display: block; }
+.dungeon-child-item .folder-state { display: block; margin-top: 3px; overflow-wrap: anywhere; }
 .map-description-area { flex: 0 0 auto; max-height: 45%; overflow-y: auto; overflow-x: hidden; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 4px; font-size: 12px; scrollbar-width: none; -ms-overflow-style: none; }
 .map-desc-text { color: #b0b0b0; margin-bottom: 8px; }
 .map-sub-line { color: #888; font-size: 11px; margin-bottom: 4px; }

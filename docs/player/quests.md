@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：2004581fb01136bd479729a9b04c7d3687e38494672648bc514a0541835f3ccd；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：76b02a73de7acb5c4d82cf222053b4e333c9b40d11f6820c21fc699269bd1eae；由 scripts/generate_player_guide.py 生成。 -->
 
 # 世界任务：接取地点、触发与结局
 

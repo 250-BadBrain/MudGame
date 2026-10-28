@@ -176,6 +176,13 @@ func (r *RuntimeManager) readPlayersFromDiskNoLock() (map[string]*model.Player, 
 		return nil, err
 	}
 	for _, p := range players {
+		changed, err := normalizePlayerItemAliases(p)
+		if err != nil {
+			return nil, err
+		}
+		if changed {
+			r.playersDirty = true
+		}
 		if repairDungeonDropClaims(p) {
 			r.playersDirty = true
 		}

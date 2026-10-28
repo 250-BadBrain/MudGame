@@ -36,6 +36,9 @@ export function useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGam
     return typeof worldId === 'string' && worldId.startsWith('dungeon_')
   })
 
+  const canQuickCompleteSelected = computed(() => !!(selectedDungeon.value?.cleared ?? selectedDungeon.value?.canQuickComplete) && getPlayerState() === 'IDLE' && !isInDungeon.value && !quickCompleting.value)
+  const quickCompleteStatusHint = computed(() => isInDungeon.value ? '请先返回公共世界' : (getPlayerState() !== 'IDLE' ? '请先结束当前行为，恢复空闲后快速完成' : ''))
+
   const buildDungeonLeavePrompt = () => {
     if (!isInDungeon.value || !room.value) return null
     const dungeonName = room.value?.dungeon?.name || room.value?.worldName || selectedDungeon.value?.name || '未知'
@@ -78,7 +81,7 @@ export function useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGam
   }
 
   const quickCompleteDungeon = () => {
-    if (quickCompleting.value || isInDungeon.value || getPlayerState() !== 'IDLE' || !selectedDungeon.value?.canQuickComplete) return
+    if (!canQuickCompleteSelected.value) return
     if (!checkCanAct('quick_complete_dungeon')) return
     quickCompleting.value = true
     quickTimer = setTimeout(() => {
@@ -109,6 +112,8 @@ export function useDungeonView({ room, addLog, addDungeonLeaveButtonLog, sendGam
   }
 
   return {
+    canQuickCompleteSelected,
+    quickCompleteStatusHint,
     quickCompleting,
     quickCompleteDungeon,
     finishQuickComplete,

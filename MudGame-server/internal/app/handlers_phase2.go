@@ -245,7 +245,11 @@ func (s *Server) handleGameBuy(conn *websocket.Conn, cmd protocol.CommandMessage
 	}
 	npcID := toString(cmd.Args["npcId"])
 	itemID := toString(cmd.Args["itemId"])
-	amount := toInt(cmd.Args["amount"], 1)
+	amount, valid := strictBoundedInt(cmd.Args["amount"], 1, 10000)
+	if !valid {
+		s.replyCommand(conn, "buy", fmt.Errorf("数量须为1至10000的整数"), nil, nil)
+		return
+	}
 	res, err := engine.BuyWithReceipt(s.repo, playerID, npcID, itemID, amount)
 	s.replyCommand(conn, "buy", err, map[string]interface{}{"money": res.Money, "boughtItemId": res.BoughtItemID, "boughtAmount": res.BoughtAmount}, res.Logs)
 }
@@ -256,7 +260,11 @@ func (s *Server) handleGameDiscardItem(conn *websocket.Conn, cmd protocol.Comman
 		return
 	}
 	itemID := toString(cmd.Args["itemId"])
-	amount := toInt(cmd.Args["amount"], 1)
+	amount, valid := strictBoundedInt(cmd.Args["amount"], 1, 10000)
+	if !valid {
+		s.replyCommand(conn, "discard_item", fmt.Errorf("数量须为1至10000的整数"), nil, nil)
+		return
+	}
 	msg, err := engine.DiscardWithMessage(s.repo, playerID, itemID, amount)
 	s.replyCommand(conn, "discard_item", err, map[string]interface{}{"message": msg}, nil)
 }
@@ -267,7 +275,11 @@ func (s *Server) handleGameSell(conn *websocket.Conn, cmd protocol.CommandMessag
 		return
 	}
 	itemID := toString(cmd.Args["itemId"])
-	amount := toInt(cmd.Args["amount"], 1)
+	amount, valid := strictBoundedInt(cmd.Args["amount"], 1, 10000)
+	if !valid {
+		s.replyCommand(conn, "sell", fmt.Errorf("数量须为1至10000的整数"), nil, nil)
+		return
+	}
 	res, err := engine.SellWithReceipt(s.repo, playerID, itemID, amount)
 	s.replyCommand(conn, "sell", err, map[string]interface{}{"money": res.Money, "gain": res.Gain, "message": res.Message}, nil)
 }

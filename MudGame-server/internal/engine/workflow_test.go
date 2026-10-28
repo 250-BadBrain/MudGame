@@ -274,6 +274,16 @@ func setupSecondPlayer(t *testing.T, username, charName string, repo RuntimeRepo
 	return playerID
 }
 
+func movePlayersToDuelArea(t *testing.T, repo RuntimeRepository, ids ...string) {
+	t.Helper()
+	for _, id := range ids {
+		if _, err := EnterWorldWithTransition(repo, id, "luoyang"); err != nil {
+			t.Fatal(err)
+		}
+		moveToOutskirtsFromSpawn(t, repo, id)
+	}
+}
+
 func TestStateAndCombatWorkflows(t *testing.T) {
 	h := setupRepo(t)
 	p2 := setupSecondPlayer(t, "tester2", "hero2", h.repo)
@@ -296,6 +306,7 @@ func TestStateAndCombatWorkflows(t *testing.T) {
 	}
 	_ = StopWithEffects(h.repo, h.playerID)
 	moveBackFromOutskirtsToSpawn(t, h.repo, h.playerID)
+	movePlayersToDuelArea(t, h.repo, h.playerID, p2, p3, p4)
 	combatRes, err := SparWithEffects(h.repo, h.playerID, p2)
 	if err != nil {
 		t.Fatalf("spar workflow failed: %v", err)
@@ -410,6 +421,10 @@ func TestShopAndInventoryWorkflows(t *testing.T) {
 		t.Fatalf("discard message should not be empty")
 	}
 
+	if _, err := EnterWorldWithTransition(h.repo, h.playerID, "luoyang"); err != nil {
+		t.Fatal(err)
+	}
+	moveToShopFromSpawn(t, h.repo, h.playerID)
 	sellRes, err := SellWithReceipt(h.repo, h.playerID, workflowShopItemID, 1)
 	if err != nil {
 		t.Fatalf("sell workflow failed: %v", err)
@@ -838,6 +853,7 @@ func TestStatusTickWorkflow(t *testing.T) {
 
 	hpDropped := false
 	for attempt := 0; attempt < 3 && !hpDropped; attempt++ {
+		movePlayersToDuelArea(t, h.repo, h.playerID, p2)
 		if _, err := SparWithEffects(h.repo, h.playerID, p2); err != nil {
 			t.Fatalf("spar failed: %v", err)
 		}
@@ -885,6 +901,7 @@ func TestSparAutoStopWorkflow(t *testing.T) {
 	h := setupRepo(t)
 	p2 := setupSecondPlayer(t, "spar2", "spar2hero", h.repo)
 
+	movePlayersToDuelArea(t, h.repo, h.playerID, p2)
 	if _, err := SparWithEffects(h.repo, h.playerID, p2); err != nil {
 		t.Fatalf("spar failed: %v", err)
 	}
@@ -917,6 +934,7 @@ func TestCombatTargetLossWorkflow(t *testing.T) {
 	h := setupRepo(t)
 	p2 := setupSecondPlayer(t, "loss2", "loss2hero", h.repo)
 
+	movePlayersToDuelArea(t, h.repo, h.playerID, p2)
 	if _, err := SparWithEffects(h.repo, h.playerID, p2); err != nil {
 		t.Fatalf("spar failed: %v", err)
 	}

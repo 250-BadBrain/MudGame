@@ -2,6 +2,8 @@ package manager
 
 import (
 	"errors"
+	"strings"
+	"unicode/utf8"
 
 	"mudgame/server/internal/exception"
 	"mudgame/server/internal/model"
@@ -115,8 +117,14 @@ func (r *RuntimeManager) CreateCharacter(username, name string, str, con, agi, p
 	if !ok {
 		return "", exception.ErrUserNotFound
 	}
-	if len(name) < 2 || len(name) > 16 {
+	name = strings.TrimSpace(name)
+	if utf8.RuneCountInString(name) < 2 || utf8.RuneCountInString(name) > 16 {
 		return "", errors.New("invalid_character_name")
+	}
+	for _, value := range []int{str, con, agi, perception, willpower} {
+		if value < 10 || value > 25 {
+			return "", errors.New("先天属性每项须为10至25的整数")
+		}
 	}
 	if str+con+agi+perception+willpower != 80 {
 		return "", errors.New("invalid_attribute_sum")

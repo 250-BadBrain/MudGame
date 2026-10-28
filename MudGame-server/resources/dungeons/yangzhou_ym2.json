@@ -136,5 +136,7 @@
     "items": {
       "ym2_relic": 1
     }
-  }
+  },
+  "contentStatus": "needs_depth",
+  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
 }

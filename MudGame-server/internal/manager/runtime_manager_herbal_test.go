@@ -45,8 +45,8 @@ func TestHerbalBrewDialogue(t *testing.T) {
 		t.Fatal("brew with insufficient herbs must be rejected")
 	}
 
-	// 材料齐：3 草 + 1 粮 → 1 金创药
-	give(map[string]int{"herb": 1, "dry_ration": 1})
+	// 材料齐：7 草 + 1 粮 → 1 金创药
+	give(map[string]int{"herb": 5, "dry_ration": 1})
 	if _, _, _, _, err := r.ChooseDialogue(playerID, "herbalist_sun", "brew_with_herbs"); err != nil {
 		t.Fatalf("brew failed: %v", err)
 	}
