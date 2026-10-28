@@ -656,9 +656,41 @@ class Guide:
                   '章节尚未解锁时，见闻会说明原前置；情报一直保留。进入后仍须处理敌人、其余调查与最后判断。快速完成不执行这些明确追问或替代解法，也不产生对应的新经历。', '']
         return '\n'.join(lines)
 
+    def combat_moves_page(self):
+        slots = {"combat": "战斗", "internal": "内功", "movement": "身法", "guard": "护体", "study": "学识"}
+        lines = ["# 武功与招式", "", "[返回玩家入口](README.md)", "",
+                 "> 本页描述即将随发布启用的主动招式玩法；在正式发布前，线上游戏暂无招式栏。", "",
+                 "## 玩法说明", "",
+                 "武功装备在「技」页完成后，战斗中会出现「招式」栏：五个位置（战斗/内功/身法/护体/学识）各自提供当前装备武学的招式；某位置没有装备命名武学时，自动改用该位置对应基本功的招式，战斗位按你当前手持的兵器匹配。学会一门武功即获得它的全部招式，升级只提高效果数值，不解锁新招。",
+                 "",
+                 "点击招式立即结算，不替代、不暂停普通攻击；普攻仍每2秒自动进行。每次成功施放同时开始两种冷却：",
+                 "",
+                 "- **出招冷却**：角色级，基础4秒，随攻速缩短（下限1秒）；期间所有招式都不能再用，普攻不受影响。",
+                 "- **技能冷却**：仅刚用的这一招固定10～60秒，攻速不改变它。",
+                 "",
+                 "按钮上的半透明进度条显示两种冷却中较长的一种（不相加）；进度清空后，若内力、兵器与其他条件也满足即可再放。内力不足、兵器不符或条件未满足会单独写明原因，不伪装成冷却。",
+                 "",
+                 "效果数值随该门武功等级成长（100级为表中基准，1级约八成，200级约107%）；次数、期限、冷却与内力消耗固定。同类效果不叠层只取最强；防御忽略、减伤、命中与暴击等均有通用上限，没有无敌或硬控。",
+                 "",
+                 "## 全部38门武功的招式目录", ""]
+        for sid, skill in self.skills.items():
+            moves = skill.get("moves") or []
+            if not moves:
+                continue
+            slot = slots.get(skill.get("slot", ""), skill.get("slot", ""))
+            lines.append("### " + safe(skill["name"]) + "（" + slot + "｜" + str(len(moves)) + "招）")
+            lines.append("")
+            lines.append("| 招式 | 基础出招 | 技能CD | 内力 | 效果（100级基准） |")
+            lines.append("|---|---:|---:|---:|---|")
+            for m in moves:
+                lines.append("| " + safe(m["name"]) + " | " + str(round(m.get("actionMs", 4000) / 1000, 1)) + "秒 | "
+                             + str(m.get("cooldownSec")) + "秒 | " + str(m.get("mpCost")) + " | " + safe(m.get("description", "")) + " |")
+            lines.append("")
+        return chr(10).join(lines)
+
     def pages(self):
         result = self.story_pages()
-        result.update({"worlds.md": self.world_page(), "quests.md": self.quest_page(), "collections.md": self.collection_page(), "content_status.md": self.status_page(), "connected_exploration.md": self.connected_exploration_page()})
+        result.update({"worlds.md": self.world_page(), "quests.md": self.quest_page(), "collections.md": self.collection_page(), "content_status.md": self.status_page(), "connected_exploration.md": self.connected_exploration_page(), "combat_moves.md": self.combat_moves_page()})
         current = "unlock_order.md"
         index = ["# 全部副本的全局解锁顺序", "", "[返回玩家入口](README.md)", "", "同序号的关卡任一 100% 离开结算即可解锁下一序号；它们不是必须全部完成的连续章节。卷内章号不参与判断。当前序号27空缺，28仍检查最近存在的序26。", "", "| 全局序号 | 副本与卷 | 实际前置 |", "|---:|---|---|"]
         for dungeon in self.dungeons:

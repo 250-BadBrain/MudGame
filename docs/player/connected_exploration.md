@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：8a45f361faa563f99c77eb85836e1ff0a973bb2f8709b61b347b27e642ffe421；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：44795b864ae97f95b4d1df736452b1474947a92c470d3f0cf7b0d3681879ed2a；由 scripts/generate_player_guide.py 生成。 -->
 
 # 三件旧事与六门武学：已有选择怎样影响探索
 

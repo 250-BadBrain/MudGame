@@ -297,6 +297,12 @@ export function cooldownFraction(window, now) {
 
 ## 12. 本轮文档验收记录
 
+2026-10-29（实施记录）：服务端与前端按本规范实施完成。`model/combat_moves.go`、`model/combat_move_clock.go`、`manager/runtime_manager_combat_{sessions,action,effects,moves,ai}.go`、`gamedata/combat_move_validation.go`、协议`get_combat_moves`/`cast_combat_move`、100ms意图调度、前端`useCombatMoves`/`GameCombatMovesPanel`与立即发送通道均已落地；84招配置按附录冻结ID写入`resources/skills.json`，三试点combatArts已配置。实施中按数据语义补充的两处枚举：`stat_mod`允许负值（削弱）、新增`parry_mult`（锁浪借势乘数）、`next_active`允许`missed`触发（逆浪回步）、命中加成允许-25pp～+25pp（乱披风）。Go全量与前端门禁通过；战斗平衡对比（三阶段三路线两策略）见[平衡报告](active_martial_moves_balance_results.md)，未宣布"平衡完成"。真实WS与浏览器验收及九路线全矩阵仍待后续。
+
+## 历史记录
+
+2026-10-29：仅做文档与纯公式检查，不执行运行代码实现。核对现有38个武功的ID/名称无增删；扩展为84招，品阶招式数13/21/27/10/13，全部费用为正、CD10～60秒、基础出招4秒；最大五位置配置15招。附录ID与目录逐行对应，不重号。检查成长/攻速/合并窗口及受折扣MP返还公式边界，并核查文档相对链接。候选战斗平衡、真实WS和页面尚待实施阶段验证。
+
 2026-10-29：仅做文档与纯公式检查，不执行运行代码实现。核对现有38个武功的ID/名称无增删；扩展为84招，品阶招式数13/21/27/10/13，全部费用为正、CD10～60秒、基础出招4秒；最大五位置配置15招。附录ID与目录逐行对应，不重号。检查成长/攻速/合并窗口及受折扣MP返还公式边界，并核查文档相对链接。候选战斗平衡、真实WS和页面尚待实施阶段验证。
 
 2026-10-29（补充）：落实附录84条冻结ID映射，逐条对照提案§5目录顺序与§7新增12招的m03编号，合计84条无重号、无遗漏；新建[实施计划](../superpowers/plans/2026-10-29-active-martial-moves.md)，其文件清单、接口签名与任务顺序均取自本页§1/§5/§8/§9/§11及提案§10/§11，未引入新机制或新数值。实施仍待用户确认；运行资源与代码未改动。
