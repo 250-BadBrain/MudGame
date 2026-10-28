@@ -2,7 +2,6 @@ package manager
 
 import (
 	"math/rand"
-	"strconv"
 
 	engruntime "mudgame/server/internal/engine/runtime"
 	"mudgame/server/internal/model"
@@ -20,6 +19,8 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 	result := model.CombatTickResult{}
 	updatedRoom := map[string]bool{}
 	processed := map[string]bool{}
+	// 持续效果先于普攻：到期清理→流血/回气→镜湖待回疗；本tick新建的持续效果下tick执行
+	r.processCombatEffectsTickNoLock(players, &result)
 	r.processDungeonAggroNoLock(players, &result, updatedRoom)
 
 	for _, attacker := range players {
@@ -88,13 +89,14 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 			combatType = "SPAR"
 		}
 
-		attackerAttrs := effectiveAttributesForPlayerNoLock(attacker)
-		targetAttrs := effectiveAttributesForPlayerNoLock(target)
-		strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, attackerAttrs, target.CharacterName, targetAttrs, combatType)
-		strikeBToA := r.resolveCombatStrikeEntity(target.CharacterName, targetAttrs, attacker.CharacterName, attackerAttrs, combatType)
-		attackerFirst := attackerAttrs.Initiative >= targetAttrs.Initiative
-
-		applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, attackerFirst, combatType == "KILL", roomID, &result.Messages, attackerAttrs.MaxHP/5, targetAttrs.MaxHP/5)
+		now := combatNowUnix(r)
+		actorA := playerEntity(attacker, combatType)
+		actorB := playerEntity(target, combatType)
+		first, second := actorA, actorB
+		if actorB.attrs.Initiative > actorA.attrs.Initiative {
+			first, second = actorB, actorA
+		}
+		r.runAutoRoundNoLock(first, second, roomID, now, &result)
 		updatedRoom[roomID] = true
 
 		if combatType == "KILL" {
@@ -104,8 +106,8 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 			continue
 		}
 
-		attackerLimit := attackerAttrs.MaxHP / 5
-		targetLimit := targetAttrs.MaxHP / 5
+		attackerLimit := actorA.maxHP / 5
+		targetLimit := actorB.maxHP / 5
 		attackerLow := attacker.Attributes.Resources.HP <= attackerLimit
 		targetLow := target.Attributes.Resources.HP <= targetLimit
 		if attackerLow || targetLow {
@@ -135,16 +137,14 @@ func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Playe
 		combatType = "SPAR"
 	}
 
-	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), target.Name, model.BuildEffectiveAttributes(target.Attributes), combatType)
-	counterType := combatType
-	if combatType == "KILL" {
-		counterType = "KILL"
+	now := combatNowUnix(r)
+	actorA := playerEntity(attacker, combatType)
+	actorB := npcEntity(ActorKey{Kind: "static_npc", EntityID: target.ID}, target, combatType)
+	first, second := actorA, actorB
+	if actorB.attrs.Initiative > actorA.attrs.Initiative {
+		first, second = actorB, actorA
 	}
-	playerAttrs := effectiveAttributesForPlayerNoLock(attacker)
-	npcAttrs := model.BuildEffectiveAttributes(target.Attributes)
-	strikeBToA := r.resolveCombatStrikeEntity(target.Name, npcAttrs, attacker.CharacterName, playerAttrs, counterType)
-
-	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &target.Attributes.Resources.HP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages, playerAttrs.MaxHP/5, npcAttrs.MaxHP/5)
+	r.runAutoRoundNoLock(first, second, roomID, now, result)
 	updatedRoom[roomID] = true
 
 	if combatType == "KILL" {
@@ -162,8 +162,8 @@ func (r *RuntimeManager) resolveStaticNPCCombatRoundNoLock(attacker *model.Playe
 		return
 	}
 
-	attackerLimit := playerAttrs.MaxHP / 5
-	targetLimit := target.Attributes.Resources.MaxHP / 5
+	attackerLimit := actorA.maxHP / 5
+	targetLimit := actorB.maxHP / 5
 	attackerLow := attacker.Attributes.Resources.HP <= attackerLimit
 	targetLow := target.Attributes.Resources.HP <= targetLimit
 	if attackerLow || targetLow {
@@ -189,17 +189,21 @@ func (r *RuntimeManager) resolveDungeonCombatRoundNoLock(players map[string]*mod
 		combatType = "KILL"
 	}
 
-	strikeAToB := r.resolveCombatStrikeEntity(attacker.CharacterName, effectiveAttributesForPlayerNoLock(attacker), dungeonTarget.Name, model.BuildEffectiveAttributes(dungeonTarget.Attributes), combatType)
-	playerAttrs := effectiveAttributesForPlayerNoLock(attacker)
-	npcAttrs := model.BuildEffectiveAttributes(dungeonTarget.Attributes)
-	strikeBToA := r.resolveCombatStrikeEntity(dungeonTarget.Name, npcAttrs, attacker.CharacterName, playerAttrs, "KILL")
-
+	now := combatNowUnix(r)
 	yieldAt := 0
 	if dungeonTarget.CombatMode == "defeat" && combatType == "KILL" {
 		yieldAt = max(1, dungeonTarget.Attributes.Resources.MaxHP/4)
 	}
 	combatHP := max(0, dungeonTarget.Attributes.Resources.HP-yieldAt)
-	applyPairedStrikesNoLock(&attacker.Attributes.Resources.HP, &combatHP, strikeAToB, strikeBToA, playerAttrs.Initiative >= npcAttrs.Initiative, combatType == "KILL", roomID, &result.Messages)
+	actorA := playerEntity(attacker, combatType)
+	actorB := npcEntity(ActorKey{Kind: "dungeon_npc", EntityID: dungeonTarget.ID}, dungeonTarget, "KILL")
+	actorB.hp = &combatHP
+	actorB.defeatMode = false // combatHP已扣除认负线：floor=0，触0即认负
+	first, second := actorA, actorB
+	if actorB.attrs.Initiative > actorA.attrs.Initiative {
+		first, second = actorB, actorA
+	}
+	r.runAutoRoundNoLock(first, second, roomID, now, result)
 	dungeonTarget.Attributes.Resources.HP = combatHP + yieldAt
 	updatedRoom[roomID] = true
 
@@ -344,88 +348,32 @@ func (r *RuntimeManager) sparEndMessage(attacker, target *model.Player, attacker
 	return winner.CharacterName + "抱拳道：承让。"
 }
 
-type combatStrikeResult struct {
-	Damage  int
-	Message string
-}
-
-// applyPairedStrikesNoLock 按先攻值决定双方出手顺序：先攻高者先出手。
-// 生死战中倒下的一方不再出手；切磋保留至少1血，达到认输线即取消后续出手。
-// strikeA 为 A 方打向 B 方的一击，strikeB 为 B 方打向 A 方的一击。
-func applyPairedStrikesNoLock(aHP, bHP *int, strikeA, strikeB combatStrikeResult, aFirst bool, killRound bool, roomID string, messages *[]model.RoomMessage, sparLimits ...int) {
-	swing := func(strikerHP, victimHP *int, strike combatStrikeResult) {
-		if !killRound && len(sparLimits) == 2 && (*aHP <= sparLimits[0] || *bHP <= sparLimits[1]) {
-			return
-		}
-		if killRound && *strikerHP <= 0 {
-			return
-		}
-		*victimHP -= strike.Damage
-		if killRound {
-			*victimHP = max(0, *victimHP)
-		} else {
-			*victimHP = max(1, *victimHP)
-		}
-		if strike.Message != "" {
-			*messages = append(*messages, model.RoomMessage{RoomID: roomID, Message: strike.Message})
+// runAutoRoundNoLock 一轮普攻：先手者先结算，其减益即时影响本轮后手；
+// 认输线/死亡取消之后的普攻（实现规范§6，废弃双方预计算）。
+func (r *RuntimeManager) runAutoRoundNoLock(first, second *combatEntity, roomID string, now int64, result *model.CombatTickResult) {
+	for _, e := range []*combatEntity{first, second} {
+		if b := r.currentBindingNoLock(e.key); b != nil {
+			b.AutoRounds++
 		}
 	}
-	if aFirst {
-		swing(aHP, bHP, strikeA)
-		swing(bHP, aHP, strikeB)
+	out := r.resolveCombatActionNoLock(combatAction{Kind: actionAuto, Actor: first, Target: second, RoomID: roomID, Now: now})
+	result.Messages = append(result.Messages, out.Messages...)
+	r.bumpRevisionForEntityNoLock(first)
+	r.bumpRevisionForEntityNoLock(second)
+	if out.Stopped || !second.canAct() || !first.canAct() {
 		return
 	}
-	swing(bHP, aHP, strikeB)
-	swing(aHP, bHP, strikeA)
+	out2 := r.resolveCombatActionNoLock(combatAction{Kind: actionAuto, Actor: second, Target: first, RoomID: roomID, Now: now})
+	result.Messages = append(result.Messages, out2.Messages...)
+	r.bumpRevisionForEntityNoLock(first)
+	r.bumpRevisionForEntityNoLock(second)
 }
 
-func (r *RuntimeManager) resolveCombatStrikeEntity(attackerName string, attackerAttrs model.EffectiveAttributes, defenderName string, defenderAttrs model.EffectiveAttributes, combatType string) combatStrikeResult {
-	floatRoll, intRoll := rand.Float64, rand.Intn
-	if r.combatRandom != nil {
-		floatRoll, intRoll = r.combatRandom.Float64, r.combatRandom.Intn
+// bumpRevisionForEntityNoLock 玩家气血/状态变化后递增其招式视图修订号。
+func (r *RuntimeManager) bumpRevisionForEntityNoLock(e *combatEntity) {
+	if e != nil && e.isPlayer {
+		r.bumpCombatRevisionNoLock(e.key.EntityID)
 	}
-	hitChance := boundedChance(attackerAttrs.HitRate, defenderAttrs.Dodge)
-	if floatRoll() > hitChance {
-		return combatStrikeResult{Damage: 0, Message: attackerName + "发起攻击，但被" + defenderName + "躲开了！"}
-	}
-
-	base := attackerAttrs.Attack - defenderAttrs.Defense/3
-	if combatType == "KILL" {
-		base += 14
-	} else {
-		base += 8
-	}
-	if base < 2 {
-		base = 2
-	}
-
-	fluctuation := 90 + intRoll(21)
-	damage := base * fluctuation / 100
-
-	crit := floatRoll() < min(25, max(0, attackerAttrs.CritRate))/100
-	if crit {
-		damage *= 2
-	}
-
-	parryChance := boundedParryChance(defenderAttrs.Parry, attackerAttrs.HitRate)
-	parried := floatRoll() < parryChance
-	if parried {
-		damage /= 2
-	}
-
-	if combatType == "SPAR" {
-		damage = min(damage, max(1, defenderAttrs.MaxHP/5), max(0, defenderAttrs.HP-1))
-	}
-	msg := attackerName + "一招击中" + defenderName + "，造成" + strconv.Itoa(damage) + "点伤害"
-	if crit {
-		msg = attackerName + "发动致命一击，重创" + defenderName + "，造成" + strconv.Itoa(damage) + "点伤害"
-	}
-	if damage <= 0 {
-		msg = attackerName + "一招击中" + defenderName + "，但没有造成任何伤害。"
-		return combatStrikeResult{Damage: 0, Message: msg}
-	}
-	msg += "。"
-	return combatStrikeResult{Damage: damage, Message: msg}
 }
 
 func boundedChance(attackerStat, defenderStat int) float64 {

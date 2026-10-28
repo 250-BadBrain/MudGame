@@ -6,6 +6,7 @@ import (
 	"mudgame/server/internal/model"
 	"reflect"
 	"testing"
+	"time"
 )
 
 func TestAuditCreationAndTransactions(t *testing.T) {
@@ -241,11 +242,22 @@ func TestAuditAliasRefundPersistsOnce(t *testing.T) {
 }
 
 func TestAuditSparStopsAtOneAndCancelsCounter(t *testing.T) {
-	a, b := 100, 100
-	messages := []model.RoomMessage{}
-	applyPairedStrikesNoLock(&a, &b, combatStrikeResult{Damage: 1000, Message: "first"}, combatStrikeResult{Damage: 1000, Message: "counter"}, true, false, "test", &messages, 20, 20)
-	if a != 100 || b != 1 || len(messages) != 1 {
-		t.Fatal("nonlethal/cancel invariant", a, b, messages)
+	r := &RuntimeManager{combatNow: func() time.Time { return time.UnixMilli(1000) }, combatRandom: rand.New(rand.NewSource(1))}
+	r.initCombatStateNoLock()
+	hpA, hpB := 100, 100
+	attrs := model.EffectiveAttributes{Attack: 1000, HitRate: 1000, Dodge: 10, Parry: 0, CritRate: 0}
+	entA := &combatEntity{key: ActorKey{Kind: "player", EntityID: "a"}, name: "甲", attrs: attrs, hp: &hpA, maxHP: 100, mode: "SPAR"}
+	entB := &combatEntity{key: ActorKey{Kind: "player", EntityID: "b"}, name: "乙", attrs: attrs, hp: &hpB, maxHP: 100, mode: "SPAR"}
+	// 切磋每次出手伤害上限为受击方MaxHP/5；到20%认输线立即终止，取消对方后续出手。
+	for round := 0; round < 100 && hpB > 20; round++ {
+		result := model.CombatTickResult{}
+		r.runAutoRoundNoLock(entA, entB, "test", int64(1000+round), &result)
+	}
+	if hpB < 1 || hpB > 20 {
+		t.Fatal("spar must stop at yield line and never below 1 HP", hpA, hpB)
+	}
+	if hpA < hpB {
+		t.Fatal("striker swings must be cancelled once opponent reaches the line", hpA, hpB)
 	}
 	r, id := v2Player(t)
 	npc, _ := r.staticNPCInRoomNoLock(fileRooms["ly_weapon_school"], "weapon_school_master")
