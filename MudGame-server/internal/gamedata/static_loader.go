@@ -65,27 +65,29 @@ type rawSkill struct {
 	School        string                 `json:"school"`
 	Bonuses       map[string]float64     `json:"bonuses"`
 	Requirements  map[string]interface{} `json:"requirements"`
+	Moves         []model.CombatMoveDef  `json:"moves"`
 }
 
 type rawNPC struct {
-	Name              string           `json:"name"`
-	Title             string           `json:"title"`
-	Description       string           `json:"description"`
-	Faction           string           `json:"faction"`
-	Role              string           `json:"role"`
-	Importance        string           `json:"importance"`
-	DialogueID        string           `json:"dialogueId"`
-	QuestIDs          []string         `json:"questIds"`
-	InstanceOnly      bool             `json:"instanceOnly"`
-	NonCombat         bool             `json:"nonCombat"`
-	SpawnRule         string           `json:"spawnRule"`
-	Aggressive        bool             `json:"aggressive"`
-	Attributes        model.Attributes `json:"attributes"`
-	ShopItems         []string         `json:"shopItems"`
-	Skills            map[string]int   `json:"skills"`
-	WeaknessFlag      string           `json:"weaknessFlag"`
-	WeaknessModifiers map[string]int   `json:"weaknessModifiers"`
-	CombatMode        string           `json:"combatMode"`
+	Name              string               `json:"name"`
+	Title             string               `json:"title"`
+	Description       string               `json:"description"`
+	Faction           string               `json:"faction"`
+	Role              string               `json:"role"`
+	Importance        string               `json:"importance"`
+	DialogueID        string               `json:"dialogueId"`
+	QuestIDs          []string             `json:"questIds"`
+	InstanceOnly      bool                 `json:"instanceOnly"`
+	NonCombat         bool                 `json:"nonCombat"`
+	SpawnRule         string               `json:"spawnRule"`
+	Aggressive        bool                 `json:"aggressive"`
+	Attributes        model.Attributes     `json:"attributes"`
+	ShopItems         []string             `json:"shopItems"`
+	Skills            map[string]int       `json:"skills"`
+	CombatArts        []model.NPCCombatArt `json:"combatArts"`
+	WeaknessFlag      string               `json:"weaknessFlag"`
+	WeaknessModifiers map[string]int       `json:"weaknessModifiers"`
+	CombatMode        string               `json:"combatMode"`
 }
 
 type rawWorldFile struct {
@@ -188,6 +190,9 @@ func loadFromDisk() (StaticData, error) {
 		return StaticData{}, err
 	}
 	if err := validateMartialData(resourceDir, skills, items, npcs); err != nil {
+		return StaticData{}, err
+	}
+	if err := ValidateCombatMoves(skills); err != nil {
 		return StaticData{}, err
 	}
 	if err := validateContentData(resourceDir, rooms, npcs, dialogues, quests); err != nil {
@@ -350,6 +355,7 @@ func loadSkills(path string) (map[string]model.SkillDef, error) {
 			School:       raw.School,
 			Bonuses:      copyFloatMap(raw.Bonuses),
 			Requirements: cloneInterfaceMap(raw.Requirements),
+			Moves:        copyCombatMoves(raw.Moves),
 		}
 	}
 	return skills, nil
@@ -408,6 +414,7 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 			WeaknessFlag:      strings.TrimSpace(raw.WeaknessFlag),
 			WeaknessModifiers: cloneIntMap(raw.WeaknessModifiers),
 			CombatMode:        strings.TrimSpace(raw.CombatMode),
+			CombatArts:        copyCombatArts(raw.CombatArts),
 		}
 	}
 	return npcs, nil
@@ -675,6 +682,7 @@ func cloneStaticData(in StaticData) StaticData {
 	for id, skill := range in.Skills {
 		skill.Bonuses = copyFloatMap(skill.Bonuses)
 		skill.Requirements = cloneInterfaceMap(skill.Requirements)
+		skill.Moves = copyCombatMoves(skill.Moves)
 		out.Skills[id] = skill
 	}
 	for id, room := range in.Rooms {
@@ -700,6 +708,7 @@ func cloneStaticData(in StaticData) StaticData {
 			npcCopy.Skills[skillID] = level
 		}
 		npcCopy.QuestIDs = append([]string{}, npc.QuestIDs...)
+		npcCopy.CombatArts = copyCombatArts(npc.CombatArts)
 		npcCopy.WeaknessModifiers = cloneIntMap(npc.WeaknessModifiers)
 		out.NPCs[id] = npcCopy
 	}
@@ -744,6 +753,37 @@ func copyFloatMap(in map[string]float64) map[string]float64 {
 	out := map[string]float64{}
 	for k, v := range in {
 		out[k] = v
+	}
+	return out
+}
+
+// copyCombatMoves 深拷贝招式定义：Conditions/Effects/Tags 均为独立切片。
+func copyCombatMoves(in []model.CombatMoveDef) []model.CombatMoveDef {
+	if in == nil {
+		return nil
+	}
+	out := make([]model.CombatMoveDef, 0, len(in))
+	for _, m := range in {
+		m.Conditions = append([]model.MoveCondition{}, m.Conditions...)
+		m.Effects = make([]model.MoveEffect, 0, len(m.Effects))
+		for _, e := range m.Effects {
+			e.Tags = append([]string{}, e.Tags...)
+			m.Effects = append(m.Effects, e)
+		}
+		out = append(out, m)
+	}
+	return out
+}
+
+// copyCombatArts 深拷贝 NPC 战斗招式配置。
+func copyCombatArts(in []model.NPCCombatArt) []model.NPCCombatArt {
+	if in == nil {
+		return nil
+	}
+	out := make([]model.NPCCombatArt, 0, len(in))
+	for _, art := range in {
+		art.MoveIDs = append([]string{}, art.MoveIDs...)
+		out = append(out, art)
 	}
 	return out
 }

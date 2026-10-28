@@ -13,6 +13,19 @@
     "slot": "combat",
     "weaponType": "unarmed",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_unarmed/m01",
+        "name": "冲拳",
+        "kind": "attack",
+        "cooldownSec": 10,
+        "actionMs": 4000,
+        "mpCost": 4,
+        "description": "单次1.4D；最直接的入门攻击手段。",
+        "power": 1.4,
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_parry": {
@@ -29,6 +42,27 @@
     "slot": "guard",
     "weaponType": "",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_parry/m01",
+        "name": "架挡",
+        "kind": "support",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 6,
+        "description": "下1次来袭减伤35%。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.35,
+            "charges": 1
+          }
+        ]
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_neigong": {
@@ -46,6 +80,25 @@
     "slot": "internal",
     "weaponType": "",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_neigong/m01",
+        "name": "护息",
+        "kind": "support",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 8,
+        "description": "恢复5%气血；不是非战斗打坐，也不回复内力。",
+        "effects": [
+          {
+            "op": "heal",
+            "target": "self",
+            "trigger": "cast",
+            "value": 0.05
+          }
+        ]
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_qinggong": {
@@ -62,6 +115,28 @@
     "slot": "movement",
     "weaponType": "",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_qinggong/m01",
+        "name": "挪步",
+        "kind": "support",
+        "cooldownSec": 10,
+        "actionMs": 4000,
+        "mpCost": 6,
+        "description": "下2次来袭计算时，躲闪值+20%。",
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "dodge",
+            "value": 0.2,
+            "charges": 2
+          }
+        ]
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_blade": {
@@ -78,6 +153,19 @@
     "slot": "combat",
     "weaponType": "blade",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_blade/m01",
+        "name": "劈斩",
+        "kind": "attack",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 6,
+        "description": "单次1.5D，偏重单击。",
+        "power": 1.5,
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_sword": {
@@ -94,6 +182,20 @@
     "slot": "combat",
     "weaponType": "sword",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_sword/m01",
+        "name": "点刺",
+        "kind": "attack",
+        "cooldownSec": 10,
+        "actionMs": 4000,
+        "mpCost": 5,
+        "description": "单次1.2D，本招命中概率+15个百分点。",
+        "power": 1.2,
+        "hitBonusPP": 0.15,
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_literacy": {
@@ -110,6 +212,30 @@
     "slot": "study",
     "weaponType": "",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_literacy/m01",
+        "name": "察势",
+        "kind": "support",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 6,
+        "description": "下一次主动攻击忽略对方25%防御；本身不伤害。",
+        "effects": [
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "armor_ignore",
+            "stat": "armor_ignore",
+            "value": 0.25,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "csj_changshengjue": {
@@ -130,6 +256,55 @@
       },
       "literacy": 80
     },
+    "moves": [
+      {
+        "id": "csj_changshengjue/m01",
+        "name": "生息归元",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "随后3个tick共恢复18%气血，每次6%；战斗结束停止。",
+        "effects": [
+          {
+            "op": "hot",
+            "target": "self",
+            "trigger": "cast",
+            "value": 0.06,
+            "ticks": 3
+          }
+        ]
+      },
+      {
+        "id": "csj_changshengjue/m02",
+        "name": "阴阳相济",
+        "kind": "support",
+        "cooldownSec": 60,
+        "actionMs": 4000,
+        "mpCost": 36,
+        "description": "移除1项负面效果，包含流血；下2次来袭减伤35%。不复活、不回满、不增加永久已修内力。",
+        "effects": [
+          {
+            "op": "cleanse",
+            "target": "self",
+            "trigger": "cast",
+            "tags": [
+              "bleed",
+              "stat_down",
+              "vulnerability"
+            ]
+          },
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.35,
+            "charges": 2
+          }
+        ]
+      }
+    ],
     "slot": "internal",
     "weaponType": "",
     "teacherId": "",
@@ -156,6 +331,61 @@
       },
       "literacy": 80
     },
+    "moves": [
+      {
+        "id": "jyg_zhanshentu_dao/m01",
+        "name": "战神凝势",
+        "kind": "support",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "下2次主动攻击伤害+25%，为后续攻击招式蓄势；普攻不享受也不消耗。",
+        "effects": [
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "damage",
+            "stat": "damage",
+            "value": 0.25,
+            "charges": 2,
+            "durationMs": 12000
+          }
+        ]
+      },
+      {
+        "id": "jyg_zhanshentu_dao/m02",
+        "name": "神意护体",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 28,
+        "description": "下2次来袭减伤45%。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.45,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "jyg_zhanshentu_dao/m03",
+        "name": "天地合势",
+        "kind": "attack",
+        "cooldownSec": 60,
+        "actionMs": 4000,
+        "mpCost": 38,
+        "description": "单次2.6D，本招忽略30%防御；使用当前合法战斗配置的攻击属性，不要求换成特定兵器。",
+        "power": 2.6,
+        "armorIgnore": 0.3,
+        "hitCount": 1
+      }
+    ],
     "slot": "internal",
     "weaponType": "",
     "teacherId": "",
@@ -181,6 +411,72 @@
       },
       "literacy": 80
     },
+    "moves": [
+      {
+        "id": "tiandao_blade/m01",
+        "name": "问刀藏锋",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "单次1.6D，本招受到的招架概率乘0.5。",
+        "power": 1.6,
+        "parryReduction": 0.5,
+        "hitCount": 1
+      },
+      {
+        "id": "tiandao_blade/m02",
+        "name": "归鞘收势",
+        "kind": "support",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "下2次来袭减伤35%；下一次主动攻击命中概率+10个百分点。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.35,
+            "charges": 2
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "hit_pp",
+            "stat": "hit_pp",
+            "value": 0.1,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      },
+      {
+        "id": "tiandao_blade/m03",
+        "name": "天刀一线",
+        "kind": "attack",
+        "cooldownSec": 60,
+        "actionMs": 4000,
+        "mpCost": 40,
+        "description": "单次3.0D，本招忽略30%防御；自己下1次来袭受到的伤害+15%，强招之后留有空隙。",
+        "power": 3.0,
+        "armorIgnore": 0.3,
+        "effects": [
+          {
+            "op": "vulnerability",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.15,
+            "charges": 1
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "combat",
     "weaponType": "blade",
     "teacherId": "",
@@ -202,6 +498,30 @@
     "slot": "combat",
     "weaponType": "staff",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_staff/m01",
+        "name": "横拦",
+        "kind": "attack",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 5,
+        "description": "单次0.8D；命中后对手下1次攻击的攻击值-15%。",
+        "power": 0.8,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "attack",
+            "value": -0.15,
+            "charges": 1
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_hidden_weapon": {
@@ -218,6 +538,19 @@
     "slot": "combat",
     "weaponType": "hidden_weapon",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_hidden_weapon/m01",
+        "name": "连珠投",
+        "kind": "attack",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 6,
+        "description": "同一目标2段、合计1.4D；分段命中，不额外消耗弹药物品。",
+        "hitCount": 2,
+        "power": 1.4
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "thunder_sword": {
@@ -243,6 +576,67 @@
         "level": 20
       }
     },
+    "moves": [
+      {
+        "id": "thunder_sword/m01",
+        "name": "疾电刺",
+        "kind": "attack",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 10,
+        "description": "单次1.5D，本招命中概率+20个百分点；稳定的先手攻击。",
+        "power": 1.5,
+        "hitBonusPP": 0.2,
+        "hitCount": 1
+      },
+      {
+        "id": "thunder_sword/m02",
+        "name": "雷回夺势",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 12,
+        "description": "单次0.9D；命中后对手下2次承受攻击时招架值-25%，为后续连攻开口。",
+        "power": 0.9,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "parry",
+            "value": -0.25,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "thunder_sword/m03",
+        "name": "惊雷趁隙",
+        "kind": "attack",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "单次1.4D；若目标施放时尚有至少1秒出招CD，本招忽略35%防御，抓住后摇而不改变对手CD。",
+        "power": 1.4,
+        "effects": [
+          {
+            "op": "conditional_ignore",
+            "target": "opponent",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "armor_ignore",
+            "value": 0.35,
+            "durationMs": 1000,
+            "tags": [
+              "target_action_remaining_gte"
+            ]
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "sourceDungeon": ""
   },
   "bloody_blade": {
@@ -268,6 +662,77 @@
         "level": 20
       }
     },
+    "moves": [
+      {
+        "id": "bloody_blade/m01",
+        "name": "血战冲阵",
+        "kind": "attack",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 10,
+        "description": "单次1.6D；自己下1次来袭受到的伤害+10%，以攻换险。",
+        "power": 1.6,
+        "effects": [
+          {
+            "op": "vulnerability",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.1,
+            "charges": 1
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "bloody_blade/m02",
+        "name": "浴血斩",
+        "kind": "attack",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "自己施放时气血低于50%则2.0D，否则1.2D；阈值不随等级变化。",
+        "power": 1.2,
+        "conditions": [
+          {
+            "kind": "self_hp_below",
+            "value": 0.5
+          }
+        ],
+        "effects": [
+          {
+            "op": "conditional_power",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "value": 2.0
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "bloody_blade/m03",
+        "name": "破阵连刀",
+        "kind": "attack",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "2段合计1.6D；至少一段命中后，对手下2次攻击的攻击值-15%。",
+        "hitCount": 2,
+        "power": 1.6,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "attack",
+            "value": -0.15,
+            "charges": 2
+          }
+        ]
+      }
+    ],
     "sourceDungeon": ""
   },
   "basic_spear": {
@@ -284,6 +749,20 @@
     "slot": "combat",
     "weaponType": "spear",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_spear/m01",
+        "name": "突刺",
+        "kind": "attack",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 6,
+        "description": "单次1.3D，本招忽略15%防御。",
+        "power": 1.3,
+        "armorIgnore": 0.15,
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_whip": {
@@ -300,6 +779,30 @@
     "slot": "combat",
     "weaponType": "whip",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_whip/m01",
+        "name": "缠足",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 6,
+        "description": "单次1.0D；命中后对手随后2轮先手值-15%。",
+        "power": 1.0,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "initiative",
+            "value": -0.15,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_mace": {
@@ -316,6 +819,20 @@
     "slot": "combat",
     "weaponType": "mace",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_mace/m01",
+        "name": "重敲",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 8,
+        "description": "单次1.4D，本招受到的招架概率乘0.7。",
+        "power": 1.4,
+        "parryReduction": 0.3,
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "basic_hook": {
@@ -332,6 +849,30 @@
     "slot": "combat",
     "weaponType": "hook",
     "requirements": {},
+    "moves": [
+      {
+        "id": "basic_hook/m01",
+        "name": "扯刃",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 8,
+        "description": "单次0.8D；命中后对手下1次攻击的命中值-20%。",
+        "power": 0.8,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "hit",
+            "value": -0.2,
+            "charges": 1
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "source": "世界老师入门；已学后在安全公共房间自主修炼。"
   },
   "cihang_jiandian": {
@@ -353,6 +894,51 @@
       },
       "literacy": 80
     },
+    "moves": [
+      {
+        "id": "cihang_jiandian/m01",
+        "name": "剑心通明",
+        "kind": "support",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "下2次主动攻击命中概率+20个百分点；下2次来袭计算时招架值+30%。",
+        "effects": [
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "hit_pp",
+            "stat": "hit_pp",
+            "value": 0.2,
+            "charges": 2,
+            "durationMs": 12000
+          },
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "parry",
+            "value": 0.3,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "cihang_jiandian/m02",
+        "name": "慈航照影",
+        "kind": "attack",
+        "cooldownSec": 50,
+        "actionMs": 4000,
+        "mpCost": 34,
+        "description": "2段合计2.6D，本招受到的招架概率乘0.4。",
+        "hitCount": 2,
+        "power": 2.6,
+        "parryReduction": 0.6
+      }
+    ],
     "slot": "combat",
     "weaponType": "sword",
     "teacherId": "",
@@ -377,6 +963,73 @@
         "level": 20
       }
     },
+    "moves": [
+      {
+        "id": "hunyuan_neigong/m01",
+        "name": "混元护息",
+        "kind": "support",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 12,
+        "description": "恢复8%气血。",
+        "effects": [
+          {
+            "op": "heal",
+            "target": "self",
+            "trigger": "cast",
+            "value": 0.08
+          }
+        ]
+      },
+      {
+        "id": "hunyuan_neigong/m02",
+        "name": "聚气归元",
+        "kind": "support",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 10,
+        "description": "随后2个其他主动招式的内力消耗-30%，每次最低1；不能优惠本招、不能叠层，不返还已支付内力。",
+        "effects": [
+          {
+            "op": "mp_discount",
+            "target": "self",
+            "trigger": "cast",
+            "group": "mp_discount",
+            "value": 0.3,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "hunyuan_neigong/m03",
+        "name": "清浊守一",
+        "kind": "support",
+        "cooldownSec": 45,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "移除自身1项流血，随后4秒免疫新增易伤；不免疫直接伤害或其他减益。",
+        "effects": [
+          {
+            "op": "cleanse",
+            "target": "self",
+            "trigger": "cast",
+            "tags": [
+              "bleed"
+            ]
+          },
+          {
+            "op": "immunity",
+            "target": "self",
+            "trigger": "cast",
+            "group": "vulnerability",
+            "durationMs": 4000,
+            "tags": [
+              "vulnerability"
+            ]
+          }
+        ]
+      }
+    ],
     "slot": "internal",
     "weaponType": "",
     "teacherId": "academy_teacher",
@@ -403,6 +1056,87 @@
       },
       "literacy": 80
     },
+    "moves": [
+      {
+        "id": "tianmo_ce/m01",
+        "name": "魔影侵心",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "单次1.2D；命中后对手下2次攻击的攻击值-20%。",
+        "power": 1.2,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "attack",
+            "value": -0.2,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "tianmo_ce/m02",
+        "name": "天魔幻身",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 28,
+        "description": "下2次来袭计算时躲闪值+35%；下一次主动攻击暴击概率+10个百分点，合计仍封顶25%。",
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "dodge",
+            "value": 0.35,
+            "charges": 2
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "crit_pp",
+            "stat": "crit_pp",
+            "value": 0.1,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      },
+      {
+        "id": "tianmo_ce/m03",
+        "name": "魔极蚀心",
+        "kind": "attack",
+        "cooldownSec": 60,
+        "actionMs": 4000,
+        "mpCost": 36,
+        "description": "自损MaxHP的5%，造成单次2.6D；命中后附加共0.5D流血，随后2个tick均分。生死战自损不得致死，切磋自损不得触及认输线；不满足时整招不可用、不扣费。",
+        "power": 2.6,
+        "conditions": [
+          {
+            "kind": "self_hp_cost",
+            "value": 0.05
+          }
+        ],
+        "effects": [
+          {
+            "op": "bleed",
+            "target": "opponent",
+            "trigger": "hit",
+            "power": 0.25,
+            "ticks": 2
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "internal",
     "weaponType": "",
     "teacherId": "",
@@ -427,6 +1161,97 @@
         "level": 20
       }
     },
+    "moves": [
+      {
+        "id": "talang_jue/m01",
+        "name": "浪上轻身",
+        "kind": "support",
+        "cooldownSec": 15,
+        "actionMs": 4000,
+        "mpCost": 8,
+        "description": "下2次来袭计算时，躲闪值+30%。",
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "dodge",
+            "value": 0.3,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "talang_jue/m02",
+        "name": "逆浪回步",
+        "kind": "support",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 12,
+        "description": "下1次来袭减伤20%；若该次攻击落空，再获下一次主动攻击命中概率+20个百分点。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.2,
+            "charges": 1
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "missed",
+            "scope": "active_attack",
+            "group": "hit_pp",
+            "stat": "hit_pp",
+            "value": 0.2,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      },
+      {
+        "id": "talang_jue/m03",
+        "name": "踏浪穿隙",
+        "kind": "support",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 10,
+        "description": "仅当前对手最近4秒内的一次攻击被自己闪避时可用；下一次主动攻击命中概率+15个百分点、伤害+10%，最多保留12秒。",
+        "conditions": [
+          {
+            "kind": "recent_dodge",
+            "value": 4000
+          }
+        ],
+        "effects": [
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "hit_pp",
+            "stat": "hit_pp",
+            "value": 0.15,
+            "charges": 1,
+            "durationMs": 12000
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "damage",
+            "stat": "damage",
+            "value": 0.1,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      }
+    ],
     "slot": "movement",
     "weaponType": "",
     "teacherId": "weapon_school_master",
@@ -451,6 +1276,73 @@
         "level": 20
       }
     },
+    "moves": [
+      {
+        "id": "fuhu_jin/m01",
+        "name": "崩山伏虎",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 10,
+        "description": "单次1.4D；自己下2次来袭减伤15%。",
+        "power": 1.4,
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.15,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "fuhu_jin/m02",
+        "name": "拿虎卸劲",
+        "kind": "attack",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 14,
+        "description": "单次1.0D；命中后对手下2次攻击的攻击值-25%，偏向近身压制。",
+        "power": 1.0,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "attack",
+            "value": -0.25,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "fuhu_jin/m03",
+        "name": "镇步伏形",
+        "kind": "attack",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "单次1.0D；命中后移除目标1项先手或出招攻速增益，优先移除幅度较大者；不倒改目标已确定的出招CD，不卸除装备。",
+        "power": 1.0,
+        "effects": [
+          {
+            "op": "dispel_bonus",
+            "target": "opponent",
+            "trigger": "hit",
+            "tags": [
+              "initiative",
+              "haste"
+            ]
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "combat",
     "weaponType": "unarmed",
     "teacherId": "weapon_school_master",
@@ -475,6 +1367,83 @@
         "level": 20
       }
     },
+    "moves": [
+      {
+        "id": "tiebi_gong/m01",
+        "name": "铜墙架",
+        "kind": "support",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 10,
+        "description": "下2次来袭减伤35%。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.35,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "tiebi_gong/m02",
+        "name": "铁壁迎击",
+        "kind": "support",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 14,
+        "description": "下1次来袭减伤25%；受到有效伤害且自己仍可出手时，追加一次0.8D反击。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.25,
+            "charges": 1
+          },
+          {
+            "op": "counter",
+            "target": "self",
+            "trigger": "incoming",
+            "scope": "normal_or_active",
+            "power": 0.8,
+            "tags": [
+              "damaged"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tiebi_gong/m03",
+        "name": "守中蓄劲",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "下2次来袭减伤20%；每次实际扣血且本人未死亡/认负时返还最多4内力。总返还不超过8且不超过本招实付内力的一半，次数效果最多12秒，不产生净内力。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.2,
+            "charges": 2
+          },
+          {
+            "op": "paid_mp_refund",
+            "target": "self",
+            "trigger": "damaged",
+            "scope": "normal_or_active",
+            "value": 4,
+            "cap": 8
+          }
+        ]
+      }
+    ],
     "slot": "guard",
     "weaponType": "",
     "teacherId": "salt_hall_master",
@@ -498,6 +1467,83 @@
         "level": 20
       }
     },
+    "moves": [
+      {
+        "id": "wuzhen_pian/m01",
+        "name": "知隙",
+        "kind": "support",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 10,
+        "description": "下一次主动攻击忽略35%防御，为高伤招准备，不直接伤害。",
+        "effects": [
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "armor_ignore",
+            "stat": "armor_ignore",
+            "value": 0.35,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      },
+      {
+        "id": "wuzhen_pian/m02",
+        "name": "澄心明鉴",
+        "kind": "support",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 12,
+        "description": "移除1项攻击/命中/躲闪/先手降低或易伤；再获下一次主动攻击命中概率+15个百分点。不解除流血。",
+        "effects": [
+          {
+            "op": "cleanse",
+            "target": "self",
+            "trigger": "cast",
+            "tags": [
+              "stat_down",
+              "vulnerability"
+            ]
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "hit_pp",
+            "stat": "hit_pp",
+            "value": 0.15,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      },
+      {
+        "id": "wuzhen_pian/m03",
+        "name": "照见虚实",
+        "kind": "support",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "下一次主动攻击忽略对手25%的主动防护减伤幅度，例如40%护体按30%计算；不忽略原防御、装备被动或免疫，最多保留12秒。",
+        "effects": [
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "guard_pierce",
+            "stat": "guard_pierce",
+            "value": 0.25,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      }
+    ],
     "slot": "study",
     "weaponType": "",
     "teacherId": "academy_teacher",
@@ -522,6 +1568,76 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "xiulou_daofa/m01",
+        "name": "斩魂破阵",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "单次2.0D；自己下1次来袭计算时防御值-20%。",
+        "power": 2.0,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "defense",
+            "value": -0.2,
+            "charges": 1
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "xiulou_daofa/m02",
+        "name": "修罗追命",
+        "kind": "attack",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "目标气血不高于30%则2.8D，否则1.4D；是收尾增伤，不是无视认负线的处决。",
+        "power": 1.4,
+        "conditions": [
+          {
+            "kind": "target_hp_at_most",
+            "value": 0.3
+          }
+        ],
+        "effects": [
+          {
+            "op": "conditional_power",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "value": 2.8
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "xiulou_daofa/m03",
+        "name": "血刃回身",
+        "kind": "attack",
+        "cooldownSec": 45,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "单次1.2D，按实际造成的直接伤害恢复20%气血，最多恢复本人MaxHP的8%；落空/零伤不回复。",
+        "power": 1.2,
+        "effects": [
+          {
+            "op": "lifesteal",
+            "target": "self",
+            "trigger": "hit",
+            "value": 0.2,
+            "cap": 0.08
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "combat",
     "weaponType": "blade",
     "teacherId": "",
@@ -546,6 +1662,101 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "taiyi_jianfa/m01",
+        "name": "太乙分光",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "2段合计1.8D，本招命中概率+5个百分点。",
+        "hitCount": 2,
+        "power": 1.8,
+        "hitBonusPP": 0.05
+      },
+      {
+        "id": "taiyi_jianfa/m02",
+        "name": "以静制动",
+        "kind": "support",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "下1次来袭减伤25%；受到有效伤害且仍可出手时，追加0.8D反击，并令自己下1次主动攻击命中概率+10个百分点。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.25,
+            "charges": 1
+          },
+          {
+            "op": "counter",
+            "target": "self",
+            "trigger": "incoming",
+            "scope": "normal_or_active",
+            "power": 0.8,
+            "tags": [
+              "damaged"
+            ]
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "hit_pp",
+            "stat": "hit_pp",
+            "value": 0.1,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      },
+      {
+        "id": "taiyi_jianfa/m03",
+        "name": "守一归锋",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "移除自身1项易伤；下一次主动攻击伤害+15%、命中概率+10个百分点。没有易伤时仍可蓄势，最多保留12秒。",
+        "effects": [
+          {
+            "op": "cleanse",
+            "target": "self",
+            "trigger": "cast",
+            "tags": [
+              "vulnerability"
+            ]
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "damage",
+            "stat": "damage",
+            "value": 0.15,
+            "charges": 1,
+            "durationMs": 12000
+          },
+          {
+            "op": "next_active",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "active_attack",
+            "group": "hit_pp",
+            "stat": "hit_pp",
+            "value": 0.1,
+            "charges": 1,
+            "durationMs": 12000
+          }
+        ]
+      }
+    ],
     "slot": "combat",
     "weaponType": "sword",
     "teacherId": "",
@@ -570,6 +1781,90 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "dongting_xinf/m01",
+        "name": "水纳百川",
+        "kind": "support",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "随后3个tick共恢复12%气血，每次4%；中途战斗结束即停止，不带到下一场。",
+        "effects": [
+          {
+            "op": "hot",
+            "target": "self",
+            "trigger": "cast",
+            "value": 0.04,
+            "ticks": 3
+          }
+        ]
+      },
+      {
+        "id": "dongting_xinf/m02",
+        "name": "定波守心",
+        "kind": "support",
+        "cooldownSec": 45,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "移除1项流血，6秒内免疫新增流血；下1次来袭减伤20%。没有流血时仍可用于防护。",
+        "effects": [
+          {
+            "op": "cleanse",
+            "target": "self",
+            "trigger": "cast",
+            "tags": [
+              "bleed"
+            ]
+          },
+          {
+            "op": "immunity",
+            "target": "self",
+            "trigger": "cast",
+            "group": "bleed",
+            "durationMs": 6000,
+            "tags": [
+              "bleed"
+            ]
+          },
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.2,
+            "charges": 1
+          }
+        ]
+      },
+      {
+        "id": "dongting_xinf/m03",
+        "name": "镜湖倒影",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "下1次来袭减伤20%；若该次来自主动攻击且确有扣血，本人存活且战斗继续时，下一tick恢复该次实扣血的15%，最多恢复自身MaxHP的5%；不能反击、流血或自损触发。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.2,
+            "charges": 1
+          },
+          {
+            "op": "delayed_damage_heal",
+            "target": "self",
+            "trigger": "damaged",
+            "scope": "active_attack",
+            "value": 0.15,
+            "cap": 0.05
+          }
+        ]
+      }
+    ],
     "slot": "internal",
     "weaponType": "",
     "teacherId": "",
@@ -594,6 +1889,85 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "lingxu_bu/m01",
+        "name": "凌虚纵影",
+        "kind": "support",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 12,
+        "description": "下2次来袭计算时躲闪值+35%。",
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "dodge",
+            "value": 0.35,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "lingxu_bu/m02",
+        "name": "步罡抢势",
+        "kind": "support",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 14,
+        "description": "随后2轮先手值+25%，另获8秒出招攻速+20%；自身加速立即参与本次出招CD计算，原普攻间隔和本招30秒技能CD不变。",
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "normal_or_active",
+            "stat": "initiative",
+            "value": 0.25,
+            "charges": 2
+          },
+          {
+            "op": "haste",
+            "target": "self",
+            "trigger": "cast",
+            "group": "haste",
+            "value": 0.2,
+            "durationMs": 8000
+          }
+        ]
+      },
+      {
+        "id": "lingxu_bu/m03",
+        "name": "虚实换步",
+        "kind": "support",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "下1次来袭减伤15%；若对方落空且自己仍可出手，追加0.9D反击。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.15,
+            "charges": 1
+          },
+          {
+            "op": "counter",
+            "target": "self",
+            "trigger": "incoming",
+            "scope": "normal_or_active",
+            "power": 0.9,
+            "tags": [
+              "missed"
+            ]
+          }
+        ]
+      }
+    ],
     "slot": "movement",
     "weaponType": "",
     "teacherId": "",
@@ -618,6 +1992,60 @@
         "level": 80
       }
     },
+    "moves": [
+      {
+        "id": "poxu_zhi/m01",
+        "name": "透隙一指",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 22,
+        "description": "单次1.8D，本招忽略40%防御。",
+        "power": 1.8,
+        "armorIgnore": 0.4,
+        "hitCount": 1
+      },
+      {
+        "id": "poxu_zhi/m02",
+        "name": "截脉封劲",
+        "kind": "attack",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 26,
+        "description": "单次1.1D；命中后对手下2次攻击的最终伤害-30%，受通用减伤上限约束；不跳过其行动。",
+        "power": 1.1,
+        "effects": [
+          {
+            "op": "outgoing_reduce",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "value": 0.3,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "poxu_zhi/m03",
+        "name": "凝虚破障",
+        "kind": "attack",
+        "cooldownSec": 50,
+        "actionMs": 4000,
+        "mpCost": 30,
+        "description": "单次1.2D；命中后在来袭正常消耗之外，额外消去目标最强主动护体的1次来袭计数，最低0；没有次数型护体时只造成直接伤害，不清除被动防御。",
+        "power": 1.2,
+        "effects": [
+          {
+            "op": "strip_guard_charge",
+            "target": "opponent",
+            "trigger": "hit",
+            "charges": 1
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "combat",
     "weaponType": "unarmed",
     "teacherId": "",
@@ -642,6 +2070,71 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "bawang_qiang/m01",
+        "name": "一线贯甲",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "单次1.6D，本招忽略25%防御。",
+        "power": 1.6,
+        "armorIgnore": 0.25,
+        "hitCount": 1
+      },
+      {
+        "id": "bawang_qiang/m02",
+        "name": "回马枪",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 22,
+        "description": "下1次来袭减伤30%；受到有效伤害且仍可出手时，追加1.1D反击。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.3,
+            "charges": 1
+          },
+          {
+            "op": "counter",
+            "target": "self",
+            "trigger": "incoming",
+            "scope": "normal_or_active",
+            "power": 1.1,
+            "tags": [
+              "damaged"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "bawang_qiang/m03",
+        "name": "压阵封门",
+        "kind": "attack",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "单次1.0D；命中后对手下2次攻击的暴击概率-10个百分点，最低0，原最高25%约束不变。",
+        "power": 1.0,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "crit_pp",
+            "value": -0.1,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "combat",
     "weaponType": "spear",
     "teacherId": "",
@@ -666,6 +2159,70 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "youlong_bian/m01",
+        "name": "双游连环",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "2段合计1.8D。",
+        "hitCount": 2,
+        "power": 1.8
+      },
+      {
+        "id": "youlong_bian/m02",
+        "name": "缚龙引",
+        "kind": "debuff",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "对手下2次攻击命中值-25%；不直接伤害，可用于顶住强攻。",
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "cast",
+            "scope": "normal_or_active",
+            "stat": "hit",
+            "value": -0.25,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "youlong_bian/m03",
+        "name": "回风牵影",
+        "kind": "attack",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 22,
+        "description": "单次1.0D；命中后对手随后2轮先手值-25%，自己下2次来袭计算时躲闪值+20%。",
+        "power": 1.0,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "initiative",
+            "value": -0.25,
+            "charges": 2
+          },
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "dodge",
+            "value": 0.2,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "combat",
     "weaponType": "whip",
     "teacherId": "",
@@ -690,6 +2247,80 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "lieshi_jian/m01",
+        "name": "碎甲重击",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "单次1.7D；命中后对手随后2次承受攻击时防御值-25%。",
+        "power": 1.7,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "defense",
+            "value": -0.25,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "lieshi_jian/m02",
+        "name": "叠嶂反震",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 22,
+        "description": "下2次来袭减伤30%；每次受到有效伤害且仍可出手时反击0.55D，最多两次。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.3,
+            "charges": 2
+          },
+          {
+            "op": "counter",
+            "target": "self",
+            "trigger": "incoming",
+            "scope": "normal_or_active",
+            "power": 0.55,
+            "charges": 2,
+            "tags": [
+              "damaged"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "lieshi_jian/m03",
+        "name": "沉锏定势",
+        "kind": "support",
+        "cooldownSec": 45,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "8秒内，下一次来自多段主动攻击的来袭减伤50%；整个多段动作只消耗一次，普通攻击、反击与流血不消耗也不享受此护持。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "multi_active",
+            "value": 0.5,
+            "charges": 1,
+            "durationMs": 8000
+          }
+        ]
+      }
+    ],
     "slot": "combat",
     "weaponType": "mace",
     "teacherId": "",
@@ -714,6 +2345,64 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "suolang_gou/m01",
+        "name": "拆兵钩",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 16,
+        "description": "单次1.4D；命中后对手下2次攻击的攻击值-20%，不卸下/掉落其兵器。",
+        "power": 1.4,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "attack",
+            "value": -0.2,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "suolang_gou/m02",
+        "name": "锁浪借势",
+        "kind": "attack",
+        "cooldownSec": 30,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "单次1.0D；命中后对手随后2次承受攻击时招架概率乘0.5。",
+        "power": 1.0,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "parry_mult",
+            "value": 0.5,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "suolang_gou/m03",
+        "name": "双钩断流",
+        "kind": "attack",
+        "cooldownSec": 45,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "2段合计2.1D，本招命中概率+10个百分点。",
+        "hitCount": 2,
+        "power": 2.1,
+        "hitBonusPP": 0.1
+      }
+    ],
     "slot": "combat",
     "weaponType": "hook",
     "teacherId": "",
@@ -739,6 +2428,62 @@
         "level": 80
       }
     },
+    "moves": [
+      {
+        "id": "mantian_huayu/m01",
+        "name": "花雨散星",
+        "kind": "attack",
+        "cooldownSec": 20,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "3段合计1.8D，本招命中概率+15个百分点。",
+        "hitCount": 3,
+        "power": 1.8,
+        "hitBonusPP": 0.15
+      },
+      {
+        "id": "mantian_huayu/m02",
+        "name": "雨落无声",
+        "kind": "attack",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "单次1.2D；命中后附加共0.6D流血，随后3个tick均分。",
+        "power": 1.2,
+        "effects": [
+          {
+            "op": "bleed",
+            "target": "opponent",
+            "trigger": "hit",
+            "power": 0.2,
+            "ticks": 3
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "mantian_huayu/m03",
+        "name": "天罗花幕",
+        "kind": "attack",
+        "cooldownSec": 50,
+        "actionMs": 4000,
+        "mpCost": 32,
+        "description": "3段合计2.4D；命中后对手下2次攻击的命中值-20%。",
+        "hitCount": 3,
+        "power": 2.4,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "hit",
+            "value": -0.2,
+            "charges": 2
+          }
+        ]
+      }
+    ],
     "slot": "combat",
     "weaponType": "hidden_weapon",
     "teacherId": "",
@@ -763,6 +2508,63 @@
         "level": 40
       }
     },
+    "moves": [
+      {
+        "id": "fengmo_gun/m01",
+        "name": "乱披风",
+        "kind": "attack",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 18,
+        "description": "3段合计2.1D，本招命中概率-10个百分点；高伤但不稳定。",
+        "hitCount": 3,
+        "power": 2.1,
+        "hitBonusPP": -0.1
+      },
+      {
+        "id": "fengmo_gun/m02",
+        "name": "盘龙护身",
+        "kind": "attack",
+        "cooldownSec": 35,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "单次1.2D；自己下2次来袭减伤25%。",
+        "power": 1.2,
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.25,
+            "charges": 2
+          }
+        ],
+        "hitCount": 1
+      },
+      {
+        "id": "fengmo_gun/m03",
+        "name": "疯魔夺势",
+        "kind": "attack",
+        "cooldownSec": 45,
+        "actionMs": 4000,
+        "mpCost": 28,
+        "description": "单次2.5D；命中后对手下1次攻击的攻击值-25%。",
+        "power": 2.5,
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "opponent",
+            "trigger": "hit",
+            "scope": "normal_or_active",
+            "stat": "attack",
+            "value": -0.25,
+            "charges": 1
+          }
+        ],
+        "hitCount": 1
+      }
+    ],
     "slot": "combat",
     "weaponType": "staff",
     "teacherId": "",
@@ -787,6 +2589,89 @@
         "level": 80
       }
     },
+    "moves": [
+      {
+        "id": "taxue_wuhen/m01",
+        "name": "雪上无痕",
+        "kind": "support",
+        "cooldownSec": 25,
+        "actionMs": 4000,
+        "mpCost": 14,
+        "description": "下3次来袭计算时躲闪值+40%，最终受躲闪增益45%上限约束。",
+        "effects": [
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "dodge",
+            "value": 0.4,
+            "charges": 3
+          }
+        ]
+      },
+      {
+        "id": "taxue_wuhen/m02",
+        "name": "不留影壁",
+        "kind": "support",
+        "cooldownSec": 45,
+        "actionMs": 4000,
+        "mpCost": 24,
+        "description": "移除1项躲闪/先手降低；下2次来袭减伤35%。",
+        "effects": [
+          {
+            "op": "cleanse",
+            "target": "self",
+            "trigger": "cast",
+            "tags": [
+              "dodge_down",
+              "initiative_down"
+            ]
+          },
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.35,
+            "charges": 2
+          }
+        ]
+      },
+      {
+        "id": "taxue_wuhen/m03",
+        "name": "踏雪折影",
+        "kind": "support",
+        "cooldownSec": 40,
+        "actionMs": 4000,
+        "mpCost": 20,
+        "description": "仅当前对手最近4秒内主动攻击造成了实际扣血时可用；恢复该笔实际扣血的20%（最多自身MaxHP的5%），并使下1次来袭的躲闪值+25%。多段合为一笔，不累加旧伤，不反转死亡/认负。",
+        "conditions": [
+          {
+            "kind": "recent_active_damage",
+            "value": 4000
+          }
+        ],
+        "effects": [
+          {
+            "op": "recent_damage_heal",
+            "target": "self",
+            "trigger": "cast",
+            "value": 0.2,
+            "cap": 0.05
+          },
+          {
+            "op": "stat_mod",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "stat": "dodge",
+            "value": 0.25,
+            "charges": 1
+          }
+        ]
+      }
+    ],
     "slot": "movement",
     "weaponType": "",
     "teacherId": "",
@@ -811,6 +2696,37 @@
         "level": 80
       }
     },
+    "moves": [
+      {
+        "id": "jingang_buhuai/m01",
+        "name": "金刚护体",
+        "kind": "support",
+        "cooldownSec": 60,
+        "actionMs": 4000,
+        "mpCost": 35,
+        "description": "下3次来袭减伤60%；防护存在时免疫新增命中/先手降低，最长12秒；不清除旧减益，不免疫流血，不无敌。",
+        "effects": [
+          {
+            "op": "guard",
+            "target": "self",
+            "trigger": "cast",
+            "scope": "direct_incoming",
+            "value": 0.6,
+            "charges": 3
+          },
+          {
+            "op": "immunity",
+            "target": "self",
+            "trigger": "cast",
+            "group": "stat_down",
+            "durationMs": 12000,
+            "tags": [
+              "stat_down"
+            ]
+          }
+        ]
+      }
+    ],
     "slot": "guard",
     "weaponType": "",
     "teacherId": "",

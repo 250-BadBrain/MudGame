@@ -260,6 +260,19 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for ei, ev := range v.EnhancedItems {
 			enhancedItems[ei] = ev
 		}
+		combatMoves := model.CombatMoveState{Sequence: v.CombatMoves.Sequence, Action: v.CombatMoves.Action}
+		if v.CombatMoves.Skills != nil {
+			combatMoves.Skills = map[string]model.CooldownWindow{}
+			for mk, mv := range v.CombatMoves.Skills {
+				combatMoves.Skills[mk] = mv
+			}
+		}
+		if v.CombatMoves.Blocks != nil {
+			combatMoves.Blocks = map[string]model.CooldownWindow{}
+			for mk, mv := range v.CombatMoves.Blocks {
+				combatMoves.Blocks[mk] = mv
+			}
+		}
 		equippedSkills := map[string]string{}
 		for ek, ev := range v.EquippedSkills {
 			equippedSkills[ek] = ev
@@ -284,7 +297,7 @@ func clonePlayersMap(src map[string]*model.Player) map[string]*model.Player {
 		for rk, rv := range v.Reputations {
 			reputations[rk] = rv
 		}
-		out[k] = &model.Player{QuickCompleteSequence: v.QuickCompleteSequence, MartialVersion: v.MartialVersion, ActiveArts: cloneStringMap(v.ActiveArts), RecoveryItemReadyAt: v.RecoveryItemReadyAt, ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, EquippedSkills: equippedSkills, EnhancedItems: enhancedItems, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online, WeakUntil: v.WeakUntil}
+		out[k] = &model.Player{QuickCompleteSequence: v.QuickCompleteSequence, MartialVersion: v.MartialVersion, ActiveArts: cloneStringMap(v.ActiveArts), RecoveryItemReadyAt: v.RecoveryItemReadyAt, ID: v.ID, UserID: v.UserID, CharacterName: v.CharacterName, RoomID: v.RoomID, State: v.State, StateTickCountdown: v.StateTickCountdown, LearningSkillID: v.LearningSkillID, LearningTeacherID: v.LearningTeacherID, LearningTeacherLevel: v.LearningTeacherLevel, SkillLearningProgress: learningProgress, TargetID: v.TargetID, CombatType: v.CombatType, Money: v.Money, Attributes: v.Attributes, Skills: skills, EquippedSkills: equippedSkills, EnhancedItems: enhancedItems, CombatMoves: combatMoves, Backpack: backpack, Equipment: equipment, QuestStates: questStates, Flags: flags, DialogueHistory: dialogueHistory, Reputations: reputations, Online: v.Online, WeakUntil: v.WeakUntil}
 	}
 	return out
 }
