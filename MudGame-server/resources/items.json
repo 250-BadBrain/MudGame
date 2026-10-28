@@ -150,7 +150,7 @@
   },
   "smoke_powder": {
     "name": "烟尘粉",
-    "description": "战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。",
+    "description": "战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。",
     "type": "consumable",
     "subtype": "tool",
     "stackable": true,
@@ -162,7 +162,7 @@
     "value": 250,
     "rarity": 2,
     "unit": "包",
-    "limit": 5,
+    "limit": -1,
     "source": "西市"
   },
   "old_map_fragment": {

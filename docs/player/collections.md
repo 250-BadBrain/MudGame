@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：76b02a73de7acb5c4d82cf222053b4e333c9b40d11f6820c21fc699269bd1eae；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：4aa91e2bf335c67bdec2967321f213ed8f3a4fa86c81f6f503f315c6878f4397；由 scripts/generate_player_guide.py 生成。 -->
 
 # 修行、商店、传承与收藏目录
 
@@ -75,7 +75,7 @@
 
 ## 商店与价格
 
-购买按 value 原价，出售按 value 的20%逐件向下取整，任务物品不可卖。烟尘粉战斗中消耗一包撤离，不回血；副本按当前进度结算，世界返回本城出生点。
+购买按 value 原价，出售按 value 的20%逐件向下取整，任务物品不可卖。烟尘粉四家商店无限供应，250铜/包；战斗中消耗一包撤离，不回血，副本按当前进度结算，世界返回本城出生点。
 
 <a id="shop-east_market_keeper"></a>
 
@@ -121,7 +121,7 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
 | 旧商路残图 | 500 | 一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。 |
 | 铜匣拓片 | 800 | 拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。 |
 
@@ -135,7 +135,7 @@
 |---|---:|---|
 | 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。 |
 | 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
 
 <a id="shop-north_market_broker"></a>
 
@@ -158,7 +158,7 @@
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
 | 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
 | 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
 
 <a id="shop-yz_salt_merchant"></a>
@@ -195,7 +195,7 @@
 | 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
 | 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。 |
 | 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
 
 <a id="shop-dd2_silk_merchant"></a>
 
@@ -235,7 +235,7 @@
 | 铁镐<br>`iron_pickaxe` | tool<br>一把结实铁镐，能用于采石、开箱和清理塌方。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith)；[创角自带](worlds.md#labor) |
 | 干粮<br>`dry_ration` | consumable；回复气血 5<br>商旅常备的粗粮饼，味道普通，却能充饥。 | [孙回春交谈「出手止血草（×2 换干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《洛水传闻》](quests.md#escort_rumor_run)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[《扬子江惊变》「打捞铁匣」现场获得](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[《鸡鸣山之约》「取走供品箱」现场获得](stories/posui.md#posui_jiming)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[药田老农商店](collections.md#shop-bs_herbalist)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[各采集点（40%）](worlds.md#labor) |
 | 金创药<br>`simple_medicine` | consumable；回复气血 25<br>普通外伤药，行走江湖的人多少会备上一些。 | [孙回春交谈「制作金创药（止血草×7、干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「付诊金取现货金创药（120铜钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「制作金创药（干粮×7）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《烽燧疑警》](quests.md#beacon_signal_case)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
-| 烟尘粉<br>`smoke_powder` | consumable；当前使用逻辑未支持其效果；escapeCombat+True<br>战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。 | [任务《漕运疑云》](quests.md#salt_smuggling_case)；[任务《流民疑云》](quests.md#refugee_rumor_case)；[任务《漕银失窃》](quests.md#caoyin_case)；[裴玄商店](collections.md#shop-black_market_broker)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader) |
+| 烟尘粉<br>`smoke_powder` | consumable；战斗中撤离，不回血<br>战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 | [任务《漕运疑云》](quests.md#salt_smuggling_case)；[任务《流民疑云》](quests.md#refugee_rumor_case)；[任务《漕银失窃》](quests.md#caoyin_case)；[裴玄商店](collections.md#shop-black_market_broker)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader) |
 | 旧商路残图<br>`old_map_fragment` | material<br>一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。 | [裴玄商店](collections.md#shop-black_market_broker) |
 | 铜匣拓片<br>`bronze_box_rubbing` | quest<br>拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。 | [裴玄商店](collections.md#shop-black_market_broker) |
 | 染血密信<br>`sealed_letter` | quest<br>信封被雨水浸湿，火漆已碎，仍能看出上面曾有一枚陌生印记。 | [100% 结算《荒庙夜雨》](stories/luoyang.md#abandoned_temple_rain) |
@@ -404,4 +404,4 @@
 
 ## 装备强化的当前入口
 
-在「囊」或「装」选择装备，点「强化」查看下级费用与属性，再确认；仅空闲且持有物品时可操作。第N级花200N铜和N枚古铜，最高5级。
+在「囊」或「装」选择装备，点「强化」查看下级费用与属性，再确认；仅空闲且持有物品时可操作。第N级花200N铜和N枚古铜，最高5级。每级原有攻击/防御/命中/躲闪/招架/先手/魅力+1，气血/内力上限+5，暴击率+0.1个百分点。旧强化保留等级，每个旧物品ID可点一次免费重置；确认后清除等级并退还全部已付铜钱与古铜，不回血。同种多件共享等级。

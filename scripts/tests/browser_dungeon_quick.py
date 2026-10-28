@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--binary', type=Path, required=True)
     parser.add_argument('--fixture-dir', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--scenario', choices=['quick', 'enhancement'], default='quick')
     args = parser.parse_args()
     fixture, output = args.fixture_dir.resolve(), args.output.resolve()
     allowed = (ROOT / 'artifacts/quick-complete').resolve()
@@ -45,7 +46,8 @@ def main():
                 break
             except OSError: time.sleep(.1)
         else: raise AssertionError('Vite did not start')
-        subprocess.run(['node', str(ROOT / 'scripts/tests/browser_dungeon_quick.cjs')], cwd=ROOT, env=env, check=True, timeout=90)
+        script = 'browser_enhancement.cjs' if args.scenario == 'enhancement' else 'browser_dungeon_quick.cjs'
+        subprocess.run(['node', str(ROOT / 'scripts/tests' / script)], cwd=ROOT, env=env, check=True, timeout=90)
     finally:
         if ui and ui.poll() is None:
             ui.terminate()

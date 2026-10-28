@@ -535,7 +535,7 @@ class Guide:
                     npc = dialogue["npcId"]
                     cost = self.items_text(option["takeItems"]) + (" + " + str(option["takeMoney"]) + " 文钱" if option.get("takeMoney") else "")
                     lines.append("| " + safe(option["text"]) + " | " + self.npc_name(npc) + "：" + self.location(npc, current) + " | " + safe(cost) + " | " + safe(self.items_text(option["giveItems"])) + " |")
-        lines += ["", "## 商店与价格", "", "购买按 value 原价，出售按 value 的20%逐件向下取整，任务物品不可卖。烟尘粉战斗中消耗一包撤离，不回血；副本按当前进度结算，世界返回本城出生点。", ""]
+        lines += ["", "## 商店与价格", "", "购买按 value 原价，出售按 value 的20%逐件向下取整，任务物品不可卖。烟尘粉四家商店无限供应，250铜/包；战斗中消耗一包撤离，不回血，副本按当前进度结算，世界返回本城出生点。", ""]
         for npc, definition in self.npcs.items():
             if not definition.get("shopItems") or not self.locations.get(npc):
                 continue
@@ -552,18 +552,20 @@ class Guide:
                 use += "；使用参悟「" + self.skills[effects["learnSkill"]]["name"] + "」"
             elif effects.get("recoverHp"):
                 use += "；回复气血 " + str(effects["recoverHp"])
+            elif effects.get("escapeCombat"):
+                use += "；战斗中撤离，不回血"
             elif item.get("usable"):
                 use += "；当前使用逻辑未支持其效果"
             sources = self.sources(self.item_sources.get(iid, []), current)
             if not self.item_sources.get(iid) and item.get("source"):
                 sources += "；资源备注「" + safe(item["source"]) + "」尚不足以证明入口已接通"
-            flat = [ATTRIBUTES.get(k, k) + ("+" if isinstance(v, (int, float)) and v >= 0 else "") + str(v) for k, v in effects.items() if k not in ("learnSkill", "recoverHp")]
+            flat = [ATTRIBUTES.get(k, k) + ("+" if isinstance(v, (int, float)) and v >= 0 else "") + str(v) for k, v in effects.items() if k not in ("learnSkill", "recoverHp", "escapeCombat")]
             use += ("；" + "、".join(flat)) if flat else ""
             lines.append("| " + safe(item["name"]) + "<br>`" + iid + "` | " + safe(use) + "<br>" + safe(item.get("description", "")) + " | " + sources + " |")
         lines += ["", "## 全部称号", "", "称号由人物旗标自动授予，通关型称号要在 100% 完成后离开结算才会记录。", "", "| 称号 | 条件来源 | 旗标 |", "|---|---|---|"]
         for flag, title in self.titles.items():
             lines.append("| " + safe(title) + " | " + self.sources(self.flags.get(flag, []), current) + " | `" + flag + "` |")
-        lines += ["", "## 装备强化的当前入口", "", "在「囊」或「装」选择装备，点「强化」查看下级费用与属性，再确认；仅空闲且持有物品时可操作。第N级花200N铜和N枚古铜，最高5级。", ""]
+        lines += ["", "## 装备强化的当前入口", "", "在「囊」或「装」选择装备，点「强化」查看下级费用与属性，再确认；仅空闲且持有物品时可操作。第N级花200N铜和N枚古铜，最高5级。每级原有攻击/防御/命中/躲闪/招架/先手/魅力+1，气血/内力上限+5，暴击率+0.1个百分点。旧强化保留等级，每个旧物品ID可点一次免费重置；确认后清除等级并退还全部已付铜钱与古铜，不回血。同种多件共享等级。", ""]
         return "\n".join(lines)
 
     def status_page(self):

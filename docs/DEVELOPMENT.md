@@ -231,3 +231,5 @@ git add -A && git commit -m "xxx"
 快速完成回归：`scripts/tests/smoke_dungeon_quick.py`使用临时端口和合成存档验证资格、收益和持久化重放；`scripts/tests/browser_dungeon_quick.py`在该合成目录上启动独立后端、Vite和无头浏览器，验证按钮与真实消息。详细命令及依赖见[快速完成规格与验收](design/dungeon_quick_complete_2026_10_28.md)。新增途中收益时同步quickRewards与玩家手册，不能将付费配方或临时钥匙加入免费奖励。
 
 审查修复回归：`scripts/tests/smoke_audit_repairs.py`包含原快速完成用例，并追加严格数值输入、20%回收/炼药、装备别名退款重启、安全区/离线目标与死亡重启。其`--keep-fixture`生成的合成目录可接上述浏览器验收；浏览器同时验证状态恢复、售价、后期内容标记及长中文名。当前规则、复验命令与结果见[审查修复规格](design/audit_repairs_2026_10_28.md)。
+
+烟尘粉/强化回归：`scripts/tests/smoke_enhancement_coefficients.py`使用合成旧档验证无限购买、分属性增益及单次重置，`browser_dungeon_quick.py --scenario enhancement`接其合成目录验证页面和真实购买；具体命令、系数与旧档兼容见[实施规格](design/smoke_enhancement_2026_10_28.md)。

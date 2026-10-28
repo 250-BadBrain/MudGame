@@ -72,6 +72,7 @@
               :selectedBackpackItem="selectedBackpackItem"
               :viewingItem="viewingItem"
               :enhancingItem="enhancingItem"
+              :resettingEnhancementItem="resettingEnhancementItem"
               :discardingItem="discardingItem"
               :discardAmount="discardAmount"
               :discardMax="maxDiscardCount"
@@ -110,6 +111,9 @@
               @enhanceItem="initiateEnhance"
               @confirmEnhance="confirmEnhance"
               @cancelEnhance="cancelEnhance"
+              @resetEnhancement="initiateEnhancementReset"
+              @confirmEnhancementReset="confirmEnhancementReset"
+              @cancelEnhancementReset="cancelEnhancementReset"
               @changeDiscardAmount="changeDiscardAmount"
               @confirmDiscard="confirmDiscard"
               @cancelDiscard="cancelDiscard"
@@ -223,6 +227,7 @@ const {
   discardAmount,
   sellingItem,
   enhancingItem, initiateEnhance, confirmEnhance, cancelEnhance,
+  resettingEnhancementItem, initiateEnhancementReset, confirmEnhancementReset, cancelEnhancementReset,
   sellAmount,
   selectEquipmentSlot,
   equipItem,
@@ -937,11 +942,11 @@ const handleMessage = (msg) => {
       } else {
           addLog(describeCommandError(msg.results.error, '当前无法修炼或调整武学。'));
       }
-  } else if (msg.type === 'command' && msg.subtype === 'enhance_item') {
+  } else if (msg.type === 'command' && ['enhance_item', 'reset_enhancement'].includes(msg.subtype)) {
       if (msg.flag) {
           addLog(msg.results?.message);
           sendSilentRefresh('get_backpack'); sendSilentRefresh('get_equipment'); sendSilentRefresh('get_attributes');
-      } else { addLog(describeCommandError(msg.results?.error, '当前无法强化这件装备。')); }
+      } else { addLog(describeCommandError(msg.results?.error, '当前无法强化或重置这件装备。')); }
   } else if (msg.type === 'command' && msg.subtype === 'use_item') {
       if (msg.flag) {
           if (msg.results?.room) {

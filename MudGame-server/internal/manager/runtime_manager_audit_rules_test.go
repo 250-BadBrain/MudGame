@@ -199,7 +199,7 @@ func TestAuditInitiativeAndPassiveNPC(t *testing.T) {
 	p.Equipment[d.EquipmentSlot] = d.ID
 	p.EnhancedItems = map[string]int{d.ID: 5}
 	after := effectiveAttributesForPlayerNoLock(p)
-	if after.Initiative != before.Initiative+13 {
+	if after.Initiative != before.Initiative+8 {
 		t.Fatal("equipment/upgrade initiative missing")
 	}
 	r2, id2, _ := createDungeonTestPlayer(t, "abandoned_temple_rain")

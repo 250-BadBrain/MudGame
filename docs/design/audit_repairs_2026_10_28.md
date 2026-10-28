@@ -49,6 +49,8 @@ langfan_jian→langfan_j；kongming_zhu→kongming_z；jueji_hu→jueji_h；long
 
 ## 暂不实施
 
+后续用户已选择无限供给与各属性独立系数，现行规则见[烟尘粉与强化实施规格](smoke_enhancement_2026_10_28.md)。以下记录本次审查修复提交时的边界。
+
 烟尘粉补货和强化属性预算等待用户选择，详细说明见[补货与强化预算选项](restock_enhancement_options_2026_10_28.md)。本轮只修复强化已有先手效果的缺失和别名强化投入兼容，不改变强化+2/级、5级上限或费用。
 
 ## 验收要求

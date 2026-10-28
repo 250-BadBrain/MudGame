@@ -22,6 +22,7 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
   const discardAmount = ref(1)
   const sellingItem = ref(null)
   const enhancingItem = ref(null)
+  const resettingEnhancementItem = ref(null)
   const sellAmount = ref(1)
 
   const selectEquipmentSlot = (slot) => {
@@ -170,6 +171,7 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
 
   const initiateEnhance = (item) => {
     if (!checkCanAct('enhance_item') || !item?.equipmentSlot || item.enhancement?.atMax) return
+    resettingEnhancementItem.value = null
     enhancingItem.value = item
   }
   const cancelEnhance = () => { enhancingItem.value = null }
@@ -182,8 +184,22 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
     sendGameCommand('command', 'enhance_item', getPlayerId(), { itemId: item.id })
   }
 
+  const initiateEnhancementReset = (item) => {
+    if (!checkCanAct('reset_enhancement') || !item?.enhancement?.canReset) return
+    enhancingItem.value = null
+    resettingEnhancementItem.value = item
+  }
+  const cancelEnhancementReset = () => { resettingEnhancementItem.value = null }
+  const confirmEnhancementReset = () => {
+    const item = resettingEnhancementItem.value
+    if (!item?.enhancement?.canReset || !checkCanAct('reset_enhancement')) return
+    resettingEnhancementItem.value = null
+    sendGameCommand('command', 'reset_enhancement', getPlayerId(), { itemId: item.id })
+  }
+
   // 关闭面板/切换选择时的统一清理
   const resetSelection = () => {
+    resettingEnhancementItem.value = null
     enhancingItem.value = null
     viewingItem.value = null
     discardingItem.value = null
@@ -192,6 +208,7 @@ export function useBackpackActions({ backpackItems, sendGameCommand, getPlayerId
   }
 
   return {
+    resettingEnhancementItem, initiateEnhancementReset, confirmEnhancementReset, cancelEnhancementReset,
     enhancingItem, initiateEnhance, confirmEnhance, cancelEnhance,
     equipmentSlots,
     equipment,

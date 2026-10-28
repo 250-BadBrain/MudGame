@@ -20,7 +20,7 @@
             <span class="item-price">{{ formatPrice(item.value) }}</span>
             <span v-if="item.limit !== undefined && item.limit === 0" class="item-sold-out-tag"> 已售罄</span>
             <span v-else-if="item.limit" class="item-limit-tag"> 库存:{{ item.limit }}</span>
-            <span v-else class="item-stock-tag"> 库存充足</span>
+            <span v-else class="item-stock-tag"> 无限供应</span>
           </div>
         </div>
       </div>
@@ -38,8 +38,8 @@
           <button @click="$emit('changeAmount', 'max')" :disabled="isMaxReached" class="small-btn">最多</button>
         </div>
         <div v-if="!teachingMode" class="stock-info">
-          <span v-if="selectedItem.limit">库存: {{ selectedItem.limit }}{{ selectedItem.unit }}</span>
-          <span v-else>库存充足</span>
+          <span v-if="selectedItem.limit != null">库存: {{ selectedItem.limit }}{{ selectedItem.unit }}</span>
+          <span v-else>无限供应</span>
         </div>
         <button @click="$emit('buy')" class="buy-btn">{{ buyButtonText }}</button>
       </div>

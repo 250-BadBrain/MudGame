@@ -60,10 +60,12 @@ func normalizePlayerItemAliases(p *model.Player) (bool, error) {
 			delete(p.EnhancedItems, old)
 			changed = true
 		}
-		if value, ok := p.Flags["item_claimed_"+old]; ok {
-			p.Flags["item_claimed_"+target] = p.Flags["item_claimed_"+target] || value
-			delete(p.Flags, "item_claimed_"+old)
-			changed = true
+		for _, prefix := range []string{"item_claimed_", "enhancement_reset_available_"} {
+			if value, ok := p.Flags[prefix+old]; ok {
+				p.Flags[prefix+target] = p.Flags[prefix+target] || value
+				delete(p.Flags, prefix+old)
+				changed = true
+			}
 		}
 	}
 	return changed, nil

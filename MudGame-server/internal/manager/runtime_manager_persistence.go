@@ -186,6 +186,13 @@ func (r *RuntimeManager) readPlayersFromDiskNoLock() (map[string]*model.Player, 
 		if repairDungeonDropClaims(p) {
 			r.playersDirty = true
 		}
+		prepared, err := prepareEnhancementReset(p)
+		if err != nil {
+			return nil, err
+		}
+		if prepared {
+			r.playersDirty = true
+		}
 		if p.MartialVersion != model.MartialVersion {
 			return nil, fmt.Errorf("角色%s尚未完成武学V2迁移；请停服运行resources/migrations/migrate_martial_v2.py", p.ID)
 		}

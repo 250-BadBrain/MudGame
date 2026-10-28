@@ -140,16 +140,21 @@ func TestShopInventoryIsIsolatedFromStaticTemplate(t *testing.T) {
 	r.mu.Unlock()
 
 	templateStock := fileNpcs["black_market_broker"].ShopInventory["smoke_powder"]
-	if templateStock != 5 {
-		t.Fatalf("expected static template stock 5 for smoke_powder, got %d", templateStock)
+	if templateStock != -1 {
+		t.Fatalf("expected unlimited smoke template, got %d", templateStock)
 	}
+	// Simulate a finite runtime offer to keep covering stock isolation.
+	r.mu.Lock()
+	shop, _ := r.staticNPCInRoomNoLock(fileRooms["ly_west_market"], "black_market_broker")
+	shop.ShopInventory["smoke_powder"] = 5
+	r.mu.Unlock()
 
 	if _, _, err := r.Buy(playerID, "black_market_broker", "smoke_powder", 2); err != nil {
 		t.Fatalf("buy failed: %v", err)
 	}
 
-	if after := fileNpcs["black_market_broker"].ShopInventory["smoke_powder"]; after != 5 {
-		t.Fatalf("static template stock was polluted by buy: got %d, want 5", after)
+	if after := fileNpcs["black_market_broker"].ShopInventory["smoke_powder"]; after != -1 {
+		t.Fatalf("static template stock was polluted by buy: got %d, want -1", after)
 	}
 	r.mu.RLock()
 	state, ok := r.staticNPCs["black_market_broker"]

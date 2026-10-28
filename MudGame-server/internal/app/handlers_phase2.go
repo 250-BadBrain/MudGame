@@ -347,6 +347,18 @@ func (s *Server) handleGameEnhanceItem(conn *websocket.Conn, cmd protocol.Comman
 	}
 }
 
+func (s *Server) handleGameResetEnhancement(conn *websocket.Conn, cmd protocol.CommandMessage) {
+	playerID, ok := s.requireSelectedPlayer(conn)
+	if !ok {
+		return
+	}
+	message, err := s.repo.ResetEnhancement(playerID, toString(cmd.Args["itemId"]))
+	s.replyCommand(conn, "reset_enhancement", err, map[string]interface{}{"message": message}, nil)
+	if err == nil {
+		s.emitRoomUpdateByPlayer(playerID)
+	}
+}
+
 func (s *Server) handleGameUseItem(conn *websocket.Conn, cmd protocol.CommandMessage) {
 	playerID, ok := s.requireSelectedPlayer(conn)
 	if !ok {

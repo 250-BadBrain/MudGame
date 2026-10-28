@@ -13,6 +13,13 @@
       <button :disabled="!enhanceAffordable" @click="$emit('confirmEnhance')">确认强化</button>
       <button @click="$emit('cancelEnhance')">取消</button>
     </div>
+    <div v-if="resettingEnhancementItem" class="enhance-confirm" role="dialog" aria-label="强化重置确认">
+      <strong>{{ resettingEnhancementItem.name }}：+{{ resettingEnhancementItem.enhancement.level }} → +0</strong>
+      <div>返还 {{ formatMoney(resettingEnhancementItem.enhancement.resetMoney) }}、古铜残片×{{ resettingEnhancementItem.enhancement.resetBronze }}</div>
+      <p>本次免费重置将清除该物品的强化，并消耗它的一次重置机会；同种装备共享强化等级。</p>
+      <button @click="$emit('confirmEnhancementReset')">确认重置</button>
+      <button @click="$emit('cancelEnhancementReset')">取消</button>
+    </div>
     <div class="panel-content">
       <div v-if="currentPanel === 'backpack'" class="backpack-panel-container">
         <div class="money-header">{{ formatMoney(playerMoney) }}</div>
@@ -33,6 +40,7 @@
                 <button @click.stop="$emit('discardItem', item)" class="action-btn discard-btn">丢弃</button>
                 <button v-if="item.equipmentSlot" @click.stop="$emit('equipItem', item)" class="action-btn">装备</button>
                 <button v-if="item.equipmentSlot" :disabled="item.enhancement?.atMax" @click.stop="$emit('enhanceItem', item)" class="action-btn">强化{{ item.enhancement?.level ? ` +${item.enhancement.level}` : '' }}</button>
+                <button v-if="item.enhancement?.canReset" @click.stop="$emit('resetEnhancement', item)" class="action-btn">免费重置</button>
                 <button v-if="item.sellable && hasShopNpc" @click.stop="$emit('sellItem', item)" class="action-btn">出售</button>
               </div>
             </li>
@@ -144,6 +152,7 @@
             <div v-if="selectedEquipmentSlot === slotKey && equipment[slotKey]" class="slot-actions">
               <button @click="$emit('unequipSlot', slotKey)" class="action-btn unequip-btn">脱下</button>
               <button :disabled="equipment[slotKey].enhancement?.atMax" @click="$emit('enhanceItem', equipment[slotKey])" class="action-btn">强化{{ equipment[slotKey].enhancement?.level ? ` +${equipment[slotKey].enhancement.level}` : '' }}</button>
+              <button v-if="equipment[slotKey].enhancement?.canReset" @click="$emit('resetEnhancement', equipment[slotKey])" class="action-btn">免费重置</button>
             </div>
           </div>
         </div>
@@ -265,6 +274,7 @@ import GameFactionPanel from './GameFactionPanel.vue'
 import GameQuestPanel from './GameQuestPanel.vue'
 
 const props = defineProps({
+  resettingEnhancementItem: Object,
   enhancingItem: Object,
   visible: Boolean,
   title: String,
@@ -335,7 +345,7 @@ const dungeonChainGroups = computed(() => {
 const fullRewardExperience = computed(() => Number(props.selectedDungeon?.rewards?.experience ?? props.selectedDungeon?.rewardBase) || 0)
 const fullRewardPotential = computed(() => Number(props.selectedDungeon?.rewards?.potential ?? props.selectedDungeon?.rewardBase) || 0)
 
-defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'useItem', 'sellItem', 'enhanceItem', 'confirmEnhance', 'cancelEnhance',
+defineEmits(['close', 'selectBackpackItem', 'viewItem', 'discardItem', 'equipItem', 'useItem', 'sellItem', 'enhanceItem', 'confirmEnhance', 'cancelEnhance', 'resetEnhancement', 'confirmEnhancementReset', 'cancelEnhancementReset',
   'changeDiscardAmount', 'confirmDiscard', 'cancelDiscard',
   'changeSellAmount', 'confirmSell', 'cancelSell',
   'changeSkillTab', 'selectSkill', 'viewSkill', 'equipSkill', 'practiceSkill', 'unequipSkill',
@@ -348,7 +358,7 @@ const enhanceAffordable = computed(() => {
   const info = props.enhancingItem?.enhancement
   return info && !info.atMax && info.ownedMoney >= info.nextMoney && info.ownedBronze >= info.nextBronze
 })
-const enhancementBonusText = (bonuses) => Object.entries(bonuses || {}).map(([key, value]) => `${({ attack: '攻击', defense: '防御', hitRate: '命中', dodge: '躲闪', parry: '招架', maxHp: '气血上限', maxMp: '内力上限', initiative: '先手' })[key] || key} +${value}`).join('、')
+const enhancementBonusText = (bonuses) => Object.entries(bonuses || {}).map(([key, value]) => `${({ attack: '攻击', defense: '防御', hitRate: '命中', dodge: '躲闪', parry: '招架', maxHp: '气血上限', maxMp: '内力上限', initiative: '先手', critRate: '暴击率', charm: '魅力' })[key] || key} +${Number(Number(value).toFixed(6))}${key === 'critRate' ? '个百分点' : ''}`).join('、')
 const martialSlots = { internal: '内功', movement: '身法', guard: '护体', combat: '战斗', study: '学识' }
 const getMartialColor = (grade) => ({ 1: '#aaa', 2: '#2ecc71', 3: '#3498db', 4: '#bb86fc', 5: '#f1c40f' })[grade] || '#aaa'
 const clock = ref(Date.now())

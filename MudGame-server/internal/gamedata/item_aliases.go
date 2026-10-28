@@ -24,6 +24,11 @@ func loadItemAliases(dir string, items map[string]model.ItemDef) (map[string]str
 		if prior := names[item.Name]; prior != "" {
 			return nil, fmt.Errorf("duplicate equipment name %s: %s/%s", item.Name, prior, id)
 		}
+		for key := range item.Effects {
+			if _, ok := model.EnhancementStep(key); !ok {
+				return nil, fmt.Errorf("equipment effect lacks enhancement coefficient: %s/%s", id, key)
+			}
+		}
 		names[item.Name] = id
 	}
 	return aliases, nil

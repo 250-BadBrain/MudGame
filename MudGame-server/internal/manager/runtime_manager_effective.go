@@ -30,7 +30,7 @@ func effectiveAttributesForPlayerNoLock(p *model.Player) model.EffectiveAttribut
 	eff.Dodge += derived.Dodge
 	eff.Parry += derived.Parry
 	eff.Initiative += 60 + eff.Agility + eff.Perception/2
-	eff.CritRate = min(25, max(0, eff.CritRate))
+	eff.CritRate = min(25, max(0, math.Round(eff.CritRate*1e6)/1e6))
 	clampEffectiveResources(&eff)
 	applyWeaknessNoLock(&eff, p)
 	return eff
@@ -100,7 +100,7 @@ func applyEquipmentEffectsNoLock(eff *model.EffectiveAttributes, equipment map[s
 			continue
 		}
 		for key, value := range def.Effects {
-			applyFlatBonus(eff, key, toIntEffect(value))
+			applyNumericBonus(eff, key, toFloatEffect(value))
 		}
 	}
 }
@@ -139,6 +139,14 @@ func applyLeveledBonus(eff *model.EffectiveAttributes, key string, value float64
 		}
 		return
 	}
+}
+
+func applyNumericBonus(eff *model.EffectiveAttributes, key string, value float64) {
+	if key == "critRate" {
+		eff.CritRate += value
+		return
+	}
+	applyFlatBonus(eff, key, int(value))
 }
 
 func applyFlatBonus(eff *model.EffectiveAttributes, key string, value int) {
@@ -213,6 +221,17 @@ func toIntEffect(value interface{}) int {
 		return v.Int()
 	default:
 		return 0
+	}
+}
+
+func toFloatEffect(value interface{}) float64 {
+	switch v := value.(type) {
+	case float64:
+		return v
+	case float32:
+		return float64(v)
+	default:
+		return float64(toIntEffect(value))
 	}
 }
 

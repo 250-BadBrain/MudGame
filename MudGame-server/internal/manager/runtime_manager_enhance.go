@@ -2,6 +2,7 @@ package manager
 
 import (
 	"errors"
+	"math"
 	"strconv"
 
 	"mudgame/server/internal/exception"
@@ -11,8 +12,7 @@ import (
 // maxEnhanceLevel 装备强化最大等级
 const maxEnhanceLevel = 5
 
-// EnhanceItem 消耗钱币与古铜，按物品ID记录强化等级；当前每个效果均+2/级。
-// 最高5级，费用递增200/400/600/800/1000铜。预算调整等待用户选择。
+// EnhanceItem 按物品ID记录强化，使用分属性系数，最高5级。
 func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 	itemID = canonicalItemID(itemID)
 	r.mu.Lock()
@@ -45,6 +45,9 @@ func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 		p.EnhancedItems = map[string]int{}
 	}
 	currentLevel := p.EnhancedItems[itemID]
+	if currentLevel < 0 {
+		return "", errors.New("强化等级异常")
+	}
 	if currentLevel >= maxEnhanceLevel {
 		return "", errors.New(def.Name + "已强化至最高等级（" + strconv.Itoa(maxEnhanceLevel) + "级）。")
 	}
@@ -74,15 +77,17 @@ func (r *RuntimeManager) EnhanceItem(playerID, itemID string) (string, error) {
 		"（消耗" + strconv.Itoa(costSilver) + "文钱 + " + strconv.Itoa(costBronze) + "枚古铜残片）", nil
 }
 
-// getEnhanceBonus 计算装备强化附加属性（主属性 +2/级）。
-func getEnhanceBonus(itemID string, level int) map[string]int {
+// getEnhanceBonus is shared by effective stats and the next-level preview.
+func getEnhanceBonus(itemID string, level int) map[string]float64 {
 	def, ok := fileItems[itemID]
 	if !ok || level <= 0 {
 		return nil
 	}
-	bonus := map[string]int{}
-	for key := range def.Effects {
-		bonus[key] = level * 2
+	bonus := map[string]float64{}
+	for key, value := range def.Effects {
+		if step, supported := model.EnhancementStep(key); supported && toFloatEffect(value) > 0 {
+			bonus[key] = math.Round(step*float64(min(level, maxEnhanceLevel))*1000) / 1000
+		}
 	}
 	return bonus
 }
@@ -102,7 +107,7 @@ func applyEnhancementNoLock(eff *model.EffectiveAttributes, p *model.Player) {
 		}
 		bonus := getEnhanceBonus(itemID, level)
 		for key, value := range bonus {
-			applyFlatBonus(eff, key, value)
+			applyNumericBonus(eff, key, value)
 		}
 	}
 }
@@ -113,5 +118,5 @@ func enhancementInfo(p *model.Player, itemID string) map[string]interface{} {
 	}
 	level := p.EnhancedItems[itemID]
 	next := level + 1
-	return map[string]interface{}{"level": level, "maxLevel": maxEnhanceLevel, "nextMoney": next * 200, "nextBronze": next, "ownedMoney": p.Money, "ownedBronze": p.Backpack["bronze_fragment"], "atMax": level >= maxEnhanceLevel, "nextBonus": getEnhanceBonus(itemID, 1)}
+	return map[string]interface{}{"level": level, "maxLevel": maxEnhanceLevel, "nextMoney": next * 200, "nextBronze": next, "ownedMoney": p.Money, "ownedBronze": p.Backpack["bronze_fragment"], "atMax": level >= maxEnhanceLevel, "nextBonus": getEnhanceBonus(itemID, 1), "canReset": level > 0 && p.Flags[enhancementResetFlag(itemID)], "resetMoney": 100 * level * (level + 1), "resetBronze": level * (level + 1) / 2}
 }
