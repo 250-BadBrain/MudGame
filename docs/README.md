@@ -23,7 +23,9 @@
 
 ## 设计
 
-- [武功专属主动招式完整提案](design/active_martial_moves_proposal.md)（**待确认、未实现**：38门72招；即时主动与普攻并行，4秒出招CD联动攻速，逐招10～60秒技能CD，合并进度条）
+- [武功专属主动招式完整提案](design/active_martial_moves_proposal.md)（**未实现**：38门84招；即时主动与普攻并行，4秒出招CD联动攻速，逐招10～60秒技能CD，合并进度条）
+- [主动招式具体实现规范](design/active_martial_moves_implementation.md)（数据、双CD、事务、效果与触发域、协议、存档、界面和验收契约）
+- [主动招式逐任务实施计划](superpowers/plans/2026-10-29-active-martial-moves.md)（按仓库实际文件划分任务、接口、测试与提交顺序）
 
 - [城市选择、武学解法与见闻指引](design/connected_exploration_2026_10_28.md)（三件旧事接入现场、六门武学替代解法）
 
