@@ -60,6 +60,19 @@ export function useCommandQueue({ addLog }) {
     flushCommandQueue()
   }
 
+  // sendImmediateCommand 施放指令专用：与原command共享15条/2秒额度，
+  // 额度用尽立即返回false（调用方立即提示），绝不进入等待队列（实现规范§9）。
+  const sendImmediateCommand = (type, subtype, playerId, args = {}) => {
+    const now = Date.now()
+    trimCommandWindow(now)
+    if (commandSentTimestamps.length >= COMMAND_LIMIT_PER_WINDOW) {
+      return false
+    }
+    rawSendGameCommand(type, subtype, playerId, args)
+    commandSentTimestamps.push(now)
+    return true
+  }
+
   const dispose = () => {
     if (commandQueueTimer) {
       clearTimeout(commandQueueTimer)
@@ -67,5 +80,5 @@ export function useCommandQueue({ addLog }) {
     }
   }
 
-  return { sendGameCommand, dispose }
+  return { sendGameCommand, sendImmediateCommand, dispose }
 }

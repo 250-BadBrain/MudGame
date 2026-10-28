@@ -141,6 +141,14 @@
               @action="doAction"
               @room-action="doRoomAction"
               @leave-dungeon="leaveCurrentDungeon" />
+
+            <GameCombatMovesPanel
+              v-if="combatMovesEnabled && currentPlayer.state === 'COMBAT'"
+              :view="combatMovesView"
+              :display-now="combatMovesDisplayNow"
+              :pending="combatMovesPending"
+              :disabled="combatMovesPending"
+              @cast="castCombatMove" />
         </div>
 
         <GameSideToolbar @toggle="onToolbarToggle" />
@@ -150,7 +158,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { usePlayerStore } from '@/stores/player'
 import { initWebSocket, removeMessageHandler, sendMessage } from '../utils/ws.js'
@@ -160,9 +168,11 @@ import GameInfoPanel from '../components/GameInfoPanel.vue'
 import GameExitsGrid from '../components/GameExitsGrid.vue'
 import GameLogPanel from '../components/GameLogPanel.vue'
 import GameActionPanel from '../components/GameActionPanel.vue'
+import GameCombatMovesPanel from '../components/GameCombatMovesPanel.vue'
 import GameSideToolbar from '../components/GameSideToolbar.vue'
 import { useChatState } from '../composables/useChatState.js'
 import { useCommandQueue } from '../composables/useCommandQueue.js'
+import { useCombatMoves } from '../composables/useCombatMoves.js'
 import { useGameLog } from '../composables/useGameLog.js'
 import { useEntityActions } from '../composables/useEntityActions.js'
 import { useDungeonView } from '../composables/useDungeonView.js'
@@ -201,8 +211,41 @@ const {
 
 const {
   sendGameCommand,
+  sendImmediateCommand,
   dispose: disposeCommandQueue
 } = useCommandQueue({ addLog })
+
+// ------------------- 主动招式（服务端权威，前端只显示） -------------------
+const {
+  view: combatMovesView,
+  pending: combatMovesPending,
+  displayNow: combatMovesDisplayNow,
+  hasCapability: combatMovesEnabled,
+  applySnapshot: applyCombatMovesSnapshot,
+  requestRefresh: refreshCombatMoves,
+  castMove: castCombatMoveBase,
+  settlePending: settleCombatMovesPending,
+  reset: resetCombatMoves,
+  dispose: disposeCombatMoves,
+} = useCombatMoves({
+  sendImmediateCommand,
+  addLog,
+  getPlayerId: () => currentPlayer.value?.id || '',
+  monotonicNow: () => performance.now(),
+})
+
+const castCombatMove = (move) => {
+  castCombatMoveBase(move.id, combatMovesView.value.battleId)
+}
+
+// 进入战斗即拉取招式视图；离开战斗/换角色清空视图，不重发旧cast
+watch(() => currentPlayer.value?.state, (state) => {
+  if (state === 'COMBAT') {
+    refreshCombatMoves()
+  } else {
+    resetCombatMoves()
+  }
+})
 
 const {
   selectedEntityKey,
@@ -453,6 +496,7 @@ onMounted(() => {
 onUnmounted(() => {
   disposeDungeonView()
     disposeCommandQueue()
+    disposeCombatMoves()
     removeMessageHandler(handleMessage)
     window.removeEventListener('keydown', handleGlobalKeydown)
 })
@@ -461,6 +505,19 @@ onUnmounted(() => {
 
 const handleMessage = (msg) => {
   const silentRefresh = msg.type === 'command' ? consumeSilentRefresh(msg.subtype) : true;
+  // 主动招式私有视图/回包（实现规范§9：以服务端时间为准，旧包不倒退）
+  if (msg.type === 'event' && msg.subtype === 'combat_moves' && msg.results?.view) {
+    applyCombatMovesSnapshot(msg.results.view)
+  }
+  if (msg.type === 'command' && msg.subtype === 'get_combat_moves' && msg.flag && msg.results?.view) {
+    applyCombatMovesSnapshot(msg.results.view)
+  }
+  if (msg.type === 'command' && msg.subtype === 'cast_combat_move') {
+    settleCombatMovesPending()
+    if (msg.results?.view) {
+      applyCombatMovesSnapshot(msg.results.view)
+    }
+  }
   // 优先使用前端生成的消息
   const generatedMsg = getMessage(msg);
   if (generatedMsg) {

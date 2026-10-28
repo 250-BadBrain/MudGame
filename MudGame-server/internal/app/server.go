@@ -466,6 +466,13 @@ func (s *Server) runBackgroundTicker() {
 }
 
 func (s *Server) emitTickResult(res model.CombatTickResult) {
+	// 主动招式私有视图：只定向发本人，不混入公共房间payload（实现规范§5）
+	for _, upd := range res.CombatMoves {
+		if upd.PlayerID == "" {
+			continue
+		}
+		s.emitPersonalEvent(upd.PlayerID, "combat_moves", map[string]interface{}{"view": upd.View})
+	}
 	for _, pm := range res.PlayerMessages {
 		if pm.PlayerID == "" || pm.Message == "" {
 			continue
@@ -483,6 +490,28 @@ func (s *Server) emitTickResult(res model.CombatTickResult) {
 			continue
 		}
 		s.emitRoomUpdate(roomID)
+	}
+}
+
+// emitPersonalEvent 向指定玩家的全部连接定向推送一条事件。
+func (s *Server) emitPersonalEvent(playerID, subtype string, data map[string]interface{}) {
+	if playerID == "" || subtype == "" {
+		return
+	}
+	s.mu.RLock()
+	conns := make([]*websocket.Conn, 0)
+	for conn, ss := range s.sessions {
+		if ss.playerID == playerID {
+			conns = append(conns, conn)
+		}
+	}
+	s.mu.RUnlock()
+	if len(conns) == 0 {
+		return
+	}
+	result := protocol.NewResult(protocol.TypeEvent, subtype, true, data, nil)
+	for _, conn := range conns {
+		s.write(conn, result)
 	}
 }
 

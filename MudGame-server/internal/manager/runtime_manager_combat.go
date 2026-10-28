@@ -119,6 +119,14 @@ func (r *RuntimeManager) ProcessCombatTick() (model.CombatTickResult, error) {
 	}
 
 	r.scheduleNPCIntentsNoLock(players)
+	// 主动招式私有视图：战斗中的玩家每tick刷新（冷却窗口以服务端时间为准）
+	for _, p := range players {
+		if p.State == "COMBAT" && p.Online {
+			result.CombatMoves = append(result.CombatMoves, model.CombatMovesUpdate{
+				PlayerID: p.ID, View: *r.buildCombatMovesViewNoLock(p, players),
+			})
+		}
+	}
 	for roomID := range updatedRoom {
 		result.UpdatedRoomIDs = append(result.UpdatedRoomIDs, roomID)
 	}
