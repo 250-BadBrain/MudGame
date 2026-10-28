@@ -19,12 +19,12 @@ CHAIN_FILES = {
 }
 CHAIN_INTROS = {
     "luoyang_rain_temple": "从洛阳城外的一封染血密信起步。三间房的小副本，适合熟悉挑战、进度、现场搜索与离开结算。",
-    "datang_double_dragon": "从扬子江追兵、杨公宝库，推进到竟陵守城、宋缺试刀、飞马牧场与长安风云，再延伸到粮道、巴陵、瓦岗和丝路护送。前期剧情、机关和人物较完整，后期部分章节为简短战斗关。",
+    "datang_double_dragon": "从扬子江追兵、杨公宝库，推进到竟陵守城、宋缺试刀、飞马牧场与长安风云，再延伸到粮道、巴陵、瓦岗和丝路护送。后期加入换班核证、回头对更、承重支护、退锋留路等不同操作；每章可查看具体判断与结局。",
     "fuyu_fan_yun": "怒蛟帮的水寨防守、拦江宗师残影、魔师宫与方夜羽串起本卷；另有水战、浪翻云试炼和双头目关。",
     "posui_xukong": "惊雁宫观星夺图、鸡鸣山之约、战神殿心象与图录续卷，最终延伸到北斗七步机关和破碎虚空题材的战斗试炼。",
     "bianhuang_legend": "从护送纪千千突围，到马贼王庭、边荒夺旗、狼山口和雪原，主题是边地护送、骑军与狼群。",
     "luoshui_raiders": "洛水水匪、魔门枯井伏笔、江南剑池、东都账册与东溟海市都归入本卷；后期还有三路鬼市、归墟龙宫等独立小故事。",
-    "yangzhou_caoyun": "盐帮、唐门与运河支线被归入这一目录。当前六章主要是四房战斗与开门机关；并不自动接取世界任务。",
+    "yangzhou_caoyun": "盐帮、唐门与运河支线归入这一目录，分别处理三联账、卸簧、验旗、双轮天梯和契约姓名等问题；不自动接取世界任务。",
 }
 NOTES = {
     "abandoned_temple_rain": "翻检刺客遗物为可选心得与钱币奖励；伏虎劲改由河洛武馆赵横江传授，不再从此处取残页。",
@@ -271,10 +271,18 @@ class Guide:
             parts.append(faction + "声望 ≥" + str(requirement.get("reputationMin", 0)))
         if requirement.get("items"):
             parts.append("携带 " + self.items_text(requirement["items"]))
+        if requirement.get("presentItems"):
+            parts.append("出示本人持有或合法穿戴的 " + self.items_text(requirement["presentItems"]) + "（不消耗）")
+        for flag, value in requirement.get("flags", {}).items():
+            parts.append(("已取得" if value else "尚未取得") + " `" + flag + "`")
+        for sid, level in requirement.get("skills", {}).items():
+            parts.append("已学" + self.skills[sid]["name"] + "≥" + str(level) + "级")
         return "；".join(parts) or "无额外条件"
 
     def option_effect(self, option, current):
         parts = []
+        if option.get("explicit"):
+            parts.append("须明确选择，普通交谈不会自动执行")
         if option.get("startQuestId"):
             qid = option["startQuestId"]
             parts.append("接取 " + self.link("《" + self.quests[qid]["name"] + "》", "quests.md", current, qid))
@@ -320,6 +328,12 @@ class Guide:
         parts = [self.state_requirement(dungeon, action.get("puzzleId", ""), action.get("fromStates", []))]
         if action.get("requiredDefeatNpcs"):
             parts.append("先击败本房间 " + "、".join(self.npc_name(npc) for npc in action["requiredDefeatNpcs"]))
+        if action.get("requiredPuzzleStates"):
+            parts.append("现场前置：" + "、".join(k+":"+v for k,v in action['requiredPuzzleStates'].items()))
+        if action.get("presentItems"):
+            parts.append("出示本人携带或穿戴的"+self.items_text(action['presentItems'])+"（不消耗）")
+        if action.get("requiredFlags"):
+            parts.append("先取得"+"、".join('`'+f+'`' for f,v in action['requiredFlags'].items() if v))
         return "；".join(parts)
 
     def door_requirement(self, dungeon, requirement):
@@ -338,6 +352,7 @@ class Guide:
                  "- **触发入口**：右侧「境」→本卷→本副本→进入；不需要先在城市找到 NPC。", "- **解锁**：" + self.unlock(dungeon, current),
                  "- **标识**：`" + did + "`；卷内标签「第 " + str(dungeon.get("chapter", "—")) + " 章」，解锁按全局序号判断。", "- **满额结算奖励**：" + self.rewards(dungeon.get("rewards", {}), drop_rates=True) + "。"]
         if dungeon.get("contentStatus") == "needs_depth": lines.append("- **内容状态：待深化**：" + dungeon["contentNote"])
+        elif dungeon.get("contentNote"): lines.append("- **本章新交互**："+dungeon['contentNote'])
         lines.append("- **快速完成**：本关100%通关并结算后，在公共世界空闲时点击「快速完成」；当前免费，同结算掉率，每次复刷另加古铜残片2。不会自动交付世界任务，也不会回复气血内力。")
         quick = dungeon.get("quickRewards", {})
         if quick:
@@ -544,7 +559,7 @@ class Guide:
                 value = self.items[item]
                 lines.append("| " + safe(value["name"]) + " | " + str(value.get("value", 0)) + " | " + safe(value.get("description", "")) + " |")
             lines.append("")
-        lines += ["## 全部物品与实际获取入口", "", "同名装备已合并为一个规范条目，旧ID仅用于存档兼容；武学已归并为一门一名。7种江湖秘本仅供旧档迁移保留，新角色直接向指定老师入门。没有可达入口的条目不能作为当前收集目标。", "", "| 物品 / ID | 类型与用途 | 当前来源 |", "|---|---|---|"]
+        lines += ["## 全部物品与实际获取入口", "", "同名装备已合并为规范条目；武学一门一名。7种江湖秘本在向原指定老师正式入门后可誊录一次，不绕过修炼门槛。全部135物品有专属解读对象；已解读并持有时可在相应章节辅助核验一段现场痕迹，不替代最后判断，不消耗。", "", "| 物品 / ID | 类型与用途 | 当前来源 |", "|---|---|---|"]
         for iid, item in self.items.items():
             use = SLOTS.get(item.get("equipmentSlot"), item.get("type", "物品"))
             effects = item.get("effects", {})
@@ -589,7 +604,8 @@ class Guide:
                  '- 序27空缺，序28需要最近存在的序26完成。同号副本为并行替代，任一满结算即可推进。',
                  '- 序42鬼市三路都能探索；序62同名关是另一短篇模板。北斗七步拒绝越序，保留已完成步骤，没有错误重置惩罚。',
                  '- 护送以战斗和到达地点计目标，没有独立跟随AI或护送血条。',
-                 '- 后期部分章节仍是短篇机关战与简短台词。本轮接通既有内容，没有补写78关长篇原创剧情。',
+                 '- 38个后期通用开门流程已改为7类实际操作图；40关有各自复盘选择，其中双龙会/丝路护送保留原分段战斗。扩写不等于新增房间，也不等于78部长篇小说。',
+                 '- 八城有不同人物互证与互斥结论，135器物可出示、65公共房间可调查；任务面板的江湖见闻只回看已取得的信息。313既有NPC均接入实际出场，不增加实体ID。',
                  '- 没有完成全部初始属性、九流派连续78关和多人同时闯关的平衡验证；单首领样本不代表完整药耗收支。', '',
                  '## 未绑定动作检查', '', '当前数量：' + str(len(self.unbound)) + '。', '']
         for dungeon, aid in self.unbound: lines += [self.dungeon_link(dungeon, current) + '：' + aid, '']

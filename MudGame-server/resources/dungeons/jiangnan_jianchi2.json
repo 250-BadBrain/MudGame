@@ -1,7 +1,7 @@
 {
   "id": "jiangnan_jianchi2",
   "name": "剑池深处",
-  "description": "剑池深处——洛水风浪中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "铁锈只沿左侧水线沉积，右泉的清流仍在护剑。 封剑台的旧楔是木制，必须先引清泉再松楔。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 55,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -9,7 +9,11 @@
   "spawnRoomId": "jiangn_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "铁锈只沿左侧水线沉积，右泉的清流仍在护剑。 此处不能只凭武力开门；沿路观察，并核验双泉封剑台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先引右泉",
       "puzzleId": "gate",
       "rooms": [
         "jiangn_02"
@@ -34,28 +38,184 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "jc_sc": true
+      "nextState": "considered",
+      "message": "铁锈只沿左侧水线沉积，右泉的清流仍在护剑。 封剑台的旧楔是木制，必须先引清泉再松楔。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known",
+        "content_support": "ready"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_good",
+          "label": "先引右泉，再松木楔"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "先搅浑两泉"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "拔剑后再管泉水"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：沉锈石阶",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "jiangn_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "铁锈只沿左侧水线沉积，右泉的清流仍在护剑。",
+      "repeatMessage": "铁锈只沿左侧水线沉积，右泉的清流仍在护剑。"
+    },
+    "content_detail": {
+      "label": "核验：双泉封剑台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "封剑台的旧楔是木制，必须先引清泉再松楔。",
+      "repeatMessage": "封剑台的旧楔是木制，必须先引清泉再松楔。"
+    },
+    "content_brace": {
+      "label": "先做人工支护",
+      "puzzleId": "content_support",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "bracing",
+      "message": "你先找稳固的着力点，支护尚需最后一道固定。",
+      "repeatMessage": "你先找稳固的着力点，支护尚需最后一道固定。",
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      }
+    },
+    "content_secure": {
+      "label": "再固定支护",
+      "puzzleId": "content_support",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "bracing"
+      ],
+      "nextState": "ready",
+      "message": "支护已经稳固，现在可以不冒险地判断机关。",
+      "repeatMessage": "支护已经稳固，现在可以不冒险地判断机关。"
+    },
+    "content_pickaxe": {
+      "label": "用铁镐校稳支点（不消耗）",
+      "puzzleId": "content_support",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "ready",
+      "message": "你以铁镐作短暂杠杆校稳支点，随后把铁镐收回。",
+      "repeatMessage": "你以铁镐作短暂杠杆校稳支点，随后把铁镐收回。",
+      "presentItems": {
+        "iron_pickaxe": 1
+      },
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      }
+    },
+    "content_decide_good": {
+      "label": "先引右泉，再松木楔",
+      "puzzleId": "gate",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "剑池名剑没有因骤冷骤热而裂，池底剑灵问的是你是否懂得养剑。",
+      "repeatMessage": "剑池名剑没有因骤冷骤热而裂，池底剑灵问的是你是否懂得养剑。",
+      "setFlags": {
+        "jc_sc": true,
+        "discovery_chapter_jiangnan_jianchi2": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "先搅浑两泉",
+      "puzzleId": "gate",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：封剑台的旧楔是木制，必须先引清泉再松楔。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：封剑台的旧楔是木制，必须先引清泉再松楔。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "拔剑后再管泉水",
+      "puzzleId": "gate",
+      "rooms": [
+        "jiangn_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：封剑台的旧楔是木制，必须先引清泉再松楔。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：封剑台的旧楔是木制，必须先引清泉再松楔。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_jianchi_m": {
+      "label": "以剑池名剑校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "jiangn_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把抚琴女子辨明的器物来历与现场互证。铁锈只沿左侧水线沉积，右泉的清流仍在护剑。",
+      "requiredFlags": {
+        "discovery_item_jianchi_m": true
+      },
+      "presentItems": {
+        "jianchi_m": 1
+      }
     }
   },
   "rooms": {
     "jiangn_00": {
-      "name": "入口",
-      "description": "入口。洛水暗涌——你踏入此处，前方的路在阴影中延伸。",
+      "name": "剑池旧栏",
+      "description": "剑池旧栏保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "jiangn_01"
       },
       "actions": [
         "listen_brief"
+      ],
+      "npcs": [
+        "jn3_shen_guard",
+        "jn3_shen_boss"
       ]
     },
     "jiangn_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "沉锈石阶",
+      "description": "铁锈只沿左侧水线沉积，右泉的清流仍在护剑。",
       "exits": {
         "south": "jiangn_00",
         "north": "jiangn_02"
@@ -71,11 +231,15 @@
       "npcs": [
         "jn3_guard",
         "jn3_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_jianchi_m"
       ]
     },
     "jiangn_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "双泉封剑台",
+      "description": "封剑台的旧楔是木制，必须先引清泉再松楔。",
       "exits": {
         "south": "jiangn_01",
         "north": "jiangn_03"
@@ -89,18 +253,23 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail",
+        "content_brace",
+        "content_secure",
+        "content_pickaxe"
       ]
     },
     "jiangn_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "池底剑室",
+      "description": "剑池名剑没有因骤冷骤热而裂，池底剑灵问的是你是否懂得养剑。",
       "exits": {
         "south": "jiangn_02"
       },
       "npcs": [
         "jn3_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +287,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成双泉封剑台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +306,37 @@
       "jianchi_m": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：手工支护或器物辅助；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "tool",
+    "solution": [
+      {
+        "roomId": "jiangn_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "jiangn_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "jiangn_02",
+        "actionId": "content_brace"
+      },
+      {
+        "roomId": "jiangn_02",
+        "actionId": "content_secure"
+      },
+      {
+        "roomId": "jiangn_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "jiangn_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "剑池名剑没有因骤冷骤热而裂，池底剑灵问的是你是否懂得养剑。"
+  }
 }

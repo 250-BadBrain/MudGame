@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "vinerope": "woven",
     "briefing_zd2": "new",
-    "nest_zd2": "untouched"
+    "nest_zd2": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_tang": {
@@ -57,6 +58,62 @@
       "repeatMessage": "已被你翻遍，再无他物。",
       "giveItems": {},
       "giveMoney": 300
+    },
+    "content_epilogue": {
+      "label": "复盘：猴巢余音",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "zd2_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "唐门护手不是为了让人随意试毒，而是让拆机关的手活着把方法传下去。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "留下能拆不能杀的机关图"
+        },
+        {
+          "id": "content_record_route",
+          "label": "把散落暗器交还识货的人"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "zd2_ape_king"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "留下能拆不能杀的机关图",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "zd2_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "唐门护手不是为了让人随意试毒，而是让拆机关的手活着把方法传下去。 你选择：留下能拆不能杀的机关图。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_zhandao_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "把散落暗器交还识货的人",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "zd2_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "唐门护手不是为了让人随意试毒，而是让拆机关的手活着把方法传下去。 你选择：把散落暗器交还识货的人。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_zhandao_route": true
+      }
     }
   },
   "rooms": {
@@ -91,7 +148,8 @@
       "npcs": [
         "zd2_ape_rouge",
         "zd2_ape_rouge"
-      ]
+      ],
+      "actions": []
     },
     "zd2_02": {
       "name": "藤索天梯",
@@ -122,7 +180,8 @@
         "zd2_ape_king"
       ],
       "actions": [
-        "search_nest"
+        "search_nest",
+        "content_epilogue"
       ]
     }
   },
@@ -175,5 +234,19 @@
   },
   "quickRewards": {
     "money": 300
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "唐门护手不是为了让人随意试毒，而是让拆机关的手活着把方法传下去。",
+    "solution": [
+      {
+        "roomId": "zd2_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "zd2_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

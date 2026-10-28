@@ -1,7 +1,7 @@
 {
   "id": "datang_yunhe",
   "name": "运河追击",
-  "description": "宫变的余波沿运河南下——叛党的残余势力劫了一艘漕运粮船，你在运河上追了三天三夜。",
+  "description": "纤道绳屑朝北散落，粮船曾逆流折返。 闸盘旧刻号与码头的发船簿相差一个更次。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 38,
   "chainId": "datang_double_dragon",
   "chainName": "大唐双龙传",
@@ -9,7 +9,11 @@
   "spawnRoomId": "dat_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "纤道绳屑朝北散落，粮船曾逆流折返。 此处不能只凭武力开门；沿路观察，并核验双闸绞盘的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：回码头核更次后开下游闸",
       "puzzleId": "gate",
       "rooms": [
         "dat_02"
@@ -34,28 +38,977 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "yunhe_zhuiji": true
+      "nextState": "considered",
+      "message": "纤道绳屑朝北散落，粮船曾逆流折返。 闸盘旧刻号与码头的发船簿相差一个更次。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known",
+        "content_compare": "checked"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_wrong",
+          "label": "同时升起两闸"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "按新刻号猛拉上游闸"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "回码头核更次后开下游闸"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：断缆纤道",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "纤道绳屑朝北散落，粮船曾逆流折返。",
+      "repeatMessage": "纤道绳屑朝北散落，粮船曾逆流折返。"
+    },
+    "content_detail": {
+      "label": "核验：双闸绞盘",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "闸盘旧刻号与码头的发船簿相差一个更次。",
+      "repeatMessage": "闸盘旧刻号与码头的发船簿相差一个更次。"
+    },
+    "content_compare": {
+      "label": "回头复核原始记录",
+      "puzzleId": "content_compare",
+      "rooms": [
+        "dat_00"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "checked",
+      "message": "纤道绳屑朝北散落，粮船曾逆流折返。 你把后来见到的细节与来处旧记核在一起。",
+      "repeatMessage": "纤道绳屑朝北散落，粮船曾逆流折返。 你把后来见到的细节与来处旧记核在一起。",
+      "requiredPuzzleStates": {
+        "content_trace": "known"
+      }
+    },
+    "content_decide_good": {
+      "label": "回码头核更次后开下游闸",
+      "puzzleId": "gate",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你赶在粮船借水逃走前卡住水位，叛军偏将被迫留在船首应战。",
+      "repeatMessage": "你赶在粮船借水逃走前卡住水位，叛军偏将被迫留在船首应战。",
+      "setFlags": {
+        "yunhe_zhuiji": true,
+        "discovery_chapter_datang_yunhe": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "同时升起两闸",
+      "puzzleId": "gate",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：闸盘旧刻号与码头的发船簿相差一个更次。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：闸盘旧刻号与码头的发船簿相差一个更次。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "按新刻号猛拉上游闸",
+      "puzzleId": "gate",
+      "rooms": [
+        "dat_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：闸盘旧刻号与码头的发船簿相差一个更次。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：闸盘旧刻号与码头的发船簿相差一个更次。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_common_clothes": {
+      "label": "以粗布衣校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把杜掌柜辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_common_clothes": true
+      },
+      "presentItems": {
+        "common_clothes": 1
+      }
+    },
+    "content_aid_common_shoes": {
+      "label": "以布鞋校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把杜掌柜辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_common_shoes": true
+      },
+      "presentItems": {
+        "common_shoes": 1
+      }
+    },
+    "content_aid_darts": {
+      "label": "以飞镖校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_darts": true
+      },
+      "presentItems": {
+        "darts": 1
+      }
+    },
+    "content_aid_dry_ration": {
+      "label": "以干粮校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把陈货郎辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_dry_ration": true
+      },
+      "presentItems": {
+        "dry_ration": 1
+      }
+    },
+    "content_aid_simple_medicine": {
+      "label": "以金创药校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦校尉辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_simple_medicine": true
+      },
+      "presentItems": {
+        "simple_medicine": 1
+      }
+    },
+    "content_aid_sealed_letter": {
+      "label": "以染血密信校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把韩录事辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_sealed_letter": true
+      },
+      "presentItems": {
+        "sealed_letter": 1
+      }
+    },
+    "content_aid_bronze_fragment": {
+      "label": "以古铜残片校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_bronze_fragment": true
+      },
+      "presentItems": {
+        "bronze_fragment": 1
+      }
+    },
+    "content_aid_yg_baoku_pearl": {
+      "label": "以宝库金珠校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把沈七辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_yg_baoku_pearl": true
+      },
+      "presentItems": {
+        "yg_baoku_pearl": 1
+      }
+    },
+    "content_aid_yanggong_sword": {
+      "label": "以杨公宝剑校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把化度寺知客僧辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_yanggong_sword": true
+      },
+      "presentItems": {
+        "yanggong_sword": 1
+      }
+    },
+    "content_aid_xiaohuandan": {
+      "label": "以小还丹校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦校尉辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_xiaohuandan": true
+      },
+      "presentItems": {
+        "xiaohuandan": 1
+      }
+    },
+    "content_aid_dahuandan": {
+      "label": "以大还丹校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_dahuandan": true
+      },
+      "presentItems": {
+        "dahuandan": 1
+      }
+    },
+    "content_aid_wagang_tiejia": {
+      "label": "以瓦岗铁甲校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把韩录事辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_wagang_tiejia": true
+      },
+      "presentItems": {
+        "wagang_tiejia": 1
+      }
+    },
+    "content_aid_tianma_ling": {
+      "label": "以天马银铃校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把沈七辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_tianma_ling": true
+      },
+      "presentItems": {
+        "tianma_ling": 1
+      }
+    },
+    "content_aid_zhanma_dao": {
+      "label": "以斩马刀校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把化度寺知客僧辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_zhanma_dao": true
+      },
+      "presentItems": {
+        "zhanma_dao": 1
+      }
+    },
+    "content_aid_dongting_ruanjia": {
+      "label": "以洞庭软甲校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_dongting_ruanjia": true
+      },
+      "presentItems": {
+        "dongting_ruanjia": 1
+      }
+    },
+    "content_aid_sanhua_yuzhuo": {
+      "label": "以散花玉镯校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把韩录事辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_sanhua_yuzhuo": true
+      },
+      "presentItems": {
+        "sanhua_yuzhuo": 1
+      }
+    },
+    "content_aid_shujin_pifeng": {
+      "label": "以蜀锦披风校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_shujin_pifeng": true
+      },
+      "presentItems": {
+        "shujin_pifeng": 1
+      }
+    },
+    "content_aid_tangmen_tili": {
+      "label": "以唐门铁蒺藜校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把沈七辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_tangmen_tili": true
+      },
+      "presentItems": {
+        "tangmen_tili": 1
+      }
+    },
+    "content_aid_tangmei_gauntlet": {
+      "label": "以唐门护手校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把化度寺知客僧辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_tangmei_gauntlet": true
+      },
+      "presentItems": {
+        "tangmei_gauntlet": 1
+      }
+    },
+    "content_aid_sanhua_flowerpin": {
+      "label": "以散花玉簪校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_sanhua_flowerpin": true
+      },
+      "presentItems": {
+        "sanhua_flowerpin": 1
+      }
+    },
+    "content_aid_kangshi_remnant": {
+      "label": "以突厥金刀令校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_kangshi_remnant": true
+      },
+      "presentItems": {
+        "kangshi_remnant": 1
+      }
+    },
+    "content_aid_songque_testament": {
+      "label": "以天刀遗篇校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_songque_testament": true
+      },
+      "presentItems": {
+        "songque_testament": 1
+      }
+    },
+    "content_aid_wanwan_feather": {
+      "label": "以天魔羽校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_wanwan_feather": true
+      },
+      "presentItems": {
+        "wanwan_feather": 1
+      }
+    },
+    "content_aid_bianbuou_wisdom": {
+      "label": "以边不负的念珠校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_bianbuou_wisdom": true
+      },
+      "presentItems": {
+        "bianbuou_wisdom": 1
+      }
+    },
+    "content_aid_yunhe_pao": {
+      "label": "以运河披风校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把韩录事辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_yunhe_pao": true
+      },
+      "presentItems": {
+        "yunhe_pao": 1
+      }
+    },
+    "content_aid_shuanglong_bei": {
+      "label": "以双龙会信杯校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_shuanglong_bei": true
+      },
+      "presentItems": {
+        "shuanglong_bei": 1
+      }
+    },
+    "content_aid_guishi_blade": {
+      "label": "以鬼市冥刀校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_guishi_blade": true
+      },
+      "presentItems": {
+        "guishi_blade": 1
+      }
+    },
+    "content_aid_beidou_xingpan": {
+      "label": "以北斗星盘校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_beidou_xingpan": true
+      },
+      "presentItems": {
+        "beidou_xingpan": 1
+      }
+    },
+    "content_aid_silk_road_map": {
+      "label": "以丝绸之路全图校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_silk_road_map": true
+      },
+      "presentItems": {
+        "silk_road_map": 1
+      }
+    },
+    "content_aid_manual_tiandao_blade": {
+      "label": "以天刀八诀秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_tiandao_blade": true
+      },
+      "presentItems": {
+        "manual_tiandao_blade": 1
+      }
+    },
+    "content_aid_manual_thunder_sword": {
+      "label": "以奔雷剑法秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦校尉辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_thunder_sword": true
+      },
+      "presentItems": {
+        "manual_thunder_sword": 1
+      }
+    },
+    "content_aid_manual_bloody_blade": {
+      "label": "以血战刀法秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦校尉辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_bloody_blade": true
+      },
+      "presentItems": {
+        "manual_bloody_blade": 1
+      }
+    },
+    "content_aid_manual_cihang_jiandian": {
+      "label": "以慈航剑典秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_cihang_jiandian": true
+      },
+      "presentItems": {
+        "manual_cihang_jiandian": 1
+      }
+    },
+    "content_aid_manual_talang_jue": {
+      "label": "以踏浪诀秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_talang_jue": true
+      },
+      "presentItems": {
+        "manual_talang_jue": 1
+      }
+    },
+    "content_aid_manual_fuhu_jin": {
+      "label": "以伏虎劲秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_fuhu_jin": true
+      },
+      "presentItems": {
+        "manual_fuhu_jin": 1
+      }
+    },
+    "content_aid_manual_taiyi_jianfa": {
+      "label": "以太乙剑法秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_taiyi_jianfa": true
+      },
+      "presentItems": {
+        "manual_taiyi_jianfa": 1
+      }
+    },
+    "content_aid_manual_dongting_xinf": {
+      "label": "以洞庭心法秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把韩录事辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_dongting_xinf": true
+      },
+      "presentItems": {
+        "manual_dongting_xinf": 1
+      }
+    },
+    "content_aid_manual_lingxu_bu": {
+      "label": "以凌虚步秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把沈七辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_lingxu_bu": true
+      },
+      "presentItems": {
+        "manual_lingxu_bu": 1
+      }
+    },
+    "content_aid_manual_bawang_qiang": {
+      "label": "以霸王枪秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把落魄诗人辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_bawang_qiang": true
+      },
+      "presentItems": {
+        "manual_bawang_qiang": 1
+      }
+    },
+    "content_aid_manual_lieshi_jian": {
+      "label": "以裂石锏秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_lieshi_jian": true
+      },
+      "presentItems": {
+        "manual_lieshi_jian": 1
+      }
+    },
+    "content_aid_manual_fengmo_gun": {
+      "label": "以疯魔棍秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦校尉辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_fengmo_gun": true
+      },
+      "presentItems": {
+        "manual_fengmo_gun": 1
+      }
+    },
+    "content_aid_manual_jingang_buhuai": {
+      "label": "以金刚不坏秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_manual_jingang_buhuai": true
+      },
+      "presentItems": {
+        "manual_jingang_buhuai": 1
+      }
+    },
+    "content_aid_training_spear": {
+      "label": "以练习长枪校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵横江辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_training_spear": true
+      },
+      "presentItems": {
+        "training_spear": 1
+      }
+    },
+    "content_aid_liangdao_spear": {
+      "label": "以粮道长枪校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把落魄诗人辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_liangdao_spear": true
+      },
+      "presentItems": {
+        "liangdao_spear": 1
+      }
+    },
+    "content_aid_lieshi_mace": {
+      "label": "以裂石铁锏校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_lieshi_mace": true
+      },
+      "presentItems": {
+        "lieshi_mace": 1
+      }
+    },
+    "content_aid_jinggang_staff": {
+      "label": "以精钢长棍校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把沈七辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_jinggang_staff": true
+      },
+      "presentItems": {
+        "jinggang_staff": 1
+      }
+    },
+    "content_aid_gongbian_mingzhu": {
+      "label": "以宫变夜明珠校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dat_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦校尉辨明的器物来历与现场互证。纤道绳屑朝北散落，粮船曾逆流折返。",
+      "requiredFlags": {
+        "discovery_item_gongbian_mingzhu": true
+      },
+      "presentItems": {
+        "gongbian_mingzhu": 1
+      }
     }
   },
   "rooms": {
     "dat_00": {
-      "name": "入口",
-      "description": "入口。隋末乱世——你踏入此处，前方的路在阴影中延伸。",
+      "name": "追粮码头",
+      "description": "追粮码头保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "dat_01"
       },
       "actions": [
-        "listen_brief"
+        "listen_brief",
+        "content_compare"
       ]
     },
     "dat_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "断缆纤道",
+      "description": "纤道绳屑朝北散落，粮船曾逆流折返。",
       "exits": {
         "south": "dat_00",
         "north": "dat_02"
@@ -71,11 +1024,61 @@
       "npcs": [
         "yh_pian_soldier",
         "yh_pian_soldier"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_common_clothes",
+        "content_aid_common_shoes",
+        "content_aid_darts",
+        "content_aid_dry_ration",
+        "content_aid_simple_medicine",
+        "content_aid_sealed_letter",
+        "content_aid_bronze_fragment",
+        "content_aid_yg_baoku_pearl",
+        "content_aid_yanggong_sword",
+        "content_aid_xiaohuandan",
+        "content_aid_dahuandan",
+        "content_aid_wagang_tiejia",
+        "content_aid_tianma_ling",
+        "content_aid_zhanma_dao",
+        "content_aid_dongting_ruanjia",
+        "content_aid_sanhua_yuzhuo",
+        "content_aid_shujin_pifeng",
+        "content_aid_tangmen_tili",
+        "content_aid_tangmei_gauntlet",
+        "content_aid_sanhua_flowerpin",
+        "content_aid_kangshi_remnant",
+        "content_aid_songque_testament",
+        "content_aid_wanwan_feather",
+        "content_aid_bianbuou_wisdom",
+        "content_aid_yunhe_pao",
+        "content_aid_shuanglong_bei",
+        "content_aid_guishi_blade",
+        "content_aid_beidou_xingpan",
+        "content_aid_silk_road_map",
+        "content_aid_manual_tiandao_blade",
+        "content_aid_manual_thunder_sword",
+        "content_aid_manual_bloody_blade",
+        "content_aid_manual_cihang_jiandian",
+        "content_aid_manual_talang_jue",
+        "content_aid_manual_fuhu_jin",
+        "content_aid_manual_taiyi_jianfa",
+        "content_aid_manual_dongting_xinf",
+        "content_aid_manual_lingxu_bu",
+        "content_aid_manual_bawang_qiang",
+        "content_aid_manual_lieshi_jian",
+        "content_aid_manual_fengmo_gun",
+        "content_aid_manual_jingang_buhuai",
+        "content_aid_training_spear",
+        "content_aid_liangdao_spear",
+        "content_aid_lieshi_mace",
+        "content_aid_jinggang_staff",
+        "content_aid_gongbian_mingzhu"
       ]
     },
     "dat_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "双闸绞盘",
+      "description": "闸盘旧刻号与码头的发船簿相差一个更次。",
       "exits": {
         "south": "dat_01",
         "north": "dat_03"
@@ -89,18 +1092,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "dat_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "夺粮船首",
+      "description": "你赶在粮船借水逃走前卡住水位，叛军偏将被迫留在船首应战。",
       "exits": {
         "south": "dat_02"
       },
       "npcs": [
         "yh_pian_jiang"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +1123,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成双闸绞盘的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +1142,33 @@
       "yunhe_pao": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：往返复核；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "traversal",
+    "solution": [
+      {
+        "roomId": "dat_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "dat_00",
+        "actionId": "content_compare"
+      },
+      {
+        "roomId": "dat_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "dat_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "dat_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你赶在粮船借水逃走前卡住水位，叛军偏将被迫留在船首应战。"
+  }
 }

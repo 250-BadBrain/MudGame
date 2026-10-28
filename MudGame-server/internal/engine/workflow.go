@@ -132,6 +132,7 @@ type RuntimeRepository interface {
 	Talk(playerID, npcID string) (map[string]interface{}, error)
 	ChooseDialogue(playerID, npcID, optionID string) (map[string]interface{}, string, []string, map[string]interface{}, error)
 	GetQuests(playerID string) ([]map[string]interface{}, error)
+	GetJournal(playerID string) ([]map[string]string, error)
 	GetFactions(playerID string) ([]map[string]interface{}, error)
 	Heal(playerID string) (string, error)
 	Meditate(playerID string) (string, error)

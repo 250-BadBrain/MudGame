@@ -9,7 +9,8 @@
   "spawnRoomId": "tt_00",
   "puzzleInitialStates": {
     "trial_gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -40,6 +41,62 @@
       },
       "message": "香烛燃尽，试炼之门缓缓开启——残影的气息扑面而来。",
       "repeatMessage": "试炼之门已开。"
+    },
+    "content_epilogue": {
+      "label": "复盘：遗篇为何不全",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "tt_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "天刀遗篇不替来者决定每一刀，未写尽的部分正是传承仍然活着的地方。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "保留宋缺没有写下的收刀处"
+        },
+        {
+          "id": "content_record_route",
+          "label": "把每一处停顿按原样留白"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "tt_song_phantom"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "保留宋缺没有写下的收刀处",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "tt_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "天刀遗篇不替来者决定每一刀，未写尽的部分正是传承仍然活着的地方。 你选择：保留宋缺没有写下的收刀处。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_tiandao_trial_hall_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "把每一处停顿按原样留白",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "tt_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "天刀遗篇不替来者决定每一刀，未写尽的部分正是传承仍然活着的地方。 你选择：把每一处停顿按原样留白。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_tiandao_trial_hall_route": true
+      }
     }
   },
   "rooms": {
@@ -63,7 +120,8 @@
       "exits": {
         "south": "tt_00",
         "north": "tt_02"
-      }
+      },
+      "actions": []
     },
     "tt_02": {
       "name": "残影之殿",
@@ -73,6 +131,9 @@
       },
       "npcs": [
         "tt_song_phantom"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -102,5 +163,19 @@
       "songque_testament": 1,
       "manual_tiandao_blade": 1
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "天刀遗篇不替来者决定每一刀，未写尽的部分正是传承仍然活着的地方。",
+    "solution": [
+      {
+        "roomId": "tt_02",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "tt_02",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

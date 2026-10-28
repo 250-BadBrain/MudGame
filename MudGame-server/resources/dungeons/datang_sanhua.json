@@ -11,7 +11,8 @@
     "lodge": "unseen",
     "briefing_sh": "new",
     "box_sh": "hidden",
-    "attic_sh": "untouched"
+    "attic_sh": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_informant": {
@@ -77,6 +78,62 @@
       "repeatMessage": "已被你搜遍。",
       "giveItems": {},
       "giveMoney": 400
+    },
+    "content_epilogue": {
+      "label": "复盘：楼中的真假",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sh_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "散花玉簪与玉镯看似相配，留下它们的人却不一定站在同一边。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "保留密阁暗号的原写法"
+        },
+        {
+          "id": "content_record_route",
+          "label": "给受胁迫的伶人留匿名证词"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "sh_hua_wuying"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "保留密阁暗号的原写法",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sh_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "散花玉簪与玉镯看似相配，留下它们的人却不一定站在同一边。 你选择：保留密阁暗号的原写法。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_sanhua_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "给受胁迫的伶人留匿名证词",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sh_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "散花玉簪与玉镯看似相配，留下它们的人却不一定站在同一边。 你选择：给受胁迫的伶人留匿名证词。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_sanhua_route": true
+      }
     }
   },
   "rooms": {
@@ -111,7 +168,8 @@
       "npcs": [
         "sh_yinkui_maid",
         "sh_yinkui_maid"
-      ]
+      ],
+      "actions": []
     },
     "sh_02": {
       "name": "二楼密阁",
@@ -146,7 +204,8 @@
       ],
       "actions": [
         "open_box_sh",
-        "search_attic"
+        "search_attic",
+        "content_epilogue"
       ]
     }
   },
@@ -214,5 +273,19 @@
   },
   "quickRewards": {
     "money": 650
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "散花玉簪与玉镯看似相配，留下它们的人却不一定站在同一边。",
+    "solution": [
+      {
+        "roomId": "sh_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "sh_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

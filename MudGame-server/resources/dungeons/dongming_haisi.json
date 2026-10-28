@@ -9,7 +9,8 @@
   "spawnRoomId": "dm2_00",
   "puzzleInitialStates": {
     "yujian": "hidden",
-    "briefing_dm2": "new"
+    "briefing_dm2": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_keeper": {
@@ -42,6 +43,62 @@
       "failureMessage": "宫主的幻影还在殿中游荡——玉简不认你。",
       "message": "你从沧溟宫主座之上取出沧溟玉简——玉简入手温润，三百年的潮声在耳边一一退去。海市的主人，后继有人。",
       "repeatMessage": "玉简已在你怀中。"
+    },
+    "content_epilogue": {
+      "label": "复盘：海市的主人",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dm2_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "海市并非只许强者入内的宝库，它也曾为错过潮汐的归船留过一扇门。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "记下潮水退去时的门槛"
+        },
+        {
+          "id": "content_record_route",
+          "label": "保留玉简中关于归航的一行"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "dm2_mirage_phantom"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "记下潮水退去时的门槛",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dm2_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "海市并非只许强者入内的宝库，它也曾为错过潮汐的归船留过一扇门。 你选择：记下潮水退去时的门槛。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_dongming_haisi_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "保留玉简中关于归航的一行",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dm2_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "海市并非只许强者入内的宝库，它也曾为错过潮汐的归船留过一扇门。 你选择：保留玉简中关于归航的一行。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_dongming_haisi_route": true
+      }
     }
   },
   "rooms": {
@@ -76,7 +133,8 @@
       "npcs": [
         "dm2_loot_cultivator",
         "dm2_loot_cultivator"
-      ]
+      ],
+      "actions": []
     },
     "dm2_02": {
       "name": "宫前长阶",
@@ -95,7 +153,8 @@
       },
       "npcs": [
         "dm2_lost_soul"
-      ]
+      ],
+      "actions": []
     },
     "dm2_03": {
       "name": "沧溟宫主殿",
@@ -107,7 +166,8 @@
         "dm2_mirage_phantom"
       ],
       "actions": [
-        "take_yujian"
+        "take_yujian",
+        "content_epilogue"
       ]
     }
   },
@@ -155,5 +215,19 @@
     "flags": {
       "haisi_case_done": true
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "海市并非只许强者入内的宝库，它也曾为错过潮汐的归船留过一扇门。",
+    "solution": [
+      {
+        "roomId": "dm2_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "dm2_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

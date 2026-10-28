@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：4aa91e2bf335c67bdec2967321f213ed8f3a4fa86c81f6f503f315c6878f4397；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：acc9a19efd5c2142911ae95ace2b99fcb893a48892414d55d0279937b0f14723；由 scripts/generate_player_guide.py 生成。 -->
 
 # 修行、商店、传承与收藏目录
 
@@ -72,6 +72,7 @@
 | 制作钢刀（铁剑×1、100文钱） | 钟铁衣：[洛阳·东市](worlds.md#ly_east_market) | 铁剑×1 + 100 文钱 | 钢刀×1 |
 | 制作钢刀（铁棍×1、150文钱） | 钟铁衣：[洛阳·东市](worlds.md#ly_east_market) | 铁棍×1 + 150 文钱 | 钢刀×1 |
 | 制作玄铁战指（古铜残片×2、200文钱） | 钟铁衣：[洛阳·东市](worlds.md#ly_east_market) | 古铜残片×2 + 200 文钱 | 玄铁战指×1 |
+| 以宫变夜明珠改铸宫变密剑（交出凭证，单次） | 钟铁衣：[洛阳·东市](worlds.md#ly_east_market) | 宫变夜明珠×1 | 宫变密剑×1 |
 
 ## 商店与价格
 
@@ -85,10 +86,10 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 粗布衣 | 80 | 一件耐磨的粗布衣，洛阳城中最常见的行装。 |
-| 布鞋 | 60 | 一双普通布鞋，走城中石板路还算合脚。 |
-| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。 |
-| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
+| 粗布衣 | 80 | 一件耐磨的粗布衣，洛阳城中最常见的行装。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 |
+| 布鞋 | 60 | 一双普通布鞋，走城中石板路还算合脚。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 |
+| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。【器物线索】可向陈货郎出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-heluo_blacksmith"></a>
 
@@ -98,20 +99,20 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 铁剑 | 400 | 河洛铁匠打制的铁剑，剑身朴实无华。 |
-| 钢刀 | 300 | 旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。 |
-| 铁棍 | 350 | 一根沉重铁棍，招式简单，胜在结实。 |
-| 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
-| 铁镐 | 600 | 一把结实铁镐，能用于采石、开箱和清理塌方。 |
-| 练习长枪 | 400 | 练习长枪，适合spear流派修炼。 |
-| 练习软鞭 | 400 | 练习软鞭，适合whip流派修炼。 |
-| 练习铁锏 | 400 | 练习铁锏，适合mace流派修炼。 |
-| 练习双钩 | 400 | 练习双钩，适合hook流派修炼。 |
-| 粮道长枪 | 1600 | 粮道长枪，适合spear流派修炼。 |
-| 游龙长鞭 | 1600 | 游龙长鞭，适合whip流派修炼。 |
-| 裂石铁锏 | 1600 | 裂石铁锏，适合mace流派修炼。 |
-| 锁浪双钩 | 1600 | 锁浪双钩，适合hook流派修炼。 |
-| 精钢长棍 | 1600 | 精钢长棍，适合staff流派修炼。 |
+| 铁剑 | 400 | 河洛铁匠打制的铁剑，剑身朴实无华。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 |
+| 钢刀 | 300 | 旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 |
+| 铁棍 | 350 | 一根沉重铁棍，招式简单，胜在结实。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。 |
+| 飞镖 | 250 | 西市常见的暗器，薄而锋利。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
+| 铁镐 | 600 | 一把结实铁镐，能用于采石、开箱和清理塌方。【器物线索】可向剑阁驿丞出示，核对《绝壁悬栈》的来历；不消耗，穿戴中也可出示。 |
+| 练习长枪 | 400 | 练习长枪，适合spear流派修炼。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
+| 练习软鞭 | 400 | 练习软鞭，适合whip流派修炼。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 |
+| 练习铁锏 | 400 | 练习铁锏，适合mace流派修炼。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 |
+| 练习双钩 | 400 | 练习双钩，适合hook流派修炼。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。 |
+| 粮道长枪 | 1600 | 粮道长枪，适合spear流派修炼。【器物线索】可向落魄诗人出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。 |
+| 游龙长鞭 | 1600 | 游龙长鞭，适合whip流派修炼。【器物线索】可向秦三娘出示，核对《方夜羽复仇》的来历；不消耗，穿戴中也可出示。 |
+| 裂石铁锏 | 1600 | 裂石铁锏，适合mace流派修炼。【器物线索】可向钟铁衣出示，核对《瓦岗惊变》的来历；不消耗，穿戴中也可出示。 |
+| 锁浪双钩 | 1600 | 锁浪双钩，适合hook流派修炼。【器物线索】可向许说书出示，核对《怒蛟水战》的来历；不消耗，穿戴中也可出示。 |
+| 精钢长棍 | 1600 | 精钢长棍，适合staff流派修炼。【器物线索】可向沈七出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-black_market_broker"></a>
 
@@ -121,9 +122,9 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
-| 旧商路残图 | 500 | 一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。 |
-| 铜匣拓片 | 800 | 拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。【器物线索】可向裴玄出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 |
+| 旧商路残图 | 500 | 一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。【器物线索】可向老骆出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 |
+| 铜匣拓片 | 800 | 拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-nan_market_peddler"></a>
 
@@ -133,9 +134,9 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。 |
-| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
+| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。【器物线索】可向陈货郎出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。【器物线索】可向裴玄出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-north_market_broker"></a>
 
@@ -145,9 +146,9 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
-| 粗布衣 | 80 | 一件耐磨的粗布衣，洛阳城中最常见的行装。 |
-| 布鞋 | 60 | 一双普通布鞋，走城中石板路还算合脚。 |
+| 飞镖 | 250 | 西市常见的暗器，薄而锋利。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
+| 粗布衣 | 80 | 一件耐磨的粗布衣，洛阳城中最常见的行装。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 |
+| 布鞋 | 60 | 一双普通布鞋，走城中石板路还算合脚。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-ca2_west_keeper"></a>
 
@@ -157,9 +158,9 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
-| 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
+| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。【器物线索】可向裴玄出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 |
+| 飞镖 | 250 | 西市常见的暗器，薄而锋利。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-yz_salt_merchant"></a>
 
@@ -169,9 +170,9 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。 |
-| 粗布衣 | 80 | 一件耐磨的粗布衣，洛阳城中最常见的行装。 |
+| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。【器物线索】可向陈货郎出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 粗布衣 | 80 | 一件耐磨的粗布衣，洛阳城中最常见的行装。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-bs_herbalist"></a>
 
@@ -181,8 +182,8 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 止血草 | 15 | 洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。 |
-| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。 |
+| 止血草 | 15 | 洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。【器物线索】可向药田老农出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 |
+| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。【器物线索】可向陈货郎出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-sb_horse_trader"></a>
 
@@ -192,10 +193,10 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。 |
-| 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
-| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 |
+| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 干粮 | 20 | 商旅常备的粗粮饼，味道普通，却能充饥。【器物线索】可向陈货郎出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 飞镖 | 250 | 西市常见的暗器，薄而锋利。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
+| 烟尘粉 | 250 | 战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。【器物线索】可向裴玄出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-dd2_silk_merchant"></a>
 
@@ -205,9 +206,9 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
-| 大还丹 | 800 | 传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。 |
-| 飞镖 | 250 | 西市常见的暗器，薄而锋利。 |
+| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
+| 大还丹 | 800 | 传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
+| 飞镖 | 250 | 西市常见的暗器，薄而锋利。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
 
 <a id="shop-dm_jiaoren"></a>
 
@@ -217,150 +218,150 @@
 
 | 商品 | 单价（钱币） | 用途 |
 |---|---:|---|
-| 大还丹 | 800 | 传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。 |
-| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。 |
+| 大还丹 | 800 | 传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 |
+| 金创药 | 120 | 普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 |
 
 ## 全部物品与实际获取入口
 
-同名装备已合并为一个规范条目，旧ID仅用于存档兼容；武学已归并为一门一名。7种江湖秘本仅供旧档迁移保留，新角色直接向指定老师入门。没有可达入口的条目不能作为当前收集目标。
+同名装备已合并为规范条目；武学一门一名。7种江湖秘本在向原指定老师正式入门后可誊录一次，不绕过修炼门槛。全部135物品有专属解读对象；已解读并持有时可在相应章节辅助核验一段现场痕迹，不替代最后判断，不消耗。
 
 | 物品 / ID | 类型与用途 | 当前来源 |
 |---|---|---|
-| 粗布衣<br>`common_clothes` | 衣甲<br>一件耐磨的粗布衣，洛阳城中最常见的行装。 | [杜掌柜商店](collections.md#shop-east_market_keeper)；[牛金牙商店](collections.md#shop-north_market_broker)；[程盐商商店](collections.md#shop-yz_salt_merchant) |
-| 布鞋<br>`common_shoes` | 鞋靴<br>一双普通布鞋，走城中石板路还算合脚。 | [杜掌柜商店](collections.md#shop-east_market_keeper)；[牛金牙商店](collections.md#shop-north_market_broker) |
-| 铁剑<br>`iron_sword` | 兵器；攻击+6<br>河洛铁匠打制的铁剑，剑身朴实无华。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 钢刀<br>`steel_blade` | 兵器；攻击+7<br>旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。 | [钟铁衣交谈「制作钢刀（铁剑×1、100文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣交谈「制作钢刀（铁棍×1、150文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 铁棍<br>`iron_staff` | 兵器；攻击+5、招架+2<br>一根沉重铁棍，招式简单，胜在结实。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 飞镖<br>`darts` | 兵器；暴击率+1、攻击+6<br>西市常见的暗器，薄而锋利。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith)；[牛金牙商店](collections.md#shop-north_market_broker)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant) |
-| 铁镐<br>`iron_pickaxe` | tool<br>一把结实铁镐，能用于采石、开箱和清理塌方。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith)；[创角自带](worlds.md#labor) |
-| 干粮<br>`dry_ration` | consumable；回复气血 5<br>商旅常备的粗粮饼，味道普通，却能充饥。 | [孙回春交谈「出手止血草（×2 换干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《洛水传闻》](quests.md#escort_rumor_run)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[《扬子江惊变》「打捞铁匣」现场获得](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[《鸡鸣山之约》「取走供品箱」现场获得](stories/posui.md#posui_jiming)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[药田老农商店](collections.md#shop-bs_herbalist)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[各采集点（40%）](worlds.md#labor) |
-| 金创药<br>`simple_medicine` | consumable；回复气血 25<br>普通外伤药，行走江湖的人多少会备上一些。 | [孙回春交谈「制作金创药（止血草×7、干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「付诊金取现货金创药（120铜钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「制作金创药（干粮×7）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《烽燧疑警》](quests.md#beacon_signal_case)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
-| 烟尘粉<br>`smoke_powder` | consumable；战斗中撤离，不回血<br>战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 | [任务《漕运疑云》](quests.md#salt_smuggling_case)；[任务《流民疑云》](quests.md#refugee_rumor_case)；[任务《漕银失窃》](quests.md#caoyin_case)；[裴玄商店](collections.md#shop-black_market_broker)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader) |
-| 旧商路残图<br>`old_map_fragment` | material<br>一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。 | [裴玄商店](collections.md#shop-black_market_broker) |
-| 铜匣拓片<br>`bronze_box_rubbing` | quest<br>拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。 | [裴玄商店](collections.md#shop-black_market_broker) |
-| 染血密信<br>`sealed_letter` | quest<br>信封被雨水浸湿，火漆已碎，仍能看出上面曾有一枚陌生印记。 | [100% 结算《荒庙夜雨》](stories/luoyang.md#abandoned_temple_rain) |
-| 古铜残片<br>`bronze_fragment` | material<br>一枚带有古怪纹路的铜片，似乎来自某个机关铜匣。 | [100% 结算《竟陵之围》](stories/datang.md#datang_jingling)；[《鸡鸣山之约》「取走供品箱」现场获得](stories/posui.md#posui_jiming) |
-| 宝库金珠<br>`yg_baoku_pearl` | treasure<br>杨公宝库中的大如龙眼的金珠，鲁妙子的手笔，成色远胜市面珠玉。 | [100% 结算《杨公宝库》](stories/datang.md#datang_yanggong) |
-| 怒蛟刀<br>`nujiao_saber` | 兵器；攻击+9<br>怒蛟帮帮众的制式快刀，刀势凶悍。 | [100% 结算《怒蛟帮夜战》](stories/fuyu.md#fuyu_nujiao) |
-| 杨公宝剑<br>`yanggong_sword` | 兵器；攻击+12、命中+4<br>出自杨公宝库的古剑，剑气内敛，锋锐无匹。 | [100% 结算《杨公宝库》](stories/datang.md#datang_yanggong) |
-| 拦江劲衣<br>`lanjiang_vest` | 衣甲；防御+8、躲闪+3<br>以拦江一战中流传的贴身劲衣，柔韧贴身，避锋藏锐。 | [100% 结算《拦江一战·残影》](stories/fuyu.md#fuyu_lanjiang) |
-| 止血草<br>`herb` | material<br>洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。 | [《扬子江惊变》「打捞铁匣」现场获得](stories/datang.md#datang_changshengjue)；[《飞马牧场》「拾取遗落的玉匣」现场获得](stories/datang.md#datang_feima)；[药田老农商店](collections.md#shop-bs_herbalist)；[普通采集点（60%）](worlds.md#labor) |
-| 回春丹<br>`herb_pill` | medicine；回复气血 60<br>回春堂以止血草与干粮配制的伤药，便于携带，一粒可补益气血。 | [孙回春交谈「制作回春丹（止血草×15、干粮×4）」](worlds.md#dialogue-dlg_herbalist_sun) |
-| 小还丹<br>`xiaohuandan` | medicine；回复气血 100<br>慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。 | [100% 结算《天刀试炼》](stories/datang.md#datang_tiandao)；[《飞马牧场》「拾取遗落的玉匣」现场获得](stories/datang.md#datang_feima)；[《长安风云》「受仙子赠丹」现场获得](stories/datang.md#datang_changan) |
-| 大还丹<br>`dahuandan` | medicine；回复气血 150<br>传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。 | [孙回春交谈「制作大还丹（止血草×40、干粮×11、150铜钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《兰亭帖》](quests.md#lanting_tie)；[任务《慈航托信》](quests.md#changan_letter)；[任务《唐门谢礼》](quests.md#bashu_thanks)；[任务《狼山商路》](quests.md#saibei_treasure)；[任务《琴师心结》](quests.md#jiangnan_heart)；[任务《诗人的真相》](quests.md#dongdu_truth)；[任务《鲛人之歌》](quests.md#dongming_song)；[《战神殿》「拾取遗落玉盒」现场获得](stories/posui.md#posui_zhanshen)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
-| 狼王刀<br>`langwang_dao` | 兵器；攻击+10、命中+3<br>马贼王赫连霸的佩刀，刀背宽厚，刃口却薄得能吹断头发——边荒十年的风霜都在刀身上。 | [100% 结算《马贼王庭》](stories/bianhuang.md#bianhuang_wangting) |
-| 天魔佩<br>`tianmo_pei` | 戒指；暴击率+3、命中+3<br>厉工退走时遗落的魔门古玉，触手冰凉——佩之能凝神索敌，魔门的旧物未必只属于魔。 | [100% 结算《魔师宫索战》](stories/fuyu.md#fuyu_moshigong) |
-| 瓦岗铁甲<br>`wagang_tiejia` | 衣甲；防御+10、气血上限+50<br>瓦岗军的制式重甲改良而来，甲片层叠如鳞，刀砍上去只留一道白痕。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang) |
-| 天马银铃<br>`tianma_ling` | 项链；防御+4、躲闪+2、先手+3<br>飞马牧场名驹颈间的银铃，铃心坠着一粒墨玉。步履之间铃音清越——恶徒夜里摸进牧场前，总能先听见它响。 | [100% 结算《飞马牧场》](stories/datang.md#datang_feima) |
-| 破碎指环<br>`posui_huan` | 戒指；暴击率+2、命中+4、躲闪+3<br>以战神殿中一块图录碎玉磨成的指环——凝神时，指环里仿佛有雷声滚动。 | [100% 结算《鸡鸣山之约》](stories/posui.md#posui_jiming) |
-| 玄铁战指<br>`xuantie_zhanzhi` | 戒指；攻击+2、防御+4<br>五枚古铜残片回炉重锻的战指，玄铁的凉意渗进指骨——出刀时会稳上几分。 | [钟铁衣交谈「制作玄铁战指（古铜残片×2、200文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith) |
-| 斩马刀<br>`zhanma_dao` | 兵器；攻击+11、命中+2<br>瓦岗阵前斩马用的厚背长刀，刀身上一道深豁——那是砍在铁骑甲上的印记。 | [100% 结算《洛阳粮道》](stories/datang.md#datang_liangdao) |
-| 洞庭软甲<br>`dongting_ruanjia` | 衣甲；防御+12<br>洞庭渔家秘传的软甲，浸过桐油鱼胶，柔如布衣，韧若鳞甲。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling) |
-| 散花玉镯<br>`sanhua_yuzhuo` | 戒指；暴击率+2、躲闪+2<br>散花楼主人的玉镯，镯身刻着细如发丝的天魔纹——戴上它，出手总比旁人快半分。 | [100% 结算《散花楼》](stories/datang.md#datang_sanhua) |
-| 羽裂双刀<br>`yulie_shuangdao` | 兵器；攻击+12<br>方夜羽的新刀——上次败给你之后，他重铸了刀，也重铸了自己的刀路。刃口薄得像一声叹息。 | [100% 结算《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou) |
-| 分水刺<br>`fenshui_ci` | 兵器；攻击+9、暴击率+2<br>水战专用的三棱分水刺，破浪如分水——怒蛟帮水战的看家家伙。 | [100% 结算《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan) |
-| 边荒战靴<br>`bianhuang_xue` | 鞋靴；躲闪+3、防御+6<br>边荒集佣兵头子们凑钱打造的战靴，鞋底钉着狼牙钉——荒漠里跑起来，风都追不上。 | [100% 结算《边荒集夺旗》](stories/bianhuang.md#bianhuang_duoqi) |
-| 镇水环<br>`zhenshui_huan` | 戒指；命中+4、防御+4<br>枯井翁镇了一辈子水的铜环，环身刻满镇字——如今它换了主人，水患换了方向。 | [100% 结算《枯井之下》](stories/luoshui.md#luoshui_kujing) |
-| 蜀锦披风<br>`shujin_pifeng` | 衣甲；防御+13、躲闪+2<br>蜀中织造的锦缎披风，内衬软甲——锦上绣的是巴山夜雨，衬里织的是刀枪不入。 | [100% 结算《蜀道护镖》](stories/datang.md#datang_shudao) |
-| 芦根<br>`reed_root` | material<br>扬州苇荡里挖出的芦根，晒干可入药，药铺按株收。 | [扬州苇荡采集（60%）](worlds.md#labor) |
-| 唐门铁蒺藜<br>`tangmen_tili` | 兵器；攻击+10、暴击率+1<br>唐门秘制的铁蒺藜，淬着见血封喉的药——巴蜀的暗器，天下第一。 | [100% 结算《蜀道栈桥》](stories/datang.md#datang_zhandao) |
-| 狼牙重锏<br>`langya_chui` | 兵器；攻击+13<br>一柄沉重铁锏，适合锏法流派。 | [100% 结算《狼山口》](stories/bianhuang.md#saibei_langshan) |
-| 淬泉剑<br>`jianchi_jian` | 兵器；攻击+12、命中+3、躲闪+2<br>剑池泉底淬了三年的长剑，剑身幽蓝——江南剑客说，好剑是水养出来的。 | [100% 结算《剑池》](stories/luoshui.md#jiangnan_jianchi) |
-| 天津晓月佩<br>`tianjin_yuepei` | 项链；命中+5、躲闪+2、攻击+2<br>以洛阳天津桥晓月为主题的玉佩，玉里封着一线晨光——佩之者心明眼亮，夜战如昼。 | [100% 结算《天津晓月》](stories/luoshui.md#dongdu_tianjin) |
-| 沧溟玉简<br>`cangming_juan` | 项链；内力上限+30、气血上限+30<br>海市主人以千年鲛绡与深海玉髓制成的玉简——据说海上的潮汐，全记在它里面。 | [100% 结算《海市》](stories/luoshui.md#dongming_haisi) |
-| 特级大还丹<br>`tezhong_dahuandan` | medicine；回复气血 300<br>回春堂孙回春倾尽毕生功力炼制的极品大还丹——一粒下去，断骨重续，气血翻涌。 | [孙回春交谈「制作特级大还丹（大还丹×2、干粮×5、300文钱）」](worlds.md#dialogue-dlg_herbalist_sun) |
-| 怒蛟腰带<br>`nujiao_belt` | 衣甲；防御+5、躲闪+2<br>怒蛟帮帮众的制式腰带，扣面是一头昂首的蛟——水战的荣光系于腰间。 | [100% 结算《怒蛟帮夜战》](stories/fuyu.md#fuyu_nujiao) |
-| 惊雁龙鳞甲<br>`jingyan_longscale` | 衣甲；防御+9、招架+3<br>以图录长阶石卫残甲熔铸的龙鳞甲，甲片如龙覆——刀砍上去留不下印。 | [100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan) |
-| 边荒狼皮氅<br>`bianhuang_wolfpelt` | 衣甲；防御+6、躲闪+3<br>白狼主帐前的白狼皮做成的氅衣——穿上它，塞外的风就认得你了。 | [100% 结算《边荒集夺旗》](stories/bianhuang.md#bianhuang_duoqi) |
-| 唐门护手<br>`tangmei_gauntlet` | 戒指；攻击+3、暴击率+2<br>唐门秘制的护手，机关暗扣暗藏其间——握手成拳时，指尖弹出三枚毒针。 | [100% 结算《蜀道栈桥》](stories/datang.md#datang_zhandao) |
-| 散花玉簪<br>`sanhua_flowerpin` | 项链；命中+3、charm+2<br>散花楼主人遗落的玉簪，簪头雕着一朵牡丹——花会谢，玉不会。 | [100% 结算《散花楼》](stories/datang.md#datang_sanhua) |
-| 阴葵莲环<br>`yinkui_lotus` | 戒指；攻击+4、防御+3<br>阴癸派的莲形铜环，环心嵌着一粒黑色珍珠——碰触时，耳边会响起经文。 | [100% 结算《枯井之下》](stories/luoshui.md#luoshui_kujing) |
-| 江潮晶石<br>`changjiang_tidecrystal` | 项链；内力上限+20、命中+3<br>从拦江战台江底捞出的潮汐结晶——握在手里，能听见长江的心跳。 | [100% 结算《拦江一战·残影》](stories/fuyu.md#fuyu_lanjiang) |
-| 狼牙项链<br>`saibei_wolftooth` | 项链；攻击+3、躲闪+2<br>以白狼王的獠牙磨成的项链——塞外人说，它能让主人听懂狼的语言。 | [100% 结算《狼山口》](stories/bianhuang.md#saibei_langshan) |
-| 寒雪刀<br>`hanxue_dao` | 兵器；攻击+12、先手+3<br>塞北铁匠以百炼精钢锻造的弯刀——雪原上的刀，出鞘即带寒气。 | [100% 结算《雪原猎狼》](stories/bianhuang.md#saibei_xueyuan) |
-| 竹梅罗盘<br>`zhumei_luopan` | 戒指；命中+4、躲闪+3<br>江南匠人以百年竹根与寒铁打造的罗盘——指的方向，永远是你心里想去的那个地方。 | [100% 结算《竹海迷踪》](stories/luoshui.md#jiangnan_zhuhai) |
-| 漕运令牌<br>`caoyun_lingpai` | 项链；防御+6、命中+4<br>东都漕运司的鎏金令牌——持此牌者，运河九省通行无阻。 | [100% 结算《漕渠暗战》](stories/luoshui.md#dongdu_caoyu) |
-| 深海寒珠<br>`shenhai_zhenzhu` | 戒指；攻击+5、防御+5<br>东溟海底万丈深处的寒珠，珠心封着一滴鲛人泪——夜战时，它会发出微光。 | [100% 结算《沉船探秘》](stories/luoshui.md#dongming_chuanfen) |
-| 突厥金刀令<br>`kangshi_remnant` | 戒指；攻击+4、命中+4、暴击率+2<br>康鞘利残影崩解后遗落的金刀令——突厥王庭的信物，持此令者可在塞北通行无阻。 | [100% 结算《竟陵试炼殿》](stories/datang.md#jingling_trial_hall) |
-| 天刀遗篇<br>`songque_testament` | 项链；攻击+4、暴击率+2、先手+2<br>宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。 | [100% 结算《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) |
-| 天魔羽<br>`wanwan_feather` | 戒指；躲闪+3、暴击率+2、内力上限+15<br>婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。 | [100% 结算《飞马试炼殿》](stories/datang.md#feima_trial_hall) |
-| 边不负的念珠<br>`bianbuou_wisdom` | 项链；防御+5、命中+3、内力上限+10<br>边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。 | [100% 结算《长安试炼殿》](stories/datang.md#changan_trial_hall) |
-| 宫变密剑<br>`gongbian_jian` | 兵器；攻击+5、暴击率+3、先手+3、躲闪+2<br>宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。 | 未找到当前可达获取入口；资源备注「历史版本东都宫变奖励，仅保留旧档持有；当前不再投放。」尚不足以证明入口已接通 |
-| 运河披风<br>`yunhe_pao` | 衣甲；防御+10、躲闪+3、招架+2、气血上限+30<br>运河船工的桐油披风，防雨防刀，水性好的人离不开它。 | [100% 结算《运河追击》](stories/datang.md#datang_yunhe) |
-| 魔师宫主令珠<br>`moshi_lingzhu` | 戒指；暴击率+4、内力上限+20、攻击+2、命中+2<br>魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。 | [100% 结算《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) |
-| 破碎虚空·悟<br>`zhongjuan_wu` | 项链；攻击+3、防御+3、内力上限+20、躲闪+3、先手+2<br>终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。 | [100% 结算《战神遗境》](stories/posui.md#posui_zhongjuan) |
-| 边荒法典<br>`bianhuang_law` | 衣甲；防御+8、招架+2、命中+3<br>边荒集新立的法典——三百年的无序，终于有了第一页规矩。 | [100% 结算《边荒传奇》](stories/bianhuang.md#bianhuang_chuanqi) |
-| 龙吟珠<br>`longyin_zhu` | 项链；内力上限+25、命中+4、气血上限+40、暴击率+1<br>洛水底的龙吟珠——珠内封着前朝最后一个秘密。 | [100% 结算《洛水龙吟》](stories/luoshui.md#luoshui_longyin) |
-| 盐帮玉佩<br>`yanbang_yupei` | 项链；防御+6、命中+5、暴击率+2、躲闪+2<br>盐帮大当家的玉佩——佩上刻着漕运的水路图。 | [100% 结算《盐帮内乱》](stories/yunhe.md#yangzhou_neiluan) |
-| 唐门宝鉴<br>`tangmen_baojian` | 戒指；暴击率+5、攻击+3、命中+2、防御+2<br>唐门历代暗器谱的总纲——管事说这是唐家坳给外人最高的荣誉。 | [100% 结算《唐门试炼》](stories/yunhe.md#bashu_tangmen_trial) |
-| 狼烟令<br>`langyan_ling` | 戒指；气血上限+20、防御+3、命中+2<br>边军的狼烟令——持此令者，九边烽燧为你而燃。 | [100% 结算《狼烟再起》](stories/bianhuang.md#saibei_langyan) |
-| 江南剑首佩剑<br>`jianshou_jian` | 兵器；攻击+8、命中+5、暴击率+2、躲闪+2<br>二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。 | [100% 结算《剑首之争》](stories/luoshui.md#jiangnan_jianshou) |
-| 行宫密剑<br>`xinggong_jian` | 兵器；攻击+9、暴击率+3<br>行宫惊变奖励。 | [100% 结算《行宫惊变》](stories/datang.md#datang_xinggong) |
-| 浪翻云剑穗<br>`langfan_j` | 项链；攻击+6、命中+4<br>浪翻云试炼奖励。 | [100% 结算《浪翻云试炼》](stories/fuyu.md#fuyu_langfan) |
-| 空明珠<br>`kongming_z` | 戒指；内力上限+30、防御+4<br>破碎空明奖励。 | [100% 结算《破碎空明》](stories/posui.md#posui_kongming) |
-| 绝地护符<br>`jueji_h` | 衣甲；防御+8、气血上限+60<br>边荒绝地奖励。 | [100% 结算《边荒绝地》](stories/bianhuang.md#bianhuang_jueji) |
-| 龙宫宝珠<br>`longgong_z` | 戒指；攻击+5、内力上限+25<br>归墟龙宫奖励。 | [100% 结算《归墟龙宫》](stories/luoshui.md#luoshui_guilou) |
-| 漕运钢刀<br>`yunhe_g` | 兵器；攻击+10、防御+3<br>运河夜战奖励。 | [100% 结算《运河夜战》](stories/yunhe.md#yangzhou_yunhe2) |
-| 唐门毒珠<br>`tangmen_z` | 戒指；暴击率+4、攻击+4<br>唐门天梯奖励。 | [100% 结算《唐门天梯》](stories/yunhe.md#bashu_tangmen2) |
-| 雪岭护符<br>`xueling_h` | 衣甲；防御+7、躲闪+3<br>狼山雪岭奖励。 | [100% 结算《狼山雪岭》](stories/bianhuang.md#saibei_langshan2) |
-| 剑池名剑<br>`jianchi_m` | 兵器；攻击+11、命中+4<br>剑池深处奖励。 | [100% 结算《剑池深处》](stories/luoshui.md#jiangnan_jianchi2) |
-| 神工遗器<br>`shengong_q` | 戒指；攻击+6、防御+6、内力上限+20<br>神工秘殿奖励。 | [100% 结算《神工秘殿》](stories/luoshui.md#dongming_shengong) |
-| 绝壁悬栈遗物<br>`xb2_relic` | 项链；攻击+3、防御+2、内力上限+5<br>绝壁悬栈遗物。 | [100% 结算《绝壁悬栈》](stories/datang.md#datang_xb2) |
-| 寒潭蛟影遗物<br>`ht2_relic` | 衣甲；攻击+3、防御+2、内力上限+7<br>寒潭蛟影遗物。 | [100% 结算《寒潭蛟影》](stories/fuyu.md#fuyu_ht2) |
-| 沙海孤城遗物<br>`sh2_relic` | 戒指；攻击+3、防御+2、内力上限+9<br>沙海孤城遗物。 | [100% 结算《沙海孤城》](stories/posui.md#posui_sh2) |
-| 毒瘴密林遗物<br>`dz2_relic` | 项链；攻击+4、防御+2、内力上限+11<br>毒瘴密林遗物。 | [100% 结算《毒瘴密林》](stories/bianhuang.md#bianhuang_dz2) |
-| 天罡北斗遗物<br>`tg2_relic` | 项链；攻击+4、防御+3、内力上限+13<br>天罡北斗遗物。 | [100% 结算《天罡北斗》](stories/luoshui.md#luoshui_tg2) |
-| 幽冥鬼市遗物<br>`ym2_relic` | 衣甲；攻击+4、防御+3、内力上限+15<br>幽冥鬼市遗物。 | [100% 结算《幽冥鬼市》](stories/yunhe.md#yangzhou_ym2) |
-| 铁血雄关遗物<br>`tx2_relic` | 戒指；攻击+5、防御+3、内力上限+17<br>铁血雄关遗物。 | [100% 结算《铁血雄关》](stories/datang.md#datang_tx2) |
-| 烟雨剑冢遗物<br>`yy2_relic` | 项链；攻击+5、防御+3、内力上限+19<br>烟雨剑冢遗物。 | [100% 结算《烟雨剑冢》](stories/fuyu.md#fuyu_yy2) |
-| 天火熔炉遗物<br>`th2_relic` | 项链；攻击+5、防御+4、内力上限+21<br>天火熔炉遗物。 | [100% 结算《天火熔炉》](stories/posui.md#posui_th2) |
-| 冰封王座遗物<br>`bf2_relic` | 衣甲；攻击+6、防御+4、内力上限+23<br>冰封王座遗物。 | [100% 结算《冰封王座》](stories/bianhuang.md#bianhuang_bf2) |
-| 雷鸣峡谷遗物<br>`lm2_relic` | 戒指；攻击+6、防御+4、内力上限+25<br>雷鸣峡谷遗物。 | [100% 结算《雷鸣峡谷》](stories/luoshui.md#luoshui_lm2) |
-| 苍穹之眼遗物<br>`cj2_relic` | 项链；攻击+6、防御+4、内力上限+27<br>苍穹之眼遗物。 | [100% 结算《苍穹之眼》](stories/yunhe.md#yangzhou_cj2) |
-| 万刃窟遗物<br>`wr2_relic` | 项链；攻击+7、防御+5、内力上限+29<br>万刃窟遗物。 | [100% 结算《万刃窟》](stories/datang.md#datang_wr2) |
-| 幽谷回音遗物<br>`yg2_relic` | 衣甲；攻击+7、防御+5、内力上限+31<br>幽谷回音遗物。 | [100% 结算《幽谷回音》](stories/fuyu.md#fuyu_yg2) |
-| 太虚幻境遗物<br>`tx3_relic` | 戒指；攻击+7、防御+5、内力上限+33<br>太虚幻境遗物。 | [100% 结算《太虚幻境》](stories/posui.md#posui_tx3) |
-| 双龙会信杯<br>`shuanglong_bei` | 戒指；攻击+6、暴击率+3、命中+3<br>双龙会的信物——一对玉杯中的一只。杯底刻着'龙行天下，不胜不归'。持有此杯者，江湖无人敢拦。 | [100% 结算《双龙会》](stories/fuyu.md#shuanglong_hui) |
-| 鬼市账本<br>`guishi_ledger` | 戒指；命中+5、内力上限+15<br>鬼市商人的账本——三百年来的每一笔交易都记在里面。这是财富。 | [《幽冥鬼市》「取走鬼市账本」现场获得](stories/luoshui.md#youming_guishi) |
-| 鬼市玉玺<br>`guishi_jade` | 戒指；防御+5、招架+3<br>鬼市侯爷的玉玺——上面刻着一个早已消失的年号。这是权力。 | [《幽冥鬼市》「取走鬼市玉玺」现场获得](stories/luoshui.md#youming_guishi) |
-| 鬼市冥刀<br>`guishi_blade` | 兵器；攻击+14、暴击率+2<br>鬼市守卫长的冥刀——刀身漆黑，不见反光。这是力量。 | [《幽冥鬼市》「取走鬼市冥刀」现场获得](stories/luoshui.md#youming_guishi) |
-| 北斗星盘<br>`beidou_xingpan` | 戒指；攻击+5、防御+5、命中+5、内力上限+25<br>北斗七星的星盘——七颗星对应七个阵眼，全部点亮即可破阵。星盘背面刻着一行小字：'顺天应人，七星归位。' | [100% 结算《天罡北斗阵》](stories/posui.md#tianbei_beidou) |
-| 丝绸之路全图<br>`silk_road_map` | 戒指；命中+5、先手+4、内力上限+15<br>商队首领三十年积累的丝绸之路全图——从长安到玉门关，每一条水路每一条小道都标得分毫不差。 | [100% 结算《护送商队》](stories/datang.md#silk_road_hugong) |
-| 长生诀秘本<br>`manual_csj_changshengjue` | consumable；使用参悟「长生诀」<br>序47《行宫惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《行宫惊变》](stories/datang.md#datang_xinggong) |
-| 战神图录秘本<br>`manual_jyg_zhanshentu_dao` | consumable；使用参悟「战神图录」<br>序40《战神遗境》（原《战神图录·终卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《战神遗境》](stories/posui.md#posui_zhongjuan) |
-| 天刀八诀秘本<br>`manual_tiandao_blade` | consumable；使用参悟「天刀八诀」<br>序38《天刀试炼殿》满通关，由宋缺授予完整传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) |
-| 奔雷剑法秘本<br>`manual_thunder_sword` | consumable；使用参悟「奔雷剑法」<br>洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | 未找到当前可达获取入口；资源备注「旧版迁移保留；新入门由指定老师传授。」尚不足以证明入口已接通 |
-| 血战刀法秘本<br>`manual_bloody_blade` | consumable；使用参悟「血战刀法」<br>洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | 未找到当前可达获取入口；资源备注「旧版迁移保留；新入门由指定老师传授。」尚不足以证明入口已接通 |
-| 慈航剑典秘本<br>`manual_cihang_jiandian` | consumable；使用参悟「慈航剑典」<br>序40《长安试炼殿》满通关，由师妃暄见证传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《长安试炼殿》](stories/datang.md#changan_trial_hall) |
-| 混元功秘本<br>`manual_hunyuan_neigong` | consumable；使用参悟「混元功」<br>河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | 未找到当前可达获取入口；资源备注「旧版迁移保留；新入门由指定老师传授。」尚不足以证明入口已接通 |
-| 天魔策秘本<br>`manual_tianmo_ce` | consumable；使用参悟「天魔策」<br>序39《魔师宫秘道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) |
-| 踏浪诀秘本<br>`manual_talang_jue` | consumable；使用参悟「踏浪诀」<br>河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | 未找到当前可达获取入口；资源备注「旧版迁移保留；新入门由指定老师传授。」尚不足以证明入口已接通 |
-| 伏虎劲秘本<br>`manual_fuhu_jin` | consumable；使用参悟「伏虎劲」<br>河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | 未找到当前可达获取入口；资源备注「旧版迁移保留；新入门由指定老师传授。」尚不足以证明入口已接通 |
-| 铁壁功秘本<br>`manual_tiebi_gong` | consumable；使用参悟「铁壁功」<br>盐帮分舵·雷万钧的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | 未找到当前可达获取入口；资源备注「旧版迁移保留；新入门由指定老师传授。」尚不足以证明入口已接通 |
-| 悟真篇秘本<br>`manual_wuzhen_pian` | consumable；使用参悟「悟真篇」<br>河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | 未找到当前可达获取入口；资源备注「旧版迁移保留；新入门由指定老师传授。」尚不足以证明入口已接通 |
-| 修罗刀法秘本<br>`manual_xiulou_daofa` | consumable；使用参悟「修罗刀法」<br>序15《马贼王庭》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《马贼王庭》](stories/bianhuang.md#bianhuang_wangting) |
-| 太乙剑法秘本<br>`manual_taiyi_jianfa` | consumable；使用参悟「太乙剑法」<br>序8《竟陵之围》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《竟陵之围》](stories/datang.md#datang_jingling) |
-| 洞庭心法秘本<br>`manual_dongting_xinf` | consumable；使用参悟「洞庭心法」<br>序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling) |
-| 凌虚步秘本<br>`manual_lingxu_bu` | consumable；使用参悟「凌虚步」<br>序20《散花楼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《散花楼》](stories/datang.md#datang_sanhua) |
-| 破虚指秘本<br>`manual_poxu_zhi` | consumable；使用参悟「破虚指」<br>序23《惊雁遗刻》（原《图录·后卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《惊雁遗刻》](stories/posui.md#posui_houjuan) |
-| 霸王枪秘本<br>`manual_bawang_qiang` | consumable；使用参悟「霸王枪」<br>序18《洛阳粮道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《洛阳粮道》](stories/datang.md#datang_liangdao) |
-| 游龙鞭秘本<br>`manual_youlong_bian` | consumable；使用参悟「游龙鞭」<br>序21《方夜羽复仇》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou) |
-| 裂石锏秘本<br>`manual_lieshi_jian` | consumable；使用参悟「裂石锏」<br>序17《瓦岗惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang) |
-| 锁浪钩秘本<br>`manual_suolang_gou` | consumable；使用参悟「锁浪钩」<br>序22《怒蛟水战》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan) |
-| 漫天花雨秘本<br>`manual_mantian_huayu` | consumable；使用参悟「漫天花雨」<br>序44《唐门试炼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《唐门试炼》](stories/yunhe.md#bashu_tangmen_trial) |
-| 疯魔棍秘本<br>`manual_fengmo_gun` | consumable；使用参悟「疯魔棍」<br>序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling) |
-| 踏雪无痕秘本<br>`manual_taxue_wuhen` | consumable；使用参悟「踏雪无痕」<br>序30《剑池》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《剑池》](stories/luoshui.md#jiangnan_jianchi) |
-| 金刚不坏秘本<br>`manual_jingang_buhuai` | consumable；使用参悟「金刚不坏」<br>序37《竟陵试炼殿》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 | [100% 结算《竟陵试炼殿》](stories/datang.md#jingling_trial_hall) |
-| 练习长枪<br>`training_spear` | 兵器；攻击+6<br>练习长枪，适合spear流派修炼。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 练习软鞭<br>`training_whip` | 兵器；攻击+6<br>练习软鞭，适合whip流派修炼。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 练习铁锏<br>`training_mace` | 兵器；攻击+6<br>练习铁锏，适合mace流派修炼。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 练习双钩<br>`training_hook` | 兵器；攻击+6<br>练习双钩，适合hook流派修炼。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 粮道长枪<br>`liangdao_spear` | 兵器；攻击+11、命中+2<br>粮道长枪，适合spear流派修炼。 | [100% 结算《洛阳粮道》](stories/datang.md#datang_liangdao)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 游龙长鞭<br>`youlong_whip` | 兵器；攻击+11、躲闪+2<br>游龙长鞭，适合whip流派修炼。 | [100% 结算《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 裂石铁锏<br>`lieshi_mace` | 兵器；攻击+11、招架+2<br>裂石铁锏，适合mace流派修炼。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 锁浪双钩<br>`suolang_hook` | 兵器；攻击+11、命中+2<br>锁浪双钩，适合hook流派修炼。 | [100% 结算《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 精钢长棍<br>`jinggang_staff` | 兵器；攻击+11、招架+2<br>精钢长棍，适合staff流派修炼。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
-| 宫变夜明珠<br>`gongbian_mingzhu` | 项链；命中+5、内力上限+25、先手+3<br>从乾清宫的密道中取得的夜明珠——珠内封着一缕不灭的火光，像是那晚的宫火永远不会熄灭。 | [100% 结算《东都宫变》](stories/datang.md#datang_gongbian) |
+| 粗布衣<br>`common_clothes` | 衣甲<br>一件耐磨的粗布衣，洛阳城中最常见的行装。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 | [杜掌柜商店](collections.md#shop-east_market_keeper)；[牛金牙商店](collections.md#shop-north_market_broker)；[程盐商商店](collections.md#shop-yz_salt_merchant) |
+| 布鞋<br>`common_shoes` | 鞋靴<br>一双普通布鞋，走城中石板路还算合脚。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 | [杜掌柜商店](collections.md#shop-east_market_keeper)；[牛金牙商店](collections.md#shop-north_market_broker) |
+| 铁剑<br>`iron_sword` | 兵器；攻击+6<br>河洛铁匠打制的铁剑，剑身朴实无华。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 钢刀<br>`steel_blade` | 兵器；攻击+7<br>旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [钟铁衣交谈「制作钢刀（铁剑×1、100文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣交谈「制作钢刀（铁棍×1、150文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 铁棍<br>`iron_staff` | 兵器；攻击+5、招架+2<br>一根沉重铁棍，招式简单，胜在结实。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 飞镖<br>`darts` | 兵器；暴击率+1、攻击+6<br>西市常见的暗器，薄而锋利。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith)；[牛金牙商店](collections.md#shop-north_market_broker)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant) |
+| 铁镐<br>`iron_pickaxe` | tool<br>一把结实铁镐，能用于采石、开箱和清理塌方。【器物线索】可向剑阁驿丞出示，核对《绝壁悬栈》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith)；[创角自带](worlds.md#labor) |
+| 干粮<br>`dry_ration` | consumable；回复气血 5<br>商旅常备的粗粮饼，味道普通，却能充饥。【器物线索】可向陈货郎出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 | [孙回春交谈「出手止血草（×2 换干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《洛水传闻》](quests.md#escort_rumor_run)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[《扬子江惊变》「打捞铁匣」现场获得](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[《鸡鸣山之约》「取走供品箱」现场获得](stories/posui.md#posui_jiming)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[药田老农商店](collections.md#shop-bs_herbalist)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[各采集点（40%）](worlds.md#labor) |
+| 金创药<br>`simple_medicine` | consumable；回复气血 25<br>普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。 | [孙回春交谈「制作金创药（止血草×7、干粮×1）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「付诊金取现货金创药（120铜钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[孙回春交谈「制作金创药（干粮×7）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《烽燧疑警》](quests.md#beacon_signal_case)；[100% 结算《扬子江惊变》](stories/datang.md#datang_changshengjue)；[100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan)；[《洛水风浪》「打捞江底沉箱」现场获得](stories/luoshui.md#liaoshui_lair)；[杜掌柜商店](collections.md#shop-east_market_keeper)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[程盐商商店](collections.md#shop-yz_salt_merchant)；[回鹘马商商店](collections.md#shop-sb_horse_trader)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
+| 烟尘粉<br>`smoke_powder` | consumable；战斗中撤离，不回血<br>战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。【器物线索】可向裴玄出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 | [任务《漕运疑云》](quests.md#salt_smuggling_case)；[任务《流民疑云》](quests.md#refugee_rumor_case)；[任务《漕银失窃》](quests.md#caoyin_case)；[裴玄商店](collections.md#shop-black_market_broker)；[陈货郎商店](collections.md#shop-nan_market_peddler)；[胡商安伽奴商店](collections.md#shop-ca2_west_keeper)；[回鹘马商商店](collections.md#shop-sb_horse_trader) |
+| 旧商路残图<br>`old_map_fragment` | material<br>一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。【器物线索】可向老骆出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 | [老骆交谈「誊取旧商路残图（500铜，本人一次）」](worlds.md#dialogue-dlg_station_luo)；[裴玄商店](collections.md#shop-black_market_broker) |
+| 铜匣拓片<br>`bronze_box_rubbing` | quest<br>拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 | [柳先生交谈「誊取铜匣拓片（800铜，本人一次）」](worlds.md#dialogue-content_npc_academy_teacher)；[裴玄商店](collections.md#shop-black_market_broker) |
+| 染血密信<br>`sealed_letter` | quest<br>信封被雨水浸湿，火漆已碎，仍能看出上面曾有一枚陌生印记。【器物线索】可向韩录事出示，核对《荒庙夜雨》的来历；不消耗，穿戴中也可出示。 | [100% 结算《荒庙夜雨》](stories/luoyang.md#abandoned_temple_rain) |
+| 古铜残片<br>`bronze_fragment` | material<br>一枚带有古怪纹路的铜片，似乎来自某个机关铜匣。【器物线索】可向钟铁衣出示，核对《竟陵之围》的来历；不消耗，穿戴中也可出示。 | [100% 结算《竟陵之围》](stories/datang.md#datang_jingling)；[《鸡鸣山之约》「取走供品箱」现场获得](stories/posui.md#posui_jiming) |
+| 宝库金珠<br>`yg_baoku_pearl` | treasure<br>杨公宝库中的大如龙眼的金珠，鲁妙子的手笔，成色远胜市面珠玉。【器物线索】可向沈七出示，核对《杨公宝库》的来历；不消耗，穿戴中也可出示。 | [100% 结算《杨公宝库》](stories/datang.md#datang_yanggong) |
+| 怒蛟刀<br>`nujiao_saber` | 兵器；攻击+9<br>怒蛟帮帮众的制式快刀，刀势凶悍。【器物线索】可向抚琴女子出示，核对《怒蛟帮夜战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《怒蛟帮夜战》](stories/fuyu.md#fuyu_nujiao) |
+| 杨公宝剑<br>`yanggong_sword` | 兵器；攻击+12、命中+4<br>出自杨公宝库的古剑，剑气内敛，锋锐无匹。【器物线索】可向化度寺知客僧出示，核对《杨公宝库》的来历；不消耗，穿戴中也可出示。 | [100% 结算《杨公宝库》](stories/datang.md#datang_yanggong) |
+| 拦江劲衣<br>`lanjiang_vest` | 衣甲；防御+8、躲闪+3<br>以拦江一战中流传的贴身劲衣，柔韧贴身，避锋藏锐。【器物线索】可向鲁大个出示，核对《拦江一战·残影》的来历；不消耗，穿戴中也可出示。 | [100% 结算《拦江一战·残影》](stories/fuyu.md#fuyu_lanjiang) |
+| 止血草<br>`herb` | material<br>洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。【器物线索】可向药田老农出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [《扬子江惊变》「打捞铁匣」现场获得](stories/datang.md#datang_changshengjue)；[《飞马牧场》「拾取遗落的玉匣」现场获得](stories/datang.md#datang_feima)；[药田老农商店](collections.md#shop-bs_herbalist)；[普通采集点（60%）](worlds.md#labor) |
+| 回春丹<br>`herb_pill` | medicine；回复气血 60<br>回春堂以止血草与干粮配制的伤药，便于携带，一粒可补益气血。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [孙回春交谈「制作回春丹（止血草×15、干粮×4）」](worlds.md#dialogue-dlg_herbalist_sun) |
+| 小还丹<br>`xiaohuandan` | medicine；回复气血 100<br>慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。【器物线索】可向秦校尉出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《天刀试炼》](stories/datang.md#datang_tiandao)；[《飞马牧场》「拾取遗落的玉匣」现场获得](stories/datang.md#datang_feima)；[《长安风云》「受仙子赠丹」现场获得](stories/datang.md#datang_changan) |
+| 大还丹<br>`dahuandan` | medicine；回复气血 150<br>传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 | [孙回春交谈「制作大还丹（止血草×40、干粮×11、150铜钱）」](worlds.md#dialogue-dlg_herbalist_sun)；[任务《兰亭帖》](quests.md#lanting_tie)；[任务《慈航托信》](quests.md#changan_letter)；[任务《唐门谢礼》](quests.md#bashu_thanks)；[任务《狼山商路》](quests.md#saibei_treasure)；[任务《琴师心结》](quests.md#jiangnan_heart)；[任务《诗人的真相》](quests.md#dongdu_truth)；[任务《鲛人之歌》](quests.md#dongming_song)；[《战神殿》「拾取遗落玉盒」现场获得](stories/posui.md#posui_zhanshen)；[锦绸庄主商店](collections.md#shop-dd2_silk_merchant)；[鲛人珠娘商店](collections.md#shop-dm_jiaoren) |
+| 狼王刀<br>`langwang_dao` | 兵器；攻击+10、命中+3<br>马贼王赫连霸的佩刀，刀背宽厚，刃口却薄得能吹断头发——边荒十年的风霜都在刀身上。【器物线索】可向马邑铁匠出示，核对《马贼王庭》的来历；不消耗，穿戴中也可出示。 | [100% 结算《马贼王庭》](stories/bianhuang.md#bianhuang_wangting) |
+| 天魔佩<br>`tianmo_pei` | 戒指；暴击率+3、命中+3<br>厉工退走时遗落的魔门古玉，触手冰凉——佩之能凝神索敌，魔门的旧物未必只属于魔。【器物线索】可向抚琴女子出示，核对《魔师宫索战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《魔师宫索战》](stories/fuyu.md#fuyu_moshigong) |
+| 瓦岗铁甲<br>`wagang_tiejia` | 衣甲；防御+10、气血上限+50<br>瓦岗军的制式重甲改良而来，甲片层叠如鳞，刀砍上去只留一道白痕。【器物线索】可向韩录事出示，核对《瓦岗惊变》的来历；不消耗，穿戴中也可出示。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang) |
+| 天马银铃<br>`tianma_ling` | 项链；防御+4、躲闪+2、先手+3<br>飞马牧场名驹颈间的银铃，铃心坠着一粒墨玉。步履之间铃音清越——恶徒夜里摸进牧场前，总能先听见它响。【器物线索】可向沈七出示，核对《飞马牧场》的来历；不消耗，穿戴中也可出示。 | [100% 结算《飞马牧场》](stories/datang.md#datang_feima) |
+| 破碎指环<br>`posui_huan` | 戒指；暴击率+2、命中+4、躲闪+3<br>以战神殿中一块图录碎玉磨成的指环——凝神时，指环里仿佛有雷声滚动。【器物线索】可向临帖老翁出示，核对《鸡鸣山之约》的来历；不消耗，穿戴中也可出示。 | [100% 结算《鸡鸣山之约》](stories/posui.md#posui_jiming) |
+| 玄铁战指<br>`xuantie_zhanzhi` | 戒指；攻击+2、防御+4<br>五枚古铜残片回炉重锻的战指，玄铁的凉意渗进指骨——出刀时会稳上几分。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [钟铁衣交谈「制作玄铁战指（古铜残片×2、200文钱）」](worlds.md#dialogue-dlg_heluo_blacksmith) |
+| 斩马刀<br>`zhanma_dao` | 兵器；攻击+11、命中+2<br>瓦岗阵前斩马用的厚背长刀，刀身上一道深豁——那是砍在铁骑甲上的印记。【器物线索】可向化度寺知客僧出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。 | [100% 结算《洛阳粮道》](stories/datang.md#datang_liangdao) |
+| 洞庭软甲<br>`dongting_ruanjia` | 衣甲；防御+12<br>洞庭渔家秘传的软甲，浸过桐油鱼胶，柔如布衣，韧若鳞甲。【器物线索】可向钟铁衣出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling) |
+| 散花玉镯<br>`sanhua_yuzhuo` | 戒指；暴击率+2、躲闪+2<br>散花楼主人的玉镯，镯身刻着细如发丝的天魔纹——戴上它，出手总比旁人快半分。【器物线索】可向韩录事出示，核对《散花楼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《散花楼》](stories/datang.md#datang_sanhua) |
+| 羽裂双刀<br>`yulie_shuangdao` | 兵器；攻击+12<br>方夜羽的新刀——上次败给你之后，他重铸了刀，也重铸了自己的刀路。刃口薄得像一声叹息。【器物线索】可向抚琴女子出示，核对《方夜羽复仇》的来历；不消耗，穿戴中也可出示。 | [100% 结算《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou) |
+| 分水刺<br>`fenshui_ci` | 兵器；攻击+9、暴击率+2<br>水战专用的三棱分水刺，破浪如分水——怒蛟帮水战的看家家伙。【器物线索】可向许说书出示，核对《怒蛟水战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan) |
+| 边荒战靴<br>`bianhuang_xue` | 鞋靴；躲闪+3、防御+6<br>边荒集佣兵头子们凑钱打造的战靴，鞋底钉着狼牙钉——荒漠里跑起来，风都追不上。【器物线索】可向赵关山出示，核对《边荒集夺旗》的来历；不消耗，穿戴中也可出示。 | [100% 结算《边荒集夺旗》](stories/bianhuang.md#bianhuang_duoqi) |
+| 镇水环<br>`zhenshui_huan` | 戒指；命中+4、防御+4<br>枯井翁镇了一辈子水的铜环，环身刻满镇字——如今它换了主人，水患换了方向。【器物线索】可向落魄诗人出示，核对《枯井之下》的来历；不消耗，穿戴中也可出示。 | [100% 结算《枯井之下》](stories/luoshui.md#luoshui_kujing) |
+| 蜀锦披风<br>`shujin_pifeng` | 衣甲；防御+13、躲闪+2<br>蜀中织造的锦缎披风，内衬软甲——锦上绣的是巴山夜雨，衬里织的是刀枪不入。【器物线索】可向钟铁衣出示，核对《蜀道护镖》的来历；不消耗，穿戴中也可出示。 | [100% 结算《蜀道护镖》](stories/datang.md#datang_shudao) |
+| 芦根<br>`reed_root` | material<br>扬州苇荡里挖出的芦根，晒干可入药，药铺按株收。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [扬州苇荡采集（60%）](worlds.md#labor) |
+| 唐门铁蒺藜<br>`tangmen_tili` | 兵器；攻击+10、暴击率+1<br>唐门秘制的铁蒺藜，淬着见血封喉的药——巴蜀的暗器，天下第一。【器物线索】可向沈七出示，核对《蜀道栈桥》的来历；不消耗，穿戴中也可出示。 | [100% 结算《蜀道栈桥》](stories/datang.md#datang_zhandao) |
+| 狼牙重锏<br>`langya_chui` | 兵器；攻击+13<br>一柄沉重铁锏，适合锏法流派。【器物线索】可向马邑铁匠出示，核对《狼山口》的来历；不消耗，穿戴中也可出示。 | [100% 结算《狼山口》](stories/bianhuang.md#saibei_langshan) |
+| 淬泉剑<br>`jianchi_jian` | 兵器；攻击+12、命中+3、躲闪+2<br>剑池泉底淬了三年的长剑，剑身幽蓝——江南剑客说，好剑是水养出来的。【器物线索】可向江南绸商出示，核对《剑池》的来历；不消耗，穿戴中也可出示。 | [100% 结算《剑池》](stories/luoshui.md#jiangnan_jianchi) |
+| 天津晓月佩<br>`tianjin_yuepei` | 项链；命中+5、躲闪+2、攻击+2<br>以洛阳天津桥晓月为主题的玉佩，玉里封着一线晨光——佩之者心明眼亮，夜战如昼。【器物线索】可向钟铁衣出示，核对《天津晓月》的来历；不消耗，穿戴中也可出示。 | [100% 结算《天津晓月》](stories/luoshui.md#dongdu_tianjin) |
+| 沧溟玉简<br>`cangming_juan` | 项链；内力上限+30、气血上限+30<br>海市主人以千年鲛绡与深海玉髓制成的玉简——据说海上的潮汐，全记在它里面。【器物线索】可向鲛人珠娘出示，核对《海市》的来历；不消耗，穿戴中也可出示。 | [100% 结算《海市》](stories/luoshui.md#dongming_haisi) |
+| 特级大还丹<br>`tezhong_dahuandan` | medicine；回复气血 300<br>回春堂孙回春倾尽毕生功力炼制的极品大还丹——一粒下去，断骨重续，气血翻涌。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 | [孙回春交谈「制作特级大还丹（大还丹×2、干粮×5、300文钱）」](worlds.md#dialogue-dlg_herbalist_sun) |
+| 怒蛟腰带<br>`nujiao_belt` | 衣甲；防御+5、躲闪+2<br>怒蛟帮帮众的制式腰带，扣面是一头昂首的蛟——水战的荣光系于腰间。【器物线索】可向抚琴女子出示，核对《怒蛟帮夜战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《怒蛟帮夜战》](stories/fuyu.md#fuyu_nujiao) |
+| 惊雁龙鳞甲<br>`jingyan_longscale` | 衣甲；防御+9、招架+3<br>以图录长阶石卫残甲熔铸的龙鳞甲，甲片如龙覆——刀砍上去留不下印。【器物线索】可向灰袍老者出示，核对《惊雁宫夺图》的来历；不消耗，穿戴中也可出示。 | [100% 结算《惊雁宫夺图》](stories/posui.md#posui_jingyan) |
+| 边荒狼皮氅<br>`bianhuang_wolfpelt` | 衣甲；防御+6、躲闪+3<br>白狼主帐前的白狼皮做成的氅衣——穿上它，塞外的风就认得你了。【器物线索】可向赵关山出示，核对《边荒集夺旗》的来历；不消耗，穿戴中也可出示。 | [100% 结算《边荒集夺旗》](stories/bianhuang.md#bianhuang_duoqi) |
+| 唐门护手<br>`tangmei_gauntlet` | 戒指；攻击+3、暴击率+2<br>唐门秘制的护手，机关暗扣暗藏其间——握手成拳时，指尖弹出三枚毒针。【器物线索】可向化度寺知客僧出示，核对《蜀道栈桥》的来历；不消耗，穿戴中也可出示。 | [100% 结算《蜀道栈桥》](stories/datang.md#datang_zhandao) |
+| 散花玉簪<br>`sanhua_flowerpin` | 项链；命中+3、charm+2<br>散花楼主人遗落的玉簪，簪头雕着一朵牡丹——花会谢，玉不会。【器物线索】可向钟铁衣出示，核对《散花楼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《散花楼》](stories/datang.md#datang_sanhua) |
+| 阴葵莲环<br>`yinkui_lotus` | 戒指；攻击+4、防御+3<br>阴癸派的莲形铜环，环心嵌着一粒黑色珍珠——碰触时，耳边会响起经文。【器物线索】可向二十四桥船娘出示，核对《枯井之下》的来历；不消耗，穿戴中也可出示。 | [100% 结算《枯井之下》](stories/luoshui.md#luoshui_kujing) |
+| 江潮晶石<br>`changjiang_tidecrystal` | 项链；内力上限+20、命中+3<br>从拦江战台江底捞出的潮汐结晶——握在手里，能听见长江的心跳。【器物线索】可向鲁大个出示，核对《拦江一战·残影》的来历；不消耗，穿戴中也可出示。 | [100% 结算《拦江一战·残影》](stories/fuyu.md#fuyu_lanjiang) |
+| 狼牙项链<br>`saibei_wolftooth` | 项链；攻击+3、躲闪+2<br>以白狼王的獠牙磨成的项链——塞外人说，它能让主人听懂狼的语言。【器物线索】可向马邑铁匠出示，核对《狼山口》的来历；不消耗，穿戴中也可出示。 | [100% 结算《狼山口》](stories/bianhuang.md#saibei_langshan) |
+| 寒雪刀<br>`hanxue_dao` | 兵器；攻击+12、先手+3<br>塞北铁匠以百炼精钢锻造的弯刀——雪原上的刀，出鞘即带寒气。【器物线索】可向雪线领路人出示，核对《雪原猎狼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《雪原猎狼》](stories/bianhuang.md#saibei_xueyuan) |
+| 竹梅罗盘<br>`zhumei_luopan` | 戒指；命中+4、躲闪+3<br>江南匠人以百年竹根与寒铁打造的罗盘——指的方向，永远是你心里想去的那个地方。【器物线索】可向守池人出示，核对《竹海迷踪》的来历；不消耗，穿戴中也可出示。 | [100% 结算《竹海迷踪》](stories/luoshui.md#jiangnan_zhuhai) |
+| 漕运令牌<br>`caoyun_lingpai` | 项链；防御+6、命中+4<br>东都漕运司的鎏金令牌——持此牌者，运河九省通行无阻。【器物线索】可向赵横江出示，核对《漕渠暗战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《漕渠暗战》](stories/luoshui.md#dongdu_caoyu) |
+| 深海寒珠<br>`shenhai_zhenzhu` | 戒指；攻击+5、防御+5<br>东溟海底万丈深处的寒珠，珠心封着一滴鲛人泪——夜战时，它会发出微光。【器物线索】可向守阁人出示，核对《沉船探秘》的来历；不消耗，穿戴中也可出示。 | [100% 结算《沉船探秘》](stories/luoshui.md#dongming_chuanfen) |
+| 突厥金刀令<br>`kangshi_remnant` | 戒指；攻击+4、命中+4、暴击率+2<br>康鞘利残影崩解后遗落的金刀令——突厥王庭的信物，持此令者可在塞北通行无阻。【器物线索】可向孙回春出示，核对《竟陵试炼殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《竟陵试炼殿》](stories/datang.md#jingling_trial_hall) |
+| 天刀遗篇<br>`songque_testament` | 项链；攻击+4、暴击率+2、先手+2<br>宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。【器物线索】可向钟铁衣出示，核对《天刀试炼殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) |
+| 天魔羽<br>`wanwan_feather` | 戒指；躲闪+3、暴击率+2、内力上限+15<br>婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。【器物线索】可向赵横江出示，核对《飞马试炼殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《飞马试炼殿》](stories/datang.md#feima_trial_hall) |
+| 边不负的念珠<br>`bianbuou_wisdom` | 项链；防御+5、命中+3、内力上限+10<br>边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。【器物线索】可向柳先生出示，核对《长安试炼殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《长安试炼殿》](stories/datang.md#changan_trial_hall) |
+| 宫变密剑<br>`gongbian_jian` | 兵器；攻击+5、暴击率+3、先手+3、躲闪+2<br>宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [钟铁衣交谈「以宫变夜明珠改铸宫变密剑（交出凭证，单次）」](worlds.md#dialogue-dlg_heluo_blacksmith) |
+| 运河披风<br>`yunhe_pao` | 衣甲；防御+10、躲闪+3、招架+2、气血上限+30<br>运河船工的桐油披风，防雨防刀，水性好的人离不开它。【器物线索】可向韩录事出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。 | [100% 结算《运河追击》](stories/datang.md#datang_yunhe) |
+| 魔师宫主令珠<br>`moshi_lingzhu` | 戒指；暴击率+4、内力上限+20、攻击+2、命中+2<br>魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。【器物线索】可向鲁大个出示，核对《魔师宫秘道》的来历；不消耗，穿戴中也可出示。 | [100% 结算《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) |
+| 破碎虚空·悟<br>`zhongjuan_wu` | 项链；攻击+3、防御+3、内力上限+20、躲闪+3、先手+2<br>终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。【器物线索】可向临帖老翁出示，核对《战神遗境》的来历；不消耗，穿戴中也可出示。 | [100% 结算《战神遗境》](stories/posui.md#posui_zhongjuan) |
+| 边荒法典<br>`bianhuang_law` | 衣甲；防御+8、招架+2、命中+3<br>边荒集新立的法典——三百年的无序，终于有了第一页规矩。【器物线索】可向塞北斥候长出示，核对《边荒传奇》的来历；不消耗，穿戴中也可出示。 | [100% 结算《边荒传奇》](stories/bianhuang.md#bianhuang_chuanqi) |
+| 龙吟珠<br>`longyin_zhu` | 项链；内力上限+25、命中+4、气血上限+40、暴击率+1<br>洛水底的龙吟珠——珠内封着前朝最后一个秘密。【器物线索】可向二十四桥船娘出示，核对《洛水龙吟》的来历；不消耗，穿戴中也可出示。 | [100% 结算《洛水龙吟》](stories/luoshui.md#luoshui_longyin) |
+| 盐帮玉佩<br>`yanbang_yupei` | 项链；防御+6、命中+5、暴击率+2、躲闪+2<br>盐帮大当家的玉佩——佩上刻着漕运的水路图。【器物线索】可向程盐商出示，核对《盐帮内乱》的来历；不消耗，穿戴中也可出示。 | [100% 结算《盐帮内乱》](stories/yunhe.md#yangzhou_neiluan) |
+| 唐门宝鉴<br>`tangmen_baojian` | 戒指；暴击率+5、攻击+3、命中+2、防御+2<br>唐门历代暗器谱的总纲——管事说这是唐家坳给外人最高的荣誉。【器物线索】可向剑阁驿丞出示，核对《唐门试炼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《唐门试炼》](stories/yunhe.md#bashu_tangmen_trial) |
+| 狼烟令<br>`langyan_ling` | 戒指；气血上限+20、防御+3、命中+2<br>边军的狼烟令——持此令者，九边烽燧为你而燃。【器物线索】可向雪线领路人出示，核对《狼烟再起》的来历；不消耗，穿戴中也可出示。 | [100% 结算《狼烟再起》](stories/bianhuang.md#saibei_langyan) |
+| 江南剑首佩剑<br>`jianshou_jian` | 兵器；攻击+8、命中+5、暴击率+2、躲闪+2<br>二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。【器物线索】可向守池人出示，核对《剑首之争》的来历；不消耗，穿戴中也可出示。 | [100% 结算《剑首之争》](stories/luoshui.md#jiangnan_jianshou) |
+| 行宫密剑<br>`xinggong_jian` | 兵器；攻击+9、暴击率+3<br>行宫惊变奖励。【器物线索】可向落魄诗人出示，核对《行宫惊变》的来历；不消耗，穿戴中也可出示。 | [100% 结算《行宫惊变》](stories/datang.md#datang_xinggong) |
+| 浪翻云剑穗<br>`langfan_j` | 项链；攻击+6、命中+4<br>浪翻云试炼奖励。【器物线索】可向秦三娘出示，核对《浪翻云试炼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《浪翻云试炼》](stories/fuyu.md#fuyu_langfan) |
+| 空明珠<br>`kongming_z` | 戒指；内力上限+30、防御+4<br>破碎空明奖励。【器物线索】可向东海渔隐出示，核对《破碎空明》的来历；不消耗，穿戴中也可出示。 | [100% 结算《破碎空明》](stories/posui.md#posui_kongming) |
+| 绝地护符<br>`jueji_h` | 衣甲；防御+8、气血上限+60<br>边荒绝地奖励。【器物线索】可向李百夫长出示，核对《边荒绝地》的来历；不消耗，穿戴中也可出示。 | [100% 结算《边荒绝地》](stories/bianhuang.md#bianhuang_jueji) |
+| 龙宫宝珠<br>`longgong_z` | 戒指；攻击+5、内力上限+25<br>归墟龙宫奖励。【器物线索】可向采珠人出示，核对《归墟龙宫》的来历；不消耗，穿戴中也可出示。 | [100% 结算《归墟龙宫》](stories/luoshui.md#luoshui_guilou) |
+| 漕运钢刀<br>`yunhe_g` | 兵器；攻击+10、防御+3<br>运河夜战奖励。【器物线索】可向扬州茶博士出示，核对《运河夜战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《运河夜战》](stories/yunhe.md#yangzhou_yunhe2) |
+| 唐门毒珠<br>`tangmen_z` | 戒指；暴击率+4、攻击+4<br>唐门天梯奖励。【器物线索】可向巴蜀酒娘出示，核对《唐门天梯》的来历；不消耗，穿戴中也可出示。 | [100% 结算《唐门天梯》](stories/yunhe.md#bashu_tangmen2) |
+| 雪岭护符<br>`xueling_h` | 衣甲；防御+7、躲闪+3<br>狼山雪岭奖励。【器物线索】可向回鹘马商出示，核对《狼山雪岭》的来历；不消耗，穿戴中也可出示。 | [100% 结算《狼山雪岭》](stories/bianhuang.md#saibei_langshan2) |
+| 剑池名剑<br>`jianchi_m` | 兵器；攻击+11、命中+4<br>剑池深处奖励。【器物线索】可向抚琴女子出示，核对《剑池深处》的来历；不消耗，穿戴中也可出示。 | [100% 结算《剑池深处》](stories/luoshui.md#jiangnan_jianchi2) |
+| 神工遗器<br>`shengong_q` | 戒指；攻击+6、防御+6、内力上限+20<br>神工秘殿奖励。【器物线索】可向守阁人出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《神工秘殿》](stories/luoshui.md#dongming_shengong) |
+| 断索铜扣<br>`xb2_relic` | 项链；攻击+3、防御+2、内力上限+5<br>绝壁悬栈遗物。【器物线索】可向沈七出示，核对《绝壁悬栈》的来历；不消耗，穿戴中也可出示。 | [100% 结算《绝壁悬栈》](stories/datang.md#datang_xb2) |
+| 寒潭鳞氅<br>`ht2_relic` | 衣甲；攻击+3、防御+2、内力上限+7<br>寒潭蛟影遗物。【器物线索】可向许说书出示，核对《寒潭蛟影》的来历；不消耗，穿戴中也可出示。 | [100% 结算《寒潭蛟影》](stories/fuyu.md#fuyu_ht2) |
+| 无水砂戒<br>`sh2_relic` | 戒指；攻击+3、防御+2、内力上限+9<br>沙海孤城遗物。【器物线索】可向柳先生出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。 | [100% 结算《沙海孤城》](stories/posui.md#posui_sh2) |
+| 青苔试瘴佩<br>`dz2_relic` | 项链；攻击+4、防御+2、内力上限+11<br>毒瘴密林遗物。【器物线索】可向马邑铁匠出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [100% 结算《毒瘴密林》](stories/bianhuang.md#bianhuang_dz2) |
+| 逆影星坠<br>`tg2_relic` | 项链；攻击+4、防御+3、内力上限+13<br>天罡北斗遗物。【器物线索】可向鲛人珠娘出示，核对《天罡北斗》的来历；不消耗，穿戴中也可出示。 | [100% 结算《天罡北斗》](stories/luoshui.md#luoshui_tg2) |
+| 无名契衣<br>`ym2_relic` | 衣甲；攻击+4、防御+3、内力上限+15<br>幽冥鬼市遗物。【器物线索】可向盐运司书办出示，核对《幽冥鬼市》的来历；不消耗，穿戴中也可出示。 | [100% 结算《幽冥鬼市》](stories/yunhe.md#yangzhou_ym2) |
+| 铁血关印<br>`tx2_relic` | 戒指；攻击+5、防御+3、内力上限+17<br>铁血雄关遗物。【器物线索】可向沈七出示，核对《铁血雄关》的来历；不消耗，穿戴中也可出示。 | [100% 结算《铁血雄关》](stories/datang.md#datang_tx2) |
+| 雨痕剑铭<br>`yy2_relic` | 项链；攻击+5、防御+3、内力上限+19<br>烟雨剑冢遗物。【器物线索】可向秦三娘出示，核对《烟雨剑冢》的来历；不消耗，穿戴中也可出示。 | [100% 结算《烟雨剑冢》](stories/fuyu.md#fuyu_yy2) |
+| 余烬炉心<br>`th2_relic` | 项链；攻击+5、防御+4、内力上限+21<br>天火熔炉遗物。【器物线索】可向东海渔隐出示，核对《天火熔炉》的来历；不消耗，穿戴中也可出示。 | [100% 结算《天火熔炉》](stories/posui.md#posui_th2) |
+| 无冠冰氅<br>`bf2_relic` | 衣甲；攻击+6、防御+4、内力上限+23<br>冰封王座遗物。【器物线索】可向李百夫长出示，核对《冰封王座》的来历；不消耗，穿戴中也可出示。 | [100% 结算《冰封王座》](stories/bianhuang.md#bianhuang_bf2) |
+| 静电石环<br>`lm2_relic` | 戒指；攻击+6、防御+4、内力上限+25<br>雷鸣峡谷遗物。【器物线索】可向采珠人出示，核对《雷鸣峡谷》的来历；不消耗，穿戴中也可出示。 | [100% 结算《雷鸣峡谷》](stories/luoshui.md#luoshui_lm2) |
+| 留白瞳镜<br>`cj2_relic` | 项链；攻击+6、防御+4、内力上限+27<br>苍穹之眼遗物。【器物线索】可向扬州茶博士出示，核对《苍穹之眼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《苍穹之眼》](stories/yunhe.md#yangzhou_cj2) |
+| 退锋铜尺<br>`wr2_relic` | 项链；攻击+7、防御+5、内力上限+29<br>万刃窟遗物。【器物线索】可向沈七出示，核对《万刃窟》的来历；不消耗，穿戴中也可出示。 | [100% 结算《万刃窟》](stories/datang.md#datang_wr2) |
+| 归声护衣<br>`yg2_relic` | 衣甲；攻击+7、防御+5、内力上限+31<br>幽谷回音遗物。【器物线索】可向许说书出示，核对《幽谷回音》的来历；不消耗，穿戴中也可出示。 | [100% 结算《幽谷回音》](stories/fuyu.md#fuyu_yg2) |
+| 两生旧佩<br>`tx3_relic` | 戒指；攻击+7、防御+5、内力上限+33<br>太虚幻境遗物。【器物线索】可向柳先生出示，核对《太虚幻境》的来历；不消耗，穿戴中也可出示。 | [100% 结算《太虚幻境》](stories/posui.md#posui_tx3) |
+| 双龙会信杯<br>`shuanglong_bei` | 戒指；攻击+6、暴击率+3、命中+3<br>双龙会的信物——一对玉杯中的一只。杯底刻着'龙行天下，不胜不归'。持有此杯者，江湖无人敢拦。【器物线索】可向柳先生出示，核对《双龙会》的来历；不消耗，穿戴中也可出示。 | [100% 结算《双龙会》](stories/fuyu.md#shuanglong_hui) |
+| 鬼市账本<br>`guishi_ledger` | 戒指；命中+5、内力上限+15<br>鬼市商人的账本——三百年来的每一笔交易都记在里面。这是财富。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [《幽冥鬼市》「取走鬼市账本」现场获得](stories/luoshui.md#youming_guishi) |
+| 鬼市玉玺<br>`guishi_jade` | 戒指；防御+5、招架+3<br>鬼市侯爷的玉玺——上面刻着一个早已消失的年号。这是权力。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。 | [《幽冥鬼市》「取走鬼市玉玺」现场获得](stories/luoshui.md#youming_guishi) |
+| 鬼市冥刀<br>`guishi_blade` | 兵器；攻击+14、暴击率+2<br>鬼市守卫长的冥刀——刀身漆黑，不见反光。这是力量。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 | [《幽冥鬼市》「取走鬼市冥刀」现场获得](stories/luoshui.md#youming_guishi) |
+| 北斗星盘<br>`beidou_xingpan` | 戒指；攻击+5、防御+5、命中+5、内力上限+25<br>北斗七星的星盘——七颗星对应七个阵眼，全部点亮即可破阵。星盘背面刻着一行小字：'顺天应人，七星归位。'【器物线索】可向柳先生出示，核对《天罡北斗阵》的来历；不消耗，穿戴中也可出示。 | [100% 结算《天罡北斗阵》](stories/posui.md#tianbei_beidou) |
+| 丝绸之路全图<br>`silk_road_map` | 戒指；命中+5、先手+4、内力上限+15<br>商队首领三十年积累的丝绸之路全图——从长安到玉门关，每一条水路每一条小道都标得分毫不差。【器物线索】可向孙回春出示，核对《护送商队》的来历；不消耗，穿戴中也可出示。 | [100% 结算《护送商队》](stories/datang.md#silk_road_hugong) |
+| 长生诀秘本<br>`manual_csj_changshengjue` | consumable；使用参悟「长生诀」<br>序47《行宫惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向化度寺知客僧出示，核对《行宫惊变》的来历；不消耗，穿戴中也可出示。 | [100% 结算《行宫惊变》](stories/datang.md#datang_xinggong) |
+| 战神图录秘本<br>`manual_jyg_zhanshentu_dao` | consumable；使用参悟「战神图录」<br>序40《战神遗境》（原《战神图录·终卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《战神遗境》的来历；不消耗，穿戴中也可出示。 | [100% 结算《战神遗境》](stories/posui.md#posui_zhongjuan) |
+| 天刀八诀秘本<br>`manual_tiandao_blade` | consumable；使用参悟「天刀八诀」<br>序38《天刀试炼殿》满通关，由宋缺授予完整传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《天刀试炼殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《天刀试炼殿》](stories/datang.md#tiandao_trial_hall) |
+| 奔雷剑法秘本<br>`manual_thunder_sword` | consumable；使用参悟「奔雷剑法」<br>洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦校尉出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。 | [秦校尉交谈「誊录已学的奔雷剑法，留作比对」](worlds.md#dialogue-content_npc_military_instructor) |
+| 血战刀法秘本<br>`manual_bloody_blade` | consumable；使用参悟「血战刀法」<br>洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦校尉出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。 | [秦校尉交谈「誊录已学的血战刀法，留作比对」](worlds.md#dialogue-content_npc_military_instructor) |
+| 慈航剑典秘本<br>`manual_cihang_jiandian` | consumable；使用参悟「慈航剑典」<br>序40《长安试炼殿》满通关，由师妃暄见证传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向赵横江出示，核对《长安试炼殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《长安试炼殿》](stories/datang.md#changan_trial_hall) |
+| 混元功秘本<br>`manual_hunyuan_neigong` | consumable；使用参悟「混元功」<br>河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 | [柳先生交谈「誊录已学的混元功，留作比对」](worlds.md#dialogue-content_npc_academy_teacher) |
+| 天魔策秘本<br>`manual_tianmo_ce` | consumable；使用参悟「天魔策」<br>序39《魔师宫秘道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向抚琴女子出示，核对《魔师宫秘道》的来历；不消耗，穿戴中也可出示。 | [100% 结算《魔师宫秘道》](stories/fuyu.md#fuyu_mishi) |
+| 踏浪诀秘本<br>`manual_talang_jue` | consumable；使用参悟「踏浪诀」<br>河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 | [赵横江交谈「誊录已学的踏浪诀，留作比对」](worlds.md#dialogue-content_npc_weapon_school_master) |
+| 伏虎劲秘本<br>`manual_fuhu_jin` | consumable；使用参悟「伏虎劲」<br>河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 | [赵横江交谈「誊录已学的伏虎劲，留作比对」](worlds.md#dialogue-content_npc_weapon_school_master) |
+| 铁壁功秘本<br>`manual_tiebi_gong` | consumable；使用参悟「铁壁功」<br>盐帮分舵·雷万钧的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向雷万钧出示，核对《盐帮内乱》的来历；不消耗，穿戴中也可出示。 | [雷万钧交谈「誊录已学的铁壁功，留作比对」](worlds.md#dialogue-dlg_salt_hall) |
+| 悟真篇秘本<br>`manual_wuzhen_pian` | consumable；使用参悟「悟真篇」<br>河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 | [柳先生交谈「誊录已学的悟真篇，留作比对」](worlds.md#dialogue-content_npc_academy_teacher) |
+| 修罗刀法秘本<br>`manual_xiulou_daofa` | consumable；使用参悟「修罗刀法」<br>序15《马贼王庭》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向李百夫长出示，核对《马贼王庭》的来历；不消耗，穿戴中也可出示。 | [100% 结算《马贼王庭》](stories/bianhuang.md#bianhuang_wangting) |
+| 太乙剑法秘本<br>`manual_taiyi_jianfa` | consumable；使用参悟「太乙剑法」<br>序8《竟陵之围》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向钟铁衣出示，核对《竟陵之围》的来历；不消耗，穿戴中也可出示。 | [100% 结算《竟陵之围》](stories/datang.md#datang_jingling) |
+| 洞庭心法秘本<br>`manual_dongting_xinf` | consumable；使用参悟「洞庭心法」<br>序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向韩录事出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling) |
+| 凌虚步秘本<br>`manual_lingxu_bu` | consumable；使用参悟「凌虚步」<br>序20《散花楼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向沈七出示，核对《散花楼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《散花楼》](stories/datang.md#datang_sanhua) |
+| 破虚指秘本<br>`manual_poxu_zhi` | consumable；使用参悟「破虚指」<br>序23《惊雁遗刻》（原《图录·后卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向灰袍老者出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 | [100% 结算《惊雁遗刻》](stories/posui.md#posui_houjuan) |
+| 霸王枪秘本<br>`manual_bawang_qiang` | consumable；使用参悟「霸王枪」<br>序18《洛阳粮道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向落魄诗人出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。 | [100% 结算《洛阳粮道》](stories/datang.md#datang_liangdao) |
+| 游龙鞭秘本<br>`manual_youlong_bian` | consumable；使用参悟「游龙鞭」<br>序21《方夜羽复仇》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦三娘出示，核对《方夜羽复仇》的来历；不消耗，穿戴中也可出示。 | [100% 结算《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou) |
+| 裂石锏秘本<br>`manual_lieshi_jian` | consumable；使用参悟「裂石锏」<br>序17《瓦岗惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向钟铁衣出示，核对《瓦岗惊变》的来历；不消耗，穿戴中也可出示。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang) |
+| 锁浪钩秘本<br>`manual_suolang_gou` | consumable；使用参悟「锁浪钩」<br>序22《怒蛟水战》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向许说书出示，核对《怒蛟水战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan) |
+| 漫天花雨秘本<br>`manual_mantian_huayu` | consumable；使用参悟「漫天花雨」<br>序44《唐门试炼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向药田老农出示，核对《唐门试炼》的来历；不消耗，穿戴中也可出示。 | [100% 结算《唐门试炼》](stories/yunhe.md#bashu_tangmen_trial) |
+| 疯魔棍秘本<br>`manual_fengmo_gun` | consumable；使用参悟「疯魔棍」<br>序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦校尉出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling) |
+| 踏雪无痕秘本<br>`manual_taxue_wuhen` | consumable；使用参悟「踏雪无痕」<br>序30《剑池》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向江南绸商出示，核对《剑池》的来历；不消耗，穿戴中也可出示。 | [100% 结算《剑池》](stories/luoshui.md#jiangnan_jianchi) |
+| 金刚不坏秘本<br>`manual_jingang_buhuai` | consumable；使用参悟「金刚不坏」<br>序37《竟陵试炼殿》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向钟铁衣出示，核对《竟陵试炼殿》的来历；不消耗，穿戴中也可出示。 | [100% 结算《竟陵试炼殿》](stories/datang.md#jingling_trial_hall) |
+| 练习长枪<br>`training_spear` | 兵器；攻击+6<br>练习长枪，适合spear流派修炼。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 练习软鞭<br>`training_whip` | 兵器；攻击+6<br>练习软鞭，适合whip流派修炼。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 练习铁锏<br>`training_mace` | 兵器；攻击+6<br>练习铁锏，适合mace流派修炼。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 练习双钩<br>`training_hook` | 兵器；攻击+6<br>练习双钩，适合hook流派修炼。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。 | [钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 粮道长枪<br>`liangdao_spear` | 兵器；攻击+11、命中+2<br>粮道长枪，适合spear流派修炼。【器物线索】可向落魄诗人出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。 | [100% 结算《洛阳粮道》](stories/datang.md#datang_liangdao)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 游龙长鞭<br>`youlong_whip` | 兵器；攻击+11、躲闪+2<br>游龙长鞭，适合whip流派修炼。【器物线索】可向秦三娘出示，核对《方夜羽复仇》的来历；不消耗，穿戴中也可出示。 | [100% 结算《方夜羽复仇》](stories/fuyu.md#fuyu_fangfuchou)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 裂石铁锏<br>`lieshi_mace` | 兵器；攻击+11、招架+2<br>裂石铁锏，适合mace流派修炼。【器物线索】可向钟铁衣出示，核对《瓦岗惊变》的来历；不消耗，穿戴中也可出示。 | [100% 结算《瓦岗惊变》](stories/datang.md#datang_wagang)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 锁浪双钩<br>`suolang_hook` | 兵器；攻击+11、命中+2<br>锁浪双钩，适合hook流派修炼。【器物线索】可向许说书出示，核对《怒蛟水战》的来历；不消耗，穿戴中也可出示。 | [100% 结算《怒蛟水战》](stories/fuyu.md#fuyu_shuizhan)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 精钢长棍<br>`jinggang_staff` | 兵器；攻击+11、招架+2<br>精钢长棍，适合staff流派修炼。【器物线索】可向沈七出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。 | [100% 结算《巴陵夜泊》](stories/datang.md#datang_baling)；[钟铁衣商店](collections.md#shop-heluo_blacksmith) |
+| 宫变夜明珠<br>`gongbian_mingzhu` | 项链；命中+5、内力上限+25、先手+3<br>从乾清宫的密道中取得的夜明珠——珠内封着一缕不灭的火光，像是那晚的宫火永远不会熄灭。【器物线索】可向秦校尉出示，核对《东都宫变》的来历；不消耗，穿戴中也可出示。 | [100% 结算《东都宫变》](stories/datang.md#datang_gongbian) |
 
 ## 全部称号
 

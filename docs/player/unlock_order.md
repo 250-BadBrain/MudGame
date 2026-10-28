@@ -1,4 +1,4 @@
-<!-- 资源校验指纹：4aa91e2bf335c67bdec2967321f213ed8f3a4fa86c81f6f503f315c6878f4397；由 scripts/generate_player_guide.py 生成。 -->
+<!-- 资源校验指纹：acc9a19efd5c2142911ae95ace2b99fcb893a48892414d55d0279937b0f14723；由 scripts/generate_player_guide.py 生成。 -->
 
 # 全部副本的全局解锁顺序
 

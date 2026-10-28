@@ -1,7 +1,7 @@
 {
   "id": "saibei_langyan",
   "name": "狼烟再起",
-  "description": "边关烽火再起——不是马贼，是真正的草原大军。你受李百夫长之托，在烽燧台上点亮第一束狼烟。",
+  "description": "白烟被刻意压低，黑烟却在无风时偏向南面。 两块更牌都写着三更，旧更牌背面有前夜雪痕。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 45,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -9,7 +9,11 @@
   "spawnRoomId": "sai_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "白烟被刻意压低，黑烟却在无风时偏向南面。 此处不能只凭武力开门；沿路观察，并核验双色信台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：回营核对旧更牌后点白烟",
       "puzzleId": "gate",
       "rooms": [
         "sai_02"
@@ -34,28 +38,149 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "langyan_dianran": true
+      "nextState": "considered",
+      "message": "白烟被刻意压低，黑烟却在无风时偏向南面。 两块更牌都写着三更，旧更牌背面有前夜雪痕。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known",
+        "content_compare": "checked"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "两台同时点火"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "回营核对旧更牌后点白烟"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "只点最醒目的黑烟"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：逆风烽道",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "sai_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "白烟被刻意压低，黑烟却在无风时偏向南面。",
+      "repeatMessage": "白烟被刻意压低，黑烟却在无风时偏向南面。"
+    },
+    "content_detail": {
+      "label": "核验：双色信台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "sai_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "两块更牌都写着三更，旧更牌背面有前夜雪痕。",
+      "repeatMessage": "两块更牌都写着三更，旧更牌背面有前夜雪痕。"
+    },
+    "content_compare": {
+      "label": "回头复核原始记录",
+      "puzzleId": "content_compare",
+      "rooms": [
+        "sai_00"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "checked",
+      "message": "白烟被刻意压低，黑烟却在无风时偏向南面。 你把后来见到的细节与来处旧记核在一起。",
+      "repeatMessage": "白烟被刻意压低，黑烟却在无风时偏向南面。 你把后来见到的细节与来处旧记核在一起。",
+      "requiredPuzzleStates": {
+        "content_trace": "known"
+      }
+    },
+    "content_decide_good": {
+      "label": "回营核对旧更牌后点白烟",
+      "puzzleId": "gate",
+      "rooms": [
+        "sai_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "迟到的白烟把失联部队引回正确山口，假警报的传令者无处可藏。",
+      "repeatMessage": "迟到的白烟把失联部队引回正确山口，假警报的传令者无处可藏。",
+      "setFlags": {
+        "langyan_dianran": true,
+        "discovery_chapter_saibei_langyan": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "只点最醒目的黑烟",
+      "puzzleId": "gate",
+      "rooms": [
+        "sai_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：两块更牌都写着三更，旧更牌背面有前夜雪痕。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：两块更牌都写着三更，旧更牌背面有前夜雪痕。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "两台同时点火",
+      "puzzleId": "gate",
+      "rooms": [
+        "sai_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：两块更牌都写着三更，旧更牌背面有前夜雪痕。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：两块更牌都写着三更，旧更牌背面有前夜雪痕。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_langyan_ling": {
+      "label": "以狼烟令校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "sai_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把雪线领路人辨明的器物来历与现场互证。白烟被刻意压低，黑烟却在无风时偏向南面。",
+      "requiredFlags": {
+        "discovery_item_langyan_ling": true
+      },
+      "presentItems": {
+        "langyan_ling": 1
+      }
     }
   },
   "rooms": {
     "sai_00": {
-      "name": "入口",
-      "description": "入口。法外之地——你踏入此处，前方的路在阴影中延伸。",
+      "name": "废燧营门",
+      "description": "废燧营门保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "sai_01"
       },
       "actions": [
-        "listen_brief"
+        "listen_brief",
+        "content_compare"
       ]
     },
     "sai_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "逆风烽道",
+      "description": "白烟被刻意压低，黑烟却在无风时偏向南面。",
       "exits": {
         "south": "sai_00",
         "north": "sai_02"
@@ -71,11 +196,15 @@
       "npcs": [
         "sb_grassland_rider",
         "sb_grassland_rider"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_langyan_ling"
       ]
     },
     "sai_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "双色信台",
+      "description": "两块更牌都写着三更，旧更牌背面有前夜雪痕。",
       "exits": {
         "south": "sai_01",
         "north": "sai_03"
@@ -89,18 +218,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "sai_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "失联中军",
+      "description": "迟到的白烟把失联部队引回正确山口，假警报的传令者无处可藏。",
       "exits": {
         "south": "sai_02"
       },
       "npcs": [
         "sb_grassland_khan"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +249,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成双色信台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +268,33 @@
       "langyan_ling": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：往返复核；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "traversal",
+    "solution": [
+      {
+        "roomId": "sai_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "sai_00",
+        "actionId": "content_compare"
+      },
+      {
+        "roomId": "sai_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "sai_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "sai_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "迟到的白烟把失联部队引回正确山口，假警报的传令者无处可藏。"
+  }
 }

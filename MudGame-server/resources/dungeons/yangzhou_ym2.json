@@ -1,7 +1,7 @@
 {
   "id": "yangzhou_ym2",
   "name": "幽冥鬼市",
-  "description": "幽冥鬼市——运河风云中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "摊主肯放弃金银，却不肯交出账页上一个人的姓名。 旧契分价与名两栏，钱能两清，姓名一旦交出便无法收回。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 62,
   "chainId": "yangzhou_caoyun",
   "chainName": "运河风云",
@@ -9,7 +9,11 @@
   "spawnRoomId": "ym2_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "摊主肯放弃金银，却不肯交出账页上一个人的姓名。 此处不能只凭武力开门；沿路观察，并核验无价议台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：抹去姓名",
       "puzzleId": "gate",
       "rooms": [
         "ym2_02"
@@ -34,18 +38,124 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "ym2_gate": true
+      "nextState": "considered",
+      "message": "摊主肯放弃金银，却不肯交出账页上一个人的姓名。 旧契分价与名两栏，钱能两清，姓名一旦交出便无法收回。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_wrong",
+          "label": "把姓名写进价栏换路"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "撕尽契纸掩去来历"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "抹去姓名，以实物清旧契"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：缺页账巷",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "ym2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "摊主肯放弃金银，却不肯交出账页上一个人的姓名。",
+      "repeatMessage": "摊主肯放弃金银，却不肯交出账页上一个人的姓名。"
+    },
+    "content_detail": {
+      "label": "核验：无价议台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "ym2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "旧契分价与名两栏，钱能两清，姓名一旦交出便无法收回。",
+      "repeatMessage": "旧契分价与名两栏，钱能两清，姓名一旦交出便无法收回。"
+    },
+    "content_decide_good": {
+      "label": "抹去姓名，以实物清旧契",
+      "puzzleId": "gate",
+      "rooms": [
+        "ym2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你决定哪些东西不该被标价；另一条路把可追索的契约保留下来，代价也写得明白。",
+      "repeatMessage": "你决定哪些东西不该被标价；另一条路把可追索的契约保留下来，代价也写得明白。",
+      "setFlags": {
+        "ym2_gate": true,
+        "discovery_chapter_yangzhou_ym2": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "把姓名写进价栏换路",
+      "puzzleId": "gate",
+      "rooms": [
+        "ym2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你决定哪些东西不该被标价；另一条路把可追索的契约保留下来，代价也写得明白。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "repeatMessage": "你决定哪些东西不该被标价；另一条路把可追索的契约保留下来，代价也写得明白。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "setFlags": {
+        "discovery_alternative_yangzhou_ym2": true
+      }
+    },
+    "content_decide_other": {
+      "label": "撕尽契纸掩去来历",
+      "puzzleId": "gate",
+      "rooms": [
+        "ym2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：旧契分价与名两栏，钱能两清，姓名一旦交出便无法收回。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：旧契分价与名两栏，钱能两清，姓名一旦交出便无法收回。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_ym2_relic": {
+      "label": "以无名契衣校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "ym2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把盐运司书办辨明的器物来历与现场互证。摊主肯放弃金银，却不肯交出账页上一个人的姓名。",
+      "requiredFlags": {
+        "discovery_item_ym2_relic": true
+      },
+      "presentItems": {
+        "ym2_relic": 1
+      }
     }
   },
   "rooms": {
     "ym2_00": {
-      "name": "入口",
-      "description": "入口。漕运风波——你踏入此处，前方的路在阴影中延伸。",
+      "name": "鬼市灯棚",
+      "description": "鬼市灯棚保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "ym2_01"
       },
@@ -54,8 +164,8 @@
       ]
     },
     "ym2_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "缺页账巷",
+      "description": "摊主肯放弃金银，却不肯交出账页上一个人的姓名。",
       "exits": {
         "south": "ym2_00",
         "north": "ym2_02"
@@ -71,11 +181,15 @@
       "npcs": [
         "ym2_guard",
         "ym2_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_ym2_relic"
       ]
     },
     "ym2_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "无价议台",
+      "description": "旧契分价与名两栏，钱能两清，姓名一旦交出便无法收回。",
       "exits": {
         "south": "ym2_01",
         "north": "ym2_03"
@@ -89,18 +203,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "ym2_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "旧契暗室",
+      "description": "你决定哪些东西不该被标价；另一条路把可追索的契约保留下来，代价也写得明白。",
       "exits": {
         "south": "ym2_02"
       },
       "npcs": [
         "ym2_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +234,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成无价议台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +253,29 @@
       "ym2_relic": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：两种立场；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "polarity",
+    "solution": [
+      {
+        "roomId": "ym2_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "ym2_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "ym2_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "ym2_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你决定哪些东西不该被标价；另一条路把可追索的契约保留下来，代价也写得明白。"
+  }
 }

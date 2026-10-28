@@ -1,7 +1,7 @@
 {
   "id": "bashu_tangmen_trial",
   "name": "唐门试炼",
-  "description": "唐家坳百年一度的暗器试炼——唐门管事破例允许外人参加。试炼分三关：暗器关、身法关、心法关。",
+  "description": "机簧上没有毒色，真正危险的是下一轮回弹。 三根牵丝从松到紧排列，机台规矩是先卸力再分线。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 44,
   "chainId": "yangzhou_caoyun",
   "chainName": "运河风云",
@@ -9,7 +9,11 @@
   "spawnRoomId": "bas_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "机簧上没有毒色，真正危险的是下一轮回弹。 此处不能只凭武力开门；沿路观察，并核验牵丝机台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先卸回簧",
       "puzzleId": "gate",
       "rooms": [
         "bas_02"
@@ -34,18 +38,173 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "tangmen_shilian": true
+      "nextState": "considered",
+      "message": "机簧上没有毒色，真正危险的是下一轮回弹。 三根牵丝从松到紧排列，机台规矩是先卸力再分线。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_wrong",
+          "label": "先剪最紧牵丝"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "以毒针试毒针"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先卸回簧，再断最松的牵丝"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：错簧回廊",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bas_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "机簧上没有毒色，真正危险的是下一轮回弹。",
+      "repeatMessage": "机簧上没有毒色，真正危险的是下一轮回弹。"
+    },
+    "content_detail": {
+      "label": "核验：牵丝机台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "bas_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "三根牵丝从松到紧排列，机台规矩是先卸力再分线。",
+      "repeatMessage": "三根牵丝从松到紧排列，机台规矩是先卸力再分线。"
+    },
+    "content_decide_good": {
+      "label": "先卸回簧，再断最松的牵丝",
+      "puzzleId": "gate",
+      "rooms": [
+        "bas_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "aligned",
+      "message": "第一步已与线索相符；仍须决定下一步，不能一口气把所有机关推到底。",
+      "repeatMessage": "唐门考的是控制而不是狠毒，百花堂的最后一道暗簧不再突袭你。",
+      "choices": [
+        {
+          "id": "content_finish",
+          "label": "再断最松的牵丝"
+        },
+        {
+          "id": "content_reverse",
+          "label": "反过来，再做一次最先的动作"
+        }
+      ]
+    },
+    "content_decide_wrong": {
+      "label": "先剪最紧牵丝",
+      "puzzleId": "gate",
+      "rooms": [
+        "bas_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：三根牵丝从松到紧排列，机台规矩是先卸力再分线。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：三根牵丝从松到紧排列，机台规矩是先卸力再分线。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "以毒针试毒针",
+      "puzzleId": "gate",
+      "rooms": [
+        "bas_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：三根牵丝从松到紧排列，机台规矩是先卸力再分线。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：三根牵丝从松到紧排列，机台规矩是先卸力再分线。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_finish": {
+      "label": "再断最松的牵丝",
+      "puzzleId": "gate",
+      "rooms": [
+        "bas_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "open",
+      "message": "唐门考的是控制而不是狠毒，百花堂的最后一道暗簧不再突袭你。",
+      "setFlags": {
+        "tangmen_shilian": true,
+        "discovery_chapter_bashu_tangmen_trial": true
+      }
+    },
+    "content_reverse": {
+      "label": "颠倒次序",
+      "puzzleId": "gate",
+      "rooms": [
+        "bas_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "closed",
+      "message": "先后次序被颠倒了，你撤回到安全位置。重新判断即可，没有物品损失。"
+    },
+    "content_aid_tangmen_baojian": {
+      "label": "以唐门宝鉴校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bas_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把剑阁驿丞辨明的器物来历与现场互证。机簧上没有毒色，真正危险的是下一轮回弹。",
+      "requiredFlags": {
+        "discovery_item_tangmen_baojian": true
+      },
+      "presentItems": {
+        "tangmen_baojian": 1
+      }
+    },
+    "content_aid_manual_mantian_huayu": {
+      "label": "以漫天花雨秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bas_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把药田老农辨明的器物来历与现场互证。机簧上没有毒色，真正危险的是下一轮回弹。",
+      "requiredFlags": {
+        "discovery_item_manual_mantian_huayu": true
+      },
+      "presentItems": {
+        "manual_mantian_huayu": 1
+      }
     }
   },
   "rooms": {
     "bas_00": {
-      "name": "入口",
-      "description": "唐家坳的试炼入口隐在竹影中。石阶两旁钉着废旧靶板，暗器留下的细孔深浅不一。堂内传来机括轻响，提醒来者先看清落脚处。",
+      "name": "试针坪",
+      "description": "试针坪保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "bas_01"
       },
@@ -54,8 +213,8 @@
       ]
     },
     "bas_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "错簧回廊",
+      "description": "机簧上没有毒色，真正危险的是下一轮回弹。",
       "exits": {
         "south": "bas_00",
         "north": "bas_02"
@@ -71,11 +230,16 @@
       "npcs": [
         "tm_trial_guard",
         "tm_trial_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_tangmen_baojian",
+        "content_aid_manual_mantian_huayu"
       ]
     },
     "bas_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "牵丝机台",
+      "description": "三根牵丝从松到紧排列，机台规矩是先卸力再分线。",
       "exits": {
         "south": "bas_01",
         "north": "bas_03"
@@ -89,18 +253,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "bas_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "百花暗器堂",
+      "description": "唐门考的是控制而不是狠毒，百花堂的最后一道暗簧不再突袭你。",
       "exits": {
         "south": "bas_02"
       },
       "npcs": [
         "tm_trial_master"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +284,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成牵丝机台的判断"
     },
     {
       "id": "repel_boss",
@@ -138,6 +304,33 @@
       "manual_mantian_huayu": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：分步次序；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "sequence",
+    "solution": [
+      {
+        "roomId": "bas_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "bas_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "bas_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "bas_02",
+        "actionId": "content_decide_good"
+      },
+      {
+        "roomId": "bas_02",
+        "actionId": "content_finish"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "唐门考的是控制而不是狠毒，百花堂的最后一道暗簧不再突袭你。"
+  }
 }

@@ -9,7 +9,8 @@
   "spawnRoomId": "jt_00",
   "puzzleInitialStates": {
     "trial_gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -40,6 +41,62 @@
       },
       "message": "香烛燃尽，试炼之门缓缓开启——残影的气息扑面而来。",
       "repeatMessage": "试炼之门已开。"
+    },
+    "content_epilogue": {
+      "label": "复盘：金刀令的两面",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "jt_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "金刚不坏不是不知疼痛，而是在能退的时候仍选择替别人守住一步。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "记录金刀令背面的守城刻痕"
+        },
+        {
+          "id": "content_record_route",
+          "label": "保留残影对守而不攻的解释"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "jt_kangshi_phantom"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "记录金刀令背面的守城刻痕",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "jt_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "金刚不坏不是不知疼痛，而是在能退的时候仍选择替别人守住一步。 你选择：记录金刀令背面的守城刻痕。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_jingling_trial_hall_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "保留残影对守而不攻的解释",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "jt_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "金刚不坏不是不知疼痛，而是在能退的时候仍选择替别人守住一步。 你选择：保留残影对守而不攻的解释。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_jingling_trial_hall_route": true
+      }
     }
   },
   "rooms": {
@@ -63,7 +120,8 @@
       "exits": {
         "south": "jt_00",
         "north": "jt_02"
-      }
+      },
+      "actions": []
     },
     "jt_02": {
       "name": "残影之殿",
@@ -73,6 +131,9 @@
       },
       "npcs": [
         "jt_kangshi_phantom"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -102,5 +163,19 @@
       "kangshi_remnant": 1,
       "manual_jingang_buhuai": 1
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "金刚不坏不是不知疼痛，而是在能退的时候仍选择替别人守住一步。",
+    "solution": [
+      {
+        "roomId": "jt_02",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "jt_02",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

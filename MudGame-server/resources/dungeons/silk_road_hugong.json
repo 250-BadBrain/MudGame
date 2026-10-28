@@ -8,7 +8,8 @@
   "chapter": 20,
   "spawnRoomId": "hc_00",
   "puzzleInitialStates": {
-    "briefing_hc": "new"
+    "briefing_hc": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_hc": {
@@ -23,6 +24,62 @@
       "nextState": "told",
       "message": "商队首领展开路线图：\"从这儿到玉门关，三段路。每段路上都有人等着抢我们——你的刀，就是我们的路引。\"",
       "repeatMessage": "路线图你已记住。"
+    },
+    "content_epilogue": {
+      "label": "复盘：玉门关前的镖单",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "hc_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "丝路全图的价值不在画得最远，而在让下一支没有高手护送的商队也能回来。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "把每一段可补水处标在全图"
+        },
+        {
+          "id": "content_record_route",
+          "label": "留下沙道上被商旅改过的路标"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "hc_bandit_boss"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "把每一段可补水处标在全图",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "hc_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "丝路全图的价值不在画得最远，而在让下一支没有高手护送的商队也能回来。 你选择：把每一段可补水处标在全图。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_silk_road_hugong_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "留下沙道上被商旅改过的路标",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "hc_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "丝路全图的价值不在画得最远，而在让下一支没有高手护送的商队也能回来。 你选择：留下沙道上被商旅改过的路标。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_silk_road_hugong_route": true
+      }
     }
   },
   "rooms": {
@@ -57,7 +114,8 @@
       "npcs": [
         "hc_bandit_1",
         "hc_caravan_leader"
-      ]
+      ],
+      "actions": []
     },
     "hc_02": {
       "name": "第二段·烽燧残垣",
@@ -77,7 +135,8 @@
       "npcs": [
         "hc_bandit_2",
         "hc_caravan_leader"
-      ]
+      ],
+      "actions": []
     },
     "hc_03": {
       "name": "第三段·玉门关",
@@ -88,6 +147,9 @@
       "npcs": [
         "hc_bandit_boss",
         "hc_caravan_leader"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -133,6 +195,20 @@
       "silk_road_map": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：保留本章分段战斗，以专属复盘选择区分护送/赴会中的职责，不套用通用开门题。",
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "丝路全图的价值不在画得最远，而在让下一支没有高手护送的商队也能回来。",
+    "solution": [
+      {
+        "roomId": "hc_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "hc_03",
+        "actionId": "content_record_people"
+      }
+    ]
+  }
 }

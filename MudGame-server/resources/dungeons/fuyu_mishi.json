@@ -1,7 +1,7 @@
 {
   "id": "fuyu_mishi",
   "name": "魔师宫秘道",
-  "description": "方夜羽再败后，魔师宫在塞外建了一条通往中原的秘道——你受托深入秘道，截断魔门的后路。",
+  "description": "石廊脚步先响后现，真正来人走在逆光一侧。 铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 39,
   "chainId": "fuyu_fan_yun",
   "chainName": "覆雨翻云",
@@ -9,7 +9,11 @@
   "spawnRoomId": "fuy_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "石廊脚步先响后现，真正来人走在逆光一侧。 此处不能只凭武力开门；沿路观察，并核验错位铜镜的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先遮上镜",
       "puzzleId": "gate",
       "rooms": [
         "fuy_02"
@@ -34,18 +38,371 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "mishi_duanlu": true
+      "nextState": "considered",
+      "message": "石廊脚步先响后现，真正来人走在逆光一侧。 铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "闭眼循最响的脚步"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先遮上镜，再转下镜"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "照亮全部铜镜"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：叠影石廊",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "石廊脚步先响后现，真正来人走在逆光一侧。",
+      "repeatMessage": "石廊脚步先响后现，真正来人走在逆光一侧。"
+    },
+    "content_detail": {
+      "label": "核验：错位铜镜",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "fuy_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。",
+      "repeatMessage": "铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。"
+    },
+    "content_decide_good": {
+      "label": "先遮上镜，再转下镜",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuy_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "aligned",
+      "message": "第一步已与线索相符；仍须决定下一步，不能一口气把所有机关推到底。",
+      "repeatMessage": "你拆开魔师宫用来放大威势的镜阵，令珠室里只余一人的呼吸。",
+      "choices": [
+        {
+          "id": "content_finish",
+          "label": "再转下镜"
+        },
+        {
+          "id": "content_reverse",
+          "label": "反过来，再做一次最先的动作"
+        }
+      ]
+    },
+    "content_decide_wrong": {
+      "label": "照亮全部铜镜",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuy_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "闭眼循最响的脚步",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuy_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_finish": {
+      "label": "再转下镜",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuy_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "open",
+      "message": "你拆开魔师宫用来放大威势的镜阵，令珠室里只余一人的呼吸。",
+      "setFlags": {
+        "mishi_duanlu": true,
+        "discovery_chapter_fuyu_mishi": true
+      }
+    },
+    "content_reverse": {
+      "label": "颠倒次序",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuy_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "closed",
+      "message": "先后次序被颠倒了，你撤回到安全位置。重新判断即可，没有物品损失。"
+    },
+    "content_aid_nujiao_saber": {
+      "label": "以怒蛟刀校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把抚琴女子辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_nujiao_saber": true
+      },
+      "presentItems": {
+        "nujiao_saber": 1
+      }
+    },
+    "content_aid_lanjiang_vest": {
+      "label": "以拦江劲衣校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把鲁大个辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_lanjiang_vest": true
+      },
+      "presentItems": {
+        "lanjiang_vest": 1
+      }
+    },
+    "content_aid_tianmo_pei": {
+      "label": "以天魔佩校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把抚琴女子辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_tianmo_pei": true
+      },
+      "presentItems": {
+        "tianmo_pei": 1
+      }
+    },
+    "content_aid_yulie_shuangdao": {
+      "label": "以羽裂双刀校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把抚琴女子辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_yulie_shuangdao": true
+      },
+      "presentItems": {
+        "yulie_shuangdao": 1
+      }
+    },
+    "content_aid_fenshui_ci": {
+      "label": "以分水刺校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把许说书辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_fenshui_ci": true
+      },
+      "presentItems": {
+        "fenshui_ci": 1
+      }
+    },
+    "content_aid_nujiao_belt": {
+      "label": "以怒蛟腰带校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把抚琴女子辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_nujiao_belt": true
+      },
+      "presentItems": {
+        "nujiao_belt": 1
+      }
+    },
+    "content_aid_changjiang_tidecrystal": {
+      "label": "以江潮晶石校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把鲁大个辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_changjiang_tidecrystal": true
+      },
+      "presentItems": {
+        "changjiang_tidecrystal": 1
+      }
+    },
+    "content_aid_moshi_lingzhu": {
+      "label": "以魔师宫主令珠校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把鲁大个辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_moshi_lingzhu": true
+      },
+      "presentItems": {
+        "moshi_lingzhu": 1
+      }
+    },
+    "content_aid_manual_tianmo_ce": {
+      "label": "以天魔策秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把抚琴女子辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_manual_tianmo_ce": true
+      },
+      "presentItems": {
+        "manual_tianmo_ce": 1
+      }
+    },
+    "content_aid_manual_youlong_bian": {
+      "label": "以游龙鞭秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦三娘辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_manual_youlong_bian": true
+      },
+      "presentItems": {
+        "manual_youlong_bian": 1
+      }
+    },
+    "content_aid_manual_suolang_gou": {
+      "label": "以锁浪钩秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把许说书辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_manual_suolang_gou": true
+      },
+      "presentItems": {
+        "manual_suolang_gou": 1
+      }
+    },
+    "content_aid_youlong_whip": {
+      "label": "以游龙长鞭校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦三娘辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_youlong_whip": true
+      },
+      "presentItems": {
+        "youlong_whip": 1
+      }
+    },
+    "content_aid_suolang_hook": {
+      "label": "以锁浪双钩校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把许说书辨明的器物来历与现场互证。石廊脚步先响后现，真正来人走在逆光一侧。",
+      "requiredFlags": {
+        "discovery_item_suolang_hook": true
+      },
+      "presentItems": {
+        "suolang_hook": 1
+      }
     }
   },
   "rooms": {
     "fuy_00": {
-      "name": "入口",
-      "description": "入口。魔门暗流——你踏入此处，前方的路在阴影中延伸。",
+      "name": "秘道潮门",
+      "description": "秘道潮门保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "fuy_01"
       },
@@ -54,8 +411,8 @@
       ]
     },
     "fuy_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "叠影石廊",
+      "description": "石廊脚步先响后现，真正来人走在逆光一侧。",
       "exits": {
         "south": "fuy_00",
         "north": "fuy_02"
@@ -71,11 +428,27 @@
       "npcs": [
         "ms_elite",
         "ms_elite"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_nujiao_saber",
+        "content_aid_lanjiang_vest",
+        "content_aid_tianmo_pei",
+        "content_aid_yulie_shuangdao",
+        "content_aid_fenshui_ci",
+        "content_aid_nujiao_belt",
+        "content_aid_changjiang_tidecrystal",
+        "content_aid_moshi_lingzhu",
+        "content_aid_manual_tianmo_ce",
+        "content_aid_manual_youlong_bian",
+        "content_aid_manual_suolang_gou",
+        "content_aid_youlong_whip",
+        "content_aid_suolang_hook"
       ]
     },
     "fuy_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "错位铜镜",
+      "description": "铜镜不能同时照亮，先遮上镜再转下镜才有一道实影。",
       "exits": {
         "south": "fuy_01",
         "north": "fuy_03"
@@ -89,18 +462,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "fuy_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "令珠密室",
+      "description": "你拆开魔师宫用来放大威势的镜阵，令珠室里只余一人的呼吸。",
       "exits": {
         "south": "fuy_02"
       },
       "npcs": [
         "ms_elder"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +493,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成错位铜镜的判断"
     },
     {
       "id": "repel_boss",
@@ -138,6 +513,33 @@
       "manual_tianmo_ce": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：分步次序；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "sequence",
+    "solution": [
+      {
+        "roomId": "fuy_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "fuy_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "fuy_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "fuy_02",
+        "actionId": "content_decide_good"
+      },
+      {
+        "roomId": "fuy_02",
+        "actionId": "content_finish"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你拆开魔师宫用来放大威势的镜阵，令珠室里只余一人的呼吸。"
+  }
 }

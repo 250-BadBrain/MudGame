@@ -71,7 +71,8 @@
       },
       "npcs": [
         "temple_bandit"
-      ]
+      ],
+      "actions": []
     },
     "temple_01": {
       "name": "无相殿",
@@ -91,7 +92,8 @@
       "npcs": [
         "temple_bandit",
         "temple_bandit"
-      ]
+      ],
+      "actions": []
     },
     "temple_02": {
       "name": "后院雨廊",
@@ -103,12 +105,14 @@
         "temple_assassin"
       ],
       "actions": [
-        "search_body"
+        "search_body",
+        "content_epilogue"
       ]
     }
   },
   "puzzleInitialStates": {
-    "relic_hm": "untouched"
+    "relic_hm": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "search_body": {
@@ -129,9 +133,79 @@
         "temple_assassin"
       ],
       "failureMessage": "刺客尚未败退，先结束战斗再翻检遗物。"
+    },
+    "content_epilogue": {
+      "label": "复盘：密信上的雨印",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "temple_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "密信的印记与劫匪的刀并不属于同一路人；庙中雨声掩去了真正递信者的脚步。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "先交官署保全受害者证词"
+        },
+        {
+          "id": "content_record_route",
+          "label": "先问镖局核对运信路线"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "temple_assassin"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "先交官署保全受害者证词",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "temple_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "密信的印记与劫匪的刀并不属于同一路人；庙中雨声掩去了真正递信者的脚步。 你选择：先交官署保全受害者证词。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_abandoned_temple_rain_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "先问镖局核对运信路线",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "temple_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "密信的印记与劫匪的刀并不属于同一路人；庙中雨声掩去了真正递信者的脚步。 你选择：先问镖局核对运信路线。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_abandoned_temple_rain_route": true
+      }
     }
   },
   "quickRewards": {
     "money": 250
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "密信的印记与劫匪的刀并不属于同一路人；庙中雨声掩去了真正递信者的脚步。",
+    "solution": [
+      {
+        "roomId": "temple_02",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "temple_02",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

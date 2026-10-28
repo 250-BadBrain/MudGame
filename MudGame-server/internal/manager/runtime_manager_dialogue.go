@@ -179,7 +179,7 @@ func (r *RuntimeManager) advanceStaticDialogueNoLock(p *model.Player, npc model.
 	for i := range dialogue.Options {
 		option := dialogue.Options[i]
 		key := npc.ID + "|" + option.ID
-		if option.Repeatable || !r.dialogueOptionAvailableNoLock(p, npc.ID, option, history) {
+		if option.Explicit || option.Repeatable || !r.dialogueOptionAvailableNoLock(p, npc.ID, option, history) {
 			continue
 		}
 		logs, err := r.applyDialogueOptionEffectsNoLock(p, &option, npc.ID)
@@ -438,6 +438,9 @@ func (r *RuntimeManager) puzzleActionRequirementsMetNoLock(p *model.Player, room
 	if p == nil || inst == nil {
 		return false
 	}
+	if !contentEvidenceMet(p, action.RequiredFlags, action.PresentItems) {
+		return false
+	}
 	if len(inst.PendingChoices) > 0 && r.dungeonMgr.PuzzleActionStateStatusNoLock(inst, action) == engruntime.PuzzleActionRepeat {
 		return true
 	}
@@ -469,6 +472,14 @@ func (r *RuntimeManager) puzzleActionRequirementsMetNoLock(p *model.Player, room
 }
 
 func (r *RuntimeManager) dialogueRequirementMetNoLock(p *model.Player, req model.DialogueRequire) bool {
+	if !contentEvidenceMet(p, req.Flags, req.PresentItems) {
+		return false
+	}
+	for id, level := range req.Skills {
+		if p.Skills[id] < level {
+			return false
+		}
+	}
 	if req.QuestID != "" {
 		state := questStateNoLock(p, req.QuestID)
 		if req.QuestStatus != "" && state.Status != req.QuestStatus {

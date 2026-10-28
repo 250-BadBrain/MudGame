@@ -11,7 +11,8 @@
     "granary": "intact",
     "briefing_wt": "new",
     "vault_wt": "untouched",
-    "warehouse_wt": "untouched"
+    "warehouse_wt": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_scout": {
@@ -73,6 +74,62 @@
       "repeatMessage": "已被你搜遍。",
       "giveItems": {},
       "giveMoney": 400
+    },
+    "content_epilogue": {
+      "label": "复盘：空下来的王帐",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wt_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "王庭的粮不是马贼凭空变出的，粮袋底的盐迹指向被抢过的商旅。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "给粮仓留下向导标记"
+        },
+        {
+          "id": "content_record_route",
+          "label": "先记取狼王刀上的旧盐迹"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "wt_helian_ba"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "给粮仓留下向导标记",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wt_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "王庭的粮不是马贼凭空变出的，粮袋底的盐迹指向被抢过的商旅。 你选择：给粮仓留下向导标记。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_bianhuang_wangting_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "先记取狼王刀上的旧盐迹",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wt_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "王庭的粮不是马贼凭空变出的，粮袋底的盐迹指向被抢过的商旅。 你选择：先记取狼王刀上的旧盐迹。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_bianhuang_wangting_route": true
+      }
     }
   },
   "rooms": {
@@ -107,7 +164,8 @@
       "npcs": [
         "wt_archer",
         "wt_archer"
-      ]
+      ],
+      "actions": []
     },
     "wt_02": {
       "name": "王帐前",
@@ -143,7 +201,8 @@
         "wt_helian_ba"
       ],
       "actions": [
-        "search_vault"
+        "search_vault",
+        "content_epilogue"
       ]
     }
   },
@@ -210,5 +269,19 @@
   },
   "quickRewards": {
     "money": 700
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "王庭的粮不是马贼凭空变出的，粮袋底的盐迹指向被抢过的商旅。",
+    "solution": [
+      {
+        "roomId": "wt_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "wt_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

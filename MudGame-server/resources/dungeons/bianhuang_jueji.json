@@ -1,7 +1,7 @@
 {
   "id": "bianhuang_jueji",
   "name": "边荒绝地",
-  "description": "边荒绝地——边荒传说中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。 井口绳轮可以复用，碎石只堵住浅层而非断了水源。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 50,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -9,7 +9,11 @@
   "spawnRoomId": "bianhu_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。 此处不能只凭武力开门；沿路观察，并核验最后一井的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先稳住伤兵",
       "puzzleId": "gate",
       "rooms": [
         "bianhu_02"
@@ -34,28 +38,139 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "jj_sl": true
+      "nextState": "considered",
+      "message": "伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。 井口绳轮可以复用，碎石只堵住浅层而非断了水源。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_wrong",
+          "label": "拆井绳当战利品"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "赶牲口冲向王帐"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先稳住伤兵，再修井绳"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：断水营道",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bianhu_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。",
+      "repeatMessage": "伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。",
+      "requiredDefeatNpcs": [
+        "bh2_guard"
+      ],
+      "failureMessage": "先让本处的拦路者失去战意，再救助与查验；不必消耗稀有物品。"
+    },
+    "content_detail": {
+      "label": "核验：最后一井",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "bianhu_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "井口绳轮可以复用，碎石只堵住浅层而非断了水源。",
+      "repeatMessage": "井口绳轮可以复用，碎石只堵住浅层而非断了水源。"
+    },
+    "content_decide_good": {
+      "label": "先稳住伤兵，再修井绳",
+      "puzzleId": "gate",
+      "rooms": [
+        "bianhu_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你先保存撤离的可能，再面对绝地之主；绝境因此不只剩下拼命。",
+      "repeatMessage": "你先保存撤离的可能，再面对绝地之主；绝境因此不只剩下拼命。",
+      "setFlags": {
+        "jj_sl": true,
+        "discovery_chapter_bianhuang_jueji": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "拆井绳当战利品",
+      "puzzleId": "gate",
+      "rooms": [
+        "bianhu_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：井口绳轮可以复用，碎石只堵住浅层而非断了水源。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：井口绳轮可以复用，碎石只堵住浅层而非断了水源。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "赶牲口冲向王帐",
+      "puzzleId": "gate",
+      "rooms": [
+        "bianhu_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：井口绳轮可以复用，碎石只堵住浅层而非断了水源。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：井口绳轮可以复用，碎石只堵住浅层而非断了水源。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_jueji_h": {
+      "label": "以绝地护符校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bianhu_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把李百夫长辨明的器物来历与现场互证。伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。",
+      "requiredFlags": {
+        "discovery_item_jueji_h": true
+      },
+      "presentItems": {
+        "jueji_h": 1
+      }
     }
   },
   "rooms": {
     "bianhu_00": {
-      "name": "入口",
-      "description": "入口。法外之地——你踏入此处，前方的路在阴影中延伸。",
+      "name": "绝地小营",
+      "description": "绝地小营保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "bianhu_01"
       },
       "actions": [
         "listen_brief"
+      ],
+      "npcs": [
+        "bh2_jueji_guard",
+        "bh2_jueji_boss"
       ]
     },
     "bianhu_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "断水营道",
+      "description": "伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。",
       "exits": {
         "south": "bianhu_00",
         "north": "bianhu_02"
@@ -71,11 +186,15 @@
       "npcs": [
         "bh2_guard",
         "bh2_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_jueji_h"
       ]
     },
     "bianhu_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "最后一井",
+      "description": "井口绳轮可以复用，碎石只堵住浅层而非断了水源。",
       "exits": {
         "south": "bianhu_01",
         "north": "bianhu_03"
@@ -89,18 +208,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "bianhu_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "断粮王帐",
+      "description": "你先保存撤离的可能，再面对绝地之主；绝境因此不只剩下拼命。",
       "exits": {
         "south": "bianhu_02"
       },
       "npcs": [
         "bh2_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +239,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成最后一井的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +258,29 @@
       "jueji_h": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：先稳现场再判断；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "rescue",
+    "solution": [
+      {
+        "roomId": "bianhu_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "bianhu_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "bianhu_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "bianhu_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你先保存撤离的可能，再面对绝地之主；绝境因此不只剩下拼命。"
+  }
 }

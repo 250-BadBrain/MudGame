@@ -1,7 +1,7 @@
 {
   "id": "luoshui_lm2",
   "name": "雷鸣峡谷",
-  "description": "雷鸣峡谷——洛水风浪中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "回声比雷光先到，是空洞岩层在预警，不是天雷追人。 三钉连着两条湿链，必须先断上链再移下钉。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 67,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -9,7 +9,11 @@
   "spawnRoomId": "lm2_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "回声比雷光先到，是空洞岩层在预警，不是天雷追人。 此处不能只凭武力开门；沿路观察，并核验三钉避雷台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先断上链",
       "puzzleId": "gate",
       "rooms": [
         "lm2_02"
@@ -34,18 +38,155 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "lm2_gate": true
+      "nextState": "considered",
+      "message": "回声比雷光先到，是空洞岩层在预警，不是天雷追人。 三钉连着两条湿链，必须先断上链再移下钉。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_good",
+          "label": "先断上链，再移下钉"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "同时拔掉三钉"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "循最响的回声冲谷心"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：湿岩回声径",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "lm2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "回声比雷光先到，是空洞岩层在预警，不是天雷追人。",
+      "repeatMessage": "回声比雷光先到，是空洞岩层在预警，不是天雷追人。"
+    },
+    "content_detail": {
+      "label": "核验：三钉避雷台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "lm2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "三钉连着两条湿链，必须先断上链再移下钉。",
+      "repeatMessage": "三钉连着两条湿链，必须先断上链再移下钉。"
+    },
+    "content_decide_good": {
+      "label": "先断上链，再移下钉",
+      "puzzleId": "gate",
+      "rooms": [
+        "lm2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "aligned",
+      "message": "第一步已与线索相符；仍须决定下一步，不能一口气把所有机关推到底。",
+      "repeatMessage": "你把雷引回空岩，静电石环的焦痕证明峡谷曾有一套救人的避雷法。",
+      "choices": [
+        {
+          "id": "content_finish",
+          "label": "再移下钉"
+        },
+        {
+          "id": "content_reverse",
+          "label": "反过来，再做一次最先的动作"
+        }
+      ]
+    },
+    "content_decide_wrong": {
+      "label": "同时拔掉三钉",
+      "puzzleId": "gate",
+      "rooms": [
+        "lm2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：三钉连着两条湿链，必须先断上链再移下钉。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：三钉连着两条湿链，必须先断上链再移下钉。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "循最响的回声冲谷心",
+      "puzzleId": "gate",
+      "rooms": [
+        "lm2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：三钉连着两条湿链，必须先断上链再移下钉。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：三钉连着两条湿链，必须先断上链再移下钉。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_finish": {
+      "label": "再移下钉",
+      "puzzleId": "gate",
+      "rooms": [
+        "lm2_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "open",
+      "message": "你把雷引回空岩，静电石环的焦痕证明峡谷曾有一套救人的避雷法。",
+      "setFlags": {
+        "lm2_gate": true,
+        "discovery_chapter_luoshui_lm2": true
+      }
+    },
+    "content_reverse": {
+      "label": "颠倒次序",
+      "puzzleId": "gate",
+      "rooms": [
+        "lm2_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "closed",
+      "message": "先后次序被颠倒了，你撤回到安全位置。重新判断即可，没有物品损失。"
+    },
+    "content_aid_lm2_relic": {
+      "label": "以静电石环校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "lm2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把采珠人辨明的器物来历与现场互证。回声比雷光先到，是空洞岩层在预警，不是天雷追人。",
+      "requiredFlags": {
+        "discovery_item_lm2_relic": true
+      },
+      "presentItems": {
+        "lm2_relic": 1
+      }
     }
   },
   "rooms": {
     "lm2_00": {
-      "name": "入口",
-      "description": "入口。洛水暗涌——你踏入此处，前方的路在阴影中延伸。",
+      "name": "雷谷听声口",
+      "description": "雷谷听声口保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "lm2_01"
       },
@@ -54,8 +195,8 @@
       ]
     },
     "lm2_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "湿岩回声径",
+      "description": "回声比雷光先到，是空洞岩层在预警，不是天雷追人。",
       "exits": {
         "south": "lm2_00",
         "north": "lm2_02"
@@ -71,11 +212,15 @@
       "npcs": [
         "lm2_guard",
         "lm2_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_lm2_relic"
       ]
     },
     "lm2_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "三钉避雷台",
+      "description": "三钉连着两条湿链，必须先断上链再移下钉。",
       "exits": {
         "south": "lm2_01",
         "north": "lm2_03"
@@ -89,18 +234,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "lm2_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "峡心风隙",
+      "description": "你把雷引回空岩，静电石环的焦痕证明峡谷曾有一套救人的避雷法。",
       "exits": {
         "south": "lm2_02"
       },
       "npcs": [
         "lm2_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +265,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成三钉避雷台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +284,33 @@
       "lm2_relic": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：分步次序；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "sequence",
+    "solution": [
+      {
+        "roomId": "lm2_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "lm2_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "lm2_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "lm2_02",
+        "actionId": "content_decide_good"
+      },
+      {
+        "roomId": "lm2_02",
+        "actionId": "content_finish"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你把雷引回空岩，静电石环的焦痕证明峡谷曾有一套救人的避雷法。"
+  }
 }

@@ -21,7 +21,8 @@
   ],
   "puzzleInitialStates": {
     "tale": "new",
-    "tide": "unseen"
+    "tide": "unseen",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_boatman_tale": {
@@ -53,6 +54,62 @@
       },
       "message": "你在船头静立良久，看尽江涛三叠起落。魔师残影借的是江潮之势——潮有起落，势有间隙。你已看破他的气机。",
       "repeatMessage": "江涛依旧三叠，你心中的间隙不会消失。"
+    },
+    "content_epilogue": {
+      "label": "复盘：胜负之外的江潮",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "lj_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "浪翻云的剑与江潮同在，但江上仍要容普通人的一叶小舟经过。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "记下退潮时露出的剑痕"
+        },
+        {
+          "id": "content_record_route",
+          "label": "记录舟阵避开渔船的空位"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "lj_pang_ban"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "记下退潮时露出的剑痕",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "lj_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "浪翻云的剑与江潮同在，但江上仍要容普通人的一叶小舟经过。 你选择：记下退潮时露出的剑痕。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_fuyu_lanjiang_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "记录舟阵避开渔船的空位",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "lj_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "浪翻云的剑与江潮同在，但江上仍要容普通人的一叶小舟经过。 你选择：记录舟阵避开渔船的空位。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_fuyu_lanjiang_route": true
+      }
     }
   },
   "rooms": {
@@ -100,6 +157,9 @@
       },
       "npcs": [
         "lj_pang_ban"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -137,5 +197,19 @@
       "lanjiang_vest": 1,
       "changjiang_tidecrystal": 1
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "浪翻云的剑与江潮同在，但江上仍要容普通人的一叶小舟经过。",
+    "solution": [
+      {
+        "roomId": "lj_02",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "lj_02",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

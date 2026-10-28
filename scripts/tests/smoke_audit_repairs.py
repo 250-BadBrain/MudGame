@@ -59,8 +59,8 @@ def run(binary, directory):
         assert next(i for i in backpack['items'] if i['id'] == 'bronze_fragment')['sellPrice'] == 200
         checks.append('legacy item aliases merge quantities, preserve max enhancement and refund duplicate investment')
         catalog = client.call('command', 'get_dungeons')['dungeons']
-        assert len(catalog) == 78 and sum(d.get('contentStatus') == 'needs_depth' for d in catalog) == 40
-        checks.append('all dungeons retained; 40 late chapters explicitly marked for deeper content')
+        assert len(catalog) == 78 and sum(d.get('contentStatus') == 'enriched' for d in catalog) == 40
+        checks.append('all dungeons retained; 40 late chapters show their expanded interaction status')
         client.call('command', 'enter_world', worldId='bashu'); walk(client, 'bs_market', rooms)
         before = inventory_state(client.call('command', 'get_backpack'))
         for amount in [-1, 0, 10001, 1 << 60, 1.5, '2']:

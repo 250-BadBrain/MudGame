@@ -233,3 +233,5 @@ git add -A && git commit -m "xxx"
 审查修复回归：`scripts/tests/smoke_audit_repairs.py`包含原快速完成用例，并追加严格数值输入、20%回收/炼药、装备别名退款重启、安全区/离线目标与死亡重启。其`--keep-fixture`生成的合成目录可接上述浏览器验收；浏览器同时验证状态恢复、售价、后期内容标记及长中文名。当前规则、复验命令与结果见[审查修复规格](design/audit_repairs_2026_10_28.md)。
 
 烟尘粉/强化回归：`scripts/tests/smoke_enhancement_coefficients.py`使用合成旧档验证无限购买、分属性增益及单次重置，`browser_dungeon_quick.py --scenario enhancement`接其合成目录验证页面和真实购买；具体命令、系数与旧档兼容见[实施规格](design/smoke_enhancement_2026_10_28.md)。
+
+既有资源深化回归：`gamedata/content_depth_test.go`冻结本轮实体ID和奖励，`manager/runtime_manager_content_depth_test.go`遍历78关交互、135件物品出示和八城事件。真实协议与网页命令见[深化规格与验收](design/existing_content_depth_2026_10_28.md)；所有服务只用临时端口及合成存档。`scripts/enrich_existing_content.py`是本轮内容编辑器，依赖71085f3历史，重复运行会重建本轮`content_*`选项；未来扩资源或手写新内容时不要直接重跑它覆盖后续编辑，应按新的设计修改对应JSON并更新测试基线。常规维护只运行玩家手册生成器。

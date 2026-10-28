@@ -9,6 +9,7 @@
 - [世界任务接取、推进与结局](player/quests.md)（38个唯一任务全接通，3个旧ID兼容别名）
 - [修行、商店、武学传承与收藏目录](player/collections.md)
 - [当前内容缺口与文案/实现差异](player/content_status.md)
+- [全部既有人物、器物与章节的用途索引](content/existing_resource_roles.md)（313个人物、135件器物、78关交互及八城互证事件）
 
 ## 开发流程
 
@@ -21,6 +22,7 @@
 
 ## 设计
 
+- [既有资源内容深化](design/existing_content_depth_2026_10_28.md)（冻结实体ID，人物专长、物品出示、在地调查及章节交互）
 - [全量审查修复规格](design/audit_repairs_2026_10_28.md)（用户确认的战斗、20%回收、转化价值、装备合并及内容标记）
 - [烟尘粉无限供给与强化属性系数](design/smoke_enhancement_2026_10_28.md)（用户选择的现行规则与旧强化免费重置）
 - [烟尘粉补货与强化预算选项](design/restock_enhancement_options_2026_10_28.md)（历史分析，已选择无限供给与各属性独立系数）

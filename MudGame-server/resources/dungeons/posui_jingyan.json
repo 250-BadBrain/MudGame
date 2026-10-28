@@ -8,7 +8,8 @@
   "chapter": 1,
   "spawnRoomId": "palace_00",
   "puzzleInitialStates": {
-    "star_map": "unread"
+    "star_map": "unread",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "observe_star_map": {
@@ -85,6 +86,62 @@
       ],
       "nextState": "sketched",
       "message": "星盘向右转了半圈便咔哒卡死、原样弹回——方向不对。你需重新对照壁画。"
+    },
+    "content_epilogue": {
+      "label": "复盘：星盘为何留一缺角",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "palace_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "夺图不是把前人的答案原样占有；那块缺角正提醒每个来者亲自看一次星空。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "拓下缺角供后来者校验"
+        },
+        {
+          "id": "content_record_route",
+          "label": "保留原状避免误导后来人"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "jyg_war_phantom"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "拓下缺角供后来者校验",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "palace_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "夺图不是把前人的答案原样占有；那块缺角正提醒每个来者亲自看一次星空。 你选择：拓下缺角供后来者校验。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_posui_jingyan_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "保留原状避免误导后来人",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "palace_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "夺图不是把前人的答案原样占有；那块缺角正提醒每个来者亲自看一次星空。 你选择：保留原状避免误导后来人。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_posui_jingyan_route": true
+      }
     }
   },
   "rooms": {
@@ -105,7 +162,8 @@
       "npcs": [
         "jyg_stone_guard",
         "jyg_stone_guard"
-      ]
+      ],
+      "actions": []
     },
     "palace_01": {
       "name": "前殿回廊",
@@ -125,7 +183,8 @@
       "npcs": [
         "jyg_stone_guard",
         "jyg_stone_guard"
-      ]
+      ],
+      "actions": []
     },
     "palace_02": {
       "name": "星槎大殿",
@@ -167,7 +226,8 @@
       "npcs": [
         "jyg_sword_guard",
         "jyg_sword_guard"
-      ]
+      ],
+      "actions": []
     },
     "palace_04": {
       "name": "图录大殿",
@@ -177,6 +237,9 @@
       },
       "npcs": [
         "jyg_war_phantom"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -226,5 +289,19 @@
     "flags": {
       "posui_jingyan_completed": true
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "夺图不是把前人的答案原样占有；那块缺角正提醒每个来者亲自看一次星空。",
+    "solution": [
+      {
+        "roomId": "palace_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "palace_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

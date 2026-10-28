@@ -21,8 +21,15 @@
         "north": "bs_qingcheng"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "bs_t2"
+      ],
+      "searchFlag": "discovery_place_bs_city_gate",
+      "searchMessage": "你在锦官城门核对现场：成都锦官城的城门内外挤满盐商与药贩，城墙上\"蜀道千里，通于蜀中\"的刻字被摸得发亮。 进一步可核验的是：蜀锦披风挡过雨，护镖的本事还包括让不会武功的人走完这段山路。",
+      "contentRole": "巴蜀的锦官城门：记赶路人抵达的先后"
     },
     "bs_market": {
       "name": "蜀锦市集",
@@ -35,16 +42,21 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "bs_tang_steward",
-        "bs_herbalist"
+        "bs_herbalist",
+        "bs_tea_house"
       ],
       "exits": {
         "west": "bs_city_gate",
         "south": "bs_huanhua"
-      }
+      },
+      "searchFlag": "discovery_place_bs_market",
+      "searchMessage": "你在蜀锦市集核对现场：蜀锦市集天下闻名，一匹上等的蜀锦能换十匹洛绢。市集尽头，一家挂着唐字灯笼的铺子门可罗雀——唐家的铺子，不缺客人。 进一步可核验的是：暗器的难处在不该发时能停住。天梯先锁退轮，试针台先卸回簧；见到红结不要先剪。",
+      "contentRole": "巴蜀的蜀锦市集：卸簧分线与唐门克制"
     },
     "bs_huanhua": {
       "name": "浣花溪",
@@ -56,11 +68,18 @@
       ],
       "safeZone": true,
       "actions": [
-        "gather"
+        "gather",
+        "search"
       ],
       "exits": {
         "north": "bs_market"
-      }
+      },
+      "npcs": [
+        "bs_wine_maker"
+      ],
+      "searchFlag": "discovery_place_bs_huanhua",
+      "searchMessage": "你在浣花溪核对现场：浣花溪水清见底，浣衣的妇人捣衣声此起彼伏。溪边的药田一畦一畦——巴蜀的药材，一半出自这里。 进一步可核验的是：苦泉旁有活虫，甜泉旁却连苔藓都发白。 药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。",
+      "contentRole": "巴蜀的浣花溪：用酒曲气味辨假香掩毒"
     },
     "bs_qingcheng": {
       "name": "青城山道",
@@ -79,8 +98,15 @@
         "青城山道旁的老道童说：山上那位真人，已经闭关七年了——听说是在参悟一卷从洛阳带来的残页。"
       ],
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "r204_npc_1"
+      ],
+      "searchFlag": "discovery_place_bs_qingcheng",
+      "searchMessage": "你在青城山道核对现场：青城山道幽深寂谧，道观的钟声隔着竹林传下来。道旁的石碑刻着\"青城天下幽\"。 进一步可核验的是：苦泉旁有活虫，甜泉旁却连苔藓都发白。 药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。",
+      "contentRole": "巴蜀的青城山道：比鲜草、芦根与陈药性状"
     },
     "bs_tang_village": {
       "name": "唐家坳",
@@ -96,8 +122,12 @@
         "north": "bs_jiange"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "searchFlag": "discovery_place_bs_tang_village",
+      "searchMessage": "你在唐家坳核对现场：唐家坳的每一户人家都姓唐，每一户人家都会做暗器——村里最不缺的就是机关与规矩。 进一步可核验的是：唐家坳的每一户人家都姓唐，每一户人家都会做暗器——村里最不缺的就是机关与规矩。",
+      "contentRole": "巴蜀的唐家坳：从现场痕迹校验传闻"
     },
     "bs_jiange": {
       "name": "剑阁栈道口",
@@ -114,7 +144,13 @@
       ],
       "exits": {
         "south": "bs_tang_village"
-      }
+      },
+      "searchFlag": "discovery_place_bs_jiange",
+      "searchMessage": "你在剑阁栈道口核对现场：剑阁栈道口的石壁上插着断掉的箭——猿叟虽伏诛，余党的口哨还在栈道深处响。 进一步可核验的是：修栈道要先替回程留索。把铁镐尖插进新桩，可能只会连根撬走还没压实的泥土。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "巴蜀的剑阁栈道口：剑阁补路与旧驿绳法"
     }
   }
 }

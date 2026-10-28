@@ -931,6 +931,9 @@ func (r *RuntimeManager) executePuzzleActionNoLock(p *model.Player, room model.R
 	}
 	allowedState := stateStatus == engruntime.PuzzleActionReady
 	itemsReady := true
+	if !contentEvidenceMet(p, action.RequiredFlags, action.PresentItems) {
+		itemsReady = false
+	}
 	for itemID, amount := range action.RequiredItems {
 		if amount > 0 && p.Backpack[itemID] < amount {
 			itemsReady = false

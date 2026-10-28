@@ -1,7 +1,7 @@
 {
   "common_clothes": {
     "name": "粗布衣",
-    "description": "一件耐磨的粗布衣，洛阳城中最常见的行装。",
+    "description": "一件耐磨的粗布衣，洛阳城中最常见的行装。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "clothing",
     "stackable": false,
@@ -11,11 +11,17 @@
     "unit": "件",
     "equipmentSlot": "BODY",
     "limit": -1,
-    "source": "东市"
+    "source": "东市",
+    "contentUse": {
+      "npcId": "east_market_keeper",
+      "chapterId": "datang_yunhe",
+      "aidDungeon": "datang_yunhe",
+      "reading": "一件耐磨的粗布衣，洛阳城中最常见的行装。 粗布衣的补丁朝内是赶路磨破，朝外压线才像临时伪装。布鞋藏不住走山路还是踩船板的磨痕。 杜掌柜建议把粗布衣与《运河追击》的这个问题互证：纤道绳屑朝北散落，粮船曾逆流折返。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "common_shoes": {
     "name": "布鞋",
-    "description": "一双普通布鞋，走城中石板路还算合脚。",
+    "description": "一双普通布鞋，走城中石板路还算合脚。【器物线索】可向杜掌柜出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "shoes",
     "stackable": false,
@@ -25,11 +31,17 @@
     "unit": "双",
     "equipmentSlot": "FEET",
     "limit": -1,
-    "source": "东市"
+    "source": "东市",
+    "contentUse": {
+      "npcId": "east_market_keeper",
+      "chapterId": "datang_yunhe",
+      "aidDungeon": "datang_yunhe",
+      "reading": "一双普通布鞋，走城中石板路还算合脚。 粗布衣的补丁朝内是赶路磨破，朝外压线才像临时伪装。布鞋藏不住走山路还是踩船板的磨痕。 杜掌柜建议把布鞋与《运河追击》的这个问题互证：纤道绳屑朝北散落，粮船曾逆流折返。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "iron_sword": {
     "name": "铁剑",
-    "description": "河洛铁匠打制的铁剑，剑身朴实无华。",
+    "description": "河洛铁匠打制的铁剑，剑身朴实无华。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "sword",
     "stackable": false,
@@ -43,11 +55,17 @@
       "attack": 6
     },
     "source": "河洛铁匠",
-    "weaponType": "sword"
+    "weaponType": "sword",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_houjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "河洛铁匠打制的铁剑，剑身朴实无华。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把铁剑与《惊雁遗刻》的这个问题互证：遗刻与正文 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "steel_blade": {
     "name": "钢刀",
-    "description": "旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。",
+    "description": "旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -61,11 +79,17 @@
       "attack": 7
     },
     "source": "河洛铁匠",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "旧兵改铸而成，刃口较利，柄首仍留着旧铸痕。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把钢刀与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "iron_staff": {
     "name": "铁棍",
-    "description": "一根沉重铁棍，招式简单，胜在结实。",
+    "description": "一根沉重铁棍，招式简单，胜在结实。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "staff",
     "stackable": false,
@@ -80,11 +104,17 @@
       "parry": 2
     },
     "source": "河洛铁匠",
-    "weaponType": "staff"
+    "weaponType": "staff",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "dongming_shengong",
+      "aidDungeon": "dongming_shengong",
+      "reading": "一根沉重铁棍，招式简单，胜在结实。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把铁棍与《神工秘殿》的这个问题互证：大齿轮转得慢却承重，小齿轮转得快却只传讯。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "darts": {
     "name": "飞镖",
-    "description": "西市常见的暗器，薄而锋利。",
+    "description": "西市常见的暗器，薄而锋利。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "hidden_weapon",
     "stackable": false,
@@ -99,11 +129,17 @@
       "attack": 6
     },
     "source": "河洛铁匠",
-    "weaponType": "hidden_weapon"
+    "weaponType": "hidden_weapon",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "datang_tiandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "西市常见的暗器，薄而锋利。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把飞镖与《天刀试炼》的这个问题互证：刀意中的收手 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "iron_pickaxe": {
     "name": "铁镐",
-    "description": "一把结实铁镐，能用于采石、开箱和清理塌方。",
+    "description": "一把结实铁镐，能用于采石、开箱和清理塌方。【器物线索】可向剑阁驿丞出示，核对《绝壁悬栈》的来历；不消耗，穿戴中也可出示。",
     "type": "tool",
     "subtype": "gathering",
     "stackable": false,
@@ -112,11 +148,17 @@
     "rarity": 1,
     "unit": "把",
     "limit": -1,
-    "source": "河洛铁匠"
+    "source": "河洛铁匠",
+    "contentUse": {
+      "npcId": "bs_jiange_clerk",
+      "chapterId": "datang_xb2",
+      "aidDungeon": "datang_xb2",
+      "reading": "一把结实铁镐，能用于采石、开箱和清理塌方。 修栈道要先替回程留索。把铁镐尖插进新桩，可能只会连根撬走还没压实的泥土。 剑阁驿丞建议把铁镐与《绝壁悬栈》的这个问题互证：断索断在旧接头，不是被刀割断，拉得越紧越危险。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "dry_ration": {
     "name": "干粮",
-    "description": "商旅常备的粗粮饼，味道普通，却能充饥。",
+    "description": "商旅常备的粗粮饼，味道普通，却能充饥。【器物线索】可向陈货郎出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "food",
     "stackable": true,
@@ -129,11 +171,17 @@
     "effects": {
       "recoverHp": 5
     },
-    "source": "东市"
+    "source": "东市",
+    "contentUse": {
+      "npcId": "nan_market_peddler",
+      "chapterId": "datang_changshengjue",
+      "aidDungeon": "datang_yunhe",
+      "reading": "商旅常备的粗粮饼，味道普通，却能充饥。 干粮少补气血却便于分给掉队的人；金创药治外伤，烟尘粉只负责退路。把三样混成一种救命药，路上就会吃亏。 陈货郎建议把干粮与《扬子江惊变》的这个问题互证：渡江之后谁应被记住 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "simple_medicine": {
     "name": "金创药",
-    "description": "普通外伤药，行走江湖的人多少会备上一些。",
+    "description": "普通外伤药，行走江湖的人多少会备上一些。【器物线索】可向秦校尉出示，核对《扬子江惊变》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "medicine",
     "stackable": true,
@@ -146,11 +194,17 @@
     "effects": {
       "recoverHp": 25
     },
-    "source": "东市"
+    "source": "东市",
+    "contentUse": {
+      "npcId": "military_instructor",
+      "chapterId": "datang_changshengjue",
+      "aidDungeon": "datang_yunhe",
+      "reading": "普通外伤药，行走江湖的人多少会备上一些。 军令错一更便能让友军成为伏兵。到粮道先看射界，别拿追击的阵法护送百姓。 秦校尉建议把金创药与《扬子江惊变》的这个问题互证：渡江之后谁应被记住 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "smoke_powder": {
     "name": "烟尘粉",
-    "description": "战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。",
+    "description": "战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。【器物线索】可向裴玄出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "tool",
     "stackable": true,
@@ -163,11 +217,17 @@
     "rarity": 2,
     "unit": "包",
     "limit": -1,
-    "source": "西市"
+    "source": "西市",
+    "contentUse": {
+      "npcId": "black_market_broker",
+      "chapterId": "posui_sh2",
+      "aidDungeon": "posui_sh2",
+      "reading": "战斗中消耗一包撤离，不回复气血。副本按当前进度结算返回入口；公共世界返回本城出生点。常驻商店无限供应。 烟尘粉能替你争一次撤离，不能替你养伤。旧残图的价值在能与驿站原簿互证，只有传闻却没有来路的货先别信。 裴玄建议把烟尘粉与《沙海孤城》的这个问题互证：日影指向南面，脚下沙纹却来自北风，路标曾被挪过。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "old_map_fragment": {
     "name": "旧商路残图",
-    "description": "一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。",
+    "description": "一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。【器物线索】可向老骆出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。",
     "type": "material",
     "subtype": "map",
     "stackable": true,
@@ -176,11 +236,17 @@
     "rarity": 2,
     "unit": "张",
     "limit": 3,
-    "source": "西市"
+    "source": "西市",
+    "contentUse": {
+      "npcId": "station_master_luo",
+      "chapterId": "posui_sh2",
+      "aidDungeon": "posui_sh2",
+      "reading": "一张残缺商路图，边角写着潼关、荒庙和夜雨几个字。 路图上画的是地形，不是今天的风；在沙海看见新路牌，先回城门以日影校一次旧图。 老骆建议把旧商路残图与《沙海孤城》的这个问题互证：日影指向南面，脚下沙纹却来自北风，路标曾被挪过。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "bronze_box_rubbing": {
     "name": "铜匣拓片",
-    "description": "拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。",
+    "description": "拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。",
     "type": "quest",
     "subtype": "xunqin_clue",
     "stackable": true,
@@ -191,11 +257,17 @@
     "unit": "张",
     "limit": 1,
     "source": "西市",
-    "FirstClaim": true
+    "FirstClaim": true,
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_houjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "拓片纹路古拙，似乎与战国文字有关。许说书见了，也许会多讲几句。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把铜匣拓片与《惊雁遗刻》的这个问题互证：遗刻与正文 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "sealed_letter": {
     "name": "染血密信",
-    "description": "信封被雨水浸湿，火漆已碎，仍能看出上面曾有一枚陌生印记。",
+    "description": "信封被雨水浸湿，火漆已碎，仍能看出上面曾有一枚陌生印记。【器物线索】可向韩录事出示，核对《荒庙夜雨》的来历；不消耗，穿戴中也可出示。",
     "type": "quest",
     "subtype": "letter",
     "stackable": false,
@@ -205,11 +277,17 @@
     "rarity": 2,
     "unit": "封",
     "source": "荒庙夜雨",
-    "FirstClaim": true
+    "FirstClaim": true,
+    "contentUse": {
+      "npcId": "office_clerk",
+      "chapterId": "abandoned_temple_rain",
+      "aidDungeon": "datang_yunhe",
+      "reading": "信封被雨水浸湿，火漆已碎，仍能看出上面曾有一枚陌生印记。 染血密信的纸被雨打皱，火漆却在雨前就碎了。把纸与印分开记，才不会让转交者背了主谋的罪。 韩录事建议把染血密信与《荒庙夜雨》的这个问题互证：密信上的雨印 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "bronze_fragment": {
     "name": "古铜残片",
-    "description": "一枚带有古怪纹路的铜片，似乎来自某个机关铜匣。",
+    "description": "一枚带有古怪纹路的铜片，似乎来自某个机关铜匣。【器物线索】可向钟铁衣出示，核对《竟陵之围》的来历；不消耗，穿戴中也可出示。",
     "type": "material",
     "subtype": "secret_realm",
     "stackable": true,
@@ -217,11 +295,17 @@
     "value": 1000,
     "rarity": 3,
     "unit": "枚",
-    "source": "秘境异闻"
+    "source": "秘境异闻",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "datang_jingling",
+      "aidDungeon": "datang_yunhe",
+      "reading": "一枚带有古怪纹路的铜片，似乎来自某个机关铜匣。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把古铜残片与《竟陵之围》的这个问题互证：城门后的人 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yg_baoku_pearl": {
     "name": "宝库金珠",
-    "description": "杨公宝库中的大如龙眼的金珠，鲁妙子的手笔，成色远胜市面珠玉。",
+    "description": "杨公宝库中的大如龙眼的金珠，鲁妙子的手笔，成色远胜市面珠玉。【器物线索】可向沈七出示，核对《杨公宝库》的来历；不消耗，穿戴中也可出示。",
     "type": "treasure",
     "subtype": "gem",
     "stackable": false,
@@ -229,11 +313,17 @@
     "value": 800,
     "rarity": 3,
     "unit": "颗",
-    "source": "杨公宝库"
+    "source": "杨公宝库",
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_yanggong",
+      "aidDungeon": "datang_yunhe",
+      "reading": "杨公宝库中的大如龙眼的金珠，鲁妙子的手笔，成色远胜市面珠玉。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把宝库金珠与《杨公宝库》的这个问题互证：宝库里的轻重 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "nujiao_saber": {
     "name": "怒蛟刀",
-    "description": "怒蛟帮帮众的制式快刀，刀势凶悍。",
+    "description": "怒蛟帮帮众的制式快刀，刀势凶悍。【器物线索】可向抚琴女子出示，核对《怒蛟帮夜战》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -247,11 +337,17 @@
       "attack": 9
     },
     "source": "怒蛟帮夜战",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "jn_zither_player",
+      "chapterId": "fuyu_nujiao",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "怒蛟帮帮众的制式快刀，刀势凶悍。 竹海一声长笛只有石壁回应，两声短笛才有鸟鸣。听出谁在回应，比听出曲子有多好听更要紧。 抚琴女子建议把怒蛟刀与《怒蛟帮夜战》的这个问题互证：水寨的胜利属于谁 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yanggong_sword": {
     "name": "杨公宝剑",
-    "description": "出自杨公宝库的古剑，剑气内敛，锋锐无匹。",
+    "description": "出自杨公宝库的古剑，剑气内敛，锋锐无匹。【器物线索】可向化度寺知客僧出示，核对《杨公宝库》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "sword",
     "stackable": false,
@@ -266,11 +362,17 @@
       "hitRate": 4
     },
     "source": "杨公宝库",
-    "weaponType": "sword"
+    "weaponType": "sword",
+    "contentUse": {
+      "npcId": "ca2_monk",
+      "chapterId": "datang_yanggong",
+      "aidDungeon": "datang_yunhe",
+      "reading": "出自杨公宝库的古剑，剑气内敛，锋锐无匹。 念珠缺一颗不等于修行缺一分；先问遗失还是有意留下空位，才谈补全。慈航的试炼也不是把每处留白填满。 化度寺知客僧建议把杨公宝剑与《杨公宝库》的这个问题互证：宝库里的轻重 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "lanjiang_vest": {
     "name": "拦江劲衣",
-    "description": "以拦江一战中流传的贴身劲衣，柔韧贴身，避锋藏锐。",
+    "description": "以拦江一战中流传的贴身劲衣，柔韧贴身，避锋藏锐。【器物线索】可向鲁大个出示，核对《拦江一战·残影》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "clothes",
     "stackable": false,
@@ -284,11 +386,17 @@
       "defense": 8,
       "dodge": 3
     },
-    "source": "拦江一战"
+    "source": "拦江一战",
+    "contentUse": {
+      "npcId": "dock_foreman",
+      "chapterId": "fuyu_lanjiang",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "以拦江一战中流传的贴身劲衣，柔韧贴身，避锋藏锐。 缆头新、缆腰旧，往往是被人在夜里调过船。运河追击不能只沿着最深的辙痕跑，先核对原来的出船更次。 鲁大个建议把拦江劲衣与《拦江一战·残影》的这个问题互证：胜负之外的江潮 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "herb": {
     "name": "止血草",
-    "description": "洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。",
+    "description": "洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。【器物线索】可向药田老农出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "material",
     "subtype": "herb",
     "stackable": true,
@@ -296,11 +404,17 @@
     "value": 15,
     "rarity": 1,
     "unit": "株",
-    "source": "芦苇滩采集"
+    "source": "芦苇滩采集",
+    "contentUse": {
+      "npcId": "bs_herbalist",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "洛水滩涂常见的药草，捣敷可止血。药铺收购价不高，炼药师傅另眼相看。 止血草的茎断后有清苦味，芦根切口则有细密纤维。晒过的香气不能作无毒凭据，先看旁边是否还有活虫。 药田老农建议把止血草与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "herb_pill": {
     "name": "回春丹",
-    "description": "回春堂以止血草与干粮配制的伤药，便于携带，一粒可补益气血。",
+    "description": "回春堂以止血草与干粮配制的伤药，便于携带，一粒可补益气血。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "medicine",
     "subtype": "pill",
     "stackable": true,
@@ -312,11 +426,17 @@
     "usable": true,
     "effects": {
       "recoverHp": 60
+    },
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "回春堂以止血草与干粮配制的伤药，便于携带，一粒可补益气血。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把回春丹与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
     }
   },
   "xiaohuandan": {
     "name": "小还丹",
-    "description": "慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。",
+    "description": "慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。【器物线索】可向秦校尉出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "medicine",
     "subtype": "pill",
     "stackable": true,
@@ -328,11 +448,17 @@
     "usable": true,
     "effects": {
       "recoverHp": 100
+    },
+    "contentUse": {
+      "npcId": "military_instructor",
+      "chapterId": "datang_tiandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "慈航静斋秘制的疗伤圣药，一粒下去气血翻涌，伤势立愈大半。 军令错一更便能让友军成为伏兵。到粮道先看射界，别拿追击的阵法护送百姓。 秦校尉建议把小还丹与《天刀试炼》的这个问题互证：刀意中的收手 这是一条调查线索，最后的判断仍须亲历现场。"
     }
   },
   "dahuandan": {
     "name": "大还丹",
-    "description": "传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。",
+    "description": "传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "medicine",
     "subtype": "pill",
     "stackable": true,
@@ -344,11 +470,17 @@
     "usable": true,
     "effects": {
       "recoverHp": 150
+    },
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "datang_tiandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "传自战神殿丹方的伤药，也可在回春堂备料炼制或向行商购买。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把大还丹与《天刀试炼》的这个问题互证：刀意中的收手 这是一条调查线索，最后的判断仍须亲历现场。"
     }
   },
   "langwang_dao": {
     "name": "狼王刀",
-    "description": "马贼王赫连霸的佩刀，刀背宽厚，刃口却薄得能吹断头发——边荒十年的风霜都在刀身上。",
+    "description": "马贼王赫连霸的佩刀，刀背宽厚，刃口却薄得能吹断头发——边荒十年的风霜都在刀身上。【器物线索】可向马邑铁匠出示，核对《马贼王庭》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -362,11 +494,17 @@
       "hitRate": 3
     },
     "source": "马贼王庭",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "sb_iron_smith",
+      "chapterId": "bianhuang_wangting",
+      "aidDungeon": "bianhuang_chuanqi",
+      "reading": "马贼王赫连霸的佩刀，刀背宽厚，刃口却薄得能吹断头发——边荒十年的风霜都在刀身上。 白狼的威名靠哨探和地形维持；认清山口的风比再挂一面旗更有用。 马邑铁匠建议把狼王刀与《马贼王庭》的这个问题互证：空下来的王帐 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tianmo_pei": {
     "name": "天魔佩",
-    "description": "厉工退走时遗落的魔门古玉，触手冰凉——佩之能凝神索敌，魔门的旧物未必只属于魔。",
+    "description": "厉工退走时遗落的魔门古玉，触手冰凉——佩之能凝神索敌，魔门的旧物未必只属于魔。【器物线索】可向抚琴女子出示，核对《魔师宫索战》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "ring",
     "stackable": false,
@@ -379,11 +517,17 @@
       "critRate": 3,
       "hitRate": 3
     },
-    "source": "魔师宫索战"
+    "source": "魔师宫索战",
+    "contentUse": {
+      "npcId": "jn_zither_player",
+      "chapterId": "fuyu_moshigong",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "厉工退走时遗落的魔门古玉，触手冰凉——佩之能凝神索敌，魔门的旧物未必只属于魔。 竹海一声长笛只有石壁回应，两声短笛才有鸟鸣。听出谁在回应，比听出曲子有多好听更要紧。 抚琴女子建议把天魔佩与《魔师宫索战》的这个问题互证：索战为何击鼓 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "wagang_tiejia": {
     "name": "瓦岗铁甲",
-    "description": "瓦岗军的制式重甲改良而来，甲片层叠如鳞，刀砍上去只留一道白痕。",
+    "description": "瓦岗军的制式重甲改良而来，甲片层叠如鳞，刀砍上去只留一道白痕。【器物线索】可向韩录事出示，核对《瓦岗惊变》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "armor",
     "stackable": false,
@@ -396,11 +540,17 @@
       "defense": 10,
       "maxHp": 50
     },
-    "source": "瓦岗惊变"
+    "source": "瓦岗惊变",
+    "contentUse": {
+      "npcId": "office_clerk",
+      "chapterId": "datang_wagang",
+      "aidDungeon": "datang_yunhe",
+      "reading": "瓦岗军的制式重甲改良而来，甲片层叠如鳞，刀砍上去只留一道白痕。 染血密信的纸被雨打皱，火漆却在雨前就碎了。把纸与印分开记，才不会让转交者背了主谋的罪。 韩录事建议把瓦岗铁甲与《瓦岗惊变》的这个问题互证：开仓之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tianma_ling": {
     "name": "天马银铃",
-    "description": "飞马牧场名驹颈间的银铃，铃心坠着一粒墨玉。步履之间铃音清越——恶徒夜里摸进牧场前，总能先听见它响。",
+    "description": "飞马牧场名驹颈间的银铃，铃心坠着一粒墨玉。步履之间铃音清越——恶徒夜里摸进牧场前，总能先听见它响。【器物线索】可向沈七出示，核对《飞马牧场》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "necklace",
     "stackable": false,
@@ -414,11 +564,17 @@
       "dodge": 2,
       "initiative": 3
     },
-    "source": "飞马牧场"
+    "source": "飞马牧场",
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_feima",
+      "aidDungeon": "datang_yunhe",
+      "reading": "飞马牧场名驹颈间的银铃，铃心坠着一粒墨玉。步履之间铃音清越——恶徒夜里摸进牧场前，总能先听见它响。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把天马银铃与《飞马牧场》的这个问题互证：牧场的归属 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "posui_huan": {
     "name": "破碎指环",
-    "description": "以战神殿中一块图录碎玉磨成的指环——凝神时，指环里仿佛有雷声滚动。",
+    "description": "以战神殿中一块图录碎玉磨成的指环——凝神时，指环里仿佛有雷声滚动。【器物线索】可向临帖老翁出示，核对《鸡鸣山之约》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "ring",
     "stackable": false,
@@ -432,11 +588,17 @@
       "hitRate": 4,
       "dodge": 3
     },
-    "source": "鸡鸣山之约"
+    "source": "鸡鸣山之约",
+    "contentUse": {
+      "npcId": "jn_calligrapher",
+      "chapterId": "posui_jiming",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "以战神殿中一块图录碎玉磨成的指环——凝神时，指环里仿佛有雷声滚动。 临帖最难的是不替古人填他没有写的东西。空明照壁有字无影处，恰好值得多看一眼。 临帖老翁建议把破碎指环与《鸡鸣山之约》的这个问题互证：登山之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "xuantie_zhanzhi": {
     "name": "玄铁战指",
-    "description": "五枚古铜残片回炉重锻的战指，玄铁的凉意渗进指骨——出刀时会稳上几分。",
+    "description": "五枚古铜残片回炉重锻的战指，玄铁的凉意渗进指骨——出刀时会稳上几分。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "ring",
     "stackable": false,
@@ -449,11 +611,17 @@
       "attack": 2,
       "defense": 4
     },
-    "source": "铁匠铺合成"
+    "source": "铁匠铺合成",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "五枚古铜残片回炉重锻的战指，玄铁的凉意渗进指骨——出刀时会稳上几分。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把玄铁战指与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "zhanma_dao": {
     "name": "斩马刀",
-    "description": "瓦岗阵前斩马用的厚背长刀，刀身上一道深豁——那是砍在铁骑甲上的印记。",
+    "description": "瓦岗阵前斩马用的厚背长刀，刀身上一道深豁——那是砍在铁骑甲上的印记。【器物线索】可向化度寺知客僧出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -467,11 +635,17 @@
       "hitRate": 2
     },
     "source": "洛阳粮道",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "ca2_monk",
+      "chapterId": "datang_liangdao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "瓦岗阵前斩马用的厚背长刀，刀身上一道深豁——那是砍在铁骑甲上的印记。 念珠缺一颗不等于修行缺一分；先问遗失还是有意留下空位，才谈补全。慈航的试炼也不是把每处留白填满。 化度寺知客僧建议把斩马刀与《洛阳粮道》的这个问题互证：断桥该怎样重修 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "dongting_ruanjia": {
     "name": "洞庭软甲",
-    "description": "洞庭渔家秘传的软甲，浸过桐油鱼胶，柔如布衣，韧若鳞甲。",
+    "description": "洞庭渔家秘传的软甲，浸过桐油鱼胶，柔如布衣，韧若鳞甲。【器物线索】可向钟铁衣出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "armor",
     "stackable": false,
@@ -483,11 +657,17 @@
     "effects": {
       "defense": 12
     },
-    "source": "巴陵夜泊"
+    "source": "巴陵夜泊",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "datang_baling",
+      "aidDungeon": "datang_yunhe",
+      "reading": "洞庭渔家秘传的软甲，浸过桐油鱼胶，柔如布衣，韧若鳞甲。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把洞庭软甲与《巴陵夜泊》的这个问题互证：火后的泊口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "sanhua_yuzhuo": {
     "name": "散花玉镯",
-    "description": "散花楼主人的玉镯，镯身刻着细如发丝的天魔纹——戴上它，出手总比旁人快半分。",
+    "description": "散花楼主人的玉镯，镯身刻着细如发丝的天魔纹——戴上它，出手总比旁人快半分。【器物线索】可向韩录事出示，核对《散花楼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "bracelet",
     "stackable": false,
@@ -500,11 +680,17 @@
       "critRate": 2,
       "dodge": 2
     },
-    "source": "散花楼"
+    "source": "散花楼",
+    "contentUse": {
+      "npcId": "office_clerk",
+      "chapterId": "datang_sanhua",
+      "aidDungeon": "datang_yunhe",
+      "reading": "散花楼主人的玉镯，镯身刻着细如发丝的天魔纹——戴上它，出手总比旁人快半分。 染血密信的纸被雨打皱，火漆却在雨前就碎了。把纸与印分开记，才不会让转交者背了主谋的罪。 韩录事建议把散花玉镯与《散花楼》的这个问题互证：楼中的真假 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yulie_shuangdao": {
     "name": "羽裂双刀",
-    "description": "方夜羽的新刀——上次败给你之后，他重铸了刀，也重铸了自己的刀路。刃口薄得像一声叹息。",
+    "description": "方夜羽的新刀——上次败给你之后，他重铸了刀，也重铸了自己的刀路。刃口薄得像一声叹息。【器物线索】可向抚琴女子出示，核对《方夜羽复仇》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -517,11 +703,17 @@
       "attack": 12
     },
     "source": "方夜羽复仇",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "jn_zither_player",
+      "chapterId": "fuyu_fangfuchou",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "方夜羽的新刀——上次败给你之后，他重铸了刀，也重铸了自己的刀路。刃口薄得像一声叹息。 竹海一声长笛只有石壁回应，两声短笛才有鸟鸣。听出谁在回应，比听出曲子有多好听更要紧。 抚琴女子建议把羽裂双刀与《方夜羽复仇》的这个问题互证：复仇后的水门 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "fenshui_ci": {
     "name": "分水刺",
-    "description": "水战专用的三棱分水刺，破浪如分水——怒蛟帮水战的看家家伙。",
+    "description": "水战专用的三棱分水刺，破浪如分水——怒蛟帮水战的看家家伙。【器物线索】可向许说书出示，核对《怒蛟水战》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "hidden_weapon",
     "stackable": false,
@@ -535,11 +727,17 @@
       "critRate": 2
     },
     "source": "怒蛟水战",
-    "weaponType": "hidden_weapon"
+    "weaponType": "hidden_weapon",
+    "contentUse": {
+      "npcId": "storyteller",
+      "chapterId": "fuyu_shuizhan",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "水战专用的三棱分水刺，破浪如分水——怒蛟帮水战的看家家伙。 说书会把渡船唱成神舟，把不愿留名的人写成大侠。若要查真事，去找仍在替那条船补缝的人。 许说书建议把分水刺与《怒蛟水战》的这个问题互证：沉船锁口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "bianhuang_xue": {
     "name": "边荒战靴",
-    "description": "边荒集佣兵头子们凑钱打造的战靴，鞋底钉着狼牙钉——荒漠里跑起来，风都追不上。",
+    "description": "边荒集佣兵头子们凑钱打造的战靴，鞋底钉着狼牙钉——荒漠里跑起来，风都追不上。【器物线索】可向赵关山出示，核对《边荒集夺旗》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "boots",
     "stackable": false,
@@ -552,11 +750,17 @@
       "dodge": 3,
       "defense": 6
     },
-    "source": "边荒集夺旗"
+    "source": "边荒集夺旗",
+    "contentUse": {
+      "npcId": "tongguan_officer",
+      "chapterId": "bianhuang_duoqi",
+      "aidDungeon": "bianhuang_chuanqi",
+      "reading": "边荒集佣兵头子们凑钱打造的战靴，鞋底钉着狼牙钉——荒漠里跑起来，风都追不上。 守关不是毁掉敌我共用的每一口井。没有水，伤兵会先于攻城者倒下；空箭架有时是在替他们争一刻。 赵关山建议把边荒战靴与《边荒集夺旗》的这个问题互证：旗落之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "zhenshui_huan": {
     "name": "镇水环",
-    "description": "枯井翁镇了一辈子水的铜环，环身刻满镇字——如今它换了主人，水患换了方向。",
+    "description": "枯井翁镇了一辈子水的铜环，环身刻满镇字——如今它换了主人，水患换了方向。【器物线索】可向落魄诗人出示，核对《枯井之下》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "ring",
     "stackable": false,
@@ -569,11 +773,17 @@
       "hitRate": 4,
       "defense": 4
     },
-    "source": "枯井之下"
+    "source": "枯井之下",
+    "contentUse": {
+      "npcId": "dd2_pool_poet",
+      "chapterId": "luoshui_kujing",
+      "aidDungeon": "luoshui_longyin",
+      "reading": "枯井翁镇了一辈子水的铜环，环身刻满镇字——如今它换了主人，水患换了方向。 诗里的晓月是方位，不是时辰。水下账页依原来的孔线排列，比按你喜欢的诗序重编可靠。 落魄诗人建议把镇水环与《枯井之下》的这个问题互证：井底的来历 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "shujin_pifeng": {
     "name": "蜀锦披风",
-    "description": "蜀中织造的锦缎披风，内衬软甲——锦上绣的是巴山夜雨，衬里织的是刀枪不入。",
+    "description": "蜀中织造的锦缎披风，内衬软甲——锦上绣的是巴山夜雨，衬里织的是刀枪不入。【器物线索】可向钟铁衣出示，核对《蜀道护镖》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "cloak",
     "stackable": false,
@@ -586,11 +796,17 @@
       "defense": 13,
       "dodge": 2
     },
-    "source": "蜀道护镖"
+    "source": "蜀道护镖",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "datang_shudao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "蜀中织造的锦缎披风，内衬软甲——锦上绣的是巴山夜雨，衬里织的是刀枪不入。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把蜀锦披风与《蜀道护镖》的这个问题互证：镖货与人 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "reed_root": {
     "name": "芦根",
-    "description": "扬州苇荡里挖出的芦根，晒干可入药，药铺按株收。",
+    "description": "扬州苇荡里挖出的芦根，晒干可入药，药铺按株收。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "material",
     "subtype": "herb",
     "stackable": true,
@@ -598,11 +814,17 @@
     "value": 12,
     "rarity": 1,
     "unit": "株",
-    "source": "扬州苇荡采集"
+    "source": "扬州苇荡采集",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "扬州苇荡里挖出的芦根，晒干可入药，药铺按株收。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把芦根与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tangmen_tili": {
     "name": "唐门铁蒺藜",
-    "description": "唐门秘制的铁蒺藜，淬着见血封喉的药——巴蜀的暗器，天下第一。",
+    "description": "唐门秘制的铁蒺藜，淬着见血封喉的药——巴蜀的暗器，天下第一。【器物线索】可向沈七出示，核对《蜀道栈桥》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "hidden_weapon",
     "stackable": false,
@@ -616,11 +838,17 @@
       "critRate": 1
     },
     "source": "蜀道栈桥",
-    "weaponType": "hidden_weapon"
+    "weaponType": "hidden_weapon",
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_zhandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "唐门秘制的铁蒺藜，淬着见血封喉的药——巴蜀的暗器，天下第一。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把唐门铁蒺藜与《蜀道栈桥》的这个问题互证：猴巢余音 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "langya_chui": {
     "name": "狼牙重锏",
-    "description": "一柄沉重铁锏，适合锏法流派。",
+    "description": "一柄沉重铁锏，适合锏法流派。【器物线索】可向马邑铁匠出示，核对《狼山口》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "mace",
     "stackable": false,
@@ -633,11 +861,17 @@
       "attack": 13
     },
     "source": "狼山口",
-    "weaponType": "mace"
+    "weaponType": "mace",
+    "contentUse": {
+      "npcId": "sb_iron_smith",
+      "chapterId": "saibei_langshan",
+      "aidDungeon": "saibei_xueyuan",
+      "reading": "一柄沉重铁锏，适合锏法流派。 白狼的威名靠哨探和地形维持；认清山口的风比再挂一面旗更有用。 马邑铁匠建议把狼牙重锏与《狼山口》的这个问题互证：狼旗与哨口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "jianchi_jian": {
     "name": "淬泉剑",
-    "description": "剑池泉底淬了三年的长剑，剑身幽蓝——江南剑客说，好剑是水养出来的。",
+    "description": "剑池泉底淬了三年的长剑，剑身幽蓝——江南剑客说，好剑是水养出来的。【器物线索】可向江南绸商出示，核对《剑池》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "sword",
     "stackable": false,
@@ -652,11 +886,17 @@
       "dodge": 2
     },
     "source": "剑池",
-    "weaponType": "sword"
+    "weaponType": "sword",
+    "contentUse": {
+      "npcId": "jn_silk_merchant",
+      "chapterId": "jiangnan_jianchi",
+      "aidDungeon": "jiangnan_zhuhai",
+      "reading": "剑池泉底淬了三年的长剑，剑身幽蓝——江南剑客说，好剑是水养出来的。 散花玉簪与玉镯看似相配，留下它们的人却不一定站在同一边。 江南绸商建议把淬泉剑与《剑池》的这个问题互证：泉下之剑 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tianjin_yuepei": {
     "name": "天津晓月佩",
-    "description": "以洛阳天津桥晓月为主题的玉佩，玉里封着一线晨光——佩之者心明眼亮，夜战如昼。",
+    "description": "以洛阳天津桥晓月为主题的玉佩，玉里封着一线晨光——佩之者心明眼亮，夜战如昼。【器物线索】可向钟铁衣出示，核对《天津晓月》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "necklace",
     "stackable": false,
@@ -670,11 +910,17 @@
       "dodge": 2,
       "attack": 2
     },
-    "source": "天津晓月"
+    "source": "天津晓月",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "dongdu_tianjin",
+      "aidDungeon": "dongdu_caoyu",
+      "reading": "以洛阳天津桥晓月为主题的玉佩，玉里封着一线晨光——佩之者心明眼亮，夜战如昼。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把天津晓月佩与《天津晓月》的这个问题互证：晓月照账 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "cangming_juan": {
     "name": "沧溟玉简",
-    "description": "海市主人以千年鲛绡与深海玉髓制成的玉简——据说海上的潮汐，全记在它里面。",
+    "description": "海市主人以千年鲛绡与深海玉髓制成的玉简——据说海上的潮汐，全记在它里面。【器物线索】可向鲛人珠娘出示，核对《海市》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "necklace",
     "stackable": false,
@@ -687,11 +933,17 @@
       "maxMp": 30,
       "maxHp": 30
     },
-    "source": "海市"
+    "source": "海市",
+    "contentUse": {
+      "npcId": "dm_jiaoren",
+      "chapterId": "dongming_haisi",
+      "aidDungeon": "dongming_chuanfen",
+      "reading": "海市主人以千年鲛绡与深海玉髓制成的玉简——据说海上的潮汐，全记在它里面。 深海寒珠贴掌先凉后回温，海市假珠却始终一个温度。验珠不是只为卖贵一点，也为了辨清哪份旧约真的到过海底。 鲛人珠娘建议把沧溟玉简与《海市》的这个问题互证：海市的主人 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tezhong_dahuandan": {
     "name": "特级大还丹",
-    "description": "回春堂孙回春倾尽毕生功力炼制的极品大还丹——一粒下去，断骨重续，气血翻涌。",
+    "description": "回春堂孙回春倾尽毕生功力炼制的极品大还丹——一粒下去，断骨重续，气血翻涌。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。",
     "type": "medicine",
     "subtype": "pill",
     "stackable": true,
@@ -703,11 +955,17 @@
     "usable": true,
     "effects": {
       "recoverHp": 300
+    },
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_houjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "回春堂孙回春倾尽毕生功力炼制的极品大还丹——一粒下去，断骨重续，气血翻涌。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把特级大还丹与《惊雁遗刻》的这个问题互证：遗刻与正文 这是一条调查线索，最后的判断仍须亲历现场。"
     }
   },
   "nujiao_belt": {
     "name": "怒蛟腰带",
-    "description": "怒蛟帮帮众的制式腰带，扣面是一头昂首的蛟——水战的荣光系于腰间。",
+    "description": "怒蛟帮帮众的制式腰带，扣面是一头昂首的蛟——水战的荣光系于腰间。【器物线索】可向抚琴女子出示，核对《怒蛟帮夜战》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "belt",
     "stackable": false,
@@ -720,11 +978,17 @@
       "defense": 5,
       "dodge": 2
     },
-    "source": "怒蛟帮夜战"
+    "source": "怒蛟帮夜战",
+    "contentUse": {
+      "npcId": "jn_zither_player",
+      "chapterId": "fuyu_nujiao",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "怒蛟帮帮众的制式腰带，扣面是一头昂首的蛟——水战的荣光系于腰间。 竹海一声长笛只有石壁回应，两声短笛才有鸟鸣。听出谁在回应，比听出曲子有多好听更要紧。 抚琴女子建议把怒蛟腰带与《怒蛟帮夜战》的这个问题互证：水寨的胜利属于谁 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "jingyan_longscale": {
     "name": "惊雁龙鳞甲",
-    "description": "以图录长阶石卫残甲熔铸的龙鳞甲，甲片如龙覆——刀砍上去留不下印。",
+    "description": "以图录长阶石卫残甲熔铸的龙鳞甲，甲片如龙覆——刀砍上去留不下印。【器物线索】可向灰袍老者出示，核对《惊雁宫夺图》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "armor",
     "stackable": false,
@@ -737,11 +1001,17 @@
       "defense": 9,
       "parry": 3
     },
-    "source": "惊雁宫夺图"
+    "source": "惊雁宫夺图",
+    "contentUse": {
+      "npcId": "ancient_scroll_keeper",
+      "chapterId": "posui_jingyan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "以图录长阶石卫残甲熔铸的龙鳞甲，甲片如龙覆——刀砍上去留不下印。 战神图录、遗刻与后人的解释应分开记。绝学仍要亲历，读到一个古名不等于已经取得传承。 灰袍老者建议把惊雁龙鳞甲与《惊雁宫夺图》的这个问题互证：星盘为何留一缺角 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "bianhuang_wolfpelt": {
     "name": "边荒狼皮氅",
-    "description": "白狼主帐前的白狼皮做成的氅衣——穿上它，塞外的风就认得你了。",
+    "description": "白狼主帐前的白狼皮做成的氅衣——穿上它，塞外的风就认得你了。【器物线索】可向赵关山出示，核对《边荒集夺旗》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "cloak",
     "stackable": false,
@@ -754,11 +1024,17 @@
       "defense": 6,
       "dodge": 3
     },
-    "source": "边荒集夺旗"
+    "source": "边荒集夺旗",
+    "contentUse": {
+      "npcId": "tongguan_officer",
+      "chapterId": "bianhuang_duoqi",
+      "aidDungeon": "bianhuang_chuanqi",
+      "reading": "白狼主帐前的白狼皮做成的氅衣——穿上它，塞外的风就认得你了。 守关不是毁掉敌我共用的每一口井。没有水，伤兵会先于攻城者倒下；空箭架有时是在替他们争一刻。 赵关山建议把边荒狼皮氅与《边荒集夺旗》的这个问题互证：旗落之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tangmei_gauntlet": {
     "name": "唐门护手",
-    "description": "唐门秘制的护手，机关暗扣暗藏其间——握手成拳时，指尖弹出三枚毒针。",
+    "description": "唐门秘制的护手，机关暗扣暗藏其间——握手成拳时，指尖弹出三枚毒针。【器物线索】可向化度寺知客僧出示，核对《蜀道栈桥》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "gauntlet",
     "stackable": false,
@@ -771,11 +1047,17 @@
       "attack": 3,
       "critRate": 2
     },
-    "source": "蜀道栈桥"
+    "source": "蜀道栈桥",
+    "contentUse": {
+      "npcId": "ca2_monk",
+      "chapterId": "datang_zhandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "唐门秘制的护手，机关暗扣暗藏其间——握手成拳时，指尖弹出三枚毒针。 念珠缺一颗不等于修行缺一分；先问遗失还是有意留下空位，才谈补全。慈航的试炼也不是把每处留白填满。 化度寺知客僧建议把唐门护手与《蜀道栈桥》的这个问题互证：猴巢余音 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "sanhua_flowerpin": {
     "name": "散花玉簪",
-    "description": "散花楼主人遗落的玉簪，簪头雕着一朵牡丹——花会谢，玉不会。",
+    "description": "散花楼主人遗落的玉簪，簪头雕着一朵牡丹——花会谢，玉不会。【器物线索】可向钟铁衣出示，核对《散花楼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "hairpin",
     "stackable": false,
@@ -788,11 +1070,17 @@
       "hitRate": 3,
       "charm": 2
     },
-    "source": "散花楼"
+    "source": "散花楼",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "datang_sanhua",
+      "aidDungeon": "datang_yunhe",
+      "reading": "散花楼主人遗落的玉簪，簪头雕着一朵牡丹——花会谢，玉不会。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把散花玉簪与《散花楼》的这个问题互证：楼中的真假 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yinkui_lotus": {
     "name": "阴葵莲环",
-    "description": "阴癸派的莲形铜环，环心嵌着一粒黑色珍珠——碰触时，耳边会响起经文。",
+    "description": "阴癸派的莲形铜环，环心嵌着一粒黑色珍珠——碰触时，耳边会响起经文。【器物线索】可向二十四桥船娘出示，核对《枯井之下》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "ring",
     "stackable": false,
@@ -805,11 +1093,17 @@
       "attack": 4,
       "defense": 3
     },
-    "source": "枯井之下"
+    "source": "枯井之下",
+    "contentUse": {
+      "npcId": "yz_boat_girl",
+      "chapterId": "luoshui_kujing",
+      "aidDungeon": "luoshui_longyin",
+      "reading": "阴癸派的莲形铜环，环心嵌着一粒黑色珍珠——碰触时，耳边会响起经文。 船娘唱的不是任意曲子，每一停橹对应一次回水。龙吟随水位变，就先查连通水道，不必急着认作神怪。 二十四桥船娘建议把阴葵莲环与《枯井之下》的这个问题互证：井底的来历 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "changjiang_tidecrystal": {
     "name": "江潮晶石",
-    "description": "从拦江战台江底捞出的潮汐结晶——握在手里，能听见长江的心跳。",
+    "description": "从拦江战台江底捞出的潮汐结晶——握在手里，能听见长江的心跳。【器物线索】可向鲁大个出示，核对《拦江一战·残影》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "charm",
     "stackable": false,
@@ -822,11 +1116,17 @@
       "maxMp": 20,
       "hitRate": 3
     },
-    "source": "拦江一战·残影"
+    "source": "拦江一战·残影",
+    "contentUse": {
+      "npcId": "dock_foreman",
+      "chapterId": "fuyu_lanjiang",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "从拦江战台江底捞出的潮汐结晶——握在手里，能听见长江的心跳。 缆头新、缆腰旧，往往是被人在夜里调过船。运河追击不能只沿着最深的辙痕跑，先核对原来的出船更次。 鲁大个建议把江潮晶石与《拦江一战·残影》的这个问题互证：胜负之外的江潮 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "saibei_wolftooth": {
     "name": "狼牙项链",
-    "description": "以白狼王的獠牙磨成的项链——塞外人说，它能让主人听懂狼的语言。",
+    "description": "以白狼王的獠牙磨成的项链——塞外人说，它能让主人听懂狼的语言。【器物线索】可向马邑铁匠出示，核对《狼山口》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "necklace",
     "stackable": false,
@@ -839,11 +1139,17 @@
       "attack": 3,
       "dodge": 2
     },
-    "source": "狼山口"
+    "source": "狼山口",
+    "contentUse": {
+      "npcId": "sb_iron_smith",
+      "chapterId": "saibei_langshan",
+      "aidDungeon": "saibei_xueyuan",
+      "reading": "以白狼王的獠牙磨成的项链——塞外人说，它能让主人听懂狼的语言。 白狼的威名靠哨探和地形维持；认清山口的风比再挂一面旗更有用。 马邑铁匠建议把狼牙项链与《狼山口》的这个问题互证：狼旗与哨口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "hanxue_dao": {
     "name": "寒雪刀",
-    "description": "塞北铁匠以百炼精钢锻造的弯刀——雪原上的刀，出鞘即带寒气。",
+    "description": "塞北铁匠以百炼精钢锻造的弯刀——雪原上的刀，出鞘即带寒气。【器物线索】可向雪线领路人出示，核对《雪原猎狼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -857,11 +1163,17 @@
       "initiative": 3
     },
     "source": "雪原猎狼",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "sb_s2",
+      "chapterId": "saibei_xueyuan",
+      "aidDungeon": "saibei_xueyuan",
+      "reading": "塞北铁匠以百炼精钢锻造的弯刀——雪原上的刀，出鞘即带寒气。 去向王帐的脚印整齐，回程却只有一串拖痕。 石槽里藏着反穿的毡靴，哨探把前后方向调换了。 雪线领路人建议把寒雪刀与《雪原猎狼》的这个问题互证：狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "zhumei_luopan": {
     "name": "竹梅罗盘",
-    "description": "江南匠人以百年竹根与寒铁打造的罗盘——指的方向，永远是你心里想去的那个地方。",
+    "description": "江南匠人以百年竹根与寒铁打造的罗盘——指的方向，永远是你心里想去的那个地方。【器物线索】可向守池人出示，核对《竹海迷踪》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "compass",
     "stackable": false,
@@ -874,11 +1186,17 @@
       "hitRate": 4,
       "dodge": 3
     },
-    "source": "竹海迷踪"
+    "source": "竹海迷踪",
+    "contentUse": {
+      "npcId": "jn_pool_keeper",
+      "chapterId": "jiangnan_zhuhai",
+      "aidDungeon": "jiangnan_zhuhai",
+      "reading": "江南匠人以百年竹根与寒铁打造的罗盘——指的方向，永远是你心里想去的那个地方。 木牌画着清浊两泉：先引清流，再松封剑木楔。只把剑拿走，后来的人就只能从一池锈水里找传说。 守池人建议把竹梅罗盘与《竹海迷踪》的这个问题互证：两声短笛引来鸟鸣，一声长笛却只在石壁回响。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "caoyun_lingpai": {
     "name": "漕运令牌",
-    "description": "东都漕运司的鎏金令牌——持此牌者，运河九省通行无阻。",
+    "description": "东都漕运司的鎏金令牌——持此牌者，运河九省通行无阻。【器物线索】可向赵横江出示，核对《漕渠暗战》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "token",
     "stackable": false,
@@ -891,11 +1209,17 @@
       "defense": 6,
       "hitRate": 4
     },
-    "source": "漕渠暗战"
+    "source": "漕渠暗战",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "dongdu_caoyu",
+      "aidDungeon": "dongdu_caoyu",
+      "reading": "东都漕运司的鎏金令牌——持此牌者，运河九省通行无阻。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把漕运令牌与《漕渠暗战》的这个问题互证：漕砖上的水痕高低相反，有人夜里倒开了水闸。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "shenhai_zhenzhu": {
     "name": "深海寒珠",
-    "description": "东溟海底万丈深处的寒珠，珠心封着一滴鲛人泪——夜战时，它会发出微光。",
+    "description": "东溟海底万丈深处的寒珠，珠心封着一滴鲛人泪——夜战时，它会发出微光。【器物线索】可向守阁人出示，核对《沉船探秘》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "pearl",
     "stackable": false,
@@ -908,11 +1232,17 @@
       "attack": 5,
       "defense": 5
     },
-    "source": "沉船探秘"
+    "source": "沉船探秘",
+    "contentUse": {
+      "npcId": "dm_mirage_keeper",
+      "chapterId": "dongming_chuanfen",
+      "aidDungeon": "dongming_chuanfen",
+      "reading": "东溟海底万丈深处的寒珠，珠心封着一滴鲛人泪——夜战时，它会发出微光。 真正的门槛会留下退潮盐线，幻景只肯在涨潮时好看。沧溟玉简里先读归航，再谈入宫。 守阁人建议把深海寒珠与《沉船探秘》的这个问题互证：浮木都卡在上舷，梁木受力点却在下舷。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "kangshi_remnant": {
     "name": "突厥金刀令",
-    "description": "康鞘利残影崩解后遗落的金刀令——突厥王庭的信物，持此令者可在塞北通行无阻。",
+    "description": "康鞘利残影崩解后遗落的金刀令——突厥王庭的信物，持此令者可在塞北通行无阻。【器物线索】可向孙回春出示，核对《竟陵试炼殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "token",
     "stackable": false,
@@ -926,11 +1256,17 @@
       "hitRate": 4,
       "critRate": 2
     },
-    "source": "竟陵试炼殿"
+    "source": "竟陵试炼殿",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "jingling_trial_hall",
+      "aidDungeon": "datang_yunhe",
+      "reading": "康鞘利残影崩解后遗落的金刀令——突厥王庭的信物，持此令者可在塞北通行无阻。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把突厥金刀令与《竟陵试炼殿》的这个问题互证：金刀令的两面 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "songque_testament": {
     "name": "天刀遗篇",
-    "description": "宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。",
+    "description": "宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。【器物线索】可向钟铁衣出示，核对《天刀试炼殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "scroll",
     "stackable": false,
@@ -944,11 +1280,17 @@
       "critRate": 2,
       "initiative": 2
     },
-    "source": "天刀试炼殿"
+    "source": "天刀试炼殿",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "tiandao_trial_hall",
+      "aidDungeon": "datang_yunhe",
+      "reading": "宋缺残影消散前留下的天刀心得，笔势从容——这是他毕生武道的最后注脚。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把天刀遗篇与《天刀试炼殿》的这个问题互证：遗篇为何不全 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "wanwan_feather": {
     "name": "天魔羽",
-    "description": "婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。",
+    "description": "婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。【器物线索】可向赵横江出示，核对《飞马试炼殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "feather",
     "stackable": false,
@@ -962,11 +1304,17 @@
       "critRate": 2,
       "maxMp": 15
     },
-    "source": "飞马试炼殿"
+    "source": "飞马试炼殿",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "feima_trial_hall",
+      "aidDungeon": "datang_yunhe",
+      "reading": "婠婠残影消散后留下一根白羽——天魔功的最高境界不是杀伐，是自在。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把天魔羽与《飞马试炼殿》的这个问题互证：羽落谁手 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "bianbuou_wisdom": {
     "name": "边不负的念珠",
-    "description": "边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。",
+    "description": "边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。【器物线索】可向柳先生出示，核对《长安试炼殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "rosary",
     "stackable": false,
@@ -980,11 +1328,17 @@
       "hitRate": 3,
       "maxMp": 10
     },
-    "source": "长安试炼殿"
+    "source": "长安试炼殿",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "changan_trial_hall",
+      "aidDungeon": "datang_yunhe",
+      "reading": "边不负残影消散后留下一串念珠——魔门元老最后握着的不是刀，是念珠。世事如潮，念珠如初。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把边不负的念珠与《长安试炼殿》的这个问题互证：念珠与剑典 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "gongbian_jian": {
     "name": "宫变密剑",
-    "description": "宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。",
+    "description": "宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "sword",
     "stackable": false,
@@ -999,12 +1353,18 @@
       "initiative": 3,
       "dodge": 2
     },
-    "source": "历史版本东都宫变奖励，仅保留旧档持有；当前不再投放。",
-    "weaponType": "sword"
+    "source": "钟铁衣以宫变夜明珠按旧制改铸，单次明确选择；旧档兼容。",
+    "weaponType": "sword",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "宫变之夜遗落的短剑——剑柄缠着金吾卫的丝绦。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把宫变密剑与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yunhe_pao": {
     "name": "运河披风",
-    "description": "运河船工的桐油披风，防雨防刀，水性好的人离不开它。",
+    "description": "运河船工的桐油披风，防雨防刀，水性好的人离不开它。【器物线索】可向韩录事出示，核对《运河追击》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1019,11 +1379,17 @@
       "parry": 2,
       "maxHp": 30
     },
-    "source": "运河追击"
+    "source": "运河追击",
+    "contentUse": {
+      "npcId": "office_clerk",
+      "chapterId": "datang_yunhe",
+      "aidDungeon": "datang_yunhe",
+      "reading": "运河船工的桐油披风，防雨防刀，水性好的人离不开它。 染血密信的纸被雨打皱，火漆却在雨前就碎了。把纸与印分开记，才不会让转交者背了主谋的罪。 韩录事建议把运河披风与《运河追击》的这个问题互证：纤道绳屑朝北散落，粮船曾逆流折返。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "moshi_lingzhu": {
     "name": "魔师宫主令珠",
-    "description": "魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。",
+    "description": "魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。【器物线索】可向鲁大个出示，核对《魔师宫秘道》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1038,11 +1404,17 @@
       "attack": 2,
       "hitRate": 2
     },
-    "source": "魔师宫秘道"
+    "source": "魔师宫秘道",
+    "contentUse": {
+      "npcId": "dock_foreman",
+      "chapterId": "fuyu_mishi",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "魔师宫主人赐下的令珠——持此珠者，魔师宫上下概不过问。 缆头新、缆腰旧，往往是被人在夜里调过船。运河追击不能只沿着最深的辙痕跑，先核对原来的出船更次。 鲁大个建议把魔师宫主令珠与《魔师宫秘道》的这个问题互证：石廊脚步先响后现，真正来人走在逆光一侧。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "zhongjuan_wu": {
     "name": "破碎虚空·悟",
-    "description": "终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。",
+    "description": "终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。【器物线索】可向临帖老翁出示，核对《战神遗境》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1058,11 +1430,17 @@
       "dodge": 3,
       "initiative": 2
     },
-    "source": "战神图录·终卷"
+    "source": "战神图录·终卷",
+    "contentUse": {
+      "npcId": "jn_calligrapher",
+      "chapterId": "posui_zhongjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "终卷的最后一页只有一行字——你读懂了它，便懂了什么是破碎。 临帖最难的是不替古人填他没有写的东西。空明照壁有字无影处，恰好值得多看一眼。 临帖老翁建议把破碎虚空·悟与《战神遗境》的这个问题互证：碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "bianhuang_law": {
     "name": "边荒法典",
-    "description": "边荒集新立的法典——三百年的无序，终于有了第一页规矩。",
+    "description": "边荒集新立的法典——三百年的无序，终于有了第一页规矩。【器物线索】可向塞北斥候长出示，核对《边荒传奇》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1076,11 +1454,17 @@
       "parry": 2,
       "hitRate": 3
     },
-    "source": "边荒传奇"
+    "source": "边荒传奇",
+    "contentUse": {
+      "npcId": "sb_scout_captain",
+      "chapterId": "bianhuang_chuanqi",
+      "aidDungeon": "bianhuang_chuanqi",
+      "reading": "边荒集新立的法典——三百年的无序，终于有了第一页规矩。 狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。 冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。 塞北斥候长建议把边荒法典与《边荒传奇》的这个问题互证：商队要守秤，流民要留井，两者争的是同一道街口。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "longyin_zhu": {
     "name": "龙吟珠",
-    "description": "洛水底的龙吟珠——珠内封着前朝最后一个秘密。",
+    "description": "洛水底的龙吟珠——珠内封着前朝最后一个秘密。【器物线索】可向二十四桥船娘出示，核对《洛水龙吟》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1095,11 +1479,17 @@
       "maxHp": 40,
       "critRate": 1
     },
-    "source": "洛水龙吟"
+    "source": "洛水龙吟",
+    "contentUse": {
+      "npcId": "yz_boat_girl",
+      "chapterId": "luoshui_longyin",
+      "aidDungeon": "luoshui_longyin",
+      "reading": "洛水底的龙吟珠——珠内封着前朝最后一个秘密。 船娘唱的不是任意曲子，每一停橹对应一次回水。龙吟随水位变，就先查连通水道，不必急着认作神怪。 二十四桥船娘建议把龙吟珠与《洛水龙吟》的这个问题互证：龙吟随着水位而变，不随风向而变。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yanbang_yupei": {
     "name": "盐帮玉佩",
-    "description": "盐帮大当家的玉佩——佩上刻着漕运的水路图。",
+    "description": "盐帮大当家的玉佩——佩上刻着漕运的水路图。【器物线索】可向程盐商出示，核对《盐帮内乱》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1114,11 +1504,17 @@
       "critRate": 2,
       "dodge": 2
     },
-    "source": "盐帮内乱"
+    "source": "盐帮内乱",
+    "contentUse": {
+      "npcId": "yz_salt_merchant",
+      "chapterId": "yangzhou_neiluan",
+      "aidDungeon": "yangzhou_neiluan",
+      "reading": "盐帮大当家的玉佩——佩上刻着漕运的水路图。 流通盐引都会磨损，张张完好的纸通常从未进过脚夫的手。程盐商自己的账也应接受同样核对。 程盐商建议把盐帮玉佩与《盐帮内乱》的这个问题互证：工人的盐引有破角，堂口收到的盐引却张张完好。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tangmen_baojian": {
     "name": "唐门宝鉴",
-    "description": "唐门历代暗器谱的总纲——管事说这是唐家坳给外人最高的荣誉。",
+    "description": "唐门历代暗器谱的总纲——管事说这是唐家坳给外人最高的荣誉。【器物线索】可向剑阁驿丞出示，核对《唐门试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1133,11 +1529,17 @@
       "hitRate": 2,
       "defense": 2
     },
-    "source": "唐门试炼"
+    "source": "唐门试炼",
+    "contentUse": {
+      "npcId": "bs_jiange_clerk",
+      "chapterId": "bashu_tangmen_trial",
+      "aidDungeon": "bashu_tangmen_trial",
+      "reading": "唐门历代暗器谱的总纲——管事说这是唐家坳给外人最高的荣誉。 修栈道要先替回程留索。把铁镐尖插进新桩，可能只会连根撬走还没压实的泥土。 剑阁驿丞建议把唐门宝鉴与《唐门试炼》的这个问题互证：机簧上没有毒色，真正危险的是下一轮回弹。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "langyan_ling": {
     "name": "狼烟令",
-    "description": "边军的狼烟令——持此令者，九边烽燧为你而燃。",
+    "description": "边军的狼烟令——持此令者，九边烽燧为你而燃。【器物线索】可向雪线领路人出示，核对《狼烟再起》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1151,11 +1553,17 @@
       "defense": 3,
       "hitRate": 2
     },
-    "source": "狼烟再起"
+    "source": "狼烟再起",
+    "contentUse": {
+      "npcId": "sb_s2",
+      "chapterId": "saibei_langyan",
+      "aidDungeon": "saibei_langyan",
+      "reading": "边军的狼烟令——持此令者，九边烽燧为你而燃。 去向王帐的脚印整齐，回程却只有一串拖痕。 石槽里藏着反穿的毡靴，哨探把前后方向调换了。 雪线领路人建议把狼烟令与《狼烟再起》的这个问题互证：白烟被刻意压低，黑烟却在无风时偏向南面。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "jianshou_jian": {
     "name": "江南剑首佩剑",
-    "description": "二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。",
+    "description": "二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。【器物线索】可向守池人出示，核对《剑首之争》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "sword",
     "stackable": false,
@@ -1171,11 +1579,17 @@
       "dodge": 2
     },
     "source": "剑首之争",
-    "weaponType": "sword"
+    "weaponType": "sword",
+    "contentUse": {
+      "npcId": "jn_pool_keeper",
+      "chapterId": "jiangnan_jianshou",
+      "aidDungeon": "jiangnan_jianshou",
+      "reading": "二十年前江南剑首的佩剑——剑柄上刻着那个'影'字。 木牌画着清浊两泉：先引清流，再松封剑木楔。只把剑拿走，后来的人就只能从一池锈水里找传说。 守池人建议把江南剑首佩剑与《剑首之争》的这个问题互证：折枝切口平滑却未伤根，前任剑首并未以杀人立威。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "xinggong_jian": {
     "name": "行宫密剑",
-    "description": "行宫惊变奖励。",
+    "description": "行宫惊变奖励。【器物线索】可向落魄诗人出示，核对《行宫惊变》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "sword",
     "stackable": false,
@@ -1189,11 +1603,17 @@
       "critRate": 3
     },
     "source": "行宫惊变",
-    "weaponType": "sword"
+    "weaponType": "sword",
+    "contentUse": {
+      "npcId": "dd2_pool_poet",
+      "chapterId": "datang_xinggong",
+      "aidDungeon": "datang_xinggong",
+      "reading": "行宫惊变奖励。 诗里的晓月是方位，不是时辰。水下账页依原来的孔线排列，比按你喜欢的诗序重编可靠。 落魄诗人建议把行宫密剑与《行宫惊变》的这个问题互证：门锁从宫内反扣，刺客不是从院外破门而入。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "langfan_j": {
     "name": "浪翻云剑穗",
-    "description": "浪翻云试炼奖励。",
+    "description": "浪翻云试炼奖励。【器物线索】可向秦三娘出示，核对《浪翻云试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1206,11 +1626,17 @@
       "attack": 6,
       "hitRate": 4
     },
-    "source": "浪翻云试炼"
+    "source": "浪翻云试炼",
+    "contentUse": {
+      "npcId": "qingyi_spy",
+      "chapterId": "fuyu_langfan",
+      "aidDungeon": "fuyu_langfan",
+      "reading": "浪翻云试炼奖励。 藏身的人不一定是细作，最响亮的口供也不一定可信。散花楼里先找谁不能自由离开，再问谁说了什么。 秦三娘建议把浪翻云剑穗与《浪翻云试炼》的这个问题互证：浪退时石上剑痕清晰，涨时反而全被水光遮住。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "kongming_z": {
     "name": "空明珠",
-    "description": "破碎空明奖励。",
+    "description": "破碎空明奖励。【器物线索】可向东海渔隐出示，核对《破碎空明》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1223,11 +1649,17 @@
       "maxMp": 30,
       "defense": 4
     },
-    "source": "破碎空明"
+    "source": "破碎空明",
+    "contentUse": {
+      "npcId": "r204_npc_3",
+      "chapterId": "posui_kongming",
+      "aidDungeon": "posui_kongming",
+      "reading": "破碎空明奖励。 日影指向南面，脚下沙纹却来自北风，路标曾被挪过。 井里没有水却有凉风，城门旧地图把风穴画成了街巷。 东海渔隐建议把空明珠与《破碎空明》的这个问题互证：同一行字朝东有影朝西无影，真文不在最亮处。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "jueji_h": {
     "name": "绝地护符",
-    "description": "边荒绝地奖励。",
+    "description": "边荒绝地奖励。【器物线索】可向李百夫长出示，核对《边荒绝地》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1240,11 +1672,17 @@
       "defense": 8,
       "maxHp": 60
     },
-    "source": "边荒绝地"
+    "source": "边荒绝地",
+    "contentUse": {
+      "npcId": "sb_centurion",
+      "chapterId": "bianhuang_jueji",
+      "aidDungeon": "bianhuang_jueji",
+      "reading": "边荒绝地奖励。 狼爪旁若有铁钉，就去找驱使狼群的人。救回一名失联戍卒，比把兵册上的空格填成战死容易得多。 李百夫长建议把绝地护符与《边荒绝地》的这个问题互证：伤兵把最后一壶水塞给了驮货的牲口，粮队还有人要活着出去。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "longgong_z": {
     "name": "龙宫宝珠",
-    "description": "归墟龙宫奖励。",
+    "description": "归墟龙宫奖励。【器物线索】可向采珠人出示，核对《归墟龙宫》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1257,11 +1695,17 @@
       "attack": 5,
       "maxMp": 25
     },
-    "source": "归墟龙宫"
+    "source": "归墟龙宫",
+    "contentUse": {
+      "npcId": "dm_pearl_diver",
+      "chapterId": "luoshui_guilou",
+      "aidDungeon": "luoshui_guilou",
+      "reading": "归墟龙宫奖励。 浮木都卡在上舷，梁木受力点却在下舷。 压舱石旁的通气孔尚有风，先支梁才能放水。 采珠人建议把龙宫宝珠与《归墟龙宫》的这个问题互证：白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yunhe_g": {
     "name": "漕运钢刀",
-    "description": "运河夜战奖励。",
+    "description": "运河夜战奖励。【器物线索】可向扬州茶博士出示，核对《运河夜战》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -1275,11 +1719,17 @@
       "defense": 3
     },
     "source": "运河夜战",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "yz_tea_master",
+      "chapterId": "yangzhou_yunhe2",
+      "aidDungeon": "yangzhou_yunhe2",
+      "reading": "运河夜战奖励。 工人的盐引有破角，堂口收到的盐引却张张完好。 三联账中只有脚夫联留着实数，官联与商联互相照抄。 扬州茶博士建议把漕运钢刀与《运河夜战》的这个问题互证：同一面漕旗一边干一边湿，有人把靠岸船伪装成刚入港。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tangmen_z": {
     "name": "唐门毒珠",
-    "description": "唐门天梯奖励。",
+    "description": "唐门天梯奖励。【器物线索】可向巴蜀酒娘出示，核对《唐门天梯》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1292,11 +1742,17 @@
       "critRate": 4,
       "attack": 4
     },
-    "source": "唐门天梯"
+    "source": "唐门天梯",
+    "contentUse": {
+      "npcId": "bs_wine_maker",
+      "chapterId": "bashu_tangmen2",
+      "aidDungeon": "bashu_tangmen2",
+      "reading": "唐门天梯奖励。 苦泉旁有活虫，甜泉旁却连苔藓都发白。 药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。 巴蜀酒娘建议把唐门毒珠与《唐门天梯》的这个问题互证：梯索上红结受力、白结松弛，红结不能先解。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "xueling_h": {
     "name": "雪岭护符",
-    "description": "狼山雪岭奖励。",
+    "description": "狼山雪岭奖励。【器物线索】可向回鹘马商出示，核对《狼山雪岭》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1309,11 +1765,17 @@
       "defense": 7,
       "dodge": 3
     },
-    "source": "狼山雪岭"
+    "source": "狼山雪岭",
+    "contentUse": {
+      "npcId": "sb_horse_trader",
+      "chapterId": "saibei_langshan2",
+      "aidDungeon": "saibei_langshan2",
+      "reading": "狼山雪岭奖励。 认路的马不会只循脚印走。雪脊上有反穿的毡靴，整齐的一列印往往是留给追兵看的。 回鹘马商建议把雪岭护符与《狼山雪岭》的这个问题互证：去向王帐的脚印整齐，回程却只有一串拖痕。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "jianchi_m": {
     "name": "剑池名剑",
-    "description": "剑池深处奖励。",
+    "description": "剑池深处奖励。【器物线索】可向抚琴女子出示，核对《剑池深处》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "sword",
     "stackable": false,
@@ -1327,11 +1789,17 @@
       "hitRate": 4
     },
     "source": "剑池深处",
-    "weaponType": "sword"
+    "weaponType": "sword",
+    "contentUse": {
+      "npcId": "jn_zither_player",
+      "chapterId": "jiangnan_jianchi2",
+      "aidDungeon": "jiangnan_jianchi2",
+      "reading": "剑池深处奖励。 竹海一声长笛只有石壁回应，两声短笛才有鸟鸣。听出谁在回应，比听出曲子有多好听更要紧。 抚琴女子建议把剑池名剑与《剑池深处》的这个问题互证：铁锈只沿左侧水线沉积，右泉的清流仍在护剑。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "shengong_q": {
     "name": "神工遗器",
-    "description": "神工秘殿奖励。",
+    "description": "神工秘殿奖励。【器物线索】可向守阁人出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1345,11 +1813,17 @@
       "defense": 6,
       "maxMp": 20
     },
-    "source": "神工秘殿"
+    "source": "神工秘殿",
+    "contentUse": {
+      "npcId": "dm_mirage_keeper",
+      "chapterId": "dongming_shengong",
+      "aidDungeon": "dongming_shengong",
+      "reading": "神工秘殿奖励。 真正的门槛会留下退潮盐线，幻景只肯在涨潮时好看。沧溟玉简里先读归航，再谈入宫。 守阁人建议把神工遗器与《神工秘殿》的这个问题互证：大齿轮转得慢却承重，小齿轮转得快却只传讯。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "xb2_relic": {
-    "name": "绝壁悬栈遗物",
-    "description": "绝壁悬栈遗物。",
+    "name": "断索铜扣",
+    "description": "绝壁悬栈遗物。【器物线索】可向沈七出示，核对《绝壁悬栈》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1363,11 +1837,17 @@
       "defense": 2,
       "maxMp": 5
     },
-    "source": "绝壁悬栈"
+    "source": "绝壁悬栈",
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_xb2",
+      "aidDungeon": "datang_xb2",
+      "reading": "绝壁悬栈遗物。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把断索铜扣与《绝壁悬栈》的这个问题互证：断索断在旧接头，不是被刀割断，拉得越紧越危险。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "ht2_relic": {
-    "name": "寒潭蛟影遗物",
-    "description": "寒潭蛟影遗物。",
+    "name": "寒潭鳞氅",
+    "description": "寒潭蛟影遗物。【器物线索】可向许说书出示，核对《寒潭蛟影》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1381,11 +1861,17 @@
       "defense": 2,
       "maxMp": 7
     },
-    "source": "寒潭蛟影"
+    "source": "寒潭蛟影",
+    "contentUse": {
+      "npcId": "storyteller",
+      "chapterId": "fuyu_ht2",
+      "aidDungeon": "fuyu_ht2",
+      "reading": "寒潭蛟影遗物。 说书会把渡船唱成神舟，把不愿留名的人写成大侠。若要查真事，去找仍在替那条船补缝的人。 许说书建议把寒潭鳞氅与《寒潭蛟影》的这个问题互证：水泡总在蛟影出现之前冒起，影子与真身不在同一处。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "sh2_relic": {
-    "name": "沙海孤城遗物",
-    "description": "沙海孤城遗物。",
+    "name": "无水砂戒",
+    "description": "沙海孤城遗物。【器物线索】可向柳先生出示，核对《沙海孤城》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1399,11 +1885,17 @@
       "defense": 2,
       "maxMp": 9
     },
-    "source": "沙海孤城"
+    "source": "沙海孤城",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_sh2",
+      "aidDungeon": "posui_sh2",
+      "reading": "沙海孤城遗物。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把无水砂戒与《沙海孤城》的这个问题互证：日影指向南面，脚下沙纹却来自北风，路标曾被挪过。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "dz2_relic": {
-    "name": "毒瘴密林遗物",
-    "description": "毒瘴密林遗物。",
+    "name": "青苔试瘴佩",
+    "description": "毒瘴密林遗物。【器物线索】可向马邑铁匠出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1417,11 +1909,17 @@
       "defense": 2,
       "maxMp": 11
     },
-    "source": "毒瘴密林"
+    "source": "毒瘴密林",
+    "contentUse": {
+      "npcId": "sb_iron_smith",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "毒瘴密林遗物。 白狼的威名靠哨探和地形维持；认清山口的风比再挂一面旗更有用。 马邑铁匠建议把青苔试瘴佩与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tg2_relic": {
-    "name": "天罡北斗遗物",
-    "description": "天罡北斗遗物。",
+    "name": "逆影星坠",
+    "description": "天罡北斗遗物。【器物线索】可向鲛人珠娘出示，核对《天罡北斗》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1435,11 +1933,17 @@
       "defense": 3,
       "maxMp": 13
     },
-    "source": "天罡北斗"
+    "source": "天罡北斗",
+    "contentUse": {
+      "npcId": "dm_jiaoren",
+      "chapterId": "luoshui_tg2",
+      "aidDungeon": "luoshui_tg2",
+      "reading": "天罡北斗遗物。 深海寒珠贴掌先凉后回温，海市假珠却始终一个温度。验珠不是只为卖贵一点，也为了辨清哪份旧约真的到过海底。 鲛人珠娘建议把逆影星坠与《天罡北斗》的这个问题互证：星名顺排，影子却逆行，阵眼跟的是影而不是字。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "ym2_relic": {
-    "name": "幽冥鬼市遗物",
-    "description": "幽冥鬼市遗物。",
+    "name": "无名契衣",
+    "description": "幽冥鬼市遗物。【器物线索】可向盐运司书办出示，核对《幽冥鬼市》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1453,11 +1957,17 @@
       "defense": 3,
       "maxMp": 15
     },
-    "source": "幽冥鬼市"
+    "source": "幽冥鬼市",
+    "contentUse": {
+      "npcId": "yz_yamen_clerk",
+      "chapterId": "yangzhou_ym2",
+      "aidDungeon": "yangzhou_ym2",
+      "reading": "幽冥鬼市遗物。 官联照抄商联，两本一致也可能是同一个谎。脚夫联的零碎尾数才有真正搬过盐的人的痕迹。 盐运司书办建议把无名契衣与《幽冥鬼市》的这个问题互证：摊主肯放弃金银，却不肯交出账页上一个人的姓名。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tx2_relic": {
-    "name": "铁血雄关遗物",
-    "description": "铁血雄关遗物。",
+    "name": "铁血关印",
+    "description": "铁血雄关遗物。【器物线索】可向沈七出示，核对《铁血雄关》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1471,11 +1981,17 @@
       "defense": 3,
       "maxMp": 17
     },
-    "source": "铁血雄关"
+    "source": "铁血雄关",
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_tx2",
+      "aidDungeon": "datang_tx2",
+      "reading": "铁血雄关遗物。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把铁血关印与《铁血雄关》的这个问题互证：箭架已经空了，城头仍按时举弓，是在替伤兵争取时间。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yy2_relic": {
-    "name": "烟雨剑冢遗物",
-    "description": "烟雨剑冢遗物。",
+    "name": "雨痕剑铭",
+    "description": "烟雨剑冢遗物。【器物线索】可向秦三娘出示，核对《烟雨剑冢》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1489,11 +2005,17 @@
       "defense": 3,
       "maxMp": 19
     },
-    "source": "烟雨剑冢"
+    "source": "烟雨剑冢",
+    "contentUse": {
+      "npcId": "qingyi_spy",
+      "chapterId": "fuyu_yy2",
+      "aidDungeon": "fuyu_yy2",
+      "reading": "烟雨剑冢遗物。 藏身的人不一定是细作，最响亮的口供也不一定可信。散花楼里先找谁不能自由离开，再问谁说了什么。 秦三娘建议把雨痕剑铭与《烟雨剑冢》的这个问题互证：碑上剑名被磨掉，断刃却都朝向同一个缺口。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "th2_relic": {
-    "name": "天火熔炉遗物",
-    "description": "天火熔炉遗物。",
+    "name": "余烬炉心",
+    "description": "天火熔炉遗物。【器物线索】可向东海渔隐出示，核对《天火熔炉》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1507,11 +2029,17 @@
       "defense": 4,
       "maxMp": 21
     },
-    "source": "天火熔炉"
+    "source": "天火熔炉",
+    "contentUse": {
+      "npcId": "r204_npc_3",
+      "chapterId": "posui_th2",
+      "aidDungeon": "posui_th2",
+      "reading": "天火熔炉遗物。 日影指向南面，脚下沙纹却来自北风，路标曾被挪过。 井里没有水却有凉风，城门旧地图把风穴画成了街巷。 东海渔隐建议把余烬炉心与《天火熔炉》的这个问题互证：炉壁红亮处反而最薄，冷灰覆盖处才有承重铆钉。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "bf2_relic": {
-    "name": "冰封王座遗物",
-    "description": "冰封王座遗物。",
+    "name": "无冠冰氅",
+    "description": "冰封王座遗物。【器物线索】可向李百夫长出示，核对《冰封王座》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1525,11 +2053,17 @@
       "defense": 4,
       "maxMp": 23
     },
-    "source": "冰封王座"
+    "source": "冰封王座",
+    "contentUse": {
+      "npcId": "sb_centurion",
+      "chapterId": "bianhuang_bf2",
+      "aidDungeon": "bianhuang_bf2",
+      "reading": "冰封王座遗物。 狼爪旁若有铁钉，就去找驱使狼群的人。救回一名失联戍卒，比把兵册上的空格填成战死容易得多。 李百夫长建议把无冠冰氅与《冰封王座》的这个问题互证：王座有两道影，一道随火把动，一道随地裂动。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "lm2_relic": {
-    "name": "雷鸣峡谷遗物",
-    "description": "雷鸣峡谷遗物。",
+    "name": "静电石环",
+    "description": "雷鸣峡谷遗物。【器物线索】可向采珠人出示，核对《雷鸣峡谷》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1543,11 +2077,17 @@
       "defense": 4,
       "maxMp": 25
     },
-    "source": "雷鸣峡谷"
+    "source": "雷鸣峡谷",
+    "contentUse": {
+      "npcId": "dm_pearl_diver",
+      "chapterId": "luoshui_lm2",
+      "aidDungeon": "luoshui_lm2",
+      "reading": "雷鸣峡谷遗物。 浮木都卡在上舷，梁木受力点却在下舷。 压舱石旁的通气孔尚有风，先支梁才能放水。 采珠人建议把静电石环与《雷鸣峡谷》的这个问题互证：回声比雷光先到，是空洞岩层在预警，不是天雷追人。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "cj2_relic": {
-    "name": "苍穹之眼遗物",
-    "description": "苍穹之眼遗物。",
+    "name": "留白瞳镜",
+    "description": "苍穹之眼遗物。【器物线索】可向扬州茶博士出示，核对《苍穹之眼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1561,11 +2101,17 @@
       "defense": 4,
       "maxMp": 27
     },
-    "source": "苍穹之眼"
+    "source": "苍穹之眼",
+    "contentUse": {
+      "npcId": "yz_tea_master",
+      "chapterId": "yangzhou_cj2",
+      "aidDungeon": "yangzhou_cj2",
+      "reading": "苍穹之眼遗物。 工人的盐引有破角，堂口收到的盐引却张张完好。 三联账中只有脚夫联留着实数，官联与商联互相照抄。 扬州茶博士建议把留白瞳镜与《苍穹之眼》的这个问题互证：两面镜分别映星与水，把水面亮点当星位便会偏半尺。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "wr2_relic": {
-    "name": "万刃窟遗物",
-    "description": "万刃窟遗物。",
+    "name": "退锋铜尺",
+    "description": "万刃窟遗物。【器物线索】可向沈七出示，核对《万刃窟》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1579,11 +2125,17 @@
       "defense": 5,
       "maxMp": 29
     },
-    "source": "万刃窟"
+    "source": "万刃窟",
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_wr2",
+      "aidDungeon": "datang_wr2",
+      "reading": "万刃窟遗物。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把退锋铜尺与《万刃窟》的这个问题互证：越锋利的刃越悬在外侧，石廊中央反而被钝背护住。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "yg2_relic": {
-    "name": "幽谷回音遗物",
-    "description": "幽谷回音遗物。",
+    "name": "归声护衣",
+    "description": "幽谷回音遗物。【器物线索】可向许说书出示，核对《幽谷回音》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1597,11 +2149,17 @@
       "defense": 5,
       "maxMp": 31
     },
-    "source": "幽谷回音"
+    "source": "幽谷回音",
+    "contentUse": {
+      "npcId": "storyteller",
+      "chapterId": "fuyu_yg2",
+      "aidDungeon": "fuyu_yg2",
+      "reading": "幽谷回音遗物。 说书会把渡船唱成神舟，把不愿留名的人写成大侠。若要查真事，去找仍在替那条船补缝的人。 许说书建议把归声护衣与《幽谷回音》的这个问题互证：左壁回声少一字，右壁却多一声，不可把最完整的声音当真。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "tx3_relic": {
-    "name": "太虚幻境遗物",
-    "description": "太虚幻境遗物。",
+    "name": "两生旧佩",
+    "description": "太虚幻境遗物。【器物线索】可向柳先生出示，核对《太虚幻境》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "relic",
     "stackable": false,
@@ -1615,11 +2173,17 @@
       "defense": 5,
       "maxMp": 33
     },
-    "source": "太虚幻境"
+    "source": "太虚幻境",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_tx3",
+      "aidDungeon": "posui_tx3",
+      "reading": "太虚幻境遗物。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把两生旧佩与《太虚幻境》的这个问题互证：镜中一身握剑，一身空手，两者都保留了你的旧伤。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "shuanglong_bei": {
     "name": "双龙会信杯",
-    "description": "双龙会的信物——一对玉杯中的一只。杯底刻着'龙行天下，不胜不归'。持有此杯者，江湖无人敢拦。",
+    "description": "双龙会的信物——一对玉杯中的一只。杯底刻着'龙行天下，不胜不归'。持有此杯者，江湖无人敢拦。【器物线索】可向柳先生出示，核对《双龙会》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "cup",
     "stackable": false,
@@ -1633,11 +2197,17 @@
       "critRate": 3,
       "hitRate": 3
     },
-    "source": "双龙会"
+    "source": "双龙会",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "shuanglong_hui",
+      "aidDungeon": "datang_yunhe",
+      "reading": "双龙会的信物——一对玉杯中的一只。杯底刻着'龙行天下，不胜不归'。持有此杯者，江湖无人敢拦。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把双龙会信杯与《双龙会》的这个问题互证：信杯为何成双 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "guishi_ledger": {
     "name": "鬼市账本",
-    "description": "鬼市商人的账本——三百年来的每一笔交易都记在里面。这是财富。",
+    "description": "鬼市商人的账本——三百年来的每一笔交易都记在里面。这是财富。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "book",
     "stackable": false,
@@ -1650,11 +2220,17 @@
       "hitRate": 5,
       "maxMp": 15
     },
-    "source": "幽冥鬼市"
+    "source": "幽冥鬼市",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "鬼市商人的账本——三百年来的每一笔交易都记在里面。这是财富。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把鬼市账本与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "guishi_jade": {
     "name": "鬼市玉玺",
-    "description": "鬼市侯爷的玉玺——上面刻着一个早已消失的年号。这是权力。",
+    "description": "鬼市侯爷的玉玺——上面刻着一个早已消失的年号。这是权力。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "seal",
     "stackable": false,
@@ -1667,11 +2243,17 @@
       "defense": 5,
       "parry": 3
     },
-    "source": "幽冥鬼市"
+    "source": "幽冥鬼市",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "dongming_shengong",
+      "aidDungeon": "dongming_shengong",
+      "reading": "鬼市侯爷的玉玺——上面刻着一个早已消失的年号。这是权力。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把鬼市玉玺与《神工秘殿》的这个问题互证：大齿轮转得慢却承重，小齿轮转得快却只传讯。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "guishi_blade": {
     "name": "鬼市冥刀",
-    "description": "鬼市守卫长的冥刀——刀身漆黑，不见反光。这是力量。",
+    "description": "鬼市守卫长的冥刀——刀身漆黑，不见反光。这是力量。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "blade",
     "stackable": false,
@@ -1685,11 +2267,17 @@
       "critRate": 2
     },
     "source": "幽冥鬼市",
-    "weaponType": "blade"
+    "weaponType": "blade",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "datang_tiandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "鬼市守卫长的冥刀——刀身漆黑，不见反光。这是力量。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把鬼市冥刀与《天刀试炼》的这个问题互证：刀意中的收手 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "beidou_xingpan": {
     "name": "北斗星盘",
-    "description": "北斗七星的星盘——七颗星对应七个阵眼，全部点亮即可破阵。星盘背面刻着一行小字：'顺天应人，七星归位。'",
+    "description": "北斗七星的星盘——七颗星对应七个阵眼，全部点亮即可破阵。星盘背面刻着一行小字：'顺天应人，七星归位。'【器物线索】可向柳先生出示，核对《天罡北斗阵》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "compass",
     "stackable": false,
@@ -1704,11 +2292,17 @@
       "hitRate": 5,
       "maxMp": 25
     },
-    "source": "天罡北斗阵"
+    "source": "天罡北斗阵",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "tianbei_beidou",
+      "aidDungeon": "datang_yunhe",
+      "reading": "北斗七星的星盘——七颗星对应七个阵眼，全部点亮即可破阵。星盘背面刻着一行小字：'顺天应人，七星归位。' 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把北斗星盘与《天罡北斗阵》的这个问题互证：走出北斗之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "silk_road_map": {
     "name": "丝绸之路全图",
-    "description": "商队首领三十年积累的丝绸之路全图——从长安到玉门关，每一条水路每一条小道都标得分毫不差。",
+    "description": "商队首领三十年积累的丝绸之路全图——从长安到玉门关，每一条水路每一条小道都标得分毫不差。【器物线索】可向孙回春出示，核对《护送商队》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "map",
     "stackable": false,
@@ -1722,11 +2316,17 @@
       "initiative": 4,
       "maxMp": 15
     },
-    "source": "护送商队"
+    "source": "护送商队",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "silk_road_hugong",
+      "aidDungeon": "datang_yunhe",
+      "reading": "商队首领三十年积累的丝绸之路全图——从长安到玉门关，每一条水路每一条小道都标得分毫不差。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把丝绸之路全图与《护送商队》的这个问题互证：玉门关前的镖单 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_csj_changshengjue": {
     "name": "长生诀秘本",
-    "description": "序47《行宫惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序47《行宫惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向化度寺知客僧出示，核对《行宫惊变》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1740,11 +2340,17 @@
     "effects": {
       "learnSkill": "csj_changshengjue"
     },
-    "source": "序47《行宫惊变》满通关结算"
+    "source": "序47《行宫惊变》满通关结算",
+    "contentUse": {
+      "npcId": "ca2_monk",
+      "chapterId": "datang_xinggong",
+      "aidDungeon": "datang_xinggong",
+      "reading": "序47《行宫惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 念珠缺一颗不等于修行缺一分；先问遗失还是有意留下空位，才谈补全。慈航的试炼也不是把每处留白填满。 化度寺知客僧建议把长生诀秘本与《行宫惊变》的这个问题互证：门锁从宫内反扣，刺客不是从院外破门而入。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_jyg_zhanshentu_dao": {
     "name": "战神图录秘本",
-    "description": "序40《战神遗境》（原《战神图录·终卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序40《战神遗境》（原《战神图录·终卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《战神遗境》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1758,11 +2364,17 @@
     "effects": {
       "learnSkill": "jyg_zhanshentu_dao"
     },
-    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算"
+    "source": "序40《战神遗境》（原《战神图录·终卷》）满通关结算",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_zhongjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "序40《战神遗境》（原《战神图录·终卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把战神图录秘本与《战神遗境》的这个问题互证：碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_tiandao_blade": {
     "name": "天刀八诀秘本",
-    "description": "序38《天刀试炼殿》满通关，由宋缺授予完整传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序38《天刀试炼殿》满通关，由宋缺授予完整传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《天刀试炼殿》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1776,11 +2388,17 @@
     "effects": {
       "learnSkill": "tiandao_blade"
     },
-    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承"
+    "source": "序38《天刀试炼殿》满通关，由宋缺授予完整传承",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "tiandao_trial_hall",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序38《天刀试炼殿》满通关，由宋缺授予完整传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把天刀八诀秘本与《天刀试炼殿》的这个问题互证：遗篇为何不全 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_thunder_sword": {
     "name": "奔雷剑法秘本",
-    "description": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦校尉出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1794,11 +2412,17 @@
     "effects": {
       "learnSkill": "thunder_sword"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。"
+    "source": "原指定老师入门后可誊录一次；旧档持有继续兼容。",
+    "contentUse": {
+      "npcId": "military_instructor",
+      "chapterId": "datang_liangdao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 军令错一更便能让友军成为伏兵。到粮道先看射界，别拿追击的阵法护送百姓。 秦校尉建议把奔雷剑法秘本与《洛阳粮道》的这个问题互证：断桥该怎样重修 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_bloody_blade": {
     "name": "血战刀法秘本",
-    "description": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦校尉出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1812,11 +2436,17 @@
     "effects": {
       "learnSkill": "bloody_blade"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。"
+    "source": "原指定老师入门后可誊录一次；旧档持有继续兼容。",
+    "contentUse": {
+      "npcId": "military_instructor",
+      "chapterId": "datang_liangdao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "洛阳军府·秦校尉的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 军令错一更便能让友军成为伏兵。到粮道先看射界，别拿追击的阵法护送百姓。 秦校尉建议把血战刀法秘本与《洛阳粮道》的这个问题互证：断桥该怎样重修 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_cihang_jiandian": {
     "name": "慈航剑典秘本",
-    "description": "序40《长安试炼殿》满通关，由师妃暄见证传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序40《长安试炼殿》满通关，由师妃暄见证传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向赵横江出示，核对《长安试炼殿》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1830,11 +2460,17 @@
     "effects": {
       "learnSkill": "cihang_jiandian"
     },
-    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承"
+    "source": "序40《长安试炼殿》满通关，由师妃暄见证传承",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "changan_trial_hall",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序40《长安试炼殿》满通关，由师妃暄见证传承的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把慈航剑典秘本与《长安试炼殿》的这个问题互证：念珠与剑典 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_hunyuan_neigong": {
     "name": "混元功秘本",
-    "description": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1848,11 +2484,17 @@
     "effects": {
       "learnSkill": "hunyuan_neigong"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。"
+    "source": "原指定老师入门后可誊录一次；旧档持有继续兼容。",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_houjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把混元功秘本与《惊雁遗刻》的这个问题互证：遗刻与正文 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_tianmo_ce": {
     "name": "天魔策秘本",
-    "description": "序39《魔师宫秘道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序39《魔师宫秘道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向抚琴女子出示，核对《魔师宫秘道》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1866,11 +2508,17 @@
     "effects": {
       "learnSkill": "tianmo_ce"
     },
-    "source": "序39《魔师宫秘道》满通关结算"
+    "source": "序39《魔师宫秘道》满通关结算",
+    "contentUse": {
+      "npcId": "jn_zither_player",
+      "chapterId": "fuyu_mishi",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "序39《魔师宫秘道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 竹海一声长笛只有石壁回应，两声短笛才有鸟鸣。听出谁在回应，比听出曲子有多好听更要紧。 抚琴女子建议把天魔策秘本与《魔师宫秘道》的这个问题互证：石廊脚步先响后现，真正来人走在逆光一侧。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_talang_jue": {
     "name": "踏浪诀秘本",
-    "description": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1884,11 +2532,17 @@
     "effects": {
       "learnSkill": "talang_jue"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。"
+    "source": "原指定老师入门后可誊录一次；旧档持有继续兼容。",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "datang_tiandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把踏浪诀秘本与《天刀试炼》的这个问题互证：刀意中的收手 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_fuhu_jin": {
     "name": "伏虎劲秘本",
-    "description": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1902,11 +2556,17 @@
     "effects": {
       "learnSkill": "fuhu_jin"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。"
+    "source": "原指定老师入门后可誊录一次；旧档持有继续兼容。",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "datang_tiandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "河洛武馆·赵横江的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把伏虎劲秘本与《天刀试炼》的这个问题互证：刀意中的收手 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_tiebi_gong": {
     "name": "铁壁功秘本",
-    "description": "盐帮分舵·雷万钧的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "盐帮分舵·雷万钧的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向雷万钧出示，核对《盐帮内乱》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1920,11 +2580,17 @@
     "effects": {
       "learnSkill": "tiebi_gong"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。"
+    "source": "原指定老师入门后可誊录一次；旧档持有继续兼容。",
+    "contentUse": {
+      "npcId": "salt_hall_master",
+      "chapterId": "yangzhou_neiluan",
+      "aidDungeon": "yangzhou_neiluan",
+      "reading": "盐帮分舵·雷万钧的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 棍是撑住船身，钩是挽回失船，不能都当劈人的刀。遇到盐帮争账，先看脚夫联，那里才有一担担盐的实数。 雷万钧建议把铁壁功秘本与《盐帮内乱》的这个问题互证：工人的盐引有破角，堂口收到的盐引却张张完好。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_wuzhen_pian": {
     "name": "悟真篇秘本",
-    "description": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1938,11 +2604,17 @@
     "effects": {
       "learnSkill": "wuzhen_pian"
     },
-    "source": "旧版迁移保留；新入门由指定老师传授。"
+    "source": "原指定老师入门后可誊录一次；旧档持有继续兼容。",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_houjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "河洛书院·柳先生的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把悟真篇秘本与《惊雁遗刻》的这个问题互证：遗刻与正文 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_xiulou_daofa": {
     "name": "修罗刀法秘本",
-    "description": "序15《马贼王庭》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序15《马贼王庭》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向李百夫长出示，核对《马贼王庭》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1956,11 +2628,17 @@
     "effects": {
       "learnSkill": "xiulou_daofa"
     },
-    "source": "序15《马贼王庭》满通关结算"
+    "source": "序15《马贼王庭》满通关结算",
+    "contentUse": {
+      "npcId": "sb_centurion",
+      "chapterId": "bianhuang_wangting",
+      "aidDungeon": "bianhuang_chuanqi",
+      "reading": "序15《马贼王庭》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 狼爪旁若有铁钉，就去找驱使狼群的人。救回一名失联戍卒，比把兵册上的空格填成战死容易得多。 李百夫长建议把修罗刀法秘本与《马贼王庭》的这个问题互证：空下来的王帐 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_taiyi_jianfa": {
     "name": "太乙剑法秘本",
-    "description": "序8《竟陵之围》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序8《竟陵之围》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向钟铁衣出示，核对《竟陵之围》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1974,11 +2652,17 @@
     "effects": {
       "learnSkill": "taiyi_jianfa"
     },
-    "source": "序8《竟陵之围》满通关结算"
+    "source": "序8《竟陵之围》满通关结算",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "datang_jingling",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序8《竟陵之围》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把太乙剑法秘本与《竟陵之围》的这个问题互证：城门后的人 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_dongting_xinf": {
     "name": "洞庭心法秘本",
-    "description": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向韩录事出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -1992,11 +2676,17 @@
     "effects": {
       "learnSkill": "dongting_xinf"
     },
-    "source": "序19《巴陵夜泊》满通关结算"
+    "source": "序19《巴陵夜泊》满通关结算",
+    "contentUse": {
+      "npcId": "office_clerk",
+      "chapterId": "datang_baling",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 染血密信的纸被雨打皱，火漆却在雨前就碎了。把纸与印分开记，才不会让转交者背了主谋的罪。 韩录事建议把洞庭心法秘本与《巴陵夜泊》的这个问题互证：火后的泊口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_lingxu_bu": {
     "name": "凌虚步秘本",
-    "description": "序20《散花楼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序20《散花楼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向沈七出示，核对《散花楼》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2010,11 +2700,17 @@
     "effects": {
       "learnSkill": "lingxu_bu"
     },
-    "source": "序20《散花楼》满通关结算"
+    "source": "序20《散花楼》满通关结算",
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_sanhua",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序20《散花楼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把凌虚步秘本与《散花楼》的这个问题互证：楼中的真假 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_poxu_zhi": {
     "name": "破虚指秘本",
-    "description": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向灰袍老者出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2028,11 +2724,17 @@
     "effects": {
       "learnSkill": "poxu_zhi"
     },
-    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算"
+    "source": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算",
+    "contentUse": {
+      "npcId": "ancient_scroll_keeper",
+      "chapterId": "posui_houjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "序23《惊雁遗刻》（原《图录·后卷》）满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 战神图录、遗刻与后人的解释应分开记。绝学仍要亲历，读到一个古名不等于已经取得传承。 灰袍老者建议把破虚指秘本与《惊雁遗刻》的这个问题互证：遗刻与正文 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_bawang_qiang": {
     "name": "霸王枪秘本",
-    "description": "序18《洛阳粮道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序18《洛阳粮道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向落魄诗人出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2046,11 +2748,17 @@
     "effects": {
       "learnSkill": "bawang_qiang"
     },
-    "source": "序18《洛阳粮道》满通关结算"
+    "source": "序18《洛阳粮道》满通关结算",
+    "contentUse": {
+      "npcId": "dd2_pool_poet",
+      "chapterId": "datang_liangdao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序18《洛阳粮道》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 诗里的晓月是方位，不是时辰。水下账页依原来的孔线排列，比按你喜欢的诗序重编可靠。 落魄诗人建议把霸王枪秘本与《洛阳粮道》的这个问题互证：断桥该怎样重修 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_youlong_bian": {
     "name": "游龙鞭秘本",
-    "description": "序21《方夜羽复仇》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序21《方夜羽复仇》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦三娘出示，核对《方夜羽复仇》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2064,11 +2772,17 @@
     "effects": {
       "learnSkill": "youlong_bian"
     },
-    "source": "序21《方夜羽复仇》满通关结算"
+    "source": "序21《方夜羽复仇》满通关结算",
+    "contentUse": {
+      "npcId": "qingyi_spy",
+      "chapterId": "fuyu_fangfuchou",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "序21《方夜羽复仇》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 藏身的人不一定是细作，最响亮的口供也不一定可信。散花楼里先找谁不能自由离开，再问谁说了什么。 秦三娘建议把游龙鞭秘本与《方夜羽复仇》的这个问题互证：复仇后的水门 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_lieshi_jian": {
     "name": "裂石锏秘本",
-    "description": "序17《瓦岗惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序17《瓦岗惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向钟铁衣出示，核对《瓦岗惊变》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2082,11 +2796,17 @@
     "effects": {
       "learnSkill": "lieshi_jian"
     },
-    "source": "序17《瓦岗惊变》满通关结算"
+    "source": "序17《瓦岗惊变》满通关结算",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "datang_wagang",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序17《瓦岗惊变》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把裂石锏秘本与《瓦岗惊变》的这个问题互证：开仓之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_suolang_gou": {
     "name": "锁浪钩秘本",
-    "description": "序22《怒蛟水战》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序22《怒蛟水战》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向许说书出示，核对《怒蛟水战》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2100,11 +2820,17 @@
     "effects": {
       "learnSkill": "suolang_gou"
     },
-    "source": "序22《怒蛟水战》满通关结算"
+    "source": "序22《怒蛟水战》满通关结算",
+    "contentUse": {
+      "npcId": "storyteller",
+      "chapterId": "fuyu_shuizhan",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "序22《怒蛟水战》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 说书会把渡船唱成神舟，把不愿留名的人写成大侠。若要查真事，去找仍在替那条船补缝的人。 许说书建议把锁浪钩秘本与《怒蛟水战》的这个问题互证：沉船锁口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_mantian_huayu": {
     "name": "漫天花雨秘本",
-    "description": "序44《唐门试炼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序44《唐门试炼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向药田老农出示，核对《唐门试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2118,11 +2844,17 @@
     "effects": {
       "learnSkill": "mantian_huayu"
     },
-    "source": "序44《唐门试炼》满通关结算"
+    "source": "序44《唐门试炼》满通关结算",
+    "contentUse": {
+      "npcId": "bs_herbalist",
+      "chapterId": "bashu_tangmen_trial",
+      "aidDungeon": "bashu_tangmen_trial",
+      "reading": "序44《唐门试炼》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 止血草的茎断后有清苦味，芦根切口则有细密纤维。晒过的香气不能作无毒凭据，先看旁边是否还有活虫。 药田老农建议把漫天花雨秘本与《唐门试炼》的这个问题互证：机簧上没有毒色，真正危险的是下一轮回弹。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_fengmo_gun": {
     "name": "疯魔棍秘本",
-    "description": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向秦校尉出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2136,11 +2868,17 @@
     "effects": {
       "learnSkill": "fengmo_gun"
     },
-    "source": "序19《巴陵夜泊》满通关结算"
+    "source": "序19《巴陵夜泊》满通关结算",
+    "contentUse": {
+      "npcId": "military_instructor",
+      "chapterId": "datang_baling",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序19《巴陵夜泊》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 军令错一更便能让友军成为伏兵。到粮道先看射界，别拿追击的阵法护送百姓。 秦校尉建议把疯魔棍秘本与《巴陵夜泊》的这个问题互证：火后的泊口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_taxue_wuhen": {
     "name": "踏雪无痕秘本",
-    "description": "序30《剑池》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序30《剑池》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向江南绸商出示，核对《剑池》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2154,11 +2892,17 @@
     "effects": {
       "learnSkill": "taxue_wuhen"
     },
-    "source": "序30《剑池》满通关结算"
+    "source": "序30《剑池》满通关结算",
+    "contentUse": {
+      "npcId": "jn_silk_merchant",
+      "chapterId": "jiangnan_jianchi",
+      "aidDungeon": "jiangnan_zhuhai",
+      "reading": "序30《剑池》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 散花玉簪与玉镯看似相配，留下它们的人却不一定站在同一边。 江南绸商建议把踏雪无痕秘本与《剑池》的这个问题互证：泉下之剑 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "manual_jingang_buhuai": {
     "name": "金刚不坏秘本",
-    "description": "序37《竟陵试炼殿》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。",
+    "description": "序37《竟陵试炼殿》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。【器物线索】可向钟铁衣出示，核对《竟陵试炼殿》的来历；不消耗，穿戴中也可出示。",
     "type": "consumable",
     "subtype": "manual",
     "stackable": false,
@@ -2172,11 +2916,17 @@
     "effects": {
       "learnSkill": "jingang_buhuai"
     },
-    "source": "序37《竟陵试炼殿》满通关结算"
+    "source": "序37《竟陵试炼殿》满通关结算",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "jingling_trial_hall",
+      "aidDungeon": "datang_yunhe",
+      "reading": "序37《竟陵试炼殿》满通关结算的完整传承，一门武功一本秘本；参悟须满足根基与传承条件。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把金刚不坏秘本与《竟陵试炼殿》的这个问题互证：金刀令的两面 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "training_spear": {
     "name": "练习长枪",
-    "description": "练习长枪，适合spear流派修炼。",
+    "description": "练习长枪，适合spear流派修炼。【器物线索】可向赵横江出示，核对《天刀试炼》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "spear",
     "weaponType": "spear",
@@ -2190,11 +2940,17 @@
     "sellable": true,
     "limit": -1,
     "unit": "件",
-    "source": "河洛铁匠钟铁衣常驻出售"
+    "source": "河洛铁匠钟铁衣常驻出售",
+    "contentUse": {
+      "npcId": "weapon_school_master",
+      "chapterId": "datang_tiandao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "练习长枪，适合spear流派修炼。 切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。 赵横江建议把练习长枪与《天刀试炼》的这个问题互证：刀意中的收手 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "training_whip": {
     "name": "练习软鞭",
-    "description": "练习软鞭，适合whip流派修炼。",
+    "description": "练习软鞭，适合whip流派修炼。【器物线索】可向柳先生出示，核对《惊雁遗刻》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "whip",
     "weaponType": "whip",
@@ -2208,11 +2964,17 @@
     "sellable": true,
     "limit": -1,
     "unit": "件",
-    "source": "同上"
+    "source": "同上",
+    "contentUse": {
+      "npcId": "academy_teacher",
+      "chapterId": "posui_houjuan",
+      "aidDungeon": "posui_zhongjuan",
+      "reading": "练习软鞭，适合whip流派修炼。 铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。 柳先生建议把练习软鞭与《惊雁遗刻》的这个问题互证：遗刻与正文 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "training_mace": {
     "name": "练习铁锏",
-    "description": "练习铁锏，适合mace流派修炼。",
+    "description": "练习铁锏，适合mace流派修炼。【器物线索】可向孙回春出示，核对《毒瘴密林》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "mace",
     "weaponType": "mace",
@@ -2226,11 +2988,17 @@
     "sellable": true,
     "limit": -1,
     "unit": "件",
-    "source": "同上"
+    "source": "同上",
+    "contentUse": {
+      "npcId": "herbalist_sun",
+      "chapterId": "bianhuang_dz2",
+      "aidDungeon": "bianhuang_dz2",
+      "reading": "练习铁锏，适合mace流派修炼。 金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。 孙回春建议把练习铁锏与《毒瘴密林》的这个问题互证：苦泉旁有活虫，甜泉旁却连苔藓都发白。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "training_hook": {
     "name": "练习双钩",
-    "description": "练习双钩，适合hook流派修炼。",
+    "description": "练习双钩，适合hook流派修炼。【器物线索】可向钟铁衣出示，核对《神工秘殿》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "hook",
     "weaponType": "hook",
@@ -2244,11 +3012,17 @@
     "sellable": true,
     "limit": -1,
     "unit": "件",
-    "source": "同上"
+    "source": "同上",
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "dongming_shengong",
+      "aidDungeon": "dongming_shengong",
+      "reading": "练习双钩，适合hook流派修炼。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把练习双钩与《神工秘殿》的这个问题互证：大齿轮转得慢却承重，小齿轮转得快却只传讯。 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "liangdao_spear": {
     "name": "粮道长枪",
-    "description": "粮道长枪，适合spear流派修炼。",
+    "description": "粮道长枪，适合spear流派修炼。【器物线索】可向落魄诗人出示，核对《洛阳粮道》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "spear",
     "weaponType": "spear",
@@ -2264,11 +3038,17 @@
     "limit": -1,
     "unit": "件",
     "source": "序18《洛阳粮道》首次满通关",
-    "firstClaim": true
+    "firstClaim": true,
+    "contentUse": {
+      "npcId": "dd2_pool_poet",
+      "chapterId": "datang_liangdao",
+      "aidDungeon": "datang_yunhe",
+      "reading": "粮道长枪，适合spear流派修炼。 诗里的晓月是方位，不是时辰。水下账页依原来的孔线排列，比按你喜欢的诗序重编可靠。 落魄诗人建议把粮道长枪与《洛阳粮道》的这个问题互证：断桥该怎样重修 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "youlong_whip": {
     "name": "游龙长鞭",
-    "description": "游龙长鞭，适合whip流派修炼。",
+    "description": "游龙长鞭，适合whip流派修炼。【器物线索】可向秦三娘出示，核对《方夜羽复仇》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "whip",
     "weaponType": "whip",
@@ -2284,11 +3064,17 @@
     "limit": -1,
     "unit": "件",
     "source": "序21《方夜羽复仇》首次满通关",
-    "firstClaim": true
+    "firstClaim": true,
+    "contentUse": {
+      "npcId": "qingyi_spy",
+      "chapterId": "fuyu_fangfuchou",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "游龙长鞭，适合whip流派修炼。 藏身的人不一定是细作，最响亮的口供也不一定可信。散花楼里先找谁不能自由离开，再问谁说了什么。 秦三娘建议把游龙长鞭与《方夜羽复仇》的这个问题互证：复仇后的水门 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "lieshi_mace": {
     "name": "裂石铁锏",
-    "description": "裂石铁锏，适合mace流派修炼。",
+    "description": "裂石铁锏，适合mace流派修炼。【器物线索】可向钟铁衣出示，核对《瓦岗惊变》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "mace",
     "weaponType": "mace",
@@ -2304,11 +3090,17 @@
     "limit": -1,
     "unit": "件",
     "source": "序17《瓦岗惊变》首次满通关",
-    "firstClaim": true
+    "firstClaim": true,
+    "contentUse": {
+      "npcId": "heluo_blacksmith",
+      "chapterId": "datang_wagang",
+      "aidDungeon": "datang_yunhe",
+      "reading": "裂石铁锏，适合mace流派修炼。 铁剑重心在护手，钢刀重心在刃前；铁镐的旧裂口不能当撬点。看懂受力，比只挑贵兵器可靠。 钟铁衣建议把裂石铁锏与《瓦岗惊变》的这个问题互证：开仓之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "suolang_hook": {
     "name": "锁浪双钩",
-    "description": "锁浪双钩，适合hook流派修炼。",
+    "description": "锁浪双钩，适合hook流派修炼。【器物线索】可向许说书出示，核对《怒蛟水战》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "hook",
     "weaponType": "hook",
@@ -2324,11 +3116,17 @@
     "limit": -1,
     "unit": "件",
     "source": "序22《怒蛟水战》首次满通关",
-    "firstClaim": true
+    "firstClaim": true,
+    "contentUse": {
+      "npcId": "storyteller",
+      "chapterId": "fuyu_shuizhan",
+      "aidDungeon": "fuyu_mishi",
+      "reading": "锁浪双钩，适合hook流派修炼。 说书会把渡船唱成神舟，把不愿留名的人写成大侠。若要查真事，去找仍在替那条船补缝的人。 许说书建议把锁浪双钩与《怒蛟水战》的这个问题互证：沉船锁口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "jinggang_staff": {
     "name": "精钢长棍",
-    "description": "精钢长棍，适合staff流派修炼。",
+    "description": "精钢长棍，适合staff流派修炼。【器物线索】可向沈七出示，核对《巴陵夜泊》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "staff",
     "weaponType": "staff",
@@ -2344,11 +3142,17 @@
     "limit": -1,
     "unit": "件",
     "source": "序19《巴陵夜泊》首次满通关",
-    "firstClaim": true
+    "firstClaim": true,
+    "contentUse": {
+      "npcId": "guild_steward",
+      "chapterId": "datang_baling",
+      "aidDungeon": "datang_yunhe",
+      "reading": "精钢长棍，适合staff流派修炼。 镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。 沈七建议把精钢长棍与《巴陵夜泊》的这个问题互证：火后的泊口 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   },
   "gongbian_mingzhu": {
     "name": "宫变夜明珠",
-    "description": "从乾清宫的密道中取得的夜明珠——珠内封着一缕不灭的火光，像是那晚的宫火永远不会熄灭。",
+    "description": "从乾清宫的密道中取得的夜明珠——珠内封着一缕不灭的火光，像是那晚的宫火永远不会熄灭。【器物线索】可向秦校尉出示，核对《东都宫变》的来历；不消耗，穿戴中也可出示。",
     "type": "equipment",
     "subtype": "pearl",
     "stackable": false,
@@ -2362,6 +3166,12 @@
       "maxMp": 25,
       "initiative": 3
     },
-    "source": "东都宫变"
+    "source": "东都宫变",
+    "contentUse": {
+      "npcId": "military_instructor",
+      "chapterId": "datang_gongbian",
+      "aidDungeon": "datang_yunhe",
+      "reading": "从乾清宫的密道中取得的夜明珠——珠内封着一缕不灭的火光，像是那晚的宫火永远不会熄灭。 军令错一更便能让友军成为伏兵。到粮道先看射界，别拿追击的阵法护送百姓。 秦校尉建议把宫变夜明珠与《东都宫变》的这个问题互证：密册离宫之后 这是一条调查线索，最后的判断仍须亲历现场。"
+    }
   }
 }

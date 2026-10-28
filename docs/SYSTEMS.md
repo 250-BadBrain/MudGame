@@ -26,6 +26,7 @@
 | 商店 | 同上 + `manager/runtime_manager_static_npc.go` | NPC 模板 `shopItems` 字段 |
 | 状态与恢复 | `manager/runtime_manager_player.go`（ProcessStatusTick/Stop） | worlds 房间 `actions` |
 | 对话 | `manager/runtime_manager_dialogue.go` | `dialogues.json` / `dungeon_dialogues.json` |
+| 证据与见闻 | `manager/runtime_manager_content_evidence.go` | 对话explicit/requires与机关requiredFlags/presentItems；Player.Flags |
 | 任务 | `manager`（flag 驱动） | `quests.json` |
 | 势力声望 | 结算与 NPC 模板 | `factions.json` |
 | 聊天 | `app` chat 通道 | — |
@@ -131,6 +132,14 @@ items.json：usable/effects（recoverHp回复、learnSkill参悟）、equipmentS
 ## 10. 对话系统
 
 静态 NPC 对话：`dialogues.json`（id/npcId/title/opening/options），`Talk` 指令逐句推进；副本剧情对话见 §3.4（dungeon_dialogues.json）。NPC 模板的 `dialogueId` 指向 dialogues.json 条目。
+
+### 人物专长、物品出示与见闻（2026-10-28）
+
+玩法与逐资源映射见[内容深化规格](design/existing_content_depth_2026_10_28.md)和[资源用途索引](content/existing_resource_roles.md)。`explicit: true`的对话只能通过明确选择执行，自动交谈不替玩家出示证据或决定立场；Talk响应须包含`dialogue`，供前端渲染可选按钮。`requires.flags`检查精确布尔值，`requires.presentItems`只验证本人背包/合法装备，不扣除；`requires.skills`验证已学等级。实际消耗仍用`takeItems`，不得混淆。
+
+机关的`requiredFlags`和`presentItems`叠加既有房间、状态和选择校验。器物辅助只替代第一段观察，普通现场路径仍可独立完成；缺少持有物或解读记录时隐藏辅助按钮，直接伪造请求也必须拒绝。新增观察对话不会把原可击杀敌人变成保护人物，`combatMode: kill`显式保留其身份，其他商人/老师/任务人物保护不变。
+
+`GetJournal`从玩家已取得的调查、`discovery_*`对话/机关旗标派生记录，`get_quests.journal`供“令→见闻”显示。只收录真正取得的响应，不列出未选择分支；沿用旗标持久化，无新任务定义。八城事件的两种结论长期互斥，另一位人物的后续也须明确追问。新增叙事不增奖励、不计入快速完成额外收益。
 
 ## 11. 任务系统
 

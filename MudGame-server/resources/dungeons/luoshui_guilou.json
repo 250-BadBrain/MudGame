@@ -1,7 +1,7 @@
 {
   "id": "luoshui_guilou",
   "name": "归墟龙宫",
-  "description": "归墟龙宫——洛水风浪中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。 中孔铜栓已松，必须先固定低孔，再依次泄压。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 51,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -9,7 +9,11 @@
   "spawnRoomId": "luoshu_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。 此处不能只凭武力开门；沿路观察，并核验三孔镇水门的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先固定低孔",
       "puzzleId": "gate",
       "rooms": [
         "luoshu_02"
@@ -34,28 +38,184 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "lg_tw": true
+      "nextState": "considered",
+      "message": "白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。 中孔铜栓已松，必须先固定低孔，再依次泄压。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known",
+        "content_support": "ready"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "只堵最高的孔"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先固定低孔，再泄中孔水"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "拔掉全部铜栓"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：积盐石廊",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "luoshu_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。",
+      "repeatMessage": "白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。"
+    },
+    "content_detail": {
+      "label": "核验：三孔镇水门",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "中孔铜栓已松，必须先固定低孔，再依次泄压。",
+      "repeatMessage": "中孔铜栓已松，必须先固定低孔，再依次泄压。"
+    },
+    "content_brace": {
+      "label": "先做人工支护",
+      "puzzleId": "content_support",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "bracing",
+      "message": "你先找稳固的着力点，支护尚需最后一道固定。",
+      "repeatMessage": "你先找稳固的着力点，支护尚需最后一道固定。",
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      }
+    },
+    "content_secure": {
+      "label": "再固定支护",
+      "puzzleId": "content_support",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "bracing"
+      ],
+      "nextState": "ready",
+      "message": "支护已经稳固，现在可以不冒险地判断机关。",
+      "repeatMessage": "支护已经稳固，现在可以不冒险地判断机关。"
+    },
+    "content_pickaxe": {
+      "label": "用铁镐校稳支点（不消耗）",
+      "puzzleId": "content_support",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "ready",
+      "message": "你以铁镐作短暂杠杆校稳支点，随后把铁镐收回。",
+      "repeatMessage": "你以铁镐作短暂杠杆校稳支点，随后把铁镐收回。",
+      "presentItems": {
+        "iron_pickaxe": 1
+      },
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      }
+    },
+    "content_decide_good": {
+      "label": "先固定低孔，再泄中孔水",
+      "puzzleId": "gate",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "龙宫的威压随积水退去，守殿者终于承认这里曾是凡人的水工遗迹。",
+      "repeatMessage": "龙宫的威压随积水退去，守殿者终于承认这里曾是凡人的水工遗迹。",
+      "setFlags": {
+        "lg_tw": true,
+        "discovery_chapter_luoshui_guilou": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "拔掉全部铜栓",
+      "puzzleId": "gate",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：中孔铜栓已松，必须先固定低孔，再依次泄压。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：中孔铜栓已松，必须先固定低孔，再依次泄压。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "只堵最高的孔",
+      "puzzleId": "gate",
+      "rooms": [
+        "luoshu_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：中孔铜栓已松，必须先固定低孔，再依次泄压。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：中孔铜栓已松，必须先固定低孔，再依次泄压。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_longgong_z": {
+      "label": "以龙宫宝珠校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "luoshu_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把采珠人辨明的器物来历与现场互证。白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。",
+      "requiredFlags": {
+        "discovery_item_longgong_z": true
+      },
+      "presentItems": {
+        "longgong_z": 1
+      }
     }
   },
   "rooms": {
     "luoshu_00": {
-      "name": "入口",
-      "description": "入口。洛水暗涌——你踏入此处，前方的路在阴影中延伸。",
+      "name": "归墟潮阶",
+      "description": "归墟潮阶保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "luoshu_01"
       },
       "actions": [
         "listen_brief"
+      ],
+      "npcs": [
+        "gw_longgong_guard",
+        "gw_longgong_boss"
       ]
     },
     "luoshu_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "积盐石廊",
+      "description": "白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。",
       "exits": {
         "south": "luoshu_00",
         "north": "luoshu_02"
@@ -71,11 +231,15 @@
       "npcs": [
         "gw_guard",
         "gw_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_longgong_z"
       ]
     },
     "luoshu_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "三孔镇水门",
+      "description": "中孔铜栓已松，必须先固定低孔，再依次泄压。",
       "exits": {
         "south": "luoshu_01",
         "north": "luoshu_03"
@@ -89,18 +253,23 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail",
+        "content_brace",
+        "content_secure",
+        "content_pickaxe"
       ]
     },
     "luoshu_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "龙宫旧殿",
+      "description": "龙宫的威压随积水退去，守殿者终于承认这里曾是凡人的水工遗迹。",
       "exits": {
         "south": "luoshu_02"
       },
       "npcs": [
         "gw_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +287,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成三孔镇水门的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +306,37 @@
       "longgong_z": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：手工支护或器物辅助；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "tool",
+    "solution": [
+      {
+        "roomId": "luoshu_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "luoshu_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "luoshu_02",
+        "actionId": "content_brace"
+      },
+      {
+        "roomId": "luoshu_02",
+        "actionId": "content_secure"
+      },
+      {
+        "roomId": "luoshu_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "luoshu_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "龙宫的威压随积水退去，守殿者终于承认这里曾是凡人的水工遗迹。"
+  }
 }

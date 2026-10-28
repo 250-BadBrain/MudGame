@@ -2,7 +2,7 @@
   "luoyang_guard": {
     "name": "洛阳府卫",
     "title": "城防军士",
-    "description": "一名披甲执戟的府卫，目光警惕地扫视来往行人。",
+    "description": "一名披甲执戟的府卫，目光警惕地扫视来往行人。【专长】辨伪路引。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "guard",
     "importance": "common",
@@ -62,12 +62,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "辨伪路引",
+    "dialogueId": "content_npc_luoyang_guard",
+    "combatMode": "kill"
   },
   "office_clerk": {
     "name": "韩录事",
     "title": "官署录事",
-    "description": "韩录事掌管告示和案牍，语气平和，却总能问到要害处。",
+    "description": "韩录事掌管告示和案牍，语气平和，却总能问到要害处。【专长】保全密信证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "quest",
     "importance": "local",
@@ -131,12 +134,13 @@
     },
     "questIds": [
       "luoyang_bounty"
-    ]
+    ],
+    "specialty": "保全密信证词"
   },
   "east_market_keeper": {
     "name": "杜掌柜",
     "title": "东市铺主",
-    "description": "杜掌柜算盘打得飞快，柜上摆着衣履、干粮和常用杂物。",
+    "description": "杜掌柜算盘打得飞快，柜上摆着衣履、干粮和常用杂物。【专长】衣履针脚与旅人来路。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "common",
@@ -202,12 +206,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "衣履针脚与旅人来路",
+    "dialogueId": "content_npc_east_market_keeper"
   },
   "heluo_blacksmith": {
     "name": "钟铁衣",
     "title": "河洛铁匠",
-    "description": "钟铁衣双臂粗壮，炉火映得脸色通红。他打造的兵器不华丽，却结实可靠。",
+    "description": "钟铁衣双臂粗壮，炉火映得脸色通红。他打造的兵器不华丽，却结实可靠。【专长】铸痕与受力诊断。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "local",
@@ -284,12 +290,13 @@
         "seal": 0
       }
     },
-    "dialogueId": "dlg_heluo_blacksmith"
+    "dialogueId": "dlg_heluo_blacksmith",
+    "specialty": "铸痕与受力诊断"
   },
   "weapon_school_master": {
     "name": "赵横江",
     "title": "河洛武馆教头",
-    "description": "赵横江曾在军中任教，精通拳脚、刀剑和招架，最重基本功。",
+    "description": "赵横江曾在军中任教，精通拳脚、刀剑和招架，最重基本功。【专长】收招与非致死试手。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_common_training",
     "role": "teacher",
     "importance": "local",
@@ -359,12 +366,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "收招与非致死试手",
+    "dialogueId": "content_npc_weapon_school_master"
   },
   "academy_teacher": {
     "name": "柳先生",
     "title": "河洛书院先生",
-    "description": "柳先生衣着朴素，案头常放着兵书、医案和残缺古卷。",
+    "description": "柳先生衣着朴素，案头常放着兵书、医案和残缺古卷。【专长】古文字与留白校勘。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_academy",
     "role": "teacher",
     "importance": "local",
@@ -430,12 +439,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "古文字与留白校勘",
+    "dialogueId": "content_npc_academy_teacher"
   },
   "military_instructor": {
     "name": "秦校尉",
     "title": "军府校尉",
-    "description": "秦校尉负责军府操练，谈吐简短有力，身上带着久经沙场的肃杀气。",
+    "description": "秦校尉负责军府操练，谈吐简短有力，身上带着久经沙场的肃杀气。【专长】辨军令与临敌操练。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_military",
     "role": "teacher",
     "importance": "local",
@@ -503,12 +514,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "辨军令与临敌操练",
+    "dialogueId": "content_npc_military_instructor"
   },
   "guild_steward": {
     "name": "沈七",
     "title": "商会管事",
-    "description": "沈七熟知各地商路，笑容和气，却把每一笔人情都记得清清楚楚。",
+    "description": "沈七熟知各地商路，笑容和气，却把每一笔人情都记得清清楚楚。【专长】商路风险与双联账。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "quest",
     "importance": "local",
@@ -569,12 +582,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "商路风险与双联账"
   },
   "escort_bureau_chief": {
     "name": "段老镖头",
     "title": "南门镖局管事",
-    "description": "段老镖头须发花白，腰杆仍挺得笔直。每逢商队出城，他都会亲自查验镖旗。",
+    "description": "段老镖头须发花白，腰杆仍挺得笔直。每逢商队出城，他都会亲自查验镖旗。【专长】护镖撤路与队尾照看。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_escort",
     "role": "quest",
     "importance": "local",
@@ -638,12 +652,13 @@
     },
     "questIds": [
       "escort_rumor_run"
-    ]
+    ],
+    "specialty": "护镖撤路与队尾照看"
   },
   "storyteller": {
     "name": "许说书",
     "title": "洛水说书人",
-    "description": "许说书一柄折扇，一块醒木，讲得出扬州双龙，也讲得出战国铜匣的怪谈。",
+    "description": "许说书一柄折扇，一块醒木，讲得出扬州双龙，也讲得出战国铜匣的怪谈。【专长】传闻中的不同叙事者。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "rumor",
     "importance": "special",
@@ -707,12 +722,13 @@
     },
     "questIds": [
       "escort_rumor_run"
-    ]
+    ],
+    "specialty": "传闻中的不同叙事者"
   },
   "qingyi_spy": {
     "name": "秦三娘",
     "title": "青衣密探",
-    "description": "秦三娘倚在暗巷墙边，像是在等人，又像是在听整座洛阳的呼吸。",
+    "description": "秦三娘倚在暗巷墙边，像是在等人，又像是在听整座洛阳的呼吸。【专长】反向追踪与匿名证人。交谈后明确选择“专长”可记录见闻。",
     "faction": "qingyi_spies",
     "role": "spy",
     "importance": "local",
@@ -777,12 +793,13 @@
     "skills": {
       "basic_hidden_weapon": 240,
       "basic_whip": 150
-    }
+    },
+    "specialty": "反向追踪与匿名证人"
   },
   "black_market_broker": {
     "name": "裴玄",
     "title": "西市掮客",
-    "description": "裴玄总能弄到别人弄不到的东西，也总能问出别人问不到的消息。",
+    "description": "裴玄总能弄到别人弄不到的东西，也总能问出别人问不到的消息。【专长】烟尘撤离与赝品口风。交谈后明确选择“专长”可记录见闻。",
     "faction": "west_market",
     "role": "shopkeeper",
     "importance": "local",
@@ -847,12 +864,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "烟尘撤离与赝品口风",
+    "dialogueId": "content_npc_black_market_broker"
   },
   "road_bandit": {
     "name": "城郊流寇",
     "title": "拦路贼",
-    "description": "一名衣衫破旧的流寇，手里提着卷刃短刀，眼神凶狠又饥饿。",
+    "description": "一名衣衫破旧的流寇，手里提着卷刃短刀，眼神凶狠又饥饿。【专长】假路标下的饥民痕迹。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -913,12 +932,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "假路标下的饥民痕迹",
+    "dialogueId": "content_npc_road_bandit",
+    "combatMode": "kill"
   },
   "temple_bandit": {
     "name": "荒庙流寇",
     "title": "亡命徒",
-    "description": "这名流寇满身泥水，刀口还沾着未干的血迹。",
+    "description": "这名流寇满身泥水，刀口还沾着未干的血迹。【专长】荒庙夜雨·庙门的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -980,12 +1002,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "荒庙夜雨·庙门的武备与守位",
+    "dialogueId": "content_npc_temple_bandit",
+    "combatMode": "kill"
   },
   "temple_assassin": {
     "name": "蒙面刺客",
     "title": "夜雨杀手",
-    "description": "刺客黑巾覆面，短刃藏在袖中，出手前几乎听不到脚步声。",
+    "description": "刺客黑巾覆面，短刃藏在袖中，出手前几乎听不到脚步声。【专长】荒庙夜雨·后院雨廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "elite",
@@ -1047,12 +1072,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "荒庙夜雨·后院雨廊的武备与守位",
+    "dialogueId": "content_npc_temple_assassin",
+    "combatMode": "kill"
   },
   "csj_boatman": {
     "name": "老船夫",
     "title": "扬子渡艄公",
-    "description": "老船夫在渡口撑了三十年船，见过太多少年郎意气风发地上船，再没回来。",
+    "description": "老船夫在渡口撑了三十年船，见过太多少年郎意气风发地上船，再没回来。【专长】扬子江惊变·扬子渡口的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -1116,12 +1144,13 @@
     },
     "aggressive": false,
     "dialogueId": "dlg_csj_boatman",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "扬子江惊变·扬子渡口的在场证词"
   },
   "csj_yuwen_soldier": {
     "name": "宇文阀武士",
     "title": "宇文阀亲兵",
-    "description": "铁甲外罩着黑色披风，刀是北方好钢，出手没有多余的花巧。",
+    "description": "铁甲外罩着黑色披风，刀是北方好钢，出手没有多余的花巧。【专长】扬子江惊变·芦苇荡的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -1182,12 +1211,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "扬子江惊变·芦苇荡的武备与守位",
+    "dialogueId": "content_npc_csj_yuwen_soldier",
+    "combatMode": "kill"
   },
   "csj_yuwen_scout": {
     "name": "巡江刀手",
     "title": "宇文阀斥候",
-    "description": "巡江刀手一身短打，步法滑溜，刀专挑下三路招呼。",
+    "description": "巡江刀手一身短打，步法滑溜，刀专挑下三路招呼。【专长】扬子江惊变·沉船浅滩的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -1248,12 +1280,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "扬子江惊变·沉船浅滩的武备与守位",
+    "dialogueId": "content_npc_csj_yuwen_scout",
+    "combatMode": "kill"
   },
   "csj_yuwen_vanguard": {
     "name": "宇文阀先锋",
     "title": "宇文阀先锋统领",
-    "description": "先锋统领纵马立在洲头，屡经沙场的煞气不用拔刀便已逼人。",
+    "description": "先锋统领纵马立在洲头，屡经沙场的煞气不用拔刀便已逼人。【专长】扬子江惊变·江心洲的武备与守位。交谈后明确选择“专长”可记录见闻。",
     "faction": "unknown_assassins",
     "role": "elite",
     "importance": "elite",
@@ -1314,12 +1349,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "扬子江惊变·江心洲的武备与守位",
+    "dialogueId": "content_npc_csj_yuwen_vanguard",
+    "combatMode": "kill"
   },
   "csj_yuwen_huaji": {
     "name": "宇文化及",
     "title": "宇文阀少主",
-    "description": "宇文阀少主宇文化及按剑立于柳林之前，眼高于顶，杀意却实实在在。",
+    "description": "宇文阀少主宇文化及按剑立于柳林之前，眼高于顶，杀意却实实在在。【专长】扬子江惊变·北岸柳林的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "boss",
     "importance": "boss",
@@ -1380,12 +1418,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "扬子江惊变·北岸柳林的武备与守位",
+    "dialogueId": "content_npc_csj_yuwen_huaji",
+    "combatMode": "kill"
   },
   "csj_fu_junzhuo": {
     "name": "傅君婥",
     "title": "高丽弈剑门客",
-    "description": "白衣女子抱剑倚柳，气息紊乱却掩不住一身剑气——正是携《长生诀》北上的傅君婥。",
+    "description": "白衣女子抱剑倚柳，气息紊乱却掩不住一身剑气——正是携《长生诀》北上的傅君婥。【专长】扬子江惊变·北岸柳林的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -1449,12 +1490,13 @@
     },
     "aggressive": false,
     "combatMode": "protected",
-    "dialogueId": "dlg_csj_fu_junzhuo"
+    "dialogueId": "dlg_csj_fu_junzhuo",
+    "specialty": "扬子江惊变·北岸柳林的在场证词"
   },
   "nj_sentinel": {
     "name": "怒蛟帮哨兵",
     "title": "水寨哨卫",
-    "description": "哨兵肩头中了一刀，血浸了半边衣襟，仍死死盯着寨外。",
+    "description": "哨兵肩头中了一刀，血浸了半边衣襟，仍死死盯着寨外。【专长】怒蛟帮夜战·水寨栈桥的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -1518,12 +1560,13 @@
     },
     "aggressive": false,
     "dialogueId": "dlg_nj_sentinel",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "怒蛟帮夜战·水寨栈桥的在场证词"
   },
   "nj_wounded": {
     "name": "怒蛟帮伤兵",
     "title": "聚义庭守卫",
-    "description": "帮众背上插着一支短箭，靠着廊柱喘息，手里还攥着刀。",
+    "description": "帮众背上插着一支短箭，靠着廊柱喘息，手里还攥着刀。【专长】怒蛟帮夜战·聚义庭的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -1588,12 +1631,13 @@
     "aggressive": false,
     "dialogueId": "dlg_nj_wounded",
     "nonCombat": true,
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "怒蛟帮夜战·聚义庭的在场证词"
   },
   "nj_daoshou": {
     "name": "魔师宫刀手",
     "title": "方夜羽麾下",
-    "description": "魔师宫刀手刀法狠辣干净，一言不发便拔刀砍人。",
+    "description": "魔师宫刀手刀法狠辣干净，一言不发便拔刀砍人。【专长】怒蛟帮夜战·前寨栅门的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -1654,12 +1698,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "怒蛟帮夜战·前寨栅门的武备与守位",
+    "dialogueId": "content_npc_nj_daoshou",
+    "combatMode": "kill"
   },
   "nj_qiangwei": {
     "name": "魔师宫枪卫",
     "title": "方夜羽麾下",
-    "description": "枪卫的长枪使开了泼水不进，枪尖始终不离敌人咽喉。",
+    "description": "枪卫的长枪使开了泼水不进，枪尖始终不离敌人咽喉。【专长】怒蛟帮夜战·演武场的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -1720,12 +1767,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "怒蛟帮夜战·演武场的武备与守位",
+    "dialogueId": "content_npc_nj_qiangwei",
+    "combatMode": "kill"
   },
   "nj_spy": {
     "name": "魔师宫细作",
     "title": "方夜羽麾下",
-    "description": "细作身法鬼魅般飘忽，专拣人背後放火偷袭。",
+    "description": "细作身法鬼魅般飘忽，专拣人背後放火偷袭。【专长】怒蛟帮夜战·演武场的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -1786,12 +1836,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "怒蛟帮夜战·演武场的武备与守位",
+    "dialogueId": "content_npc_nj_spy",
+    "combatMode": "kill"
   },
   "nj_shuangjian": {
     "name": "魔师宫双剑卫",
     "title": "方夜羽贴身护卫",
-    "description": "双剑卫左右手各持一剑，攻守之间如臂使指。",
+    "description": "双剑卫左右手各持一剑，攻守之间如臂使指。【专长】怒蛟帮夜战·聚义厅的武备与守位。交谈后明确选择“专长”可记录见闻。",
     "faction": "unknown_assassins",
     "role": "elite",
     "importance": "elite",
@@ -1852,12 +1905,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "怒蛟帮夜战·聚义厅的武备与守位",
+    "dialogueId": "content_npc_nj_shuangjian",
+    "combatMode": "kill"
   },
   "nj_fang_yeyu": {
     "name": "方夜羽",
     "title": "魔师宫少主",
-    "description": "魔师宫少主方夜羽白衣胜雪，儒雅从容，出手却是魔门最狠辣的路子。",
+    "description": "魔师宫少主方夜羽白衣胜雪，儒雅从容，出手却是魔门最狠辣的路子。【专长】怒蛟帮夜战·聚义厅的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "boss",
     "importance": "boss",
@@ -1919,12 +1975,14 @@
         "seal": 0
       }
     },
-    "combatMode": "defeat"
+    "combatMode": "defeat",
+    "specialty": "怒蛟帮夜战·聚义厅的武备与守位",
+    "dialogueId": "content_npc_nj_fang_yeyu"
   },
   "jyg_stone_guard": {
     "name": "惊雁宫石像卫",
     "title": "上古守卫",
-    "description": "石像卫兵通体青灰，行动迟缓，长戟势大力沉。",
+    "description": "石像卫兵通体青灰，行动迟缓，长戟势大力沉。【专长】惊雁宫夺图·宫门石阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -1985,12 +2043,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "惊雁宫夺图·宫门石阶的武备与守位",
+    "dialogueId": "content_npc_jyg_stone_guard",
+    "combatMode": "kill"
   },
   "jyg_sword_guard": {
     "name": "惊雁宫石剑卫",
     "title": "剑冢守卫",
-    "description": "石剑卫破壁而出，古拙剑势里藏着斩尽闯宫者的决意。",
+    "description": "石剑卫破壁而出，古拙剑势里藏着斩尽闯宫者的决意。【专长】惊雁宫夺图·剑冢长廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -2051,12 +2112,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "惊雁宫夺图·剑冢长廊的武备与守位",
+    "dialogueId": "content_npc_jyg_sword_guard",
+    "combatMode": "kill"
   },
   "jyg_war_phantom": {
     "name": "战神幻影",
     "title": "图录兵戈之气",
-    "description": "由殿中千载兵戈之气凝成的巨大幻影，每一招都是战神图录的入门真意。",
+    "description": "由殿中千载兵戈之气凝成的巨大幻影，每一招都是战神图录的入门真意。【专长】惊雁宫夺图·图录大殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -2123,12 +2187,15 @@
       "attack": -8,
       "hitRate": -12,
       "defense": -6
-    }
+    },
+    "specialty": "惊雁宫夺图·图录大殿的武备与守位",
+    "dialogueId": "content_npc_jyg_war_phantom",
+    "combatMode": "kill"
   },
   "bh_ji_qianqian": {
     "name": "纪千千",
     "title": "边荒名妓",
-    "description": "纪千千素衣不加钗环，眉目间却自有令千军侧目的气度。",
+    "description": "纪千千素衣不加钗环，眉目间却自有令千军侧目的气度。【专长】边荒夜护·边荒集北门的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "elite",
     "importance": "elite",
@@ -2192,12 +2259,13 @@
     },
     "aggressive": false,
     "dialogueId": "dlg_bh_ji_qianqian",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "边荒夜护·边荒集北门的在场证词"
   },
   "bh_swordsman": {
     "name": "荒集剑手",
     "title": "护卫队剑手",
-    "description": "边荒集最好的剑手里挑出来的一个，话不多，剑很快。",
+    "description": "边荒集最好的剑手里挑出来的一个，话不多，剑很快。【专长】边荒夜护·边荒集北门的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -2260,12 +2328,14 @@
       }
     },
     "aggressive": false,
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "边荒夜护·边荒集北门的在场证词",
+    "dialogueId": "content_npc_bh_swordsman"
   },
   "bh_rider": {
     "name": "燕军游骑",
     "title": "慕容垂麾下",
-    "description": "燕军游骑马术精湛，弯刀借马力劈砍，一击即走。",
+    "description": "燕军游骑马术精湛，弯刀借马力劈砍，一击即走。【专长】边荒夜护·官道荒林的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -2326,12 +2396,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒夜护·官道荒林的武备与守位",
+    "dialogueId": "content_npc_bh_rider",
+    "combatMode": "kill"
   },
   "bh_archer": {
     "name": "燕军弓手",
     "title": "慕容垂麾下",
-    "description": "燕军弓手开的是硬弓，箭箭咬着要害。",
+    "description": "燕军弓手开的是硬弓，箭箭咬着要害。【专长】边荒夜护·破败驿站的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -2392,12 +2465,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒夜护·破败驿站的武备与守位",
+    "dialogueId": "content_npc_bh_archer",
+    "combatMode": "kill"
   },
   "bh_captain": {
     "name": "燕军骑督",
     "title": "前锋骑兵统领",
-    "description": "燕军骑督久经战阵，长矛使开了如毒龙出洞。",
+    "description": "燕军骑督久经战阵，长矛使开了如毒龙出洞。【专长】边荒夜护·断魂石桥的武备与守位。交谈后明确选择“专长”可记录见闻。",
     "faction": "unknown_assassins",
     "role": "elite",
     "importance": "elite",
@@ -2458,12 +2534,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒夜护·断魂石桥的武备与守位",
+    "dialogueId": "content_npc_bh_captain",
+    "combatMode": "kill"
   },
   "bh_general": {
     "name": "慕容前锋督将",
     "title": "燕军前锋统帅",
-    "description": "前锋督将铁甲染霜，横戟立在渡口，身后是必得的军令。",
+    "description": "前锋督将铁甲染霜，横戟立在渡口，身后是必得的军令。【专长】边荒夜护·荒野渡口的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "boss",
     "importance": "boss",
@@ -2524,12 +2603,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒夜护·荒野渡口的武备与守位",
+    "dialogueId": "content_npc_bh_general",
+    "combatMode": "kill"
   },
   "yg_turkic_soldier": {
     "name": "突厥武士",
     "title": "康鞘利前锋",
-    "description": "突厥武士体魄雄壮，弯刀劈砍带着草原上的野性。",
+    "description": "突厥武士体魄雄壮，弯刀劈砍带着草原上的野性。【专长】杨公宝库·库门甬道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "enemy",
     "importance": "common",
@@ -2590,12 +2672,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "杨公宝库·库门甬道的武备与守位",
+    "dialogueId": "content_npc_yg_turkic_soldier",
+    "combatMode": "kill"
   },
   "yg_yinkui_witch": {
     "name": "阴癸派妖女",
     "title": "魔门高手",
-    "description": "妖女眼波流转，天魔舞步飘忽不定，笑声比方才更近了一步。",
+    "description": "妖女眼波流转，天魔舞步飘忽不定，笑声比方才更近了一步。【专长】杨公宝库·千机廊的武备与守位。交谈后明确选择“专长”可记录见闻。",
     "faction": "unknown_assassins",
     "role": "elite",
     "importance": "elite",
@@ -2656,12 +2741,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "杨公宝库·千机廊的武备与守位",
+    "dialogueId": "content_npc_yg_yinkui_witch",
+    "combatMode": "kill"
   },
   "yg_stone_golem": {
     "name": "宝库石人卫",
     "title": "鲁妙子机关傀儡",
-    "description": "石人卫是鲁妙子留下的机关傀儡，只认机关令，不认活人。",
+    "description": "石人卫是鲁妙子留下的机关傀儡，只认机关令，不认活人。【专长】杨公宝库·藏兵库的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -2722,12 +2810,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "杨公宝库·藏兵库的武备与守位",
+    "dialogueId": "content_npc_yg_stone_golem",
+    "combatMode": "kill"
   },
   "yg_kang_xiaoli": {
     "name": "康鞘利",
     "title": "突厥第一高手",
-    "description": "突厥第一高手康鞘利，武功马术俱是一时之选，为宝库而来，为宝库而留。",
+    "description": "突厥第一高手康鞘利，武功马术俱是一时之选，为宝库而来，为宝库而留。【专长】杨公宝库·宝库大殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "unknown_assassins",
     "role": "boss",
     "importance": "boss",
@@ -2788,12 +2879,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "杨公宝库·宝库大殿的武备与守位",
+    "dialogueId": "content_npc_yg_kang_xiaoli",
+    "combatMode": "kill"
   },
   "lj_old_boatman": {
     "name": "老船翁",
     "title": "当年那夜的路人",
-    "description": "老船翁自称当年就在江上，亲眼见过那一战，此后再没离开过大江。",
+    "description": "老船翁自称当年就在江上，亲眼见过那一战，此后再没离开过大江。【专长】拦江一战·残影·大江渡头的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -2857,12 +2951,13 @@
     },
     "aggressive": false,
     "dialogueId": "dlg_lj_old_boatman",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "拦江一战·残影·大江渡头的在场证词"
   },
   "lj_phantom_soldier": {
     "name": "江雾幻兵",
     "title": "江气所凝",
-    "description": "幻兵由江雾凝成，戟上水声如潮，散而复聚。",
+    "description": "幻兵由江雾凝成，戟上水声如潮，散而复聚。【专长】拦江一战·残影·江心舟阵的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -2923,12 +3018,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "拦江一战·残影·江心舟阵的武备与守位",
+    "dialogueId": "content_npc_lj_phantom_soldier",
+    "combatMode": "kill"
   },
   "lj_pang_ban": {
     "name": "庞斑残影",
     "title": "魔师残影",
-    "description": "魔师庞斑的残影，虽只是百年江气所凝，渊渟岳峙的气机仍是宗师气象。",
+    "description": "魔师庞斑的残影，虽只是百年江气所凝，渊渟岳峙的气机仍是宗师气象。【专长】拦江一战·残影·拦江战台的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -2995,12 +3093,15 @@
       "attack": -10,
       "hitRate": -15,
       "defense": -8
-    }
+    },
+    "specialty": "拦江一战·残影·拦江战台的武备与守位",
+    "dialogueId": "content_npc_lj_pang_ban",
+    "combatMode": "kill"
   },
   "ancient_scroll_keeper": {
     "name": "灰袍老者",
     "title": "残卷守护者",
-    "description": "翻阅旧闻的灰袍老者，愿意谈江湖掌故；真正的武学传承仍须亲历。",
+    "description": "翻阅旧闻的灰袍老者，愿意谈江湖掌故；真正的武学传承仍须亲历。【专长】传承异本比对。交谈后明确选择“专长”可记录见闻。",
     "role": "teacher",
     "importance": "local",
     "skills": {},
@@ -3064,12 +3165,13 @@
     "dialogueId": "dlg_ancient_scroll_keeper_commissions",
     "questIds": [
       "changan_letter"
-    ]
+    ],
+    "specialty": "传承异本比对"
   },
   "jl_spearman": {
     "name": "江淮军长矛手",
     "title": "围城先锋",
-    "description": "江淮军的前排矛手，长矛如林，专破城门缺口。",
+    "description": "江淮军的前排矛手，长矛如林，专破城门缺口。【专长】竟陵之围·竟陵南门的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "common",
@@ -3130,12 +3232,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "竟陵之围·竟陵南门的武备与守位",
+    "dialogueId": "content_npc_jl_spearman",
+    "combatMode": "kill"
   },
   "jl_ladder_trooper": {
     "name": "云梯锐士",
     "title": "攀城死士",
-    "description": "肩扛云梯的江淮死士，弃了甲换轻，专为登城而生。",
+    "description": "肩扛云梯的江淮死士，弃了甲换轻，专为登城而生。【专长】竟陵之围·城头箭楼的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "common",
@@ -3196,12 +3301,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "竟陵之围·城头箭楼的武备与守位",
+    "dialogueId": "content_npc_jl_ladder_trooper",
+    "combatMode": "kill"
   },
   "jl_infiltrator": {
     "name": "江淮细作",
     "title": "混城暗子",
-    "description": "混在溃兵人流里的细作，短刃专拣守军背心下手。",
+    "description": "混在溃兵人流里的细作，短刃专拣守军背心下手。【专长】竟陵之围·内城街巷的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "common",
@@ -3262,12 +3370,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "竟陵之围·内城街巷的武备与守位",
+    "dialogueId": "content_npc_jl_infiltrator",
+    "combatMode": "kill"
   },
   "jl_iron_cavalry": {
     "name": "江淮铁骑",
     "title": "东门骑阵",
-    "description": "人马俱甲的江淮铁骑，冲阵时如一道铁墙碾过。",
+    "description": "人马俱甲的江淮铁骑，冲阵时如一道铁墙碾过。【专长】竟陵之围·东门瓮城的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "common",
@@ -3328,12 +3439,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "竟陵之围·东门瓮城的武备与守位",
+    "dialogueId": "content_npc_jl_iron_cavalry",
+    "combatMode": "kill"
   },
   "jl_canal_ambusher": {
     "name": "渠畔伏兵",
     "title": "水门杀手",
-    "description": "埋伏在暗渠水影里的刀手，等的就是逃难的人流。",
+    "description": "埋伏在暗渠水影里的刀手，等的就是逃难的人流。【专长】竟陵之围·水门暗渠的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "common",
@@ -3394,12 +3508,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "竟陵之围·水门暗渠的武备与守位",
+    "dialogueId": "content_npc_jl_canal_ambusher",
+    "combatMode": "kill"
   },
   "jl_vanguard_commander": {
     "name": "江淮军先锋都督",
     "title": "围城军锋",
-    "description": "杜伏威麾下的先锋都督，一身铁甲立在将旗之下，掌中长槊挑翻过无数守将。城里的耗子敢出来，正省了他爬墙。",
+    "description": "杜伏威麾下的先锋都督，一身铁甲立在将旗之下，掌中长槊挑翻过无数守将。城里的耗子敢出来，正省了他爬墙。【专长】竟陵之围·城外芦荡的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "jianghuai_army",
     "role": "boss",
     "importance": "boss",
@@ -3466,12 +3583,15 @@
       "attack": -10,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "竟陵之围·城外芦荡的武备与守位",
+    "dialogueId": "content_npc_jl_vanguard_commander",
+    "combatMode": "kill"
   },
   "jl_fang_zeliu": {
     "name": "方泽流",
     "title": "竟陵城主",
-    "description": "竟陵城主方泽流，铁甲未卸，眼中满是血丝，仍死死盯着城下的军阵。",
+    "description": "竟陵城主方泽流，铁甲未卸，眼中满是血丝，仍死死盯着城下的军阵。【专长】竟陵之围·竟陵南门的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "local",
@@ -3534,12 +3654,13 @@
       }
     },
     "dialogueId": "dlg_jl_fang",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "竟陵之围·竟陵南门的在场证词"
   },
   "jl_lu_miaozi": {
     "name": "鲁妙子",
     "title": "机关隐士",
-    "description": "白须老者伏在守城弩机的图纸间，正是留下杨公宝库的机关大家鲁妙子。",
+    "description": "白须老者伏在守城弩机的图纸间，正是留下杨公宝库的机关大家鲁妙子。【专长】竟陵之围·府库机枢房的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "local",
@@ -3602,12 +3723,13 @@
       }
     },
     "dialogueId": "dlg_jl_lu",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "竟陵之围·府库机枢房的在场证词"
   },
   "jl_kou_zhong": {
     "name": "寇仲",
     "title": "城头少年",
-    "description": "咧着嘴守垛口的少年，刀名井中月，正是日后的天刀传人寇仲。",
+    "description": "咧着嘴守垛口的少年，刀名井中月，正是日后的天刀传人寇仲。【专长】竟陵之围·城头箭楼的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "local",
@@ -3670,12 +3792,13 @@
       }
     },
     "dialogueId": "dlg_jl_twins",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "竟陵之围·城头箭楼的在场证词"
   },
   "jl_xu_ziling": {
     "name": "徐子陵",
     "title": "城头少年",
-    "description": "与寇仲背靠背而立的沉静少年，掌法飘逸，正是徐子陵。",
+    "description": "与寇仲背靠背而立的沉静少年，掌法飘逸，正是徐子陵。【专长】竟陵之围·城头箭楼的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "local",
@@ -3737,12 +3860,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "竟陵之围·城头箭楼的在场证词",
+    "dialogueId": "content_npc_jl_xu_ziling"
   },
   "jl_refugee_leader": {
     "name": "民夫头领",
     "title": "水门逃难者",
-    "description": "背着老母的汉子，领着一队民夫挤在水门渠口，等一条活路。",
+    "description": "背着老母的汉子，领着一队民夫挤在水门渠口，等一条活路。【专长】竟陵之围·水门暗渠的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "jianghuai_army",
     "role": "enemy",
     "importance": "local",
@@ -3805,12 +3930,13 @@
       }
     },
     "dialogueId": "dlg_jl_refugees",
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "竟陵之围·水门暗渠的在场证词"
   },
   "td_steward": {
     "name": "宋阀管事",
     "title": "刀堂知客",
-    "description": "青衫管事立在刀堂门首，见人先拱手：'宋阀设堂三日，只试刀，不问出身。'",
+    "description": "青衫管事立在刀堂门首，见人先拱手：'宋阀设堂三日，只试刀，不问出身。'【专长】天刀试炼·刀堂前院的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "song_clan",
     "role": "guard",
     "importance": "local",
@@ -3873,12 +3999,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "天刀试炼·刀堂前院的在场证词"
   },
   "td_wood_puppet": {
     "name": "木人",
     "title": "阵中刀靶",
-    "description": "精铁包木的机关木人，招式全是宋阀刀法的基本架子，快而准，不知疲倦。",
+    "description": "精铁包木的机关木人，招式全是宋阀刀法的基本架子，快而准，不知疲倦。【专长】天刀试炼·木人阵廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "song_clan",
     "role": "enemy",
     "importance": "common",
@@ -3939,12 +4066,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "天刀试炼·木人阵廊的武备与守位",
+    "dialogueId": "content_npc_td_wood_puppet",
+    "combatMode": "kill"
   },
   "td_inner_shadow": {
     "name": "心魔幻影",
     "title": "镜中所见",
-    "description": "水榭心镜照出的黑影——它用的竟是你自己的刀，招招都是你最得意的杀招。",
+    "description": "水榭心镜照出的黑影——它用的竟是你自己的刀，招招都是你最得意的杀招。【专长】天刀试炼·心镜水榭的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "elite",
@@ -4005,12 +4135,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "天刀试炼·心镜水榭的武备与守位",
+    "dialogueId": "content_npc_td_inner_shadow",
+    "combatMode": "kill"
   },
   "td_song_que": {
     "name": "宋缺",
     "title": "天刀",
-    "description": "负手立于演武场中央的男人，一袭布衣，目光落在你刀上时，你才明白什么叫天下第一刀。",
+    "description": "负手立于演武场中央的男人，一袭布衣，目光落在你刀上时，你才明白什么叫天下第一刀。【专长】天刀试炼·演武场的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "song_clan",
     "role": "boss",
     "importance": "boss",
@@ -4080,12 +4213,13 @@
       "defense": -6
     },
     "skills": {},
-    "dialogueId": ""
+    "dialogueId": "content_npc_td_song_que",
+    "specialty": "天刀试炼·演武场的武备与守位"
   },
   "salt_hall_master": {
     "name": "雷万钧",
     "title": "盐帮香主",
-    "description": "盐帮洛阳分舵的香主，掌舵出身的粗壮汉子，一双铁掌磨满了缆绳勒出的旧茧，棍法在漕帮里排得进前三。",
+    "description": "盐帮洛阳分舵的香主，掌舵出身的粗壮汉子，一双铁掌磨满了缆绳勒出的旧茧，棍法在漕帮里排得进前三。【专长】漕棍受力与盐帮规矩。交谈后明确选择“专长”可记录见闻。",
     "faction": "salt_gang",
     "role": "teacher",
     "importance": "local",
@@ -4155,12 +4289,13 @@
     },
     "questIds": [
       "salt_smuggling_case"
-    ]
+    ],
+    "specialty": "漕棍受力与盐帮规矩"
   },
   "salt_disciple": {
     "name": "盐帮弟子",
     "title": "分舵伙计",
-    "description": "赤脚短打的盐帮弟子，正把一捆捆漕棍码上货架，见人进门便抱拳。",
+    "description": "赤脚短打的盐帮弟子，正把一捆捆漕棍码上货架，见人进门便抱拳。【专长】盐包封角与码垛次序。交谈后明确选择“专长”可记录见闻。",
     "faction": "salt_gang",
     "role": "guard",
     "importance": "common",
@@ -4221,12 +4356,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "盐包封角与码垛次序",
+    "dialogueId": "content_npc_salt_disciple"
   },
   "dock_foreman": {
     "name": "鲁大个",
     "title": "码头把头",
-    "description": "漕运码头的把头，嗓门能压过号子声，手里的点货签敲得竹签乱跳。肯出力气就有你的饭。",
+    "description": "漕运码头的把头，嗓门能压过号子声，手里的点货签敲得竹签乱跳。肯出力气就有你的饭。【专长】缆绳磨损与船期核对。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "quest",
     "importance": "local",
@@ -4287,12 +4424,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "缆绳磨损与船期核对"
   },
   "luoshui_bandit": {
     "name": "洛水水匪",
     "title": "鹞子帮",
-    "description": "船帮上刻着鹞子记号的水匪，白日装作脚夫，夜里劫漕船。",
+    "description": "船帮上刻着鹞子记号的水匪，白日装作脚夫，夜里劫漕船。【专长】伪装脚夫的船帮暗记。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -4352,12 +4490,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "伪装脚夫的船帮暗记",
+    "dialogueId": "content_npc_luoshui_bandit",
+    "combatMode": "kill"
   },
   "nan_market_peddler": {
     "name": "陈货郎",
     "title": "南市杂货",
-    "description": "挑着担子走南闯北的货郎，担子里针头线脑、跌打药、烟尘粉应有尽有。",
+    "description": "挑着担子走南闯北的货郎，担子里针头线脑、跌打药、烟尘粉应有尽有。【专长】旅途口粮的实用准备。交谈后明确选择“专长”可记录见闻。",
     "faction": "west_market",
     "role": "shopkeeper",
     "importance": "common",
@@ -4422,12 +4563,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "旅途口粮的实用准备",
+    "dialogueId": "content_npc_nan_market_peddler"
   },
   "west_gate_guard": {
     "name": "西门城卒",
     "title": "瓮城当值",
-    "description": "倚着长戟打盹的城卒，路引盖戳的手法却快得像本能。",
+    "description": "倚着长戟打盹的城卒，路引盖戳的手法却快得像本能。【专长】关印重叠与通行时刻。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "guard",
     "importance": "common",
@@ -4487,12 +4630,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "关印重叠与通行时刻",
+    "dialogueId": "content_npc_west_gate_guard",
+    "combatMode": "kill"
   },
   "road_raider": {
     "name": "官道劫匪",
     "title": "崤函马贼",
-    "description": "盘踞函谷古道的马贼，专挑落单的行商下手，得手便钻进崖畔的荒径。",
+    "description": "盘踞函谷古道的马贼，专挑落单的行商下手，得手便钻进崖畔的荒径。【专长】山道伏击的受力点。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -4552,12 +4698,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "山道伏击的受力点",
+    "dialogueId": "content_npc_road_raider",
+    "combatMode": "kill"
   },
   "station_master_luo": {
     "name": "老骆",
     "title": "桃林驿丞",
-    "description": "在桃林驿站熬了三十年茶的老驿丞，谁的卦都算不准，谁的消息都记得住。",
+    "description": "在桃林驿站熬了三十年茶的老驿丞，谁的卦都算不准，谁的消息都记得住。【专长】旧图复核与驿路风向。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "quest",
     "importance": "local",
@@ -4618,12 +4767,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "旧图复核与驿路风向"
   },
   "beacon_deserter": {
     "name": "掉队的戍卒",
     "title": "禁沟残兵",
-    "description": "甲胄残破的戍卒躲在烽燧阴影里，眼神像受惊的野兽——他既不敢点燧，也不敢回关。",
+    "description": "甲胄残破的戍卒躲在烽燧阴影里，眼神像受惊的野兽——他既不敢点燧，也不敢回关。【专长】假烽信号的先后。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -4683,12 +4833,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "假烽信号的先后",
+    "dialogueId": "content_npc_beacon_deserter",
+    "combatMode": "kill"
   },
   "tongguan_officer": {
     "name": "赵关山",
     "title": "潼关校尉",
-    "description": "潼关守口的校尉，半边脸上有道旧箭疤。他核路引时只看你一眼：\"西边来的？那正好，有件事问你。\"",
+    "description": "潼关守口的校尉，半边脸上有道旧箭疤。他核路引时只看你一眼：\"西边来的？那正好，有件事问你。\"【专长】守关与共同水源。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_military",
     "role": "quest",
     "importance": "local",
@@ -4752,12 +4905,13 @@
     },
     "questIds": [
       "beacon_signal_case"
-    ]
+    ],
+    "specialty": "守关与共同水源"
   },
   "herbalist_sun": {
     "name": "孙回春",
     "title": "回春堂坐堂",
-    "description": "回春堂的坐堂大夫，三缕长须，搭脉时眼观鼻鼻观心。嘴上说医者仁心，手底下却从不肯让一个铜板的价。",
+    "description": "回春堂的坐堂大夫，三缕长须，搭脉时眼观鼻鼻观心。嘴上说医者仁心，手底下却从不肯让一个铜板的价。【专长】外伤分级与药性互证。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "local",
@@ -4818,12 +4972,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "外伤分级与药性互证"
   },
   "north_market_broker": {
     "name": "牛金牙",
     "title": "北市牙人",
-    "description": "北市最大的掮客，金牙一露三分利。杂货估衣旧兵刃没有他不倒手的。",
+    "description": "北市最大的掮客，金牙一露三分利。杂货估衣旧兵刃没有他不倒手的。【专长】旧货修补与伪造来历。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "common",
@@ -4888,12 +5043,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "旧货修补与伪造来历",
+    "dialogueId": "content_npc_north_market_broker"
   },
   "north_alley_thug": {
     "name": "北里地痞",
     "title": "巷中恶徒",
-    "description": "盘踞北里暗巷的地痞，专敲过路客的竹杠，不给就动刀。",
+    "description": "盘踞北里暗巷的地痞，专敲过路客的竹杠，不给就动刀。【专长】勒索账的两套记号。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -4953,12 +5110,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "勒索账的两套记号",
+    "dialogueId": "content_npc_north_alley_thug",
+    "combatMode": "kill"
   },
   "old_refugee": {
     "name": "老瘸子",
     "title": "流民营孤老",
-    "description": "流民营里最老的人，腿是早年替人挡刀废的。见多识广，只是没人肯听他说话。",
+    "description": "流民营里最老的人，腿是早年替人挡刀废的。见多识广，只是没人肯听他说话。【专长】流离者与被遗漏的名册。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -5022,12 +5182,13 @@
     },
     "questIds": [
       "refugee_rumor_case"
-    ]
+    ],
+    "specialty": "流离者与被遗漏的名册"
   },
   "ls_pirate": {
     "name": "鹞子帮水匪",
     "title": "洛水劫道",
-    "description": "船帮上刻鹞子的水匪，借着漕运空虚四处劫掠，白日扮渔夫，夜里做刀客。",
+    "description": "船帮上刻鹞子的水匪，借着漕运空虚四处劫掠，白日扮渔夫，夜里做刀客。【专长】洛水风浪·水寨外围的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -5088,12 +5249,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "洛水风浪·水寨外围的武备与守位",
+    "dialogueId": "content_npc_ls_pirate",
+    "combatMode": "kill"
   },
   "ls_chief": {
     "name": "鹞子帮头目",
     "title": "水寨之主",
-    "description": "鹞子帮的大当家，独眼挎双刀，官盐私盐一肩挑。盐帮的船号被他学了个十成十，就栽在这一点上。",
+    "description": "鹞子帮的大当家，独眼挎双刀，官盐私盐一肩挑。盐帮的船号被他学了个十成十，就栽在这一点上。【专长】洛水风浪·中军快船的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -5154,12 +5318,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "洛水风浪·中军快船的武备与守位",
+    "dialogueId": "content_npc_ls_chief",
+    "combatMode": "kill"
   },
   "ls_captive": {
     "name": "被掳船工",
     "title": "漕运苦力",
-    "description": "被绑在船舱里的漕工，见了刀光先当是水匪内讧，看清你的脸才敢哭出声。",
+    "description": "被绑在船舱里的漕工，见了刀光先当是水匪内讧，看清你的脸才敢哭出声。【专长】洛水风浪·中军快船的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "local",
@@ -5222,12 +5389,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "洛水风浪·中军快船的在场证词"
   },
   "fm_shang_xiuxun": {
     "name": "商秀珣",
     "title": "飞马牧场主",
-    "description": "飞马牧场年轻的主事人，眉目清朗，握缰的手却稳如铁铸。阴癸派夜袭之后，她的声音冷得像牧场凌晨的霜。",
+    "description": "飞马牧场年轻的主事人，眉目清朗，握缰的手却稳如铁铸。阴癸派夜袭之后，她的声音冷得像牧场凌晨的霜。【专长】飞马牧场·牧场大门的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -5290,12 +5458,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "飞马牧场·牧场大门的在场证词"
   },
   "fm_yinkui_acolyte": {
     "name": "阴葵刺客",
     "title": "魔门夜行",
-    "description": "一身黑衣贴着马厩阴影移动的刺客，袖口绣着一朵小小的葵花。",
+    "description": "一身黑衣贴着马厩阴影移动的刺客，袖口绣着一朵小小的葵花。【专长】飞马牧场·马厩场的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "enemy",
     "importance": "common",
@@ -5356,12 +5525,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "飞马牧场·马厩场的武备与守位",
+    "dialogueId": "content_npc_fm_yinkui_acolyte",
+    "combatMode": "kill"
   },
   "fm_yinkui_slasher": {
     "name": "阴葵杀手",
     "title": "魔门行刑",
-    "description": "阴癸派的外堂杀手，双钩淬着幽蓝药汁，招招搏命。",
+    "description": "阴癸派的外堂杀手，双钩淬着幽蓝药汁，招招搏命。【专长】飞马牧场·桑田阡陌的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "enemy",
     "importance": "common",
@@ -5422,12 +5594,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "飞马牧场·桑田阡陌的武备与守位",
+    "dialogueId": "content_npc_fm_yinkui_slasher",
+    "combatMode": "kill"
   },
   "fm_wanwan": {
     "name": "婠婠",
     "title": "阴癸派·白衣",
-    "description": "白衣胜雪的少女赤足立在主宅檐上，笑起来眼睛弯成月牙——南市买素帕的是她，流民营童谣里的白衣娘娘也是她。天魔真气在她指间流转，像在逗一只猫。",
+    "description": "白衣胜雪的少女赤足立在主宅檐上，笑起来眼睛弯成月牙——南市买素帕的是她，流民营童谣里的白衣娘娘也是她。天魔真气在她指间流转，像在逗一只猫。【专长】飞马牧场·主宅庭院的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "boss",
     "importance": "boss",
@@ -5489,12 +5664,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "飞马牧场·主宅庭院的武备与守位",
+    "dialogueId": "content_npc_fm_wanwan"
   },
   "fm_ranch_hand": {
     "name": "牧场马师",
     "title": "驯马人",
-    "description": "老马师缩在草料堆后发抖，手里的驯马哨攥得死紧——那是他一辈子的家当。",
+    "description": "老马师缩在草料堆后发抖，手里的驯马哨攥得死紧——那是他一辈子的家当。【专长】飞马牧场·天马厩的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "local",
@@ -5557,12 +5734,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "飞马牧场·天马厩的在场证词"
   },
   "ca_tea_master": {
     "name": "茶博士",
     "title": "西市说书人",
-    "description": "长安西市的茶博士，一张嘴把满城风闻编排得比说书还热闹，也是各方消息的中转站。",
+    "description": "长安西市的茶博士，一张嘴把满城风闻编排得比说书还热闹，也是各方消息的中转站。【专长】长安风云·长安西市的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -5625,12 +5803,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "长安风云·长安西市的在场证词"
   },
   "ca_shi_feixuan": {
     "name": "师妃暄",
     "title": "慈航静斋·仙子",
-    "description": "一身素白道袍的年轻仙子，眉目如画却不带一丝烟火气。她奉师命携和氏璧入长安，慈航剑典在她手中轻若无物，重若千钧。",
+    "description": "一身素白道袍的年轻仙子，眉目如画却不带一丝烟火气。她奉师命携和氏璧入长安，慈航剑典在她手中轻若无物，重若千钧。【专长】长安风云·和春亭的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "boss",
@@ -5693,12 +5872,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "长安风云·和春亭的在场证词"
   },
   "ca_yinkui_guard": {
     "name": "阴葵死士",
     "title": "魔门敢死",
-    "description": "服过秘药的阴癸派死士，双目泛着不正常的红，只认任务不认生死。",
+    "description": "服过秘药的阴癸派死士，双目泛着不正常的红，只认任务不认生死。【专长】长安风云·天街的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "enemy",
     "importance": "common",
@@ -5759,12 +5939,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "长安风云·天街的武备与守位",
+    "dialogueId": "content_npc_ca_yinkui_guard",
+    "combatMode": "kill"
   },
   "ca_bian_bufu": {
     "name": "边不负",
     "title": "阴癸派元老",
-    "description": "阴癸派硕果仅存的元老高手，笑面慈悲，一双手却沾满百年血腥。和氏璧的传闻把他从终南山引了出来。",
+    "description": "阴癸派硕果仅存的元老高手，笑面慈悲，一双手却沾满百年血腥。和氏璧的传闻把他从终南山引了出来。【专长】长安风云·慈航别院的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "boss",
     "importance": "boss",
@@ -5832,12 +6015,14 @@
       "attack": -12,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "长安风云·慈航别院的武备与守位",
+    "dialogueId": "content_npc_ca_bian_bufu"
   },
   "jm_qi_bishao": {
     "name": "祁碧芍",
     "title": "侠女",
-    "description": "青衫佩剑的女侠守在山脚古道口，为传鹰的战约断后。她看你的眼神像在看一把还没出鞘的刀。",
+    "description": "青衫佩剑的女侠守在山脚古道口，为传鹰的战约断后。她看你的眼神像在看一把还没出鞘的刀。【专长】鸡鸣山之约·山脚古道的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -5900,12 +6085,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "鸡鸣山之约·山脚古道的在场证词"
   },
   "jm_mongol_warrior": {
     "name": "蒙古武士",
     "title": "汗庭铁卫",
-    "description": "封山的蒙古武士，弯刀出了鞘就不再回鞘——国师的战约，不许任何人搅局。",
+    "description": "封山的蒙古武士，弯刀出了鞘就不再回鞘——国师的战约，不许任何人搅局。【专长】鸡鸣山之约·迎客坡的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -5966,12 +6152,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "鸡鸣山之约·迎客坡的武备与守位",
+    "dialogueId": "content_npc_jm_mongol_warrior",
+    "combatMode": "kill"
   },
   "jm_mongol_adept": {
     "name": "蒙古高手",
     "title": "国师座下",
-    "description": "国师座下的高手，一手摔撇功夫硬桥硬马，藏獒般的体魄里藏着精准的杀意。",
+    "description": "国师座下的高手，一手摔撇功夫硬桥硬马，藏獒般的体魄里藏着精准的杀意。【专长】鸡鸣山之约·千级石阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -6032,12 +6221,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "鸡鸣山之约·千级石阶的武备与守位",
+    "dialogueId": "content_npc_jm_mongol_adept",
+    "combatMode": "kill"
   },
   "jm_si_hanfei": {
     "name": "思汉飞",
     "title": "蒙古国师",
-    "description": "紫袍金冠的蒙古国师立在山巅，天妖气如潮水般外放，压得满山鸟雀噤声。他与传鹰的战约，是当世武道的巅峰对决。",
+    "description": "紫袍金冠的蒙古国师立在山巅，天妖气如潮水般外放，压得满山鸟雀噤声。他与传鹰的战约，是当世武道的巅峰对决。【专长】鸡鸣山之约·鸡鸣山巅的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "boss",
     "importance": "boss",
@@ -6105,12 +6297,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -8
-    }
+    },
+    "specialty": "鸡鸣山之约·鸡鸣山巅的武备与守位",
+    "dialogueId": "content_npc_jm_si_hanfei"
   },
   "zd_chuan_ying": {
     "name": "传鹰",
     "title": "破碎虚空·传人",
-    "description": "披着旧披风的青年立在战神大殿中央，闭目入定，周身气机与整座大殿的嗡鸣融成一体——他正在走前人未走完的那条路。",
+    "description": "披着旧披风的青年立在战神大殿中央，闭目入定，周身气机与整座大殿的嗡鸣融成一体——他正在走前人未走完的那条路。【专长】战神殿·雪原山道的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "boss",
@@ -6173,12 +6367,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "战神殿·雪原山道的在场证词"
   },
   "zd_shaman_guard": {
     "name": "萨满武士",
     "title": "汗庭秘术",
-    "description": "脸上涂着骨纹的萨满武士，铜铃与弯刀一起响，守住通往战神殿的雪原山道。",
+    "description": "脸上涂着骨纹的萨满武士，铜铃与弯刀一起响，守住通往战神殿的雪原山道。【专长】战神殿·雪原山道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -6239,12 +6434,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "战神殿·雪原山道的武备与守位",
+    "dialogueId": "content_npc_zd_shaman_guard",
+    "combatMode": "kill"
   },
   "zd_tulu_adept": {
     "name": "图录高手",
     "title": "殿阶守卫",
-    "description": "守在图录长阶的高手，枪尖挑着的不是杀气，而是近乎朝圣的执拗——他们守的其实是殿里那东西。",
+    "description": "守在图录长阶的高手，枪尖挑着的不是杀气，而是近乎朝圣的执拗——他们守的其实是殿里那东西。【专长】战神殿·图录长阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -6305,12 +6503,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "战神殿·图录长阶的武备与守位",
+    "dialogueId": "content_npc_zd_tulu_adept",
+    "combatMode": "kill"
   },
   "zd_war_phantom": {
     "name": "战神心象",
     "title": "传鹰心魔",
-    "description": "由千年战意与传鹰自己的道心交织而成的心象——每一招都是传鹰的招，每一式都恰好在你的旧伤处。",
+    "description": "由千年战意与传鹰自己的道心交织而成的心象——每一招都是传鹰的招，每一式都恰好在你的旧伤处。【专长】战神殿·战神大殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -6378,12 +6579,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "战神殿·战神大殿的武备与守位",
+    "dialogueId": "content_npc_zd_war_phantom"
   },
   "wt_scout": {
     "name": "边荒游侠",
     "title": "商路眼线",
-    "description": "在边荒讨生活的老游侠，替商队盯马贼王的动向——盯了十年，头一回看到有人真敢去捣巢。",
+    "description": "在边荒讨生活的老游侠，替商队盯马贼王的动向——盯了十年，头一回看到有人真敢去捣巢。【专长】马贼王庭·王庭外围的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -6446,12 +6649,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "马贼王庭·王庭外围的在场证词"
   },
   "wt_archer": {
     "name": "哨塔弓手",
     "title": "王庭眼线",
-    "description": "守在哨塔上的马贼弓手，箭无虚发——边荒的箭比刀更不讲情面。",
+    "description": "守在哨塔上的马贼弓手，箭无虚发——边荒的箭比刀更不讲情面。【专长】马贼王庭·哨塔的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -6512,12 +6716,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "马贼王庭·哨塔的武备与守位",
+    "dialogueId": "content_npc_wt_archer",
+    "combatMode": "kill"
   },
   "wt_chief": {
     "name": "马贼头目",
     "title": "金帐护卫",
-    "description": "赫连霸麾下的头目，一人一狼一柄厚背刀，把金帐前守得铁桶一般。",
+    "description": "赫连霸麾下的头目，一人一狼一柄厚背刀，把金帐前守得铁桶一般。【专长】马贼王庭·王帐前的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -6578,12 +6785,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "马贼王庭·王帐前的武备与守位",
+    "dialogueId": "content_npc_wt_chief",
+    "combatMode": "kill"
   },
   "wt_helian_ba": {
     "name": "赫连霸",
     "title": "马贼王",
-    "description": "雄踞边荒十年的马贼王，狼皮大氅下全是旧伤疤。他的规矩很简单：刀快的人活着，刀慢的人的货归他。",
+    "description": "雄踞边荒十年的马贼王，狼皮大氅下全是旧伤疤。他的规矩很简单：刀快的人活着，刀慢的人的货归他。【专长】马贼王庭·金帐的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -6651,12 +6861,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "马贼王庭·金帐的武备与守位",
+    "dialogueId": "content_npc_wt_helian_ba"
   },
   "mg_steward": {
     "name": "怒蛟执事",
     "title": "帮舵管事",
-    "description": "怒蛟帮的老执事，胳膊上还缠着上回方夜羽夜袭留下的绷带，腰杆却挺得笔直。",
+    "description": "怒蛟帮的老执事，胳膊上还缠着上回方夜羽夜袭留下的绷带，腰杆却挺得笔直。【专长】魔师宫索战·帮门外海的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -6719,12 +6931,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "魔师宫索战·帮门外海的在场证词"
   },
   "mg_disciple": {
     "name": "魔师宫弟子",
     "title": "索战先锋",
-    "description": "黑袍束发的魔师宫弟子，剑走轻灵却杀意森然——索战索的就是名气。",
+    "description": "黑袍束发的魔师宫弟子，剑走轻灵却杀意森然——索战索的就是名气。【专长】魔师宫索战·栈桥的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "moshi_palace",
     "role": "enemy",
     "importance": "common",
@@ -6785,12 +6998,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "魔师宫索战·栈桥的武备与守位",
+    "dialogueId": "content_npc_mg_disciple",
+    "combatMode": "kill"
   },
   "mg_adept": {
     "name": "魔师宫好手",
     "title": "大尊者亲随",
-    "description": "厉工座下的亲随好手，一双手稳得像铁铸的——他们随大尊者征战半生，败绩屈指可数。",
+    "description": "厉工座下的亲随好手，一双手稳得像铁铸的——他们随大尊者征战半生，败绩屈指可数。【专长】魔师宫索战·演武场的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "moshi_palace",
     "role": "enemy",
     "importance": "common",
@@ -6851,12 +7067,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "魔师宫索战·演武场的武备与守位",
+    "dialogueId": "content_npc_mg_adept",
+    "combatMode": "kill"
   },
   "mg_li_gong": {
     "name": "厉工",
     "title": "魔师宫大尊者",
-    "description": "魔师宫大尊者厉工，白发白袍，笑容和煦——他杀人之前总是先笑，笑得越深，出刀越重。",
+    "description": "魔师宫大尊者厉工，白发白袍，笑容和煦——他杀人之前总是先笑，笑得越深，出刀越重。【专长】魔师宫索战·聚义厅的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "moshi_palace",
     "role": "boss",
     "importance": "boss",
@@ -6924,12 +7143,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "魔师宫索战·聚义厅的武备与守位",
+    "dialogueId": "content_npc_mg_li_gong"
   },
   "wg_defender": {
     "name": "守城校尉",
     "title": "东都留守",
-    "description": "东都留守府的校尉，甲胄上全是修补的痕迹。他递来的军令上只有八个字：开仓安民，阵前挫锋。",
+    "description": "东都留守府的校尉，甲胄上全是修补的痕迹。他递来的军令上只有八个字：开仓安民，阵前挫锋。【专长】瓦岗惊变·洛北官道的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "quest",
     "importance": "local",
@@ -6992,12 +7213,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "瓦岗惊变·洛北官道的在场证词"
   },
   "wg_elite": {
     "name": "瓦岗锐士",
     "title": "前营骁兵",
-    "description": "瓦岗军的前营锐士，长槊如林——他们只听军令，不知变通。",
+    "description": "瓦岗军的前营锐士，长槊如林——他们只听军令，不知变通。【专长】瓦岗惊变·瓦岗前营的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -7058,12 +7280,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "瓦岗惊变·瓦岗前营的武备与守位",
+    "dialogueId": "content_npc_wg_elite",
+    "combatMode": "kill"
   },
   "wg_quartermaster": {
     "name": "辎重卫",
     "title": "连营护卫",
-    "description": "看守连营辎重的瓦岗老兵，护粮如护命——他们的粮车边躺着冻毙的流民。",
+    "description": "看守连营辎重的瓦岗老兵，护粮如护命——他们的粮车边躺着冻毙的流民。【专长】瓦岗惊变·连营辎重的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -7124,12 +7349,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "瓦岗惊变·连营辎重的武备与守位",
+    "dialogueId": "content_npc_wg_quartermaster",
+    "combatMode": "kill"
   },
   "wg_luo_shixin": {
     "name": "罗士信",
     "title": "瓦岗骁将",
-    "description": "瓦岗第一骁将罗士信，少年成名，一杆铁枪挑遍东都无对手。他勒马立于大纛之下，眼中战意灼灼——但他身后，是同样灼热的连营炊烟与城头饿殍的目光。",
+    "description": "瓦岗第一骁将罗士信，少年成名，一杆铁枪挑遍东都无对手。他勒马立于大纛之下，眼中战意灼灼——但他身后，是同样灼热的连营炊烟与城头饿殍的目光。【专长】瓦岗惊变·中军大纛的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -7197,12 +7425,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "瓦岗惊变·中军大纛的武备与守位",
+    "dialogueId": "content_npc_wg_luo_shixin"
   },
   "ca2_west_keeper": {
     "name": "胡商安伽奴",
     "title": "长安西市柜坊",
-    "description": "粟特胡商，西市柜坊的主人，能把一匹绢的价钱讲出花的来。西域酒与波斯地毯在他柜上应有尽有。",
+    "description": "粟特胡商，西市柜坊的主人，能把一匹绢的价钱讲出花的来。西域酒与波斯地毯在他柜上应有尽有。【专长】异地契约的姓名与价格。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "local",
@@ -7267,12 +7497,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "异地契约的姓名与价格",
+    "dialogueId": "content_npc_ca2_west_keeper"
   },
   "ca2_erci_soldier": {
     "name": "骁果卫士",
     "title": "皇城宿卫",
-    "description": "皇城安上门的骁果卫士，甲胄崭新，眼神却倦——长安的夜，最近太不太平。",
+    "description": "皇城安上门的骁果卫士，甲胄崭新，眼神却倦——长安的夜，最近太不太平。【专长】宫门换班的真假。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "guard",
     "importance": "local",
@@ -7333,12 +7565,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "宫门换班的真假"
   },
   "ca2_monk": {
     "name": "化度寺知客僧",
     "title": "佛门知客",
-    "description": "化度寺派驻别院的知客僧，为师妃暄打理起居。合十的姿势常年不变，耳朵却把满城动静听了个七成。",
+    "description": "化度寺派驻别院的知客僧，为师妃暄打理起居。合十的姿势常年不变，耳朵却把满城动静听了个七成。【专长】念珠异本与不争之问。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -7404,12 +7637,13 @@
       "changan_letter",
       "zhongjuan_daozhen",
       "kongming_daozhen"
-    ]
+    ],
+    "specialty": "念珠异本与不争之问"
   },
   "ld_courier_chief": {
     "name": "郑镖头",
     "title": "粮道押运",
-    "description": "洛阳粮道的总押运，胖脸上总挂着笑——只有粮车起火时那双眼睛例外。",
+    "description": "洛阳粮道的总押运，胖脸上总挂着笑——只有粮车起火时那双眼睛例外。【专长】洛阳粮道·粮道官驿的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_escort",
     "role": "quest",
     "importance": "local",
@@ -7472,12 +7706,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "洛阳粮道·粮道官驿的在场证词"
   },
   "ld_wagang_rider": {
     "name": "瓦岗游骑",
     "title": "截粮偏师",
-    "description": "瓦岗撤围后游荡在粮道上的偏师游骑，马术精湛，专挑粮车下手。",
+    "description": "瓦岗撤围后游荡在粮道上的偏师游骑，马术精湛，专挑粮车下手。【专长】洛阳粮道·山口隘道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -7538,12 +7773,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "洛阳粮道·山口隘道的武备与守位",
+    "dialogueId": "content_npc_ld_wagang_rider",
+    "combatMode": "kill"
   },
   "ld_wang_bodang": {
     "name": "王伯当",
     "title": "瓦岗神箭",
-    "description": "瓦岗神箭手王伯当——他要的不是粮，是让东都知道：瓦岗走了，箭还留在路上。",
+    "description": "瓦岗神箭手王伯当——他要的不是粮，是让东都知道：瓦岗走了，箭还留在路上。【专长】洛阳粮道·北岸箭阵的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -7611,12 +7849,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "洛阳粮道·北岸箭阵的武备与守位",
+    "dialogueId": "content_npc_ld_wang_bodang"
   },
   "db_boatwoman": {
     "name": "洞庭渔娘",
     "title": "泊口向导",
-    "description": "在洞庭泊口撑船为生的渔家女，认得水寨每一道浮桥的绳结。萧铣的水军征她的船，她偏把船借给你。",
+    "description": "在洞庭泊口撑船为生的渔家女，认得水寨每一道浮桥的绳结。萧铣的水军征她的船，她偏把船借给你。【专长】巴陵夜泊·洞庭泊口的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -7679,12 +7919,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "巴陵夜泊·洞庭泊口的在场证词"
   },
   "db_scout": {
     "name": "水军哨探",
     "title": "萧铣水军",
-    "description": "巴陵水军的哨探，驾一叶轻舟出没芦洲，哨音一响，整个水寨都会惊动。",
+    "description": "巴陵水军的哨探，驾一叶轻舟出没芦洲，哨音一响，整个水寨都会惊动。【专长】巴陵夜泊·芦洲浅滩的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -7745,12 +7986,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "巴陵夜泊·芦洲浅滩的武备与守位",
+    "dialogueId": "content_npc_db_scout",
+    "combatMode": "kill"
   },
   "db_commander": {
     "name": "水军校尉",
     "title": "浮桥守备",
-    "description": "守浮桥的水军校尉，一手水战一手刀，甲上还滴着湖水的咸腥。",
+    "description": "守浮桥的水军校尉，一手水战一手刀，甲上还滴着湖水的咸腥。【专长】巴陵夜泊·水寨浮桥的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -7811,12 +8055,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "巴陵夜泊·水寨浮桥的武备与守位",
+    "dialogueId": "content_npc_db_commander",
+    "combatMode": "kill"
   },
   "db_zhang_xiu": {
     "name": "张绣",
     "title": "萧铣麾下大将",
-    "description": "萧铣麾下大将张绣，夜泊巴陵的楼船便是他的中军。他信水，信到把整座水寨都拴在浮桥上。",
+    "description": "萧铣麾下大将张绣，夜泊巴陵的楼船便是他的中军。他信水，信到把整座水寨都拴在浮桥上。【专长】巴陵夜泊·中军楼船的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -7884,12 +8131,14 @@
       "attack": -24,
       "hitRate": -26,
       "defense": -8
-    }
+    },
+    "specialty": "巴陵夜泊·中军楼船的武备与守位",
+    "dialogueId": "content_npc_db_zhang_xiu"
   },
   "sh_informant": {
     "name": "琵琶娘子",
     "title": "楼中乐师",
-    "description": "散花楼的头牌乐师，琵琶里藏着消息——她恨透了楼里的主人，只等一个能听懂弦外之音的人。",
+    "description": "散花楼的头牌乐师，琵琶里藏着消息——她恨透了楼里的主人，只等一个能听懂弦外之音的人。【专长】散花楼·楼前画舫的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -7952,12 +8201,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "散花楼·楼前画舫的在场证词"
   },
   "sh_yinkui_maid": {
     "name": "阴葵侍女",
     "title": "楼中暗桩",
-    "description": "捧着香盘的侍女，袖底藏着淬毒的短刃——散花楼的每一条走廊都有她们的眼睛。",
+    "description": "捧着香盘的侍女，袖底藏着淬毒的短刃——散花楼的每一条走廊都有她们的眼睛。【专长】散花楼·一楼回廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "enemy",
     "importance": "common",
@@ -8018,12 +8268,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "散花楼·一楼回廊的武备与守位",
+    "dialogueId": "content_npc_sh_yinkui_maid",
+    "combatMode": "kill"
   },
   "sh_guard_captain": {
     "name": "护楼使",
     "title": "阴癸堂主座下",
-    "description": "散花楼护楼使，一掌拍碎过青石桌面——阴癸派堂主的看门人，从来不止是看门。",
+    "description": "散花楼护楼使，一掌拍碎过青石桌面——阴癸派堂主的看门人，从来不止是看门。【专长】散花楼·二楼密阁的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "enemy",
     "importance": "common",
@@ -8084,12 +8337,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "散花楼·二楼密阁的武备与守位",
+    "dialogueId": "content_npc_sh_guard_captain",
+    "combatMode": "kill"
   },
   "sh_hua_wuying": {
     "name": "花弄影",
     "title": "阴癸派堂主",
-    "description": "散花楼的主人，阴癸派堂主花弄影——她笑起来的样子像三月的洛阳，出手的时候像腊月的洛水。",
+    "description": "散花楼的主人，阴癸派堂主花弄影——她笑起来的样子像三月的洛阳，出手的时候像腊月的洛水。【专长】散花楼·顶楼花厅的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "boss",
     "importance": "boss",
@@ -8157,12 +8413,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -8
-    }
+    },
+    "specialty": "散花楼·顶楼花厅的武备与守位",
+    "dialogueId": "content_npc_sh_hua_wuying"
   },
   "fy2_steward": {
     "name": "怒蛟老舵工",
     "title": "帮舵老人",
-    "description": "在怒蛟帮摇了四十年橹的老舵工，上回夜袭他在船舱底下躲过——这一回他说什么也要站在甲板上。",
+    "description": "在怒蛟帮摇了四十年橹的老舵工，上回夜袭他在船舱底下躲过——这一回他说什么也要站在甲板上。【专长】方夜羽复仇·水寨暗处的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -8225,12 +8483,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "方夜羽复仇·水寨暗处的在场证词"
   },
   "fy2_moshi_elite": {
     "name": "魔师宫好手",
     "title": "复仇死士",
-    "description": "随方夜羽二上怒蛟帮的魔师宫好手，个个眼中带着雪耻的狠劲。",
+    "description": "随方夜羽二上怒蛟帮的魔师宫好手，个个眼中带着雪耻的狠劲。【专长】方夜羽复仇·水门故道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "moshi_palace",
     "role": "enemy",
     "importance": "common",
@@ -8291,12 +8550,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "方夜羽复仇·水门故道的武备与守位",
+    "dialogueId": "content_npc_fy2_moshi_elite",
+    "combatMode": "kill"
   },
   "fy2_fang_yeyu": {
     "name": "方夜羽",
     "title": "魔师宫少主·再来",
-    "description": "方夜羽又回来了。他瘦了，刀却重了——上次败给你的地方，他练了整整一百天。",
+    "description": "方夜羽又回来了。他瘦了，刀却重了——上次败给你的地方，他练了整整一百天。【专长】方夜羽复仇·聚义厅的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "moshi_palace",
     "role": "boss",
     "importance": "boss",
@@ -8364,12 +8626,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -10
-    }
+    },
+    "specialty": "方夜羽复仇·聚义厅的武备与守位",
+    "dialogueId": "content_npc_fy2_fang_yeyu"
   },
   "hy2_scout": {
     "name": "怒蛟哨船头",
     "title": "江面眼线",
-    "description": "怒蛟帮哨船的老船头，在江上漂了半辈子——他一声锣，半个怒蛟帮都会醒。",
+    "description": "怒蛟帮哨船的老船头，在江上漂了半辈子——他一声锣，半个怒蛟帮都会醒。【专长】怒蛟水战·怒蛟哨船的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -8432,12 +8696,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "怒蛟水战·怒蛟哨船的在场证词"
   },
   "hy2_yuan_sailor": {
     "name": "元军水手",
     "title": "水师桨手",
-    "description": "元军水师的桨手，赤着上身肌肉虬结，跳帮接舷的功夫是从浪里泡出来的。",
+    "description": "元军水师的桨手，赤着上身肌肉虬结，跳帮接舷的功夫是从浪里泡出来的。【专长】怒蛟水战·接舷江面的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -8498,12 +8763,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "怒蛟水战·接舷江面的武备与守位",
+    "dialogueId": "content_npc_hy2_yuan_sailor",
+    "combatMode": "kill"
   },
   "hy2_yuan_captain": {
     "name": "水师百户",
     "title": "接舷督战",
-    "description": "元军水师百户，督战队就站在他身后——他的刀先砍自己人，再砍敌人。",
+    "description": "元军水师百户，督战队就站在他身后——他的刀先砍自己人，再砍敌人。【专长】怒蛟水战·沉船锁口的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -8564,12 +8832,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "怒蛟水战·沉船锁口的武备与守位",
+    "dialogueId": "content_npc_hy2_yuan_captain",
+    "combatMode": "kill"
   },
   "hy2_chilaowen": {
     "name": "赤老温",
     "title": "元军水师万户",
-    "description": "元军水师万户赤老温，楼船大纛下的老人——他打过的水战比怒蛟帮帮众见过的江还多。",
+    "description": "元军水师万户赤老温，楼船大纛下的老人——他打过的水战比怒蛟帮帮众见过的江还多。【专长】怒蛟水战·楼船大纛的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "boss",
     "importance": "boss",
@@ -8637,12 +8908,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "怒蛟水战·楼船大纛的武备与守位",
+    "dialogueId": "content_npc_hy2_chilaowen"
   },
   "jm2_mongol_prince_guard": {
     "name": "金帐武士",
     "title": "小王子亲卫",
-    "description": "蒙古小王子的亲卫武士，狼头金盔在雪地里晃眼——他们护送的不是王子，是图录后卷。",
+    "description": "蒙古小王子的亲卫武士，狼头金盔在雪地里晃眼——他们护送的不是王子，是图录后卷。【专长】惊雁遗刻·雪道营盘的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -8703,12 +8976,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "惊雁遗刻·雪道营盘的武备与守位",
+    "dialogueId": "content_npc_jm2_mongol_prince_guard",
+    "combatMode": "kill"
   },
   "jm2_saman_elder": {
     "name": "萨满长老",
     "title": "汗庭秘祝",
-    "description": "汗庭的萨满长老，鼓声里裹着摄魂的咒——他要把图录后卷连同传鹰的传说一起送回北方。",
+    "description": "汗庭的萨满长老，鼓声里裹着摄魂的咒——他要把图录后卷连同传鹰的传说一起送回北方。【专长】惊雁遗刻·贡品车驾的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "enemy",
     "importance": "common",
@@ -8769,12 +9045,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "惊雁遗刻·贡品车驾的武备与守位",
+    "dialogueId": "content_npc_jm2_saman_elder",
+    "combatMode": "kill"
   },
   "jm2_yelv_xuan": {
     "name": "耶律玄",
     "title": "新任蒙古国师",
-    "description": "思汉飞拜服之后，耶律玄接过了国师的金冠。他修的不是天妖气，是把《战神图录》倒背如流的执念——他要证明，图录该归大汗。",
+    "description": "思汉飞拜服之后，耶律玄接过了国师的金冠。他修的不是天妖气，是把《战神图录》倒背如流的执念——他要证明，图录该归大汗。【专长】惊雁遗刻·断崖道口的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "mongol_khan",
     "role": "boss",
     "importance": "boss",
@@ -8842,12 +9121,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -10
-    }
+    },
+    "specialty": "惊雁遗刻·断崖道口的武备与守位",
+    "dialogueId": "content_npc_jm2_yelv_xuan"
   },
   "jm2_old_monk": {
     "name": "守图老僧",
     "title": "雪山寺僧",
-    "description": "雪山小寺里唯一的老僧，守着图录后卷的抄本抄了三十年。他不挡路，只指路。",
+    "description": "雪山小寺里唯一的老僧，守着图录后卷的抄本抄了三十年。他不挡路，只指路。【专长】惊雁遗刻·雪山小寺的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -8910,12 +9191,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "惊雁遗刻·雪山小寺的在场证词"
   },
   "bd_flag_guard": {
     "name": "燕军旗卫",
     "title": "夺旗死敌",
-    "description": "燕军的旗卫，把帅旗看得比命重——旗倒，军心就倒。",
+    "description": "燕军的旗卫，把帅旗看得比命重——旗倒，军心就倒。【专长】边荒集夺旗·燕军辎重营的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yan_army",
     "role": "enemy",
     "importance": "common",
@@ -8976,12 +9258,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒集夺旗·燕军辎重营的武备与守位",
+    "dialogueId": "content_npc_bd_flag_guard",
+    "combatMode": "kill"
   },
   "bd_flag_vanguard": {
     "name": "燕军先锋",
     "title": "夺旗先锋",
-    "description": "燕军先锋营的百战老兵，一手刀牌配合滴水不漏。",
+    "description": "燕军先锋营的百战老兵，一手刀牌配合滴水不漏。【专长】边荒集夺旗·中军辕门的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yan_army",
     "role": "enemy",
     "importance": "common",
@@ -9042,12 +9327,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒集夺旗·中军辕门的武备与守位",
+    "dialogueId": "content_npc_bd_flag_vanguard",
+    "combatMode": "kill"
   },
   "bd_tuoba_gu": {
     "name": "拓跋孤",
     "title": "燕军千夫长",
-    "description": "燕军千夫长拓跋孤，帅旗立在他帐前——旗在，边荒集就翻不了天。",
+    "description": "燕军千夫长拓跋孤，帅旗立在他帐前——旗在，边荒集就翻不了天。【专长】边荒集夺旗·帅旗之下的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yan_army",
     "role": "boss",
     "importance": "boss",
@@ -9115,12 +9403,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "边荒集夺旗·帅旗之下的武备与守位",
+    "dialogueId": "content_npc_bd_tuoba_gu"
   },
   "bd_caravan_head": {
     "name": "商队护卫头领",
     "title": "夺旗主事",
-    "description": "边荒集商队凑钱请来的护卫头领，一脸络腮胡，说话像刀劈斧凿：夺回帅旗，边荒集还是边荒人的。",
+    "description": "边荒集商队凑钱请来的护卫头领，一脸络腮胡，说话像刀劈斧凿：夺回帅旗，边荒集还是边荒人的。【专长】边荒集夺旗·边荒集北门的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -9183,12 +9473,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "边荒集夺旗·边荒集北门的在场证词"
   },
   "kj_yinkui_adept": {
     "name": "井底伏修",
     "title": "阴葵暗桩",
-    "description": "守在枯井暗渠里的阴癸派伏修，多年不见天日的脸白得像纸。",
+    "description": "守在枯井暗渠里的阴癸派伏修，多年不见天日的脸白得像纸。【专长】枯井之下·井绳深处的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "enemy",
     "importance": "common",
@@ -9249,12 +9540,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "枯井之下·井绳深处的武备与守位",
+    "dialogueId": "content_npc_kj_yinkui_adept",
+    "combatMode": "kill"
   },
   "kj_yinkui_guard": {
     "name": "井口暗哨",
     "title": "阴癸眼线",
-    "description": "扮作乞丐的井口暗哨，破碗底下压着淬毒的柳叶刀。",
+    "description": "扮作乞丐的井口暗哨，破碗底下压着淬毒的柳叶刀。【专长】枯井之下·井口暗渠的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "enemy",
     "importance": "common",
@@ -9315,12 +9609,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "枯井之下·井口暗渠的武备与守位",
+    "dialogueId": "content_npc_kj_yinkui_guard",
+    "combatMode": "kill"
   },
   "kj_kujing_weng": {
     "name": "枯井翁",
     "title": "阴癸派护法",
-    "description": "阴癸派护法枯井翁，在洛水上游的枯井底住了二十年——他在等'种子'破土的那一天。",
+    "description": "阴癸派护法枯井翁，在洛水上游的枯井底住了二十年——他在等'种子'破土的那一天。【专长】枯井之下·井底地窖的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "yinkui_sect",
     "role": "boss",
     "importance": "boss",
@@ -9388,12 +9685,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -10
-    }
+    },
+    "specialty": "枯井之下·井底地窖的武备与守位",
+    "dialogueId": "content_npc_kj_kujing_weng"
   },
   "kj_ropemaker": {
     "name": "搓绳老妇",
     "title": "井台旧邻",
-    "description": "枯井台边搓麻绳的老妇，她的儿子十年前掉进井里没再上来——她搓的绳，一捆捆全是等。",
+    "description": "枯井台边搓麻绳的老妇，她的儿子十年前掉进井里没再上来——她搓的绳，一捆捆全是等。【专长】枯井之下·镇水井台的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -9456,12 +9755,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "枯井之下·镇水井台的在场证词"
   },
   "sd_ape_rouge": {
     "name": "剑阁劫匪",
     "title": "栈道剪径",
-    "description": "剑阁栈道上的劫匪，攀岩走壁如履平地——他们的头儿自称猿叟。",
+    "description": "剑阁栈道上的劫匪，攀岩走壁如履平地——他们的头儿自称猿叟。【专长】蜀道护镖·绳网天梯的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -9522,12 +9822,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "蜀道护镖·绳网天梯的武备与守位",
+    "dialogueId": "content_npc_sd_ape_rouge",
+    "combatMode": "kill"
   },
   "sd_ape_scout": {
     "name": "猿叟哨探",
     "title": "栈道眼线",
-    "description": "猿叟手下的哨探，口哨一响，整条栈道的绳网都会收起来。",
+    "description": "猿叟手下的哨探，口哨一响，整条栈道的绳网都会收起来。【专长】蜀道护镖·栈道前哨的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -9588,12 +9891,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "蜀道护镖·栈道前哨的武备与守位",
+    "dialogueId": "content_npc_sd_ape_scout",
+    "combatMode": "kill"
   },
   "sd_yuan_sou": {
     "name": "猿叟",
     "title": "剑阁劫首",
-    "description": "剑阁劫首猿叟，据说能荡着藤蔓追上奔马——他占着蜀道咽喉十年，官府的镖船全得看他脸色。",
+    "description": "剑阁劫首猿叟，据说能荡着藤蔓追上奔马——他占着蜀道咽喉十年，官府的镖船全得看他脸色。【专长】蜀道护镖·栈道尽头的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -9661,12 +9967,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "蜀道护镖·栈道尽头的武备与守位",
+    "dialogueId": "content_npc_sd_yuan_sou"
   },
   "sd_escort_head": {
     "name": "蜀锦商队主",
     "title": "入蜀镖头",
-    "description": "蜀锦商队的女镖头，一手软鞭使得出神入化——她的商队要在猿叟的地盘上过，就得找一个敢跟他讲道理的人。",
+    "description": "蜀锦商队的女镖头，一手软鞭使得出神入化——她的商队要在猿叟的地盘上过，就得找一个敢跟他讲道理的人。【专长】蜀道护镖·剑阁驿的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -9729,12 +10037,13 @@
         "seal": 0
       }
     },
-    "combatMode": "protected"
+    "combatMode": "protected",
+    "specialty": "蜀道护镖·剑阁驿的在场证词"
   },
   "yz_salt_merchant": {
     "name": "程盐商",
     "title": "扬州盐商",
-    "description": "扬州城数一数二的盐商，圆脸细眼，算盘打得比谁都精——他的账房昨夜丢了三万两漕银。",
+    "description": "扬州城数一数二的盐商，圆脸细眼，算盘打得比谁都精——他的账房昨夜丢了三万两漕银。【专长】盐引损耗与脚夫实账。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "local",
@@ -9803,12 +10112,13 @@
     },
     "questIds": [
       "caoyin_case"
-    ]
+    ],
+    "specialty": "盐引损耗与脚夫实账"
   },
   "yz_boat_girl": {
     "name": "二十四桥船娘",
     "title": "瘦西湖船娘",
-    "description": "在瘦西湖上摇了十年橹的船娘，会唱二十四桥的旧曲——曲子里藏着扬州城的水路。",
+    "description": "在瘦西湖上摇了十年橹的船娘，会唱二十四桥的旧曲——曲子里藏着扬州城的水路。【专长】水位节拍与暗渠回流。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -9869,12 +10179,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "水位节拍与暗渠回流"
   },
   "yz_yamen_clerk": {
     "name": "盐运司书办",
     "title": "衙门书办",
-    "description": "盐运司的书办，袖子里永远揣着三份账——一份给上官，一份给自己，一份给得罪不起的人。",
+    "description": "盐运司的书办，袖子里永远揣着三份账——一份给上官，一份给自己，一份给得罪不起的人。【专长】三联账的互相遮掩。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "quest",
     "importance": "local",
@@ -9939,12 +10250,13 @@
     "questIds": [
       "yangzhou_bounty",
       "yunhe_houyi"
-    ]
+    ],
+    "specialty": "三联账的互相遮掩"
   },
   "bs_tang_steward": {
     "name": "唐门管事",
     "title": "唐家坳管事",
-    "description": "唐家坳的管事，腰间挂着七只不重样的暗器囊。他的规矩只有一条：唐家的暗器，不出蜀地杀人。",
+    "description": "唐家坳的管事，腰间挂着七只不重样的暗器囊。他的规矩只有一条：唐家的暗器，不出蜀地杀人。【专长】卸簧分线与唐门克制。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -10008,12 +10320,13 @@
     },
     "questIds": [
       "bashu_thanks"
-    ]
+    ],
+    "specialty": "卸簧分线与唐门克制"
   },
   "bs_herbalist": {
     "name": "药田老农",
     "title": "浣花药农",
-    "description": "浣花溪药田的老农，认得巴蜀每一种药草的脾气——他晒药的竹匾就是半个药铺。",
+    "description": "浣花溪药田的老农，认得巴蜀每一种药草的脾气——他晒药的竹匾就是半个药铺。【专长】药草鲜陈与苦甜辨毒。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "shopkeeper",
     "importance": "common",
@@ -10077,12 +10390,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "药草鲜陈与苦甜辨毒",
+    "dialogueId": "content_npc_bs_herbalist"
   },
   "bs_jiange_clerk": {
     "name": "剑阁驿丞",
     "title": "剑阁驿丞",
-    "description": "剑阁驿的驿丞，驿墙上的箭孔比窗还多。猿叟伏诛后他的腰杆直了——可余党还在，货还得丢。",
+    "description": "剑阁驿的驿丞，驿墙上的箭孔比窗还多。猿叟伏诛后他的腰杆直了——可余党还在，货还得丢。【专长】剑阁补路与旧驿绳法。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "quest",
     "importance": "local",
@@ -10146,12 +10461,13 @@
     },
     "questIds": [
       "zhandao_case"
-    ]
+    ],
+    "specialty": "剑阁补路与旧驿绳法"
   },
   "zd2_ape_rouge": {
     "name": "猿叟余党",
     "title": "栈道劫匪",
-    "description": "猿叟的关门弟子们，荡藤走壁的功夫得了真传，口哨就是他们的号令。",
+    "description": "猿叟的关门弟子们，荡藤走壁的功夫得了真传，口哨就是他们的号令。【专长】蜀道栈桥·断崖栈道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -10212,12 +10528,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "蜀道栈桥·断崖栈道的武备与守位",
+    "dialogueId": "content_npc_zd2_ape_rouge",
+    "combatMode": "kill"
   },
   "zd2_ape_king": {
     "name": "小猿王",
     "title": "剑阁劫首",
-    "description": "猿叟的关门弟子小猿王，荡藤如飞，骨爪如钩——他要做出比师父更大的名头。",
+    "description": "猿叟的关门弟子小猿王，荡藤如飞，骨爪如钩——他要做出比师父更大的名头。【专长】蜀道栈桥·崖顶猴巢的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -10285,12 +10604,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "蜀道栈桥·崖顶猴巢的武备与守位",
+    "dialogueId": "content_npc_zd2_ape_king"
   },
   "sb_centurion": {
     "name": "李百夫长",
     "title": "边军百夫长",
-    "description": "守了烽燧十五年的百夫长，脸被风沙刻成了岩石。他的兵册上，近一个月少了十一个名字。",
+    "description": "守了烽燧十五年的百夫长，脸被风沙刻成了岩石。他的兵册上，近一个月少了十一个名字。【专长】兵册缺名与猎狼口哨。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_military",
     "role": "quest",
     "importance": "local",
@@ -10356,12 +10677,13 @@
       "bianguan_fenghuo",
       "mishi_aftermath",
       "jueji_houji"
-    ]
+    ],
+    "specialty": "兵册缺名与猎狼口哨"
   },
   "sb_horse_trader": {
     "name": "回鹘马商",
     "title": "马市胡商",
-    "description": "回鹘来的马商，一口流利的汉话夹着价钱——他的马群里混着几匹认得狼山口路的快马。",
+    "description": "回鹘来的马商，一口流利的汉话夹着价钱——他的马群里混着几匹认得狼山口路的快马。【专长】反穿毡靴与雪地误导。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "shopkeeper",
     "importance": "local",
@@ -10431,12 +10753,13 @@
     "dialogueId": "dlg_sb_horse_trader_commissions",
     "questIds": [
       "saibei_treasure"
-    ]
+    ],
+    "specialty": "反穿毡靴与雪地误导"
   },
   "sb_beacon_guard": {
     "name": "烽燧戍卒",
     "title": "守燧卒",
-    "description": "守燧的年轻戍卒，手心全是冻疮。他说他不怕狼，怕的是狼烟点起来的时候。",
+    "description": "守燧的年轻戍卒，手心全是冻疮。他说他不怕狼，怕的是狼烟点起来的时候。【专长】烟色与更牌雪痕。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_military",
     "role": "guard",
     "importance": "common",
@@ -10497,16 +10820,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "烟色与更牌雪痕"
   },
   "sb_wolf_scout": {
     "name": "白狼哨探",
     "title": "狼山眼线",
-    "description": "白狼主的哨探，白狼皮披风在草原上就是一封战书。",
+    "description": "白狼主的哨探，白狼皮披风在草原上就是一封战书。【专长】哨探的逆风藏身。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
-    "dialogueId": "",
+    "dialogueId": "content_npc_sb_wolf_scout",
     "attributes": {
       "level": 38,
       "realm": "trainee",
@@ -10563,12 +10887,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "哨探的逆风藏身",
+    "combatMode": "kill"
   },
   "sb2_wolf_guard": {
     "name": "白狼死士",
     "title": "狼口守卫",
-    "description": "白狼主豢养的死士，白衣白骨——他们把守山口当作祭狼的仪式。",
+    "description": "白狼主豢养的死士，白衣白骨——他们把守山口当作祭狼的仪式。【专长】狼山口·狼口窄道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -10629,12 +10955,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "狼山口·狼口窄道的武备与守位",
+    "dialogueId": "content_npc_sb2_wolf_guard",
+    "combatMode": "kill"
   },
   "sb2_wolf_champion": {
     "name": "狼卫长",
     "title": "王帐亲卫",
-    "description": "白狼主的狼卫长，狼牙棒抡起来带风——他是白狼主从死人堆里刨出来的兄弟。",
+    "description": "白狼主的狼卫长，狼牙棒抡起来带风——他是白狼主从死人堆里刨出来的兄弟。【专长】狼山口·白狼王帐的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -10695,12 +11024,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "狼山口·白狼王帐的武备与守位",
+    "dialogueId": "content_npc_sb2_wolf_champion",
+    "combatMode": "kill"
   },
   "sb2_white_wolf": {
     "name": "白狼主",
     "title": "草原马贼王",
-    "description": "白狼主，草原上最老的马贼王——他的白发和白狼皮一样旧，可他的锤比山口的石头还硬。",
+    "description": "白狼主，草原上最老的马贼王——他的白发和白狼皮一样旧，可他的锤比山口的石头还硬。【专长】狼山口·白狼王座的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -10768,12 +11100,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "狼山口·白狼王座的武备与守位",
+    "dialogueId": "content_npc_sb2_white_wolf"
   },
   "jn_zither_player": {
     "name": "抚琴女子",
     "title": "听雨楼琴师",
-    "description": "听雨楼的琴师，琴音里总有一丝剑意——有人猜她是隐世的剑客，她只说琴是琴，剑是剑。",
+    "description": "听雨楼的琴师，琴音里总有一丝剑意——有人猜她是隐世的剑客，她只说琴是琴，剑是剑。【专长】琴声、剑势与停手时机。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -10839,12 +11173,13 @@
       "lanting_tie",
       "jiangnan_heart",
       "langfan_legacy"
-    ]
+    ],
+    "specialty": "琴声、剑势与停手时机"
   },
   "jn_calligrapher": {
     "name": "临帖老翁",
     "title": "兰亭守碑人",
-    "description": "在兰亭临了一辈子帖的老翁，他临的《兰亭帖》能以假乱真——但他从不卖，只送有缘人。",
+    "description": "在兰亭临了一辈子帖的老翁，他临的《兰亭帖》能以假乱真——但他从不卖，只送有缘人。【专长】留白、字影与后人误补。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -10905,12 +11240,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "留白、字影与后人误补"
   },
   "jn_pool_keeper": {
     "name": "守池人",
     "title": "剑池看泉",
-    "description": "守剑池的哑叔，用一块木牌写字与人交谈。他在池边守了三十年，池水涨落全记在心里。",
+    "description": "守剑池的哑叔，用一块木牌写字与人交谈。他在池边守了三十年，池水涨落全记在心里。【专长】双泉水线与养剑。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -10971,12 +11307,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "双泉水线与养剑"
   },
   "jn2_pool_frog": {
     "name": "池底蛙人",
     "title": "水路守卫",
-    "description": "守泉眼的蛙人，鱼叉与水性好得惊人——他们是盗剑人从水路养出来的眼线。",
+    "description": "守泉眼的蛙人，鱼叉与水性好得惊人——他们是盗剑人从水路养出来的眼线。【专长】剑池·池底石阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -11037,12 +11374,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "剑池·池底石阶的武备与守位",
+    "dialogueId": "content_npc_jn2_pool_frog",
+    "combatMode": "kill"
   },
   "jn2_sword_thief": {
     "name": "青衣剑客",
     "title": "盗剑人",
-    "description": "盗剑的青衣剑客转过头来，唇边一丝笑意：\"名剑配我，委屈了池水。——你的剑，也不见得比我的快。\"",
+    "description": "盗剑的青衣剑客转过头来，唇边一丝笑意：\"名剑配我，委屈了池水。——你的剑，也不见得比我的快。\"【专长】剑池·泉底暗窟的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -11110,12 +11450,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -10
-    }
+    },
+    "specialty": "剑池·泉底暗窟的武备与守位",
+    "dialogueId": "content_npc_jn2_sword_thief"
   },
   "dd2_palace_guard": {
     "name": "金吾卫校尉",
     "title": "宫门宿卫",
-    "description": "金吾卫的校尉，面无表情地盯着每一个靠近宫门的人——他的职责就是让所有人保持距离。",
+    "description": "金吾卫的校尉，面无表情地盯着每一个靠近宫门的人——他的职责就是让所有人保持距离。【专长】内锁与宫人出入。交谈后明确选择“专长”可记录见闻。",
     "faction": "luoyang_office",
     "role": "guard",
     "importance": "local",
@@ -11190,12 +11532,13 @@
       "quest_r204_7",
       "quest_r204_8",
       "quest_r204_9"
-    ]
+    ],
+    "specialty": "内锁与宫人出入"
   },
   "dd2_silk_merchant": {
     "name": "锦绸庄主",
     "title": "东都绸商",
-    "description": "东都锦绸庄的庄主，货通南北——他的商队最近总在瓦岗与官府的夹缝里走钢丝。",
+    "description": "东都锦绸庄的庄主，货通南北——他的商队最近总在瓦岗与官府的夹缝里走钢丝。【专长】水渍布纹与夹缝生意。交谈后明确选择“专长”可记录见闻。",
     "faction": "heluo_merchant_guild",
     "role": "shopkeeper",
     "importance": "local",
@@ -11260,12 +11603,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "水渍布纹与夹缝生意",
+    "dialogueId": "content_npc_dd2_silk_merchant"
   },
   "dd2_pool_poet": {
     "name": "落魄诗人",
     "title": "万曲池畔醉客",
-    "description": "自称科举落第的诗人，终日在万曲池畔饮酒赋诗——他的诗里，藏着东都坊间的所有秘辛。",
+    "description": "自称科举落第的诗人，终日在万曲池畔饮酒赋诗——他的诗里，藏着东都坊间的所有秘辛。【专长】月影方位与水下页码。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -11331,12 +11676,13 @@
       "gongmen_ye",
       "dongdu_truth",
       "longyin_zhengming"
-    ]
+    ],
+    "specialty": "月影方位与水下页码"
   },
   "dd3_water_ghost": {
     "name": "桥洞水鬼",
     "title": "旧账守卫",
-    "description": "守桥洞的水鬼，青苔长满了他的皮——他守的不是账，是他自己也记不清的年头。",
+    "description": "守桥洞的水鬼，青苔长满了他的皮——他守的不是账，是他自己也记不清的年头。【专长】天津晓月·桥洞浅滩的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -11397,12 +11743,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "天津晓月·桥洞浅滩的武备与守位",
+    "dialogueId": "content_npc_dd3_water_ghost",
+    "combatMode": "kill"
   },
   "dd3_ledger_guard": {
     "name": "起居郎",
     "title": "前朝记室",
-    "description": "前朝的起居郎根本没老、没疯、也没死——他把前朝的账记到了今天，谁翻账他杀谁。",
+    "description": "前朝的起居郎根本没老、没疯、也没死——他把前朝的账记到了今天，谁翻账他杀谁。【专长】天津晓月·前朝账房的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -11470,12 +11819,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -10
-    }
+    },
+    "specialty": "天津晓月·前朝账房的武备与守位",
+    "dialogueId": "content_npc_dd3_ledger_guard"
   },
   "dm_old_captain": {
     "name": "老船长",
     "title": "归墟港主",
-    "description": "归墟港的老船长，年轻时是海上最凶的海盗——他见过海市，也见过海市里的东西。",
+    "description": "归墟港的老船长，年轻时是海上最凶的海盗——他见过海市，也见过海市里的东西。【专长】沉船压舱与归航潮汐。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -11540,12 +11891,13 @@
     "questIds": [
       "cangming_yijuan",
       "longgong_yiji"
-    ]
+    ],
+    "specialty": "沉船压舱与归航潮汐"
   },
   "dm_jiaoren": {
     "name": "鲛人珠娘",
     "title": "鲛人市珠商",
-    "description": "鲛人珠娘只在大潮时现身，她的珠贝是海上最好的——她也是海上唯一知道海市入口的人。",
+    "description": "鲛人珠娘只在大潮时现身，她的珠贝是海上最好的——她也是海上唯一知道海市入口的人。【专长】真珠寒意与海市旧约。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "shopkeeper",
     "importance": "local",
@@ -11613,12 +11965,13 @@
     },
     "questIds": [
       "dongming_song"
-    ]
+    ],
+    "specialty": "真珠寒意与海市旧约"
   },
   "dm_mirage_keeper": {
     "name": "守阁人",
     "title": "海市守阁",
-    "description": "守阁人脸上戴着青铜面具，面具后传出苍老的声音——他说他等海市的主人回来，已经等了三百年。",
+    "description": "守阁人脸上戴着青铜面具，面具后传出苍老的声音——他说他等海市的主人回来，已经等了三百年。【专长】真假门槛与归航之约。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -11679,12 +12032,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "真假门槛与归航之约"
   },
   "dm2_loot_cultivator": {
     "name": "贪婪散修",
     "title": "海市盗宝人",
-    "description": "从各地赶来盗宝的散修，在海市里迷了十年——他们的眼睛已经变成琉璃色。",
+    "description": "从各地赶来盗宝的散修，在海市里迷了十年——他们的眼睛已经变成琉璃色。【专长】海市·蜃楼街巷的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -11745,12 +12099,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "海市·蜃楼街巷的武备与守位",
+    "dialogueId": "content_npc_dm2_loot_cultivator",
+    "combatMode": "kill"
   },
   "dm2_lost_soul": {
     "name": "迷失亡魂",
     "title": "海市怨灵",
-    "description": "在海市里迷失了三百年的亡魂，低语里满是绝望——它们不害人，只是太孤独。",
+    "description": "在海市里迷失了三百年的亡魂，低语里满是绝望——它们不害人，只是太孤独。【专长】海市·宫前长阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -11811,12 +12168,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "海市·宫前长阶的武备与守位",
+    "dialogueId": "content_npc_dm2_lost_soul",
+    "combatMode": "kill"
   },
   "dm2_mirage_phantom": {
     "name": "宫主幻影",
     "title": "沧溟宫记忆",
-    "description": "沧溟宫主人留下的记忆幻影——它守护玉简三百年，等一个不是来盗宝的人。",
+    "description": "沧溟宫主人留下的记忆幻影——它守护玉简三百年，等一个不是来盗宝的人。【专长】海市·沧溟宫主殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -11884,12 +12244,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -12
-    }
+    },
+    "specialty": "海市·沧溟宫主殿的武备与守位",
+    "dialogueId": "content_npc_dm2_mirage_phantom"
   },
   "xy_wolf_remnant": {
     "name": "白狼残部",
     "title": "狼山残狼",
-    "description": "雪原猎狼中的普通敌人。",
+    "description": "雪原猎狼中的普通敌人。【专长】雪原猎狼·逆风白骨坡的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -11950,12 +12312,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "雪原猎狼·逆风白骨坡的武备与守位",
+    "dialogueId": "content_npc_xy_wolf_remnant",
+    "combatMode": "kill"
   },
   "xy_bai_lang2": {
     "name": "白狼头领",
     "title": "残部之首",
-    "description": "雪原猎狼的最终Boss。",
+    "description": "雪原猎狼的最终Boss。【专长】雪原猎狼·旧帐火盆的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -12023,12 +12388,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "雪原猎狼·旧帐火盆的武备与守位",
+    "dialogueId": "content_npc_xy_bai_lang2"
   },
   "zh_thief_scout": {
     "name": "盗剑探子",
     "title": "青衣暗探",
-    "description": "竹海迷踪中的普通敌人。",
+    "description": "竹海迷踪中的普通敌人。【专长】竹海迷踪·回声竹径的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -12089,12 +12456,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "竹海迷踪·回声竹径的武备与守位",
+    "dialogueId": "content_npc_zh_thief_scout",
+    "combatMode": "kill"
   },
   "zh_thief_leader": {
     "name": "盗剑头目",
     "title": "青衣首座",
-    "description": "竹海迷踪的最终Boss。",
+    "description": "竹海迷踪的最终Boss。【专长】竹海迷踪·伪琴密营的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -12162,12 +12532,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "竹海迷踪·伪琴密营的武备与守位",
+    "dialogueId": "content_npc_zh_thief_leader"
   },
   "cy_eraser": {
     "name": "销账死士",
     "title": "漕渠杀手",
-    "description": "漕渠暗战中的普通敌人。",
+    "description": "漕渠暗战中的普通敌人。【专长】漕渠暗战·倒流水廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -12228,12 +12600,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "漕渠暗战·倒流水廊的武备与守位",
+    "dialogueId": "content_npc_cy_eraser",
+    "combatMode": "kill"
   },
   "cy_ledger_master": {
     "name": "销账总管",
     "title": "漕渠暗首",
-    "description": "漕渠暗战的最终Boss。",
+    "description": "漕渠暗战的最终Boss。【专长】漕渠暗战·私闸船坞的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -12301,12 +12676,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "漕渠暗战·私闸船坞的武备与守位",
+    "dialogueId": "content_npc_cy_ledger_master"
   },
   "cf_reef_guardian": {
     "name": "礁石守卫",
     "title": "船坟怨灵",
-    "description": "沉船探秘中的普通敌人。",
+    "description": "沉船探秘中的普通敌人。【专长】沉船探秘·倒悬舱梁的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -12367,12 +12744,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "沉船探秘·倒悬舱梁的武备与守位",
+    "dialogueId": "content_npc_cf_reef_guardian",
+    "combatMode": "kill"
   },
   "cf_ghost_captain": {
     "name": "幽灵船长",
     "title": "沉船之主",
-    "description": "沉船探秘的最终Boss。",
+    "description": "沉船探秘的最终Boss。【专长】沉船探秘·封蜡船长室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -12440,12 +12820,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "沉船探秘·封蜡船长室的武备与守位",
+    "dialogueId": "content_npc_cf_ghost_captain"
   },
   "jt_kangshi_phantom": {
     "name": "康鞘利残影",
     "title": "突厥刀魂",
-    "description": "竟陵试炼殿中凝成的残影——比记忆中更强。",
+    "description": "竟陵试炼殿中凝成的残影——比记忆中更强。【专长】竟陵试炼殿·残影之殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -12513,12 +12895,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -12
-    }
+    },
+    "specialty": "竟陵试炼殿·残影之殿的武备与守位",
+    "dialogueId": "content_npc_jt_kangshi_phantom"
   },
   "tt_song_phantom": {
     "name": "宋缺残影",
     "title": "天刀之影",
-    "description": "天刀试炼殿中凝成的残影——比记忆中更强。",
+    "description": "天刀试炼殿中凝成的残影——比记忆中更强。【专长】天刀试炼殿·残影之殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -12586,12 +12970,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -12
-    }
+    },
+    "specialty": "天刀试炼殿·残影之殿的武备与守位",
+    "dialogueId": "content_npc_tt_song_phantom"
   },
   "ft_wanwan_phantom": {
     "name": "婠婠残影",
     "title": "天魔之影",
-    "description": "飞马试炼殿中凝成的残影——比记忆中更强。",
+    "description": "飞马试炼殿中凝成的残影——比记忆中更强。【专长】飞马试炼殿·残影之殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -12659,12 +13045,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -12
-    }
+    },
+    "specialty": "飞马试炼殿·残影之殿的武备与守位",
+    "dialogueId": "content_npc_ft_wanwan_phantom"
   },
   "ct_bian_phantom": {
     "name": "边不负残影",
     "title": "魔门元老之影",
-    "description": "长安试炼殿中凝成的残影——比记忆中更强。",
+    "description": "长安试炼殿中凝成的残影——比记忆中更强。【专长】长安试炼殿·残影之殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -12732,12 +13120,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -12
-    }
+    },
+    "specialty": "长安试炼殿·残影之殿的武备与守位",
+    "dialogueId": "content_npc_ct_bian_phantom"
   },
   "gb_yuwen_guard": {
-    "name": "宇文残兵",
+    "name": "宫门伤卒",
     "title": "宇文残兵",
-    "description": "东都宫变中的普通敌人。",
+    "description": "宫门伤卒亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -12798,17 +13188,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_gb_yuwen_guard"
   },
   "gb_yuwen_jun": {
-    "name": "宇文残部统领",
+    "name": "内廷旧执簿",
     "title": "宫变主谋",
-    "description": "东都宫变的最终Boss。",
+    "description": "内廷旧执簿亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 58,
       "realm": "master",
@@ -12871,12 +13266,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_gb_yuwen_jun"
   },
   "yh_pian_soldier": {
     "name": "叛军水手",
     "title": "叛军水手",
-    "description": "运河追击中的普通敌人。",
+    "description": "运河追击中的普通敌人。【专长】运河追击·断缆纤道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -12937,12 +13336,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "运河追击·断缆纤道的武备与守位",
+    "dialogueId": "content_npc_yh_pian_soldier",
+    "combatMode": "kill"
   },
   "yh_pian_jiang": {
     "name": "叛军偏将",
     "title": "漕运劫首",
-    "description": "运河追击的最终Boss。",
+    "description": "运河追击的最终Boss。【专长】运河追击·夺粮船首的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13010,12 +13412,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "运河追击·夺粮船首的武备与守位",
+    "dialogueId": "content_npc_yh_pian_jiang"
   },
   "ms_elite": {
     "name": "魔师宫精锐",
     "title": "魔师宫精锐",
-    "description": "魔师宫秘道中的普通敌人。",
+    "description": "魔师宫秘道中的普通敌人。【专长】魔师宫秘道·叠影石廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13076,12 +13480,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "魔师宫秘道·叠影石廊的武备与守位",
+    "dialogueId": "content_npc_ms_elite",
+    "combatMode": "kill"
   },
   "ms_elder": {
     "name": "魔师宫长老",
     "title": "塞外监军",
-    "description": "魔师宫秘道的最终Boss。",
+    "description": "魔师宫秘道的最终Boss。【专长】魔师宫秘道·令珠密室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13149,12 +13556,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "魔师宫秘道·令珠密室的武备与守位",
+    "dialogueId": "content_npc_ms_elder"
   },
   "zj_mongol_elite": {
     "name": "汗庭精锐",
     "title": "汗庭精锐",
-    "description": "战神遗境中的普通敌人。",
+    "description": "战神遗境中的普通敌人。【专长】战神遗境·残图石阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13215,12 +13624,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "战神遗境·残图石阶的武备与守位",
+    "dialogueId": "content_npc_zj_mongol_elite",
+    "combatMode": "kill"
   },
   "zj_mongol_champion": {
     "name": "汗庭第一勇士",
     "title": "草原之巅",
-    "description": "战神遗境的最终Boss。",
+    "description": "战神遗境的最终Boss。【专长】战神遗境·无字殿心的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13288,12 +13700,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "战神遗境·无字殿心的武备与守位",
+    "dialogueId": "content_npc_zj_mongol_champion"
   },
   "bh_wolf_royal": {
     "name": "草原狼卫",
     "title": "草原狼卫",
-    "description": "边荒传奇中的普通敌人。",
+    "description": "边荒传奇中的普通敌人。【专长】边荒传奇·争水窄巷的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13354,12 +13768,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒传奇·争水窄巷的武备与守位",
+    "dialogueId": "content_npc_bh_wolf_royal",
+    "combatMode": "kill"
   },
   "bh_new_king": {
     "name": "新狼王",
     "title": "草原新主",
-    "description": "边荒传奇的最终Boss。",
+    "description": "边荒传奇的最终Boss。【专长】边荒传奇·旧盟石屋的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13427,12 +13844,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "边荒传奇·旧盟石屋的武备与守位",
+    "dialogueId": "content_npc_bh_new_king"
   },
   "ls_water_spirit": {
     "name": "洛水精灵",
     "title": "洛水精灵",
-    "description": "洛水龙吟中的普通敌人。",
+    "description": "洛水龙吟中的普通敌人。【专长】洛水龙吟·空腹石龙的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13493,12 +13912,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "洛水龙吟·空腹石龙的武备与守位",
+    "dialogueId": "content_npc_ls_water_spirit",
+    "combatMode": "kill"
   },
   "ls_dragon_guard": {
     "name": "洛水守灵",
     "title": "前朝英灵",
-    "description": "洛水龙吟的最终Boss。",
+    "description": "洛水龙吟的最终Boss。【专长】洛水龙吟·伏水暗殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13566,12 +13988,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "洛水龙吟·伏水暗殿的武备与守位",
+    "dialogueId": "content_npc_ls_dragon_guard"
   },
   "yz_rebel_gang": {
     "name": "叛帮弟子",
     "title": "叛帮弟子",
-    "description": "盐帮内乱中的普通敌人。",
+    "description": "盐帮内乱中的普通敌人。【专长】盐帮内乱·分盐旧秤的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13632,12 +14056,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "盐帮内乱·分盐旧秤的武备与守位",
+    "dialogueId": "content_npc_yz_rebel_gang",
+    "combatMode": "kill"
   },
   "yz_second_chief": {
     "name": "盐帮二当家",
     "title": "野心家",
-    "description": "盐帮内乱的最终Boss。",
+    "description": "盐帮内乱的最终Boss。【专长】盐帮内乱·堂口议事厅的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13705,12 +14132,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "盐帮内乱·堂口议事厅的武备与守位",
+    "dialogueId": "content_npc_yz_second_chief"
   },
   "tm_trial_guard": {
     "name": "试炼傀儡",
     "title": "试炼傀儡",
-    "description": "唐门试炼中的普通敌人。",
+    "description": "唐门试炼中的普通敌人。【专长】唐门试炼·错簧回廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13771,12 +14200,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "唐门试炼·错簧回廊的武备与守位",
+    "dialogueId": "content_npc_tm_trial_guard",
+    "combatMode": "kill"
   },
   "tm_trial_master": {
     "name": "唐门试炼使",
     "title": "暗器宗师",
-    "description": "唐门试炼的最终Boss。",
+    "description": "唐门试炼的最终Boss。【专长】唐门试炼·百花暗器堂的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13844,12 +14276,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "唐门试炼·百花暗器堂的武备与守位",
+    "dialogueId": "content_npc_tm_trial_master"
   },
   "sb_grassland_rider": {
     "name": "草原铁骑",
     "title": "草原铁骑",
-    "description": "狼烟再起中的普通敌人。",
+    "description": "狼烟再起中的普通敌人。【专长】狼烟再起·逆风烽道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -13910,12 +14344,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "狼烟再起·逆风烽道的武备与守位",
+    "dialogueId": "content_npc_sb_grassland_rider",
+    "combatMode": "kill"
   },
   "sb_grassland_khan": {
     "name": "草原万骑长",
     "title": "大汗之子",
-    "description": "狼烟再起的最终Boss。",
+    "description": "狼烟再起的最终Boss。【专长】狼烟再起·失联中军的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -13983,12 +14420,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "狼烟再起·失联中军的武备与守位",
+    "dialogueId": "content_npc_sb_grassland_khan"
   },
   "jn_sword_apprentice": {
     "name": "剑道弟子",
     "title": "剑道弟子",
-    "description": "剑首之争中的普通敌人。",
+    "description": "剑首之争中的普通敌人。【专长】剑首之争·折枝剑径的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -14049,12 +14488,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "剑首之争·折枝剑径的武备与守位",
+    "dialogueId": "content_npc_jn_sword_apprentice",
+    "combatMode": "kill"
   },
   "jn_sword_daozi": {
     "name": "琴剑道子",
     "title": "剑首之女",
-    "description": "剑首之争的最终Boss。",
+    "description": "剑首之争的最终Boss。【专长】剑首之争·剑首旧席的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -14122,12 +14564,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "剑首之争·剑首旧席的武备与守位",
+    "dialogueId": "content_npc_jn_sword_daozi"
   },
   "yz_tea_master": {
     "name": "扬州茶博士",
     "title": "茶楼掌柜",
-    "description": "扬州东关街的茶博士，一张嘴能把二十四桥的月色说出花来。",
+    "description": "扬州东关街的茶博士，一张嘴能把二十四桥的月色说出花来。【专长】从茶客座次辨三联账来路。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -14188,12 +14632,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "从茶客座次辨三联账来路"
   },
   "bs_wine_maker": {
     "name": "巴蜀酒娘",
     "title": "酒坊主人",
-    "description": "巴蜀酒坊的女主人，酿的酒叫'剑南春'——喝过的人都说，一杯忘忧。",
+    "description": "巴蜀酒坊的女主人，酿的酒叫'剑南春'——喝过的人都说，一杯忘忧。【专长】用酒曲气味辨假香掩毒。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -14254,12 +14703,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "用酒曲气味辨假香掩毒"
   },
   "sb_iron_smith": {
-    "name": "塞北铁匠",
+    "name": "马邑铁匠",
     "title": "马邑铁匠",
-    "description": "马邑的铁匠，打了三十年的弯刀——他的铁锤上全是狼牙印。",
+    "description": "马邑的铁匠，打了三十年的弯刀——他的铁锤上全是狼牙印。【专长】辨狼牙刻印与旧锏补焊。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -14320,12 +14774,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "辨狼牙刻印与旧锏补焊"
   },
   "jn_silk_merchant": {
     "name": "江南绸商",
     "title": "丝绸商人",
-    "description": "江南的丝绸商人，丝绸比他的话还柔滑——他的货通南北。",
+    "description": "江南的丝绸商人，丝绸比他的话还柔滑——他的货通南北。【专长】从缝线反查委托者。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -14386,12 +14845,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "从缝线反查委托者"
   },
   "dm_pearl_diver": {
     "name": "采珠人",
     "title": "海底采珠",
-    "description": "东溟的采珠人，能在万丈海底憋一炷香——他见过的海底秘密，比龙王爷还多。",
+    "description": "东溟的采珠人，能在万丈海底憋一炷香——他见过的海底秘密，比龙王爷还多。【专长】验珠回温与水下旧契。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -14452,12 +14916,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "验珠回温与水下旧契"
   },
   "gb2_xinggong_guard": {
-    "name": "行宫刺客",
+    "name": "残灯掌钥人",
     "title": "守卫",
-    "description": "行宫惊变的守卫。",
+    "description": "残灯掌钥人亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -14518,17 +14987,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_gb2_xinggong_guard"
   },
   "gb2_xinggong_boss": {
-    "name": "行宫刺客首",
+    "name": "行宫司香人",
     "title": "刺客之首",
-    "description": "行宫惊变的最终Boss。",
+    "description": "行宫司香人亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 69,
       "realm": "master",
@@ -14591,12 +15065,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_gb2_xinggong_boss"
   },
   "fy3_langfan_guard": {
-    "name": "剑庐守卫",
+    "name": "剑庐守舟童",
     "title": "守卫",
-    "description": "浪翻云试炼的守卫。",
+    "description": "剑庐守舟童亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -14657,17 +15135,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_fy3_langfan_guard"
   },
   "fy3_langfan_boss": {
-    "name": "浪翻云残影",
+    "name": "覆雨留札客",
     "title": "剑道之绝",
-    "description": "浪翻云试炼的最终Boss。",
+    "description": "覆雨留札客亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 70,
       "realm": "master",
@@ -14730,12 +15213,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_fy3_langfan_boss"
   },
   "pk_kongming_guard": {
-    "name": "空明守卫",
+    "name": "照壁拓工",
     "title": "守卫",
-    "description": "破碎空明的守卫。",
+    "description": "照壁拓工亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -14796,17 +15283,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_pk_kongming_guard"
   },
   "pk_kongming_boss": {
-    "name": "空明之影",
+    "name": "空明守字人",
     "title": "万象归一",
-    "description": "破碎空明的最终Boss。",
+    "description": "空明守字人亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 72,
       "realm": "master",
@@ -14869,12 +15361,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_pk_kongming_boss"
   },
   "bh2_jueji_guard": {
-    "name": "绝地守卫",
+    "name": "绝地运水卒",
     "title": "守卫",
-    "description": "边荒绝地的守卫。",
+    "description": "绝地运水卒亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -14935,17 +15431,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_bh2_jueji_guard"
   },
   "bh2_jueji_boss": {
-    "name": "绝地之主",
+    "name": "断粮记名者",
     "title": "边荒之主",
-    "description": "边荒绝地的最终Boss。",
+    "description": "断粮记名者亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 73,
       "realm": "master",
@@ -15008,12 +15509,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_bh2_jueji_boss"
   },
   "gw_longgong_guard": {
-    "name": "龙宫卫将",
+    "name": "镇水旧匠",
     "title": "守卫",
-    "description": "归墟龙宫的守卫。",
+    "description": "镇水旧匠亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -15074,17 +15579,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_gw_longgong_guard"
   },
   "gw_longgong_boss": {
-    "name": "龙王虚影",
+    "name": "龙宫守约人",
     "title": "龙宫之主",
-    "description": "归墟龙宫的最终Boss。",
+    "description": "龙宫守约人亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 74,
       "realm": "master",
@@ -15147,12 +15657,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_gw_longgong_boss"
   },
   "yz2_yunhe_guard": {
-    "name": "漕帮精锐",
+    "name": "夜航验旗手",
     "title": "守卫",
-    "description": "运河夜战的守卫。",
+    "description": "夜航验旗手亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -15213,17 +15727,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_yz2_yunhe_guard"
   },
   "yz2_yunhe_boss": {
-    "name": "漕帮叛首",
+    "name": "漕帮旧更夫",
     "title": "夜战之主",
-    "description": "运河夜战的最终Boss。",
+    "description": "漕帮旧更夫亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 75,
       "realm": "master",
@@ -15286,12 +15805,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_yz2_yunhe_boss"
   },
   "tm2_tianti_guard": {
-    "name": "天梯守卫",
+    "name": "退轮护索人",
     "title": "守卫",
-    "description": "唐门天梯的守卫。",
+    "description": "退轮护索人亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -15352,17 +15875,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_tm2_tianti_guard"
   },
   "tm2_tianti_boss": {
-    "name": "唐门大长老",
+    "name": "唐门旧机师",
     "title": "暗器之巅",
-    "description": "唐门天梯的最终Boss。",
+    "description": "唐门旧机师亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 76,
       "realm": "master",
@@ -15425,12 +15953,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_tm2_tianti_boss"
   },
   "sb2_xueling_guard": {
-    "name": "雪岭狼卫",
+    "name": "雪岭归队卒",
     "title": "守卫",
-    "description": "狼山雪岭的守卫。",
+    "description": "雪岭归队卒亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -15491,17 +16023,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_sb2_xueling_guard"
   },
   "sb2_xueling_boss": {
-    "name": "雪岭狼主",
+    "name": "狼帐遗册人",
     "title": "白狼传承",
-    "description": "狼山雪岭的最终Boss。",
+    "description": "狼帐遗册人亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 77,
       "realm": "master",
@@ -15564,12 +16101,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_sb2_xueling_boss"
   },
   "jn3_shen_guard": {
-    "name": "池底精灵",
+    "name": "引泉木楔匠",
     "title": "守卫",
-    "description": "剑池深处的守卫。",
+    "description": "引泉木楔匠亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -15630,17 +16171,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_jn3_shen_guard"
   },
   "jn3_shen_boss": {
-    "name": "池底剑灵",
+    "name": "剑池留铭人",
     "title": "名剑之魂",
-    "description": "剑池深处的最终Boss。",
+    "description": "剑池留铭人亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 78,
       "realm": "master",
@@ -15703,12 +16249,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_jn3_shen_boss"
   },
   "dm3_shengong_guard": {
-    "name": "秘殿守卫",
+    "name": "废殿校衡匠",
     "title": "守卫",
-    "description": "神工秘殿的守卫。",
+    "description": "废殿校衡匠亲历旧事，不代替本章首领作战。【专长】现场痕迹的原始见证。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -15769,17 +16319,22 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "现场痕迹的原始见证",
+    "dialogueId": "content_npc_dm3_shengong_guard"
   },
   "dm3_shengong_boss": {
-    "name": "神工守卫",
+    "name": "神工守炉人",
     "title": "仙人遗卫",
-    "description": "神工秘殿的最终Boss。",
+    "description": "神工守炉人亲历旧事，不代替本章首领作战。【专长】旧制与误判的校对。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
     "instanceOnly": true,
-    "combatMode": "defeat",
+    "combatMode": "protected",
     "attributes": {
       "level": 80,
       "realm": "master",
@@ -15842,12 +16397,16 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "nonCombat": true,
+    "aggressive": false,
+    "specialty": "旧制与误判的校对",
+    "dialogueId": "content_npc_dm3_shengong_boss"
   },
   "yz_musician": {
-    "name": "扬州琴师",
+    "name": "桥头邵琴师",
     "title": "琴师",
-    "description": "扬州琴师，见多识广。",
+    "description": "扬州琴师，见多识广。【专长】听橹歌里缺失的水位节拍。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -15908,12 +16467,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "听橹歌里缺失的水位节拍"
   },
   "bs_tea_house": {
-    "name": "巴蜀茶掌柜",
+    "name": "茶博士沈醒",
     "title": "茶掌柜",
-    "description": "巴蜀茶掌柜，见多识广。",
+    "description": "巴蜀茶掌柜，见多识广。【专长】辨青城口音与蜀道回声。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -15974,12 +16538,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "辨青城口音与蜀道回声"
   },
   "sb_scout_captain": {
     "name": "塞北斥候长",
     "title": "斥候长",
-    "description": "塞北斥候长，见多识广。",
+    "description": "塞北斥候长，见多识广。【专长】核失联巡队的回程。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -16040,12 +16609,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "核失联巡队的回程"
   },
   "jn_poet": {
-    "name": "江南诗人",
+    "name": "兰亭题壁客",
     "title": "诗人",
-    "description": "江南诗人，见多识广。",
+    "description": "江南诗人，见多识广。【专长】区分原刻和后人续字。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -16106,12 +16680,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "区分原刻和后人续字"
   },
   "dm_sailor": {
-    "name": "东溟水手",
+    "name": "归墟舵工",
     "title": "老水手",
-    "description": "东溟水手，见多识广。",
+    "description": "东溟水手，见多识广。【专长】辨沉船上下舷的旧痕。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -16172,12 +16751,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "辨沉船上下舷的旧痕"
   },
   "gb2_guard": {
     "name": "行宫刺客",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】行宫惊变·倒锁寝廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -16238,12 +16822,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "行宫惊变·倒锁寝廊的武备与守位",
+    "dialogueId": "content_npc_gb2_guard",
+    "combatMode": "kill"
   },
   "gb2_boss": {
     "name": "行宫刺客首",
     "title": "行宫刺客首",
-    "description": "行宫惊变Boss。",
+    "description": "行宫惊变Boss。【专长】行宫惊变·行宫静室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -16311,12 +16898,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "行宫惊变·行宫静室的武备与守位",
+    "dialogueId": "content_npc_gb2_boss"
   },
   "fy3_guard": {
     "name": "剑庐守卫",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】浪翻云试炼·观浪石径的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -16377,12 +16966,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "浪翻云试炼·观浪石径的武备与守位",
+    "dialogueId": "content_npc_fy3_guard",
+    "combatMode": "kill"
   },
   "fy3_boss": {
     "name": "浪翻云残影",
     "title": "浪翻云残影",
-    "description": "浪翻云试炼Boss。",
+    "description": "浪翻云试炼Boss。【专长】浪翻云试炼·覆雨剑庐的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -16450,12 +17042,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "浪翻云试炼·覆雨剑庐的武备与守位",
+    "dialogueId": "content_npc_fy3_boss"
   },
   "pk_guard": {
     "name": "空明守卫",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】破碎空明·有字无影廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -16516,12 +17110,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "破碎空明·有字无影廊的武备与守位",
+    "dialogueId": "content_npc_pk_guard",
+    "combatMode": "kill"
   },
   "pk_boss": {
     "name": "空明之影",
     "title": "空明之影",
-    "description": "破碎空明Boss。",
+    "description": "破碎空明Boss。【专长】破碎空明·空心静台的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -16589,12 +17186,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "破碎空明·空心静台的武备与守位",
+    "dialogueId": "content_npc_pk_boss"
   },
   "bh2_guard": {
     "name": "绝地守卫",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】边荒绝地·断水营道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -16655,12 +17254,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "边荒绝地·断水营道的武备与守位",
+    "dialogueId": "content_npc_bh2_guard",
+    "combatMode": "kill"
   },
   "bh2_boss": {
     "name": "绝地之主",
     "title": "绝地之主",
-    "description": "边荒绝地Boss。",
+    "description": "边荒绝地Boss。【专长】边荒绝地·断粮王帐的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -16728,12 +17330,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "边荒绝地·断粮王帐的武备与守位",
+    "dialogueId": "content_npc_bh2_boss"
   },
   "gw_guard": {
     "name": "龙宫卫将",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】归墟龙宫·积盐石廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -16794,12 +17398,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "归墟龙宫·积盐石廊的武备与守位",
+    "dialogueId": "content_npc_gw_guard",
+    "combatMode": "kill"
   },
   "gw_boss": {
     "name": "龙王虚影",
     "title": "龙王虚影",
-    "description": "归墟龙宫Boss。",
+    "description": "归墟龙宫Boss。【专长】归墟龙宫·龙宫旧殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -16867,12 +17474,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "归墟龙宫·龙宫旧殿的武备与守位",
+    "dialogueId": "content_npc_gw_boss"
   },
   "yz2_guard": {
     "name": "漕帮精锐",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】运河夜战·错旗漕船的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -16933,12 +17542,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "运河夜战·错旗漕船的武备与守位",
+    "dialogueId": "content_npc_yz2_guard",
+    "combatMode": "kill"
   },
   "yz2_boss": {
     "name": "漕帮叛首",
     "title": "漕帮叛首",
-    "description": "运河夜战Boss。",
+    "description": "运河夜战Boss。【专长】运河夜战·叛首船舱的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -17006,12 +17618,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "运河夜战·叛首船舱的武备与守位",
+    "dialogueId": "content_npc_yz2_boss"
   },
   "tm2_guard": {
     "name": "天梯守卫",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】唐门天梯·松索半崖的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -17072,12 +17686,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "唐门天梯·松索半崖的武备与守位",
+    "dialogueId": "content_npc_tm2_guard",
+    "combatMode": "kill"
   },
   "tm2_boss": {
     "name": "唐门大长老",
     "title": "唐门大长老",
-    "description": "唐门天梯Boss。",
+    "description": "唐门天梯Boss。【专长】唐门天梯·长老试台的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -17145,12 +17762,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "唐门天梯·长老试台的武备与守位",
+    "dialogueId": "content_npc_tm2_boss"
   },
   "sb2_guard": {
     "name": "雪岭狼卫",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】狼山雪岭·假足迹雪脊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -17211,12 +17830,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "狼山雪岭·假足迹雪脊的武备与守位",
+    "dialogueId": "content_npc_sb2_guard",
+    "combatMode": "kill"
   },
   "sb2_boss": {
     "name": "雪岭狼主",
     "title": "雪岭狼主",
-    "description": "狼山雪岭Boss。",
+    "description": "狼山雪岭Boss。【专长】狼山雪岭·狼主冰帐的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -17284,12 +17906,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "狼山雪岭·狼主冰帐的武备与守位",
+    "dialogueId": "content_npc_sb2_boss"
   },
   "jn3_guard": {
     "name": "池底精灵",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】剑池深处·沉锈石阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -17350,12 +17974,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "剑池深处·沉锈石阶的武备与守位",
+    "dialogueId": "content_npc_jn3_guard",
+    "combatMode": "kill"
   },
   "jn3_boss": {
     "name": "池底剑灵",
     "title": "池底剑灵",
-    "description": "剑池深处Boss。",
+    "description": "剑池深处Boss。【专长】剑池深处·池底剑室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -17423,12 +18050,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "剑池深处·池底剑室的武备与守位",
+    "dialogueId": "content_npc_jn3_boss"
   },
   "dm3_guard": {
     "name": "秘殿守卫",
     "title": "守卫",
-    "description": "守卫。",
+    "description": "守卫。【专长】神工秘殿·异齿机廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -17489,12 +18118,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "神工秘殿·异齿机廊的武备与守位",
+    "dialogueId": "content_npc_dm3_guard",
+    "combatMode": "kill"
   },
   "dm3_boss": {
     "name": "神工守卫",
     "title": "神工守卫",
-    "description": "神工秘殿Boss。",
+    "description": "神工秘殿Boss。【专长】神工秘殿·神工核心的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -17562,12 +18194,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "神工秘殿·神工核心的武备与守位",
+    "dialogueId": "content_npc_dm3_boss"
   },
   "yz_m2": {
-    "name": "扬州琴师",
+    "name": "湖畔击节人",
     "title": "琴师",
-    "description": "扬州琴师。",
+    "description": "扬州琴师。【专长】校水镜与实星的错位。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -17628,12 +18262,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "校水镜与实星的错位"
   },
   "bs_t2": {
-    "name": "巴蜀茶掌柜",
+    "name": "茶棚跑堂阿松",
     "title": "茶掌柜",
-    "description": "巴蜀茶掌柜。",
+    "description": "巴蜀茶掌柜。【专长】记赶路人抵达的先后。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -17694,12 +18333,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "记赶路人抵达的先后"
   },
   "sb_s2": {
-    "name": "塞北斥候长",
+    "name": "雪线领路人",
     "title": "斥候长",
-    "description": "塞北斥候长。",
+    "description": "塞北斥候长。【专长】辨反穿毡靴和真实拖痕。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -17760,12 +18404,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "辨反穿毡靴和真实拖痕"
   },
   "jn_p2": {
-    "name": "江南诗人",
+    "name": "竹间听雨客",
     "title": "诗人",
-    "description": "江南诗人。",
+    "description": "江南诗人。【专长】用疏密雨声辨旧剑诀。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -17826,12 +18475,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "用疏密雨声辨旧剑诀"
   },
   "dm_s2": {
-    "name": "东溟水手",
+    "name": "礁间测潮人",
     "title": "老水手",
-    "description": "东溟水手。",
+    "description": "东溟水手。【专长】辨暗礁通风与潮门盐线。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "common",
@@ -17892,12 +18546,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "辨暗礁通风与潮门盐线"
   },
   "xb2_guard": {
     "name": "绝壁悬栈守卫",
     "title": "守卫",
-    "description": "绝壁悬栈守卫。",
+    "description": "绝壁悬栈守卫。【专长】绝壁悬栈·风剪悬栈的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -17958,12 +18617,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "绝壁悬栈·风剪悬栈的武备与守位",
+    "dialogueId": "content_npc_xb2_guard",
+    "combatMode": "kill"
   },
   "xb2_boss": {
     "name": "绝壁悬栈之主",
     "title": "绝壁悬栈之主",
-    "description": "绝壁悬栈之主。",
+    "description": "绝壁悬栈之主。【专长】绝壁悬栈·绝壁收索台的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -18031,12 +18693,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "绝壁悬栈·绝壁收索台的武备与守位",
+    "dialogueId": "content_npc_xb2_boss"
   },
   "ht2_guard": {
     "name": "寒潭蛟影守卫",
     "title": "守卫",
-    "description": "寒潭蛟影守卫。",
+    "description": "寒潭蛟影守卫。【专长】寒潭蛟影·空泡回流湾的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -18097,12 +18761,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "寒潭蛟影·空泡回流湾的武备与守位",
+    "dialogueId": "content_npc_ht2_guard",
+    "combatMode": "kill"
   },
   "ht2_boss": {
     "name": "寒潭蛟影之主",
     "title": "寒潭蛟影之主",
-    "description": "寒潭蛟影之主。",
+    "description": "寒潭蛟影之主。【专长】寒潭蛟影·蛟影潜窟的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -18170,12 +18837,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "寒潭蛟影·蛟影潜窟的武备与守位",
+    "dialogueId": "content_npc_ht2_boss"
   },
   "sh2_guard": {
     "name": "沙海孤城守卫",
     "title": "守卫",
-    "description": "沙海孤城守卫。",
+    "description": "沙海孤城守卫。【专长】沙海孤城·日影残街的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -18236,12 +18905,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "沙海孤城·日影残街的武备与守位",
+    "dialogueId": "content_npc_sh2_guard",
+    "combatMode": "kill"
   },
   "sh2_boss": {
     "name": "沙海孤城之主",
     "title": "沙海孤城之主",
-    "description": "沙海孤城之主。",
+    "description": "沙海孤城之主。【专长】沙海孤城·无水城心的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -18309,12 +18981,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "沙海孤城·无水城心的武备与守位",
+    "dialogueId": "content_npc_sh2_boss"
   },
   "dz2_guard": {
     "name": "毒瘴密林守卫",
     "title": "守卫",
-    "description": "毒瘴密林守卫。",
+    "description": "毒瘴密林守卫。【专长】毒瘴密林·倒伏药径的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -18375,12 +19049,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "毒瘴密林·倒伏药径的武备与守位",
+    "dialogueId": "content_npc_dz2_guard",
+    "combatMode": "kill"
   },
   "dz2_boss": {
     "name": "毒瘴密林之主",
     "title": "毒瘴密林之主",
-    "description": "毒瘴密林之主。",
+    "description": "毒瘴密林之主。【专长】毒瘴密林·毒藤营帐的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -18448,12 +19125,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "毒瘴密林·毒藤营帐的武备与守位",
+    "dialogueId": "content_npc_dz2_boss"
   },
   "tg2_guard": {
     "name": "天罡北斗守卫",
     "title": "守卫",
-    "description": "天罡北斗守卫。",
+    "description": "天罡北斗守卫。【专长】天罡北斗·倒刻星廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -18514,12 +19193,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "天罡北斗·倒刻星廊的武备与守位",
+    "dialogueId": "content_npc_tg2_guard",
+    "combatMode": "kill"
   },
   "tg2_boss": {
     "name": "天罡北斗之主",
     "title": "天罡北斗之主",
-    "description": "天罡北斗之主。",
+    "description": "天罡北斗之主。【专长】天罡北斗·北斗回环殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -18587,12 +19269,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "天罡北斗·北斗回环殿的武备与守位",
+    "dialogueId": "content_npc_tg2_boss"
   },
   "ym2_guard": {
     "name": "幽冥鬼市守卫",
     "title": "守卫",
-    "description": "幽冥鬼市守卫。",
+    "description": "幽冥鬼市守卫。【专长】幽冥鬼市·缺页账巷的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -18653,12 +19337,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "幽冥鬼市·缺页账巷的武备与守位",
+    "dialogueId": "content_npc_ym2_guard",
+    "combatMode": "kill"
   },
   "ym2_boss": {
     "name": "幽冥鬼市之主",
     "title": "幽冥鬼市之主",
-    "description": "幽冥鬼市之主。",
+    "description": "幽冥鬼市之主。【专长】幽冥鬼市·旧契暗室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -18726,12 +19413,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "幽冥鬼市·旧契暗室的武备与守位",
+    "dialogueId": "content_npc_ym2_boss"
   },
   "tx2_guard": {
     "name": "铁血雄关守卫",
     "title": "守卫",
-    "description": "铁血雄关守卫。",
+    "description": "铁血雄关守卫。【专长】铁血雄关·空箭戍道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -18792,12 +19481,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "铁血雄关·空箭戍道的武备与守位",
+    "dialogueId": "content_npc_tx2_guard",
+    "combatMode": "kill"
   },
   "tx2_boss": {
     "name": "铁血雄关之主",
     "title": "铁血雄关之主",
-    "description": "铁血雄关之主。",
+    "description": "铁血雄关之主。【专长】铁血雄关·铁血关楼的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -18865,12 +19557,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "铁血雄关·铁血关楼的武备与守位",
+    "dialogueId": "content_npc_tx2_boss"
   },
   "yy2_guard": {
     "name": "烟雨剑冢守卫",
     "title": "守卫",
-    "description": "烟雨剑冢守卫。",
+    "description": "烟雨剑冢守卫。【专长】烟雨剑冢·断刃碑径的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -18931,12 +19625,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "烟雨剑冢·断刃碑径的武备与守位",
+    "dialogueId": "content_npc_yy2_guard",
+    "combatMode": "kill"
   },
   "yy2_boss": {
     "name": "烟雨剑冢之主",
     "title": "烟雨剑冢之主",
-    "description": "烟雨剑冢之主。",
+    "description": "烟雨剑冢之主。【专长】烟雨剑冢·旧主剑室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19004,12 +19701,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "烟雨剑冢·旧主剑室的武备与守位",
+    "dialogueId": "content_npc_yy2_boss"
   },
   "th2_guard": {
     "name": "天火熔炉守卫",
     "title": "守卫",
-    "description": "天火熔炉守卫。",
+    "description": "天火熔炉守卫。【专长】天火熔炉·裂纹运矿道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -19070,12 +19769,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "天火熔炉·裂纹运矿道的武备与守位",
+    "dialogueId": "content_npc_th2_guard",
+    "combatMode": "kill"
   },
   "th2_boss": {
     "name": "天火熔炉之主",
     "title": "天火熔炉之主",
-    "description": "天火熔炉之主。",
+    "description": "天火熔炉之主。【专长】天火熔炉·天火旧炉的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19143,12 +19845,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "天火熔炉·天火旧炉的武备与守位",
+    "dialogueId": "content_npc_th2_boss"
   },
   "bf2_guard": {
     "name": "冰封王座守卫",
     "title": "守卫",
-    "description": "冰封王座守卫。",
+    "description": "冰封王座守卫。【专长】冰封王座·封冻席道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -19209,12 +19913,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "冰封王座·封冻席道的武备与守位",
+    "dialogueId": "content_npc_bf2_guard",
+    "combatMode": "kill"
   },
   "bf2_boss": {
     "name": "冰封王座之主",
     "title": "冰封王座之主",
-    "description": "冰封王座之主。",
+    "description": "冰封王座之主。【专长】冰封王座·无冠内室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19282,12 +19989,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "冰封王座·无冠内室的武备与守位",
+    "dialogueId": "content_npc_bf2_boss"
   },
   "lm2_guard": {
     "name": "雷鸣峡谷守卫",
     "title": "守卫",
-    "description": "雷鸣峡谷守卫。",
+    "description": "雷鸣峡谷守卫。【专长】雷鸣峡谷·湿岩回声径的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -19348,12 +20057,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "雷鸣峡谷·湿岩回声径的武备与守位",
+    "dialogueId": "content_npc_lm2_guard",
+    "combatMode": "kill"
   },
   "lm2_boss": {
     "name": "雷鸣峡谷之主",
     "title": "雷鸣峡谷之主",
-    "description": "雷鸣峡谷之主。",
+    "description": "雷鸣峡谷之主。【专长】雷鸣峡谷·峡心风隙的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19421,12 +20133,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "雷鸣峡谷·峡心风隙的武备与守位",
+    "dialogueId": "content_npc_lm2_boss"
   },
   "cj2_guard": {
     "name": "苍穹之眼守卫",
     "title": "守卫",
-    "description": "苍穹之眼守卫。",
+    "description": "苍穹之眼守卫。【专长】苍穹之眼·错镜长阶的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -19487,12 +20201,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "苍穹之眼·错镜长阶的武备与守位",
+    "dialogueId": "content_npc_cj2_guard",
+    "combatMode": "kill"
   },
   "cj2_boss": {
     "name": "苍穹之眼之主",
     "title": "苍穹之眼之主",
-    "description": "苍穹之眼之主。",
+    "description": "苍穹之眼之主。【专长】苍穹之眼·苍穹旧眼的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19560,12 +20277,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "苍穹之眼·苍穹旧眼的武备与守位",
+    "dialogueId": "content_npc_cj2_boss"
   },
   "wr2_guard": {
     "name": "万刃窟守卫",
     "title": "守卫",
-    "description": "万刃窟守卫。",
+    "description": "万刃窟守卫。【专长】万刃窟·悬刃石廊的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -19626,12 +20345,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "万刃窟·悬刃石廊的武备与守位",
+    "dialogueId": "content_npc_wr2_guard",
+    "combatMode": "kill"
   },
   "wr2_boss": {
     "name": "万刃窟之主",
     "title": "万刃窟之主",
-    "description": "万刃窟之主。",
+    "description": "万刃窟之主。【专长】万刃窟·万刃藏室的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19699,12 +20421,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "万刃窟·万刃藏室的武备与守位",
+    "dialogueId": "content_npc_wr2_boss"
   },
   "yg2_guard": {
     "name": "幽谷回音守卫",
     "title": "守卫",
-    "description": "幽谷回音守卫。",
+    "description": "幽谷回音守卫。【专长】幽谷回音·错音苔径的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -19765,12 +20489,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "幽谷回音·错音苔径的武备与守位",
+    "dialogueId": "content_npc_yg2_guard",
+    "combatMode": "kill"
   },
   "yg2_boss": {
     "name": "幽谷回音之主",
     "title": "幽谷回音之主",
-    "description": "幽谷回音之主。",
+    "description": "幽谷回音之主。【专长】幽谷回音·归声深谷的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19838,12 +20565,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "幽谷回音·归声深谷的武备与守位",
+    "dialogueId": "content_npc_yg2_boss"
   },
   "tx3_guard": {
     "name": "太虚幻境守卫",
     "title": "守卫",
-    "description": "太虚幻境守卫。",
+    "description": "太虚幻境守卫。【专长】太虚幻境·有形旧路的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -19904,12 +20633,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "太虚幻境·有形旧路的武备与守位",
+    "dialogueId": "content_npc_tx3_guard",
+    "combatMode": "kill"
   },
   "tx3_boss": {
     "name": "太虚幻境之主",
     "title": "太虚幻境之主",
-    "description": "太虚幻境之主。",
+    "description": "太虚幻境之主。【专长】太虚幻境·返真无门处的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -19977,12 +20709,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "太虚幻境·返真无门处的武备与守位",
+    "dialogueId": "content_npc_tx3_boss"
   },
   "r204_npc_0": {
     "name": "太行剑客",
     "title": "剑客",
-    "description": "太行剑客。",
+    "description": "太行剑客。【专长】辨退锋留路与斩尽杀绝。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -20043,12 +20777,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "辨退锋留路与斩尽杀绝"
   },
   "r204_npc_1": {
     "name": "蜀中药王",
     "title": "药王",
-    "description": "蜀中药王。",
+    "description": "蜀中药王。【专长】比鲜草、芦根与陈药性状。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -20109,12 +20848,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "比鲜草、芦根与陈药性状"
   },
   "r204_npc_2": {
     "name": "漠北刀王",
     "title": "刀王",
-    "description": "漠北刀王。",
+    "description": "漠北刀王。【专长】辨持关与追敌的刀势。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -20175,12 +20919,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "辨持关与追敌的刀势"
   },
   "r204_npc_3": {
     "name": "东海渔隐",
     "title": "渔隐",
-    "description": "东海渔隐。",
+    "description": "东海渔隐。【专长】从风穴而非路标辨归航。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -20241,12 +20990,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "从风穴而非路标辨归航"
   },
   "r204_npc_4": {
     "name": "岭南琴圣",
     "title": "琴圣",
-    "description": "岭南琴圣。",
+    "description": "岭南琴圣。【专长】用原叩校准两壁回声。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -20307,12 +21061,17 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "instanceOnly": false,
+    "nonCombat": true,
+    "combatMode": "protected",
+    "aggressive": false,
+    "specialty": "用原叩校准两壁回声"
   },
   "sl_gate_boss": {
     "name": "铁面判官",
     "title": "双龙会·守门人",
-    "description": "双龙会的守门人，铁面覆脸，双掌如铁——他不说话，只用手势告诉你：过了他这一关，才见真龙。",
+    "description": "双龙会的守门人，铁面覆脸，双掌如铁——他不说话，只用手势告诉你：过了他这一关，才见真龙。【专长】双龙会·铁面关的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -20380,12 +21139,14 @@
       "attack": -12,
       "hitRate": -14,
       "defense": -8
-    }
+    },
+    "specialty": "双龙会·铁面关的武备与守位",
+    "dialogueId": "content_npc_sl_gate_boss"
   },
   "sl_main_boss": {
     "name": "金枪无双·赵无极",
     "title": "双龙会·会主",
-    "description": "双龙会会主赵无极，金枪天下第一——他一生只败过一次，败给一个后来消失的剑客。他等了二十年，等一个能让他再败一次的人。",
+    "description": "双龙会会主赵无极，金枪天下第一——他一生只败过一次，败给一个后来消失的剑客。他等了二十年，等一个能让他再败一次的人。【专长】双龙会·无双金枪殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -20453,12 +21214,14 @@
       "attack": -14,
       "hitRate": -18,
       "defense": -10
-    }
+    },
+    "specialty": "双龙会·无双金枪殿的武备与守位",
+    "dialogueId": "content_npc_sl_main_boss"
   },
   "yg_merchant_ghost": {
     "name": "鬼市商人",
     "title": "幽冥鬼市·商路",
-    "description": "幽冥鬼市里最富有的商人——他死了三百年，但他的账本还没记完最后一笔。",
+    "description": "幽冥鬼市里最富有的商人——他死了三百年，但他的账本还没记完最后一笔。【专长】幽冥鬼市·商路·账房的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -20526,12 +21289,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "幽冥鬼市·商路·账房的武备与守位",
+    "dialogueId": "content_npc_yg_merchant_ghost"
   },
   "yg_noble_ghost": {
     "name": "鬼市侯爷",
     "title": "幽冥鬼市·权贵",
-    "description": "幽冥鬼市的权贵侯爷——他生前坐拥千金，死后也不肯放下。他的鬼市就是他的宫殿。",
+    "description": "幽冥鬼市的权贵侯爷——他生前坐拥千金，死后也不肯放下。他的鬼市就是他的宫殿。【专长】幽冥鬼市·侯路·府邸的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -20599,12 +21364,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -10
-    }
+    },
+    "specialty": "幽冥鬼市·侯路·府邸的武备与守位",
+    "dialogueId": "content_npc_yg_noble_ghost"
   },
   "yg_guardian_ghost": {
     "name": "鬼市守卫长",
     "title": "幽冥鬼市·武力",
-    "description": "幽冥鬼市的守卫长——他是鬼市唯一的武力。三百年了，没人从他的刀下活着走出去。",
+    "description": "幽冥鬼市的守卫长——他是鬼市唯一的武力。三百年了，没人从他的刀下活着走出去。【专长】幽冥鬼市·武路·校场的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -20672,12 +21439,14 @@
       "attack": -16,
       "hitRate": -14,
       "defense": -12
-    }
+    },
+    "specialty": "幽冥鬼市·武路·校场的武备与守位",
+    "dialogueId": "content_npc_yg_guardian_ghost"
   },
   "yg_00_guard": {
     "name": "鬼市守卫",
     "title": "入口看守",
-    "description": "鬼市入口的看守，脸藏在斗篷里——你看不清他的脸，但他看得清你的。",
+    "description": "鬼市入口的看守，脸藏在斗篷里——你看不清他的脸，但他看得清你的。【专长】幽冥鬼市·三岔路口的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -20738,12 +21507,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "幽冥鬼市·三岔路口的武备与守位",
+    "dialogueId": "content_npc_yg_00_guard",
+    "combatMode": "kill"
   },
   "bd_tianxu_guard": {
     "name": "天枢守卫",
     "title": "北斗阵·天枢",
-    "description": "北斗阵第一位的守卫——天枢星主'贪狼'的化身，手持双戟守在阵眼。",
+    "description": "北斗阵第一位的守卫——天枢星主'贪狼'的化身，手持双戟守在阵眼。【专长】天罡北斗阵·北斗阵殿的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "boss",
     "importance": "boss",
@@ -20811,12 +21583,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -12
-    }
+    },
+    "specialty": "天罡北斗阵·北斗阵殿的武备与守位",
+    "dialogueId": "content_npc_bd_tianxu_guard"
   },
   "bd_path_guard": {
     "name": "阵法守卫",
     "title": "北斗阵·游卫",
-    "description": "北斗阵的游动守卫。",
+    "description": "北斗阵的游动守卫。【专长】天罡北斗阵·阵前石台的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "neutral",
     "role": "enemy",
     "importance": "common",
@@ -20877,12 +21651,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "天罡北斗阵·阵前石台的武备与守位",
+    "dialogueId": "content_npc_bd_path_guard",
+    "combatMode": "kill"
   },
   "hc_caravan_leader": {
     "name": "商队首领",
     "title": "丝绸之路",
-    "description": "丝绸之路上的老商人，他护送的不是货物，是三十年攒下的一封信——收信人在玉门关外。",
+    "description": "丝绸之路上的老商人，他护送的不是货物，是三十年攒下的一封信——收信人在玉门关外。【专长】护送商队·丝路起点的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -20944,17 +21721,19 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "护送商队·丝路起点的在场证词",
+    "dialogueId": "content_npc_hc_caravan_leader"
   },
   "hc_bandit_1": {
     "name": "丝路劫匪",
     "title": "丝路劫道",
-    "description": "丝路劫匪。",
+    "description": "丝路劫匪。【专长】护送商队·第一段·黄沙道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
     "instanceOnly": true,
-    "combatMode": "",
+    "combatMode": "kill",
     "attributes": {
       "level": 40,
       "realm": "grandmaster",
@@ -21011,17 +21790,19 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "护送商队·第一段·黄沙道的武备与守位",
+    "dialogueId": "content_npc_hc_bandit_1"
   },
   "hc_bandit_2": {
     "name": "丝路刀客",
     "title": "丝路劫道",
-    "description": "丝路刀客。",
+    "description": "丝路刀客。【专长】护送商队·第二段·烽燧残垣的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
     "instanceOnly": true,
-    "combatMode": "",
+    "combatMode": "kill",
     "attributes": {
       "level": 44,
       "realm": "grandmaster",
@@ -21078,12 +21859,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "护送商队·第二段·烽燧残垣的武备与守位",
+    "dialogueId": "content_npc_hc_bandit_2"
   },
   "hc_bandit_boss": {
     "name": "丝路劫首",
     "title": "丝路劫道",
-    "description": "丝路劫首。",
+    "description": "丝路劫首。【专长】护送商队·第三段·玉门关的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "boss",
@@ -21145,12 +21928,14 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "护送商队·第三段·玉门关的武备与守位",
+    "dialogueId": "content_npc_hc_bandit_boss"
   },
   "mute_refugee_woman": {
     "name": "哑婆",
     "title": "营地南角",
-    "description": "她蜷在营地南角的窝棚旁，手边放着一截炭条。",
+    "description": "她蜷在营地南角的窝棚旁，手边放着一截炭条。【专长】炭画中的无声证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -21214,12 +21999,13 @@
     },
     "questIds": [
       "refugee_rumor_case"
-    ]
+    ],
+    "specialty": "炭画中的无声证词"
   },
   "gb2_yunque": {
     "name": "宫女云雀",
     "title": "金吾卫旧部",
-    "description": "一个看起来不到二十岁的宫女，但她的眼神比谁都坚定。她冒死送出密信，为了把那个能翻转政变的人带出这座吃人的皇城。",
+    "description": "一个看起来不到二十岁的宫女，但她的眼神比谁都坚定。她冒死送出密信，为了把那个能翻转政变的人带出这座吃人的皇城。【专长】东都宫变·东华门甬道的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -21282,12 +22068,13 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "东都宫变·东华门甬道的在场证词"
   },
   "gb_dugu_ling": {
     "name": "独孤嶙",
     "title": "金吾卫叛将",
-    "description": "金吾卫叛将独孤嶙，铁甲未卸，眼中全是血丝。他曾是杨广最信任的将领——直到他亲眼看到自己的族人被无端屠杀。",
+    "description": "金吾卫叛将独孤嶙，铁甲未卸，眼中全是血丝。他曾是杨广最信任的将领——直到他亲眼看到自己的族人被无端屠杀。【专长】东都宫变·宫城内廷广场的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "boss",
     "importance": "boss",
@@ -21355,12 +22142,14 @@
       "attack": -14,
       "hitRate": -16,
       "defense": -8
-    }
+    },
+    "specialty": "东都宫变·宫城内廷广场的武备与守位",
+    "dialogueId": "content_npc_gb_dugu_ling"
   },
   "gb_pegasus_sergeant": {
     "name": "叛军什长",
     "title": "东华门巡逻",
-    "description": "叛军的巡逻什长，横刀扛在肩上，走路的时候地砖都会响。",
+    "description": "叛军的巡逻什长，横刀扛在肩上，走路的时候地砖都会响。【专长】东都宫变·东华门甬道的武备与守位。交谈后明确选择对应观察项可记录见闻。",
     "faction": "bandits",
     "role": "enemy",
     "importance": "common",
@@ -21421,12 +22210,15 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "东都宫变·东华门甬道的武备与守位",
+    "dialogueId": "content_npc_gb_pegasus_sergeant",
+    "combatMode": "kill"
   },
   "gb2_old_eunuch": {
     "name": "老内侍",
     "title": "御花园扫洒",
-    "description": "在御花园扫了四十年落叶的老内侍。他见过三朝皇帝的起落，也见过无数人的死——他只是继续扫他的地。",
+    "description": "在御花园扫了四十年落叶的老内侍。他见过三朝皇帝的起落，也见过无数人的死——他只是继续扫他的地。【专长】东都宫变·御花园石径的在场证词。交谈后明确选择“专长”可记录见闻。",
     "faction": "neutral",
     "role": "quest",
     "importance": "local",
@@ -21489,6 +22281,7 @@
         "charm": 0,
         "seal": 0
       }
-    }
+    },
+    "specialty": "东都宫变·御花园石径的在场证词"
   }
 }

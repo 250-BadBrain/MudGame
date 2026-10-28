@@ -25,8 +25,12 @@
         "天津桥的商旅们在传：宫里最近不太平——听说圣上的龙体欠安，几位皇子已经在暗中较劲了。"
       ],
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "searchFlag": "discovery_place_dd2_tianjin",
+      "searchMessage": "你在天津桥核对现场：东都的天津桥横跨洛水，晓月将桥面照得雪亮——桥头石狮阅尽了王朝的车马与江湖的刀光。 进一步可核验的是：天津桥的商旅们在传：宫里最近不太平——听说圣上的龙体欠安，几位皇子已经在暗中较劲了。",
+      "contentRole": "东都的天津桥：从现场痕迹校验传闻"
     },
     "dd2_gongmen": {
       "name": "宫门广场",
@@ -42,7 +46,13 @@
       ],
       "exits": {
         "south": "dd2_tianjin"
-      }
+      },
+      "searchFlag": "discovery_place_dd2_gongmen",
+      "searchMessage": "你在宫门广场核对现场：宫门广场的石板一尘不染，骁果军的甲光在宫墙下连成一线——杨广的仪仗偶尔出巡，百姓跪伏如草。 进一步可核验的是：门从里面反锁，不是外面的人力气更大。守门者能证明谁没有经过这道门，未必能证明里面没有内应。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "东都的宫门广场：内锁与宫人出入"
     },
     "dd2_market": {
       "name": "南市",
@@ -55,7 +65,8 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "dd2_silk_merchant"
@@ -63,7 +74,10 @@
       "exits": {
         "west": "dd2_tianjin",
         "south": "dd2_wanqu"
-      }
+      },
+      "searchFlag": "discovery_place_dd2_market",
+      "searchMessage": "你在南市核对现场：东都南市天下第一富——三万五千家商铺昼夜不休，胡汉商旅在货栈间穿行。 进一步可核验的是：绸匹的旧水线能留很久，新旗的一边湿一边干却只维持片刻。运河夜战里，旗的两面比旗上绣的字诚实。",
+      "contentRole": "东都的南市：水渍布纹与夹缝生意"
     },
     "dd2_wanqu": {
       "name": "万曲池畔",
@@ -80,7 +94,13 @@
       "exits": {
         "north": "dd2_tianjin",
         "west": "dd2_market"
-      }
+      },
+      "searchFlag": "discovery_place_dd2_wanqu",
+      "searchMessage": "你在万曲池畔核对现场：万曲池畔柳色如烟，东都的权贵在此泛舟——池水深处沉着的东西，比权贵的秘辛更沉。 进一步可核验的是：诗里的晓月是方位，不是时辰。水下账页依原来的孔线排列，比按你喜欢的诗序重编可靠。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "东都的万曲池畔：月影方位与水下页码"
     }
   }
 }

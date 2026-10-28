@@ -1,7 +1,7 @@
 {
   "id": "yangzhou_neiluan",
   "name": "盐帮内乱",
-  "description": "盐帮内乱——大当家与二当家争夺漕运的控制权，扬州城分为两派。你受托调停，却在调停中发现了更大的阴谋。",
+  "description": "工人的盐引有破角，堂口收到的盐引却张张完好。 三联账中只有脚夫联留着实数，官联与商联互相照抄。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 43,
   "chainId": "yangzhou_caoyun",
   "chainName": "运河风云",
@@ -9,7 +9,11 @@
   "spawnRoomId": "yan_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "工人的盐引有破角，堂口收到的盐引却张张完好。 此处不能只凭武力开门；沿路观察，并核验三联账房的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：保留脚夫账",
       "puzzleId": "gate",
       "rooms": [
         "yan_02"
@@ -34,18 +38,142 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "yanbang_tiaoting": true
+      "nextState": "considered",
+      "message": "工人的盐引有破角，堂口收到的盐引却张张完好。 三联账中只有脚夫联留着实数，官联与商联互相照抄。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_good",
+          "label": "保留脚夫账，当众对三联"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "只听官联把头的口供"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "先毁商联平息争端"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：分盐旧秤",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "yan_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "工人的盐引有破角，堂口收到的盐引却张张完好。",
+      "repeatMessage": "工人的盐引有破角，堂口收到的盐引却张张完好。"
+    },
+    "content_detail": {
+      "label": "核验：三联账房",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "yan_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "三联账中只有脚夫联留着实数，官联与商联互相照抄。",
+      "repeatMessage": "三联账中只有脚夫联留着实数，官联与商联互相照抄。"
+    },
+    "content_decide_good": {
+      "label": "保留脚夫账，当众对三联",
+      "puzzleId": "gate",
+      "rooms": [
+        "yan_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你让被藏起的脚夫成为见证；若先护堂口秩序，真账仍被封存，争端留下另一种结局。",
+      "repeatMessage": "你让被藏起的脚夫成为见证；若先护堂口秩序，真账仍被封存，争端留下另一种结局。",
+      "setFlags": {
+        "yanbang_tiaoting": true,
+        "discovery_chapter_yangzhou_neiluan": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "只听官联把头的口供",
+      "puzzleId": "gate",
+      "rooms": [
+        "yan_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你让被藏起的脚夫成为见证；若先护堂口秩序，真账仍被封存，争端留下另一种结局。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "repeatMessage": "你让被藏起的脚夫成为见证；若先护堂口秩序，真账仍被封存，争端留下另一种结局。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "setFlags": {
+        "discovery_alternative_yangzhou_neiluan": true
+      }
+    },
+    "content_decide_other": {
+      "label": "先毁商联平息争端",
+      "puzzleId": "gate",
+      "rooms": [
+        "yan_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：三联账中只有脚夫联留着实数，官联与商联互相照抄。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：三联账中只有脚夫联留着实数，官联与商联互相照抄。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_yanbang_yupei": {
+      "label": "以盐帮玉佩校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "yan_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把程盐商辨明的器物来历与现场互证。工人的盐引有破角，堂口收到的盐引却张张完好。",
+      "requiredFlags": {
+        "discovery_item_yanbang_yupei": true
+      },
+      "presentItems": {
+        "yanbang_yupei": 1
+      }
+    },
+    "content_aid_manual_tiebi_gong": {
+      "label": "以铁壁功秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "yan_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把雷万钧辨明的器物来历与现场互证。工人的盐引有破角，堂口收到的盐引却张张完好。",
+      "requiredFlags": {
+        "discovery_item_manual_tiebi_gong": true
+      },
+      "presentItems": {
+        "manual_tiebi_gong": 1
+      }
     }
   },
   "rooms": {
     "yan_00": {
-      "name": "入口",
-      "description": "入口。漕运风波——你踏入此处，前方的路在阴影中延伸。",
+      "name": "盐帮问讯棚",
+      "description": "盐帮问讯棚保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "yan_01"
       },
@@ -54,8 +182,8 @@
       ]
     },
     "yan_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "分盐旧秤",
+      "description": "工人的盐引有破角，堂口收到的盐引却张张完好。",
       "exits": {
         "south": "yan_00",
         "north": "yan_02"
@@ -71,11 +199,16 @@
       "npcs": [
         "yz_rebel_gang",
         "yz_rebel_gang"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_yanbang_yupei",
+        "content_aid_manual_tiebi_gong"
       ]
     },
     "yan_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "三联账房",
+      "description": "三联账中只有脚夫联留着实数，官联与商联互相照抄。",
       "exits": {
         "south": "yan_01",
         "north": "yan_03"
@@ -89,18 +222,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "yan_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "堂口议事厅",
+      "description": "你让被藏起的脚夫成为见证；若先护堂口秩序，真账仍被封存，争端留下另一种结局。",
       "exits": {
         "south": "yan_02"
       },
       "npcs": [
         "yz_second_chief"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +253,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成三联账房的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +272,29 @@
       "yanbang_yupei": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：两种立场；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "polarity",
+    "solution": [
+      {
+        "roomId": "yan_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "yan_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "yan_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "yan_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你让被藏起的脚夫成为见证；若先护堂口秩序，真账仍被封存，争端留下另一种结局。"
+  }
 }

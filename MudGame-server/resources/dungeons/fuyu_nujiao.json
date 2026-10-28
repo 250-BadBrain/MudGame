@@ -9,7 +9,8 @@
   "spawnRoomId": "dock_00",
   "puzzleInitialStates": {
     "briefing": "new",
-    "arsenal": "untouched"
+    "arsenal": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_sentinel": {
@@ -40,6 +41,63 @@
       "repeatMessage": "武库已被你翻遍，暗格空空。",
       "giveItems": {},
       "giveMoney": 250
+    },
+    "content_epilogue": {
+      "label": "复盘：水寨的胜利属于谁",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dock_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "怒蛟刀守住了正面，腰带上湿透的绳结则记住了未被唱进战报的搬运者。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "把武库清单交回值守帮众"
+        },
+        {
+          "id": "content_record_route",
+          "label": "先给正厅留下夜袭路线"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "nj_fang_yeyu",
+        "nj_shuangjian"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "把武库清单交回值守帮众",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dock_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "怒蛟刀守住了正面，腰带上湿透的绳结则记住了未被唱进战报的搬运者。 你选择：把武库清单交回值守帮众。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_fuyu_nujiao_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "先给正厅留下夜袭路线",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dock_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "怒蛟刀守住了正面，腰带上湿透的绳结则记住了未被唱进战报的搬运者。 你选择：先给正厅留下夜袭路线。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_fuyu_nujiao_route": true
+      }
     }
   },
   "rooms": {
@@ -74,7 +132,8 @@
       "npcs": [
         "nj_daoshou",
         "nj_daoshou"
-      ]
+      ],
+      "actions": []
     },
     "dock_02": {
       "name": "演武场",
@@ -96,7 +155,8 @@
         "nj_qiangwei",
         "nj_qiangwei",
         "nj_spy"
-      ]
+      ],
+      "actions": []
     },
     "dock_03": {
       "name": "聚义庭",
@@ -132,6 +192,9 @@
         "nj_fang_yeyu",
         "nj_shuangjian",
         "nj_shuangjian"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -200,5 +263,19 @@
   },
   "quickRewards": {
     "money": 250
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "怒蛟刀守住了正面，腰带上湿透的绳结则记住了未被唱进战报的搬运者。",
+    "solution": [
+      {
+        "roomId": "dock_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "dock_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

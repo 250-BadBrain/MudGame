@@ -1,7 +1,7 @@
 {
   "id": "dongming_shengong",
   "name": "神工秘殿",
-  "description": "神工秘殿——洛水风浪中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "大齿轮转得慢却承重，小齿轮转得快却只传讯。 天平两端空载时并不等高，旧铭文说先校零位。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 56,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -9,7 +9,11 @@
   "spawnRoomId": "dongmi_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "大齿轮转得慢却承重，小齿轮转得快却只传讯。 此处不能只凭武力开门；沿路观察，并核验恒重天平台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先校天平",
       "puzzleId": "gate",
       "rooms": [
         "dongmi_02"
@@ -34,28 +38,223 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "sg_tw": true
+      "nextState": "considered",
+      "message": "大齿轮转得慢却承重，小齿轮转得快却只传讯。 天平两端空载时并不等高，旧铭文说先校零位。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_wrong",
+          "label": "先推最大齿轮"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "把两端垫到一样高"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先校天平，再合小齿轮"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：异齿机廊",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dongmi_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "大齿轮转得慢却承重，小齿轮转得快却只传讯。",
+      "repeatMessage": "大齿轮转得慢却承重，小齿轮转得快却只传讯。"
+    },
+    "content_detail": {
+      "label": "核验：恒重天平台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "dongmi_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "天平两端空载时并不等高，旧铭文说先校零位。",
+      "repeatMessage": "天平两端空载时并不等高，旧铭文说先校零位。"
+    },
+    "content_decide_good": {
+      "label": "先校天平，再合小齿轮",
+      "puzzleId": "gate",
+      "rooms": [
+        "dongmi_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "aligned",
+      "message": "第一步已与线索相符；仍须决定下一步，不能一口气把所有机关推到底。",
+      "repeatMessage": "机芯重新以自身重量运作，神工遗器不再只是一件不能解释的宝物。",
+      "choices": [
+        {
+          "id": "content_finish",
+          "label": "再合小齿轮"
+        },
+        {
+          "id": "content_reverse",
+          "label": "反过来，再做一次最先的动作"
+        }
+      ]
+    },
+    "content_decide_wrong": {
+      "label": "先推最大齿轮",
+      "puzzleId": "gate",
+      "rooms": [
+        "dongmi_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：天平两端空载时并不等高，旧铭文说先校零位。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：天平两端空载时并不等高，旧铭文说先校零位。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "把两端垫到一样高",
+      "puzzleId": "gate",
+      "rooms": [
+        "dongmi_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：天平两端空载时并不等高，旧铭文说先校零位。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：天平两端空载时并不等高，旧铭文说先校零位。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_finish": {
+      "label": "再合小齿轮",
+      "puzzleId": "gate",
+      "rooms": [
+        "dongmi_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "open",
+      "message": "机芯重新以自身重量运作，神工遗器不再只是一件不能解释的宝物。",
+      "setFlags": {
+        "sg_tw": true,
+        "discovery_chapter_dongming_shengong": true
+      }
+    },
+    "content_reverse": {
+      "label": "颠倒次序",
+      "puzzleId": "gate",
+      "rooms": [
+        "dongmi_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "closed",
+      "message": "先后次序被颠倒了，你撤回到安全位置。重新判断即可，没有物品损失。"
+    },
+    "content_aid_iron_staff": {
+      "label": "以铁棍校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dongmi_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。大齿轮转得慢却承重，小齿轮转得快却只传讯。",
+      "requiredFlags": {
+        "discovery_item_iron_staff": true
+      },
+      "presentItems": {
+        "iron_staff": 1
+      }
+    },
+    "content_aid_shengong_q": {
+      "label": "以神工遗器校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dongmi_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把守阁人辨明的器物来历与现场互证。大齿轮转得慢却承重，小齿轮转得快却只传讯。",
+      "requiredFlags": {
+        "discovery_item_shengong_q": true
+      },
+      "presentItems": {
+        "shengong_q": 1
+      }
+    },
+    "content_aid_guishi_jade": {
+      "label": "以鬼市玉玺校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dongmi_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。大齿轮转得慢却承重，小齿轮转得快却只传讯。",
+      "requiredFlags": {
+        "discovery_item_guishi_jade": true
+      },
+      "presentItems": {
+        "guishi_jade": 1
+      }
+    },
+    "content_aid_training_hook": {
+      "label": "以练习双钩校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dongmi_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把钟铁衣辨明的器物来历与现场互证。大齿轮转得慢却承重，小齿轮转得快却只传讯。",
+      "requiredFlags": {
+        "discovery_item_training_hook": true
+      },
+      "presentItems": {
+        "training_hook": 1
+      }
     }
   },
   "rooms": {
     "dongmi_00": {
-      "name": "入口",
-      "description": "入口。洛水暗涌——你踏入此处，前方的路在阴影中延伸。",
+      "name": "匠作废门",
+      "description": "匠作废门保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "dongmi_01"
       },
       "actions": [
         "listen_brief"
+      ],
+      "npcs": [
+        "dm3_shengong_guard",
+        "dm3_shengong_boss"
       ]
     },
     "dongmi_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "异齿机廊",
+      "description": "大齿轮转得慢却承重，小齿轮转得快却只传讯。",
       "exits": {
         "south": "dongmi_00",
         "north": "dongmi_02"
@@ -71,11 +270,18 @@
       "npcs": [
         "dm3_guard",
         "dm3_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_iron_staff",
+        "content_aid_shengong_q",
+        "content_aid_guishi_jade",
+        "content_aid_training_hook"
       ]
     },
     "dongmi_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "恒重天平台",
+      "description": "天平两端空载时并不等高，旧铭文说先校零位。",
       "exits": {
         "south": "dongmi_01",
         "north": "dongmi_03"
@@ -89,18 +295,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "dongmi_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "神工核心",
+      "description": "机芯重新以自身重量运作，神工遗器不再只是一件不能解释的宝物。",
       "exits": {
         "south": "dongmi_02"
       },
       "npcs": [
         "dm3_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +326,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成恒重天平台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +345,33 @@
       "shengong_q": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：分步次序；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "sequence",
+    "solution": [
+      {
+        "roomId": "dongmi_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "dongmi_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "dongmi_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "dongmi_02",
+        "actionId": "content_decide_good"
+      },
+      {
+        "roomId": "dongmi_02",
+        "actionId": "content_finish"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "机芯重新以自身重量运作，神工遗器不再只是一件不能解释的宝物。"
+  }
 }

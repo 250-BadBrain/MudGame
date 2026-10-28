@@ -11,6 +11,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
   const statusAttributes = ref(null)
   const worldsList = ref([])
   const questsList = ref([])
+  const journalEntries = ref([])
   const factionsList = ref([])
 
   const selectedWorldId = ref(null)
@@ -191,6 +192,7 @@ export function useInfoPanels({ room, sendGameCommand, getPlayerId, checkCanAct 
     statusAttributes,
     worldsList,
     questsList,
+    journalEntries,
     factionsList,
     selectedWorldId,
     selectedSkill,

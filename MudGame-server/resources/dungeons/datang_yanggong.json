@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "mechanism": "locked",
     "chess": "unsolved",
-    "annotation": "unread"
+    "annotation": "unread",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "turn_mechanism": {
@@ -53,6 +54,62 @@
       "repeatMessage": "批注你早已烂熟于心。",
       "giveItems": {},
       "giveMoney": 250
+    },
+    "content_epilogue": {
+      "label": "复盘：宝库里的轻重",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "vault_05"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "金珠能估价，教人从机关中活着走出的注记却不能以金珠替代。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "保留匠人的开闸注记"
+        },
+        {
+          "id": "content_record_route",
+          "label": "只封存军器清单"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "yg_kang_xiaoli"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "保留匠人的开闸注记",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "vault_05"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "金珠能估价，教人从机关中活着走出的注记却不能以金珠替代。 你选择：保留匠人的开闸注记。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_yanggong_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "只封存军器清单",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "vault_05"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "金珠能估价，教人从机关中活着走出的注记却不能以金珠替代。 你选择：只封存军器清单。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_yanggong_route": true
+      }
     }
   },
   "rooms": {
@@ -73,7 +130,8 @@
       "npcs": [
         "yg_turkic_soldier",
         "yg_turkic_soldier"
-      ]
+      ],
+      "actions": []
     },
     "vault_01": {
       "name": "机关厅",
@@ -113,7 +171,8 @@
       "npcs": [
         "yg_yinkui_witch",
         "yg_yinkui_witch"
-      ]
+      ],
+      "actions": []
     },
     "vault_03": {
       "name": "天地棋枰",
@@ -155,7 +214,8 @@
         "yg_stone_golem",
         "yg_stone_golem",
         "yg_stone_golem"
-      ]
+      ],
+      "actions": []
     },
     "vault_05": {
       "name": "宝库大殿",
@@ -165,6 +225,9 @@
       },
       "npcs": [
         "yg_kang_xiaoli"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -238,5 +301,19 @@
   },
   "quickRewards": {
     "money": 250
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "金珠能估价，教人从机关中活着走出的注记却不能以金珠替代。",
+    "solution": [
+      {
+        "roomId": "vault_05",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "vault_05",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

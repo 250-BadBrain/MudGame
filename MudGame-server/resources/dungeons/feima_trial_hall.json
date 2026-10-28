@@ -9,7 +9,8 @@
   "spawnRoomId": "ft_00",
   "puzzleInitialStates": {
     "trial_gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -40,6 +41,62 @@
       },
       "message": "香烛燃尽，试炼之门缓缓开启——残影的气息扑面而来。",
       "repeatMessage": "试炼之门已开。"
+    },
+    "content_epilogue": {
+      "label": "复盘：羽落谁手",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ft_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "天魔羽在这里考的不是杀意，试炼与袭击的区别在于你肯不肯看见无关者。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "记录羽毛落下时未伤马匹"
+        },
+        {
+          "id": "content_record_route",
+          "label": "保留试炼者不同于战场的问法"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "ft_wanwan_phantom"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "记录羽毛落下时未伤马匹",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ft_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "天魔羽在这里考的不是杀意，试炼与袭击的区别在于你肯不肯看见无关者。 你选择：记录羽毛落下时未伤马匹。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_feima_trial_hall_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "保留试炼者不同于战场的问法",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ft_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "天魔羽在这里考的不是杀意，试炼与袭击的区别在于你肯不肯看见无关者。 你选择：保留试炼者不同于战场的问法。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_feima_trial_hall_route": true
+      }
     }
   },
   "rooms": {
@@ -63,7 +120,8 @@
       "exits": {
         "south": "ft_00",
         "north": "ft_02"
-      }
+      },
+      "actions": []
     },
     "ft_02": {
       "name": "残影之殿",
@@ -73,6 +131,9 @@
       },
       "npcs": [
         "ft_wanwan_phantom"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -101,5 +162,19 @@
     "items": {
       "wanwan_feather": 1
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "天魔羽在这里考的不是杀意，试炼与袭击的区别在于你肯不肯看见无关者。",
+    "solution": [
+      {
+        "roomId": "ft_02",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "ft_02",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

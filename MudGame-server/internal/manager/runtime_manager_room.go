@@ -3,6 +3,7 @@ package manager
 import (
 	"mudgame/server/internal/exception"
 	"mudgame/server/internal/model"
+	"strings"
 )
 
 func (r *RuntimeManager) GetRoomSnapshot(playerID string) (map[string]interface{}, map[string]interface{}, error) {
@@ -145,6 +146,19 @@ func (r *RuntimeManager) buildRoomPayload(roomID string, players map[string]*mod
 	actions := room.Actions
 	if r.dungeonMgr != nil {
 		actions = r.dungeonMgr.RoomActionsForPayloadNoLock(room.ID, room.Actions)
+		if instanceID, exists := r.dungeonMgr.RoomInstanceIDNoLock(room.ID); exists {
+			if inst, exists := r.dungeonMgr.DungeonInstanceNoLock(instanceID); exists && players[inst.OwnerPlayer] != nil {
+				visible := make([]string, 0, len(actions))
+				for _, aid := range actions {
+					_, action, ok := r.dungeonMgr.PuzzleActionNoLock(inst.OwnerPlayer, room.ID, aid)
+					if ok && (strings.HasPrefix(aid, "content_aid_") || len(action.PresentItems) > 0) && !contentEvidenceMet(players[inst.OwnerPlayer], action.RequiredFlags, action.PresentItems) {
+						continue
+					}
+					visible = append(visible, aid)
+				}
+				actions = visible
+			}
+		}
 	}
 	roomPayload := map[string]interface{}{
 		"id":            room.ID,

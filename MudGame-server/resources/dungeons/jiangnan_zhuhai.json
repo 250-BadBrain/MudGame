@@ -1,7 +1,7 @@
 {
   "id": "jiangnan_zhuhai",
   "name": "竹海迷踪",
-  "description": "盗剑人的同伙仍在竹海深处活动——他们要找的不止是名剑，还有剑池的泉眼秘图。你深入竹海，截断他们的耳目。",
+  "description": "两声短笛引来鸟鸣，一声长笛却只在石壁回响。 水渠先分清流后汇浊流，竹签刻着先辨声、再引水。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 34,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -9,7 +9,11 @@
   "spawnRoomId": "zh_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_zither2": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "两声短笛引来鸟鸣，一声长笛却只在石壁回响。 此处不能只凭武力开门；沿路观察，并核验分水石渠的细节。",
       "repeatMessage": "话已说完，去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先循鸟声",
       "puzzleId": "gate",
       "rooms": [
         "zh_02"
@@ -34,18 +38,191 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "zhuhai_midi": true
+      "nextState": "considered",
+      "message": "两声短笛引来鸟鸣，一声长笛却只在石壁回响。 水渠先分清流后汇浊流，竹签刻着先辨声、再引水。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_wrong",
+          "label": "先堵清泉再追长笛"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "砍断全部竹枝开路"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先循鸟声，再疏清流"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：回声竹径",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "zh_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "两声短笛引来鸟鸣，一声长笛却只在石壁回响。",
+      "repeatMessage": "两声短笛引来鸟鸣，一声长笛却只在石壁回响。"
+    },
+    "content_detail": {
+      "label": "核验：分水石渠",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "zh_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "水渠先分清流后汇浊流，竹签刻着先辨声、再引水。",
+      "repeatMessage": "水渠先分清流后汇浊流，竹签刻着先辨声、再引水。"
+    },
+    "content_decide_good": {
+      "label": "先循鸟声，再疏清流",
+      "puzzleId": "gate",
+      "rooms": [
+        "zh_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "aligned",
+      "message": "第一步已与线索相符；仍须决定下一步，不能一口气把所有机关推到底。",
+      "repeatMessage": "假琴师的回声诱阵失灵，密营终于显出真实方位。",
+      "choices": [
+        {
+          "id": "content_finish",
+          "label": "再疏清流"
+        },
+        {
+          "id": "content_reverse",
+          "label": "反过来，再做一次最先的动作"
+        }
+      ]
+    },
+    "content_decide_wrong": {
+      "label": "先堵清泉再追长笛",
+      "puzzleId": "gate",
+      "rooms": [
+        "zh_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：水渠先分清流后汇浊流，竹签刻着先辨声、再引水。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：水渠先分清流后汇浊流，竹签刻着先辨声、再引水。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "砍断全部竹枝开路",
+      "puzzleId": "gate",
+      "rooms": [
+        "zh_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：水渠先分清流后汇浊流，竹签刻着先辨声、再引水。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：水渠先分清流后汇浊流，竹签刻着先辨声、再引水。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_finish": {
+      "label": "再疏清流",
+      "puzzleId": "gate",
+      "rooms": [
+        "zh_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "open",
+      "message": "假琴师的回声诱阵失灵，密营终于显出真实方位。",
+      "setFlags": {
+        "zhuhai_midi": true,
+        "discovery_chapter_jiangnan_zhuhai": true
+      }
+    },
+    "content_reverse": {
+      "label": "颠倒次序",
+      "puzzleId": "gate",
+      "rooms": [
+        "zh_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "closed",
+      "message": "先后次序被颠倒了，你撤回到安全位置。重新判断即可，没有物品损失。"
+    },
+    "content_aid_jianchi_jian": {
+      "label": "以淬泉剑校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "zh_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把江南绸商辨明的器物来历与现场互证。两声短笛引来鸟鸣，一声长笛却只在石壁回响。",
+      "requiredFlags": {
+        "discovery_item_jianchi_jian": true
+      },
+      "presentItems": {
+        "jianchi_jian": 1
+      }
+    },
+    "content_aid_zhumei_luopan": {
+      "label": "以竹梅罗盘校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "zh_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把守池人辨明的器物来历与现场互证。两声短笛引来鸟鸣，一声长笛却只在石壁回响。",
+      "requiredFlags": {
+        "discovery_item_zhumei_luopan": true
+      },
+      "presentItems": {
+        "zhumei_luopan": 1
+      }
+    },
+    "content_aid_manual_taxue_wuhen": {
+      "label": "以踏雪无痕秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "zh_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把江南绸商辨明的器物来历与现场互证。两声短笛引来鸟鸣，一声长笛却只在石壁回响。",
+      "requiredFlags": {
+        "discovery_item_manual_taxue_wuhen": true
+      },
+      "presentItems": {
+        "manual_taxue_wuhen": 1
+      }
     }
   },
   "rooms": {
     "zh_00": {
-      "name": "竹海入口",
-      "description": "竹海入口立着一块褪色的木牌：入林者迷，出林者仙。",
+      "name": "听雨竹口",
+      "description": "听雨竹口保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "zh_01"
       },
@@ -57,8 +234,8 @@
       ]
     },
     "zh_01": {
-      "name": "竹径迷津",
-      "description": "竹径七拐八绕，地上的落叶盖住了盗剑人留下的脚印。",
+      "name": "回声竹径",
+      "description": "两声短笛引来鸟鸣，一声长笛却只在石壁回响。",
       "exits": {
         "north": "zh_02",
         "south": "zh_00"
@@ -66,11 +243,17 @@
       "npcs": [
         "zh_thief_scout",
         "zh_thief_scout"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_jianchi_jian",
+        "content_aid_zhumei_luopan",
+        "content_aid_manual_taxue_wuhen"
       ]
     },
     "zh_02": {
-      "name": "泉眼支渠",
-      "description": "竹海深处的泉眼支渠连着剑池——水声潺潺，暗藏杀机。",
+      "name": "分水石渠",
+      "description": "水渠先分清流后汇浊流，竹签刻着先辨声、再引水。",
       "exits": {
         "north": "zh_03",
         "south": "zh_01"
@@ -88,12 +271,13 @@
         "zh_thief_scout"
       ],
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "zh_03": {
-      "name": "竹间密营",
-      "description": "竹丛深处藏着盗剑人的密营——桌上摊开的是一张泉眼布防图。",
+      "name": "伪琴密营",
+      "description": "假琴师的回声诱阵失灵，密营终于显出真实方位。",
       "exits": {},
       "npcs": [
         "zh_thief_leader"
@@ -116,7 +300,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成分水石渠的判断"
     },
     {
       "id": "repel_boss",
@@ -135,6 +319,33 @@
       "zhumei_luopan": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：分步次序；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "sequence",
+    "solution": [
+      {
+        "roomId": "zh_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "zh_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "zh_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "zh_02",
+        "actionId": "content_decide_good"
+      },
+      {
+        "roomId": "zh_02",
+        "actionId": "content_finish"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "假琴师的回声诱阵失灵，密营终于显出真实方位。"
+  }
 }

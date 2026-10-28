@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "contact": "waiting",
     "rockery": "intact",
-    "ledgers": "hidden"
+    "ledgers": "hidden",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "find_contact": {
@@ -62,6 +63,62 @@
       "nextState": "read",
       "message": "你展开名册，记下与叛军勾结的官员和往来款项。云雀确认册页无缺后与你攀绳出井。宫城仍在燃烧，你们已带着证据脱身。",
       "repeatMessage": "名册上的名字你已记在心里。"
+    },
+    "content_epilogue": {
+      "label": "复盘：密册离宫之后",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "gb_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "夜明珠照亮密册，真正使密册有分量的，是愿意把自己的名字留在证词旁的人。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "保留宫人匿名抄下的证词"
+        },
+        {
+          "id": "content_record_route",
+          "label": "给换班守卫留下可核对的时刻"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "gb_dugu_ling"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "保留宫人匿名抄下的证词",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "gb_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "夜明珠照亮密册，真正使密册有分量的，是愿意把自己的名字留在证词旁的人。 你选择：保留宫人匿名抄下的证词。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_gongbian_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "给换班守卫留下可核对的时刻",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "gb_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "夜明珠照亮密册，真正使密册有分量的，是愿意把自己的名字留在证词旁的人。 你选择：给换班守卫留下可核对的时刻。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_gongbian_route": true
+      }
     }
   },
   "rooms": {
@@ -71,7 +128,10 @@
       "exits": {
         "north": "gb_01"
       },
-      "npcs": [],
+      "npcs": [
+        "gb_yuwen_guard",
+        "gb_yuwen_jun"
+      ],
       "actions": [
         "find_contact"
       ],
@@ -102,7 +162,8 @@
       "npcs": [
         "gb_pegasus_sergeant",
         "gb2_yunque"
-      ]
+      ],
+      "actions": []
     },
     "gb_02": {
       "name": "武英殿偏殿",
@@ -111,7 +172,8 @@
         "east": "gb_01",
         "north": "gb_03"
       },
-      "npcs": []
+      "npcs": [],
+      "actions": []
     },
     "gb_03": {
       "name": "御花园石径",
@@ -152,6 +214,9 @@
       },
       "npcs": [
         "gb_dugu_ling"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     },
     "gb_05": {
@@ -218,5 +283,19 @@
     "items": {
       "gongbian_mingzhu": 1
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "夜明珠照亮密册，真正使密册有分量的，是愿意把自己的名字留在证词旁的人。",
+    "solution": [
+      {
+        "roomId": "gb_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "gb_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

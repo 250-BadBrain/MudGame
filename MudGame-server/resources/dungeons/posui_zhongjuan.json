@@ -1,7 +1,7 @@
 {
   "id": "posui_zhongjuan",
   "name": "战神遗境",
-  "description": "战神图录的终卷终于现世——传说里面记载着破碎虚空的最后一道门。你与蒙古汗庭、慈航静斋三方争夺，只为一窥究竟。",
+  "description": "碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。 图壁中人的轮廓始终正立，天与地倒置后才彼此相接。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 40,
   "chainId": "posui_xukong",
   "chainName": "破碎虚空",
@@ -9,7 +9,11 @@
   "spawnRoomId": "pos_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。 此处不能只凭武力开门；沿路观察，并核验三相图壁的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：以人不动、天地互换解图",
       "puzzleId": "gate",
       "rooms": [
         "pos_02"
@@ -34,18 +38,335 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "zhongjuan_wu": true
+      "nextState": "considered",
+      "message": "碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。 图壁中人的轮廓始终正立，天与地倒置后才彼此相接。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_good",
+          "label": "以人不动、天地互换解图"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "把三个轮廓都填满"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "只按笔画多少排序"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：残图石阶",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "repeatMessage": "碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。"
+    },
+    "content_detail": {
+      "label": "核验：三相图壁",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "pos_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "图壁中人的轮廓始终正立，天与地倒置后才彼此相接。",
+      "repeatMessage": "图壁中人的轮廓始终正立，天与地倒置后才彼此相接。"
+    },
+    "content_decide_good": {
+      "label": "以人不动、天地互换解图",
+      "puzzleId": "gate",
+      "rooms": [
+        "pos_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "aligned",
+      "message": "第一步已与线索相符；仍须决定下一步，不能一口气把所有机关推到底。",
+      "repeatMessage": "你承认图录的留白也是招意，无字处露出战神遗境的完整脉络。",
+      "choices": [
+        {
+          "id": "content_finish",
+          "label": "以人不动、天地互换解图"
+        },
+        {
+          "id": "content_reverse",
+          "label": "反过来，再做一次最先的动作"
+        }
+      ]
+    },
+    "content_decide_wrong": {
+      "label": "把三个轮廓都填满",
+      "puzzleId": "gate",
+      "rooms": [
+        "pos_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：图壁中人的轮廓始终正立，天与地倒置后才彼此相接。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：图壁中人的轮廓始终正立，天与地倒置后才彼此相接。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "只按笔画多少排序",
+      "puzzleId": "gate",
+      "rooms": [
+        "pos_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：图壁中人的轮廓始终正立，天与地倒置后才彼此相接。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：图壁中人的轮廓始终正立，天与地倒置后才彼此相接。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_finish": {
+      "label": "以人不动、天地互换解图",
+      "puzzleId": "gate",
+      "rooms": [
+        "pos_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "open",
+      "message": "你承认图录的留白也是招意，无字处露出战神遗境的完整脉络。",
+      "setFlags": {
+        "zhongjuan_wu": true,
+        "discovery_chapter_posui_zhongjuan": true
+      }
+    },
+    "content_reverse": {
+      "label": "颠倒次序",
+      "puzzleId": "gate",
+      "rooms": [
+        "pos_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "closed",
+      "message": "先后次序被颠倒了，你撤回到安全位置。重新判断即可，没有物品损失。"
+    },
+    "content_aid_iron_sword": {
+      "label": "以铁剑校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_iron_sword": true
+      },
+      "presentItems": {
+        "iron_sword": 1
+      }
+    },
+    "content_aid_bronze_box_rubbing": {
+      "label": "以铜匣拓片校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_bronze_box_rubbing": true
+      },
+      "presentItems": {
+        "bronze_box_rubbing": 1
+      }
+    },
+    "content_aid_posui_huan": {
+      "label": "以破碎指环校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把临帖老翁辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_posui_huan": true
+      },
+      "presentItems": {
+        "posui_huan": 1
+      }
+    },
+    "content_aid_tezhong_dahuandan": {
+      "label": "以特级大还丹校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_tezhong_dahuandan": true
+      },
+      "presentItems": {
+        "tezhong_dahuandan": 1
+      }
+    },
+    "content_aid_jingyan_longscale": {
+      "label": "以惊雁龙鳞甲校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把灰袍老者辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_jingyan_longscale": true
+      },
+      "presentItems": {
+        "jingyan_longscale": 1
+      }
+    },
+    "content_aid_zhongjuan_wu": {
+      "label": "以破碎虚空·悟校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把临帖老翁辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_zhongjuan_wu": true
+      },
+      "presentItems": {
+        "zhongjuan_wu": 1
+      }
+    },
+    "content_aid_manual_jyg_zhanshentu_dao": {
+      "label": "以战神图录秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_manual_jyg_zhanshentu_dao": true
+      },
+      "presentItems": {
+        "manual_jyg_zhanshentu_dao": 1
+      }
+    },
+    "content_aid_manual_hunyuan_neigong": {
+      "label": "以混元功秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_manual_hunyuan_neigong": true
+      },
+      "presentItems": {
+        "manual_hunyuan_neigong": 1
+      }
+    },
+    "content_aid_manual_wuzhen_pian": {
+      "label": "以悟真篇秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_manual_wuzhen_pian": true
+      },
+      "presentItems": {
+        "manual_wuzhen_pian": 1
+      }
+    },
+    "content_aid_manual_poxu_zhi": {
+      "label": "以破虚指秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把灰袍老者辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_manual_poxu_zhi": true
+      },
+      "presentItems": {
+        "manual_poxu_zhi": 1
+      }
+    },
+    "content_aid_training_whip": {
+      "label": "以练习软鞭校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "pos_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把柳先生辨明的器物来历与现场互证。碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
+      "requiredFlags": {
+        "discovery_item_training_whip": true
+      },
+      "presentItems": {
+        "training_whip": 1
+      }
     }
   },
   "rooms": {
     "pos_00": {
-      "name": "入口",
-      "description": "入口。武道极致——你踏入此处，前方的路在阴影中延伸。",
+      "name": "断碑山门",
+      "description": "断碑山门保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "pos_01"
       },
@@ -54,8 +375,8 @@
       ]
     },
     "pos_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "残图石阶",
+      "description": "碑上把天地人写成三个彼此留空的轮廓，空白并非缺损。",
       "exits": {
         "south": "pos_00",
         "north": "pos_02"
@@ -71,11 +392,25 @@
       "npcs": [
         "zj_mongol_elite",
         "zj_mongol_elite"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_iron_sword",
+        "content_aid_bronze_box_rubbing",
+        "content_aid_posui_huan",
+        "content_aid_tezhong_dahuandan",
+        "content_aid_jingyan_longscale",
+        "content_aid_zhongjuan_wu",
+        "content_aid_manual_jyg_zhanshentu_dao",
+        "content_aid_manual_hunyuan_neigong",
+        "content_aid_manual_wuzhen_pian",
+        "content_aid_manual_poxu_zhi",
+        "content_aid_training_whip"
       ]
     },
     "pos_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "三相图壁",
+      "description": "图壁中人的轮廓始终正立，天与地倒置后才彼此相接。",
       "exits": {
         "south": "pos_01",
         "north": "pos_03"
@@ -89,18 +424,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "pos_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "无字殿心",
+      "description": "你承认图录的留白也是招意，无字处露出战神遗境的完整脉络。",
       "exits": {
         "south": "pos_02"
       },
       "npcs": [
         "zj_mongol_champion"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +455,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成三相图壁的判断"
     },
     {
       "id": "repel_boss",
@@ -138,6 +475,33 @@
       "manual_jyg_zhanshentu_dao": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：留白与对照；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "cipher",
+    "solution": [
+      {
+        "roomId": "pos_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "pos_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "pos_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "pos_02",
+        "actionId": "content_decide_good"
+      },
+      {
+        "roomId": "pos_02",
+        "actionId": "content_finish"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你承认图录的留白也是招意，无字处露出战神遗境的完整脉络。"
+  }
 }

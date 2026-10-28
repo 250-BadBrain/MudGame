@@ -19,7 +19,8 @@
       "safeZone": true,
       "function": "city_center",
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "luoyang_guard"
@@ -29,7 +30,10 @@
         "east": "ly_east_market",
         "south": "ly_south_gate",
         "west": "ly_west_market"
-      }
+      },
+      "searchFlag": "discovery_place_ly_00",
+      "searchMessage": "你在天津桥核对现场：天津桥横跨洛水，桥上行人如织。北望皇城，南接坊市，酒楼的喧声与马蹄声混在一起，像一张缓缓收紧的江湖网。 进一步可核验的是：真的路引在同一座关口只压一次骑缝印。遇到重印不要先抓持引人，先查盖印的时刻。",
+      "contentRole": "洛阳的天津桥：辨伪路引"
     },
     "ly_north_office": {
       "name": "北城官署",
@@ -51,7 +55,13 @@
         "south": "ly_00",
         "east": "ly_academy",
         "west": "ly_old_alley"
-      }
+      },
+      "searchFlag": "discovery_place_ly_north_office",
+      "searchMessage": "你在北城官署核对现场：官署门前兵甲森严，告示墙上贴满通缉、征发和军报。来往小吏脚步匆匆，没人敢在这里高声喧哗。 进一步可核验的是：染血密信的纸被雨打皱，火漆却在雨前就碎了。把纸与印分开记，才不会让转交者背了主谋的罪。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的北城官署：辨伪路引"
     },
     "ly_military_office": {
       "name": "洛阳军府",
@@ -69,7 +79,13 @@
       ],
       "exits": {
         "south": "ly_north_office"
-      }
+      },
+      "searchFlag": "discovery_place_ly_military_office",
+      "searchMessage": "你在洛阳军府核对现场：军府校场上枪戟如林，军士操练声震得瓦檐微颤。这里收录军功，也发布剿匪、护粮和城防差遣。 进一步可核验的是：军令错一更便能让友军成为伏兵。到粮道先看射界，别拿追击的阵法护送百姓。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的洛阳军府：辨军令与临敌操练"
     },
     "ly_academy": {
       "name": "河洛书院",
@@ -88,7 +104,13 @@
       "exits": {
         "west": "ly_north_office",
         "north": "ly_north_market"
-      }
+      },
+      "searchFlag": "discovery_place_ly_academy",
+      "searchMessage": "你在河洛书院核对现场：书院深处传来朗朗读书声，墙上挂着河洛形势图和残旧兵书。几名士子正围着一卷古简低声争论。 进一步可核验的是：铜匣拓片能证字形，却不能证明次序。惊雁遗刻里没有刻出的地方，也要原样抄下。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的河洛书院：古文字与留白校勘"
     },
     "ly_old_alley": {
       "name": "旧坊暗巷",
@@ -108,7 +130,13 @@
       "exits": {
         "east": "ly_north_office",
         "south": "ly_west_market"
-      }
+      },
+      "searchFlag": "discovery_place_ly_old_alley",
+      "searchMessage": "你在旧坊暗巷核对现场：旧坊墙影斑驳，窄巷里常有陌生人擦肩而过。这里离官署不远，却像被阳光遗忘的另一座洛阳。 进一步可核验的是：藏身的人不一定是细作，最响亮的口供也不一定可信。散花楼里先找谁不能自由离开，再问谁说了什么。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的旧坊暗巷：反向追踪与匿名证人"
     },
     "ly_east_market": {
       "name": "东市",
@@ -131,11 +159,15 @@
         "south": "ly_weapon_school"
       },
       "actions": [
-        "work"
+        "work",
+        "search"
       ],
       "actionLabels": {
         "work": "帮工"
-      }
+      },
+      "searchFlag": "discovery_place_ly_east_market",
+      "searchMessage": "你在东市核对现场：东市铺面鳞次栉比，绸缎、茶酒、铁器和药材沿街铺开。商会伙计高声招呼客人，铜钱声此起彼伏。 进一步可核验的是：粗布衣的补丁朝内是赶路磨破，朝外压线才像临时伪装。布鞋藏不住走山路还是踩船板的磨痕。",
+      "contentRole": "洛阳的东市：衣履针脚与旅人来路"
     },
     "ly_merchant_guild": {
       "name": "河洛商会",
@@ -153,7 +185,13 @@
       ],
       "exits": {
         "west": "ly_east_market"
-      }
+      },
+      "searchFlag": "discovery_place_ly_merchant_guild",
+      "searchMessage": "你在河洛商会核对现场：商会厅内堆着账册、货样和各地路引。墙上一幅商路图标着潼关、江淮、巴蜀与塞外。 进一步可核验的是：镖单记货，领货簿记人。两本只要一处时刻对不上，就该先保全原件，而不是先把损失摊给脚夫。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的河洛商会：商路风险与双联账"
     },
     "ly_weapon_school": {
       "name": "河洛武馆",
@@ -170,7 +208,13 @@
       ],
       "exits": {
         "north": "ly_east_market"
-      }
+      },
+      "searchFlag": "discovery_place_ly_weapon_school",
+      "searchMessage": "你在河洛武馆核对现场：武馆院中立着木人和兵器架，刀剑棍棒俱全。教头坐在檐下，目光扫过每个进门的人。 进一步可核验的是：切磋双方都满血才起手。看见对方已收势就不再补刀，练习兵器不是靠更大的数字证明自己。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的河洛武馆：收招与非致死试手"
     },
     "ly_west_market": {
       "name": "西市",
@@ -184,7 +228,8 @@
       "safeZone": false,
       "function": "black_market",
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "black_market_broker"
@@ -194,7 +239,10 @@
         "north": "ly_old_alley",
         "south": "ly_herbal_hall",
         "west": "ly_west_gate"
-      }
+      },
+      "searchFlag": "discovery_place_ly_west_market",
+      "searchMessage": "你在西市核对现场：西市比东市更杂乱，胡商、游侠、掮客和赌徒混在一处。明面上卖的是旧货，暗地里流通的却是消息。 进一步可核验的是：烟尘粉能替你争一次撤离，不能替你养伤。旧残图的价值在能与驿站原簿互证，只有传闻却没有来路的货先别信。",
+      "contentRole": "洛阳的西市：烟尘撤离与赝品口风"
     },
     "ly_inn": {
       "name": "洛水酒楼",
@@ -209,7 +257,8 @@
       "safeZone": true,
       "function": "rumor_hub",
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "storyteller"
@@ -217,7 +266,10 @@
       "exits": {
         "north": "ly_west_market",
         "east": "ly_south_gate"
-      }
+      },
+      "searchFlag": "discovery_place_ly_inn",
+      "searchMessage": "你在洛水酒楼核对现场：酒楼临水而建，说书人一拍醒木，满堂立刻安静了几分。有人谈扬州双龙，有人谈战国铜匣，也有人只低头喝酒。 进一步可核验的是：说书会把渡船唱成神舟，把不愿留名的人写成大侠。若要查真事，去找仍在替那条船补缝的人。",
+      "contentRole": "洛阳的洛水酒楼：传闻中的不同叙事者"
     },
     "ly_south_gate": {
       "name": "南门",
@@ -240,7 +292,13 @@
         "west": "ly_inn",
         "east": "ly_nan_market",
         "north_west": "ly_herbal_hall"
-      }
+      },
+      "searchFlag": "discovery_place_ly_south_gate",
+      "searchMessage": "你在南门核对现场：南门外车马不断，镖旗、商队和流民挤在城门前。再往南便是城郊，太平与乱世只隔这一道门。 进一步可核验的是：镖师该先看队尾是否还跟得上。绝壁的旧桩若仍牢靠，宁可慢些分担重量，也别把全队交给一根刚立的新桩。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的南门：护镖撤路与队尾照看"
     },
     "ly_outskirts": {
       "name": "洛阳城郊",
@@ -254,7 +312,8 @@
       "safeZone": false,
       "function": "dungeon_entry",
       "actions": [
-        "gather"
+        "gather",
+        "search"
       ],
       "npcs": [
         "road_bandit"
@@ -262,7 +321,10 @@
       "exits": {
         "north": "ly_south_gate",
         "south": "ly_abandoned_temple"
-      }
+      },
+      "searchFlag": "discovery_place_ly_outskirts",
+      "searchMessage": "你在洛阳城郊核对现场：城郊荒草没膝，远处有破庙露出半截屋脊。商旅经过这里时，总会下意识按住腰间钱袋。 进一步可核验的是：这人的短刀钝口朝内，常用来割草绳；腰间却挂着不属于流寇的整齐路标钉。荒庙的袭击另有人指路。",
+      "contentRole": "洛阳的洛阳城郊：假路标下的饥民痕迹"
     },
     "ly_abandoned_temple": {
       "name": "荒庙外",
@@ -278,8 +340,12 @@
         "north": "ly_outskirts"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "searchFlag": "discovery_place_ly_abandoned_temple",
+      "searchMessage": "你在荒庙外核对现场：荒庙门楣坍塌，檐角挂着一串破铃。风从殿内穿出，带着潮湿香灰和铁锈般的血腥味。 进一步可核验的是：荒庙门楣坍塌，檐角挂着一串破铃。风从殿内穿出，带着潮湿香灰和铁锈般的血腥味。",
+      "contentRole": "洛阳的荒庙外：从现场痕迹校验传闻"
     },
     "ly_nan_market": {
       "name": "南市",
@@ -292,7 +358,8 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "nan_market_peddler"
@@ -301,7 +368,10 @@
         "west": "ly_south_gate",
         "south": "ly_dock",
         "east": "ly_reed_marsh"
-      }
+      },
+      "searchFlag": "discovery_place_ly_nan_market",
+      "searchMessage": "你在南市核对现场：洛水南岸最热闹的集市，盐商绢贾比肩而列。新凿的码头石阶还带着白灰味，南来的漕船桅杆密得像一片旱林。 进一步可核验的是：干粮少补气血却便于分给掉队的人；金创药治外伤，烟尘粉只负责退路。把三样混成一种救命药，路上就会吃亏。",
+      "contentRole": "洛阳的南市：旅途口粮的实用准备"
     },
     "ly_dock": {
       "name": "漕运码头",
@@ -314,7 +384,8 @@
       ],
       "safeZone": true,
       "actions": [
-        "work"
+        "work",
+        "search"
       ],
       "npcs": [
         "dock_foreman"
@@ -322,7 +393,10 @@
       "exits": {
         "north": "ly_nan_market",
         "east": "ly_salt_wharf"
-      }
+      },
+      "searchFlag": "discovery_place_ly_dock",
+      "searchMessage": "你在漕运码头核对现场：半里长的码头堆满盐包与粮袋，把头吆喝声压过号子。纤夫们赤着背拉拽漕船，缆绳在青石上磨出一道道深沟。 进一步可核验的是：缆头新、缆腰旧，往往是被人在夜里调过船。运河追击不能只沿着最深的辙痕跑，先核对原来的出船更次。",
+      "contentRole": "洛阳的漕运码头：缆绳磨损与船期核对"
     },
     "ly_reed_marsh": {
       "name": "芦苇滩",
@@ -335,13 +409,17 @@
       ],
       "safeZone": false,
       "actions": [
-        "gather"
+        "gather",
+        "search"
       ],
       "npcs": [],
       "exits": {
         "west": "ly_nan_market",
         "south": "ly_luonan_trail"
-      }
+      },
+      "searchFlag": "discovery_place_ly_reed_marsh",
+      "searchMessage": "你在芦苇滩核对现场：洛水在此拐出一大片浅滩，芦苇长得比人高。滩涂里散着药农踩出的小径，偶有水鸟扑棱棱惊起——也可能不是水鸟。 进一步可核验的是：洛水在此拐出一大片浅滩，芦苇长得比人高。滩涂里散着药农踩出的小径，偶有水鸟扑棱棱惊起——也可能不是水鸟。",
+      "contentRole": "洛阳的芦苇滩：从现场痕迹校验传闻"
     },
     "ly_salt_wharf": {
       "name": "盐仓渡口",
@@ -365,7 +443,8 @@
         "south": "ly_salt_hall"
       },
       "searchFlag": "found_smuggling_evidence",
-      "searchMessage": "你伏在盐垛后，记下把官盐搬上无籍小船的船号，船帮上刻着歪斜的鹞子记号。"
+      "searchMessage": "你伏在盐垛后，记下把官盐搬上无籍小船的船号，船帮上刻着歪斜的鹞子记号。",
+      "contentRole": "洛阳的盐仓渡口：伪装脚夫的船帮暗记"
     },
     "ly_salt_hall": {
       "name": "盐帮分舵",
@@ -383,7 +462,13 @@
       ],
       "exits": {
         "north": "ly_salt_wharf"
-      }
+      },
+      "searchFlag": "discovery_place_ly_salt_hall",
+      "searchMessage": "你在盐帮分舵核对现场：临水的三进大院，门口泊着几条快船。盐帮的规矩：进院不问来路，出手便是朋友——但账，从来算得比谁都清。 进一步可核验的是：棍是撑住船身，钩是挽回失船，不能都当劈人的刀。遇到盐帮争账，先看脚夫联，那里才有一担担盐的实数。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的盐帮分舵：漕棍受力与盐帮规矩"
     },
     "ly_luonan_trail": {
       "name": "洛南林道",
@@ -399,7 +484,13 @@
       ],
       "exits": {
         "north": "ly_reed_marsh"
-      }
+      },
+      "searchFlag": "discovery_place_ly_luonan_trail",
+      "searchMessage": "你在洛南林道核对现场：通往伊阙的古道穿林而过，道旁残碑上刻着前朝的功德文。林深处的鸟鸣忽然停了——这条路，最近不太平。 进一步可核验的是：这人的短刀钝口朝内，常用来割草绳；腰间却挂着不属于流寇的整齐路标钉。荒庙的袭击另有人指路。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的洛南林道：假路标下的饥民痕迹"
     },
     "ly_west_gate": {
       "name": "洛阳西门",
@@ -416,7 +507,13 @@
       "exits": {
         "east": "ly_west_market",
         "west": "tg_guandao"
-      }
+      },
+      "searchFlag": "discovery_place_ly_west_gate",
+      "searchMessage": "你在洛阳西门核对现场：西门瓮城比南门更深，出城的官道笔直向西，尽头隐在崤山褶皱里。城卒核过路引，抬了抬下巴：\"函谷道窄，结伴而行。\" 进一步可核验的是：夜里补盖的印会把白天的尘土一起压住。查路引先辨这一层灰，再听持引人的口音。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的洛阳西门：关印重叠与通行时刻"
     },
     "tg_guandao": {
       "name": "函谷古道",
@@ -434,7 +531,13 @@
       "exits": {
         "east": "ly_west_gate",
         "west": "tg_taolin_station"
-      }
+      },
+      "searchFlag": "discovery_place_tg_guandao",
+      "searchMessage": "你在函谷古道核对现场：崤函古道在绝壁间挤出一线，车辙深得能卧进一条狗。头顶崖畔的荒草里，偶尔有秃鹫盘旋——它们等的从来不是好东西。 进一步可核验的是：劫匪的套索都朝下坡放，重货经过才会收紧。砍最粗的绳并不安全，先找能托住人的承重旧桩。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的函谷古道：山道伏击的受力点"
     },
     "tg_taolin_station": {
       "name": "桃林驿站",
@@ -447,7 +550,8 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "station_master_luo"
@@ -456,7 +560,10 @@
         "east": "tg_guandao",
         "north": "tg_jingou_beacon",
         "west": "tg_tongguan_foot"
-      }
+      },
+      "searchFlag": "discovery_place_tg_taolin_station",
+      "searchMessage": "你在桃林驿站核对现场：官道旁的老驿站，桃树老得皮都裂了，茶却熬得酽。南来北往的消息在这里换马，也换价钱。 进一步可核验的是：路图上画的是地形，不是今天的风；在沙海看见新路牌，先回城门以日影校一次旧图。",
+      "contentRole": "洛阳的桃林驿站：旧图复核与驿路风向"
     },
     "tg_jingou_beacon": {
       "name": "禁沟烽燧",
@@ -478,7 +585,8 @@
         "south": "tg_taolin_station"
       },
       "searchFlag": "found_beacon_signal",
-      "searchMessage": "你在未点燃的整齐柴堆旁，捡到一枚被扯掉的戍卒号牌：断讯并非无人值守。"
+      "searchMessage": "你在未点燃的整齐柴堆旁，捡到一枚被扯掉的戍卒号牌：断讯并非无人值守。",
+      "contentRole": "洛阳的禁沟烽燧：假烽信号的先后"
     },
     "tg_tongguan_foot": {
       "name": "潼关城下",
@@ -491,11 +599,18 @@
       ],
       "safeZone": true,
       "npcs": [
-        "tongguan_officer"
+        "tongguan_officer",
+        "r204_npc_0"
       ],
       "exits": {
         "east": "tg_taolin_station"
-      }
+      },
+      "searchFlag": "discovery_place_tg_tongguan_foot",
+      "searchMessage": "你在潼关城下核对现场：雄关压着黄河与南山之间的窄口，关墙高得遮住半边天。关门只开一线，出入的商旅排成长蛇——关楼上的旗，比洛阳城里任何一面都旧，也比任何一面都硬。 进一步可核验的是：守关不是毁掉敌我共用的每一口井。没有水，伤兵会先于攻城者倒下；空箭架有时是在替他们争一刻。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的潼关城下：守关与共同水源"
     },
     "ly_herbal_hall": {
       "name": "回春堂",
@@ -512,7 +627,13 @@
       "exits": {
         "west": "ly_west_market",
         "east": "ly_south_gate"
-      }
+      },
+      "searchFlag": "discovery_place_ly_herbal_hall",
+      "searchMessage": "你在回春堂核对现场：临街的三间门面，百子柜顶天立地，药香混着当归与艾灰的气味。坐堂的孙大夫一副悬壶济世的做派，可算账时一文钱都要掰成两半。 进一步可核验的是：金创药、回春丹、小还丹到大还丹按伤情选择；高价药不该拿来证明你更强。毒瘴里香甜的泉水反而要先疑。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的回春堂：外伤分级与药性互证"
     },
     "ly_north_market": {
       "name": "北市",
@@ -525,7 +646,8 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "north_market_broker"
@@ -534,7 +656,10 @@
         "south": "ly_academy",
         "west": "ly_beili_alley",
         "north": "ly_refugee_camp"
-      }
+      },
+      "searchFlag": "discovery_place_ly_north_market",
+      "searchMessage": "你在北市核对现场：北城根下的市集，比东市嘈杂、比西市直白。南北杂货、旧兵刃、走马估衣摊挨着排开，讨价还价声能吵到书院的窗根底下。 进一步可核验的是：一件贵重衣物若用粗线匆匆补过，问修补的人往往比问卖价有用。别把每一处旧痕都磨成新货。",
+      "contentRole": "洛阳的北市：旧货修补与伪造来历"
     },
     "ly_beili_alley": {
       "name": "北里暗巷",
@@ -550,7 +675,13 @@
       ],
       "exits": {
         "east": "ly_north_market"
-      }
+      },
+      "searchFlag": "discovery_place_ly_beili_alley",
+      "searchMessage": "你在北里暗巷核对现场：北市背后的窄巷，积水映着一线天光。墙根下蹲着的几条人影，看行头不像歇脚的。 进一步可核验的是：地痞把收过钱的人记在内衬，路边写给你看的欠条只记他想让别人知道的部分。两套数不能只信有官印的一套。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "洛阳的北里暗巷：勒索账的两套记号"
     },
     "ly_refugee_camp": {
       "name": "流民营",
@@ -562,7 +693,8 @@
       ],
       "safeZone": false,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "old_refugee",
@@ -570,7 +702,10 @@
       ],
       "exits": {
         "south": "ly_north_market"
-      }
+      },
+      "searchFlag": "discovery_place_ly_refugee_camp",
+      "searchMessage": "你在流民营核对现场：官府圈给北来流民的窝棚区，破席子上晒着补丁摞补丁的衣裳。孩子们追着人讨铜板，老人们眼神里全是戒备。 进一步可核验的是：刀上的血未必能认人，旧衣里一道反复补过的线却常能。留下人的姓名，别只留下替他们复仇的人名。",
+      "contentRole": "洛阳的流民营：流离者与被遗漏的名册"
     }
   }
 }

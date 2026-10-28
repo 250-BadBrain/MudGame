@@ -9,7 +9,8 @@
   "spawnRoomId": "sl_00",
   "puzzleInitialStates": {
     "gate_sl": "closed",
-    "briefing_sl": "new"
+    "briefing_sl": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_brief_sl": {
@@ -24,6 +25,62 @@
       "nextState": "told",
       "message": "双龙会的规矩很简单：过守门人，见会主。没有第三条路。",
       "repeatMessage": "规矩你已经知道了。"
+    },
+    "content_epilogue": {
+      "label": "复盘：信杯为何成双",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sl_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "双龙会信杯不是身份通行证，它记录两个人仍肯坐下来听完彼此的话。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "保留两种不同的赴会理由"
+        },
+        {
+          "id": "content_record_route",
+          "label": "记下未被喝尽的那杯酒"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "sl_main_boss"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "保留两种不同的赴会理由",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sl_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "双龙会信杯不是身份通行证，它记录两个人仍肯坐下来听完彼此的话。 你选择：保留两种不同的赴会理由。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_shuanglong_hui_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "记下未被喝尽的那杯酒",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sl_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "双龙会信杯不是身份通行证，它记录两个人仍肯坐下来听完彼此的话。 你选择：记下未被喝尽的那杯酒。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_shuanglong_hui_route": true
+      }
     }
   },
   "rooms": {
@@ -55,7 +112,8 @@
       },
       "npcs": [
         "sl_gate_boss"
-      ]
+      ],
+      "actions": []
     },
     "sl_02": {
       "name": "龙行道",
@@ -63,7 +121,8 @@
       "exits": {
         "south": "sl_01",
         "north": "sl_03"
-      }
+      },
+      "actions": []
     },
     "sl_03": {
       "name": "无双金枪殿",
@@ -73,6 +132,9 @@
       },
       "npcs": [
         "sl_main_boss"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -102,6 +164,20 @@
       "shuanglong_bei": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：保留本章分段战斗，以专属复盘选择区分护送/赴会中的职责，不套用通用开门题。",
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "双龙会信杯不是身份通行证，它记录两个人仍肯坐下来听完彼此的话。",
+    "solution": [
+      {
+        "roomId": "sl_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "sl_03",
+        "actionId": "content_record_people"
+      }
+    ]
+  }
 }

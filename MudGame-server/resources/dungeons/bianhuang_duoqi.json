@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "flag_bd": "standing",
     "briefing_bd": "new",
-    "tent_bd": "untouched"
+    "tent_bd": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_caravan": {
@@ -57,6 +58,62 @@
       "repeatMessage": "已被你搜遍。",
       "giveItems": {},
       "giveMoney": 400
+    },
+    "content_epilogue": {
+      "label": "复盘：旗落之后",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "bd_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "夺旗不是让所有人都死在旗下；狼皮氅上的补缀说明有人一直在替同伴挡风。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "给没有倒下的人留名"
+        },
+        {
+          "id": "content_record_route",
+          "label": "留下被粮车压住的撤路"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "bd_tuoba_gu"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "给没有倒下的人留名",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "bd_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "夺旗不是让所有人都死在旗下；狼皮氅上的补缀说明有人一直在替同伴挡风。 你选择：给没有倒下的人留名。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_bianhuang_duoqi_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "留下被粮车压住的撤路",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "bd_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "夺旗不是让所有人都死在旗下；狼皮氅上的补缀说明有人一直在替同伴挡风。 你选择：留下被粮车压住的撤路。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_bianhuang_duoqi_route": true
+      }
     }
   },
   "rooms": {
@@ -91,7 +148,8 @@
       "npcs": [
         "bd_flag_guard",
         "bd_flag_guard"
-      ]
+      ],
+      "actions": []
     },
     "bd_02": {
       "name": "中军辕门",
@@ -125,7 +183,8 @@
         "bd_tuoba_gu"
       ],
       "actions": [
-        "seize_flag"
+        "seize_flag",
+        "content_epilogue"
       ]
     }
   },
@@ -183,5 +242,19 @@
   },
   "quickRewards": {
     "money": 400
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "夺旗不是让所有人都死在旗下；狼皮氅上的补缀说明有人一直在替同伴挡风。",
+    "solution": [
+      {
+        "roomId": "bd_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "bd_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

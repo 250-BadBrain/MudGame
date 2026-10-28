@@ -13,7 +13,8 @@
     "twins": "new",
     "workshop": "new",
     "refugees": "new",
-    "scripture_jl": "untouched"
+    "scripture_jl": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "load_ballista": {
@@ -161,6 +162,62 @@
       "repeatMessage": "书匣已被你收好。",
       "giveItems": {},
       "giveMoney": 300
+    },
+    "content_epilogue": {
+      "label": "复盘：城门后的人",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "jl_06"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "守住城墙与送人离城都能完成战局；留下的名册提醒后来者别只数战功。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "把难民名册交给守城者"
+        },
+        {
+          "id": "content_record_route",
+          "label": "把弩车射界留给修城匠"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "jl_vanguard_commander"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "把难民名册交给守城者",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "jl_06"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "守住城墙与送人离城都能完成战局；留下的名册提醒后来者别只数战功。 你选择：把难民名册交给守城者。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_jingling_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "把弩车射界留给修城匠",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "jl_06"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "守住城墙与送人离城都能完成战局；留下的名册提醒后来者别只数战功。 你选择：把弩车射界留给修城匠。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_jingling_route": true
+      }
     }
   },
   "rooms": {
@@ -232,7 +289,8 @@
       "npcs": [
         "jl_infiltrator",
         "jl_infiltrator"
-      ]
+      ],
+      "actions": []
     },
     "jl_03": {
       "name": "府库机枢房",
@@ -286,7 +344,8 @@
         "jl_iron_cavalry",
         "jl_iron_cavalry",
         "jl_iron_cavalry"
-      ]
+      ],
+      "actions": []
     },
     "jl_05": {
       "name": "水门暗渠",
@@ -318,6 +377,9 @@
       "exits": {},
       "npcs": [
         "jl_vanguard_commander"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -401,5 +463,19 @@
   },
   "quickRewards": {
     "money": 300
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "守住城墙与送人离城都能完成战局；留下的名册提醒后来者别只数战功。",
+    "solution": [
+      {
+        "roomId": "jl_06",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "jl_06",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

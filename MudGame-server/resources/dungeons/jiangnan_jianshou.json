@@ -1,7 +1,7 @@
 {
   "id": "jiangnan_jianshou",
   "name": "剑首之争",
-  "description": "江南剑首之争——听雨楼的琴师终于露出了真面目。她是二十年前江南剑首的女儿，来剑池是为父雪耻。",
+  "description": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。 席前两道剑痕，一道止于衣襟，一道穿过空靶。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 46,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -9,7 +9,11 @@
   "spawnRoomId": "jia_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。 此处不能只凭武力开门；沿路观察，并核验藏锋水台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：以止于衣襟的一剑论胜",
       "puzzleId": "gate",
       "rooms": [
         "jia_02"
@@ -34,18 +38,124 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "jianshou_zhengduan": true
+      "nextState": "considered",
+      "message": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。 席前两道剑痕，一道止于衣襟，一道穿过空靶。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_good",
+          "label": "以止于衣襟的一剑论胜"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "以斩断空靶立威"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "夺走剑首信物便走"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：折枝剑径",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "jia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。",
+      "repeatMessage": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。"
+    },
+    "content_detail": {
+      "label": "核验：藏锋水台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "jia_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "席前两道剑痕，一道止于衣襟，一道穿过空靶。",
+      "repeatMessage": "席前两道剑痕，一道止于衣襟，一道穿过空靶。"
+    },
+    "content_decide_good": {
+      "label": "以止于衣襟的一剑论胜",
+      "puzzleId": "gate",
+      "rooms": [
+        "jia_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你选择让剑首之名保护后来者；若以锋锐论高下，守席者会以完整剑势回应。",
+      "repeatMessage": "你选择让剑首之名保护后来者；若以锋锐论高下，守席者会以完整剑势回应。",
+      "setFlags": {
+        "jianshou_zhengduan": true,
+        "discovery_chapter_jiangnan_jianshou": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "以斩断空靶立威",
+      "puzzleId": "gate",
+      "rooms": [
+        "jia_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你选择让剑首之名保护后来者；若以锋锐论高下，守席者会以完整剑势回应。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "repeatMessage": "你选择让剑首之名保护后来者；若以锋锐论高下，守席者会以完整剑势回应。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "setFlags": {
+        "discovery_alternative_jiangnan_jianshou": true
+      }
+    },
+    "content_decide_other": {
+      "label": "夺走剑首信物便走",
+      "puzzleId": "gate",
+      "rooms": [
+        "jia_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：席前两道剑痕，一道止于衣襟，一道穿过空靶。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：席前两道剑痕，一道止于衣襟，一道穿过空靶。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_jianshou_jian": {
+      "label": "以江南剑首佩剑校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "jia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把守池人辨明的器物来历与现场互证。折枝切口平滑却未伤根，前任剑首并未以杀人立威。",
+      "requiredFlags": {
+        "discovery_item_jianshou_jian": true
+      },
+      "presentItems": {
+        "jianshou_jian": 1
+      }
     }
   },
   "rooms": {
     "jia_00": {
-      "name": "入口",
-      "description": "入口。洛水暗涌——你踏入此处，前方的路在阴影中延伸。",
+      "name": "问剑石坪",
+      "description": "问剑石坪保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "jia_01"
       },
@@ -54,8 +164,8 @@
       ]
     },
     "jia_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "折枝剑径",
+      "description": "折枝切口平滑却未伤根，前任剑首并未以杀人立威。",
       "exits": {
         "south": "jia_00",
         "north": "jia_02"
@@ -71,11 +181,15 @@
       "npcs": [
         "jn_sword_apprentice",
         "jn_sword_apprentice"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_jianshou_jian"
       ]
     },
     "jia_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "藏锋水台",
+      "description": "席前两道剑痕，一道止于衣襟，一道穿过空靶。",
       "exits": {
         "south": "jia_01",
         "north": "jia_03"
@@ -89,18 +203,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "jia_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "剑首旧席",
+      "description": "你选择让剑首之名保护后来者；若以锋锐论高下，守席者会以完整剑势回应。",
       "exits": {
         "south": "jia_02"
       },
       "npcs": [
         "jn_sword_daozi"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +234,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成藏锋水台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +253,29 @@
       "jianshou_jian": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：两种立场；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "polarity",
+    "solution": [
+      {
+        "roomId": "jia_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "jia_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "jia_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "jia_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你选择让剑首之名保护后来者；若以锋锐论高下，守席者会以完整剑势回应。"
+  }
 }

@@ -9,7 +9,8 @@
   "spawnRoomId": "wild_00",
   "puzzleInitialStates": {
     "briefing": "new",
-    "relic_bh": "untouched"
+    "relic_bh": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_qianqian": {
@@ -40,6 +41,62 @@
       "repeatMessage": "厢房已被你搜遍，再无他物。",
       "giveItems": {},
       "giveMoney": 250
+    },
+    "content_epilogue": {
+      "label": "复盘：护送与逃离",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wild_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "纪千千的路不只由护卫刀剑开出，还由肯等最后一个人的渡船开出。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "留下过桥顺序保护落后者"
+        },
+        {
+          "id": "content_record_route",
+          "label": "先记燕军换哨以护下一程"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "bh_general"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "留下过桥顺序保护落后者",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wild_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "纪千千的路不只由护卫刀剑开出，还由肯等最后一个人的渡船开出。 你选择：留下过桥顺序保护落后者。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_bianhuang_escort_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "先记燕军换哨以护下一程",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wild_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "纪千千的路不只由护卫刀剑开出，还由肯等最后一个人的渡船开出。 你选择：先记燕军换哨以护下一程。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_bianhuang_escort_route": true
+      }
     }
   },
   "rooms": {
@@ -75,7 +132,8 @@
       "npcs": [
         "bh_rider",
         "bh_rider"
-      ]
+      ],
+      "actions": []
     },
     "wild_02": {
       "name": "破败驿站",
@@ -120,7 +178,8 @@
         "bh_captain",
         "bh_rider",
         "bh_rider"
-      ]
+      ],
+      "actions": []
     },
     "wild_04": {
       "name": "荒野渡口",
@@ -130,6 +189,9 @@
       },
       "npcs": [
         "bh_general"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -191,5 +253,19 @@
   },
   "quickRewards": {
     "money": 250
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "纪千千的路不只由护卫刀剑开出，还由肯等最后一个人的渡船开出。",
+    "solution": [
+      {
+        "roomId": "wild_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "wild_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

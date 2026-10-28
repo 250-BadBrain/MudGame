@@ -12,7 +12,8 @@
     "briefing_yg": "new",
     "reward_merchant": "untouched",
     "reward_noble": "untouched",
-    "reward_guardian": "untouched"
+    "reward_guardian": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_brief_yg": {
@@ -87,6 +88,62 @@
       "giveItems": {
         "guishi_blade": 1
       }
+    },
+    "content_epilogue": {
+      "label": "复盘：三路谁有理",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "yg_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "三条路都可探索，但商人的价、侯门的名分和武者的输赢不能互相代替。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "把三路证词并列，不替他们抹平矛盾"
+        },
+        {
+          "id": "content_record_route",
+          "label": "先封存账本、玉玺和冥刀各自来历"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "yg_guardian_ghost"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "把三路证词并列，不替他们抹平矛盾",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "yg_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "三条路都可探索，但商人的价、侯门的名分和武者的输赢不能互相代替。 你选择：把三路证词并列，不替他们抹平矛盾。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_youming_guishi_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "先封存账本、玉玺和冥刀各自来历",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "yg_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "三条路都可探索，但商人的价、侯门的名分和武者的输赢不能互相代替。 你选择：先封存账本、玉玺和冥刀各自来历。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_youming_guishi_route": true
+      }
     }
   },
   "rooms": {
@@ -112,7 +169,8 @@
       "npcs": [
         "yg_00_guard",
         "yg_00_guard"
-      ]
+      ],
+      "actions": []
     },
     "yg_02": {
       "name": "商路·账房",
@@ -150,7 +208,8 @@
         "yg_guardian_ghost"
       ],
       "actions": [
-        "defeat_guardian"
+        "defeat_guardian",
+        "content_epilogue"
       ]
     }
   },
@@ -202,5 +261,19 @@
       "guishi_jade": 1,
       "guishi_blade": 1
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "三条路都可探索，但商人的价、侯门的名分和武者的输赢不能互相代替。",
+    "solution": [
+      {
+        "roomId": "yg_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "yg_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

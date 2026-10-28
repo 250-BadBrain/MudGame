@@ -17,7 +17,8 @@
       ],
       "safeZone": true,
       "npcs": [
-        "dm_old_captain"
+        "dm_old_captain",
+        "dm_sailor"
       ],
       "exits": {
         "east": "dm_market",
@@ -27,8 +28,12 @@
         "归墟港的水手们低声说：海市虽开过了，但沧溟宫的宝藏远不止一枚玉简—— deep 深海里还有更多。"
       ],
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "searchFlag": "discovery_place_dm_harbor",
+      "searchMessage": "你在归墟港核对现场：东溟唯一的海港，归墟港的栈桥以巨鲸骨搭建——海上人说，这座港是前朝流放的方士建的。 进一步可核验的是：船沉后上舷的木头不再承重，下舷的旧梁才是命。先支梁、后放水，海上不能颠倒这两步。",
+      "contentRole": "东溟的归墟港：沉船压舱与归航潮汐"
     },
     "dm_market": {
       "name": "鲛人市",
@@ -41,14 +46,19 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
-        "dm_jiaoren"
+        "dm_jiaoren",
+        "dm_pearl_diver"
       ],
       "exits": {
         "west": "dm_harbor"
-      }
+      },
+      "searchFlag": "discovery_place_dm_market",
+      "searchMessage": "你在鲛人市核对现场：鲛人市只在天文大潮时露出水面——鲛绡、珠贝、深海的珊瑚，换中原的茶与铁。 进一步可核验的是：深海寒珠贴掌先凉后回温，海市假珠却始终一个温度。验珠不是只为卖贵一点，也为了辨清哪份旧约真的到过海底。",
+      "contentRole": "东溟的鲛人市：真珠寒意与海市旧约"
     },
     "dm_reef": {
       "name": "暗礁群",
@@ -64,8 +74,15 @@
         "east": "dm_mirage"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "dm_s2"
+      ],
+      "searchFlag": "discovery_place_dm_reef",
+      "searchMessage": "你在暗礁群核对现场：暗礁群在海面下犬牙交错，船骸的桅杆从浪里探出——归墟港的水手管这里叫'船坟'。 进一步可核验的是：白盐结在高孔，青苔只长在低孔，三孔从未同时淹水。 中孔铜栓已松，必须先固定低孔，再依次泄压。",
+      "contentRole": "东溟的暗礁群：辨暗礁通风与潮门盐线"
     },
     "dm_mirage": {
       "name": "海市入口",
@@ -83,7 +100,13 @@
       "exits": {
         "west": "dm_reef",
         "north": "dm_palace"
-      }
+      },
+      "searchFlag": "discovery_place_dm_mirage",
+      "searchMessage": "你在海市入口核对现场：海市蜃楼的光影在浪尖上浮动——归墟港最老的水手说，那不是光，是另一座城的倒影。 进一步可核验的是：真正的门槛会留下退潮盐线，幻景只肯在涨潮时好看。沧溟玉简里先读归航，再谈入宫。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "东溟的海市入口：真假门槛与归航之约"
     },
     "dm_palace": {
       "name": "沧溟宫",
@@ -98,8 +121,15 @@
         "south": "dm_mirage"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "r204_npc_3"
+      ],
+      "searchFlag": "discovery_place_dm_palace",
+      "searchMessage": "你在沧溟宫核对现场：沧溟宫的琉璃瓦在海市中若隐若现——海外秘境最深处的宫殿，传说里仙人遗落的地方。 进一步可核验的是：日影指向南面，脚下沙纹却来自北风，路标曾被挪过。 井里没有水却有凉风，城门旧地图把风穴画成了街巷。",
+      "contentRole": "东溟的沧溟宫：从风穴而非路标辨归航"
     }
   }
 }

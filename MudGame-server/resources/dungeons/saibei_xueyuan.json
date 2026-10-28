@@ -1,7 +1,7 @@
 {
   "id": "saibei_xueyuan",
   "name": "雪原猎狼",
-  "description": "白狼主虽退，但狼山口的白狼死士残部仍在雪原上游荡。你随边军猎狼队深入雪原，清剿残狼。",
+  "description": "狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。 冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 33,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -9,7 +9,11 @@
   "spawnRoomId": "xy_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_hunt": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。 此处不能只凭武力开门；沿路观察，并核验裂纹冰湖的细节。",
       "repeatMessage": "话已说完，去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：沿东岸芦线绕过薄冰",
       "puzzleId": "gate",
       "rooms": [
         "xy_02"
@@ -34,18 +38,157 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "xueyuan_langqun": true
+      "nextState": "considered",
+      "message": "狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。 冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_good",
+          "label": "沿东岸芦线绕过薄冰"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "追着最近的爪印冲湖心"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "用火盆烧开冰面"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：逆风白骨坡",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "xy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。",
+      "repeatMessage": "狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。"
+    },
+    "content_detail": {
+      "label": "核验：裂纹冰湖",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "xy_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。",
+      "repeatMessage": "冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。"
+    },
+    "content_decide_good": {
+      "label": "沿东岸芦线绕过薄冰",
+      "puzzleId": "gate",
+      "rooms": [
+        "xy_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你截断驱狼人的口哨线，旧帐里的头领再不能借狼群藏身。",
+      "repeatMessage": "你截断驱狼人的口哨线，旧帐里的头领再不能借狼群藏身。",
+      "setFlags": {
+        "xueyuan_langqun": true,
+        "discovery_chapter_saibei_xueyuan": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "追着最近的爪印冲湖心",
+      "puzzleId": "gate",
+      "rooms": [
+        "xy_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "用火盆烧开冰面",
+      "puzzleId": "gate",
+      "rooms": [
+        "xy_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_langya_chui": {
+      "label": "以狼牙重锏校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "xy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把马邑铁匠辨明的器物来历与现场互证。狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。",
+      "requiredFlags": {
+        "discovery_item_langya_chui": true
+      },
+      "presentItems": {
+        "langya_chui": 1
+      }
+    },
+    "content_aid_saibei_wolftooth": {
+      "label": "以狼牙项链校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "xy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把马邑铁匠辨明的器物来历与现场互证。狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。",
+      "requiredFlags": {
+        "discovery_item_saibei_wolftooth": true
+      },
+      "presentItems": {
+        "saibei_wolftooth": 1
+      }
+    },
+    "content_aid_hanxue_dao": {
+      "label": "以寒雪刀校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "xy_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把雪线领路人辨明的器物来历与现场互证。狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。",
+      "requiredFlags": {
+        "discovery_item_hanxue_dao": true
+      },
+      "presentItems": {
+        "hanxue_dao": 1
+      }
     }
   },
   "rooms": {
     "xy_00": {
-      "name": "雪原营地",
-      "description": "边军猎狼队的临时营地，篝火上烤着冻硬的干粮。",
+      "name": "猎狼营地",
+      "description": "猎狼营地保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "xy_01"
       },
@@ -57,8 +200,8 @@
       ]
     },
     "xy_01": {
-      "name": "白骨坡",
-      "description": "坡道上白骨累累——狼群和狼主都留下了痕迹。",
+      "name": "逆风白骨坡",
+      "description": "狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。",
       "exits": {
         "north": "xy_02",
         "south": "xy_00"
@@ -66,11 +209,17 @@
       "npcs": [
         "xy_wolf_remnant",
         "xy_wolf_remnant"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_langya_chui",
+        "content_aid_saibei_wolftooth",
+        "content_aid_hanxue_dao"
       ]
     },
     "xy_02": {
-      "name": "冰湖",
-      "description": "冰封的湖面下隐约可见白影游动——残狼们藏身冰下。",
+      "name": "裂纹冰湖",
+      "description": "冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。",
       "exits": {
         "north": "xy_03",
         "south": "xy_01"
@@ -88,12 +237,13 @@
         "xy_wolf_remnant"
       ],
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "xy_03": {
-      "name": "狼王旧帐",
-      "description": "白狼主的旧帐被拆了一半，帐中堆着历年抢来的银两和兵器。",
+      "name": "旧帐火盆",
+      "description": "你截断驱狼人的口哨线，旧帐里的头领再不能借狼群藏身。",
       "exits": {},
       "npcs": [
         "xy_bai_lang2"
@@ -116,7 +266,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成裂纹冰湖的判断"
     },
     {
       "id": "repel_boss",
@@ -135,6 +285,29 @@
       "hanxue_dao": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：双证推理；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "deduction",
+    "solution": [
+      {
+        "roomId": "xy_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "xy_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "xy_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "xy_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你截断驱狼人的口哨线，旧帐里的头领再不能借狼群藏身。"
+  }
 }

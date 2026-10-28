@@ -1,7 +1,7 @@
 {
   "id": "fuyu_langfan",
   "name": "浪翻云试炼",
-  "description": "浪翻云试炼——覆雨翻云中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "浪退时石上剑痕清晰，涨时反而全被水光遮住。 第一道痕轻，第二道痕重，第三道痕只留一滴雨。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 48,
   "chainId": "fuyu_fan_yun",
   "chainName": "覆雨翻云",
@@ -9,7 +9,11 @@
   "spawnRoomId": "fuyu_l_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "浪退时石上剑痕清晰，涨时反而全被水光遮住。 此处不能只凭武力开门；沿路观察，并核验雨停听潮台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先看退潮",
       "puzzleId": "gate",
       "rooms": [
         "fuyu_l_02"
@@ -34,28 +38,169 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "lf_sl": true
+      "nextState": "considered",
+      "message": "浪退时石上剑痕清晰，涨时反而全被水光遮住。 第一道痕轻，第二道痕重，第三道痕只留一滴雨。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "用水抹去所有痕迹"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先看退潮，再听雨止"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "只追最重的剑痕"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：观浪石径",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuyu_l_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "浪退时石上剑痕清晰，涨时反而全被水光遮住。",
+      "repeatMessage": "浪退时石上剑痕清晰，涨时反而全被水光遮住。"
+    },
+    "content_detail": {
+      "label": "核验：雨停听潮台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "fuyu_l_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "第一道痕轻，第二道痕重，第三道痕只留一滴雨。",
+      "repeatMessage": "第一道痕轻，第二道痕重，第三道痕只留一滴雨。"
+    },
+    "content_decide_good": {
+      "label": "先看退潮，再听雨止",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuyu_l_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "aligned",
+      "message": "第一步已与线索相符；仍须决定下一步，不能一口气把所有机关推到底。",
+      "repeatMessage": "你从出剑的间隙而非剑锋的重量理解覆雨剑意，剑庐的问剑因此换了语气。",
+      "choices": [
+        {
+          "id": "content_finish",
+          "label": "再听雨止"
+        },
+        {
+          "id": "content_reverse",
+          "label": "反过来，再做一次最先的动作"
+        }
+      ]
+    },
+    "content_decide_wrong": {
+      "label": "只追最重的剑痕",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuyu_l_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：第一道痕轻，第二道痕重，第三道痕只留一滴雨。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：第一道痕轻，第二道痕重，第三道痕只留一滴雨。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "用水抹去所有痕迹",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuyu_l_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：第一道痕轻，第二道痕重，第三道痕只留一滴雨。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：第一道痕轻，第二道痕重，第三道痕只留一滴雨。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_finish": {
+      "label": "再听雨止",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuyu_l_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "open",
+      "message": "你从出剑的间隙而非剑锋的重量理解覆雨剑意，剑庐的问剑因此换了语气。",
+      "setFlags": {
+        "lf_sl": true,
+        "discovery_chapter_fuyu_langfan": true
+      }
+    },
+    "content_reverse": {
+      "label": "颠倒次序",
+      "puzzleId": "gate",
+      "rooms": [
+        "fuyu_l_02"
+      ],
+      "fromStates": [
+        "aligned"
+      ],
+      "nextState": "closed",
+      "message": "先后次序被颠倒了，你撤回到安全位置。重新判断即可，没有物品损失。"
+    },
+    "content_aid_langfan_j": {
+      "label": "以浪翻云剑穗校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "fuyu_l_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把秦三娘辨明的器物来历与现场互证。浪退时石上剑痕清晰，涨时反而全被水光遮住。",
+      "requiredFlags": {
+        "discovery_item_langfan_j": true
+      },
+      "presentItems": {
+        "langfan_j": 1
+      }
     }
   },
   "rooms": {
     "fuyu_l_00": {
-      "name": "入口",
-      "description": "入口。魔门暗流——你踏入此处，前方的路在阴影中延伸。",
+      "name": "剑庐渡口",
+      "description": "剑庐渡口保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "fuyu_l_01"
       },
       "actions": [
         "listen_brief"
+      ],
+      "npcs": [
+        "fy3_langfan_guard",
+        "fy3_langfan_boss"
       ]
     },
     "fuyu_l_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "观浪石径",
+      "description": "浪退时石上剑痕清晰，涨时反而全被水光遮住。",
       "exits": {
         "south": "fuyu_l_00",
         "north": "fuyu_l_02"
@@ -71,11 +216,15 @@
       "npcs": [
         "fy3_guard",
         "fy3_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_langfan_j"
       ]
     },
     "fuyu_l_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "雨停听潮台",
+      "description": "第一道痕轻，第二道痕重，第三道痕只留一滴雨。",
       "exits": {
         "south": "fuyu_l_01",
         "north": "fuyu_l_03"
@@ -89,18 +238,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "fuyu_l_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "覆雨剑庐",
+      "description": "你从出剑的间隙而非剑锋的重量理解覆雨剑意，剑庐的问剑因此换了语气。",
       "exits": {
         "south": "fuyu_l_02"
       },
       "npcs": [
         "fy3_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +269,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成雨停听潮台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +288,33 @@
       "langfan_j": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：分步次序；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "sequence",
+    "solution": [
+      {
+        "roomId": "fuyu_l_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "fuyu_l_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "fuyu_l_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "fuyu_l_02",
+        "actionId": "content_decide_good"
+      },
+      {
+        "roomId": "fuyu_l_02",
+        "actionId": "content_finish"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你从出剑的间隙而非剑锋的重量理解覆雨剑意，剑庐的问剑因此换了语气。"
+  }
 }

@@ -1,7 +1,7 @@
 {
   "id": "bianhuang_chuanqi",
   "name": "边荒传奇",
-  "description": "边荒集换了新的主人——旧的势力倒了，新的势力崛起。你受托在新旧交替之际，为边荒集立一条规矩。",
+  "description": "商队要守秤，流民要留井，两者争的是同一道街口。 盟纸有两枚不同印章，旧法并未规定谁必须迁走。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 41,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -9,7 +9,11 @@
   "spawnRoomId": "bia_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "商队要守秤，流民要留井，两者争的是同一道街口。 此处不能只凭武力开门；沿路观察，并核验双印议席的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：保井立秤",
       "puzzleId": "gate",
       "rooms": [
         "bia_02"
@@ -34,18 +38,196 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "bianhuang_lifa": true
+      "nextState": "considered",
+      "message": "商队要守秤，流民要留井，两者争的是同一道街口。 盟纸有两枚不同印章，旧法并未规定谁必须迁走。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_wrong",
+          "label": "先替强势商队封井"
+        },
+        {
+          "id": "content_decide_other",
+          "label": "把旧盟烧掉再由拳头裁决"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "保井立秤，让双方各留见证"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：争水窄巷",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "商队要守秤，流民要留井，两者争的是同一道街口。",
+      "repeatMessage": "商队要守秤，流民要留井，两者争的是同一道街口。"
+    },
+    "content_detail": {
+      "label": "核验：双印议席",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "bia_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "盟纸有两枚不同印章，旧法并未规定谁必须迁走。",
+      "repeatMessage": "盟纸有两枚不同印章，旧法并未规定谁必须迁走。"
+    },
+    "content_decide_good": {
+      "label": "保井立秤，让双方各留见证",
+      "puzzleId": "gate",
+      "rooms": [
+        "bia_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你让边荒法典重新承担约束强者的责任；另一条路则留下由你担保的停争约定。",
+      "repeatMessage": "你让边荒法典重新承担约束强者的责任；另一条路则留下由你担保的停争约定。",
+      "setFlags": {
+        "bianhuang_lifa": true,
+        "discovery_chapter_bianhuang_chuanqi": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "先替强势商队封井",
+      "puzzleId": "gate",
+      "rooms": [
+        "bia_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你让边荒法典重新承担约束强者的责任；另一条路则留下由你担保的停争约定。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "repeatMessage": "你让边荒法典重新承担约束强者的责任；另一条路则留下由你担保的停争约定。 你选择另一种承诺，后果由自己承担；守关者仍保留完整招势。",
+      "setFlags": {
+        "discovery_alternative_bianhuang_chuanqi": true
+      }
+    },
+    "content_decide_other": {
+      "label": "把旧盟烧掉再由拳头裁决",
+      "puzzleId": "gate",
+      "rooms": [
+        "bia_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：盟纸有两枚不同印章，旧法并未规定谁必须迁走。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：盟纸有两枚不同印章，旧法并未规定谁必须迁走。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_langwang_dao": {
+      "label": "以狼王刀校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把马邑铁匠辨明的器物来历与现场互证。商队要守秤，流民要留井，两者争的是同一道街口。",
+      "requiredFlags": {
+        "discovery_item_langwang_dao": true
+      },
+      "presentItems": {
+        "langwang_dao": 1
+      }
+    },
+    "content_aid_bianhuang_xue": {
+      "label": "以边荒战靴校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵关山辨明的器物来历与现场互证。商队要守秤，流民要留井，两者争的是同一道街口。",
+      "requiredFlags": {
+        "discovery_item_bianhuang_xue": true
+      },
+      "presentItems": {
+        "bianhuang_xue": 1
+      }
+    },
+    "content_aid_bianhuang_wolfpelt": {
+      "label": "以边荒狼皮氅校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把赵关山辨明的器物来历与现场互证。商队要守秤，流民要留井，两者争的是同一道街口。",
+      "requiredFlags": {
+        "discovery_item_bianhuang_wolfpelt": true
+      },
+      "presentItems": {
+        "bianhuang_wolfpelt": 1
+      }
+    },
+    "content_aid_bianhuang_law": {
+      "label": "以边荒法典校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把塞北斥候长辨明的器物来历与现场互证。商队要守秤，流民要留井，两者争的是同一道街口。",
+      "requiredFlags": {
+        "discovery_item_bianhuang_law": true
+      },
+      "presentItems": {
+        "bianhuang_law": 1
+      }
+    },
+    "content_aid_manual_xiulou_daofa": {
+      "label": "以修罗刀法秘本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bia_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把李百夫长辨明的器物来历与现场互证。商队要守秤，流民要留井，两者争的是同一道街口。",
+      "requiredFlags": {
+        "discovery_item_manual_xiulou_daofa": true
+      },
+      "presentItems": {
+        "manual_xiulou_daofa": 1
+      }
     }
   },
   "rooms": {
     "bia_00": {
-      "name": "入口",
-      "description": "入口。法外之地——你踏入此处，前方的路在阴影中延伸。",
+      "name": "集口盟棚",
+      "description": "集口盟棚保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "bia_01"
       },
@@ -54,8 +236,8 @@
       ]
     },
     "bia_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "争水窄巷",
+      "description": "商队要守秤，流民要留井，两者争的是同一道街口。",
       "exits": {
         "south": "bia_00",
         "north": "bia_02"
@@ -71,11 +253,19 @@
       "npcs": [
         "bh_wolf_royal",
         "bh_wolf_royal"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_langwang_dao",
+        "content_aid_bianhuang_xue",
+        "content_aid_bianhuang_wolfpelt",
+        "content_aid_bianhuang_law",
+        "content_aid_manual_xiulou_daofa"
       ]
     },
     "bia_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "双印议席",
+      "description": "盟纸有两枚不同印章，旧法并未规定谁必须迁走。",
       "exits": {
         "south": "bia_01",
         "north": "bia_03"
@@ -89,18 +279,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "bia_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "旧盟石屋",
+      "description": "你让边荒法典重新承担约束强者的责任；另一条路则留下由你担保的停争约定。",
       "exits": {
         "south": "bia_02"
       },
       "npcs": [
         "bh_new_king"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +310,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成双印议席的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +329,29 @@
       "bianhuang_law": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：两种立场；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "polarity",
+    "solution": [
+      {
+        "roomId": "bia_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "bia_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "bia_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "bia_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你让边荒法典重新承担约束强者的责任；另一条路则留下由你担保的停争约定。"
+  }
 }

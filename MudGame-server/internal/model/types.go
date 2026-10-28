@@ -209,6 +209,7 @@ type DialogueDef struct {
 }
 
 type DialogueOption struct {
+	Explicit        bool            `json:"explicit,omitempty"`
 	Repeatable      bool            `json:"repeatable,omitempty"`
 	ID              string          `json:"id"`
 	Text            string          `json:"text"`
@@ -224,13 +225,16 @@ type DialogueOption struct {
 }
 
 type DialogueRequire struct {
-	QuestID       string         `json:"questId,omitempty"`
-	QuestStatus   string         `json:"questStatus,omitempty"`
-	Flag          string         `json:"flag,omitempty"`
-	FlagValue     *bool          `json:"flagValue,omitempty"`
-	ReputationID  string         `json:"reputationId,omitempty"`
-	ReputationMin int            `json:"reputationMin,omitempty"`
-	Items         map[string]int `json:"items,omitempty"`
+	Flags         map[string]bool `json:"flags,omitempty"`
+	PresentItems  map[string]int  `json:"presentItems,omitempty"`
+	Skills        map[string]int  `json:"skills,omitempty"`
+	QuestID       string          `json:"questId,omitempty"`
+	QuestStatus   string          `json:"questStatus,omitempty"`
+	Flag          string          `json:"flag,omitempty"`
+	FlagValue     *bool           `json:"flagValue,omitempty"`
+	ReputationID  string          `json:"reputationId,omitempty"`
+	ReputationMin int             `json:"reputationMin,omitempty"`
+	Items         map[string]int  `json:"items,omitempty"`
 }
 
 type QuestDef struct {

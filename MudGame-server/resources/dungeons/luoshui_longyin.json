@@ -1,7 +1,7 @@
 {
   "id": "luoshui_longyin",
   "name": "洛水龙吟",
-  "description": "洛水底传来龙吟之声——前朝的密藏在洛水最深处。你带着哑婆的绳和诗人的墨，潜入洛水最深处。",
+  "description": "龙吟随着水位而变，不随风向而变。 石龙腹中有两条连通水道，一条塞满了新近的碎瓦。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 42,
   "chainId": "luoshui_raiders",
   "chainName": "洛水风浪",
@@ -9,7 +9,11 @@
   "spawnRoomId": "luo_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "任务的要点交代完毕。",
+      "message": "龙吟随着水位而变，不随风向而变。 此处不能只凭武力开门；沿路观察，并核验回流音井的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：清碎瓦",
       "puzzleId": "gate",
       "rooms": [
         "luo_02"
@@ -34,18 +38,157 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "longyin_zhengming": true
+      "nextState": "considered",
+      "message": "龙吟随着水位而变，不随风向而变。 石龙腹中有两条连通水道，一条塞满了新近的碎瓦。 你准备怎样处理？",
+      "repeatMessage": "通道已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "你找到了机关，通道缓缓打开。",
-      "repeatMessage": "通道已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "敲碎石龙头"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "清碎瓦，让两水道等压"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "塞死音井压住声音"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：空腹石龙",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "luo_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "龙吟随着水位而变，不随风向而变。",
+      "repeatMessage": "龙吟随着水位而变，不随风向而变。"
+    },
+    "content_detail": {
+      "label": "核验：回流音井",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "luo_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "石龙腹中有两条连通水道，一条塞满了新近的碎瓦。",
+      "repeatMessage": "石龙腹中有两条连通水道，一条塞满了新近的碎瓦。"
+    },
+    "content_decide_good": {
+      "label": "清碎瓦，让两水道等压",
+      "puzzleId": "gate",
+      "rooms": [
+        "luo_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "所谓龙吟是水道失衡的警报，暗殿中的守水者失去借回流震慑来客的手段。",
+      "repeatMessage": "所谓龙吟是水道失衡的警报，暗殿中的守水者失去借回流震慑来客的手段。",
+      "setFlags": {
+        "longyin_zhengming": true,
+        "discovery_chapter_luoshui_longyin": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "塞死音井压住声音",
+      "puzzleId": "gate",
+      "rooms": [
+        "luo_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：石龙腹中有两条连通水道，一条塞满了新近的碎瓦。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：石龙腹中有两条连通水道，一条塞满了新近的碎瓦。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "敲碎石龙头",
+      "puzzleId": "gate",
+      "rooms": [
+        "luo_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：石龙腹中有两条连通水道，一条塞满了新近的碎瓦。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：石龙腹中有两条连通水道，一条塞满了新近的碎瓦。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_zhenshui_huan": {
+      "label": "以镇水环校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "luo_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把落魄诗人辨明的器物来历与现场互证。龙吟随着水位而变，不随风向而变。",
+      "requiredFlags": {
+        "discovery_item_zhenshui_huan": true
+      },
+      "presentItems": {
+        "zhenshui_huan": 1
+      }
+    },
+    "content_aid_yinkui_lotus": {
+      "label": "以阴葵莲环校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "luo_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把二十四桥船娘辨明的器物来历与现场互证。龙吟随着水位而变，不随风向而变。",
+      "requiredFlags": {
+        "discovery_item_yinkui_lotus": true
+      },
+      "presentItems": {
+        "yinkui_lotus": 1
+      }
+    },
+    "content_aid_longyin_zhu": {
+      "label": "以龙吟珠校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "luo_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把二十四桥船娘辨明的器物来历与现场互证。龙吟随着水位而变，不随风向而变。",
+      "requiredFlags": {
+        "discovery_item_longyin_zhu": true
+      },
+      "presentItems": {
+        "longyin_zhu": 1
+      }
     }
   },
   "rooms": {
     "luo_00": {
-      "name": "入口",
-      "description": "入口。洛水暗涌——你踏入此处，前方的路在阴影中延伸。",
+      "name": "断桥听潮处",
+      "description": "断桥听潮处保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "luo_01"
       },
@@ -54,8 +197,8 @@
       ]
     },
     "luo_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "空腹石龙",
+      "description": "龙吟随着水位而变，不随风向而变。",
       "exits": {
         "south": "luo_00",
         "north": "luo_02"
@@ -71,11 +214,17 @@
       "npcs": [
         "ls_water_spirit",
         "ls_water_spirit"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_zhenshui_huan",
+        "content_aid_yinkui_lotus",
+        "content_aid_longyin_zhu"
       ]
     },
     "luo_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "回流音井",
+      "description": "石龙腹中有两条连通水道，一条塞满了新近的碎瓦。",
       "exits": {
         "south": "luo_01",
         "north": "luo_03"
@@ -89,18 +238,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "luo_03": {
-      "name": "Boss之间",
-      "description": "Boss之间。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "伏水暗殿",
+      "description": "所谓龙吟是水道失衡的警报，暗殿中的守水者失去借回流震慑来客的手段。",
       "exits": {
         "south": "luo_02"
       },
       "npcs": [
         "ls_dragon_guard"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +269,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成回流音井的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +288,29 @@
       "longyin_zhu": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：双证推理；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "deduction",
+    "solution": [
+      {
+        "roomId": "luo_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "luo_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "luo_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "luo_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "所谓龙吟是水道失衡的警报，暗殿中的守水者失去借回流震慑来客的手段。"
+  }
 }

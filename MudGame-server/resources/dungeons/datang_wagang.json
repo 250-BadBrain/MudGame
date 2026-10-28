@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "granary_wg": "locked",
     "briefing_wg2": "new",
-    "armory_wg": "untouched"
+    "armory_wg": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_defender": {
@@ -57,6 +58,62 @@
       "repeatMessage": "已被你翻遍，再无他物。",
       "giveItems": {},
       "giveMoney": 300
+    },
+    "content_epilogue": {
+      "label": "复盘：开仓之后",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wg_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "铁甲防的是刀，留下谁搬粮谁断粮的证据，才防得住下一次同样的饥饿。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "给运粮者保留甲片识记"
+        },
+        {
+          "id": "content_record_route",
+          "label": "封存辎重调运的旧次序"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "wg_luo_shixin"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "给运粮者保留甲片识记",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wg_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "铁甲防的是刀，留下谁搬粮谁断粮的证据，才防得住下一次同样的饥饿。 你选择：给运粮者保留甲片识记。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_wagang_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "封存辎重调运的旧次序",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "wg_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "铁甲防的是刀，留下谁搬粮谁断粮的证据，才防得住下一次同样的饥饿。 你选择：封存辎重调运的旧次序。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_wagang_route": true
+      }
     }
   },
   "rooms": {
@@ -91,7 +148,8 @@
       "npcs": [
         "wg_elite",
         "wg_elite"
-      ]
+      ],
+      "actions": []
     },
     "wg_02": {
       "name": "连营辎重",
@@ -125,6 +183,9 @@
       },
       "npcs": [
         "wg_luo_shixin"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -183,5 +244,19 @@
   },
   "quickRewards": {
     "money": 300
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "铁甲防的是刀，留下谁搬粮谁断粮的证据，才防得住下一次同样的饥饿。",
+    "solution": [
+      {
+        "roomId": "wg_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "wg_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

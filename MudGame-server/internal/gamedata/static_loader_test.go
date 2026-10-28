@@ -54,7 +54,7 @@ func TestStaticResourcesAreConsistent(t *testing.T) {
 		}
 	}
 	for npcID, npc := range data.NPCs {
-		if npc.CombatMode != "" && npc.CombatMode != "protected" && npc.CombatMode != "defeat" {
+		if npc.CombatMode != "" && npc.CombatMode != "protected" && npc.CombatMode != "defeat" && npc.CombatMode != "kill" {
 			t.Fatalf("npc %s has invalid combat mode %s", npcID, npc.CombatMode)
 		}
 		if npc.Faction != "" {

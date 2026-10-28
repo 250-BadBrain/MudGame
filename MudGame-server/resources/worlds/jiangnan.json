@@ -20,8 +20,15 @@
         "west": "jn_lanting"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "jn_silk_merchant"
+      ],
+      "searchFlag": "discovery_place_jn_jianchi_town",
+      "searchMessage": "你在剑池镇核对现场：剑池镇的每一户人家都会打铁淬剑——镇口的石碑上刻着\"天下剑，出剑池\"。 进一步可核验的是：散花玉簪与玉镯看似相配，留下它们的人却不一定站在同一边。",
+      "contentRole": "江南的剑池镇：从缝线反查委托者"
     },
     "jn_tingyu": {
       "name": "听雨楼",
@@ -34,17 +41,22 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
-        "jn_zither_player"
+        "jn_zither_player",
+        "r204_npc_4"
       ],
       "exits": {
         "south": "jn_jianchi_town"
       },
       "rumors": [
         "听雨楼的说书人正讲到：剑池的那把剑，剑柄上刻着一个'影'字——那是二十年前江南剑首的佩剑。"
-      ]
+      ],
+      "searchFlag": "discovery_place_jn_tingyu",
+      "searchMessage": "你在听雨楼核对现场：听雨楼是江南文人聚集的地方，楼上的曲、楼下的酒、墙上的字，都是江南的名帖。 进一步可核验的是：竹海一声长笛只有石壁回应，两声短笛才有鸟鸣。听出谁在回应，比听出曲子有多好听更要紧。",
+      "contentRole": "江南的听雨楼：琴声、剑势与停手时机"
     },
     "jn_lanting": {
       "name": "兰亭遗址",
@@ -56,12 +68,19 @@
       ],
       "safeZone": true,
       "npcs": [
-        "jn_calligrapher"
+        "jn_calligrapher",
+        "jn_poet"
       ],
       "exits": {
         "east": "jn_jianchi_town",
         "south": "jn_bamboo"
-      }
+      },
+      "searchFlag": "discovery_place_jn_lanting",
+      "searchMessage": "你在兰亭遗址核对现场：兰亭遗址的曲水流觞还在，石碑上的字迹却被拓得发亮——兰亭帖的摹本，在江南比真迹还多。 进一步可核验的是：临帖最难的是不替古人填他没有写的东西。空明照壁有字无影处，恰好值得多看一眼。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "江南的兰亭遗址：留白、字影与后人误补"
     },
     "jn_bamboo": {
       "name": "竹海小径",
@@ -77,8 +96,15 @@
         "west": "jn_sword_pool"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "jn_p2"
+      ],
+      "searchFlag": "discovery_place_jn_bamboo",
+      "searchMessage": "你在竹海小径核对现场：竹海一眼望不到头，风一过，竹叶的沙沙声像海浪——传闻竹海深处藏着剑池的源头。 进一步可核验的是：碑上剑名被磨掉，断刃却都朝向同一个缺口。 亭檐落雨先疏后密，旧剑诀写的是停手时机。",
+      "contentRole": "江南的竹海小径：用疏密雨声辨旧剑诀"
     },
     "jn_sword_pool": {
       "name": "剑池",
@@ -95,7 +121,13 @@
       ],
       "exits": {
         "east": "jn_bamboo"
-      }
+      },
+      "searchFlag": "discovery_place_jn_sword_pool",
+      "searchMessage": "你在剑池核对现场：剑池的水绿得发黑，池底沉着历代剑客淬废的剑——据说池水通着地下泉眼，好剑要在这里泡上三年。 进一步可核验的是：木牌画着清浊两泉：先引清流，再松封剑木楔。只把剑拿走，后来的人就只能从一池锈水里找传说。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "江南的剑池：双泉水线与养剑"
     }
   }
 }

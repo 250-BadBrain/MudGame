@@ -9,7 +9,8 @@
   "spawnRoomId": "sd_00",
   "puzzleInitialStates": {
     "ropenet": "woven",
-    "briefing_sd": "new"
+    "briefing_sd": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_escort": {
@@ -41,6 +42,62 @@
       },
       "message": "你一刀斩断绳网主索——整条栈道的传讯绳网哗啦啦垮进深涧。猿叟的耳目断了，他的脚再快，也快不过瞎子。",
       "repeatMessage": "绳网的断索还在深涧上晃。"
+    },
+    "content_epilogue": {
+      "label": "复盘：镖货与人",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sd_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "蜀锦披风挡过雨，护镖的本事还包括让不会武功的人走完这段山路。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "把栈道松索记入镖单"
+        },
+        {
+          "id": "content_record_route",
+          "label": "留下可供歇脚的背风处"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "sd_yuan_sou"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "把栈道松索记入镖单",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sd_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "蜀锦披风挡过雨，护镖的本事还包括让不会武功的人走完这段山路。 你选择：把栈道松索记入镖单。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_shudao_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "留下可供歇脚的背风处",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "sd_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "蜀锦披风挡过雨，护镖的本事还包括让不会武功的人走完这段山路。 你选择：留下可供歇脚的背风处。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_shudao_route": true
+      }
     }
   },
   "rooms": {
@@ -75,7 +132,8 @@
       "npcs": [
         "sd_ape_scout",
         "sd_ape_scout"
-      ]
+      ],
+      "actions": []
     },
     "sd_02": {
       "name": "绳网天梯",
@@ -107,6 +165,9 @@
       },
       "npcs": [
         "sd_yuan_sou"
+      ],
+      "actions": [
+        "content_epilogue"
       ]
     }
   },
@@ -151,5 +212,19 @@
     "items": {
       "shujin_pifeng": 1
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "蜀锦披风挡过雨，护镖的本事还包括让不会武功的人走完这段山路。",
+    "solution": [
+      {
+        "roomId": "sd_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "sd_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

@@ -14,7 +14,7 @@ func (s *Server) handleGameTalk(conn *websocket.Conn, cmd protocol.CommandMessag
 	}
 	npcID := toString(cmd.Args["npcId"])
 	res, err := engine.TalkWithView(s.repo, playerID, npcID)
-	s.replyCommand(conn, "talk", err, map[string]interface{}{"message": res.Message, "choices": res.Choices, "room": res.Room, "moved": res.Moved}, res.Logs)
+	s.replyCommand(conn, "talk", err, map[string]interface{}{"dialogue": res.Dialogue, "message": res.Message, "choices": res.Choices, "room": res.Room, "moved": res.Moved}, res.Logs)
 }
 
 func (s *Server) handleGameChooseDialogue(conn *websocket.Conn, cmd protocol.CommandMessage) {
@@ -34,7 +34,11 @@ func (s *Server) handleGameGetQuests(conn *websocket.Conn, _ protocol.CommandMes
 		return
 	}
 	res, err := engine.GetQuestsView(s.repo, playerID)
-	s.replyCommand(conn, "get_quests", err, map[string]interface{}{"quests": res.Quests}, nil)
+	var journal []map[string]string
+	if err == nil {
+		journal, err = s.repo.GetJournal(playerID)
+	}
+	s.replyCommand(conn, "get_quests", err, map[string]interface{}{"quests": res.Quests, "journal": journal}, nil)
 }
 
 func (s *Server) handleGameGetFactions(conn *websocket.Conn, _ protocol.CommandMessage) {

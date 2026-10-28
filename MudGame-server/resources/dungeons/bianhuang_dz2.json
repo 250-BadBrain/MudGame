@@ -1,7 +1,7 @@
 {
   "id": "bianhuang_dz2",
   "name": "毒瘴密林",
-  "description": "毒瘴密林——边荒传说中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "苦泉旁有活虫，甜泉旁却连苔藓都发白。 药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 60,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -9,7 +9,11 @@
   "spawnRoomId": "dz2_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "苦泉旁有活虫，甜泉旁却连苔藓都发白。 此处不能只凭武力开门；沿路观察，并核验苦甜双泉的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先隔瘴巾",
       "puzzleId": "gate",
       "rooms": [
         "dz2_02"
@@ -34,18 +38,269 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "dz2_gate": true
+      "nextState": "considered",
+      "message": "苦泉旁有活虫，甜泉旁却连苔藓都发白。 药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "把伤者搬到最香的花下"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先隔瘴巾，再取苦泉洗伤"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "用甜泉冲洗全部药草"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：倒伏药径",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "repeatMessage": "苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredDefeatNpcs": [
+        "dz2_guard"
+      ],
+      "failureMessage": "先让本处的拦路者失去战意，再救助与查验；不必消耗稀有物品。"
+    },
+    "content_detail": {
+      "label": "核验：苦甜双泉",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "dz2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。",
+      "repeatMessage": "药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。"
+    },
+    "content_decide_good": {
+      "label": "先隔瘴巾，再取苦泉洗伤",
+      "puzzleId": "gate",
+      "rooms": [
+        "dz2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你救回辨药的见证，青苔试瘴佩指向的是甜味掩毒而非怪物作祟。",
+      "repeatMessage": "你救回辨药的见证，青苔试瘴佩指向的是甜味掩毒而非怪物作祟。",
+      "setFlags": {
+        "dz2_gate": true,
+        "discovery_chapter_bianhuang_dz2": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "用甜泉冲洗全部药草",
+      "puzzleId": "gate",
+      "rooms": [
+        "dz2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "把伤者搬到最香的花下",
+      "puzzleId": "gate",
+      "rooms": [
+        "dz2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_steel_blade": {
+      "label": "以钢刀校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_steel_blade": true
+      },
+      "presentItems": {
+        "steel_blade": 1
+      }
+    },
+    "content_aid_herb": {
+      "label": "以止血草校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把药田老农辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_herb": true
+      },
+      "presentItems": {
+        "herb": 1
+      }
+    },
+    "content_aid_herb_pill": {
+      "label": "以回春丹校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_herb_pill": true
+      },
+      "presentItems": {
+        "herb_pill": 1
+      }
+    },
+    "content_aid_xuantie_zhanzhi": {
+      "label": "以玄铁战指校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_xuantie_zhanzhi": true
+      },
+      "presentItems": {
+        "xuantie_zhanzhi": 1
+      }
+    },
+    "content_aid_reed_root": {
+      "label": "以芦根校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_reed_root": true
+      },
+      "presentItems": {
+        "reed_root": 1
+      }
+    },
+    "content_aid_gongbian_jian": {
+      "label": "以宫变密剑校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_gongbian_jian": true
+      },
+      "presentItems": {
+        "gongbian_jian": 1
+      }
+    },
+    "content_aid_dz2_relic": {
+      "label": "以青苔试瘴佩校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把马邑铁匠辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_dz2_relic": true
+      },
+      "presentItems": {
+        "dz2_relic": 1
+      }
+    },
+    "content_aid_guishi_ledger": {
+      "label": "以鬼市账本校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_guishi_ledger": true
+      },
+      "presentItems": {
+        "guishi_ledger": 1
+      }
+    },
+    "content_aid_training_mace": {
+      "label": "以练习铁锏校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "dz2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把孙回春辨明的器物来历与现场互证。苦泉旁有活虫，甜泉旁却连苔藓都发白。",
+      "requiredFlags": {
+        "discovery_item_training_mace": true
+      },
+      "presentItems": {
+        "training_mace": 1
+      }
     }
   },
   "rooms": {
     "dz2_00": {
-      "name": "入口",
-      "description": "入口。法外之地——你踏入此处，前方的路在阴影中延伸。",
+      "name": "瘴林边棚",
+      "description": "瘴林边棚保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "dz2_01"
       },
@@ -54,8 +309,8 @@
       ]
     },
     "dz2_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "倒伏药径",
+      "description": "苦泉旁有活虫，甜泉旁却连苔藓都发白。",
       "exits": {
         "south": "dz2_00",
         "north": "dz2_02"
@@ -71,11 +326,23 @@
       "npcs": [
         "dz2_guard",
         "dz2_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_steel_blade",
+        "content_aid_herb",
+        "content_aid_herb_pill",
+        "content_aid_xuantie_zhanzhi",
+        "content_aid_reed_root",
+        "content_aid_gongbian_jian",
+        "content_aid_dz2_relic",
+        "content_aid_guishi_ledger",
+        "content_aid_training_mace"
       ]
     },
     "dz2_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "苦甜双泉",
+      "description": "药篓里有沾瘴的布巾，救人应先隔开布而非再灌甜水。",
       "exits": {
         "south": "dz2_01",
         "north": "dz2_03"
@@ -89,18 +356,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "dz2_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "毒藤营帐",
+      "description": "你救回辨药的见证，青苔试瘴佩指向的是甜味掩毒而非怪物作祟。",
       "exits": {
         "south": "dz2_02"
       },
       "npcs": [
         "dz2_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +387,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成苦甜双泉的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +406,29 @@
       "dz2_relic": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：先稳现场再判断；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "rescue",
+    "solution": [
+      {
+        "roomId": "dz2_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "dz2_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "dz2_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "dz2_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你救回辨药的见证，青苔试瘴佩指向的是甜味掩毒而非怪物作祟。"
+  }
 }

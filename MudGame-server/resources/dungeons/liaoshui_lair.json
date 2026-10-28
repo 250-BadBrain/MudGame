@@ -9,7 +9,8 @@
   "spawnRoomId": "ls_00",
   "puzzleInitialStates": {
     "captives": "locked",
-    "crate": "sunken"
+    "crate": "sunken",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_captive": {
@@ -55,6 +56,62 @@
         "simple_medicine": 3,
         "dry_ration": 2
       }
+    },
+    "content_epilogue": {
+      "label": "复盘：水匪之后的渡口",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ls_02"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "拆掉水寨不能自动让渡口安全；认得谁的船，才能防止同一面旗再回来。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "留下获救者指认的船记"
+        },
+        {
+          "id": "content_record_route",
+          "label": "记录赃箱的原封号"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "ls_chief"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "留下获救者指认的船记",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ls_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "拆掉水寨不能自动让渡口安全；认得谁的船，才能防止同一面旗再回来。 你选择：留下获救者指认的船记。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_liaoshui_lair_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "记录赃箱的原封号",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ls_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "拆掉水寨不能自动让渡口安全；认得谁的船，才能防止同一面旗再回来。 你选择：记录赃箱的原封号。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_liaoshui_lair_route": true
+      }
     }
   },
   "rooms": {
@@ -75,7 +132,8 @@
       "npcs": [
         "ls_pirate",
         "ls_pirate"
-      ]
+      ],
+      "actions": []
     },
     "ls_01": {
       "name": "芦荡栅门",
@@ -112,7 +170,8 @@
       ],
       "actions": [
         "listen_captive",
-        "free_captives"
+        "free_captives",
+        "content_epilogue"
       ]
     }
   },
@@ -164,5 +223,19 @@
       "simple_medicine": 3,
       "dry_ration": 2
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "拆掉水寨不能自动让渡口安全；认得谁的船，才能防止同一面旗再回来。",
+    "solution": [
+      {
+        "roomId": "ls_02",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "ls_02",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

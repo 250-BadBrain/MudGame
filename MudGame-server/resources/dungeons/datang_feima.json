@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "horses": "startled",
     "relic": "untouched",
-    "briefing_fm": "new"
+    "briefing_fm": "new",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_shang": {
@@ -70,6 +71,62 @@
         "xiaohuandan": 1,
         "herb": 10
       }
+    },
+    "content_epilogue": {
+      "label": "复盘：牧场的归属",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "fm_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "银铃不是指挥所有马匹的命令，而是让受惊的马认出熟悉照料者的声音。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "先记录惊马安抚的方法"
+        },
+        {
+          "id": "content_record_route",
+          "label": "先记录银铃曾系在哪匹马颈"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "fm_wanwan"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "先记录惊马安抚的方法",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "fm_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "银铃不是指挥所有马匹的命令，而是让受惊的马认出熟悉照料者的声音。 你选择：先记录惊马安抚的方法。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_feima_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "先记录银铃曾系在哪匹马颈",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "fm_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "银铃不是指挥所有马匹的命令，而是让受惊的马认出熟悉照料者的声音。 你选择：先记录银铃曾系在哪匹马颈。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_feima_route": true
+      }
     }
   },
   "rooms": {
@@ -104,7 +161,8 @@
       "npcs": [
         "fm_yinkui_acolyte",
         "fm_yinkui_acolyte"
-      ]
+      ],
+      "actions": []
     },
     "fm_02": {
       "name": "桑田阡陌",
@@ -124,7 +182,8 @@
       "npcs": [
         "fm_yinkui_slasher",
         "fm_yinkui_slasher"
-      ]
+      ],
+      "actions": []
     },
     "fm_03": {
       "name": "天马厩",
@@ -159,7 +218,8 @@
         "fm_wanwan"
       ],
       "actions": [
-        "retrieve_relic"
+        "retrieve_relic",
+        "content_epilogue"
       ]
     }
   },
@@ -219,5 +279,19 @@
       "xiaohuandan": 1,
       "herb": 10
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "银铃不是指挥所有马匹的命令，而是让受惊的马认出熟悉照料者的声音。",
+    "solution": [
+      {
+        "roomId": "fm_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "fm_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

@@ -100,6 +100,7 @@
               :dungeonRoomId="room?.dungeon?.id"
               :dungeonProgress="room?.dungeon?.progress"
               :questsList="questsList"
+              :journalEntries="journalEntries"
               :factionsList="factionsList"
               @close="closeInfoPanel"
               @selectBackpackItem="selectBackpackItem"
@@ -258,6 +259,7 @@ const {
   statusAttributes,
   worldsList,
   questsList,
+  journalEntries,
   factionsList,
   selectedWorldId,
   selectedSkill,
@@ -788,6 +790,7 @@ const handleMessage = (msg) => {
   } else if (msg.type === 'command' && msg.subtype === 'get_quests') {
       if (msg.flag) {
           questsList.value = msg.results.quests || [];
+          journalEntries.value = msg.results.journal || [];
           if (!silentRefresh && (!showInfoPanel.value || currentPanel.value !== 'quests')) {
               showInfoPanel.value = true;
               currentPanel.value = 'quests';
@@ -917,6 +920,7 @@ const handleMessage = (msg) => {
     }
   } else if (msg.type === 'command' && msg.subtype === 'do_action') {
       if (msg.flag) {
+          if (showInfoPanel.value && currentPanel.value === 'quests') sendSilentRefresh('get_quests');
           if (msg.results?.room) {
               room.value = msg.results.room;
               keepCurrentPlayerOnlineInRoom();

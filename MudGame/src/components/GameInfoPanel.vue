@@ -241,7 +241,7 @@
                     @click="$emit('selectDungeon', dungeon.id)">
                     <div class="map-item-line">
                       <span class="map-name">{{ dungeon.locked ? '🔒 ' : '' }}{{ dungeon.name }}</span>
-                      <span v-if="dungeon.contentStatus === 'needs_depth' || dungeon.locked" class="folder-state">{{ dungeon.contentStatus === 'needs_depth' ? '待深化' : '' }}{{ dungeon.contentStatus === 'needs_depth' && dungeon.locked ? ' · ' : '' }}{{ dungeon.locked ? dungeon.lockHint : '' }}</span>
+                      <span v-if="dungeon.contentStatus || dungeon.locked" class="folder-state">{{ dungeon.contentStatus === 'needs_depth' ? '待深化' : dungeon.contentStatus === 'enriched' ? '已扩写' : '' }}{{ dungeon.contentStatus && dungeon.locked ? ' · ' : '' }}{{ dungeon.locked ? dungeon.lockHint : '' }}</span>
                     </div>
                   </li>
                 </template>
@@ -252,7 +252,7 @@
         </div>
         <div v-if="selectedDungeon" class="map-description-area collapsible-detail" @click="$emit('selectDungeon', selectedDungeon.id)">
           <div class="map-desc-text">{{ selectedDungeon.description }}</div>
-          <div v-if="selectedDungeon.contentStatus === 'needs_depth'" class="map-sub-line">{{ selectedDungeon.contentNote }}</div>
+          <div v-if="selectedDungeon.contentNote" class="map-sub-line">{{ selectedDungeon.contentNote }}</div>
           <div class="map-sub-line">满额奖励：{{ fullRewardExperience }}经验 {{ fullRewardPotential }}潜能</div>
           <div v-if="isInDungeon && dungeonRoomId === selectedDungeon?.id" class="map-sub-line">当前进度：{{ dungeonProgress ?? 0 }}%</div>
           <div v-if="selectedDungeon.locked" class="map-sub-line">{{ selectedDungeon.lockHint }}</div>
@@ -262,7 +262,7 @@
           <div v-if="selectedDungeon.cleared && quickCompleteStatusHint" class="map-sub-line">{{ quickCompleteStatusHint }}</div>
         </div>
       </div>
-      <GameQuestPanel v-if="currentPanel === 'quests'" :quests="questsList" />
+      <GameQuestPanel v-if="currentPanel === 'quests'" :quests="questsList" :journal="journalEntries" />
       <GameFactionPanel v-if="currentPanel === 'factions'" :factions="factionsList" />
     </div>
   </div>
@@ -312,6 +312,7 @@ const props = defineProps({
   dungeonRoomId: String,
   dungeonProgress: { type: Number, default: 0 },
   questsList: { type: Array, default: () => [] },
+  journalEntries: { type: Array, default: () => [] },
   factionsList: { type: Array, default: () => [] }
 })
 

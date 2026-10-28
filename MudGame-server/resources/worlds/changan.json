@@ -18,7 +18,8 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "ca2_west_keeper"
@@ -26,7 +27,10 @@
       "exits": {
         "east": "ca2_sky_street",
         "south": "ca2_beitian_fang"
-      }
+      },
+      "searchFlag": "discovery_place_ca2_west_market",
+      "searchMessage": "你在长安西市核对现场：长安西市比洛阳任何一座市集都大——胡商驼队、波斯银币、高昌骏马挤在同一条街上，叫卖声能盖过钟鼓。 进一步可核验的是：粟特契约把货价与见证人分栏。钱付完可以两清，名字一旦交出去却未必能收回。",
+      "contentRole": "长安的长安西市：异地契约的姓名与价格"
     },
     "ca2_sky_street": {
       "name": "朱雀天街",
@@ -42,8 +46,12 @@
         "east": "ca2_hechun_pavilion"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "searchFlag": "discovery_place_ca2_sky_street",
+      "searchMessage": "你在朱雀天街核对现场：宽一百步的朱雀天街笔直向北，直通皇城。两侧槐树成行，槐叶落了一地金。 进一步可核验的是：宽一百步的朱雀天街笔直向北，直通皇城。两侧槐树成行，槐叶落了一地金。",
+      "contentRole": "长安的朱雀天街：从现场痕迹校验传闻"
     },
     "ca2_anyang_gate": {
       "name": "皇城安上门",
@@ -59,7 +67,13 @@
       ],
       "exits": {
         "south": "ca2_sky_street"
-      }
+      },
+      "searchFlag": "discovery_place_ca2_anyang_gate",
+      "searchMessage": "你在皇城安上门核对现场：安上门城楼高耸，骁果卫士按戟而立。门后就是皇城——大隋的脉搏从这里传向天下。 进一步可核验的是：真换班先交旧牌再点新人，伪装者常把顺序倒过来。听见整齐口令时，别忘看两只手分别拿着什么。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "长安的皇城安上门：宫门换班的真假"
     },
     "ca2_hechun_pavilion": {
       "name": "和春亭",
@@ -76,7 +90,13 @@
       "exits": {
         "west": "ca2_sky_street",
         "north": "ca2_cixiang_yuan"
-      }
+      },
+      "searchFlag": "discovery_place_ca2_hechun_pavilion",
+      "searchMessage": "你在和春亭核对现场：曲江池畔的和春亭依旧垂帘青灯——师妃暄长安之行的驻处。亭外游人如织，亭内清净如禅。 进一步可核验的是：念珠缺一颗不等于修行缺一分；先问遗失还是有意留下空位，才谈补全。慈航的试炼也不是把每处留白填满。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "长安的和春亭：念珠异本与不争之问"
     },
     "ca2_cixiang_yuan": {
       "name": "慈航别院",
@@ -91,8 +111,12 @@
         "south": "ca2_hechun_pavilion"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "searchFlag": "discovery_place_ca2_cixiang_yuan",
+      "searchMessage": "你在慈航别院核对现场：慈航静斋在长安的驻锡别院，院墙高耸，竹影婆娑。院门虚掩，门上悬一枚木剑——天下人都认得这枚剑。 进一步可核验的是：慈航静斋在长安的驻锡别院，院墙高耸，竹影婆娑。院门虚掩，门上悬一枚木剑——天下人都认得这枚剑。",
+      "contentRole": "长安的慈航别院：从现场痕迹校验传闻"
     },
     "ca2_beitian_fang": {
       "name": "悲田坊",
@@ -103,11 +127,15 @@
       ],
       "safeZone": false,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "exits": {
         "north": "ca2_west_market"
-      }
+      },
+      "searchFlag": "discovery_place_ca2_beitian_fang",
+      "searchMessage": "你在悲田坊核对现场：西市南面的贫民坊，窝棚与破庙挤作一处。战乱把北方的流民一波波送到这里——佛寺的施粥棚前，队伍从早排到晚。 进一步可核验的是：西市南面的贫民坊，窝棚与破庙挤作一处。战乱把北方的流民一波波送到这里——佛寺的施粥棚前，队伍从早排到晚。",
+      "contentRole": "长安的悲田坊：从现场痕迹校验传闻"
     }
   }
 }

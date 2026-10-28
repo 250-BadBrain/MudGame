@@ -11,7 +11,8 @@
     "sunken": "afloat",
     "briefing_hy2": "new",
     "cabin_hy2": "untouched",
-    "deck_hy2": "untouched"
+    "deck_hy2": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_scout": {
@@ -73,6 +74,62 @@
       "repeatMessage": "已被你搜遍。",
       "giveItems": {},
       "giveMoney": 400
+    },
+    "content_epilogue": {
+      "label": "复盘：沉船锁口",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "hy2_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "分水刺和锁浪钩各有用处：一个切开近身缆结，一个把失控船身拉回航道。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "为打捞者标出活缆"
+        },
+        {
+          "id": "content_record_route",
+          "label": "为守船者留下水线图"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "hy2_chilaowen"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "为打捞者标出活缆",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "hy2_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "分水刺和锁浪钩各有用处：一个切开近身缆结，一个把失控船身拉回航道。 你选择：为打捞者标出活缆。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_fuyu_shuizhan_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "为守船者留下水线图",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "hy2_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "分水刺和锁浪钩各有用处：一个切开近身缆结，一个把失控船身拉回航道。 你选择：为守船者留下水线图。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_fuyu_shuizhan_route": true
+      }
     }
   },
   "rooms": {
@@ -107,7 +164,8 @@
       "npcs": [
         "hy2_yuan_sailor",
         "hy2_yuan_sailor"
-      ]
+      ],
+      "actions": []
     },
     "hy2_02": {
       "name": "沉船锁口",
@@ -143,7 +201,8 @@
         "hy2_chilaowen"
       ],
       "actions": [
-        "search_deck"
+        "search_deck",
+        "content_epilogue"
       ]
     }
   },
@@ -211,5 +270,19 @@
   },
   "quickRewards": {
     "money": 700
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "分水刺和锁浪钩各有用处：一个切开近身缆结，一个把失控船身拉回航道。",
+    "solution": [
+      {
+        "roomId": "hy2_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "hy2_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "datang_wr2",
   "name": "万刃窟",
-  "description": "万刃窟——大唐双龙传中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "越锋利的刃越悬在外侧，石廊中央反而被钝背护住。 齿台有退锋槽，先收最外一刃，整排才肯让出空隙。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 69,
   "chainId": "datang_double_dragon",
   "chainName": "大唐双龙传",
@@ -9,7 +9,11 @@
   "spawnRoomId": "wr2_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "越锋利的刃越悬在外侧，石廊中央反而被钝背护住。 此处不能只凭武力开门；沿路观察，并核验退锋齿台的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：循钝背入廊",
       "puzzleId": "gate",
       "rooms": [
         "wr2_02"
@@ -34,18 +38,170 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "wr2_gate": true
+      "nextState": "considered",
+      "message": "越锋利的刃越悬在外侧，石廊中央反而被钝背护住。 齿台有退锋槽，先收最外一刃，整排才肯让出空隙。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known",
+        "content_support": "ready"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "把所有刃口推向同处"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "循钝背入廊，先退最外刃"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "拔出最中央的长刃"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：悬刃石廊",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "wr2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "越锋利的刃越悬在外侧，石廊中央反而被钝背护住。",
+      "repeatMessage": "越锋利的刃越悬在外侧，石廊中央反而被钝背护住。"
+    },
+    "content_detail": {
+      "label": "核验：退锋齿台",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "wr2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "齿台有退锋槽，先收最外一刃，整排才肯让出空隙。",
+      "repeatMessage": "齿台有退锋槽，先收最外一刃，整排才肯让出空隙。"
+    },
+    "content_brace": {
+      "label": "先做人工支护",
+      "puzzleId": "content_support",
+      "rooms": [
+        "wr2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "bracing",
+      "message": "你先找稳固的着力点，支护尚需最后一道固定。",
+      "repeatMessage": "你先找稳固的着力点，支护尚需最后一道固定。",
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      }
+    },
+    "content_secure": {
+      "label": "再固定支护",
+      "puzzleId": "content_support",
+      "rooms": [
+        "wr2_02"
+      ],
+      "fromStates": [
+        "bracing"
+      ],
+      "nextState": "ready",
+      "message": "支护已经稳固，现在可以不冒险地判断机关。",
+      "repeatMessage": "支护已经稳固，现在可以不冒险地判断机关。"
+    },
+    "content_pickaxe": {
+      "label": "用铁镐校稳支点（不消耗）",
+      "puzzleId": "content_support",
+      "rooms": [
+        "wr2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "ready",
+      "message": "你以铁镐作短暂杠杆校稳支点，随后把铁镐收回。",
+      "repeatMessage": "你以铁镐作短暂杠杆校稳支点，随后把铁镐收回。",
+      "presentItems": {
+        "iron_pickaxe": 1
+      },
+      "requiredPuzzleStates": {
+        "content_detail": "known"
+      }
+    },
+    "content_decide_good": {
+      "label": "循钝背入廊，先退最外刃",
+      "puzzleId": "gate",
+      "rooms": [
+        "wr2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "你没有再造一场杀局，退锋铜尺记录了兵器也能为人留出退路。",
+      "repeatMessage": "你没有再造一场杀局，退锋铜尺记录了兵器也能为人留出退路。",
+      "setFlags": {
+        "wr2_gate": true,
+        "discovery_chapter_datang_wr2": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "拔出最中央的长刃",
+      "puzzleId": "gate",
+      "rooms": [
+        "wr2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：齿台有退锋槽，先收最外一刃，整排才肯让出空隙。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：齿台有退锋槽，先收最外一刃，整排才肯让出空隙。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "把所有刃口推向同处",
+      "puzzleId": "gate",
+      "rooms": [
+        "wr2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：齿台有退锋槽，先收最外一刃，整排才肯让出空隙。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：齿台有退锋槽，先收最外一刃，整排才肯让出空隙。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_wr2_relic": {
+      "label": "以退锋铜尺校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "wr2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把沈七辨明的器物来历与现场互证。越锋利的刃越悬在外侧，石廊中央反而被钝背护住。",
+      "requiredFlags": {
+        "discovery_item_wr2_relic": true
+      },
+      "presentItems": {
+        "wr2_relic": 1
+      }
     }
   },
   "rooms": {
     "wr2_00": {
-      "name": "入口",
-      "description": "入口。隋末乱世——你踏入此处，前方的路在阴影中延伸。",
+      "name": "断刃窟口",
+      "description": "断刃窟口保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "wr2_01"
       },
@@ -54,8 +210,8 @@
       ]
     },
     "wr2_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "悬刃石廊",
+      "description": "越锋利的刃越悬在外侧，石廊中央反而被钝背护住。",
       "exits": {
         "south": "wr2_00",
         "north": "wr2_02"
@@ -71,11 +227,15 @@
       "npcs": [
         "wr2_guard",
         "wr2_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_wr2_relic"
       ]
     },
     "wr2_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "退锋齿台",
+      "description": "齿台有退锋槽，先收最外一刃，整排才肯让出空隙。",
       "exits": {
         "south": "wr2_01",
         "north": "wr2_03"
@@ -89,18 +249,23 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail",
+        "content_brace",
+        "content_secure",
+        "content_pickaxe"
       ]
     },
     "wr2_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "万刃藏室",
+      "description": "你没有再造一场杀局，退锋铜尺记录了兵器也能为人留出退路。",
       "exits": {
         "south": "wr2_02"
       },
       "npcs": [
         "wr2_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +283,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成退锋齿台的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +302,37 @@
       "wr2_relic": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：手工支护或器物辅助；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "tool",
+    "solution": [
+      {
+        "roomId": "wr2_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "wr2_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "wr2_02",
+        "actionId": "content_brace"
+      },
+      {
+        "roomId": "wr2_02",
+        "actionId": "content_secure"
+      },
+      {
+        "roomId": "wr2_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "wr2_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "你没有再造一场杀局，退锋铜尺记录了兵器也能为人留出退路。"
+  }
 }

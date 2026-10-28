@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "chan": "unheard",
     "gift": "unoffered",
-    "pavilion_ca": "untouched"
+    "pavilion_ca": "untouched",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_tea": {
@@ -78,6 +79,62 @@
       "repeatMessage": "已被你搜遍。",
       "giveItems": {},
       "giveMoney": 400
+    },
+    "content_epilogue": {
+      "label": "复盘：长安众口",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ca_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "同一座城中，胡商、知客与行脚者说的长安并不相同；不能只留最响的一种说法。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "保留市井茶话与禅言的差别"
+        },
+        {
+          "id": "content_record_route",
+          "label": "把礼物来处记在别院檐下"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "ca_bian_bufu"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "保留市井茶话与禅言的差别",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ca_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "同一座城中，胡商、知客与行脚者说的长安并不相同；不能只留最响的一种说法。 你选择：保留市井茶话与禅言的差别。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_changan_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "把礼物来处记在别院檐下",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "ca_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "同一座城中，胡商、知客与行脚者说的长安并不相同；不能只留最响的一种说法。 你选择：把礼物来处记在别院檐下。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_changan_route": true
+      }
     }
   },
   "rooms": {
@@ -112,7 +169,8 @@
       "npcs": [
         "ca_yinkui_guard",
         "ca_yinkui_guard"
-      ]
+      ],
+      "actions": []
     },
     "ca_02": {
       "name": "东市坊巷",
@@ -132,7 +190,8 @@
       "npcs": [
         "ca_yinkui_guard",
         "ca_yinkui_guard"
-      ]
+      ],
+      "actions": []
     },
     "ca_03": {
       "name": "和春亭",
@@ -159,7 +218,8 @@
       ],
       "actions": [
         "accept_gift",
-        "search_pavilion"
+        "search_pavilion",
+        "content_epilogue"
       ]
     }
   },
@@ -217,5 +277,19 @@
       "xiaohuandan": 2
     },
     "money": 400
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "同一座城中，胡商、知客与行脚者说的长安并不相同；不能只留最响的一种说法。",
+    "solution": [
+      {
+        "roomId": "ca_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "ca_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

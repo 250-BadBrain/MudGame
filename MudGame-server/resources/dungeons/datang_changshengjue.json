@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "briefing": "new",
     "wreck": "untouched",
-    "farewell": "pending"
+    "farewell": "pending",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "salvage_iron_box": {
@@ -58,6 +59,62 @@
       "failureMessage": "傅君婥气息紊乱，正自调息抗衡体内异种真气，无暇他顾。",
       "message": "傅君婥向你郑重一礼。",
       "repeatMessage": "柳林深处已再无追兵踪影。"
+    },
+    "content_epilogue": {
+      "label": "复盘：渡江之后谁应被记住",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "river_04"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "追逐长生诀的人只看见秘本，渡口留下的却是一个陌生人为陌生人撑船的痕迹。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "记录船夫冒险渡人的行止"
+        },
+        {
+          "id": "content_record_route",
+          "label": "记下傅君婥未肯交出的秘密"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "csj_yuwen_huaji"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "记录船夫冒险渡人的行止",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "river_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "追逐长生诀的人只看见秘本，渡口留下的却是一个陌生人为陌生人撑船的痕迹。 你选择：记录船夫冒险渡人的行止。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_changshengjue_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "记下傅君婥未肯交出的秘密",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "river_04"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "追逐长生诀的人只看见秘本，渡口留下的却是一个陌生人为陌生人撑船的痕迹。 你选择：记下傅君婥未肯交出的秘密。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_datang_changshengjue_route": true
+      }
     }
   },
   "rooms": {
@@ -92,7 +149,8 @@
       "npcs": [
         "csj_yuwen_soldier",
         "csj_yuwen_soldier"
-      ]
+      ],
+      "actions": []
     },
     "river_02": {
       "name": "沉船浅滩",
@@ -135,7 +193,8 @@
       "npcs": [
         "csj_yuwen_soldier",
         "csj_yuwen_vanguard"
-      ]
+      ],
+      "actions": []
     },
     "river_04": {
       "name": "北岸柳林",
@@ -144,7 +203,8 @@
         "south": "river_03"
       },
       "actions": [
-        "fu_farewell"
+        "fu_farewell",
+        "content_epilogue"
       ],
       "npcs": [
         "csj_fu_junzhuo",
@@ -209,5 +269,19 @@
       "herb": 4,
       "dry_ration": 2
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "追逐长生诀的人只看见秘本，渡口留下的却是一个陌生人为陌生人撑船的痕迹。",
+    "solution": [
+      {
+        "roomId": "river_04",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "river_04",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

@@ -1,0 +1,2014 @@
+{
+  "items": [
+    "beidou_xingpan",
+    "bf2_relic",
+    "bianbuou_wisdom",
+    "bianhuang_law",
+    "bianhuang_wolfpelt",
+    "bianhuang_xue",
+    "bronze_box_rubbing",
+    "bronze_fragment",
+    "cangming_juan",
+    "caoyun_lingpai",
+    "changjiang_tidecrystal",
+    "cj2_relic",
+    "common_clothes",
+    "common_shoes",
+    "dahuandan",
+    "darts",
+    "dongting_ruanjia",
+    "dry_ration",
+    "dz2_relic",
+    "fenshui_ci",
+    "gongbian_jian",
+    "gongbian_mingzhu",
+    "guishi_blade",
+    "guishi_jade",
+    "guishi_ledger",
+    "hanxue_dao",
+    "herb",
+    "herb_pill",
+    "ht2_relic",
+    "iron_pickaxe",
+    "iron_staff",
+    "iron_sword",
+    "jianchi_jian",
+    "jianchi_m",
+    "jianshou_jian",
+    "jinggang_staff",
+    "jingyan_longscale",
+    "jueji_h",
+    "kangshi_remnant",
+    "kongming_z",
+    "langfan_j",
+    "langwang_dao",
+    "langya_chui",
+    "langyan_ling",
+    "lanjiang_vest",
+    "liangdao_spear",
+    "lieshi_mace",
+    "lm2_relic",
+    "longgong_z",
+    "longyin_zhu",
+    "manual_bawang_qiang",
+    "manual_bloody_blade",
+    "manual_cihang_jiandian",
+    "manual_csj_changshengjue",
+    "manual_dongting_xinf",
+    "manual_fengmo_gun",
+    "manual_fuhu_jin",
+    "manual_hunyuan_neigong",
+    "manual_jingang_buhuai",
+    "manual_jyg_zhanshentu_dao",
+    "manual_lieshi_jian",
+    "manual_lingxu_bu",
+    "manual_mantian_huayu",
+    "manual_poxu_zhi",
+    "manual_suolang_gou",
+    "manual_taiyi_jianfa",
+    "manual_talang_jue",
+    "manual_taxue_wuhen",
+    "manual_thunder_sword",
+    "manual_tiandao_blade",
+    "manual_tianmo_ce",
+    "manual_tiebi_gong",
+    "manual_wuzhen_pian",
+    "manual_xiulou_daofa",
+    "manual_youlong_bian",
+    "moshi_lingzhu",
+    "nujiao_belt",
+    "nujiao_saber",
+    "old_map_fragment",
+    "posui_huan",
+    "reed_root",
+    "saibei_wolftooth",
+    "sanhua_flowerpin",
+    "sanhua_yuzhuo",
+    "sealed_letter",
+    "sh2_relic",
+    "shengong_q",
+    "shenhai_zhenzhu",
+    "shuanglong_bei",
+    "shujin_pifeng",
+    "silk_road_map",
+    "simple_medicine",
+    "smoke_powder",
+    "songque_testament",
+    "steel_blade",
+    "suolang_hook",
+    "tangmei_gauntlet",
+    "tangmen_baojian",
+    "tangmen_tili",
+    "tangmen_z",
+    "tezhong_dahuandan",
+    "tg2_relic",
+    "th2_relic",
+    "tianjin_yuepei",
+    "tianma_ling",
+    "tianmo_pei",
+    "training_hook",
+    "training_mace",
+    "training_spear",
+    "training_whip",
+    "tx2_relic",
+    "tx3_relic",
+    "wagang_tiejia",
+    "wanwan_feather",
+    "wr2_relic",
+    "xb2_relic",
+    "xiaohuandan",
+    "xinggong_jian",
+    "xuantie_zhanzhi",
+    "xueling_h",
+    "yanbang_yupei",
+    "yanggong_sword",
+    "yg2_relic",
+    "yg_baoku_pearl",
+    "yinkui_lotus",
+    "ym2_relic",
+    "youlong_whip",
+    "yulie_shuangdao",
+    "yunhe_g",
+    "yunhe_pao",
+    "yy2_relic",
+    "zhanma_dao",
+    "zhenshui_huan",
+    "zhongjuan_wu",
+    "zhumei_luopan"
+  ],
+  "npcs": [
+    "academy_teacher",
+    "ancient_scroll_keeper",
+    "bd_caravan_head",
+    "bd_flag_guard",
+    "bd_flag_vanguard",
+    "bd_path_guard",
+    "bd_tianxu_guard",
+    "bd_tuoba_gu",
+    "beacon_deserter",
+    "bf2_boss",
+    "bf2_guard",
+    "bh2_boss",
+    "bh2_guard",
+    "bh2_jueji_boss",
+    "bh2_jueji_guard",
+    "bh_archer",
+    "bh_captain",
+    "bh_general",
+    "bh_ji_qianqian",
+    "bh_new_king",
+    "bh_rider",
+    "bh_swordsman",
+    "bh_wolf_royal",
+    "black_market_broker",
+    "bs_herbalist",
+    "bs_jiange_clerk",
+    "bs_t2",
+    "bs_tang_steward",
+    "bs_tea_house",
+    "bs_wine_maker",
+    "ca2_erci_soldier",
+    "ca2_monk",
+    "ca2_west_keeper",
+    "ca_bian_bufu",
+    "ca_shi_feixuan",
+    "ca_tea_master",
+    "ca_yinkui_guard",
+    "cf_ghost_captain",
+    "cf_reef_guardian",
+    "cj2_boss",
+    "cj2_guard",
+    "csj_boatman",
+    "csj_fu_junzhuo",
+    "csj_yuwen_huaji",
+    "csj_yuwen_scout",
+    "csj_yuwen_soldier",
+    "csj_yuwen_vanguard",
+    "ct_bian_phantom",
+    "cy_eraser",
+    "cy_ledger_master",
+    "db_boatwoman",
+    "db_commander",
+    "db_scout",
+    "db_zhang_xiu",
+    "dd2_palace_guard",
+    "dd2_pool_poet",
+    "dd2_silk_merchant",
+    "dd3_ledger_guard",
+    "dd3_water_ghost",
+    "dm2_loot_cultivator",
+    "dm2_lost_soul",
+    "dm2_mirage_phantom",
+    "dm3_boss",
+    "dm3_guard",
+    "dm3_shengong_boss",
+    "dm3_shengong_guard",
+    "dm_jiaoren",
+    "dm_mirage_keeper",
+    "dm_old_captain",
+    "dm_pearl_diver",
+    "dm_s2",
+    "dm_sailor",
+    "dock_foreman",
+    "dz2_boss",
+    "dz2_guard",
+    "east_market_keeper",
+    "escort_bureau_chief",
+    "fm_ranch_hand",
+    "fm_shang_xiuxun",
+    "fm_wanwan",
+    "fm_yinkui_acolyte",
+    "fm_yinkui_slasher",
+    "ft_wanwan_phantom",
+    "fy2_fang_yeyu",
+    "fy2_moshi_elite",
+    "fy2_steward",
+    "fy3_boss",
+    "fy3_guard",
+    "fy3_langfan_boss",
+    "fy3_langfan_guard",
+    "gb2_boss",
+    "gb2_guard",
+    "gb2_old_eunuch",
+    "gb2_xinggong_boss",
+    "gb2_xinggong_guard",
+    "gb2_yunque",
+    "gb_dugu_ling",
+    "gb_pegasus_sergeant",
+    "gb_yuwen_guard",
+    "gb_yuwen_jun",
+    "guild_steward",
+    "gw_boss",
+    "gw_guard",
+    "gw_longgong_boss",
+    "gw_longgong_guard",
+    "hc_bandit_1",
+    "hc_bandit_2",
+    "hc_bandit_boss",
+    "hc_caravan_leader",
+    "heluo_blacksmith",
+    "herbalist_sun",
+    "ht2_boss",
+    "ht2_guard",
+    "hy2_chilaowen",
+    "hy2_scout",
+    "hy2_yuan_captain",
+    "hy2_yuan_sailor",
+    "jl_canal_ambusher",
+    "jl_fang_zeliu",
+    "jl_infiltrator",
+    "jl_iron_cavalry",
+    "jl_kou_zhong",
+    "jl_ladder_trooper",
+    "jl_lu_miaozi",
+    "jl_refugee_leader",
+    "jl_spearman",
+    "jl_vanguard_commander",
+    "jl_xu_ziling",
+    "jm2_mongol_prince_guard",
+    "jm2_old_monk",
+    "jm2_saman_elder",
+    "jm2_yelv_xuan",
+    "jm_mongol_adept",
+    "jm_mongol_warrior",
+    "jm_qi_bishao",
+    "jm_si_hanfei",
+    "jn2_pool_frog",
+    "jn2_sword_thief",
+    "jn3_boss",
+    "jn3_guard",
+    "jn3_shen_boss",
+    "jn3_shen_guard",
+    "jn_calligrapher",
+    "jn_p2",
+    "jn_poet",
+    "jn_pool_keeper",
+    "jn_silk_merchant",
+    "jn_sword_apprentice",
+    "jn_sword_daozi",
+    "jn_zither_player",
+    "jt_kangshi_phantom",
+    "jyg_stone_guard",
+    "jyg_sword_guard",
+    "jyg_war_phantom",
+    "kj_kujing_weng",
+    "kj_ropemaker",
+    "kj_yinkui_adept",
+    "kj_yinkui_guard",
+    "ld_courier_chief",
+    "ld_wagang_rider",
+    "ld_wang_bodang",
+    "lj_old_boatman",
+    "lj_pang_ban",
+    "lj_phantom_soldier",
+    "lm2_boss",
+    "lm2_guard",
+    "ls_captive",
+    "ls_chief",
+    "ls_dragon_guard",
+    "ls_pirate",
+    "ls_water_spirit",
+    "luoshui_bandit",
+    "luoyang_guard",
+    "mg_adept",
+    "mg_disciple",
+    "mg_li_gong",
+    "mg_steward",
+    "military_instructor",
+    "ms_elder",
+    "ms_elite",
+    "mute_refugee_woman",
+    "nan_market_peddler",
+    "nj_daoshou",
+    "nj_fang_yeyu",
+    "nj_qiangwei",
+    "nj_sentinel",
+    "nj_shuangjian",
+    "nj_spy",
+    "nj_wounded",
+    "north_alley_thug",
+    "north_market_broker",
+    "office_clerk",
+    "old_refugee",
+    "pk_boss",
+    "pk_guard",
+    "pk_kongming_boss",
+    "pk_kongming_guard",
+    "qingyi_spy",
+    "r204_npc_0",
+    "r204_npc_1",
+    "r204_npc_2",
+    "r204_npc_3",
+    "r204_npc_4",
+    "road_bandit",
+    "road_raider",
+    "salt_disciple",
+    "salt_hall_master",
+    "sb2_boss",
+    "sb2_guard",
+    "sb2_white_wolf",
+    "sb2_wolf_champion",
+    "sb2_wolf_guard",
+    "sb2_xueling_boss",
+    "sb2_xueling_guard",
+    "sb_beacon_guard",
+    "sb_centurion",
+    "sb_grassland_khan",
+    "sb_grassland_rider",
+    "sb_horse_trader",
+    "sb_iron_smith",
+    "sb_s2",
+    "sb_scout_captain",
+    "sb_wolf_scout",
+    "sd_ape_rouge",
+    "sd_ape_scout",
+    "sd_escort_head",
+    "sd_yuan_sou",
+    "sh2_boss",
+    "sh2_guard",
+    "sh_guard_captain",
+    "sh_hua_wuying",
+    "sh_informant",
+    "sh_yinkui_maid",
+    "sl_gate_boss",
+    "sl_main_boss",
+    "station_master_luo",
+    "storyteller",
+    "td_inner_shadow",
+    "td_song_que",
+    "td_steward",
+    "td_wood_puppet",
+    "temple_assassin",
+    "temple_bandit",
+    "tg2_boss",
+    "tg2_guard",
+    "th2_boss",
+    "th2_guard",
+    "tm2_boss",
+    "tm2_guard",
+    "tm2_tianti_boss",
+    "tm2_tianti_guard",
+    "tm_trial_guard",
+    "tm_trial_master",
+    "tongguan_officer",
+    "tt_song_phantom",
+    "tx2_boss",
+    "tx2_guard",
+    "tx3_boss",
+    "tx3_guard",
+    "weapon_school_master",
+    "west_gate_guard",
+    "wg_defender",
+    "wg_elite",
+    "wg_luo_shixin",
+    "wg_quartermaster",
+    "wr2_boss",
+    "wr2_guard",
+    "wt_archer",
+    "wt_chief",
+    "wt_helian_ba",
+    "wt_scout",
+    "xb2_boss",
+    "xb2_guard",
+    "xy_bai_lang2",
+    "xy_wolf_remnant",
+    "yg2_boss",
+    "yg2_guard",
+    "yg_00_guard",
+    "yg_guardian_ghost",
+    "yg_kang_xiaoli",
+    "yg_merchant_ghost",
+    "yg_noble_ghost",
+    "yg_stone_golem",
+    "yg_turkic_soldier",
+    "yg_yinkui_witch",
+    "yh_pian_jiang",
+    "yh_pian_soldier",
+    "ym2_boss",
+    "ym2_guard",
+    "yy2_boss",
+    "yy2_guard",
+    "yz2_boss",
+    "yz2_guard",
+    "yz2_yunhe_boss",
+    "yz2_yunhe_guard",
+    "yz_boat_girl",
+    "yz_m2",
+    "yz_musician",
+    "yz_rebel_gang",
+    "yz_salt_merchant",
+    "yz_second_chief",
+    "yz_tea_master",
+    "yz_yamen_clerk",
+    "zd2_ape_king",
+    "zd2_ape_rouge",
+    "zd_chuan_ying",
+    "zd_shaman_guard",
+    "zd_tulu_adept",
+    "zd_war_phantom",
+    "zh_thief_leader",
+    "zh_thief_scout",
+    "zj_mongol_champion",
+    "zj_mongol_elite"
+  ],
+  "skills": [
+    "basic_blade",
+    "basic_hidden_weapon",
+    "basic_hook",
+    "basic_literacy",
+    "basic_mace",
+    "basic_neigong",
+    "basic_parry",
+    "basic_qinggong",
+    "basic_spear",
+    "basic_staff",
+    "basic_sword",
+    "basic_unarmed",
+    "basic_whip",
+    "bawang_qiang",
+    "bloody_blade",
+    "cihang_jiandian",
+    "csj_changshengjue",
+    "dongting_xinf",
+    "fengmo_gun",
+    "fuhu_jin",
+    "hunyuan_neigong",
+    "jingang_buhuai",
+    "jyg_zhanshentu_dao",
+    "lieshi_jian",
+    "lingxu_bu",
+    "mantian_huayu",
+    "poxu_zhi",
+    "suolang_gou",
+    "taiyi_jianfa",
+    "talang_jue",
+    "taxue_wuhen",
+    "thunder_sword",
+    "tiandao_blade",
+    "tianmo_ce",
+    "tiebi_gong",
+    "wuzhen_pian",
+    "xiulou_daofa",
+    "youlong_bian"
+  ],
+  "quests": [
+    "bashu_thanks",
+    "beacon_signal_case",
+    "bianguan_fenghuo",
+    "cangming_yijuan",
+    "caoyin_case",
+    "changan_letter",
+    "dongdu_truth",
+    "dongming_song",
+    "escort_rumor_run",
+    "gongbian_aftermath",
+    "gongmen_ye",
+    "jiangnan_heart",
+    "jueji_houji",
+    "kongming_dao",
+    "kongming_daozhen",
+    "langfan_legacy",
+    "lanting_tie",
+    "longgong_yi",
+    "longgong_yiji",
+    "longyin_zhengming",
+    "luoyang_bounty",
+    "mishi_aftermath",
+    "quest_r204_0",
+    "quest_r204_1",
+    "quest_r204_2",
+    "quest_r204_3",
+    "quest_r204_4",
+    "quest_r204_5",
+    "quest_r204_6",
+    "quest_r204_7",
+    "quest_r204_8",
+    "quest_r204_9",
+    "refugee_rumor_case",
+    "saibei_treasure",
+    "salt_smuggling_case",
+    "xinggong_after",
+    "xinggong_aftermath",
+    "yangzhou_bounty",
+    "yunhe_houyi",
+    "zhandao_case",
+    "zhongjuan_daozhen"
+  ],
+  "factions": [
+    "bandits",
+    "heluo_academy",
+    "heluo_merchant_guild",
+    "jianghuai_army",
+    "luoyang_common_training",
+    "luoyang_escort",
+    "luoyang_military",
+    "luoyang_office",
+    "mongol_khan",
+    "moshi_palace",
+    "neutral",
+    "qingyi_spies",
+    "salt_gang",
+    "song_clan",
+    "turkic_khan",
+    "unknown_assassins",
+    "west_market",
+    "yan_army",
+    "yinkui_sect"
+  ],
+  "worlds": [
+    "bashu",
+    "changan",
+    "dongdu",
+    "dongming",
+    "jiangnan",
+    "luoyang",
+    "saibei",
+    "yangzhou"
+  ],
+  "rooms": [
+    "bs_city_gate",
+    "bs_huanhua",
+    "bs_jiange",
+    "bs_market",
+    "bs_qingcheng",
+    "bs_tang_village",
+    "ca2_anyang_gate",
+    "ca2_beitian_fang",
+    "ca2_cixiang_yuan",
+    "ca2_hechun_pavilion",
+    "ca2_sky_street",
+    "ca2_west_market",
+    "dd2_gongmen",
+    "dd2_market",
+    "dd2_tianjin",
+    "dd2_wanqu",
+    "dm_harbor",
+    "dm_market",
+    "dm_mirage",
+    "dm_palace",
+    "dm_reef",
+    "jn_bamboo",
+    "jn_jianchi_town",
+    "jn_lanting",
+    "jn_sword_pool",
+    "jn_tingyu",
+    "ly_00",
+    "ly_abandoned_temple",
+    "ly_academy",
+    "ly_beili_alley",
+    "ly_dock",
+    "ly_east_market",
+    "ly_herbal_hall",
+    "ly_inn",
+    "ly_luonan_trail",
+    "ly_merchant_guild",
+    "ly_military_office",
+    "ly_nan_market",
+    "ly_north_market",
+    "ly_north_office",
+    "ly_old_alley",
+    "ly_outskirts",
+    "ly_reed_marsh",
+    "ly_refugee_camp",
+    "ly_salt_hall",
+    "ly_salt_wharf",
+    "ly_south_gate",
+    "ly_weapon_school",
+    "ly_west_gate",
+    "ly_west_market",
+    "sb_beacon",
+    "sb_grassland",
+    "sb_market",
+    "sb_mayi",
+    "sb_wolf_pass",
+    "tg_guandao",
+    "tg_jingou_beacon",
+    "tg_taolin_station",
+    "tg_tongguan_foot",
+    "yz_bridge",
+    "yz_dock",
+    "yz_guanjie",
+    "yz_lake",
+    "yz_reed_marsh",
+    "yz_yamen"
+  ],
+  "dungeons": [
+    "abandoned_temple_rain",
+    "bashu_tangmen2",
+    "bashu_tangmen_trial",
+    "bianhuang_bf2",
+    "bianhuang_chuanqi",
+    "bianhuang_duoqi",
+    "bianhuang_dz2",
+    "bianhuang_escort",
+    "bianhuang_jueji",
+    "bianhuang_wangting",
+    "changan_trial_hall",
+    "datang_baling",
+    "datang_changan",
+    "datang_changshengjue",
+    "datang_feima",
+    "datang_gongbian",
+    "datang_jingling",
+    "datang_liangdao",
+    "datang_sanhua",
+    "datang_shudao",
+    "datang_tiandao",
+    "datang_tx2",
+    "datang_wagang",
+    "datang_wr2",
+    "datang_xb2",
+    "datang_xinggong",
+    "datang_yanggong",
+    "datang_yunhe",
+    "datang_zhandao",
+    "dongdu_caoyu",
+    "dongdu_tianjin",
+    "dongming_chuanfen",
+    "dongming_haisi",
+    "dongming_shengong",
+    "feima_trial_hall",
+    "fuyu_fangfuchou",
+    "fuyu_ht2",
+    "fuyu_langfan",
+    "fuyu_lanjiang",
+    "fuyu_mishi",
+    "fuyu_moshigong",
+    "fuyu_nujiao",
+    "fuyu_shuizhan",
+    "fuyu_yg2",
+    "fuyu_yy2",
+    "jiangnan_jianchi",
+    "jiangnan_jianchi2",
+    "jiangnan_jianshou",
+    "jiangnan_zhuhai",
+    "jingling_trial_hall",
+    "liaoshui_lair",
+    "luoshui_guilou",
+    "luoshui_kujing",
+    "luoshui_lm2",
+    "luoshui_longyin",
+    "luoshui_tg2",
+    "posui_houjuan",
+    "posui_jiming",
+    "posui_jingyan",
+    "posui_kongming",
+    "posui_sh2",
+    "posui_th2",
+    "posui_tx3",
+    "posui_zhanshen",
+    "posui_zhongjuan",
+    "saibei_langshan",
+    "saibei_langshan2",
+    "saibei_langyan",
+    "saibei_xueyuan",
+    "shuanglong_hui",
+    "silk_road_hugong",
+    "tianbei_beidou",
+    "tiandao_trial_hall",
+    "yangzhou_cj2",
+    "yangzhou_neiluan",
+    "yangzhou_ym2",
+    "yangzhou_yunhe2",
+    "youming_guishi"
+  ],
+  "dungeonRooms": {
+    "abandoned_temple_rain": [
+      "temple_00",
+      "temple_01",
+      "temple_02"
+    ],
+    "bashu_tangmen2": [
+      "bashu__00",
+      "bashu__01",
+      "bashu__02",
+      "bashu__03"
+    ],
+    "bashu_tangmen_trial": [
+      "bas_00",
+      "bas_01",
+      "bas_02",
+      "bas_03"
+    ],
+    "bianhuang_bf2": [
+      "bf2_00",
+      "bf2_01",
+      "bf2_02",
+      "bf2_03"
+    ],
+    "bianhuang_chuanqi": [
+      "bia_00",
+      "bia_01",
+      "bia_02",
+      "bia_03"
+    ],
+    "bianhuang_duoqi": [
+      "bd_00",
+      "bd_01",
+      "bd_02",
+      "bd_03"
+    ],
+    "bianhuang_dz2": [
+      "dz2_00",
+      "dz2_01",
+      "dz2_02",
+      "dz2_03"
+    ],
+    "bianhuang_escort": [
+      "wild_00",
+      "wild_01",
+      "wild_02",
+      "wild_03",
+      "wild_04"
+    ],
+    "bianhuang_jueji": [
+      "bianhu_00",
+      "bianhu_01",
+      "bianhu_02",
+      "bianhu_03"
+    ],
+    "bianhuang_wangting": [
+      "wt_00",
+      "wt_01",
+      "wt_02",
+      "wt_03"
+    ],
+    "changan_trial_hall": [
+      "ct_00",
+      "ct_01",
+      "ct_02"
+    ],
+    "datang_baling": [
+      "db_00",
+      "db_01",
+      "db_02",
+      "db_03"
+    ],
+    "datang_changan": [
+      "ca_00",
+      "ca_01",
+      "ca_02",
+      "ca_03",
+      "ca_04"
+    ],
+    "datang_changshengjue": [
+      "river_00",
+      "river_01",
+      "river_02",
+      "river_03",
+      "river_04"
+    ],
+    "datang_feima": [
+      "fm_00",
+      "fm_01",
+      "fm_02",
+      "fm_03",
+      "fm_04"
+    ],
+    "datang_gongbian": [
+      "gb_00",
+      "gb_01",
+      "gb_02",
+      "gb_03",
+      "gb_04",
+      "gb_05"
+    ],
+    "datang_jingling": [
+      "jl_00",
+      "jl_01",
+      "jl_02",
+      "jl_03",
+      "jl_04",
+      "jl_05",
+      "jl_06"
+    ],
+    "datang_liangdao": [
+      "ld_00",
+      "ld_01",
+      "ld_02",
+      "ld_03"
+    ],
+    "datang_sanhua": [
+      "sh_00",
+      "sh_01",
+      "sh_02",
+      "sh_03"
+    ],
+    "datang_shudao": [
+      "sd_00",
+      "sd_01",
+      "sd_02",
+      "sd_03"
+    ],
+    "datang_tiandao": [
+      "td_00",
+      "td_01",
+      "td_02",
+      "td_03",
+      "td_04"
+    ],
+    "datang_tx2": [
+      "tx2_00",
+      "tx2_01",
+      "tx2_02",
+      "tx2_03"
+    ],
+    "datang_wagang": [
+      "wg_00",
+      "wg_01",
+      "wg_02",
+      "wg_03"
+    ],
+    "datang_wr2": [
+      "wr2_00",
+      "wr2_01",
+      "wr2_02",
+      "wr2_03"
+    ],
+    "datang_xb2": [
+      "xb2_00",
+      "xb2_01",
+      "xb2_02",
+      "xb2_03"
+    ],
+    "datang_xinggong": [
+      "datang_00",
+      "datang_01",
+      "datang_02",
+      "datang_03"
+    ],
+    "datang_yanggong": [
+      "vault_00",
+      "vault_01",
+      "vault_02",
+      "vault_03",
+      "vault_04",
+      "vault_05"
+    ],
+    "datang_yunhe": [
+      "dat_00",
+      "dat_01",
+      "dat_02",
+      "dat_03"
+    ],
+    "datang_zhandao": [
+      "zd2_00",
+      "zd2_01",
+      "zd2_02",
+      "zd2_03"
+    ],
+    "dongdu_caoyu": [
+      "cy_00",
+      "cy_01",
+      "cy_02",
+      "cy_03"
+    ],
+    "dongdu_tianjin": [
+      "dd3_00",
+      "dd3_01",
+      "dd3_02",
+      "dd3_03"
+    ],
+    "dongming_chuanfen": [
+      "cf_00",
+      "cf_01",
+      "cf_02",
+      "cf_03"
+    ],
+    "dongming_haisi": [
+      "dm2_00",
+      "dm2_01",
+      "dm2_02",
+      "dm2_03"
+    ],
+    "dongming_shengong": [
+      "dongmi_00",
+      "dongmi_01",
+      "dongmi_02",
+      "dongmi_03"
+    ],
+    "feima_trial_hall": [
+      "ft_00",
+      "ft_01",
+      "ft_02"
+    ],
+    "fuyu_fangfuchou": [
+      "fy2_00",
+      "fy2_01",
+      "fy2_02",
+      "fy2_03"
+    ],
+    "fuyu_ht2": [
+      "ht2_00",
+      "ht2_01",
+      "ht2_02",
+      "ht2_03"
+    ],
+    "fuyu_langfan": [
+      "fuyu_l_00",
+      "fuyu_l_01",
+      "fuyu_l_02",
+      "fuyu_l_03"
+    ],
+    "fuyu_lanjiang": [
+      "lj_00",
+      "lj_01",
+      "lj_02"
+    ],
+    "fuyu_mishi": [
+      "fuy_00",
+      "fuy_01",
+      "fuy_02",
+      "fuy_03"
+    ],
+    "fuyu_moshigong": [
+      "mg_00",
+      "mg_01",
+      "mg_02",
+      "mg_03"
+    ],
+    "fuyu_nujiao": [
+      "dock_00",
+      "dock_01",
+      "dock_02",
+      "dock_03",
+      "dock_04"
+    ],
+    "fuyu_shuizhan": [
+      "hy2_00",
+      "hy2_01",
+      "hy2_02",
+      "hy2_03"
+    ],
+    "fuyu_yg2": [
+      "yg2_00",
+      "yg2_01",
+      "yg2_02",
+      "yg2_03"
+    ],
+    "fuyu_yy2": [
+      "yy2_00",
+      "yy2_01",
+      "yy2_02",
+      "yy2_03"
+    ],
+    "jiangnan_jianchi": [
+      "jn2_00",
+      "jn2_01",
+      "jn2_02",
+      "jn2_03"
+    ],
+    "jiangnan_jianchi2": [
+      "jiangn_00",
+      "jiangn_01",
+      "jiangn_02",
+      "jiangn_03"
+    ],
+    "jiangnan_jianshou": [
+      "jia_00",
+      "jia_01",
+      "jia_02",
+      "jia_03"
+    ],
+    "jiangnan_zhuhai": [
+      "zh_00",
+      "zh_01",
+      "zh_02",
+      "zh_03"
+    ],
+    "jingling_trial_hall": [
+      "jt_00",
+      "jt_01",
+      "jt_02"
+    ],
+    "liaoshui_lair": [
+      "ls_00",
+      "ls_01",
+      "ls_02"
+    ],
+    "luoshui_guilou": [
+      "luoshu_00",
+      "luoshu_01",
+      "luoshu_02",
+      "luoshu_03"
+    ],
+    "luoshui_kujing": [
+      "kj_00",
+      "kj_01",
+      "kj_02",
+      "kj_03"
+    ],
+    "luoshui_lm2": [
+      "lm2_00",
+      "lm2_01",
+      "lm2_02",
+      "lm2_03"
+    ],
+    "luoshui_longyin": [
+      "luo_00",
+      "luo_01",
+      "luo_02",
+      "luo_03"
+    ],
+    "luoshui_tg2": [
+      "tg2_00",
+      "tg2_01",
+      "tg2_02",
+      "tg2_03"
+    ],
+    "posui_houjuan": [
+      "jm2_00",
+      "jm2_01",
+      "jm2_02",
+      "jm2_03"
+    ],
+    "posui_jiming": [
+      "jm_00",
+      "jm_01",
+      "jm_02",
+      "jm_03",
+      "jm_04"
+    ],
+    "posui_jingyan": [
+      "palace_00",
+      "palace_01",
+      "palace_02",
+      "palace_03",
+      "palace_04"
+    ],
+    "posui_kongming": [
+      "posui__00",
+      "posui__01",
+      "posui__02",
+      "posui__03"
+    ],
+    "posui_sh2": [
+      "sh2_00",
+      "sh2_01",
+      "sh2_02",
+      "sh2_03"
+    ],
+    "posui_th2": [
+      "th2_00",
+      "th2_01",
+      "th2_02",
+      "th2_03"
+    ],
+    "posui_tx3": [
+      "tx3_00",
+      "tx3_01",
+      "tx3_02",
+      "tx3_03"
+    ],
+    "posui_zhanshen": [
+      "zd_00",
+      "zd_01",
+      "zd_02",
+      "zd_03"
+    ],
+    "posui_zhongjuan": [
+      "pos_00",
+      "pos_01",
+      "pos_02",
+      "pos_03"
+    ],
+    "saibei_langshan": [
+      "sb2_00",
+      "sb2_01",
+      "sb2_02",
+      "sb2_03"
+    ],
+    "saibei_langshan2": [
+      "saibei_00",
+      "saibei_01",
+      "saibei_02",
+      "saibei_03"
+    ],
+    "saibei_langyan": [
+      "sai_00",
+      "sai_01",
+      "sai_02",
+      "sai_03"
+    ],
+    "saibei_xueyuan": [
+      "xy_00",
+      "xy_01",
+      "xy_02",
+      "xy_03"
+    ],
+    "shuanglong_hui": [
+      "sl_00",
+      "sl_01",
+      "sl_02",
+      "sl_03"
+    ],
+    "silk_road_hugong": [
+      "hc_00",
+      "hc_01",
+      "hc_02",
+      "hc_03"
+    ],
+    "tianbei_beidou": [
+      "bd_00",
+      "bd_01",
+      "bd_02"
+    ],
+    "tiandao_trial_hall": [
+      "tt_00",
+      "tt_01",
+      "tt_02"
+    ],
+    "yangzhou_cj2": [
+      "cj2_00",
+      "cj2_01",
+      "cj2_02",
+      "cj2_03"
+    ],
+    "yangzhou_neiluan": [
+      "yan_00",
+      "yan_01",
+      "yan_02",
+      "yan_03"
+    ],
+    "yangzhou_ym2": [
+      "ym2_00",
+      "ym2_01",
+      "ym2_02",
+      "ym2_03"
+    ],
+    "yangzhou_yunhe2": [
+      "yangzh_00",
+      "yangzh_01",
+      "yangzh_02",
+      "yangzh_03"
+    ],
+    "youming_guishi": [
+      "yg_00",
+      "yg_01",
+      "yg_02",
+      "yg_03",
+      "yg_04"
+    ]
+  },
+  "rewards": {
+    "abandoned_temple_rain": {
+      "experience": 180,
+      "potential": 120,
+      "money": 60,
+      "items": {
+        "sealed_letter": 1
+      }
+    },
+    "bashu_tangmen2": {
+      "experience": 2760,
+      "potential": 1220,
+      "money": 970,
+      "items": {
+        "tangmen_z": 1
+      }
+    },
+    "bashu_tangmen_trial": {
+      "experience": 2820,
+      "potential": 1360,
+      "money": 990,
+      "items": {
+        "tangmen_baojian": 1,
+        "manual_mantian_huayu": 1
+      }
+    },
+    "bianhuang_bf2": {
+      "experience": 3040,
+      "potential": 1320,
+      "money": 1080,
+      "items": {
+        "bf2_relic": 1
+      }
+    },
+    "bianhuang_chuanqi": {
+      "experience": 2640,
+      "potential": 1300,
+      "money": 930,
+      "items": {
+        "bianhuang_law": 1
+      }
+    },
+    "bianhuang_duoqi": {
+      "experience": 1840,
+      "potential": 940,
+      "money": 620,
+      "items": {
+        "bianhuang_xue": 1,
+        "bianhuang_wolfpelt": 1
+      }
+    },
+    "bianhuang_dz2": {
+      "experience": 2680,
+      "potential": 1250,
+      "money": 960,
+      "items": {
+        "dz2_relic": 1
+      }
+    },
+    "bianhuang_escort": {
+      "experience": 400,
+      "potential": 270,
+      "money": 120
+    },
+    "bianhuang_jueji": {
+      "experience": 2580,
+      "potential": 1220,
+      "money": 910,
+      "items": {
+        "jueji_h": 1
+      }
+    },
+    "bianhuang_wangting": {
+      "experience": 1300,
+      "potential": 760,
+      "money": 440,
+      "items": {
+        "langwang_dao": 1,
+        "manual_xiulou_daofa": 1
+      }
+    },
+    "changan_trial_hall": {
+      "experience": 2400,
+      "potential": 1200,
+      "money": 800,
+      "items": {
+        "bianbuou_wisdom": 1,
+        "manual_cihang_jiandian": 1
+      }
+    },
+    "datang_baling": {
+      "experience": 1540,
+      "potential": 840,
+      "money": 520,
+      "items": {
+        "dongting_ruanjia": 1,
+        "jinggang_staff": 1,
+        "manual_dongting_xinf": 1,
+        "manual_fengmo_gun": 1
+      }
+    },
+    "datang_changan": {
+      "experience": 1180,
+      "potential": 720,
+      "money": 420
+    },
+    "datang_changshengjue": {
+      "experience": 260,
+      "potential": 180,
+      "money": 80,
+      "items": {
+        "simple_medicine": 2,
+        "dry_ration": 1
+      }
+    },
+    "datang_feima": {
+      "experience": 1060,
+      "potential": 660,
+      "money": 380,
+      "items": {
+        "tianma_ling": 1
+      }
+    },
+    "datang_gongbian": {
+      "experience": 2600,
+      "potential": 1300,
+      "money": 900,
+      "reputations": {
+        "luoyang_military": 20
+      },
+      "items": {
+        "gongbian_mingzhu": 1
+      }
+    },
+    "datang_jingling": {
+      "experience": 820,
+      "potential": 520,
+      "money": 340,
+      "items": {
+        "bronze_fragment": 3,
+        "manual_taiyi_jianfa": 1
+      }
+    },
+    "datang_liangdao": {
+      "experience": 1480,
+      "potential": 820,
+      "money": 500,
+      "items": {
+        "zhanma_dao": 1,
+        "liangdao_spear": 1,
+        "manual_bawang_qiang": 1
+      }
+    },
+    "datang_sanhua": {
+      "experience": 1600,
+      "potential": 860,
+      "money": 540,
+      "items": {
+        "sanhua_yuzhuo": 1,
+        "sanhua_flowerpin": 1,
+        "manual_lingxu_bu": 1
+      }
+    },
+    "datang_shudao": {
+      "experience": 1960,
+      "potential": 980,
+      "money": 660,
+      "items": {
+        "shujin_pifeng": 1
+      }
+    },
+    "datang_tiandao": {
+      "experience": 940,
+      "potential": 610,
+      "money": 400,
+      "items": {
+        "xiaohuandan": 1
+      }
+    },
+    "datang_tx2": {
+      "experience": 2860,
+      "potential": 1260,
+      "money": 1020,
+      "items": {
+        "tx2_relic": 1
+      }
+    },
+    "datang_wagang": {
+      "experience": 1420,
+      "potential": 800,
+      "money": 480,
+      "items": {
+        "wagang_tiejia": 1,
+        "lieshi_mace": 1,
+        "manual_lieshi_jian": 1
+      }
+    },
+    "datang_wr2": {
+      "experience": 3220,
+      "potential": 1380,
+      "money": 1140,
+      "items": {
+        "wr2_relic": 1
+      }
+    },
+    "datang_xb2": {
+      "experience": 2500,
+      "potential": 1250,
+      "money": 900,
+      "items": {
+        "xb2_relic": 1
+      }
+    },
+    "datang_xinggong": {
+      "experience": 2400,
+      "potential": 1220,
+      "money": 850,
+      "items": {
+        "xinggong_jian": 1,
+        "manual_csj_changshengjue": 1
+      }
+    },
+    "datang_yanggong": {
+      "experience": 460,
+      "potential": 300,
+      "money": 150,
+      "items": {
+        "yg_baoku_pearl": 1,
+        "yanggong_sword": 1
+      }
+    },
+    "datang_yunhe": {
+      "experience": 2460,
+      "potential": 1240,
+      "money": 870,
+      "items": {
+        "yunhe_pao": 1
+      }
+    },
+    "datang_zhandao": {
+      "experience": 2020,
+      "potential": 1000,
+      "money": 680,
+      "items": {
+        "tangmen_tili": 1,
+        "tangmei_gauntlet": 1
+      },
+      "flags": {
+        "zhandao_case_done": true
+      }
+    },
+    "dongdu_caoyu": {
+      "experience": 2550,
+      "potential": 1100,
+      "money": 780,
+      "items": {
+        "caoyun_lingpai": 1
+      }
+    },
+    "dongdu_tianjin": {
+      "experience": 2200,
+      "potential": 1060,
+      "money": 740,
+      "items": {
+        "tianjin_yuepei": 1
+      },
+      "flags": {
+        "tianjin_case_done": true
+      }
+    },
+    "dongming_chuanfen": {
+      "experience": 2560,
+      "potential": 1100,
+      "money": 780,
+      "items": {
+        "shenhai_zhenzhu": 1
+      }
+    },
+    "dongming_haisi": {
+      "experience": 2260,
+      "potential": 1080,
+      "money": 760,
+      "items": {
+        "cangming_juan": 1
+      },
+      "flags": {
+        "haisi_case_done": true
+      }
+    },
+    "dongming_shengong": {
+      "experience": 2940,
+      "potential": 1220,
+      "money": 1030,
+      "items": {
+        "shengong_q": 1
+      }
+    },
+    "feima_trial_hall": {
+      "experience": 2400,
+      "potential": 1200,
+      "money": 800,
+      "items": {
+        "wanwan_feather": 1
+      }
+    },
+    "fuyu_fangfuchou": {
+      "experience": 1660,
+      "potential": 880,
+      "money": 560,
+      "items": {
+        "yulie_shuangdao": 1,
+        "youlong_whip": 1,
+        "manual_youlong_bian": 1
+      }
+    },
+    "fuyu_ht2": {
+      "experience": 2560,
+      "potential": 1250,
+      "money": 920,
+      "items": {
+        "ht2_relic": 1
+      }
+    },
+    "fuyu_langfan": {
+      "experience": 2460,
+      "potential": 1220,
+      "money": 870,
+      "items": {
+        "langfan_j": 1
+      }
+    },
+    "fuyu_lanjiang": {
+      "experience": 700,
+      "potential": 450,
+      "money": 300,
+      "items": {
+        "lanjiang_vest": 1,
+        "changjiang_tidecrystal": 1
+      }
+    },
+    "fuyu_mishi": {
+      "experience": 2520,
+      "potential": 1260,
+      "money": 890,
+      "items": {
+        "moshi_lingzhu": 1,
+        "manual_tianmo_ce": 1
+      }
+    },
+    "fuyu_moshigong": {
+      "experience": 1360,
+      "potential": 780,
+      "money": 460,
+      "items": {
+        "tianmo_pei": 1
+      }
+    },
+    "fuyu_nujiao": {
+      "experience": 340,
+      "potential": 230,
+      "money": 100,
+      "flags": {
+        "fuyu_nujiao_completed": true
+      },
+      "items": {
+        "nujiao_saber": 1,
+        "nujiao_belt": 1
+      }
+    },
+    "fuyu_shuizhan": {
+      "experience": 1720,
+      "potential": 900,
+      "money": 580,
+      "items": {
+        "fenshui_ci": 1,
+        "suolang_hook": 1,
+        "manual_suolang_gou": 1
+      }
+    },
+    "fuyu_yg2": {
+      "experience": 3280,
+      "potential": 1400,
+      "money": 1160,
+      "items": {
+        "yg2_relic": 1
+      }
+    },
+    "fuyu_yy2": {
+      "experience": 2920,
+      "potential": 1280,
+      "money": 1040,
+      "items": {
+        "yy2_relic": 1
+      }
+    },
+    "jiangnan_jianchi": {
+      "experience": 2140,
+      "potential": 1040,
+      "money": 720,
+      "items": {
+        "jianchi_jian": 1,
+        "manual_taxue_wuhen": 1
+      },
+      "flags": {
+        "jianchi_case_done": true
+      }
+    },
+    "jiangnan_jianchi2": {
+      "experience": 2880,
+      "potential": 1220,
+      "money": 1010,
+      "items": {
+        "jianchi_m": 1
+      }
+    },
+    "jiangnan_jianshou": {
+      "experience": 2940,
+      "potential": 1400,
+      "money": 1030,
+      "items": {
+        "jianshou_jian": 1
+      }
+    },
+    "jiangnan_zhuhai": {
+      "experience": 2540,
+      "potential": 1100,
+      "money": 780,
+      "items": {
+        "zhumei_luopan": 1
+      }
+    },
+    "jingling_trial_hall": {
+      "experience": 2400,
+      "potential": 1200,
+      "money": 800,
+      "items": {
+        "kangshi_remnant": 1,
+        "manual_jingang_buhuai": 1
+      }
+    },
+    "liaoshui_lair": {
+      "experience": 760,
+      "potential": 480,
+      "money": 250,
+      "reputations": {
+        "salt_gang": 20
+      }
+    },
+    "luoshui_guilou": {
+      "experience": 2640,
+      "potential": 1220,
+      "money": 930,
+      "items": {
+        "longgong_z": 1
+      }
+    },
+    "luoshui_kujing": {
+      "experience": 1900,
+      "potential": 960,
+      "money": 640,
+      "items": {
+        "zhenshui_huan": 1,
+        "yinkui_lotus": 1
+      }
+    },
+    "luoshui_lm2": {
+      "experience": 3100,
+      "potential": 1340,
+      "money": 1100,
+      "items": {
+        "lm2_relic": 1
+      }
+    },
+    "luoshui_longyin": {
+      "experience": 2700,
+      "potential": 1320,
+      "money": 950,
+      "items": {
+        "longyin_zhu": 1
+      }
+    },
+    "luoshui_tg2": {
+      "experience": 2740,
+      "potential": 1250,
+      "money": 980,
+      "items": {
+        "tg2_relic": 1
+      }
+    },
+    "posui_houjuan": {
+      "experience": 1780,
+      "potential": 920,
+      "money": 600,
+      "items": {
+        "manual_poxu_zhi": 1
+      }
+    },
+    "posui_jiming": {
+      "experience": 1160,
+      "potential": 700,
+      "money": 400,
+      "items": {
+        "posui_huan": 1
+      }
+    },
+    "posui_jingyan": {
+      "experience": 380,
+      "potential": 260,
+      "money": 100,
+      "items": {
+        "jingyan_longscale": 1,
+        "simple_medicine": 2,
+        "dry_ration": 3
+      },
+      "flags": {
+        "posui_jingyan_completed": true
+      }
+    },
+    "posui_kongming": {
+      "experience": 2520,
+      "potential": 1220,
+      "money": 890,
+      "items": {
+        "kongming_z": 1
+      }
+    },
+    "posui_sh2": {
+      "experience": 2620,
+      "potential": 1250,
+      "money": 940,
+      "items": {
+        "sh2_relic": 1
+      }
+    },
+    "posui_th2": {
+      "experience": 2980,
+      "potential": 1300,
+      "money": 1060,
+      "items": {
+        "th2_relic": 1
+      }
+    },
+    "posui_tx3": {
+      "experience": 3340,
+      "potential": 1420,
+      "money": 1180,
+      "items": {
+        "tx3_relic": 1
+      }
+    },
+    "posui_zhanshen": {
+      "experience": 1240,
+      "potential": 740,
+      "money": 420
+    },
+    "posui_zhongjuan": {
+      "experience": 2580,
+      "potential": 1280,
+      "money": 910,
+      "items": {
+        "zhongjuan_wu": 1,
+        "manual_jyg_zhanshentu_dao": 1
+      }
+    },
+    "saibei_langshan": {
+      "experience": 2080,
+      "potential": 1020,
+      "money": 700,
+      "items": {
+        "langya_chui": 1,
+        "saibei_wolftooth": 1
+      },
+      "flags": {
+        "langshan_case_done": true
+      }
+    },
+    "saibei_langshan2": {
+      "experience": 2820,
+      "potential": 1220,
+      "money": 990,
+      "items": {
+        "xueling_h": 1
+      }
+    },
+    "saibei_langyan": {
+      "experience": 2880,
+      "potential": 1380,
+      "money": 1010,
+      "items": {
+        "langyan_ling": 1
+      }
+    },
+    "saibei_xueyuan": {
+      "experience": 2530,
+      "potential": 1100,
+      "money": 780,
+      "items": {
+        "hanxue_dao": 1
+      }
+    },
+    "shuanglong_hui": {
+      "experience": 2800,
+      "potential": 1400,
+      "money": 1000,
+      "items": {
+        "shuanglong_bei": 1
+      }
+    },
+    "silk_road_hugong": {
+      "experience": 2900,
+      "potential": 1440,
+      "money": 1050,
+      "items": {
+        "silk_road_map": 1
+      }
+    },
+    "tianbei_beidou": {
+      "experience": 2800,
+      "potential": 1400,
+      "money": 1000,
+      "items": {
+        "beidou_xingpan": 1
+      }
+    },
+    "tiandao_trial_hall": {
+      "experience": 2400,
+      "potential": 1200,
+      "money": 800,
+      "items": {
+        "songque_testament": 1,
+        "manual_tiandao_blade": 1
+      }
+    },
+    "yangzhou_cj2": {
+      "experience": 3160,
+      "potential": 1360,
+      "money": 1120,
+      "items": {
+        "cj2_relic": 1
+      }
+    },
+    "yangzhou_neiluan": {
+      "experience": 2760,
+      "potential": 1340,
+      "money": 970,
+      "items": {
+        "yanbang_yupei": 1
+      }
+    },
+    "yangzhou_ym2": {
+      "experience": 2800,
+      "potential": 1250,
+      "money": 1000,
+      "items": {
+        "ym2_relic": 1
+      }
+    },
+    "yangzhou_yunhe2": {
+      "experience": 2700,
+      "potential": 1220,
+      "money": 950,
+      "items": {
+        "yunhe_g": 1
+      }
+    },
+    "youming_guishi": {
+      "experience": 2600,
+      "potential": 1300,
+      "money": 900
+    }
+  },
+  "quickRewards": {
+    "abandoned_temple_rain": {
+      "money": 250
+    },
+    "bashu_tangmen2": {},
+    "bashu_tangmen_trial": {},
+    "bianhuang_bf2": {},
+    "bianhuang_chuanqi": {},
+    "bianhuang_duoqi": {
+      "money": 400
+    },
+    "bianhuang_dz2": {},
+    "bianhuang_escort": {
+      "money": 250
+    },
+    "bianhuang_jueji": {},
+    "bianhuang_wangting": {
+      "money": 700
+    },
+    "changan_trial_hall": {},
+    "datang_baling": {
+      "money": 550
+    },
+    "datang_changan": {
+      "items": {
+        "xiaohuandan": 2
+      },
+      "money": 400
+    },
+    "datang_changshengjue": {
+      "items": {
+        "herb": 4,
+        "dry_ration": 2
+      }
+    },
+    "datang_feima": {
+      "items": {
+        "xiaohuandan": 1,
+        "herb": 10
+      }
+    },
+    "datang_gongbian": {},
+    "datang_jingling": {
+      "money": 300
+    },
+    "datang_liangdao": {
+      "money": 300
+    },
+    "datang_sanhua": {
+      "money": 650
+    },
+    "datang_shudao": {},
+    "datang_tiandao": {},
+    "datang_tx2": {},
+    "datang_wagang": {
+      "money": 300
+    },
+    "datang_wr2": {},
+    "datang_xb2": {},
+    "datang_xinggong": {},
+    "datang_yanggong": {
+      "money": 250
+    },
+    "datang_yunhe": {},
+    "datang_zhandao": {
+      "money": 300
+    },
+    "dongdu_caoyu": {},
+    "dongdu_tianjin": {},
+    "dongming_chuanfen": {},
+    "dongming_haisi": {},
+    "dongming_shengong": {},
+    "feima_trial_hall": {},
+    "fuyu_fangfuchou": {
+      "money": 300
+    },
+    "fuyu_ht2": {},
+    "fuyu_langfan": {},
+    "fuyu_lanjiang": {},
+    "fuyu_mishi": {},
+    "fuyu_moshigong": {},
+    "fuyu_nujiao": {
+      "money": 250
+    },
+    "fuyu_shuizhan": {
+      "money": 700
+    },
+    "fuyu_yg2": {},
+    "fuyu_yy2": {},
+    "jiangnan_jianchi": {
+      "money": 400
+    },
+    "jiangnan_jianchi2": {},
+    "jiangnan_jianshou": {},
+    "jiangnan_zhuhai": {},
+    "jingling_trial_hall": {},
+    "liaoshui_lair": {
+      "items": {
+        "simple_medicine": 3,
+        "dry_ration": 2
+      }
+    },
+    "luoshui_guilou": {},
+    "luoshui_kujing": {
+      "money": 400
+    },
+    "luoshui_lm2": {},
+    "luoshui_longyin": {},
+    "luoshui_tg2": {},
+    "posui_houjuan": {
+      "money": 300
+    },
+    "posui_jiming": {
+      "items": {
+        "dry_ration": 2,
+        "bronze_fragment": 2
+      }
+    },
+    "posui_jingyan": {},
+    "posui_kongming": {},
+    "posui_sh2": {},
+    "posui_th2": {},
+    "posui_tx3": {},
+    "posui_zhanshen": {
+      "items": {
+        "dahuandan": 1
+      },
+      "money": 400
+    },
+    "posui_zhongjuan": {},
+    "saibei_langshan": {},
+    "saibei_langshan2": {},
+    "saibei_langyan": {},
+    "saibei_xueyuan": {},
+    "shuanglong_hui": {},
+    "silk_road_hugong": {},
+    "tianbei_beidou": {},
+    "tiandao_trial_hall": {},
+    "yangzhou_cj2": {},
+    "yangzhou_neiluan": {},
+    "yangzhou_ym2": {},
+    "yangzhou_yunhe2": {},
+    "youming_guishi": {
+      "items": {
+        "guishi_ledger": 1,
+        "guishi_jade": 1,
+        "guishi_blade": 1
+      }
+    }
+  }
+}

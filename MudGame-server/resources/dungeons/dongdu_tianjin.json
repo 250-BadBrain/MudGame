@@ -10,7 +10,8 @@
   "puzzleInitialStates": {
     "ledger": "hidden",
     "briefing_dd3": "new",
-    "poem": "unrecited"
+    "poem": "unrecited",
+    "content_epilogue": "unread"
   },
   "puzzleActions": {
     "listen_poet": {
@@ -59,6 +60,62 @@
       },
       "message": "你跟着诗人低声吟诵那首前朝的旧诗——诗声入水，桥洞里的水鬼竟真的松了挠钩，缓缓沉了下去。守了太多年的东西，最怕有人还记得它为什么开始。",
       "repeatMessage": "旧诗你已能背诵。"
+    },
+    "content_epilogue": {
+      "label": "复盘：晓月照账",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dd3_03"
+      ],
+      "fromStates": [
+        "unread"
+      ],
+      "nextState": "considered",
+      "message": "诗人留下的月色能指路，账本留下的页码能指认把路藏起来的人。 你准备怎样记录？",
+      "choices": [
+        {
+          "id": "content_record_people",
+          "label": "把诗句与账目并列留存"
+        },
+        {
+          "id": "content_record_route",
+          "label": "先保住账房的原始页码"
+        }
+      ],
+      "requiredDefeatNpcs": [
+        "dd3_ledger_guard"
+      ],
+      "failureMessage": "先结束这里的战斗，再整理战后留下的证词。"
+    },
+    "content_record_people": {
+      "label": "把诗句与账目并列留存",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dd3_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "people",
+      "message": "诗人留下的月色能指路，账本留下的页码能指认把路藏起来的人。 你选择：把诗句与账目并列留存。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_dongdu_tianjin_people": true
+      }
+    },
+    "content_record_route": {
+      "label": "先保住账房的原始页码",
+      "puzzleId": "content_epilogue",
+      "rooms": [
+        "dd3_03"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "route",
+      "message": "诗人留下的月色能指路，账本留下的页码能指认把路藏起来的人。 你选择：先保住账房的原始页码。这份记录不会额外发放物品或改变通关奖励。",
+      "setFlags": {
+        "discovery_dongdu_tianjin_route": true
+      }
     }
   },
   "rooms": {
@@ -94,7 +151,8 @@
       "npcs": [
         "dd3_water_ghost",
         "dd3_water_ghost"
-      ]
+      ],
+      "actions": []
     },
     "dd3_02": {
       "name": "深水石廊",
@@ -111,7 +169,8 @@
           "message": "账册未取，暗渠深处的铁闸落着。"
         }
       },
-      "npcs": []
+      "npcs": [],
+      "actions": []
     },
     "dd3_03": {
       "name": "前朝账房",
@@ -123,7 +182,8 @@
         "dd3_ledger_guard"
       ],
       "actions": [
-        "take_ledger"
+        "take_ledger",
+        "content_epilogue"
       ]
     }
   },
@@ -163,5 +223,19 @@
     "flags": {
       "tianjin_case_done": true
     }
+  },
+  "contentFeature": {
+    "kind": "epilogue",
+    "summary": "诗人留下的月色能指路，账本留下的页码能指认把路藏起来的人。",
+    "solution": [
+      {
+        "roomId": "dd3_03",
+        "actionId": "content_epilogue"
+      },
+      {
+        "roomId": "dd3_03",
+        "actionId": "content_record_people"
+      }
+    ]
   }
 }

@@ -6,7 +6,7 @@ import (
 )
 
 func staticNPCProtectedFromKill(npc model.NPC) bool {
-	return npc.NonCombat || npc.CombatMode == "protected" || npc.DialogueID != "" || npc.IsShop || len(npc.Skills) > 0 || len(npc.QuestIDs) > 0
+	return npc.NonCombat || npc.CombatMode == "protected" || (npc.DialogueID != "" && npc.CombatMode != "kill") || npc.IsShop || len(npc.Skills) > 0 || len(npc.QuestIDs) > 0
 }
 
 func (r *RuntimeManager) staticNPCStateNoLock(npcID, roomID string) (*engruntime.NPCState, bool) {

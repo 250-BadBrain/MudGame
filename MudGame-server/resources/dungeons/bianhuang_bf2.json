@@ -1,7 +1,7 @@
 {
   "id": "bianhuang_bf2",
   "name": "冰封王座",
-  "description": "冰封王座——边荒传说中一段少有人走的路。前方的每一步都可能是陷阱，也可能是转机。你的剑已经出鞘，现在没有回头的余地了。",
+  "description": "王座有两道影，一道随火把动，一道随地裂动。 地裂下有温流，真正维持封冻的是旁边的空冠架。 这一次要先判断现场，再决定怎样走完这条路。",
   "order": 66,
   "chainId": "bianhuang_legend",
   "chainName": "边荒传说",
@@ -9,7 +9,11 @@
   "spawnRoomId": "bf2_00",
   "puzzleInitialStates": {
     "gate": "closed",
-    "briefing": "new"
+    "briefing": "new",
+    "content_trace": "unseen",
+    "content_detail": "unseen",
+    "content_compare": "unseen",
+    "content_support": "unseen"
   },
   "puzzleActions": {
     "listen_brief": {
@@ -22,11 +26,11 @@
         "new"
       ],
       "nextState": "told",
-      "message": "要点已明。",
+      "message": "王座有两道影，一道随火把动，一道随地裂动。 此处不能只凭武力开门；沿路观察，并核验双影王座的细节。",
       "repeatMessage": "去吧。"
     },
     "open_gate": {
-      "label": "开启通道",
+      "label": "推断：先撤空冠架",
       "puzzleId": "gate",
       "rooms": [
         "bf2_02"
@@ -34,18 +38,121 @@
       "fromStates": [
         "closed"
       ],
-      "nextState": "open",
-      "setFlags": {
-        "bf2_gate": true
+      "nextState": "considered",
+      "message": "王座有两道影，一道随火把动，一道随地裂动。 地裂下有温流，真正维持封冻的是旁边的空冠架。 你准备怎样处理？",
+      "repeatMessage": "已开。",
+      "failureMessage": "线索还不完整。先察看前段痕迹与关口细节，再作判断。",
+      "requiredPuzzleStates": {
+        "content_trace": "known",
+        "content_detail": "known"
       },
-      "message": "通道开启。",
-      "repeatMessage": "已开。"
+      "choices": [
+        {
+          "id": "content_decide_other",
+          "label": "熄灭全部火把"
+        },
+        {
+          "id": "content_decide_good",
+          "label": "先撤空冠架，保住温流"
+        },
+        {
+          "id": "content_decide_wrong",
+          "label": "敲碎最厚的王座冰"
+        }
+      ]
+    },
+    "content_trace": {
+      "label": "察看：封冻席道",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bf2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "王座有两道影，一道随火把动，一道随地裂动。",
+      "repeatMessage": "王座有两道影，一道随火把动，一道随地裂动。"
+    },
+    "content_detail": {
+      "label": "核验：双影王座",
+      "puzzleId": "content_detail",
+      "rooms": [
+        "bf2_02"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "地裂下有温流，真正维持封冻的是旁边的空冠架。",
+      "repeatMessage": "地裂下有温流，真正维持封冻的是旁边的空冠架。"
+    },
+    "content_decide_good": {
+      "label": "先撤空冠架，保住温流",
+      "puzzleId": "gate",
+      "rooms": [
+        "bf2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "open",
+      "message": "封冻的旧誓先于冰层松动，无冠冰氅让你记住守住位置与守住人并不相同。",
+      "repeatMessage": "封冻的旧誓先于冰层松动，无冠冰氅让你记住守住位置与守住人并不相同。",
+      "setFlags": {
+        "bf2_gate": true,
+        "discovery_chapter_bianhuang_bf2": true
+      }
+    },
+    "content_decide_wrong": {
+      "label": "敲碎最厚的王座冰",
+      "puzzleId": "gate",
+      "rooms": [
+        "bf2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：地裂下有温流，真正维持封冻的是旁边的空冠架。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：地裂下有温流，真正维持封冻的是旁边的空冠架。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_decide_other": {
+      "label": "熄灭全部火把",
+      "puzzleId": "gate",
+      "rooms": [
+        "bf2_02"
+      ],
+      "fromStates": [
+        "considered"
+      ],
+      "nextState": "closed",
+      "message": "这个判断忽略了现场的反证：地裂下有温流，真正维持封冻的是旁边的空冠架。 你及时收手，没有损失物品；可以重新作出判断。",
+      "repeatMessage": "这个判断忽略了现场的反证：地裂下有温流，真正维持封冻的是旁边的空冠架。 你及时收手，没有损失物品；可以重新作出判断。"
+    },
+    "content_aid_bf2_relic": {
+      "label": "以无冠冰氅校验前段痕迹（不消耗）",
+      "puzzleId": "content_trace",
+      "rooms": [
+        "bf2_01"
+      ],
+      "fromStates": [
+        "unseen"
+      ],
+      "nextState": "known",
+      "message": "你把李百夫长辨明的器物来历与现场互证。王座有两道影，一道随火把动，一道随地裂动。",
+      "requiredFlags": {
+        "discovery_item_bf2_relic": true
+      },
+      "presentItems": {
+        "bf2_relic": 1
+      }
     }
   },
   "rooms": {
     "bf2_00": {
-      "name": "入口",
-      "description": "入口。法外之地——你踏入此处，前方的路在阴影中延伸。",
+      "name": "冰城南阶",
+      "description": "冰城南阶保留来路，调查所得可以带回这里复核。",
       "exits": {
         "north": "bf2_01"
       },
@@ -54,8 +161,8 @@
       ]
     },
     "bf2_01": {
-      "name": "通道",
-      "description": "通道。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "封冻席道",
+      "description": "王座有两道影，一道随火把动，一道随地裂动。",
       "exits": {
         "south": "bf2_00",
         "north": "bf2_02"
@@ -71,11 +178,15 @@
       "npcs": [
         "bf2_guard",
         "bf2_guard"
+      ],
+      "actions": [
+        "content_trace",
+        "content_aid_bf2_relic"
       ]
     },
     "bf2_02": {
-      "name": "关隘",
-      "description": "关隘。最后一段路被什么东西封死了——不清除眼前的障碍，就走不到终点。",
+      "name": "双影王座",
+      "description": "地裂下有温流，真正维持封冻的是旁边的空冠架。",
       "exits": {
         "south": "bf2_01",
         "north": "bf2_03"
@@ -89,18 +200,20 @@
         }
       },
       "actions": [
-        "open_gate"
+        "open_gate",
+        "content_detail"
       ]
     },
     "bf2_03": {
-      "name": "决战",
-      "description": "决战。这就是终点——你能感受到一股远超常人的气息，正从暗处锁定着你。",
+      "name": "无冠内室",
+      "description": "封冻的旧誓先于冰层松动，无冠冰氅让你记住守住位置与守住人并不相同。",
       "exits": {
         "south": "bf2_02"
       },
       "npcs": [
         "bf2_boss"
-      ]
+      ],
+      "actions": []
     }
   },
   "objectives": [
@@ -118,7 +231,7 @@
       "targetId": "gate:open",
       "required": 1,
       "weight": 15,
-      "description": "开启通道"
+      "description": "核验现场并完成双影王座的判断"
     },
     {
       "id": "repel_boss",
@@ -137,6 +250,29 @@
       "bf2_relic": 1
     }
   },
-  "contentStatus": "needs_depth",
-  "contentNote": "内容待深化：本关与部分后期关卡结构重复，暂保留入口和奖励，后续补充独特剧情与机制。"
+  "contentStatus": "enriched",
+  "contentNote": "已扩写：双证推理；线索可现场取得，失败可重试，不要求稀有掉落。",
+  "contentFeature": {
+    "kind": "deduction",
+    "solution": [
+      {
+        "roomId": "bf2_01",
+        "actionId": "content_trace"
+      },
+      {
+        "roomId": "bf2_02",
+        "actionId": "content_detail"
+      },
+      {
+        "roomId": "bf2_02",
+        "actionId": "open_gate"
+      },
+      {
+        "roomId": "bf2_02",
+        "actionId": "content_decide_good"
+      }
+    ],
+    "mistake": "content_decide_other",
+    "summary": "封冻的旧誓先于冰层松动，无冠冰氅让你记住守住位置与守住人并不相同。"
+  }
 }

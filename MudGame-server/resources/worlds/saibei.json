@@ -21,8 +21,16 @@
         "north": "sb_grassland"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "sb_iron_smith",
+        "r204_npc_2"
+      ],
+      "searchFlag": "discovery_place_sb_mayi",
+      "searchMessage": "你在马邑城核对现场：马邑城是塞外第一座边城，城墙被风沙磨了百年。城门内外的胡汉口音混成一片。 进一步可核验的是：白狼的威名靠哨探和地形维持；认清山口的风比再挂一面旗更有用。",
+      "contentRole": "塞北的马邑城：辨狼牙刻印与旧锏补焊"
     },
     "sb_market": {
       "name": "边关马市",
@@ -35,7 +43,8 @@
       ],
       "safeZone": true,
       "actions": [
-        "listen_rumor"
+        "listen_rumor",
+        "search"
       ],
       "npcs": [
         "sb_horse_trader"
@@ -46,7 +55,10 @@
       },
       "rumors": [
         "马市上有人议论：白狼主虽然退了，但草原上还有三十七个马贼王——这才是第一个。"
-      ]
+      ],
+      "searchFlag": "discovery_place_sb_market",
+      "searchMessage": "你在边关马市核对现场：边关马市是官府默许的互市之地——南边的茶盐绢帛换北边的骏马皮货，价錢看谁的马刀更亮。 进一步可核验的是：认路的马不会只循脚印走。雪脊上有反穿的毡靴，整齐的一列印往往是留给追兵看的。",
+      "contentRole": "塞北的边关马市：反穿毡靴与雪地误导"
     },
     "sb_beacon": {
       "name": "烽燧台",
@@ -65,7 +77,13 @@
       "exits": {
         "south": "sb_market",
         "north": "sb_wolf_pass"
-      }
+      },
+      "searchFlag": "discovery_place_sb_beacon",
+      "searchMessage": "你在烽燧台核对现场：烽燧台上的柴堆日夜有人看守——狼烟一起，九边皆惊。戍卒们说，最近草原上的狼嚎，比烽火多。 进一步可核验的是：狼爪旁若有铁钉，就去找驱使狼群的人。救回一名失联戍卒，比把兵册上的空格填成战死容易得多。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "塞北的烽燧台：兵册缺名与猎狼口哨"
     },
     "sb_grassland": {
       "name": "塞外草原",
@@ -81,8 +99,15 @@
         "west": "sb_wolf_pass"
       },
       "actions": [
-        "listen_rumor"
-      ]
+        "listen_rumor",
+        "search"
+      ],
+      "npcs": [
+        "sb_scout_captain"
+      ],
+      "searchFlag": "discovery_place_sb_grassland",
+      "searchMessage": "你在塞外草原核对现场：草原一直铺到天边，风一过，草浪就往一个方向倒——那是风的方向，也是狼群走的方向。 进一步可核验的是：狼爪印旁有成排铁钉，所谓狼群其实由披皮死士驱赶。 冰裂从西岸向湖心延伸，东岸的芦杆仍然笔直。",
+      "contentRole": "塞北的塞外草原：核失联巡队的回程"
     },
     "sb_wolf_pass": {
       "name": "狼山口",
@@ -95,12 +120,19 @@
       ],
       "safeZone": false,
       "npcs": [
-        "sb_wolf_scout"
+        "sb_wolf_scout",
+        "sb_s2"
       ],
       "exits": {
         "east": "sb_grassland",
         "south": "sb_beacon"
-      }
+      },
+      "searchFlag": "discovery_place_sb_wolf_pass",
+      "searchMessage": "你在狼山口核对现场：狼山口的石壁上挂满了白骨与破旗——白狼主的地界，从这儿开始。 进一步可核验的是：白狼哨探把皮毛翻到背风面，口哨却仍朝迎风处吹。看他的口哨方向，才能知道同伴藏在何处。",
+      "actions": [
+        "search"
+      ],
+      "contentRole": "塞北的狼山口：哨探的逆风藏身"
     }
   }
 }

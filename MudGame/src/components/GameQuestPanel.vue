@@ -3,7 +3,14 @@
     <div class="quest-filters">
       <button v-for="tab in tabs" :key="tab.id" :class="{ active: selectedTab === tab.id }" @click="selectedTab = tab.id">{{ tab.label }} {{ countFor(tab.id) }}</button>
     </div>
-    <div v-if="visibleQuests.length" class="quest-list">
+    <div v-if="selectedTab === 'journal'" class="journal">
+      <p v-if="!journal.length" class="quest-desc">调查场景、向人物明确询问专长或出示器物后，可在这里回看已经取得的线索。</p>
+      <details v-for="entry in journal" :key="entry.id" class="quest-entry">
+        <summary class="quest-name">{{ entry.title }}</summary>
+        <p class="quest-desc">{{ entry.text }}</p>
+      </details>
+    </div>
+    <div v-else-if="visibleQuests.length" class="quest-list">
       <div v-for="quest in visibleQuests" :key="quest.id" class="quest-entry">
         <div class="quest-title-row">
           <span class="quest-name">{{ quest.name }}</span>
@@ -28,13 +35,14 @@
 <script setup>
 import { computed, ref } from 'vue'
 const props = defineProps({
-  quests: { type: Array, default: () => [] }
+  quests: { type: Array, default: () => [] },
+  journal: { type: Array, default: () => [] }
 })
 const selectedTab = ref('available')
-const tabs = [{ id: 'available', label: '可接取' }, { id: 'active', label: '进行中' }, { id: 'locked', label: '未解锁' }, { id: 'completed', label: '已完成' }]
+const tabs = [{ id: 'available', label: '可接取' }, { id: 'active', label: '进行中' }, { id: 'locked', label: '未解锁' }, { id: 'completed', label: '已完成' }, { id: 'journal', label: '见闻' }]
 const inCategory = (quest, category) => category === 'available' ? quest.status === 'not_started' && !quest.locked : category === 'locked' ? quest.status === 'not_started' && quest.locked : quest.status === category
 const visibleQuests = computed(() => props.quests.filter(quest => inCategory(quest, selectedTab.value)))
-const countFor = (category) => props.quests.filter(quest => inCategory(quest, category)).length
+const countFor = (category) => category === 'journal' ? props.journal.length : props.quests.filter(quest => inCategory(quest, category)).length
 </script>
 
 <style scoped>

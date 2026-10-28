@@ -193,6 +193,9 @@ func loadFromDisk() (StaticData, error) {
 	if err := validateContentData(resourceDir, rooms, npcs, dialogues, quests); err != nil {
 		return StaticData{}, err
 	}
+	if err := validateContentEvidence(resourceDir, items, skills, dialogues); err != nil {
+		return StaticData{}, err
+	}
 	if err := validateQuickRewards(resourceDir, items); err != nil {
 		return StaticData{}, err
 	}
@@ -360,6 +363,9 @@ func loadNPCs(path string, itemLimits map[string]int, items map[string]model.Ite
 
 	npcs := map[string]model.NPC{}
 	for id, raw := range rawNPCs {
+		if raw.CombatMode != "" && raw.CombatMode != "protected" && raw.CombatMode != "defeat" && raw.CombatMode != "kill" {
+			return nil, fmt.Errorf("invalid NPC combat mode: %s/%s", id, raw.CombatMode)
+		}
 		if strings.TrimSpace(id) == "" || strings.TrimSpace(raw.Name) == "" {
 			continue
 		}
