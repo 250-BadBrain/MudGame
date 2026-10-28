@@ -32,19 +32,22 @@ type EffectiveAttributes struct {
 	Parry               int
 	CritRate            float64
 	AttackSpeed         int
-	Initiative          int
-	GuardBreak          int
-	DamageReduction     int
-	Fame                int
-	Notoriety           int
-	Authority           int
-	Credit              int
-	PoisonResist        int
-	BleedResist         int
-	StunResist          int
-	FearResist          int
-	CharmResist         int
-	SealResist          int
+	// EffectiveActionSpeed 出招攻速（浮点）：基础 AttackSpeed 乘临时 haste 增益。
+	// 主动招式的出招CD按此值计算，保留小数不取整；普攻tick不受影响。
+	EffectiveActionSpeed float64
+	Initiative           int
+	GuardBreak           int
+	DamageReduction      int
+	Fame                 int
+	Notoriety            int
+	Authority            int
+	Credit               int
+	PoisonResist         int
+	BleedResist          int
+	StunResist           int
+	FearResist           int
+	CharmResist          int
+	SealResist           int
 }
 
 func NewPlayerAttributes(strength, constitution, agility, perception, willpower int) Attributes {
@@ -160,31 +163,37 @@ func BuildEffectiveAttributes(a Attributes) EffectiveAttributes {
 	base := a.Base
 	growth := a.Growth
 	return EffectiveAttributes{
-		Level:           max(1, a.Level),
-		Realm:           firstNonEmpty(a.Realm, DefaultRealm),
-		Experience:      a.Experience,
-		Potential:       a.Potential,
-		HP:              a.Resources.HP,
-		MaxHP:           a.Resources.MaxHP,
-		MP:              a.Resources.MP,
-		TrainedMaxMP:    a.Resources.TrainedMaxMP,
-		MaxMP:           a.Resources.MaxMP,
-		Spirit:          a.Resources.Spirit,
-		MaxSpirit:       a.Resources.MaxSpirit,
-		Strength:        base.Strength + growth.PostStrength,
-		Constitution:    base.Constitution + growth.PostConstitution,
-		Agility:         base.Agility + growth.PostAgility,
-		Perception:      base.Perception + growth.PostPerception,
-		Willpower:       base.Willpower + growth.PostWillpower,
-		Charm:           base.Charm,
-		Luck:            base.Luck,
-		Attack:          a.Derived.Attack,
-		Defense:         a.Derived.Defense,
-		HitRate:         a.Derived.HitRate,
-		Dodge:           a.Derived.Dodge,
-		Parry:           a.Derived.Parry,
-		CritRate:        float64(a.Derived.CritRate),
-		AttackSpeed:     a.Derived.AttackSpeed,
+		Level:        max(1, a.Level),
+		Realm:        firstNonEmpty(a.Realm, DefaultRealm),
+		Experience:   a.Experience,
+		Potential:    a.Potential,
+		HP:           a.Resources.HP,
+		MaxHP:        a.Resources.MaxHP,
+		MP:           a.Resources.MP,
+		TrainedMaxMP: a.Resources.TrainedMaxMP,
+		MaxMP:        a.Resources.MaxMP,
+		Spirit:       a.Resources.Spirit,
+		MaxSpirit:    a.Resources.MaxSpirit,
+		Strength:     base.Strength + growth.PostStrength,
+		Constitution: base.Constitution + growth.PostConstitution,
+		Agility:      base.Agility + growth.PostAgility,
+		Perception:   base.Perception + growth.PostPerception,
+		Willpower:    base.Willpower + growth.PostWillpower,
+		Charm:        base.Charm,
+		Luck:         base.Luck,
+		Attack:       a.Derived.Attack,
+		Defense:      a.Derived.Defense,
+		HitRate:      a.Derived.HitRate,
+		Dodge:        a.Derived.Dodge,
+		Parry:        a.Derived.Parry,
+		CritRate:     float64(a.Derived.CritRate),
+		AttackSpeed:  a.Derived.AttackSpeed,
+		EffectiveActionSpeed: func() float64 {
+			if a.Derived.AttackSpeed > 0 {
+				return float64(a.Derived.AttackSpeed)
+			}
+			return 4
+		}(),
 		Initiative:      a.Derived.Initiative,
 		GuardBreak:      a.Derived.GuardBreak,
 		DamageReduction: a.Derived.DamageReduction,

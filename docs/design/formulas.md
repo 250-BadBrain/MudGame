@@ -103,9 +103,58 @@ MaxSpirit = max(60, (悟性+心志)×3) + 装备额外上限
 
 强化0～5级，第N级花200N铜和N古铜。每级按现有正数词条增加：攻击/防御/命中/躲闪/招架/先手/魅力+1，气血/内力上限+5，暴击率+0.1个百分点。仅当前合法装备生效，背包或卸下物品不贡献属性；换装、强化和重置均要求空闲。旧强化保留等级并逐ID提供一次全额退料重置，清等级后返100L(L+1)铜和L(L+1)/2古铜；不回血，永久已修内力不变。详见[系数与兼容规格](smoke_enhancement_2026_10_28.md)。
 
-## 6. 实现位置
+## 6. 武功主动招式（实施基线）
+
+依据[主动招式提案](active_martial_moves_proposal.md)与[实现规范](active_martial_moves_implementation.md)实施；本节为已实现公式，候选数值的战斗平衡验证以 balance_results 报告为准，未产出前不得宣称平衡完成。完整84招目录与逐招数值以提案§5为准。
+
+### 6.1 施放、双CD与攻速
+
+招式是原武功的下属动作（稳定ID `武功ID/m01～m03`），学会武功即获得本门全部招式，不按等级解锁。五位置各提供当前合法装备武学的招式；无命名武学时回退该位置基本功招式，战斗位按主武器匹配。一次最多15招可用。
+
+点击即结算：立即造成伤害/生效，不替代、不暂停、不推迟2秒普攻tick；条件不满足整招拒绝，不扣费、不启动任何CD；未命中或被招架属于已施放，照常扣费并同时进入两种CD。换装、卸下、重新装备、换目标、进出副本、重连均不重置两种CD；CD按真实服务器时间流逝，离线继续计时。
+
+```text
+出招CD（角色级） actionReadyAt = t + max(1000, ceil(actionMs × 4 / 有效攻速))
+技能CD（逐招）   skillReadyAt[moveId] = t + cooldownSec × 1000
+按钮解锁时刻     blockedUntil = max(actionReadyAt, skillReadyAt[moveId])，两种CD不相加
+有效攻速         = 基础AttackSpeed × (1 + haste%)；基础4即100%，保留小数（4.8不取整）
+合并进度窗口     blockedSince/blockedUntil仅用于表现，不是第三种CD；
+                 原窗口未结束时保留原起点、只延长终点，进度可回升后按新窗口匀速减少
+```
+
+基础出招时间本目录统一4000ms；技能CD固定10～60秒，攻速不缩短也不拉长技能CD；出招CD下限1000ms。临时haste同类取最强、最多+50%；自身加速先参与本次出招时长快照，之后到期不倒改已确定的窗口。先手不是攻速；本轮不改变2秒普攻tick。
+
+### 6.2 成长、费用与伤害
+
+```text
+成长系数 S(L) = 0.8 + 0.4L/(L+100)，L≥1；S(1)≈0.804，S(100)=1，S(200)≈1.067，渐近1.2
+攻击倍率、额外反击倍率、恢复比例、增益/减益幅度 ×S；次数、段数、期限、CD、费用固定
+招架概率乘数 = max(0.3, 1 - 削减幅度×S)（"乘0.5"存0.5，不直接把0.5乘S）
+单次基础伤害 D = max(2, 攻击 - floor(有效目标防御/3) + 战斗修正)，修正KILL 14/SPAR 8
+多段：整动作先算整数总预算，再按段序分配余数（总5拆3段=2/2/1），各段独立命中/波动/暴击/招架
+```
+
+费用只扣当前MP固定整数，不扣永久已修内力、不缩减上限；任何招式不产生净内力。防御忽略先于倍率处理，技能防御削弱与忽略合并后不超过基准防御50%；多个同类防御忽略取最大比例不连乘。
+
+### 6.3 效果公共模型
+
+全部招式由以下Op数据组合实现，无运行时脚本：heal/hot（气血恢复与持续）、next_active（蓄势：damage/hit_pp/crit_pp/armor_ignore/guard_pierce）、guard（次数/期限双限减伤）、stat_mod（属性增减）、outgoing_reduce/vulnerability、counter（姿态反击）、bleed/lifesteal、cleanse/immunity、mp_discount（仅优惠其他主动）、haste（仅出招攻速）、conditional_power/conditional_ignore（HP阈值或目标出招剩余时间）、dispel_bonus/strip_guard_charge、paid_mp_refund（受击返内力，≤实付一半）、delayed_damage_heal（镜湖回疗）、recent_damage_heal（踏雪折影）。同Group取强不叠层；较弱新效果不覆盖、续长或复活强效果。
+
+### 6.4 通用上限与触发域
+
+本招额外命中最多+25个百分点，最终命中夹在15%～95%；暴击合计≤25%；躲闪值增益≤45%，其他同类属性增减≤35%；主动效果最终减伤乘区≤65%；护势穿透≤30%且只穿透主动防护减伤比例；次数效果最长12秒（写明秒数的免疫除外）；无完全无敌，命中后直接伤害至少1。不设硬眩晕、强制跳过出手、永久封招。
+
+触发域："下N次主动攻击"仅计后续主动攻击招式，普攻、反击、持续伤害不享受也不消耗；"下N次来袭"计随后普通攻击、主动攻击或反击等直接攻击，命中或落空都消耗一次，多段整体计一次，持续伤害与自损不计来袭。反击是姿态的有限次追加：每来袭至多一次、取预算最大者，不触发另一反击、吸血、受击返内力或镜湖回疗；流血tick不算来袭动作。
+
+### 6.5 切磋与认负
+
+切磋保留满血开局与至少1血；一次主动攻击动作（含多段合计）最多造成受击方有效MaxHP/5的伤害，普攻与即时主动是独立动作各自检查上限；每次反击和每个持续伤害tick也各自受MaxHP/5及停止线限制。每段、每次HP变化后检查1HP、20%认输线与NPC 25%停止线，到线立即终止所有剩余动作；已认输者不再补伤害。自损先检查能否合法支付（不致死、不触线），否则整招不可用。
+
+## 7. 实现位置
 
 - `model/skill_progression.go`：整数经验阈值、逐级潜能。
+- `model/combat_moves.go`：招式契约、成长系数与效果缩放；`model/combat_move_clock.go`：出招时长与合并窗口纯函数。
+- `manager/runtime_manager_combat_moves.go`：施放入口与双CD；`runtime_manager_combat_action.go`：统一动作结算；`runtime_manager_combat_effects.go`：效果引擎；`runtime_manager_combat_sessions.go`：战斗绑定；`runtime_manager_combat_ai.go`：NPC意图。
 - `manager/runtime_manager_martial.go`：统一资格、修炼上限、预算结算与五位置。
 - `manager/runtime_manager_effective.go`：属性顺序、有效已修内力、装备过滤。
 - `manager/runtime_manager_player.go`：老师入门、秘本、打坐/疗伤、用药冷却。

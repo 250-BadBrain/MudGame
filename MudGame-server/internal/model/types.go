@@ -102,7 +102,10 @@ type Player struct {
 	// EquippedSkills 秘籍装备槽：键=前置基本武功 ID，值=装备中的秘籍 ID；仅装备中的 ADVANCED 技能参与属性加成
 	EquippedSkills map[string]string
 	// EnhancedItems 装备强化等级：键=装备物品 ID，值=强化等级（0-5）；每级 +2 主属性
-	EnhancedItems   map[string]int
+	EnhancedItems map[string]int
+	// CombatMoves 主动招式双CD状态与施放序号：出招CD绑定角色，技能CD绑定角色和稳定招式ID；
+	// 换装/重连/进出副本不重置，离线按真实时间继续计时
+	CombatMoves     CombatMoveState
 	Backpack        map[string]int
 	Equipment       map[string]string
 	QuestStates     map[string]QuestState
@@ -175,6 +178,9 @@ type SkillDef struct {
 	School        string
 	Bonuses       map[string]float64
 	Requirements  map[string]interface{}
+	// Moves 武功的专属主动招式（下属动作，稳定ID为 武功ID/m01～m03）；
+	// 学会武功即获得全部招式，不按等级解锁。旧资源无此字段。
+	Moves []CombatMoveDef
 }
 
 type NPC struct {
@@ -198,6 +204,8 @@ type NPC struct {
 	WeaknessFlag      string
 	WeaknessModifiers map[string]int
 	CombatMode        string
+	// CombatArts NPC 的只读战斗招式配置：与教学 Skills 分离，防止玩家免费请教绝学
+	CombatArts []NPCCombatArt
 }
 
 type DialogueDef struct {
